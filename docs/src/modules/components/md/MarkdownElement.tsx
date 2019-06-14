@@ -7,7 +7,7 @@ import remarkToReact from 'remark-react';
 import remarkSlug from 'remark-slug';
 import unified from 'unified';
 
-// import { Heading, remarkConfigDefault } from '../../../markdown/processAndRenderContent';
+import { Heading } from '../../../markdown/processAndRenderContent';
 
 // import rehypeToReactPlugin from 'rehype-react';
 // import remarkToRehypePlugin from 'remark-rehype';
@@ -43,15 +43,11 @@ function MarkdownElement({ content, remarkConfig, component }: MarkdownElementPr
       remarkReactComponents: {
         h2: props => {
           console.log("h2 props", props);
-          // return scrollHeading("h2", props);
-          // return <Heading component={"h2"} {...props} />;
-          return <h2 />;
+          return <Heading component={"h2"} {...props} />;
         },
         h3: props => {
           console.log("h3 props", props);
-          // return scrollHeading("h3", props);
-          // return <Heading component={"h3"} {...props} />;
-          return <h3 />;
+          return <Heading component={"h3"} {...props} />;
         }
       }
     });

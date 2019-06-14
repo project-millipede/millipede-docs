@@ -12,7 +12,7 @@ import stringify from 'remark-stringify';
 import unified from 'unified';
 import visit from 'unist-util-visit';
 
-// import { Heading } from '../../docs/src/markdown/processAndRenderContent';
+import { Heading } from '../../docs/src/markdown/processAndRenderContent';
 
 interface ParserOptions {
   filePath: string; // the path to the file
@@ -80,12 +80,10 @@ export const parser = async function(raw: string, options: ParserOptions) {
         sanitize: { clobberPrefix: "" }, // remove 'user-content' string from generated ids
         remarkReactComponents: {
           h2: props => {
-            // return <Heading component={"h2"} {...props} />;
-            return <h3 />;
+            return <Heading component={"h2"} {...props} />;
           },
           h3: props => {
-            // return <Heading component={"h3"} {...props} />;
-            return <h2 />;
+            return <Heading component={"h3"} {...props} />;
           }
         }
       }
