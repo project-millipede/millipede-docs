@@ -24,6 +24,9 @@
   },
   "homepage": "https://github.com/gurkerl83/millipede-docs#readme",
   "dependencies": {
+    "@material-ui/core": "^4.1.1",
+    "@material-ui/icons": "^4.2.0",
+    "@material-ui/styles": "^4.1.1",
     "@mdx-js/mdx": "^1.0.20",
     "@mdx-js/mdxast": "^1.0.20",
     "gray-matter": "^4.0.2",
@@ -35,6 +38,7 @@
     "remark-react": "^5.0.1",
     "remark-slug": "^5.1.1",
     "remark-stringify": "^6.0.4",
+    "typesafe-actions": "^4.4.1",
     "unified": "^7.1.0",
     "unist-util-visit": "^1.4.1"
   },
