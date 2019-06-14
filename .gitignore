@@ -1,0 +1,9 @@
+.DS_Store
+.vscode
+.idea
+.next
+
+node_modules
+dist
+
+package-lock.json
