@@ -24,6 +24,9 @@
   },
   "homepage": "https://github.com/gurkerl83/millipede-docs#readme",
   "dependencies": {
+    "@material-ui/core": "^4.1.1",
+    "@material-ui/icons": "^4.2.0",
+    "@material-ui/styles": "^4.1.1",
     "@mdx-js/mdx": "^1.0.20",
     "@mdx-js/mdxast": "^1.0.20",
     "gray-matter": "^4.0.2",
