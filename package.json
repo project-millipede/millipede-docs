@@ -30,6 +30,8 @@
     "@mdx-js/mdx": "^1.0.20",
     "@mdx-js/mdxast": "^1.0.20",
     "gray-matter": "^4.0.2",
+    "houx": "^1.1.2",
+    "jss": "^10.0.0-alpha.18",
     "lodash": "^4.17.11",
     "mdast-util-to-string": "^1.0.6",
     "next": "^8.1.1-canary.52",
