@@ -1,8 +1,9 @@
-// import find from 'lodash/find';
+import _ from 'lodash';
+
 import { Page } from '../redux/features/navigation/type';
 
 const findActivePage = (currentPages: Array<Page>, pathname: string): Page => {
-  const activePage = currentPages.find((page: Page) => {
+  const activePage = _.find(currentPages, (page: any) => {
     if (page.children) {
       if (pathname.indexOf(`${page.pathname}/`) === 0) {
         // Check if one of the children matches (for /components)
