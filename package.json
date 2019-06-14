@@ -1,0 +1,23 @@
+{
+  "name": "millipede-docs",
+  "version": "0.0.1",
+  "description": "A story about Project Millipedes purpose and what we are aiming at",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gurkerl83/millipede-docs.git"
+  },
+  "keywords": [
+    "story",
+    "description"
+  ],
+  "author": "Markus Gritsch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gurkerl83/millipede-docs/issues"
+  },
+  "homepage": "https://github.com/gurkerl83/millipede-docs#readme"
+}
