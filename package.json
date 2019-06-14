@@ -35,6 +35,7 @@
     "lodash": "^4.17.11",
     "mdast-util-to-string": "^1.0.6",
     "next": "^8.1.1-canary.52",
+    "prism-react-renderer": "^0.1.6",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scroll": "^1.7.12",
