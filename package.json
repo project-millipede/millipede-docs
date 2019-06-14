@@ -37,6 +37,7 @@
     "next": "^8.1.1-canary.52",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-scroll": "^1.7.12",
     "remark-react": "^5.0.1",
     "remark-slug": "^5.1.1",
     "remark-stringify": "^6.0.4",
