@@ -66,7 +66,7 @@ const processMDX = async (src: string): Promise<string> => {
   return code;
 };
 
-export const MDXDocsRaw = (props: MarkdownDocsProps) => {
+export const MDXDocs = (props: MarkdownDocsProps) => {
   const { content, raw } = props;
 
   const classes = useStyles();
@@ -117,4 +117,4 @@ export const MDXDocsRaw = (props: MarkdownDocsProps) => {
   );
 };
 
-export default MDXDocsRaw;
+export default MDXDocs;

@@ -13,6 +13,11 @@ const pages: Array<Page> = [
         pathname: "/common/dataflow/comparison",
         title: "Comparison",
         icon: <StarBorder />
+      },
+      {
+        pathname: "/common/dataflow/comparison",
+        title: "Comparison",
+        icon: <StarBorder />
       }
     ]
   },
@@ -25,17 +30,10 @@ const pages: Array<Page> = [
         pathname: "/pidp/approach/byExample",
         title: "By example",
         icon: <StarBorder />
-      }
-    ]
-  },
-  {
-    pathname: "/guides",
-    title: "Guides",
-    icon: <StarBorder />,
-    children: [
+      },
       {
-        pathname: "/guides/api",
-        title: "API",
+        pathname: "/pidp/approach/byExample",
+        title: "By example",
         icon: <StarBorder />
       }
     ]
