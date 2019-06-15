@@ -42,7 +42,7 @@ const scrollToLink = (href: string) => {
   });
 };
 
-export const MDDocsRaw = (props: MarkdownDocsProps) => {
+export const MDDocs = (props: MarkdownDocsProps) => {
   const { content } = props;
 
   const classes = useStyles();
@@ -64,4 +64,4 @@ export const MDDocsRaw = (props: MarkdownDocsProps) => {
   );
 };
 
-export default MDDocsRaw;
+export default MDDocs;

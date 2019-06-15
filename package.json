@@ -4,9 +4,9 @@
   "description": "A story about Project Millipedes purpose and what we are aiming at",
   "main": "index.js",
   "scripts": {
-    "dev": "tsc --p tsconfig-loader.json && tsc && next",
-    "build": "tsc --p tsconfig-loader.json && tsc && next build",
-    "start": "tsc --p tsconfig-loader.json && tsc && next start",
+    "dev": "next",
+    "build": "tsc --p tsconfig-loader.json && next build",
+    "start": "next start",
     "export": "next export"
   },
   "repository": {
