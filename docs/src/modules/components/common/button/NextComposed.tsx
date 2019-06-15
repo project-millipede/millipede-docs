@@ -2,7 +2,7 @@
 import NextLink from 'next/link';
 import React from 'react';
 
-import { LinkProps as NextLinkProps } from '../../../../../../src/typings/custom';
+import { LinkProps as NextLinkProps } from '../../../../../../src/typings/link';
 
 const NextComposed = React.forwardRef<HTMLAnchorElement, NextLinkProps>(
   ({ children, ...props }, ref) => {

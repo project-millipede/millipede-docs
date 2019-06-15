@@ -2,7 +2,7 @@ import { Omit } from '@material-ui/core';
 import Button, { ButtonProps } from '@material-ui/core/Button';
 import React from 'react';
 
-import { LinkProps as NextLinkProps } from '../../../../../../src/typings/custom';
+import { LinkProps as NextLinkProps } from '../../../../../../src/typings/link';
 
 // import { LinkProps as NextLinkProps } from "next/link";
 type ComponentWorkaroundProps<P extends {}> = P & {

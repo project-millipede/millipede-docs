@@ -29,6 +29,7 @@
     "@material-ui/styles": "^4.1.1",
     "@mdx-js/mdx": "^1.0.20",
     "@mdx-js/mdxast": "^1.0.20",
+    "@mdx-js/react": "^1.0.20",
     "classnames": "^2.2.6",
     "gray-matter": "^4.0.2",
     "houx": "^1.1.2",

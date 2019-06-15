@@ -20,7 +20,8 @@
     "strict": false,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "typeRoots": ["./node_modules/@types", "./src/typings"]
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", "webpack/loader/**"]
