@@ -8,7 +8,7 @@
     "build": "tsc --p tsconfig-loader.json && next build",
     "start": "next start",
     "export": "next export",
-    "now-build": "NODE_ENV=production tsc -p tsconfig-loader.json tsc -p tsconfig.json && next build"
+    "now-build": "NODE_ENV=production tsc -p ./tsconfig-loader.json tsc -p ./tsconfig.json && next build"
   },
   "repository": {
     "type": "git",
