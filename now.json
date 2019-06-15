@@ -1,7 +1,5 @@
 {
   "version": 2,
   "name": "millipede-docs",
-  "builds": [
-    { "src": "package.json", "use": "@now/static-build", "config": { "distDir": "build" } }
-  ]
+  "builds": [{ "src": "package.json", "use": "@now/node", "config": { "dist": "dist" } }]
 }
