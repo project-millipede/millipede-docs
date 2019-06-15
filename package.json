@@ -8,7 +8,7 @@
     "build": "tsc --p tsconfig-loader.json && next build",
     "start": "next start",
     "export": "next export",
-    "now-build": "tsc --p tsconfig-loader.json && next build"
+    "now-build": "tsc --p tsconfig-loader.json && tsc && next build"
   },
   "repository": {
     "type": "git",
@@ -64,7 +64,7 @@
     "prettier": "^1.18.2",
     "raw-loader": "^3.0.0",
     "ts-loader": "^6.0.2",
-    "ts-node": "^8.2.0",
+    "ts-node": "^8.3.0",
     "typescript": "3.4.5",
     "webpack": "^4.34.0",
     "webpack-merge": "^4.2.1"
