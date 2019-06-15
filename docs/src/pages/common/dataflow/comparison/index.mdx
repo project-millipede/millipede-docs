@@ -1,0 +1,94 @@
+import { Comparison } from "./index";
+
+import PagesStep0 from "../../../../../../src/assets/common/dataflow/comparison/Step1";
+import PagesStep1 from "../../../../../../src/assets/common/dataflow/comparison/Step2";
+
+export const content = {
+  elements: [
+    {
+      composition: {
+        step: 0,
+        gridSize: 4
+      },
+      title: "Determine relevant content",
+      description: `The provider determines the most relevant content for a user based on the individual's interest. 
+      A recommendation engine predicts further content items from a global content catalog published from the provider's community. 
+      Once the determination process gets concluded, the provider sends the content to the application installed on the user's device.`,
+      image: <PagesStep0 />
+    },
+    {
+      composition: {
+        step: 0,
+        gridSize: 4
+      },
+      title: "Process content",
+      description: `Contrary to the power of digital processors, nowadays most applications installed on the local device 
+      do not execute heavyweight computations. The provider performs those operations, e.g., the determination of relevant content
+      elements or searches within a dedicated infrastructure and sends the results to the user's device. Most procedures performed 
+      on users device are focused on preparing the received data set for the display purpose.`,
+      image: <PagesStep0 />
+    },
+    {
+      composition: {
+        step: 0,
+        gridSize: 4
+      },
+      title: "Interpretation of content",
+      description: `The user gets directed through the content the provider determines on the users behalf. In oder to establish a full feedback loop the user
+      interacts with the content and the community through interaction ability of the application in use.`,
+      image: <PagesStep0 />
+    },
+    {
+      composition: {
+        step: 1,
+        gridSize: 10
+      },
+      title: "Behavior",
+      description:
+        "The technique transforms the display and presentation format of any application on the user's device. This action, carried out during the handling of an existing application, generates the left-sided book page. The book page inserted in this manner encompasses content that supplements or corrects the original content on the opposing book page.",
+      image: <PagesStep1 />
+    },
+    {
+      composition: {
+        step: 2,
+        gridSize: 4
+      },
+      title: "Behavior",
+      description:
+        "The technique transforms the display and presentation format of any application on the user's device. This action, carried out during the handling of an existing application, generates the left-sided book page. The book page inserted in this manner encompasses content that supplements or corrects the original content on the opposing book page.",
+      image: <PagesStep1 />
+    },
+    {
+      composition: {
+        step: 2,
+        gridSize: 4
+      },
+      title: "Behavior",
+      description:
+        "The technique transforms the display and presentation format of any application on the user's device. This action, carried out during the handling of an existing application, generates the left-sided book page. The book page inserted in this manner encompasses content that supplements or corrects the original content on the opposing book page.",
+      image: <PagesStep1 />
+    },
+    {
+      composition: {
+        step: 2,
+        gridSize: 4
+      },
+      title: "Behavior",
+      description:
+        "The technique transforms the display and presentation format of any application on the user's device. This action, carried out during the handling of an existing application, generates the left-sided book page. The book page inserted in this manner encompasses content that supplements or corrects the original content on the opposing book page.",
+      image: <PagesStep1 />
+    }
+  ]
+};
+
+# Comparison to common dataflows
+
+## Dataflows compared
+
+<Comparison content={content} />
+
+## Heading A
+
+### Heading A.A
+
+## Heading B
