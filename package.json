@@ -2,28 +2,30 @@
   "name": "millipede-docs",
   "version": "0.0.1",
   "description": "A story about Project Millipedes purpose and what we are aiming at",
-  "main": "index.js",
-  "scripts": {
-    "dev": "next",
-    "build": "tsc --p tsconfig-loader.json && next build",
-    "start": "next start",
-    "export": "next export",
-    "now-build": "NODE_ENV=production tsc -p ./tsconfig-loader.json tsc -p ./tsconfig.json && next build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gurkerl83/millipede-docs.git"
-  },
+  "author": "Markus Gritsch",
+  "license": "MIT",
   "keywords": [
     "story",
     "description"
   ],
-  "author": "Markus Gritsch",
-  "license": "ISC",
+  "homepage": "https://millipede-docs.markusgritsch1.now.sh",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gurkerl83/millipede-docs.git"
+  },
   "bugs": {
     "url": "https://github.com/gurkerl83/millipede-docs/issues"
   },
-  "homepage": "https://github.com/gurkerl83/millipede-docs#readme",
+  "scripts": {
+    "next:dev": "next",
+    "next:build": " next build",
+    "next:start": "next start",
+    "app:build": "tsc --p tsconfig.json",
+    "loader:build": "tsc --p ./webpack/loader/tsconfig.json",
+    "local:build": "npm run loader:build && npm run app:build && npm run next:build && npm run next:start",
+    "now-build": "npm run loader:build && npm run app:build && npm run next:build"
+  },
+  "main": "index.js",
   "dependencies": {
     "@material-ui/core": "^4.1.1",
     "@material-ui/icons": "^4.2.0",
@@ -64,7 +66,6 @@
     "prettier": "^1.18.2",
     "raw-loader": "^3.0.0",
     "ts-loader": "^6.0.2",
-    "ts-node": "^8.3.0",
     "typescript": "3.4.5",
     "webpack": "^4.34.0",
     "webpack-merge": "^4.2.1"
