@@ -1,6 +1,7 @@
-import { ByExample } from "./index";
-import PagesStep0 from "../../../../../../src/assets/pidp/approach/byExample/PagesStep0";
-import PagesStep1 from "../../../../../../src/assets/pidp/approach/byExample/PagesStep1";
+import { ByExample } from './byExample';
+
+import Step1 from '../../../../../../src/assets/pidp/approach/byExample/Step1';
+import Step2 from '../../../../../../src/assets/pidp/approach/byExample/Step2';
 
 export const content = {
   elements: [
@@ -9,30 +10,32 @@ export const content = {
         step: 0,
         gridSize: 5
       },
-      title: "Left-sided arranged book page",
-      description:
-        "In the initial state, the book on the left does not exist and can be equated with the representation of a placeholder.",
-      image: <PagesStep0 style={{ width: "100%" }} />
+      title: `Left-sided arranged book page`,
+      description: `In the initial state, the book on the left does not exist and can be equated with the representation
+of a placeholder.`,
+      image: <Step1 style={{ width: '100%' }} />
     },
     {
       composition: {
         step: 0,
         gridSize: 5
       },
-      title: "Right-sided book page",
-      description:
-        "Corresponds to the original of a website or mobile application or the message stream communicated to the user by the application type.",
-      image: <PagesStep0 style={{ width: "100%" }} />
+      title: `Right-sided book page`,
+      description: `Corresponds to the original of a website or mobile application or the message stream communicated to
+the user by the application type.`,
+      image: <Step1 style={{ width: '100%' }} />
     },
     {
       composition: {
         step: 1,
         gridSize: 10
       },
-      title: "Behavior",
-      description:
-        "The technique transforms the display and presentation format of any application on the user's device. This action, carried out during the handling of an existing application, generates the left-sided book page. The book page inserted in this manner encompasses content that supplements or corrects the original content on the opposing book page.",
-      image: <PagesStep1 style={{ width: "100%" }} />
+      title: `Behavior`,
+      description: `The technique transforms the display and presentation format of any application on the user\`s
+device. This action, carried out during the handling of an existing application, generates the
+left-sided book page. The book page inserted in this manner encompasses content that supplements or
+corrects the original content on the opposing book page.`,
+      image: <Step2 style={{ width: '100%' }} />
     }
   ]
 };
