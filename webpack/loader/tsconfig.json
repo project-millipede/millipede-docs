@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./webpack/loader/",
+    "baseUrl": ".",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -18,8 +18,8 @@
     "strict": false,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "outDir": "./dist/"
+    "outDir": "../../dist/"
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/**.ts", "**/**.tsx"],
   "exclude": ["node_modules"]
 }

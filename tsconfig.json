@@ -6,7 +6,6 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "jsx": "preserve",
-    "lib": ["dom", "esnext"],
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
@@ -20,7 +19,8 @@
     "strict": false,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "lib": ["dom", "dom.iterable", "esnext"]
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", "webpack/loader/**"]
