@@ -5,43 +5,60 @@ import { Page } from './modules/redux/features/navigation/type';
 
 const pages: Array<Page> = [
   {
-    pathname: "/common",
-    title: "Dataflow",
+    pathname: '/common',
+    title: 'Dataflow',
     icon: <StarBorder />,
     children: [
       {
-        pathname: "/common/dataflow/comparison",
-        title: "Comparison",
+        pathname: '/common/dataflow/comparison',
+        title: 'Comparison',
         icon: <StarBorder />
       },
       {
-        pathname: "/common/dataflow/comparison",
-        title: "Comparison",
+        pathname: '/common/dataflow/comparison',
+        title: 'Comparison',
         icon: <StarBorder />
       }
     ]
   },
   {
-    pathname: "/pidp",
-    title: "PID/P",
+    pathname: '/guides',
+    title: 'Guides',
     icon: <StarBorder />,
     children: [
       {
-        pathname: "/pidp/approach/byExample",
-        title: "By example",
+        pathname: '/guides/api',
+        title: 'API',
         icon: <StarBorder />
       },
       {
-        pathname: "/pidp/approach/byExample",
-        title: "By example",
+        pathname: '/guides/api',
+        title: 'API',
         icon: <StarBorder />
       }
     ]
   },
   {
-    pathname: "/",
+    pathname: '/pidp',
+    title: 'PID/P',
+    icon: <StarBorder />,
+    children: [
+      {
+        pathname: '/pidp/approach/byExample',
+        title: 'By example',
+        icon: <StarBorder />
+      },
+      {
+        pathname: '/pidp/approach/byExample',
+        title: 'By example',
+        icon: <StarBorder />
+      }
+    ]
+  },
+  {
+    pathname: '/',
     displayNav: false,
-    title: ""
+    title: ''
   }
 ];
 
