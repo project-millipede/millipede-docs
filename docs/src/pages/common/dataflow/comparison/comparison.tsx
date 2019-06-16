@@ -8,20 +8,20 @@ import DotsMobileStepper from '../../../../../../src/components/stepper/DotsMobi
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     paper: {
-      padding: theme.spacing(2),
-      textAlign: "center",
-      color: theme.palette.text.secondary
+      // padding: theme.spacing(2),
+      textAlign: 'center'
+      // color: theme.palette.text.secondary
     },
     typographyDisabled: {
-      color: theme.palette.text.disabled
+      // color: theme.palette.text.disabled
     },
     typographyEnabled: {
-      color: theme.palette.text.primary
+      // color: theme.palette.text.primary
     },
     row: {
-      alignItems: "center",
-      flexDirection: "row",
-      justifyContent: "center"
+      // alignItems: "center",
+      flexDirection: 'row',
+      justifyContent: 'center'
     }
   })
 );
@@ -65,14 +65,14 @@ const generateGrid = (elements: Array<ContentItem> = [], active: boolean) => {
       >
         <CardContent className={classes.paper}>
           <Typography
-            variant="subtitle1"
+            variant='subtitle1'
             gutterBottom
             className={active ? classes.typographyEnabled : classes.typographyDisabled}
           >
             {content.title}
           </Typography>
           <Typography
-            variant="subtitle2"
+            variant='subtitle2'
             gutterBottom
             className={active ? classes.typographyEnabled : classes.typographyDisabled}
           >
@@ -88,19 +88,39 @@ interface Props {
   content: Content;
 }
 
-const ByExample = ({ content: { elements = [] } }: Props) => {
+const Comparison = ({ content: { elements = [] } }: Props) => {
   const classes = useStyles();
 
   const [step, setStep] = React.useState(0);
 
   return (
     <Grid container className={classes.row}>
-      <Grid item xs={8} className={classes.row}>
+      {/* <Grid item xs={8} className={classes.row}> */}
+      <Grid item className={classes.row}>
         <CardContent className={classes.paper}>
+          {/* <ReactSvgPanZoomLoader
+            src="file/path/image.svg"
+            proxy={
+              <>
+                <SvgLoaderSelectElement
+                // selector="#tree"
+                // onClick={onItemClick}
+                // stroke={props.strokeColor}
+                />
+              </>
+            }
+            render={content => ( */}
+          {/* <ReactSVGPanZoom width={500} height={500}>
+            <svg width={500} height={500}> */}
+          {/* {content} */}
           {stepsFiltered(elements, step)[0].image}
+          {/* </svg>
+          </ReactSVGPanZoom> */}
+          {/* )}
+          /> */}
         </CardContent>
       </Grid>
-      <Grid item xs={8} className={classes.row}>
+      <Grid item xs={10} className={classes.row}>
         <DotsMobileStepper
           steps={stepsLength(elements)}
           currentStep={(currentStep: number) => {
@@ -113,5 +133,5 @@ const ByExample = ({ content: { elements = [] } }: Props) => {
   );
 };
 
-export { ByExample };
-export default ByExample;
+export { Comparison };
+export default Comparison;
