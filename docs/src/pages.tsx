@@ -10,7 +10,7 @@ const pages: Array<Page> = [
     icon: <StarBorder />,
     children: [
       {
-        pathname: '/common/dataflow/comparison',
+        pathname: '/common/landing',
         title: 'Comparison',
         icon: <StarBorder />
       },
@@ -27,8 +27,8 @@ const pages: Array<Page> = [
     icon: <StarBorder />,
     children: [
       {
-        pathname: '/guides/api',
-        title: 'API',
+        pathname: '/guides/landing',
+        title: 'Landing',
         icon: <StarBorder />
       },
       {
@@ -44,8 +44,8 @@ const pages: Array<Page> = [
     icon: <StarBorder />,
     children: [
       {
-        pathname: '/pidp/approach/byExample',
-        title: 'By example',
+        pathname: '/pidp/landing',
+        title: 'Landing',
         icon: <StarBorder />
       },
       {
@@ -57,8 +57,8 @@ const pages: Array<Page> = [
   },
   {
     pathname: '/',
-    displayNav: false,
-    title: ''
+    title: '',
+    displayNav: false
   }
 ];
 

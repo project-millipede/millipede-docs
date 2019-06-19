@@ -1,6 +1,5 @@
 import { InputBase } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
@@ -36,11 +35,11 @@ const drawerWidth = 240;
 const useDrawerStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      display: "flex"
+      display: 'flex'
     },
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
-      transition: theme.transitions.create(["width", "margin"], {
+      transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen
       })
@@ -48,7 +47,7 @@ const useDrawerStyles = makeStyles((theme: Theme) =>
     appBarShift: {
       marginLeft: drawerWidth,
       width: `calc(100% - ${drawerWidth}px)`,
-      transition: theme.transitions.create(["width", "margin"], {
+      transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen
       })
@@ -57,36 +56,36 @@ const useDrawerStyles = makeStyles((theme: Theme) =>
       marginRight: 36
     },
     hide: {
-      display: "none"
+      display: 'none'
     },
     drawer: {
       width: drawerWidth,
       flexShrink: 0,
-      whiteSpace: "nowrap"
+      whiteSpace: 'nowrap'
     },
     drawerOpen: {
       width: drawerWidth,
-      transition: theme.transitions.create("width", {
+      transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen
       })
     },
     drawerClose: {
-      transition: theme.transitions.create("width", {
+      transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen
       }),
-      overflowX: "hidden",
+      overflowX: 'hidden',
       width: theme.spacing(7) + 1,
-      [theme.breakpoints.up("sm")]: {
+      [theme.breakpoints.up('sm')]: {
         width: theme.spacing(9) + 1
       }
     },
     toolbar: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "flex-end",
-      padding: "0 8px",
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      padding: '0 8px',
       ...theme.mixins.toolbar
     },
     content: {
@@ -106,44 +105,44 @@ const useAppBarStyles = makeStyles((theme: Theme) =>
     },
     title: {
       flexGrow: 1,
-      display: "none",
-      [theme.breakpoints.up("sm")]: {
-        display: "block"
+      display: 'none',
+      [theme.breakpoints.up('sm')]: {
+        display: 'block'
       }
     },
     search: {
-      position: "relative",
+      position: 'relative',
       borderRadius: theme.shape.borderRadius,
       backgroundColor: fade(theme.palette.common.white, 0.15),
-      "&:hover": {
+      '&:hover': {
         backgroundColor: fade(theme.palette.common.white, 0.25)
       },
       marginLeft: 0,
-      width: "100%",
-      [theme.breakpoints.up("sm")]: {
+      width: '100%',
+      [theme.breakpoints.up('sm')]: {
         marginLeft: theme.spacing(1),
-        width: "auto"
+        width: 'auto'
       }
     },
     searchIcon: {
       width: theme.spacing(7),
-      height: "100%",
-      position: "absolute",
-      pointerEvents: "none",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center"
+      height: '100%',
+      position: 'absolute',
+      pointerEvents: 'none',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
     },
     inputRoot: {
-      color: "inherit"
+      color: 'inherit'
     },
     inputInput: {
       padding: theme.spacing(1, 1, 1, 7),
-      transition: theme.transitions.create("width"),
-      width: "100%",
-      [theme.breakpoints.up("sm")]: {
+      transition: theme.transitions.create('width'),
+      width: '100%',
+      [theme.breakpoints.up('sm')]: {
         width: 120,
-        "&:focus": {
+        '&:focus': {
           width: 200
         }
       }
@@ -157,9 +156,9 @@ const useCustomStyles = makeStyles((theme: Theme) =>
       flexGrow: 1
     },
     sectionDesktop: {
-      display: "none",
-      [theme.breakpoints.up("md")]: {
-        display: "flex"
+      display: 'none',
+      [theme.breakpoints.up('md')]: {
+        display: 'flex'
       }
     }
   })
@@ -173,13 +172,13 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       color: theme.palette.text.secondary,
       marginBottom: theme.spacing(0.5),
-      "&:hover": {
+      '&:hover': {
         color: theme.palette.primary.main
       }
     },
     // https://github.com/philipwalton/flexbugs#3-min-height-on-a-flex-container-wont-apply-to-its-flex-items
     toolbarIe11: {
-      display: "flex"
+      display: 'flex'
     },
     placeholder: {
       height: 29
@@ -187,11 +186,11 @@ const useStyles = makeStyles((theme: Theme) =>
     toolbar: {
       ...theme.mixins.toolbar,
       paddingLeft: theme.spacing(3),
-      display: "flex",
+      display: 'flex',
       flexGrow: 1,
-      flexDirection: "column",
-      alignItems: "flex-start",
-      justifyContent: "center"
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      justifyContent: 'center'
     }
   })
 );
@@ -313,19 +312,19 @@ function MiniDrawer(
 
   return (
     <div className={drawerClasses.root}>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <AppBar
-        position="fixed"
+        position='fixed'
         className={clsx(drawerClasses.appBar, {
           [drawerClasses.appBarShift]: open
         })}
       >
         <Toolbar>
           <IconButton
-            color="inherit"
-            aria-label="Open drawer"
+            color='inherit'
+            aria-label='Open drawer'
             onClick={handleDrawerOpen}
-            edge="start"
+            edge='start'
             className={clsx(drawerClasses.menuButton, {
               [drawerClasses.hide]: open
             })}
@@ -333,7 +332,7 @@ function MiniDrawer(
             <MenuIcon />
           </IconButton>
           <Typography
-            variant="h6"
+            variant='h6'
             // color="inherit"
             noWrap
           >
@@ -347,7 +346,7 @@ function MiniDrawer(
               <SearchIcon />
             </div>
             <InputBase
-              placeholder="Search…"
+              placeholder='Search…'
               classes={{
                 root: appBarClasses.inputRoot,
                 input: appBarClasses.inputInput
@@ -357,7 +356,7 @@ function MiniDrawer(
         </Toolbar>
       </AppBar>
       <Drawer
-        variant="permanent"
+        variant='permanent'
         className={clsx(drawerClasses.drawer, {
           [drawerClasses.drawerOpen]: open,
           [drawerClasses.drawerClose]: !open
@@ -372,7 +371,7 @@ function MiniDrawer(
       >
         <div className={drawerClasses.toolbar}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </div>
         {drawer}
