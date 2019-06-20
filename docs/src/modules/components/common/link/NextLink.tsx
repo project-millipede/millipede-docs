@@ -1,7 +1,7 @@
-import Link from "next/link";
-import React from "react";
+import Link from 'next/link';
+import React from 'react';
 
-interface INextLinkProps {
+interface NextLinkProps {
   as?: string;
   href?: string;
   prefetch?: boolean;
@@ -11,7 +11,7 @@ interface INextLinkProps {
   other?: any;
 }
 
-export class NextLink extends React.Component<INextLinkProps, {}> {
+export class NextLink extends React.Component<NextLinkProps, {}> {
   public render() {
     const { as, href, prefetch, target, rel, ...other } = this.props;
 

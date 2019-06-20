@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import withInteraction from './LinkHoc';
 import NextLink from './NextLink';
 
-type TProps = {
+interface TProps {
   as?: string;
   onClick?: (event: React.SyntheticEvent) => void;
   target?: string;
@@ -14,17 +14,17 @@ type TProps = {
   naked?: boolean;
   other?: any;
   className?: string;
-  display?: "initial" | "inline" | "block";
+  display?: 'initial' | 'inline' | 'block';
   color?:
-    | "inherit"
-    | "initial"
-    | "error"
-    | "primary"
-    | "secondary"
-    | "textPrimary"
-    | "textSecondary";
-  underline?: "none" | "hover" | "always";
-};
+    | 'inherit'
+    | 'initial'
+    | 'error'
+    | 'primary'
+    | 'secondary'
+    | 'textPrimary'
+    | 'textSecondary';
+  underline?: 'none' | 'hover' | 'always';
+}
 
 export type TLinkProps = TProps & {
   activeClassName?: string;
@@ -45,7 +45,7 @@ export class Link extends Component<TRouterLinkProps, {}> {
       <MuiLink
         component={NextLink}
         onClick={onClick}
-        underline="none"
+        underline='none'
         className={className}
         target={target}
         rel={rel}

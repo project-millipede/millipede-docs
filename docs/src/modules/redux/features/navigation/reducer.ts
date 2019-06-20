@@ -3,17 +3,17 @@ import { StoreAction } from '../actionType';
 import { CHANGE_NAVIGATION, SETUP_NAVIGATION } from './actionTypes';
 import { Page } from './type';
 
-interface ISType {
+interface Props {
   activePage: Page;
   pages: Array<Page>;
 }
 
-export const initialState: ISType = {
+export const initialState: Props = {
   activePage: {
-    pathname: "Test",
-    title: ""
+    pathname: 'Test',
+    title: ''
   },
-  pages: pages
+  pages
 };
 
 const navigationReducer = (state = initialState, action: StoreAction) => {

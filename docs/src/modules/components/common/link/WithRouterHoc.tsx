@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
-import { forwardRef } from 'react';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 const customWithRouter = Component => {
   const WithRouter = forwardRef((props, ref) => {

@@ -2,15 +2,12 @@ import mdx from '@mdx-js/mdx';
 import toMDXAST from '@mdx-js/mdxast';
 import matter from 'gray-matter';
 import castArray from 'lodash/castArray';
-import kebabCase from 'lodash/kebabCase';
-import toString from 'mdast-util-to-string';
 import React from 'react';
 import parse from 'remark-parse';
 import remarkToReact from 'remark-react';
 import remarkSlug from 'remark-slug';
 import stringify from 'remark-stringify';
 import unified from 'unified';
-import visit from 'unist-util-visit';
 
 import { Heading } from '../../docs/src/markdown/processAndRenderContent';
 
@@ -27,7 +24,37 @@ interface ParserProps {
   options: ParserOptions;
 }
 
-export const parser = async function(raw: string, options: ParserOptions) {
+// const hasChildren = (node: Node) => {
+//   return !!node.children;
+// };
+
+// const hasChildCodeTag = (node: Node) => {
+//   const { children = [] } = node;
+
+//   const firstChild = (children as Array<Node>)[0];
+
+//   if (hasChildren(node) && firstChild.tagName === 'code') {
+//     return true;
+//   }
+//   return false;
+// };
+
+// const syncCodeBlocks = () => (tree: Parent) => {
+//   tree.children.forEach((child: Node) => {
+//     if (
+//       child.type === 'element' &&
+//       child.tagName === 'pre' &&
+//       child.children &&
+//       child.children[0].tagName === 'code'
+//     ) {
+//       const { properties = {} } = child;
+//       const code = child.children[0];
+//       code.properties = Object.assign(code.properties, properties);
+//     }
+//   });
+// };
+
+export async function parser(raw: string, options: ParserOptions) {
   const tree = unified()
     .use(parse)
     .use(stringify)
@@ -35,66 +62,58 @@ export const parser = async function(raw: string, options: ParserOptions) {
 
   const { content, data: meta } = matter(raw);
 
-  let ast = tree.parse(content) as any;
+  const ast = tree.parse(content) as any;
+
   let mdxast;
 
-  const captureAst = () => tree => {
-    mdxast = tree;
-    return tree;
-  };
+  // const captureAst = () => tree => {
+  //   mdxast = tree;
+  //   return tree;
+  // };
 
-  const captureMeta = () => tree => {
-    visit(tree, node => {
-      if (node.type === "code" && node.lang && node.lang.match(/\w+\s.*/)) {
-        const parts = node.lang.split(" ")[0];
-        node.lang = parts[0];
-        node.meta = parts.slice(1).join(" ");
-      }
-    });
+  // const captureMeta = () => tree => {
+  //   visit(tree, node => {
+  //     if (node.type === 'code' && node.lang && node.lang.match(/\w+\s.*/)) {
+  //       const parts = node.lang.split(' ')[0];
+  //       node.lang = parts[0];
+  //       node.meta = parts.slice(1).join(' ');
+  //     }
+  //   });
 
-    return tree;
-  };
-
-  const syncCodeBlocks = () => tree => {
-    tree.children.forEach(child => {
-      if (
-        child.type === "element" &&
-        child.tagName === "pre" &&
-        child.children &&
-        child.children[0].tagName === "code"
-      ) {
-        const { properties = {} } = child;
-        const code = child.children[0];
-        code.properties = Object.assign(code.properties, properties);
-      }
-    });
-  };
+  //   return tree;
+  // };
 
   const injectRemarkPlugins = [
-    captureMeta,
+    // captureMeta,
     remarkSlug,
     [
       remarkToReact,
       {
         fragment: React.Fragment,
-        sanitize: { clobberPrefix: "" }, // remove 'user-content' string from generated ids
+        sanitize: { clobberPrefix: '' }, // remove 'user-content' string from generated ids
         remarkReactComponents: {
           h2: props => {
-            return <Heading component={"h2"} {...props} />;
+            return <Heading component={'h2'} {...props} />;
           },
           h3: props => {
-            return <Heading component={"h3"} {...props} />;
+            return <Heading component={'h3'} {...props} />;
           }
         }
       }
     ]
   ];
-  const injectRehypePlugins = [syncCodeBlocks];
+  const injectRehypePlugins = [
+    // syncCodeBlocks
+  ];
 
   const compile = (src, { filePath = options.filePath } = {}) =>
     mdx(src, {
-      remarkPlugins: injectRemarkPlugins.concat(options.remarkPlugins || []).concat([captureAst]),
-      rehypePlugins: [syncAstNodes(ast, filePath)]
+      remarkPlugins: injectRemarkPlugins.concat(options.remarkPlugins || []).concat([
+        // captureAst
+      ]),
+      rehypePlugins: [
+        // syncAstNodes(ast, filePath)
+      ]
         .concat(injectRehypePlugins)
         .concat(options.rehypePlugins || [])
     });
@@ -105,41 +124,40 @@ export const parser = async function(raw: string, options: ParserOptions) {
 
   let headingsMap;
 
-  try {
-    headingsMap = ast.children.reduce(
-      (memo, node) => {
-        if (node.type === "heading") {
-          const string = toString(node);
-          const pos = node.position.start.line;
-          const slug = kebabCase(string.toLowerCase());
+  // try {
+  //   headingsMap = ast.children.reduce(
+  //     (memo, node) => {
+  //       if (node.type === 'heading') {
+  //         const string = toString(node);
+  //         const pos = node.position.start.line;
+  //         const slug = kebabCase(string.toLowerCase());
 
-          memo.lines[pos] = string;
-          memo.headings[string] = memo.lines[string] || [];
-          memo.headings[slug] = memo.lines[slug] || [];
+  //         memo.lines[pos] = string;
+  //         memo.headings[string] = memo.lines[string] || [];
+  //         memo.headings[slug] = memo.lines[slug] || [];
 
-          memo.headings[string].push(pos);
-          memo.headings[slug].push(pos);
+  //         memo.headings[string].push(pos);
+  //         memo.headings[slug].push(pos);
 
-          return memo;
-        } else {
-          return memo;
-        }
-      },
-      {
-        lines: {},
-        headings: {}
-      }
-    );
-  } catch (error) {
-    headingsMap = { message: error.message };
-  }
+  //         return memo;
+  //       }
+  //       return memo;
+  //     },
+  //     {
+  //       lines: {},
+  //       headings: {}
+  //     }
+  //   );
+  // } catch (error) {
+  //   headingsMap = { message: error.message };
+  // }
 
-  let injectLines = castArray(options.injectCode).filter(v => v && v.length);
+  const injectLines = castArray(options.injectCode).filter(v => v && v.length);
 
-  let code = [
+  const code = [
     `import React from 'react'`,
     `import { mdx } from '@mdx-js/react'`,
-    !result.match("export const meta") ? "export const meta = {}" : undefined,
+    !result.match('export const meta') ? 'export const meta = {}' : undefined,
     `typeof meta !== 'undefined' && Object.assign(meta, ${JSON.stringify(meta)}, meta)`,
     `export const ast = ${JSON.stringify(mdxast || getAst(), null, 2)}`,
     `export const raw = ${JSON.stringify(raw)}`,
@@ -148,7 +166,7 @@ export const parser = async function(raw: string, options: ParserOptions) {
     result
   ].filter(Boolean);
 
-  let response = code.join("\n");
+  const response = code.join('\n');
 
   /*
   if (options.babel) {
@@ -169,7 +187,7 @@ export const parser = async function(raw: string, options: ParserOptions) {
   */
 
   return { code: response, meta, ast: mdxast, headingsMap, raw };
-};
+}
 
 function stringifier() {
   const { Compiler } = this;
@@ -180,6 +198,7 @@ function stringifier() {
   visitors.export = node => node.value;
 }
 
+/*
 function syncAstNodes(withAst, filePath) {
   const findNode = position =>
     withAst.children.find(
@@ -225,5 +244,6 @@ function syncAstNodes(withAst, filePath) {
     };
   };
 }
+*/
 
 export default parser;

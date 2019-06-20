@@ -94,7 +94,7 @@ const AppFrame = ({ children }: Props) => {
   //   dispatch
   // }: { state: RootState; dispatch: React.Dispatch<ThemeActions> } = useHoux();
 
-  let canonical = null;
+  const canonical = null;
 
   // componentDidMount() {
   //   const { canonical } = pathnameToLanguage(window.location.pathname);

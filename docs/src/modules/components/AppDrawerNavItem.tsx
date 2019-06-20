@@ -17,28 +17,28 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     item: {
-      display: "block",
+      display: 'block',
       paddingTop: 0,
       paddingBottom: 0
     },
     itemLeaf: {
-      display: "flex",
+      display: 'flex',
       paddingTop: 0,
       paddingBottom: 0
     },
     button: {
       letterSpacing: 0,
-      justifyContent: "flex-start",
-      textTransform: "none",
-      width: "100%"
+      justifyContent: 'flex-start',
+      textTransform: 'none',
+      width: '100%'
     },
     buttonLeaf: {
       letterSpacing: 0,
-      justifyContent: "flex-start",
-      textTransform: "none",
-      width: "100%",
+      justifyContent: 'flex-start',
+      textTransform: 'none',
+      width: '100%',
       fontWeight: theme.typography.fontWeightRegular,
-      "&.depth-0": {
+      '&.depth-0': {
         fontWeight: theme.typography.fontWeightMedium
       }
     },
@@ -76,7 +76,7 @@ const AppDrawerNavItem = ({
   const [open, setOpen] = useState(openImmediately);
 
   const handleClick = () => {
-    setOpen(open => !open);
+    setOpen(!open);
   };
 
   // const style = {
@@ -101,8 +101,8 @@ const AppDrawerNavItem = ({
         <ListItemText primary={title} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding dense>
+      <Collapse in={open} timeout='auto' unmountOnExit>
+        <List component='div' disablePadding dense>
           {children}
         </List>
       </Collapse>

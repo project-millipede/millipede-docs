@@ -8,6 +8,7 @@ import reducers from '../docs/src/modules/redux/reducers';
 const USE_STRICT_MODE = false;
 const ReactMode = USE_STRICT_MODE ? React.StrictMode : React.Fragment;
 
+/* eslint-disable class-methods-use-this */
 class MillipedeApp extends App {
   componentDidMount() {
     // TODO - determine purpose

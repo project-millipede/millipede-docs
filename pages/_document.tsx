@@ -2,6 +2,7 @@ import { ServerStyleSheets } from '@material-ui/styles';
 import NextDocument, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
 import React from 'react';
 
+/* eslint-disable class-methods-use-this */
 class MillipedeDocument extends NextDocument {
   static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
     // Resolution order
