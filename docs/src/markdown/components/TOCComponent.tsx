@@ -1,5 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import vfile, { VFile } from 'vfile';
 
 import { processAndRender } from '../processAndRender';
@@ -10,13 +9,8 @@ export interface TOCProps {
   callback: (hash: string) => void;
 }
 
-interface AnchorObject {
-  href: string;
-  title: string;
-}
-
 const TOCComponent = ({ content, activeState, callback }: TOCProps) => {
-  const [toc, setToc] = useState("");
+  const [toc, setToc] = useState('');
 
   useEffect(() => {
     const generateMDX = async () => {

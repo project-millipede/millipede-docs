@@ -5,8 +5,7 @@ import { Element } from 'react-scroll';
 interface RemarkProps {
   // id generated through slug
   id: string;
-
-  component: "h2" | "h3";
+  component: 'h2' | 'h3';
 }
 
 export class Heading extends React.Component<RemarkProps> {

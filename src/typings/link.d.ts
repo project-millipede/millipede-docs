@@ -1,9 +1,10 @@
 declare type Url = string | UrlObject;
-declare type FormatResult = {
+declare interface FormatResult {
   href: string;
   as?: string;
-};
-export declare type LinkProps = {
+}
+
+export declare interface LinkProps {
   href: Url;
   as?: Url | undefined;
   replace?: boolean;
@@ -15,4 +16,4 @@ export declare type LinkProps = {
    * @deprecated since version 8.1.1-canary.20
    */
   prefetch?: boolean;
-};
+}

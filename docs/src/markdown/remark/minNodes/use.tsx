@@ -10,9 +10,8 @@ import unified from 'unified';
 import attacher from '.';
 
 const renderHeading = (variant: ThemeStyle) => (props: TypographyProps) => {
-  console.log("renderHeading");
   return (
-    <Typography component="a" variant={variant}>
+    <Typography component='a' variant={variant}>
       {props.children}
     </Typography>
   );
@@ -24,7 +23,7 @@ const processor = unified()
   .use(attacher)
   .use(remarkToReact, {
     remarkReactComponents: {
-      a: renderHeading("h5")
+      a: renderHeading('h5')
     }
   });
 

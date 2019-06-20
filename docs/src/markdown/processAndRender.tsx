@@ -22,7 +22,6 @@ export const processAndRender = async (callback: (value: string) => void, active
         // Redefining the anchor element overrides the results generated in a
         // before executed effort of remark-slug to produce anchor elements
         a: props => {
-          console.log("a", props);
           return (
             <Counter initialvalue={10} callback={callback} activeState={activeState} {...props} />
           );

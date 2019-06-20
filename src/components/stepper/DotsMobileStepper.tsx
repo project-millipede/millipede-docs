@@ -11,10 +11,10 @@ const useStyles = makeStyles({
   }
 });
 
-type StepperProps = {
+interface StepperProps {
   steps: number;
   currentStep: (step: number) => void;
-};
+}
 
 function DotsMobileStepper(props: StepperProps) {
   const classes = useStyles();
@@ -35,19 +35,19 @@ function DotsMobileStepper(props: StepperProps) {
 
   return (
     <MobileStepper
-      variant="dots"
+      variant='dots'
       steps={props.steps}
-      position="static"
+      position='static'
       activeStep={activeStep}
       className={classes.root}
       nextButton={
-        <Button size="small" onClick={handleNext} disabled={activeStep === props.steps - 1}>
+        <Button size='small' onClick={handleNext} disabled={activeStep === props.steps - 1}>
           Next
           <KeyboardArrowRight />
         </Button>
       }
       backButton={
-        <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+        <Button size='small' onClick={handleBack} disabled={activeStep === 0}>
           <KeyboardArrowLeft />
           Back
         </Button>

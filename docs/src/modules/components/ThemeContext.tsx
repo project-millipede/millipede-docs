@@ -2,14 +2,13 @@ import { blue, pink } from '@material-ui/core/colors';
 import { createMuiTheme, darken } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { ThemeProvider } from '@material-ui/styles';
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import { getCookie } from '../utils/helpers';
 
 // import { darkTheme, lightTheme, setPrismTheme } from 'docs/src/modules/components/prism';
 export const themeInitialOptions = {
-  direction: "ltr",
+  direction: 'ltr',
   paletteColors: {
     primary: {
       main: blue[500]
@@ -22,22 +21,22 @@ export const themeInitialOptions = {
 };
 
 export const DispatchContext = React.createContext(() => {
-  throw new Error("Forgot to wrap component in ThemeContext.Provider");
+  throw new Error('Forgot to wrap component in ThemeContext.Provider');
 });
 
-const useEnhancedEffect = typeof window === "undefined" ? React.useEffect : React.useLayoutEffect;
+const useEnhancedEffect = typeof window === 'undefined' ? React.useEffect : React.useLayoutEffect;
 
 export function Provider(props) {
   const { children } = props;
 
   const [themeOptions, dispatch] = React.useReducer((state, action) => {
     switch (action.type) {
-      case "RESET_COLORS":
+      case 'RESET_COLORS':
         return {
           ...state,
           paletteColors: themeInitialOptions.paletteColors
         };
-      case "CHANGE":
+      case 'CHANGE':
         return {
           paletteType: action.payload.paletteType || state.paletteType,
           direction: action.payload.direction || state.direction,
@@ -48,8 +47,8 @@ export function Provider(props) {
     }
   }, themeInitialOptions);
 
-  const prefersDarkMode = useMediaQuery("@media (prefers-color-scheme: dark)");
-  const preferredType = prefersDarkMode ? "dark" : "light";
+  const prefersDarkMode = useMediaQuery('@media (prefers-color-scheme: dark)');
+  const preferredType = prefersDarkMode ? 'dark' : 'light';
   const { direction, paletteColors, paletteType = preferredType } = themeOptions;
 
   React.useEffect(() => {
@@ -58,11 +57,11 @@ export function Provider(props) {
 
   React.useEffect(() => {
     // if (process.browser) {
-    const nextPaletteColors = JSON.parse(getCookie("paletteColors") || "null");
-    const nextPaletteType = getCookie("paletteType");
+    const nextPaletteColors = JSON.parse(getCookie('paletteColors') || 'null');
+    const nextPaletteType = getCookie('paletteType');
 
     dispatch({
-      type: "CHANGE",
+      type: 'CHANGE',
       payload: { paletteColors: nextPaletteColors, paletteType: nextPaletteType }
     });
     // }
@@ -87,7 +86,7 @@ export function Provider(props) {
         ...paletteColors,
         type: paletteType,
         background: {
-          default: paletteType === "light" ? "#fff" : "#303030"
+          default: paletteType === 'light' ? '#fff' : '#303030'
         }
       }
     });
@@ -114,10 +113,6 @@ export function Provider(props) {
     </ThemeProvider>
   );
 }
-
-Provider.propTypes = {
-  children: PropTypes.node
-};
 
 /**
  * @returns {(nextOptions: Partial<typeof themeInitialOptions>) => void}

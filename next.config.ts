@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import compose from 'lodash/fp/compose';
 import merge from 'webpack-merge';
 
@@ -14,10 +15,13 @@ export default composeFn({
      */
 
     const { isServer } = options;
+    const {
+      optimization: {
+        splitChunks: { cacheGroups }
+      }
+    } = config;
 
     if (!isServer) {
-      const cacheGroups = config.optimization.splitChunks.cacheGroups;
-
       delete cacheGroups.react;
 
       cacheGroups.default = false;
