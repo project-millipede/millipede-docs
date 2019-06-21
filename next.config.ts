@@ -14,31 +14,31 @@ export default composeFn({
      * The following snippet was borrowed from https://github.com/zeit/next.js/issues/5923
      */
 
-    const { isServer } = options;
-    const {
-      optimization: {
-        splitChunks: { cacheGroups }
-      }
-    } = config;
+    // const { isServer } = options;
+    // const {
+    //   optimization: {
+    //     splitChunks: { cacheGroups }
+    //   }
+    // } = config;
 
-    if (!isServer) {
-      delete cacheGroups.react;
+    // if (!isServer) {
+    //   delete cacheGroups.react;
 
-      cacheGroups.default = false;
+    //   cacheGroups.default = false;
 
-      cacheGroups.vendors = {
-        name: 'vendors',
-        test: /[\\/](node_modules|packages)[\\/]/,
-        enforce: true,
-        priority: 20
-      };
+    //   cacheGroups.vendors = {
+    //     name: 'vendors',
+    //     test: /[\\/](node_modules|packages)[\\/]/,
+    //     enforce: true,
+    //     priority: 20
+    //   };
 
-      cacheGroups.commons = {
-        name: 'commons',
-        minChunks: 2,
-        priority: 10
-      };
-    }
+    //   cacheGroups.commons = {
+    //     name: 'commons',
+    //     minChunks: 2,
+    //     priority: 10
+    //   };
+    // }
 
     return merge(config, webpackConfig);
 
