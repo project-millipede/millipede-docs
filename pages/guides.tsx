@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MDDocs from '../docs/src/modules/components/md/MDDocs';
+import { MdDocs } from '../docs/src/modules/components/md';
 import content from '../docs/src/pages/guides/api/api.md';
 
 /**
@@ -15,7 +15,7 @@ import content from '../docs/src/pages/guides/api/api.md';
  */
 
 const Page = () => {
-  return <MDDocs content={content} />;
+  return <MdDocs content={content} />;
 };
 
 export default Page;
