@@ -1,7 +1,4 @@
-// import MdDocs from './MdDocs';
+import MdDocs from './MdDocs';
 import MdElement from './MdElement';
 
-export {
-  // MdDocs,
-  MdElement
-};
+export { MdDocs, MdElement };
