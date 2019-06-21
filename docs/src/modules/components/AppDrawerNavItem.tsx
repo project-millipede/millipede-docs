@@ -52,11 +52,11 @@ const useStyles = makeStyles((theme: Theme) =>
 interface AppDrawerNavItemProps extends React.Props<any> {
   title: string;
   icon?: React.ReactElement<SvgIconProps>;
-  depth: number;
   href?: string;
   onClick?: (event: React.SyntheticEvent) => void;
   openImmediately?: boolean;
   topLevel?: boolean;
+  depth: number;
 }
 
 type Props = AppDrawerNavItemProps & WithRouterProps;
@@ -78,10 +78,6 @@ const AppDrawerNavItem = ({
   const handleClick = () => {
     setOpen(!open);
   };
-
-  // const style = {
-  //   paddingLeft: 8 * (3 + 2 * depth)
-  // };
 
   if (href) {
     return (
@@ -108,67 +104,6 @@ const AppDrawerNavItem = ({
       </Collapse>
     </>
   );
-
-  // if (href) {
-  //   return (
-  //     <ListItem
-  //       // button
-  //       // className={classes.itemLeaf}
-  //       // disableGutters
-  //       // {...other}
-  //       onClick={onClick}
-  //     >
-  //       <NextLinkButton
-  //         component={Link}
-  //         // naked
-  //         // activeClassName={`drawer-active ${classes.active}`}
-  //         href={href}
-  //         // className={clsx(classes.buttonLeaf, `depth-${depth}`)}
-  //         // disableTouchRipple
-  //         onClick={onClick}
-  //         // style={style}
-  //       >
-  //         <ListItemIcon>{icon}</ListItemIcon>
-  //         <ListItemText primary={title} />
-  //       </NextLinkButton>
-  //     </ListItem>
-  //   );
-  // }
-
-  // return (
-  //   <>
-  //     <ListItem
-  //       button
-  //       // className={classes.item}
-  //       // disableGutters
-  //       // {...other}
-  //       onClick={event => handleClick()}
-  //     >
-  //       {/* <Button
-  //         // classes={
-  //         //   {
-  //         //     // root: classes.button,
-  //         //     label: openImmediately ? "algolia-lvl0" : ""
-  //         //   }
-  //         // }
-  //         onClick={handleClick}
-  //         // style={style}
-  //       >
-  //         <ListItemIcon>{icon}</ListItemIcon>
-  //         <ListItemText primary={title} />
-  //       </Button> */}
-
-  //       <ListItemIcon>{icon}</ListItemIcon>
-  //       <ListItemText primary={title} />
-  //       {open ? <ExpandLess /> : <ExpandMore />}
-  //     </ListItem>
-  //     <Collapse in={open} timeout="auto" unmountOnExit>
-  //       <List component="div" disablePadding dense>
-  //         {children}
-  //       </List>
-  //     </Collapse>
-  //   </>
-  // );
 };
 
 export default withRouter(AppDrawerNavItem);
