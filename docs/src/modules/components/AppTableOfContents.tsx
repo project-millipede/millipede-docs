@@ -1,7 +1,10 @@
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { useHoux } from 'houx';
 import React, { lazy, Suspense } from 'react';
+import { scroller } from 'react-scroll';
 
-import TOCComponent from '../../markdown/components/TOCComponent';
+import TOCComponent from '../../markdown/components/toc/TocComponent';
+import { RootState } from '../redux/reducers';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -12,13 +15,13 @@ const useStyles = makeStyles((theme: Theme) =>
       width: 175,
       flexShrink: 0,
       order: 2,
-      position: "sticky",
-      height: "calc(100vh - 70px)",
-      overflowY: "auto",
+      position: 'sticky',
+      height: 'calc(100vh - 70px)',
+      overflowY: 'auto',
       padding: theme.spacing(2, 2, 2, 0),
-      display: "none",
-      [theme.breakpoints.up("sm")]: {
-        display: "block"
+      display: 'none',
+      [theme.breakpoints.up('sm')]: {
+        display: 'block'
       }
     },
     contents: {
@@ -28,21 +31,21 @@ const useStyles = makeStyles((theme: Theme) =>
     ul: {
       padding: 0,
       margin: 0,
-      listStyleType: "none"
+      listStyleType: 'none'
     },
     item: {
       fontSize: 13,
       padding: theme.spacing(0.5, 0, 0.5, 1),
-      borderLeft: "4px solid transparent",
-      boxSizing: "content-box",
-      "&:hover": {
+      borderLeft: '4px solid transparent',
+      boxSizing: 'content-box',
+      '&:hover': {
         borderLeft: `4px solid ${
-          theme.palette.type === "light" ? theme.palette.grey[200] : theme.palette.grey[900]
+          theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[900]
         }`
       },
-      "&$active,&:active": {
+      '&$active,&:active': {
         borderLeft: `4px solid ${
-          theme.palette.type === "light" ? theme.palette.grey[300] : theme.palette.grey[800]
+          theme.palette.type === 'light' ? theme.palette.grey[300] : theme.palette.grey[800]
         }`
       }
     },
@@ -55,28 +58,38 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface AppTableOfContentsProps {
   content: string;
-  scrollToLink?: (href: string) => void;
 }
 
-const AppTableOfContents = ({ content, scrollToLink }: AppTableOfContentsProps) => {
+const scrollToLink = (href: string) => {
+  scroller.scrollTo(href.slice(1), {
+    duration: 600,
+    offset: -85,
+    delay: 0,
+    smooth: 'ease',
+    containerId: 'main-content'
+  });
+};
+
+const AppTableOfContents = ({ content }: AppTableOfContentsProps) => {
   const classes = useStyles();
 
-  const [activeState, setActiveState] = React.useState(null);
+  const { state }: { state: RootState } = useHoux();
 
   const handleClick = hash => {
-    if (activeState !== hash) {
-      setActiveState(hash);
-      scrollToLink(hash);
-    }
+    scrollToLink(hash);
   };
 
   return (
-    <nav className={classes.root} aria-label="Table of contents">
+    <nav className={classes.root} aria-label='Table of contents'>
       <React.Fragment>
         <Typography gutterBottom className={classes.contents}>
-          {"Contents"}
+          {'Contents'}
         </Typography>
-        <TOCComponent content={content} callback={handleClick} activeState={activeState} />
+        <TOCComponent
+          content={content}
+          activeState={state.scroll.position as Set<string>}
+          scrollToLink={handleClick}
+        />
       </React.Fragment>
     </nav>
   );
