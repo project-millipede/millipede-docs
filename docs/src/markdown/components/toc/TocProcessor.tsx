@@ -4,12 +4,15 @@ import remarkToReact from 'remark-react';
 import remarkSlug from 'remark-slug';
 import unified from 'unified';
 
-import Counter from './components/Counter';
-import remarkMinNodes from './remark/minNodes';
-import remarkToc from './remark/toc';
+import remarkMinNodes from '../../remark/minNodes';
+import remarkToc from '../../remark/toc';
+import TocLink from './TocLink';
 
-export const processAndRender = async (callback: (value: string) => void, activeState: string) => {
-  const processor = await unified()
+export const generateProcessor = (
+  activeState: Set<string>,
+  scrollToLink?: (href: string) => void
+) => {
+  const processor = unified()
     .use(remarkParse)
     .use(remarkSlug)
     // .use(remarkTitle)
@@ -23,23 +26,28 @@ export const processAndRender = async (callback: (value: string) => void, active
         // before executed effort of remark-slug to produce anchor elements
         a: props => {
           return (
-            <Counter initialvalue={10} callback={callback} activeState={activeState} {...props} />
+            <TocLink
+              initialvalue={10}
+              activeState={activeState}
+              scrollToLink={scrollToLink}
+              {...props}
+            />
           );
         }
         // ul: props => (
-        //   <Counter
+        //   <TocLink
         //     initialvalue={10}
-        //     callback={callback}
         //     activeState={activeState}
+        //     scrollToLink={scrollToLink}
         //     secondary={false}
         //     {...props}
         //   />
         // ),
         // li: props => (
-        //   <Counter
+        //   <TocLink
         //     initialvalue={10}
-        //     callback={callback}
         //     activeState={activeState}
+        //     scrollToLink={scrollToLink}
         //     secondary={true}
         //     {...props}
         //   />

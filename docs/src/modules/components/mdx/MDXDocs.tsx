@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { scroller } from 'react-scroll';
+import React, { useEffect, useState } from 'react';
 
 import AppContent from '../AppContent';
 import AppFrame from '../AppFrame';
@@ -15,17 +14,7 @@ interface MarkdownDocsProps extends React.Props<any> {
   outerClasses?: any;
 }
 
-const scrollToLink = (href: string) => {
-  scroller.scrollTo(href.slice(1), {
-    duration: 600,
-    offset: -85,
-    delay: 0,
-    smooth: 'ease',
-    containerId: 'main-content'
-  });
-};
-
-export const MDXDocs = (props: MarkdownDocsProps) => {
+export const MdxDocs = (props: MarkdownDocsProps) => {
   const { content, raw, outerClasses = {} } = props;
 
   const [markdownFiles, setMarkdownFiles] = useState('');
@@ -36,7 +25,7 @@ export const MDXDocs = (props: MarkdownDocsProps) => {
 
   return (
     <AppFrame>
-      <AppTableOfContents content={raw} scrollToLink={scrollToLink} />
+      <AppTableOfContents content={raw} />
       <AppContent className={outerClasses.root}>
         <Breadcrumbs />
         {markdownFiles}
@@ -45,4 +34,4 @@ export const MDXDocs = (props: MarkdownDocsProps) => {
   );
 };
 
-export default MDXDocs;
+export default MdxDocs;
