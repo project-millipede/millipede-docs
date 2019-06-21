@@ -1,7 +1,12 @@
 import path from 'path';
 import webpack from 'webpack';
 
+// import * as options from './remarkReactComponents';
+
 const webpackDevConfig: webpack.Configuration = {
+  mode: 'development',
+  devtool: 'inline-source-map',
+
   // Fixes npm packages that depend on `fs` module
   node: {
     fs: 'empty'
@@ -23,6 +28,19 @@ const webpackDevConfig: webpack.Configuration = {
         test: /\.mdx$/,
         exclude: /node_modules/,
         use: ['babel-loader', path.join(__dirname, './loader/mdx-custom-loader')]
+        // use: [
+        //   {
+        //     loader: 'babel-loader'
+        //   },
+        //   {
+        //     loader: path.join(__dirname, './loader/mdx-custom-loader'),
+        //     options: {
+        //       remarkPlugins: [
+        //         // options
+        //       ]
+        //     }
+        //   }
+        // ]
       },
       {
         test: /\.md$/,
