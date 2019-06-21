@@ -4,15 +4,15 @@ import matter from 'gray-matter';
 import castArray from 'lodash/castArray';
 import React from 'react';
 import parse from 'remark-parse';
-import remarkToReact from 'remark-react';
-import remarkSlug from 'remark-slug';
 import stringify from 'remark-stringify';
 import unified from 'unified';
 
-import { Heading } from '../../docs/src/markdown/processAndRenderContent';
+// import remarkToReact from 'remark-react';
+// import remarkSlug from 'remark-slug';
+// import { Heading } from '../../docs/src/markdown/processAndRenderContentLoader';
 
-interface ParserOptions {
-  filePath: string; // the path to the file
+export interface ParserOptions {
+  filePath?: string; // the path to the file
   babel: boolean; // whether to transpile otherwise es6 / jsx output returned from mdx
   remarkPlugins: Array<() => (tree: any) => any>;
   rehypePlugins: Array<(options: any) => (tree: any) => void>;
@@ -54,6 +54,31 @@ interface ParserProps {
 //   });
 // };
 
+export const compile = async (
+  src: string,
+  options: ParserOptions,
+  injectRemarkPlugins: Array<() => (tree: any) => any>,
+  injectRehypePlugins: Array<(options: any) => (tree: any) => void>
+) => {
+  const {
+    // filePath,
+    remarkPlugins,
+    rehypePlugins
+  } = options;
+
+  const jsx = await mdx(src, {
+    remarkPlugins: injectRemarkPlugins.concat(remarkPlugins || []).concat([
+      // captureAst
+    ]),
+    rehypePlugins: [
+      // syncAstNodes(ast, filePath)
+    ]
+      .concat(injectRehypePlugins)
+      .concat(rehypePlugins || [])
+  });
+  return jsx;
+};
+
 export async function parser(raw: string, options: ParserOptions) {
   const tree = unified()
     .use(parse)
@@ -85,42 +110,30 @@ export async function parser(raw: string, options: ParserOptions) {
 
   const injectRemarkPlugins = [
     // captureMeta,
-    remarkSlug,
-    [
-      remarkToReact,
-      {
-        fragment: React.Fragment,
-        sanitize: { clobberPrefix: '' }, // remove 'user-content' string from generated ids
-        remarkReactComponents: {
-          h2: props => {
-            return <Heading component={'h2'} {...props} />;
-          },
-          h3: props => {
-            return <Heading component={'h3'} {...props} />;
-          }
-        }
-      }
-    ]
+    // remarkSlug,
+    // [
+    //   remarkToReact,
+    //   {
+    //     fragment: React.Fragment,
+    //     sanitize: { clobberPrefix: '' }, // remove 'user-content' string from generated ids
+    //     remarkReactComponents: {
+    //       h2: props => {
+    //         return <Heading component={'h2'} {...props} />;
+    //       },
+    //       h3: props => {
+    //         return <Heading component={'h3'} {...props} />;
+    //       }
+    //     }
+    //   }
+    // ]
   ];
   const injectRehypePlugins = [
     // syncCodeBlocks
   ];
 
-  const compile = (src, { filePath = options.filePath } = {}) =>
-    mdx(src, {
-      remarkPlugins: injectRemarkPlugins.concat(options.remarkPlugins || []).concat([
-        // captureAst
-      ]),
-      rehypePlugins: [
-        // syncAstNodes(ast, filePath)
-      ]
-        .concat(injectRehypePlugins)
-        .concat(options.rehypePlugins || [])
-    });
-
   const toMdx = (a, o) => toMDXAST(o)(a);
   const getAst = () => mdxast || toMdx(ast, options);
-  const result = await compile(content, options);
+  const result = await compile(content, options, injectRemarkPlugins, injectRemarkPlugins);
 
   let headingsMap;
 
