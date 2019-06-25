@@ -1,15 +1,15 @@
 export const CODE_VARIANTS = {
-  JS: "JS",
-  TS: "TS"
+  JS: 'JS',
+  TS: 'TS'
 };
 
 export const ACTION_TYPES = {
-  THEME_CHANGE: "THEME_CHANGE",
-  OPTIONS_CHANGE: "OPTIONS_CHANGE"
+  THEME_CHANGE: 'THEME_CHANGE',
+  OPTIONS_CHANGE: 'OPTIONS_CHANGE'
 };
 
 // Active
-export const LANGUAGES = ["en"];
+export const LANGUAGES = ['en', 'de'];
 
 // Work in progress
-export const LANGUAGES_IN_PROGRESS = ["en", "de"];
+export const LANGUAGES_IN_PROGRESS = ['en', 'de', 'es'];
