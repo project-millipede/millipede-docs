@@ -18,7 +18,7 @@
     "strict": false,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "outDir": "../../dist/webpack/loader"
+    "outDir": "../../dist"
   },
   "include": ["**/**.ts", "**/**.tsx"],
   "exclude": ["node_modules"]
