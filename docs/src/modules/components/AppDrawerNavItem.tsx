@@ -1,53 +1,13 @@
 import { Collapse, List, ListItemIcon, ListItemText } from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
-import { Theme } from '@material-ui/core/styles';
 import { SvgIconProps } from '@material-ui/core/SvgIcon';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import { createStyles, makeStyles } from '@material-ui/styles';
 import withRouter, { WithRouterProps } from 'next/dist/client/with-router';
 import Link from 'next/link';
 import React, { useState } from 'react';
 
 // import MillipedeLink from './button/MillipedeLink';
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    nested: {
-      paddingLeft: theme.spacing(4)
-    },
-
-    item: {
-      display: 'block',
-      paddingTop: 0,
-      paddingBottom: 0
-    },
-    itemLeaf: {
-      display: 'flex',
-      paddingTop: 0,
-      paddingBottom: 0
-    },
-    button: {
-      letterSpacing: 0,
-      justifyContent: 'flex-start',
-      textTransform: 'none',
-      width: '100%'
-    },
-    buttonLeaf: {
-      letterSpacing: 0,
-      justifyContent: 'flex-start',
-      textTransform: 'none',
-      width: '100%',
-      fontWeight: theme.typography.fontWeightRegular,
-      '&.depth-0': {
-        fontWeight: theme.typography.fontWeightMedium
-      }
-    },
-    active: {
-      color: theme.palette.primary.main,
-      fontWeight: theme.typography.fontWeightMedium
-    }
-  })
-);
 
 interface AppDrawerNavItemProps extends React.Props<any> {
   title: string;
@@ -72,7 +32,6 @@ const AppDrawerNavItem = ({
   children,
   ...other
 }: Props) => {
-  const classes = useStyles();
   const [open, setOpen] = useState(openImmediately);
 
   const handleClick = () => {

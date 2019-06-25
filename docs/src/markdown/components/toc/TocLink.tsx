@@ -7,27 +7,6 @@ import NextLinkMuiLink from '../../../modules/components/common/button/NextLinkM
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      top: 70,
-      // Fix IE 11 position sticky issue.
-      marginTop: 70,
-      width: 175,
-      flexShrink: 0,
-      order: 2,
-      position: 'sticky',
-      height: 'calc(100vh - 70px)',
-      overflowY: 'auto',
-      padding: theme.spacing(2, 2, 2, 0),
-      display: 'none',
-      [theme.breakpoints.up('sm')]: {
-        display: 'block'
-      }
-    },
-    contents: {
-      marginTop: theme.spacing(2),
-      paddingLeft: theme.spacing(1.5)
-    },
-
     item: {
       fontSize: 13,
       padding: theme.spacing(0.5, 0, 0.5, 1),
@@ -60,7 +39,7 @@ interface Props extends React.Props<any> {
 }
 
 const TocLink = (props: Props) => {
-  const classes = useStyles();
+  const classes = useStyles({});
 
   const handleClick = () => {
     const { href, scrollToLink } = props;

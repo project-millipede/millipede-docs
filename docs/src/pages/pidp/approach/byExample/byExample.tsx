@@ -8,15 +8,15 @@ import DotsMobileStepper from '../../../../../../src/components/stepper/DotsMobi
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     paper: {
-      padding: theme.spacing(2),
-      textAlign: 'center',
-      color: theme.palette.text.secondary
+      // padding: theme.spacing(2),
+      textAlign: 'center'
+      // color: theme.palette.text.secondary
     },
     typographyDisabled: {
-      color: theme.palette.text.disabled
+      // color: theme.palette.text.disabled
     },
     typographyEnabled: {
-      color: theme.palette.text.primary
+      // color: theme.palette.text.primary
     },
     row: {
       alignItems: 'center',
@@ -53,7 +53,7 @@ const stepsFiltered = (array: Array<ContentItem> = [], step: number): Array<Cont
 };
 
 const generateGrid = (elements: Array<ContentItem> = [], active: boolean) => {
-  const classes = useStyles();
+  const classes = useStyles({});
   return elements.map((content, index) => {
     const { composition } = content;
     return (
@@ -89,7 +89,7 @@ interface Props {
 }
 
 const ByExample = ({ content: { elements = [] } }: Props) => {
-  const classes = useStyles();
+  const classes = useStyles({});
 
   const [step, setStep] = React.useState(0);
 

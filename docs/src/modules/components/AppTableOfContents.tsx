@@ -71,11 +71,11 @@ const scrollToLink = (href: string) => {
 };
 
 const AppTableOfContents = ({ content }: AppTableOfContentsProps) => {
-  const classes = useStyles();
+  const classes = useStyles({});
 
   const { state }: { state: RootState } = useHoux();
 
-  const handleClick = hash => {
+  const handleClick = (hash: string) => {
     scrollToLink(hash);
   };
 
