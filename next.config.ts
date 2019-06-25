@@ -2,6 +2,7 @@
 import compose from 'lodash/fp/compose';
 import merge from 'webpack-merge';
 
+import exportPathMap from './next/exportPathMap';
 import webpackConfig from './webpack/webpack.dev.conf';
 
 const composeFn = compose();
@@ -47,6 +48,7 @@ export default composeFn({
     // return config;
   },
 
+  exportPathMap,
   target: 'serverless',
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx']
 });
