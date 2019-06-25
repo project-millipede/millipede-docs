@@ -9,7 +9,7 @@ import remarkSlug from 'remark-slug';
 import stringify from 'remark-stringify';
 import unified from 'unified';
 
-import { InteractiveHeadForLoader } from '../../docs/src/markdown/components/head';
+import InteractiveHeadForLoader from '../../docs/src/markdown/components/head/InteractiveHeadForLoader';
 
 export interface ParserOptions {
   filePath?: string; // the path to the file
