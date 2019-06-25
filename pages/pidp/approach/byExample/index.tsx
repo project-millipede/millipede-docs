@@ -1,10 +1,48 @@
-import React from 'react';
+import { useHoux } from 'houx';
+import React, { useEffect, useState } from 'react';
 
 import { MdxDocs } from '../../../../docs/src/modules/components/mdx';
-import content, { ast, headingsMap, meta, raw } from '../../../../docs/src/pages/pidp/approach/byExample/index.mdx';
+import { RootState } from '../../../../docs/src/modules/redux/reducers';
+
+const load = (userLanguage: string = ''): any =>
+  import(`../../../../docs/src/pages/pidp/approach/byExample/index${userLanguage}.mdx`)
+    .then(result => {
+      return {
+        content: result.default,
+        raw: result.raw
+      };
+    })
+    .catch(error => console.log(error));
 
 const Page = () => {
-  return <MdxDocs content={content} meta={meta} ast={ast} headingsMap={headingsMap} raw={raw} />;
+  const [contentMain, setContentMain] = useState('');
+  const [rawMain, setRawMain] = useState('');
+  const { state }: { state: RootState } = useHoux();
+  useEffect(() => {
+    const loadContent = async () => {
+      let content: any;
+      if (state.language.userLanguage === 'de') {
+        content = await load('-de');
+      } else {
+        content = await load();
+      }
+      setContentMain(content.content);
+      setRawMain(content.raw);
+    };
+    loadContent();
+  }, [state.language.userLanguage]);
+
+  return <MdxDocs content={contentMain} raw={rawMain} />;
 };
 
 export default Page;
+
+/**
+ * import React from 'react';
+ * import { MdxDocs } from '../../../../docs/src/modules/components/mdx';
+ * import content, { ast, headingsMap, meta, raw } from '../../../../docs/src/pages/pidp/approach/byExample/index.mdx';
+ * const Page = () => {
+ *   return <MdxDocs content={content} meta={meta} ast={ast} headingsMap={headingsMap} raw={raw} />;
+ * };
+ * export default Page;
+ */
