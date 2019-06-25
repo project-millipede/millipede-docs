@@ -8,7 +8,7 @@ interface HeadProps extends React.Props<any> {
   component: 'h2' | 'h3';
 }
 
-export const InderaktiveHeadForLoader = ({ id, component, children }: HeadProps) => {
+const InderaktiveHeadForLoader = ({ id, component, children }: HeadProps) => {
   return (
     <Element name={id}>
       <Typography variant={component}>{children}</Typography>

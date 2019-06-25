@@ -13,7 +13,7 @@ interface HeadProps extends React.Props<any> {
   component: 'h2' | 'h3';
 }
 
-export const InderaktiveHead = ({ id, component, children }: HeadProps) => {
+const InderaktiveHead = ({ id, component, children }: HeadProps) => {
   const { dispatch }: { dispatch: React.Dispatch<ScrollActions> } = useHoux();
 
   const [ref, inView, entry] = useInView({ threshold: 0 });

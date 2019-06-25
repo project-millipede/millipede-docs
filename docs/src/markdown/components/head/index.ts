@@ -1,4 +1,2 @@
-import InteractiveHead from './InteractiveHead';
-import InteractiveHeadForLoader from './InteractiveHeadForLoader';
-
-export { InteractiveHead, InteractiveHeadForLoader };
+export { default as InteractiveHead } from './InteractiveHead';
+export { default as InteractiveHeadForLoader } from './InteractiveHeadForLoader';
