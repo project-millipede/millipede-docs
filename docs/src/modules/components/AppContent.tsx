@@ -12,7 +12,7 @@ interface Props extends React.Props<any> {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      paddingTop: 80 + 29,
+      paddingTop: 80 + 16,
       flex: '1 1 100%',
       maxWidth: '100%',
       margin: '0 auto',
@@ -21,9 +21,17 @@ const useStyles = makeStyles((theme: Theme) =>
         maxWidth: 'calc(100% - 175px)'
       },
       [theme.breakpoints.up('lg')]: {
-        paddingLeft: theme.spacing(1),
-        paddingRight: theme.spacing(5),
-        maxWidth: 'calc(100% - 240px - 175px)'
+        paddingLeft: theme.spacing(6),
+        paddingRight: theme.spacing(6),
+        maxWidth: 'calc(100% - 175px - 240px)'
+      }
+    },
+    disableToc: {
+      [theme.breakpoints.up('sm')]: {
+        maxWidth: 'calc(100%)'
+      },
+      [theme.breakpoints.up('lg')]: {
+        maxWidth: 'calc(100% - 240px)'
       }
     }
   })
@@ -38,7 +46,7 @@ const AppContent = ({ className, children, disableToc }: Props) => {
       id='main-content'
       tabIndex={-1}
       className={clsx(classes.root, className, {
-        // [classes.disableToc]: disableToc
+        [classes.disableToc]: disableToc
       })}
     >
       {children}
