@@ -1,31 +1,32 @@
-import { InputBase } from '@material-ui/core';
+import { Tooltip } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
-import { fade, Theme, useTheme } from '@material-ui/core/styles';
+import { Theme, useTheme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import GithubIcon from '@material-ui/docs/svgIcons/GitHub';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import { useHoux } from 'houx';
-import withRouter, { WithRouterProps } from 'next/dist/client/with-router';
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 
 import { Page } from '../redux/features/navigation/type';
 import { RootState } from '../redux/reducers';
-import { pageToTitleI18n } from '../utils/helpers';
+import { pageToTitleI18n, pathnameToLanguage } from '../utils/helpers';
 import AppDrawerNavItem from './AppDrawerNavItem';
+import AppSearch from './AppSearch';
+import MenuLanguage from './MenuLanguage';
 
 interface AppDrawerProps {
   disablePermanent?: boolean;
   mobileOpen?: boolean;
-  onClose?: (event: React.SyntheticEvent) => void;
-  onOpen?: (event: React.SyntheticEvent) => void;
+  onClose?: (event: SyntheticEvent) => void;
+  onOpen?: (event: SyntheticEvent) => void;
   t?: (title: string) => string;
   className?: string;
 }
@@ -95,65 +96,13 @@ const useDrawerStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const useAppBarStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1
-    },
-    menuButton: {
-      marginRight: theme.spacing(2)
-    },
-    title: {
-      flexGrow: 1,
-      display: 'none',
-      [theme.breakpoints.up('sm')]: {
-        display: 'block'
-      }
-    },
-    search: {
-      position: 'relative',
-      borderRadius: theme.shape.borderRadius,
-      backgroundColor: fade(theme.palette.common.white, 0.15),
-      '&:hover': {
-        backgroundColor: fade(theme.palette.common.white, 0.25)
-      },
-      marginLeft: 0,
-      width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(1),
-        width: 'auto'
-      }
-    },
-    searchIcon: {
-      width: theme.spacing(7),
-      height: '100%',
-      position: 'absolute',
-      pointerEvents: 'none',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    },
-    inputRoot: {
-      color: 'inherit'
-    },
-    inputInput: {
-      padding: theme.spacing(1, 1, 1, 7),
-      transition: theme.transitions.create('width'),
-      width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        width: 120,
-        '&:focus': {
-          width: 200
-        }
-      }
-    }
-  })
-);
-
 const useCustomStyles = makeStyles((theme: Theme) =>
   createStyles({
+    // grow: {
+    //   flexGrow: 1
+    // },
     grow: {
-      flexGrow: 1
+      flex: '1 1 auto'
     },
     sectionDesktop: {
       display: 'none',
@@ -195,8 +144,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface Props extends WithRouterProps {}
-
 interface ChildRoutes {
   items?: Array<JSX.Element>;
   page?: Page;
@@ -219,7 +166,6 @@ function MiniDrawer(
   props: AppDrawerProps
 ) {
   const drawerClasses = useDrawerStyles({});
-  const appBarClasses = useAppBarStyles({});
   const customStyles = useCustomStyles({});
 
   const classes = useStyles({});
@@ -236,6 +182,12 @@ function MiniDrawer(
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const canonicalRef = React.useRef();
+  React.useEffect(() => {
+    const { canonical } = pathnameToLanguage(window.location.pathname);
+    (canonicalRef as any).current = canonical;
+  }, []);
 
   const reduceChildRoutes = ({ items, page, activePage, depth, translate, props }: ChildRoutes) => {
     if (page.displayNav === false) {
@@ -341,18 +293,28 @@ function MiniDrawer(
 
           <div className={customStyles.grow} />
 
-          <div className={appBarClasses.search}>
-            <div className={appBarClasses.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder='Search…'
-              classes={{
-                root: appBarClasses.inputRoot,
-                input: appBarClasses.inputInput
-              }}
-            />
-          </div>
+          <AppSearch />
+
+          <MenuLanguage />
+
+          <Tooltip
+            // title={t('github')}
+            title={'Github'}
+            enterDelay={300}
+          >
+            <IconButton
+              edge='end'
+              component='a'
+              color='inherit'
+              href='https://github.com/gurkerl83/millipede-docs'
+              // aria-label={t('github')}
+              aria-label={'github'}
+              data-ga-event-category='AppBar'
+              data-ga-event-action='github'
+            >
+              <GithubIcon />
+            </IconButton>
+          </Tooltip>
         </Toolbar>
       </AppBar>
       <Drawer
