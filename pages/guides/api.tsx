@@ -1,7 +1,40 @@
-import React from 'react';
+import { RootState } from 'docs/src/modules/redux/reducers';
+import { useHoux } from 'houx';
+import React, { useEffect, useState } from 'react';
 
 import { MdDocs } from '../../docs/src/modules/components/md';
-import content from '../../docs/src/pages/guides/api/api.md';
+
+// Taking a more functional approach :)
+const load = (userLanguage: string = ''): any =>
+  import(`../../docs/src/pages/guides/api/api${userLanguage}.md`)
+    .then(result => {
+      return result.default;
+    })
+    .catch(error => console.log(error));
+
+const loadInEnglish = load('');
+const loadInGerman = load('-de');
+
+const Page = () => {
+  const [contentMain, setContentMain] = useState('');
+  const { state }: { state: RootState } = useHoux();
+  useEffect(() => {
+    const loadContent = async () => {
+      let content: any;
+      if (state.language.userLanguage === 'de') {
+        content = await load('-de');
+      } else {
+        content = await load();
+      }
+      setContentMain(content);
+    };
+    loadContent();
+  }, [state.language.userLanguage]);
+
+  return <MdDocs content={contentMain} />;
+};
+
+export default Page;
 
 /**
  *
@@ -14,8 +47,12 @@ import content from '../../docs/src/pages/guides/api/api.md';
  *
  */
 
-const Page = () => {
-  return <MdDocs content={content} />;
-};
-
-export default Page;
+/**
+ * import React from 'react';
+ * import { MdDocs } from '../../docs/src/modules/components/md';
+// import content from '../../docs/src/pages/guides/api/api.md';
+ * const Page = () => {
+ *   return <MdDocs content={content} />;
+ * };
+ * export default Page;
+ */
