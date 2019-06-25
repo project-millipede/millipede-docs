@@ -218,11 +218,11 @@ function MiniDrawer(
   // }
   props: AppDrawerProps
 ) {
-  const drawerClasses = useDrawerStyles();
-  const appBarClasses = useAppBarStyles();
-  const customStyles = useCustomStyles();
+  const drawerClasses = useDrawerStyles({});
+  const appBarClasses = useAppBarStyles({});
+  const customStyles = useCustomStyles({});
 
-  const classes = useStyles();
+  const classes = useStyles({});
 
   const theme: Theme = useTheme();
   const [open, setOpen] = React.useState(false);

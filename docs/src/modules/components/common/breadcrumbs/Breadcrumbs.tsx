@@ -32,15 +32,17 @@ export const createBreadcrumbs = (str: string): Array<BreadCrumb> =>
 const Breadcrumbs: React.FC<Props> = props => {
   const breadcrumbs = createBreadcrumbs(props.router.pathname);
 
-  const classes = useStyles();
+  const classes = useStyles({});
 
   if (breadcrumbs.length < 2) {
     return null;
   }
 
+  // className={classes.root}
+
   return (
     <React.Fragment>
-      <div className={classes.root}>
+      <div>
         <>
           <MaterialBreadcrumbs
             separator={<NavigateNextIcon fontSize='small' />}

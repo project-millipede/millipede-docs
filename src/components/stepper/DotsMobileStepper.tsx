@@ -17,8 +17,8 @@ interface StepperProps {
 }
 
 function DotsMobileStepper(props: StepperProps) {
-  const classes = useStyles();
-  // const theme = useTheme();
+  const classes = useStyles({});
+
   const [activeStep, setActiveStep] = useState(0);
 
   useEffect(() => {

@@ -199,7 +199,7 @@ export const useStyles = makeStyles((theme: Theme) =>
 
 function MdElement({ content }: MdElementProps) {
   const [markdown, setMarkdown] = useState('');
-  const classes = useStyles();
+  const classes = useStyles({});
 
   useEffect(() => {
     generateMdElement({ content }).then(result => setMarkdown(result.contents as string));

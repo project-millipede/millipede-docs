@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const AppContent = ({ className, children, disableToc }: Props) => {
-  const classes = useStyles();
+  const classes = useStyles({});
 
   return (
     <Container

@@ -209,7 +209,7 @@ interface MarkdownDocsProps extends React.Props<any> {
 export const MdxDocs = (props: MarkdownDocsProps) => {
   const { content, raw, outerClasses = {} } = props;
 
-  const classes = useStyles();
+  const classes = useStyles({});
 
   const [markdownFiles, setMarkdownFiles] = useState('');
 

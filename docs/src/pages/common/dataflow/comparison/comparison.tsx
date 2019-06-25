@@ -53,7 +53,7 @@ const stepsFiltered = (array: Array<ContentItem> = [], step: number): Array<Cont
 };
 
 const generateGrid = (elements: Array<ContentItem> = [], active: boolean) => {
-  const classes = useStyles();
+  const classes = useStyles({});
   return elements.map((content, index) => {
     const { composition } = content;
     return (
@@ -89,7 +89,7 @@ interface Props {
 }
 
 const Comparison = ({ content: { elements = [] } }: Props) => {
-  const classes = useStyles();
+  const classes = useStyles({});
 
   const [step, setStep] = React.useState(0);
 

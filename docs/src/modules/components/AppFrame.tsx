@@ -84,9 +84,8 @@ interface OProps extends React.Props<any> {}
 type Props = OProps;
 
 const AppFrame = ({ children }: Props) => {
-  const classes = useStyles();
+  const classes = useStyles({});
 
-  const [languageMenu, setLanguageMenu] = useState(null);
   const [open, setOpen] = useState(false);
 
   // const {
