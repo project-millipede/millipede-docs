@@ -67,7 +67,7 @@ API
 API
 API
 
-## Heading B
+## Heading B.B
 
 API
 API
