@@ -1,15 +1,14 @@
-import { createGenerateClassName, jssPreset, StylesProvider } from "@material-ui/styles";
-import { useHoux } from "houx";
-import { create } from "jss";
-import withRouter, { WithRouterProps } from "next/dist/client/with-router";
-import React, { useEffect } from "react";
+import { createGenerateClassName, jssPreset, StylesProvider } from '@material-ui/styles';
+import { useHoux } from 'houx';
+import { create } from 'jss';
+import withRouter, { WithRouterProps } from 'next/dist/client/with-router';
+import React, { useEffect } from 'react';
 
-import { Provider as ThemeProvider } from "./ThemeContext";
-
-import pages from "../../pages";
-import { NavigationActions } from "../redux/features/actionType";
-import { changeNavigation } from "../redux/features/navigation/actions";
-import { determineCurrenPathname, findActivePage } from "../utils/router";
+import pages from '../../pages';
+import { NavigationActions } from '../redux/features/actionType';
+import { changeNavigation } from '../redux/features/navigation/actions';
+import { determineCurrenPathname, findActivePage } from '../utils/router';
+import { Provider as ThemeProvider } from './ThemeContext';
 
 interface OProps extends React.Props<any> {}
 
@@ -34,7 +33,7 @@ const AppWrapper = ({ children, router }: Props) => {
   const { dispatch }: { dispatch: React.Dispatch<NavigationActions> } = useHoux();
   useEffect(() => {
     dispatch(changeNavigation(activePage));
-  }, []);
+  }, [router.pathname]);
 
   // return (
   //   <StylesProvider generateClassName={generateClassName} jss={jss}>
