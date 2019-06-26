@@ -1,4 +1,4 @@
-import { Theme } from '@material-ui/core';
+import { Container, Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React from 'react';
 
@@ -23,10 +23,8 @@ const useStyles = makeStyles((theme: Theme) =>
       width: 0
     },
     hero: {
-      paddingTop: 64 + 29,
-      backgroundColor: theme.palette.background.paper,
-      color:
-        theme.palette.type === 'light' ? theme.palette.primary.dark : theme.palette.primary.main
+      paddingTop: 64,
+      color: theme.palette.primary.main
     },
     content: {
       display: 'flex',
@@ -52,24 +50,26 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.only('xs')]: {
         fontSize: 28
       }
-    },
-    button: {
-      marginTop: theme.spacing(4)
     }
   })
 );
 
-function Index() {
+const Index = () => {
   const classes = useStyles({});
   return (
-    <AppFrame
-    // classes={{ drawer: classes.drawer }}
-    >
+    <AppFrame drawerStyleOverride={{ drawer: classes.drawer }}>
       <div className={classes.root}>
         <Head />
+        <Container
+          component='main'
+          // id='main-content'
+          tabIndex={-1}
+        >
+          <div className={classes.hero}>{/* <HomeSteps /> */}</div>
+        </Container>
       </div>
     </AppFrame>
   );
-}
+};
 
 export default Index;

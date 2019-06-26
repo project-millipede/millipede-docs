@@ -1,15 +1,9 @@
-import { Tooltip } from '@material-ui/core';
-import AppBar from '@material-ui/core/AppBar';
 import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import { Theme, useTheme } from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import GithubIcon from '@material-ui/docs/svgIcons/GitHub';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import MenuIcon from '@material-ui/icons/Menu';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import { useHoux } from 'houx';
@@ -19,17 +13,6 @@ import { Page } from '../redux/features/navigation/type';
 import { RootState } from '../redux/reducers';
 import { pageToTitleI18n, pathnameToLanguage } from '../utils/helpers';
 import AppDrawerNavItem from './AppDrawerNavItem';
-import AppSearch from './AppSearch';
-import MenuLanguage from './MenuLanguage';
-
-interface AppDrawerProps {
-  disablePermanent?: boolean;
-  mobileOpen?: boolean;
-  onClose?: (event: SyntheticEvent) => void;
-  onOpen?: (event: SyntheticEvent) => void;
-  t?: (title: string) => string;
-  className?: string;
-}
 
 const drawerWidth = 240;
 
@@ -96,53 +79,15 @@ const useDrawerStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const useCustomStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    // grow: {
-    //   flexGrow: 1
-    // },
-    grow: {
-      flex: '1 1 auto'
-    },
-    sectionDesktop: {
-      display: 'none',
-      [theme.breakpoints.up('md')]: {
-        display: 'flex'
-      }
-    }
-  })
-);
+export interface DrawerStyleOverride {
+  drawer: string;
+}
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    paper: {
-      width: 240
-    },
-    title: {
-      color: theme.palette.text.secondary,
-      marginBottom: theme.spacing(0.5),
-      '&:hover': {
-        color: theme.palette.primary.main
-      }
-    },
-    // https://github.com/philipwalton/flexbugs#3-min-height-on-a-flex-container-wont-apply-to-its-flex-items
-    toolbarIe11: {
-      display: 'flex'
-    },
-    placeholder: {
-      height: 29
-    },
-    toolbar: {
-      ...theme.mixins.toolbar,
-      paddingLeft: theme.spacing(3),
-      display: 'flex',
-      flexGrow: 1,
-      flexDirection: 'column',
-      alignItems: 'flex-start',
-      justifyContent: 'center'
-    }
-  })
-);
+interface AppDrawerProps {
+  isDrawerOpen: boolean;
+  handleDrawerClose: () => void;
+  drawerStyleOverride: DrawerStyleOverride;
+}
 
 interface ChildRoutes {
   items?: Array<JSX.Element>;
@@ -153,35 +98,14 @@ interface ChildRoutes {
   props?: any;
 }
 
-function MiniDrawer(
-  // {
-  // router,
-  // className,
-  // disablePermanent,
-  // mobileOpen,
-  // onClose,
-  // onOpen,
-  // t
-  // }
-  props: AppDrawerProps
-) {
-  const drawerClasses = useDrawerStyles({});
-  const customStyles = useCustomStyles({});
+const AppDrawer = (props: AppDrawerProps) => {
+  const { isDrawerOpen, handleDrawerClose, drawerStyleOverride } = props;
 
-  const classes = useStyles({});
+  const classes = useDrawerStyles(drawerStyleOverride ? drawerStyleOverride.drawer : {});
 
   const theme: Theme = useTheme();
-  const [open, setOpen] = React.useState(false);
 
   const { state }: { state: RootState } = useHoux();
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
 
   const canonicalRef = React.useRef();
   React.useEffect(() => {
@@ -235,103 +159,31 @@ function MiniDrawer(
     );
   };
 
-  // const drawer = (
-  //   <div
-  //   // className={classes.nav}
-  //   >
-  //     <div className={classes.placeholder} />
-  //     <div className={classes.toolbarIe11}>
-  //       <div className={classes.toolbar} />
-  //     </div>
-  //     <Divider />
-  //     {renderNavItems({
-  //       props,
-  //       pages: state.navigation.pages,
-  //       activePage: state.navigation.activePage,
-  //       depth: 0
-  //       // t
-  //     })}
-  //   </div>
-  // );
-
   const drawer = renderNavItems({
     props,
     pages: state.navigation.pages,
     activePage: state.navigation.activePage,
-    depth: 0
-    // t
+    depth: 0,
+    isDrawerOpen
   });
 
   return (
-    <div className={drawerClasses.root}>
-      {/* <CssBaseline /> */}
-      <AppBar
-        position='fixed'
-        className={clsx(drawerClasses.appBar, {
-          [drawerClasses.appBarShift]: open
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color='inherit'
-            aria-label='Open drawer'
-            onClick={handleDrawerOpen}
-            edge='start'
-            className={clsx(drawerClasses.menuButton, {
-              [drawerClasses.hide]: open
-            })}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            variant='h6'
-            // color="inherit"
-            noWrap
-          >
-            Project Millipede
-          </Typography>
-
-          <div className={customStyles.grow} />
-
-          <AppSearch />
-
-          <MenuLanguage />
-
-          <Tooltip
-            // title={t('github')}
-            title={'Github'}
-            enterDelay={300}
-          >
-            <IconButton
-              edge='end'
-              component='a'
-              color='inherit'
-              href='https://github.com/gurkerl83/millipede-docs'
-              // aria-label={t('github')}
-              aria-label={'github'}
-              data-ga-event-category='AppBar'
-              data-ga-event-action='github'
-            >
-              <GithubIcon />
-            </IconButton>
-          </Tooltip>
-        </Toolbar>
-      </AppBar>
+    <div className={classes.root}>
       <Drawer
         variant='permanent'
-        className={clsx(drawerClasses.drawer, {
-          [drawerClasses.drawerOpen]: open,
-          [drawerClasses.drawerClose]: !open
+        className={clsx(classes.drawer, {
+          [classes.drawerOpen]: isDrawerOpen,
+          [classes.drawerClose]: !isDrawerOpen
         })}
         classes={{
           paper: clsx({
-            [drawerClasses.drawerOpen]: open,
-            [drawerClasses.drawerClose]: !open
+            [classes.drawerOpen]: isDrawerOpen,
+            [classes.drawerClose]: !isDrawerOpen
           })
         }}
-        open={open}
+        open={isDrawerOpen}
       >
-        <div className={drawerClasses.toolbar}>
+        <div className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
@@ -340,6 +192,6 @@ function MiniDrawer(
       </Drawer>
     </div>
   );
-}
+};
 
-export default MiniDrawer;
+export default AppDrawer;

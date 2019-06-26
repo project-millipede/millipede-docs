@@ -1,12 +1,13 @@
+import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Theme } from '@material-ui/core/styles';
 import { createStyles, makeStyles } from '@material-ui/styles';
+import clsx from 'clsx';
 import React, { useState } from 'react';
 
-import MiniDrawer from './MiniDrawer';
+import AppDrawer, { DrawerStyleOverride } from './AppDrawer';
+import AppToolBar from './AppToolBar';
 import PageTitle from './PageTitle';
-
-// import NProgressBar from '@material-ui/docs/NProgressBar';
 
 export const languages = [
   {
@@ -80,33 +81,80 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface OProps extends React.Props<any> {}
-type Props = OProps;
+const drawerWidth = 240;
 
-const AppFrame = ({ children }: Props) => {
+const useDrawerStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex'
+    },
+    appBar: {
+      zIndex: theme.zIndex.drawer + 1,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen
+      })
+    },
+    appBarShift: {
+      marginLeft: drawerWidth,
+      width: `calc(100% - ${drawerWidth}px)`,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen
+      })
+    },
+    menuButton: {
+      marginRight: 36
+    },
+    hide: {
+      display: 'none'
+    },
+    drawer: {
+      width: drawerWidth,
+      flexShrink: 0,
+      whiteSpace: 'nowrap'
+    },
+    drawerOpen: {
+      width: drawerWidth,
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen
+      })
+    },
+    drawerClose: {
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen
+      }),
+      overflowX: 'hidden',
+      width: theme.spacing(7) + 1,
+      [theme.breakpoints.up('sm')]: {
+        width: theme.spacing(9) + 1
+      }
+    },
+    toolbar: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      padding: '0 8px',
+      ...theme.mixins.toolbar
+    },
+    content: {
+      flexGrow: 1,
+      padding: theme.spacing(3)
+    }
+  })
+);
+
+interface AppFrameProps extends React.Props<any> {
+  drawerStyleOverride?: DrawerStyleOverride;
+}
+
+const AppFrame = ({ children, drawerStyleOverride }: AppFrameProps) => {
   const classes = useStyles({});
+  const drawerClasses = useDrawerStyles({});
 
   const [open, setOpen] = useState(false);
-
-  // const {
-  //   state,
-  //   dispatch
-  // }: { state: RootState; dispatch: React.Dispatch<ThemeActions> } = useHoux();
-
-  const canonical = null;
-
-  // componentDidMount() {
-  //   const { canonical } = pathnameToLanguage(window.location.pathname);
-  //   this.canonical = canonical;
-  // }
-
-  // useEffect(() => {
-  //   const { canonical: canonicalTemp } = pathnameToLanguage(window.location.pathname);
-  //   canonical = canonicalTemp;
-  //   return () => {
-  //     canonical = null;
-  //   };
-  // });
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -117,26 +165,24 @@ const AppFrame = ({ children }: Props) => {
   };
 
   return (
-    <PageTitle
-    // t={state.option.t}
-    >
+    <PageTitle>
       {title => {
-        let navIconClassName = '';
-        let appBarClassName = classes.appBar;
-
-        if (title === null) {
-          // home route, don't shift app bar or dock drawer
-          appBarClassName += ` ${classes.appBarHome}`;
-        } else {
-          navIconClassName = classes.navIconHide;
-          appBarClassName += ` ${classes.appBarShift}`;
-        }
-
         return (
           <div className={classes.root}>
-            {/* <NProgressBar /> */}
             <CssBaseline />
-            <MiniDrawer onClose={handleDrawerClose} onOpen={handleDrawerOpen} />
+            <AppBar
+              position='fixed'
+              className={clsx(drawerClasses.appBar, {
+                [drawerClasses.appBarShift]: open
+              })}
+            >
+              <AppToolBar isDrawerOpen={open} handleDrawerOpen={handleDrawerOpen} />
+            </AppBar>
+            <AppDrawer
+              drawerStyleOverride={drawerStyleOverride}
+              isDrawerOpen={open}
+              handleDrawerClose={handleDrawerClose}
+            />
             {children}
           </div>
         );
