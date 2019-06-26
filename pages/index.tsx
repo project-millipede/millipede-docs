@@ -1,9 +1,10 @@
-import { Container, Theme } from '@material-ui/core';
+import { Container, Divider, Theme, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React from 'react';
 
 import AppFrame from '../docs/src/modules/components/AppFrame';
 import Head from '../docs/src/modules/components/Head';
+import GuttersGrid from '../src/components/layout/grid/GuttersGrid';
 
 // // --- Post bootstrap -----
 // const useStyles = makeStyles(_theme => ({
@@ -17,7 +18,7 @@ import Head from '../docs/src/modules/components/Head';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      flex: '1 0 100%'
+      flex: '1 1 100%'
     },
     drawer: {
       width: 0
@@ -49,7 +50,21 @@ const useStyles = makeStyles((theme: Theme) =>
       fontWeight: theme.typography.fontWeightLight,
       [theme.breakpoints.only('xs')]: {
         fontSize: 28
-      }
+      },
+      textAlign: 'center'
+    },
+    header: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      flexDirection: 'column'
+    },
+    headerSpace: {
+      flexGrow: 1
+    },
+    headerItem: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      flexDirection: 'row'
     }
   })
 );
@@ -60,13 +75,28 @@ const Index = () => {
     <AppFrame drawerStyleOverride={{ drawer: classes.drawer }}>
       <div className={classes.root}>
         <Head />
-        <Container
-          component='main'
-          // id='main-content'
-          tabIndex={-1}
-        >
-          <div className={classes.hero}>{/* <HomeSteps /> */}</div>
-        </Container>
+        <div className={classes.hero}>
+          <Container maxWidth='md' className={classes.content}>
+            {/* <img
+              src='/static/images/material-ui-logo.svg'
+              alt='Material-UI Logo'
+              className={classes.logo}
+            /> */}
+            <div className={classes.header}>
+              <Typography
+                variant='h3'
+                component='h1'
+                color='inherit'
+                gutterBottom
+                className={classes.title}
+              >
+                {'Project Millipede'}
+              </Typography>
+              <Divider />
+              <GuttersGrid />
+            </div>
+          </Container>
+        </div>
       </div>
     </AppFrame>
   );
