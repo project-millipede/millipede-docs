@@ -53,6 +53,8 @@
     "react-highlight": "^0.12.0",
     "react-intersection-observer": "^8.23.0",
     "react-scroll": "^1.7.12",
+    "react-swipeable-views": "^0.13.3",
+    "react-swipeable-views-utils": "^0.13.3",
     "remark-parse": "^6.0.3",
     "remark-react": "^5.0.1",
     "remark-slug": "^5.1.2",
