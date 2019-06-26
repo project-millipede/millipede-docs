@@ -1,3 +1,5 @@
 files:
   - source: /docs/src/**/*.md
+    ignore:
+      - /docs/src/**/api.md
     translation: '%original_path%/%file_name%-%two_letters_code%.%file_extension%'
