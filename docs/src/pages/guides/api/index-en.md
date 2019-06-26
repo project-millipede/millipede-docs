@@ -1,3 +1,3 @@
 # API
 
-## Grundlage der Schnittstelle
+## Basis of the interface
