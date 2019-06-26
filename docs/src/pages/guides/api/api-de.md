@@ -1,3 +1,0 @@
-# API Design Approach
-
-## German

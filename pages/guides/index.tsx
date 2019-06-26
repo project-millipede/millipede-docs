@@ -40,17 +40,17 @@ export default Page;
  *
  * Note: Option (!!) - does not look at the global web-pack loader
  * option (test) to handle file extentions
- * import content from '!!raw-loader!../../docs/src/pages/guides/api/api.md';
+ * import content from '!!raw-loader!../../docs/src/pages/guides/api/index.md';
  *
  * as raw-loader is defined in the web-pack configuration to handle .md files
- * import content from "../../docs/src/pages/guides/api/api.md";
+ * import content from "../../docs/src/pages/guides/api/index.md";
  *
  */
 
 /**
  * import React from 'react';
  * import { MdDocs } from '../../docs/src/modules/components/md';
-// import content from '../../docs/src/pages/guides/api/api.md';
+// import content from '../../docs/src/pages/guides/api/index.md';
  * const Page = () => {
  *   return <MdDocs content={content} />;
  * };
