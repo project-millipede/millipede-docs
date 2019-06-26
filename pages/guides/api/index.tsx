@@ -21,8 +21,8 @@ const Page = () => {
   useEffect(() => {
     const loadContent = async () => {
       let content: any;
-      if (state.language.userLanguage === 'de') {
-        content = await load('-de');
+      if (state.language.userLanguage === 'en') {
+        content = await load('-en');
       } else {
         content = await load();
       }
