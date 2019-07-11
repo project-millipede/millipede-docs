@@ -1,69 +1,4 @@
-import { Comparison } from './component';
-
-import Step1 from '../../../../../../src/assets/common/dataFlow/comparison/Step1';
-import Step2 from '../../../../../../src/assets/common/dataFlow/comparison/Step2';
-
-export const content = {
-  elements: [
-    {
-      composition: {
-        step: 0,
-        gridSize: 4
-      },
-      title: `Bestimmung relevanter Inhalte`,
-      description: `Der Anbieter bestimmt die für einen Nutzer relevantesten Inhalte anhand der persönlichen Interessen. Eine
-Empfehlungsmaschine sagt weitere Inhaltselemente aus einem globalen Inhaltskatalog voraus, der von der
-die Community der Anbieter. Sobald der Bestimmungsprozess abgeschlossen ist, sendet der Anbieter den
-die Inhalte an die Anwendung, welche auf dem Gerät des Benutzers installiert ist.`,
-      image: <Step1 style={{ width: '100%' }} />
-    },
-    {
-      composition: {
-        step: 0,
-        gridSize: 4
-      },
-      title: `Verarbeitung von Inhalten`,
-      description: `Im Gegensatz zur Leistung digitaler Prozessoren führen die meisten auf dem lokalen Gerät installierten Anwendungen heutzutage keine schwergewichtigen Berechnungen aus. Der Anbieter führt diese Operationen durch, z.B. die Bestimmung relevanter Inhaltselemente oder Suchanfragen innerhalb einer dedizierten Infrastruktur aus und sendet die Ergebnisse an das Gerät des Nutzers. Die auf dem Endgerät des Nutzers ausgeführten Operationen sind zumeist auf die Vorbereitung des empfangenen Datensatzes ausgerichtet mit dem Ziel, diesen da darzustellen.`,
-      image: <Step1 style={{ width: '100%' }} />
-    },
-    {
-      composition: {
-        step: 0,
-        gridSize: 4
-      },
-      title: `Interpretation von Inhalten`,
-      description: `Der Nutzer wird durch die Inhalte geführt, die der Anbieter im Interesse des Nutzers bestimmt. Um eine vollständige Feedback-Schleife zu etablieren, interagiert der Benutzer mit den Inhalten und der Community mittels Interaktionsfunktionen der genutzten Anwendung.`,
-      image: <Step1 style={{ width: '100%' }} />
-    },
-    {
-      composition: {
-        step: 1,
-        gridSize: 4
-      },
-      title: 'Behavior',
-      description: `TODO`,
-      image: <Step2 style={{ width: '100%' }} />
-    },
-    {
-      composition: {
-        step: 2,
-        gridSize: 4
-      },
-      title: `Behavior`,
-      description: `TODO`,
-      image: <Step2 style={{ width: '100%' }} />
-    },
-    {
-      composition: {
-        step: 2,
-        gridSize: 4
-      },
-      title: `Behavior`,
-      description: `TODO`,
-      image: <Step2 style={{ width: '100%' }} />
-    }
-  ]
-};
+import WrappedByExample from './use';
 
 # Opening closed data flows up
 
@@ -81,7 +16,7 @@ die Inhalte an die Anwendung, welche auf dem Gerät des Benutzers installiert is
 
 > The following animation illustrates the intersection points of open and closed data flow pathways within existing applications.
 
-<Comparison content={content} />
+<WrappedByExample />
 
 ## Introduction
 

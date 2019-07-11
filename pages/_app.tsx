@@ -4,7 +4,9 @@ import React from 'react';
 
 import AppWrapper from '../docs/src/modules/components/AppWrapper';
 import reducers from '../docs/src/modules/redux/reducers';
+import { appWithTranslation } from '../i18n';
 
+// import { I18N, namespaces } from '../i18n';
 const USE_STRICT_MODE = false;
 const ReactMode = USE_STRICT_MODE ? React.StrictMode : React.Fragment;
 
@@ -13,10 +15,10 @@ class MillipedeApp extends App {
   componentDidMount() {
     // TODO - determine purpose
     // Remove the server-side injected CSS.
-    // const jssStyles = document.querySelector('#jss-server-side');
-    // if (jssStyles) {
-    //   jssStyles.parentNode.removeChild(jssStyles);
-    // }
+    const jssStyles = document.querySelector('#jss-server-side');
+    if (jssStyles) {
+      jssStyles.parentNode.removeChild(jssStyles);
+    }
   }
 
   render() {
@@ -43,4 +45,32 @@ class MillipedeApp extends App {
   }
 }
 
-export default MillipedeApp;
+// MillipedeApp.getInitialProps = async ({ Component, ctx }: any): Promise<any> => {
+//   let pageProps = {};
+
+//   if (Component.getInitialProps) {
+//     pageProps = await Component.getInitialProps(ctx);
+//   }
+
+//   return { pageProps };
+// };
+
+MillipedeApp.getInitialProps = async ({ Component, router, ctx }) => {
+  let pageProps = {};
+
+  if (Component.getInitialProps) {
+    pageProps = await Component.getInitialProps(ctx);
+  }
+
+  // Inject env variables into SSR
+  // pageProps.CONFIG = getConfig().publicRuntimeConfig.env as AppConfig;
+
+  // Fetch correct required namespaces depending on route
+  // pageProps.namespacesRequired = namespaces[router.route];
+
+  // console.log('pageProps.namespacesRequired', pageProps.namespacesRequired);
+
+  return { pageProps };
+};
+
+export default appWithTranslation(MillipedeApp);

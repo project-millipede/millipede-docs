@@ -1,45 +1,10 @@
-import { ByExample } from './component';
-
-import Step1 from '../../../../../../src/assets/pidp/approach/byExample/Step1';
-import Step2 from '../../../../../../src/assets/pidp/approach/byExample/Step2';
-
-export const content = {
-  elements: [
-    {
-      composition: {
-        step: 0,
-        gridSize: 5
-      },
-      title: `Linksseitig angeordnete Buchseite`,
-      description: `Im Anfangszustand ist die linksseitig angeordnete Buchseite nicht vorhanden und mit der Darstellung eines Platzhalters gleichzusetzen.`,
-      image: <Step1 style={{ width: '100%' }} />
-    },
-    {
-      composition: {
-        step: 0,
-        gridSize: 5
-      },
-      title: `Rechtsseitig angeordnete Buchseite`,
-      description: `Entspricht dem Original einer Website oder mobilen Anwendung bzw. dem über den Anwendungstyp an den Nutzer kommunizierten Nachrichtenstrom.`,
-      image: <Step1 style={{ width: '100%' }} />
-    },
-    {
-      composition: {
-        step: 1,
-        gridSize: 10
-      },
-      title: `Verhalten`,
-      description: `Das Verfahren verändert das Anzeige- und Darstellungsformat einer beliebigen Anwendung auf dem Endgerät des Benutzers. Diese während der Bedienung einer bestehenden Anwendung durchgeführte Maßnahme erzeugt die linke Buchseite. Die auf diese Art und Weise eingebettete Buchseite umfasst Inhalte, die den ursprünglichen Inhalt auf der gegenüberliegenden Buchseite ergänzen oder korrigieren.`,
-      image: <Step2 style={{ width: '100%' }} />
-    }
-  ]
-};
+import WrappedByExample from './use';
 
 # Abstract
 
 ## Extend your perspektive, similar to a workflow you know best
 
-<ByExample content={content} />
+<WrappedByExample />
 
 ## Zweck
 

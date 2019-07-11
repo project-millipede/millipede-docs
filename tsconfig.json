@@ -20,8 +20,19 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "typeRoots": ["./node_modules/@types"],
     "lib": ["dom", "dom.iterable", "esnext.array"]
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": [
+    "next.config.ts",
+    "docs/**/*.ts",
+    "docs/**/*.tsx",
+    "next/**/*.ts",
+    "next/**/*.tsx",
+    "pages/**/*.ts",
+    "pages/**/*.tsx",
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
   "exclude": ["node_modules", "webpack/loader/**"]
 }
