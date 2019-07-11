@@ -51,4 +51,11 @@ export default composeFn({
   exportPathMap,
   target: 'serverless',
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx']
+  // publicRuntimeConfig: {
+  //   localeSubpaths:
+  //     typeof process.env.LOCALE_SUBPATHS === 'string' ? process.env.LOCALE_SUBPATHS : 'none'
+  // }
+  // publicRuntimeConfig: {
+  //   localeSubpaths: 'all'
+  // }
 });

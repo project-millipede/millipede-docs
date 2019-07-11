@@ -1,0 +1,28 @@
+{
+  "stepss": [
+    {
+      "title": "Bestimmung relevanter Inhalte",
+      "description": "Der Anbieter bestimmt die für einen Nutzer relevantesten Inhalte anhand der persönlichen Interessen. Eine Empfehlungsmaschine sagt weitere Inhaltselemente aus einem globalen Inhaltskatalog voraus, der von der die Community der Anbieter. Sobald der Bestimmungsprozess abgeschlossen ist, sendet der Anbieter den die Inhalte an die Anwendung, welche auf dem Gerät des Benutzers installiert ist."
+    },
+    {
+      "title": "Verarbeitung von Inhalten",
+      "description": "Im Gegensatz zur Leistung digitaler Prozessoren führen die meisten auf dem lokalen Gerät installierten Anwendungen heutzutage keine schwergewichtigen Berechnungen aus. Der Anbieter führt diese Operationen durch, z.B. die Bestimmung relevanter Inhaltselemente oder Suchanfragen innerhalb einer dedizierten Infrastruktur aus und sendet die Ergebnisse an das Gerät des Nutzers. Die auf dem Endgerät des Nutzers ausgeführten Operationen sind zumeist auf die Vorbereitung des empfangenen Datensatzes ausgerichtet mit dem Ziel, diesen da darzustellen."
+    },
+    {
+      "title": "Interpretation von Inhalten",
+      "description": "Der Nutzer wird durch die Inhalte geführt, die der Anbieter im Interesse des Nutzers bestimmt. Um eine vollständige Feedback-Schleife zu etablieren, interagiert der Benutzer mit den Inhalten und der Community mittels Interaktionsfunktionen der genutzten Anwendung."
+    },
+    {
+      "title": "Verhalten",
+      "description": "TODO"
+    },
+    {
+      "title": "Verhalten",
+      "description": "TODO"
+    },
+    {
+      "title": "Verhalten",
+      "description": "TODO"
+    }
+  ]
+}

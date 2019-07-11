@@ -1,0 +1,28 @@
+{
+  "stepss": [
+    {
+      "title": "Determine relevant content",
+      "description": "The provider determines the most relevant content for a user based on the individual`s interest. A recommendation engine predicts further content items from a global content catalog published from the provider`s community. Once the determination process gets concluded, the provider sends the content to the application installed on the user`s device."
+    },
+    {
+      "title": "Process content",
+      "description": "Contrary to the power of digital processors, nowadays most applications installed on the local device do not execute heavyweight computations. The provider performs those operations, e.g., the determination of relevant content elements or searches within a dedicated infrastructure and sends the results to the user`s device. Most procedures performed on users device are focused on preparing the received data set for the display purpose."
+    },
+    {
+      "title": "Interpretation of content",
+      "description": "The user gets directed through the content the provider determines on the users behalf. In oder to establish a full feedback loop the user interacts with the content and the community through interaction ability of the application in use."
+    },
+    {
+      "title": "Behavior",
+      "description": "TODO"
+    },
+    {
+      "title": "Behavior",
+      "description": "TODO"
+    },
+    {
+      "title": "Behavior",
+      "description": "TODO"
+    }
+  ]
+}

@@ -26,19 +26,19 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface ContentItem {
+export interface Composition {
+  step: number;
+  gridSize: GridSize;
+}
+
+export interface ContentItem {
   composition: Composition;
   title: string;
   description: string;
   image?: JSX.Element;
 }
 
-interface Composition {
-  step: number;
-  gridSize: GridSize;
-}
-
-interface Content {
+export interface Content {
   elements: Array<ContentItem>;
 }
 
@@ -84,11 +84,11 @@ const generateGrid = (elements: Array<ContentItem> = [], active: boolean) => {
   });
 };
 
-interface Props {
+interface ComponentProps {
   content: Content;
 }
 
-const ByExample = ({ content: { elements = [] } }: Props) => {
+const ByExample = ({ content: { elements = [] } }: ComponentProps) => {
   const classes = useStyles({});
 
   const [step, setStep] = React.useState(0);

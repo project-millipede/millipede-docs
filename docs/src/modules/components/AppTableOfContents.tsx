@@ -1,8 +1,10 @@
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import { useHoux } from 'houx';
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
+import { WithTranslation } from 'react-i18next';
 import { scroller } from 'react-scroll';
 
+import { withTranslation } from '../../../../i18n';
 import TOCComponent from '../../markdown/components/toc/TocComponent';
 import { RootState } from '../redux/reducers';
 
@@ -28,6 +30,8 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(2),
       paddingLeft: theme.spacing(1.5)
     },
+
+    // TODO: Somehow this rule does not get applied
     ul: {
       padding: 0,
       margin: 0,
@@ -56,10 +60,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface AppTableOfContentsProps {
-  content: string;
-}
-
 const scrollToLink = (href: string) => {
   scroller.scrollTo(href.slice(1), {
     duration: 600,
@@ -70,7 +70,13 @@ const scrollToLink = (href: string) => {
   });
 };
 
-const AppTableOfContents = ({ content }: AppTableOfContentsProps) => {
+interface AppTableOfContentsProps {
+  content: string;
+}
+
+type Props = AppTableOfContentsProps & WithTranslation;
+
+const AppTableOfContents = ({ content, t }: Props) => {
   const classes = useStyles({});
 
   const { state }: { state: RootState } = useHoux();
@@ -80,10 +86,10 @@ const AppTableOfContents = ({ content }: AppTableOfContentsProps) => {
   };
 
   return (
-    <nav className={classes.root} aria-label='Table of contents'>
+    <nav className={classes.root} aria-label={t('toc')}>
       <React.Fragment>
         <Typography gutterBottom className={classes.contents}>
-          {'Contents'}
+          {t('toc')}
         </Typography>
         <TOCComponent
           content={content}
@@ -95,4 +101,10 @@ const AppTableOfContents = ({ content }: AppTableOfContentsProps) => {
   );
 };
 
-export default AppTableOfContents;
+AppTableOfContents.getInitialProps = async () => {
+  return {
+    namespacesRequired: ['components/pageElements']
+  };
+};
+
+export default withTranslation(['components/pageElements'])(AppTableOfContents);

@@ -7,7 +7,7 @@ import { Page } from '../redux/features/navigation/type';
 
 // import warning from 'warning';
 
-export function titleize(value: string) {
+export const titleize = (value: string) => {
   // warning(
   //   typeof value === "string" && value.length > 0,
   //   "titleize(string) expects a non empty string argument."
@@ -17,9 +17,9 @@ export function titleize(value: string) {
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
-}
+};
 
-export function pageToTitle(page: Page) {
+export const pageToTitle = (page: Page) => {
   if (!page.title) {
     return null;
   }
@@ -35,12 +35,12 @@ export function pageToTitle(page: Page) {
   }
 
   return titleize(name);
-}
+};
 
-export function pageToTitleI18n(
+export const pageToTitleI18n = (
   page: Page,
   _translate: (title: string, options: object) => string
-) {
+) => {
   // return translate(`pages.${page.pathname}`, { ignoreWarning: true }) || pageToTitle(page);
   // return translate
   //   ? translate(`pages.${page.pathname}`, { ignoreWarning: true })
@@ -61,14 +61,19 @@ export function pageToTitleI18n(
   // if (page.title) {
   //   return page.title;
   // }
-}
+};
 
-export function getCookie(name: string) {
+export const getCookie = (name: string) => {
   const regex = new RegExp(`(?:(?:^|.*;*)${name}*=*([^;]*).*$)|^.*$`);
   return document.cookie.replace(regex, '$1');
+};
+
+export interface PathnameToLanguage {
+  userLanguage: string;
+  canonical: string;
 }
 
-export function pathnameToLanguage(pathname: string) {
+export const pathnameToLanguage = (pathname: string): PathnameToLanguage => {
   const userLanguage = pathname.substring(1, 3);
 
   if (LANGUAGES.indexOf(userLanguage) !== -1 && pathname.indexOf(`/${userLanguage}/`) === 0) {
@@ -82,4 +87,4 @@ export function pathnameToLanguage(pathname: string) {
     userLanguage: 'en',
     canonical: pathname
   };
-}
+};

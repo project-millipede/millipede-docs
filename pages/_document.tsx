@@ -2,6 +2,8 @@ import { ServerStyleSheets } from '@material-ui/styles';
 import NextDocument, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
 import React from 'react';
 
+import { PathnameToLanguage, pathnameToLanguage } from '../docs/src/modules/utils/helpers';
+
 /* eslint-disable class-methods-use-this */
 class MillipedeDocument extends NextDocument {
   render() {
@@ -28,7 +30,9 @@ class MillipedeDocument extends NextDocument {
   }
 }
 
-MillipedeDocument.getInitialProps = async (ctx: DocumentContext): Promise<DocumentInitialProps> => {
+type InitialProps = PathnameToLanguage & DocumentInitialProps;
+
+MillipedeDocument.getInitialProps = async (ctx: DocumentContext): Promise<InitialProps> => {
   // Resolution order
   //
   // On the server:
@@ -64,6 +68,10 @@ MillipedeDocument.getInitialProps = async (ctx: DocumentContext): Promise<Docume
 
   return {
     ...initialProps,
+
+    canonical: pathnameToLanguage(ctx.req.url).canonical,
+    userLanguage: ctx.query.userLanguage as string,
+
     // Styles fragment is rendered after the app and page rendering finish.
     styles: (
       <React.Fragment>
@@ -71,6 +79,7 @@ MillipedeDocument.getInitialProps = async (ctx: DocumentContext): Promise<Docume
         {sheets.getStyleElement()}
       </React.Fragment>
     ) as any
+    // styles: [...(initialProps.styles || []), sheets.getStyleElement()]
   };
 };
 
