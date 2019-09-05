@@ -5,12 +5,15 @@ import { MdDocs } from '../../../docs/src/modules/components/md';
 import { RootState } from '../../../docs/src/modules/redux/reducers';
 
 // Taking a more functional approach :)
-const load = (userLanguage: string = ''): any =>
+const load = (userLanguage = ''): any =>
   import(`../../../docs/src/pages/guides/api/index${userLanguage}.md`)
     .then(result => {
       return result.default;
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+      /* eslint-disable no-console */
+      console.log(error);
+    });
 
 const loadInEnglish = load('');
 const loadInGerman = load('-de');

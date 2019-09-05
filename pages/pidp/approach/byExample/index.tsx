@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { MdxDocs } from '../../../../docs/src/modules/components/mdx';
 import { RootState } from '../../../../docs/src/modules/redux/reducers';
 
-const load = (userLanguage: string = ''): any =>
+const load = (userLanguage = ''): any =>
   import(`../../../../docs/src/pages/pidp/approach/byExample/index${userLanguage}.mdx`)
     .then(result => {
       return {
@@ -12,7 +12,10 @@ const load = (userLanguage: string = ''): any =>
         raw: result.raw
       };
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+      /* eslint-disable no-console */
+      console.log(error);
+    });
 
 const Page = () => {
   const [contentMain, setContentMain] = useState('');
