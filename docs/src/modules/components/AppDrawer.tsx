@@ -89,13 +89,15 @@ interface AppDrawerProps {
   drawerStyleOverride: DrawerStyleOverride;
 }
 
-interface ChildRoutes {
-  items?: Array<JSX.Element>;
-  page?: Page;
-  activePage?: Page;
-  depth?: number;
-  translate?: (title: string, options: object) => string;
-  props?: any;
+interface DrawerContextProps {
+  activePage: Page;
+  depth: number;
+  handleDrawerClose?: () => void;
+}
+
+interface DrawerReduceProps {
+  acc: Array<JSX.Element>;
+  currentPage: Page;
 }
 
 const AppDrawer = (props: AppDrawerProps) => {
@@ -113,58 +115,74 @@ const AppDrawer = (props: AppDrawerProps) => {
     (canonicalRef as any).current = canonical;
   }, []);
 
-  const reduceChildRoutes = ({ items, page, activePage, depth, translate, props }: ChildRoutes) => {
-    if (page.displayNav === false) {
-      return items;
+  const reduceChildRoutes = (
+    { acc, currentPage }: DrawerReduceProps,
+    drawerContext: DrawerContextProps
+  ) => {
+    const { activePage, depth, handleDrawerClose: onClose } = drawerContext;
+
+    if (currentPage.displayNav === false) {
+      return acc;
     }
 
-    if (page.children && page.children.length > 1) {
-      const title = pageToTitleI18n(page, undefined);
-      const topLevel = activePage.pathname.indexOf(`${page.pathname}/`) === 0;
+    if (currentPage.children && currentPage.children.length > 1) {
+      const title = pageToTitleI18n(currentPage, undefined);
+      const topLevel = activePage.pathname.indexOf(`${currentPage.pathname}/`) === 0;
 
-      items.push(
+      return [
+        ...acc,
         <AppDrawerNavItem
           depth={depth}
           key={title}
-          topLevel={topLevel && !page.subheader}
-          openImmediately={topLevel || Boolean(page.subheader)}
+          topLevel={topLevel && !currentPage.subheader}
+          openImmediately={topLevel || Boolean(currentPage.subheader)}
           title={title}
-          icon={page.icon}
+          icon={currentPage.icon}
         >
-          {renderNavItems({ props, pages: page.children, activePage, depth: depth + 1, undefined })}
+          {renderNavItems(currentPage.children, {
+            handleDrawerClose: onClose,
+            activePage,
+            depth: depth + 1
+          })}
         </AppDrawerNavItem>
-      );
-    } else {
-      const title = pageToTitleI18n(page, undefined);
-      page = page.children && page.children.length === 1 ? page.children[0] : page;
-      items.push(
-        <AppDrawerNavItem
-          depth={depth}
-          key={title}
-          title={title}
-          icon={page.icon}
-          href={page.pathname}
-          onClick={props.onClose}
-        />
-      );
+      ];
     }
-    return items;
+
+    const title = pageToTitleI18n(currentPage, undefined);
+    const { icon, pathname } =
+      currentPage.children && currentPage.children.length === 1
+        ? currentPage.children[0]
+        : currentPage;
+
+    return [
+      ...acc,
+      <AppDrawerNavItem
+        depth={depth}
+        key={title}
+        title={title}
+        icon={icon}
+        href={pathname}
+        onClick={onClose}
+      />
+    ];
   };
 
-  const renderNavItems = ({ pages, ...params }) => {
+  const renderNavItems = (pages: Array<Page>, drawerContext: DrawerContextProps) => {
+    const initValue: Array<JSX.Element> = [];
     return (
       <List dense>
-        {pages.reduce((items, page) => reduceChildRoutes({ items, page, ...params }), [])}
+        {pages.reduce(
+          (acc, currentPage) => reduceChildRoutes({ acc, currentPage }, drawerContext),
+          initValue
+        )}
       </List>
     );
   };
 
-  const drawer = renderNavItems({
-    props,
-    pages: state.navigation.pages,
+  const drawer = renderNavItems(state.navigation.pages, {
+    handleDrawerClose,
     activePage: state.navigation.activePage,
-    depth: 0,
-    isDrawerOpen
+    depth: 0
   });
 
   return (

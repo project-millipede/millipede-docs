@@ -12,6 +12,7 @@ const wrapI18n = (req: IncomingMessage, res: ServerResponse) => {
   const middleware = compose(nextI18NextMiddleware(NextI18NextInstance));
 
   const done = () => {
+    /* eslint-disable no-console */
     console.log('done');
   };
 
