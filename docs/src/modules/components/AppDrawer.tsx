@@ -9,9 +9,10 @@ import clsx from 'clsx';
 import { useHoux } from 'houx';
 import React, { SyntheticEvent } from 'react';
 
+import { useTranslation } from '../../../../i18n';
 import { Page } from '../redux/features/navigation/type';
 import { RootState } from '../redux/reducers';
-import { pageToTitleI18n, pathnameToLanguage } from '../utils/helpers';
+import { pathnameToLanguage } from '../utils/helpers';
 import AppDrawerNavItem from './AppDrawerNavItem';
 
 const drawerWidth = 240;
@@ -109,6 +110,8 @@ const AppDrawer = (props: AppDrawerProps) => {
 
   const { state }: { state: RootState } = useHoux();
 
+  const { t } = useTranslation();
+
   const canonicalRef = React.useRef();
   React.useEffect(() => {
     const { canonical } = pathnameToLanguage(window.location.pathname);
@@ -126,7 +129,8 @@ const AppDrawer = (props: AppDrawerProps) => {
     }
 
     if (currentPage.children && currentPage.children.length > 1) {
-      const title = pageToTitleI18n(currentPage, undefined);
+      const title = t(`pages.${currentPage.pathname}`);
+
       const topLevel = activePage.pathname.indexOf(`${currentPage.pathname}/`) === 0;
 
       return [
@@ -148,7 +152,8 @@ const AppDrawer = (props: AppDrawerProps) => {
       ];
     }
 
-    const title = pageToTitleI18n(currentPage, undefined);
+    const title = t(`pages.${currentPage.pathname}`);
+
     const { icon, pathname } =
       currentPage.children && currentPage.children.length === 1
         ? currentPage.children[0]

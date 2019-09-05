@@ -1,6 +1,19 @@
 {
   "description": "This is a non-page component that requires its own namespace",
-  "change_language": "Change language",
+  "changeLanguage": "Change language",
   "toc": "Contents",
-  "search": "Search…"
+  "search": "Search…",
+  "pages": {
+    "/": "",
+    "/common": "Common",
+    "/common/landing": "Landing",
+    "/common/dataflow/comparison": "Comparison",
+    "/guides": "Guides",
+    "/guides/landing": "Landing",
+    "/guides/api": "API",
+    "/pidp": "PID/P",
+    "/pidp/landing": "Landing",
+    "/pidp/approach/byExample": "By example",
+    "/getting-started": "Getting Started"
+  }
 }

@@ -1,6 +1,19 @@
 {
   "description": "Dies ist eine Nicht-Seitenkomponente, die einen eigenen Namespace erfordert",
-  "change_language": "Sprache ändern",
+  "changeLanguage": "Sprache ändern",
   "toc": "Inhaltsverzeichnis",
-  "search": "Suche…"
+  "search": "Suche…",
+  "pages": {
+    "/": "",
+    "/common": "Allgemeines",
+    "/common/landing": "Landepunkt",
+    "/common/dataflow/comparison": "Vergleich",
+    "/guides": "Hilfestellungen",
+    "/guides/landing": "Landing",
+    "/guides/api": "API",
+    "/pidp": "PID/P",
+    "/pidp/landing": "Landing",
+    "/pidp/approach/byExample": "Beispiel",
+    "/getting-started": "Erste Schritte"
+  }
 }
