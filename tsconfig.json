@@ -24,7 +24,8 @@
     "lib": ["dom", "dom.iterable", "esnext.array"]
   },
   "include": [
-    "next.config.ts",
+    "next-env.d.ts",
+    "webpack/**/*.ts",
     "docs/**/*.ts",
     "docs/**/*.tsx",
     "next/**/*.ts",

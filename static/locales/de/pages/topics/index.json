@@ -2,11 +2,13 @@
   "topics": [
     {
       "title": "Privacy Enhancing Technology / PET",
-      "subTitle": "Etablierung von Vertrauen in unsicheren Umgegebugen"
+      "description": "Etablierung von Vertrauen in unsicheren Umgegebugen",
+      "steps": [{ "label": "Schritt - 1" }, { "label": "Schritt - 2" }, { "label": "Schritt - 3" }]
     },
     {
       "title": "Personal Intrusion Detection and Prevention / PID-P",
-      "subTitle": "Ansatz zur Eindämmung von Falschinformation"
+      "description": "Ansatz zur Eindämmung von Falschinformation",
+      "steps": [{ "label": "Schritt - 4" }, { "label": "Schritt - 5" }, { "label": "Schritt - 6" }]
     }
   ]
 }

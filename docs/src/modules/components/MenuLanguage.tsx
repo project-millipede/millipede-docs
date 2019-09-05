@@ -2,8 +2,8 @@ import { IconButton, Menu, MenuItem, NoSsr, Tooltip } from '@material-ui/core';
 import LanguageIcon from '@material-ui/icons/Language';
 import { useHoux } from 'houx';
 import React, { SyntheticEvent, useCallback, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
+import { useTranslation } from '../../../../i18n';
 import { LANGUAGES } from '../constants';
 import { LanguageActions } from '../redux/features/actionType';
 import { changeUserLanguage } from '../redux/features/language/actions';
@@ -25,7 +25,7 @@ const MenuLanguage = () => {
 
   const { state }: { state: RootState } = useHoux();
   const { dispatch }: { dispatch: React.Dispatch<LanguageActions> } = useHoux();
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   const handleSelect = useCallback((event: React.SyntheticEvent, languageCode: string) => {
     dispatch(changeUserLanguage(languageCode));
@@ -42,12 +42,12 @@ const MenuLanguage = () => {
 
   return (
     <>
-      <Tooltip title='Change language' enterDelay={300}>
+      <Tooltip title={`${t('change_language')}`} enterDelay={300}>
         <IconButton
           color='inherit'
           aria-owns={languageMenu ? 'language-menu' : undefined}
           aria-haspopup='true'
-          aria-label='Change language'
+          aria-label={`${t('change_language')}`}
           onClick={handleLanguageIconClick}
           data-ga-event-category='AppBar'
           data-ga-event-action='language'

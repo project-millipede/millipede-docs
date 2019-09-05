@@ -1,3 +1,6 @@
 {
-  "description": "This is a non-page component that requires its own namespace"
+  "description": "This is a non-page component that requires its own namespace",
+  "change_language": "Change language",
+  "toc": "Contents",
+  "search": "Search…"
 }

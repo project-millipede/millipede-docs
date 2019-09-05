@@ -1,9 +1,9 @@
 import { CardContent, Grid, Theme, Typography } from '@material-ui/core';
-import { GridSize } from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React from 'react';
 
 import DotsMobileStepper from '../../../../../../src/components/stepper/DotsMobileStepper';
+import { Content, Stack } from '../../../../../../src/typings/data/import';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,43 +26,20 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export interface Composition {
-  step: number;
-  gridSize: GridSize;
-}
-
-export interface ContentItem {
-  composition: Composition;
-  title: string;
-  description: string;
-  image?: JSX.Element;
-}
-
-export interface Content {
-  elements: Array<ContentItem>;
-}
-
-const stepsLength = (array: Array<ContentItem> = []): number => {
-  return array
-    .map(item => item.composition.step)
-    .filter((value, index, self) => self.indexOf(value) === index).length;
+const stepsLength = (array: Array<Content> = []): number => {
+  return array.map(item => item.step).filter((value, index, self) => self.indexOf(value) === index)
+    .length;
 };
 
-const stepsFiltered = (array: Array<ContentItem> = [], step: number): Array<ContentItem> => {
-  return array.map(item => item).filter(value => value.composition.step === step);
+const stepsFiltered = (array: Array<Content> = [], step: number): Array<Content> => {
+  return array.map(item => item).filter(value => value.step === step);
 };
 
-const generateGrid = (elements: Array<ContentItem> = [], active: boolean) => {
+const generateGrid = (elements: Array<Content> = [], active: boolean) => {
   const classes = useStyles({});
   return elements.map((content, index) => {
-    const { composition } = content;
     return (
-      <Grid
-        item
-        xs={composition.gridSize}
-        className={classes.row}
-        key={`${content.title} ${index}`}
-      >
+      <Grid item xs={content.size} className={classes.row} key={`${content.title} ${index}`}>
         <CardContent className={classes.paper}>
           <Typography
             variant='subtitle1'
@@ -84,11 +61,7 @@ const generateGrid = (elements: Array<ContentItem> = [], active: boolean) => {
   });
 };
 
-interface ComponentProps {
-  content: Content;
-}
-
-const ByExample = ({ content: { elements = [] } }: ComponentProps) => {
+const ByExample = ({ elements = [] }: Stack) => {
   const classes = useStyles({});
 
   const [step, setStep] = React.useState(0);

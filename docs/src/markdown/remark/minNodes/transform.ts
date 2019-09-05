@@ -12,10 +12,10 @@ export const transform = (options: Options) => (
 ): Node | Error | Promise<Node> => {
   const { minDepth } = options;
   // file.data = file.data || {};
-  return visit(tree, 'heading', (node, index, parent) => {
+  return visit(tree, 'heading', (node: Node, index: number, parent: any) => {
     if (node.depth < minDepth) {
       parent.children.splice(index, 1);
     }
     return true;
-  });
+  }) as any;
 };

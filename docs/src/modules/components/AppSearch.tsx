@@ -5,6 +5,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import { useHoux } from 'houx';
 import React from 'react';
 
+import { useTranslation } from '../../../../i18n';
 import { RootState } from '../redux/reducers';
 
 // let searchTimer;
@@ -159,6 +160,8 @@ export const AppSearch = props => {
   const inputRef = React.useRef(null);
   const theme = useTheme();
 
+  const { t } = useTranslation();
+
   React.useEffect(() => {
     const handleKeyDown = event => {
       // Use event.keyCode to support IE 11
@@ -197,9 +200,9 @@ export const AppSearch = props => {
       </div>
       <Input
         disableUnderline
-        placeholder='Search…'
+        placeholder={`${t('search')}`}
         inputProps={{
-          'aria-label': 'Search'
+          'aria-label': t('search')
         }}
         id='docsearch-input'
         inputRef={inputRef}

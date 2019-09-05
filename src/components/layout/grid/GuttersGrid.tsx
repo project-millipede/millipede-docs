@@ -1,11 +1,12 @@
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import i18next from 'i18next';
+import { TFunction } from 'next-i18next-serverless';
 import React from 'react';
 import { WithTranslation } from 'react-i18next';
 
 import { withTranslation } from '../../../../i18n';
-import ExpandableCard, { OverviewProps } from '../../card/ExpandableCard';
+import { OverviewProps } from '../../../typings/data/import';
+import ExpandableCard from '../../card/ExpandableCard';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,10 +16,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const generateTopicData = (t: i18next.TFunction): Array<OverviewProps> => {
-  const topics: Array<Partial<OverviewProps>> = t('topics', { returnObjects: true });
+const generateTopicData = (t: TFunction): Array<OverviewProps> => {
+  const topics: Array<OverviewProps> = t('topics', { returnObjects: true });
 
-  const template: Array<Partial<OverviewProps>> = [
+  const template: Array<OverviewProps> = [
     {
       letter: ['PET'],
       link: '/common/dataflow/comparison',
@@ -35,8 +36,12 @@ const generateTopicData = (t: i18next.TFunction): Array<OverviewProps> => {
     return {
       ...templateItem,
       title: topics[index].title,
-      subTitle: topics[index].subTitle
-    } as OverviewProps;
+      description: topics[index].description,
+      // steps: {
+      //   ...templateItem.steps[index],
+      //   ...topics[index].steps
+      steps: topics[index].steps
+    };
   });
 };
 
@@ -52,7 +57,7 @@ const GuttersGrid = ({ t }: Props) => {
           <Grid key={index} item xs={12} md={6}>
             <ExpandableCard
               title={data.title}
-              subTitle={data.subTitle}
+              description={data.description}
               letter={data.letter}
               link={data.link}
               steps={data.steps}
@@ -70,4 +75,4 @@ GuttersGrid.getInitialProps = async () => {
   };
 };
 
-export default withTranslation(['pages/topics/index'])(GuttersGrid);
+export default withTranslation('pages/topics/index')(GuttersGrid);
