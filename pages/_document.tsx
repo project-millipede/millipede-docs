@@ -1,8 +1,28 @@
 import { ServerStyleSheets } from '@material-ui/styles';
+import { compose } from 'compose-middleware';
+import { IncomingMessage, ServerResponse } from 'http';
+import nextI18NextMiddleware from 'next-i18next-serverless/dist/commonjs/middlewares/next-i18next-middleware';
 import NextDocument, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
 import React from 'react';
 
 import { PathnameToLanguage, pathnameToLanguage } from '../docs/src/modules/utils/helpers';
+import { NextI18NextInstance } from '../i18n';
+
+const wrapI18n = (req: IncomingMessage, res: ServerResponse) => {
+  const middleware = compose(nextI18NextMiddleware(NextI18NextInstance));
+
+  const done = () => {
+    console.log('done');
+  };
+
+  middleware(req, res, _next => {
+    return done();
+  });
+};
+
+export const middleware = async ({ req, res }: DocumentContext) => {
+  await wrapI18n(req, res);
+};
 
 /* eslint-disable class-methods-use-this */
 class MillipedeDocument extends NextDocument {

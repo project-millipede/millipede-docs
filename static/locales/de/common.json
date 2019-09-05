@@ -1,3 +1,6 @@
 {
-  "description": "Dies ist eine Nicht-Seitenkomponente, die einen eigenen Namespace erfordert"
+  "description": "Dies ist eine Nicht-Seitenkomponente, die einen eigenen Namespace erfordert",
+  "change_language": "Sprache ändern",
+  "toc": "Inhaltsverzeichnis",
+  "search": "Suche…"
 }

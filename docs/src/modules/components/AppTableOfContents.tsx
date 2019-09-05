@@ -1,10 +1,9 @@
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import { useHoux } from 'houx';
 import React from 'react';
-import { WithTranslation } from 'react-i18next';
 import { scroller } from 'react-scroll';
 
-import { withTranslation } from '../../../../i18n';
+import { useTranslation } from '../../../../i18n';
 import TOCComponent from '../../markdown/components/toc/TocComponent';
 import { RootState } from '../redux/reducers';
 
@@ -74,12 +73,12 @@ interface AppTableOfContentsProps {
   content: string;
 }
 
-type Props = AppTableOfContentsProps & WithTranslation;
-
-const AppTableOfContents = ({ content, t }: Props) => {
+const AppTableOfContents = ({ content }: AppTableOfContentsProps) => {
   const classes = useStyles({});
 
   const { state }: { state: RootState } = useHoux();
+
+  const { t } = useTranslation();
 
   const handleClick = (hash: string) => {
     scrollToLink(hash);
@@ -101,10 +100,4 @@ const AppTableOfContents = ({ content, t }: Props) => {
   );
 };
 
-AppTableOfContents.getInitialProps = async () => {
-  return {
-    namespacesRequired: ['components/pageElements']
-  };
-};
-
-export default withTranslation(['components/pageElements'])(AppTableOfContents);
+export default AppTableOfContents;

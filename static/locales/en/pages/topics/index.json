@@ -2,11 +2,13 @@
   "topics": [
     {
       "title": "Privacy Enhancing Technology / PET",
-      "subTitle": "Make untrusted envrionments trusted"
+      "description": "Make untrusted envrionments trusted",
+      "steps": [{ "label": "Step - 1" }, { "label": "Step - 2" }, { "label": "Step - 3" }]
     },
     {
       "title": "Personal Intrusion Detection and Prevention / PID-P",
-      "subTitle": "Approach to fight fake news"
+      "description": "Approach to fight fake news",
+      "steps": [{ "label": "Step - 4" }, { "label": "Step - 5" }, { "label": "Step - 6" }]
     }
   ]
 }

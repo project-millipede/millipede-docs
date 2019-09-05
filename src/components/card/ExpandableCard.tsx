@@ -18,6 +18,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 
+import { OverviewProps } from '../../typings/data/import';
 import AvatarGrid from '../avatar/AvatarGrid';
 
 // import { autoPlay } from 'react-swipeable-views-utils';
@@ -25,20 +26,7 @@ import AvatarGrid from '../avatar/AvatarGrid';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({}));
 
-export interface OverviewStep {
-  label: string;
-  imgPath?: string;
-}
-
-export interface OverviewProps {
-  title: string;
-  subTitle: string;
-  letter: Array<string>;
-  link: string;
-  steps: Array<OverviewStep>;
-}
-
-const ExpandableCard = ({ title, subTitle, letter, link, steps = [] }: OverviewProps) => {
+const ExpandableCard = ({ title, description, letter, link, steps = [] }: OverviewProps) => {
   const classes = useStyles({});
   const theme = useTheme();
 
@@ -60,7 +48,7 @@ const ExpandableCard = ({ title, subTitle, letter, link, steps = [] }: OverviewP
 
   return (
     <Card>
-      <CardHeader avatar={<AvatarGrid letter={letter} />} title={title} subheader={subTitle} />
+      <CardHeader avatar={<AvatarGrid letter={letter} />} title={title} subheader={description} />
       <CardContent>
         <SwipeableViews index={activeStep} onChangeIndex={handleStepChange} enableMouseEvents>
           {steps.map((step, index) => (

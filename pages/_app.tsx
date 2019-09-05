@@ -1,5 +1,5 @@
 import { HouxProvider } from 'houx';
-import App, { Container } from 'next/app';
+import App from 'next/app';
 import React from 'react';
 
 import AppWrapper from '../docs/src/modules/components/AppWrapper';
@@ -33,13 +33,11 @@ class MillipedeApp extends App {
             <link rel='stylesheet' href={font} key={font} />
           ))}
         </NextHead> */}
-        <Container>
-          <HouxProvider reducers={reducers} logDispatchedActions>
-            <AppWrapper>
-              <Component {...pageProps} />
-            </AppWrapper>
-          </HouxProvider>
-        </Container>
+        <HouxProvider reducers={reducers} logDispatchedActions>
+          <AppWrapper>
+            <Component {...pageProps} />
+          </AppWrapper>
+        </HouxProvider>
       </ReactMode>
     );
   }

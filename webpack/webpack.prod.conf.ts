@@ -4,8 +4,7 @@ import webpack from 'webpack';
 // import * as options from './remarkReactComponents';
 
 const webpackConfig: webpack.Configuration = {
-  mode: 'development',
-  devtool: 'inline-source-map',
+  mode: 'production',
 
   // Fixes npm packages that depend on `fs` module
   node: {

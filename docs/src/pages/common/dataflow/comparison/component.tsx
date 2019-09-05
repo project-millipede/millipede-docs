@@ -1,9 +1,9 @@
 import { CardContent, Grid, Theme, Typography } from '@material-ui/core';
-import { GridSize } from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React from 'react';
 
 import DotsMobileStepper from '../../../../../../src/components/stepper/DotsMobileStepper';
+import { Content, Stack } from '../../../../../../src/typings/data/import';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,50 +19,30 @@ const useStyles = makeStyles((theme: Theme) =>
       // color: theme.palette.text.primary
     },
     row: {
-      // alignItems: "center",
+      alignItems: 'center',
       flexDirection: 'row',
       justifyContent: 'center'
+    },
+    col: {
+      flexDirection: 'column'
     }
   })
 );
 
-export interface Composition {
-  step: number;
-  gridSize: GridSize;
-}
-
-export interface ContentItem {
-  composition: Composition;
-  title: string;
-  description: string;
-  image?: JSX.Element;
-}
-
-export interface Content {
-  elements: Array<ContentItem>;
-}
-
-const stepsLength = (array: Array<ContentItem> = []): number => {
-  return array
-    .map(item => item.composition.step)
-    .filter((value, index, self) => self.indexOf(value) === index).length;
+const stepsLength = (array: Array<Content> = []): number => {
+  return array.map(item => item.step).filter((value, index, self) => self.indexOf(value) === index)
+    .length;
 };
 
-const stepsFiltered = (array: Array<ContentItem> = [], step: number): Array<ContentItem> => {
-  return array.map(item => item).filter(value => value.composition.step === step);
+const stepsFiltered = (array: Array<Content> = [], step: number): Array<Content> => {
+  return array.map(item => item).filter(value => value.step === step);
 };
 
-const generateGrid = (elements: Array<ContentItem> = [], active: boolean) => {
+const generateGrid = (elements: Array<Content> = [], active: boolean) => {
   const classes = useStyles({});
   return elements.map((content, index) => {
-    const { composition } = content;
     return (
-      <Grid
-        item
-        xs={composition.gridSize}
-        className={classes.row}
-        key={`${content.title} ${index}`}
-      >
+      <Grid item xs={content.size} key={`${content.title} ${index}`}>
         <CardContent className={classes.paper}>
           <Typography
             variant='subtitle1'
@@ -84,43 +64,20 @@ const generateGrid = (elements: Array<ContentItem> = [], active: boolean) => {
   });
 };
 
-interface Props {
-  content: Content;
-}
-
-const Comparison = ({ content: { elements = [] } }: Props) => {
+const Comparison = ({ elements = [] }: Stack) => {
   const classes = useStyles({});
 
   const [step, setStep] = React.useState(0);
 
   return (
-    <Grid container className={classes.row}>
-      {/* <Grid item xs={8} className={classes.row}> */}
-      <Grid item className={classes.row}>
+    <Grid container direction='column' spacing={1}>
+      <Grid item>
         <CardContent className={classes.paper}>
-          {/* <ReactSvgPanZoomLoader
-            src="file/path/image.svg"
-            proxy={
-              <>
-                <SvgLoaderSelectElement
-                // selector="#tree"
-                // onClick={onItemClick}
-                // stroke={props.strokeColor}
-                />
-              </>
-            }
-            render={content => ( */}
-          {/* <ReactSVGPanZoom width={500} height={500}>
-            <svg width={500} height={500}> */}
-          {/* {content} */}
           {stepsFiltered(elements, step)[0].image}
-          {/* </svg>
-          </ReactSVGPanZoom> */}
-          {/* )}
-          /> */}
         </CardContent>
       </Grid>
-      <Grid item xs={10} className={classes.row}>
+
+      <Grid item>
         <DotsMobileStepper
           steps={stepsLength(elements)}
           currentStep={(currentStep: number) => {
@@ -128,7 +85,7 @@ const Comparison = ({ content: { elements = [] } }: Props) => {
           }}
         />
       </Grid>
-      {generateGrid(stepsFiltered(elements, step), true)}
+      <Grid container>{generateGrid(stepsFiltered(elements, step), true)}</Grid>
     </Grid>
   );
 };
