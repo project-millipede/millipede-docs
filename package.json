@@ -26,10 +26,7 @@
     "dev": "npm run loader:build && npm run app:build && npm run next:dev",
     "start": "npm run loader:build && npm run app:build && npm run next:build && npm run next:start",
     "now-build": "npm run loader:build && npm run app:build && npm run next:build",
-    "clean": "rm -rf dist/ .next/",
-    "node:dev": "nodemon --exec ts-node --project tsconfig.server.json index.ts",
-    "node:build": "next build && tsc --project tsconfig.server.json",
-    "node:start": "NODE_ENV=production node dist/index.js"
+    "clean": "rm -rf dist/ .next/"
   },
   "main": "index.js",
   "dependencies": {
@@ -37,9 +34,9 @@
     "@material-ui/docs": "^4.0.0-beta.0",
     "@material-ui/icons": "^4.2.1",
     "@material-ui/styles": "^4.3.3",
-    "@mdx-js/mdx": "^1.4.3",
+    "@mdx-js/mdx": "^1.4.4",
     "@mdx-js/mdxast": "^1.1.1",
-    "@mdx-js/react": "^1.4.3",
+    "@mdx-js/react": "^1.4.4",
     "classnames": "^2.2.6",
     "clsx": "^1.0.4",
     "compose-middleware": "^5.0.1",
@@ -52,7 +49,7 @@
     "lodash": "^4.17.15",
     "mdast-util-to-string": "^1.0.6",
     "mdast-util-toc": "^4.2.0",
-    "next": "^9.0.6-canary.0",
+    "next": "^9.0.6-canary.1",
     "next-i18next-serverless": "^1.1.30",
     "prism-react-renderer": "^0.1.7",
     "react": "^16.9.0",
