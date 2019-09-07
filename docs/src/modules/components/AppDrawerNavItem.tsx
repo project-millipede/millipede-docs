@@ -1,8 +1,9 @@
-import { Collapse, List, ListItemIcon, ListItemText } from '@material-ui/core';
+import { Collapse, List, ListItemIcon, ListItemText, Theme } from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import { SvgIconProps } from '@material-ui/core/SvgIcon';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import { createStyles, makeStyles } from '@material-ui/styles';
 import withRouter, { WithRouterProps } from 'next/dist/client/with-router';
 import Link from 'next/link';
 import React, { useState } from 'react';
@@ -15,24 +16,28 @@ interface AppDrawerNavItemProps extends React.Props<any> {
   href?: string;
   onClick?: (event: React.SyntheticEvent) => void;
   openImmediately?: boolean;
-  topLevel?: boolean;
   depth: number;
 }
 
 type Props = AppDrawerNavItemProps & WithRouterProps;
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: { paddingLeft: '8px' }
+  })
+);
+
 const AppDrawerNavItem = ({
   title,
   icon,
-  depth,
   href,
   onClick,
   openImmediately = false,
-  topLevel = false,
-  children,
-  ...other
+  children
 }: Props) => {
   const [open, setOpen] = useState(openImmediately);
+
+  const classes = useStyles({});
 
   const handleClick = () => {
     setOpen(!open);
@@ -42,7 +47,7 @@ const AppDrawerNavItem = ({
     return (
       <Link href={href}>
         <ListItem button onClick={onClick}>
-          <ListItemIcon>{icon}</ListItemIcon>
+          <ListItemIcon className={classes.root}>{icon}</ListItemIcon>
           <ListItemText primary={title} />
         </ListItem>
       </Link>
@@ -52,7 +57,7 @@ const AppDrawerNavItem = ({
   return (
     <>
       <ListItem button onClick={event => handleClick()}>
-        <ListItemIcon>{icon}</ListItemIcon>
+        <ListItemIcon className={classes.root}>{icon}</ListItemIcon>
         <ListItemText primary={title} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
