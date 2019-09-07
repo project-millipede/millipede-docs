@@ -138,8 +138,7 @@ const AppDrawer = (props: AppDrawerProps) => {
         <AppDrawerNavItem
           depth={depth}
           key={title}
-          topLevel={topLevel && !currentPage.subheader}
-          openImmediately={topLevel || Boolean(currentPage.subheader)}
+          openImmediately={topLevel || !!currentPage.subheader}
           title={title}
           icon={currentPage.icon}
         >
