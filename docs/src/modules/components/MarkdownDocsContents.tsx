@@ -42,7 +42,7 @@ const MarkdownDocsContents = (props: MarkdownDocsContentsProps) => {
     }
   }
 
-  const { components } = headers;
+  // const { components } = headers;
 
   if (headers.components.length > 0) {
     const section = markdownLocation.split('/')[4];

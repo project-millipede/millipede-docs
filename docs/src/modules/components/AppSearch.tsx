@@ -2,11 +2,9 @@ import { useMediaQuery } from '@material-ui/core';
 import Input from '@material-ui/core/Input';
 import { createStyles, fade, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
-import { useHoux } from 'houx';
 import React from 'react';
 
 import { useTranslation } from '../../../../i18n';
-import { RootState } from '../redux/reducers';
 
 // let searchTimer;
 // let initialized = false;
@@ -28,7 +26,7 @@ import { RootState } from '../redux/reducers';
 //   );
 // };
 
-const initDocsearch = userLanguage => {
+export const initDocsearch = () => {
   //   clearInterval(searchTimer);
   //   searchTimer = setInterval(() => {
   //     const docsearchInput = document.querySelector('#docsearch-input');
@@ -152,9 +150,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const AppSearch = props => {
-  const { state }: { state: RootState } = useHoux();
-  const { userLanguage } = state.language;
+export const AppSearch = () => {
+  // const { state }: { state: RootState } = useHoux();
+  // const { userLanguage } = state.language;
 
   const classes = useStyles({});
   const inputRef = React.useRef(null);
@@ -189,7 +187,7 @@ export const AppSearch = props => {
   React.useEffect(() => {
     if (desktop) {
       // loadDependencies();
-      initDocsearch(userLanguage);
+      // initDocsearch(userLanguage);
     }
   });
 

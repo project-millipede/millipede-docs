@@ -22,7 +22,8 @@ type Props = TProps;
 
 export class MillipedeLink extends Component<Props, {}> {
   render() {
-    const { naked, href, onClick, target, rel, className, ...other } = this.props;
+    // const { naked, href, onClick, target, rel, className, ...other } = this.props;
+    const { naked, href, onClick, target, rel, className } = this.props;
 
     if (naked) {
       return <NextLinkButton component={Link} href={href} className={className} />;

@@ -6,7 +6,7 @@ import { Options, transform } from './transform';
 //   return transform({ minDepth: 2 });
 // };
 
-const attacher = (options?: Options): Transformer => {
+const attacher = (_options?: Options): Transformer => {
   return transform({ minDepth: 2 });
 };
 

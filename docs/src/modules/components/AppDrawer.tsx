@@ -7,7 +7,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import { useHoux } from 'houx';
-import React, { SyntheticEvent } from 'react';
+import React from 'react';
 
 import { useTranslation } from '../../../../i18n';
 import { Page } from '../redux/features/navigation/type';

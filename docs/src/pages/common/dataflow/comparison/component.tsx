@@ -5,7 +5,7 @@ import React from 'react';
 import DotsMobileStepper from '../../../../../../src/components/stepper/DotsMobileStepper';
 import { Content, Stack } from '../../../../../../src/typings/data/import';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((_theme: Theme) =>
   createStyles({
     paper: {
       // padding: theme.spacing(2),

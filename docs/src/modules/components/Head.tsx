@@ -11,7 +11,7 @@ interface OProps extends WithRouterProps {
 type Props = OProps & WithRouterProps;
 
 function Head(props: Props) {
-  const { description = "", title = "" } = props;
+  const { title = '' } = props;
 
   return (
     <NextHead>

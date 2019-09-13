@@ -6,7 +6,7 @@ const pages: Array<Page> = [
     icon: 'star',
     children: [
       {
-        pathname: '/common/landing',
+        pathname: '/common/dataflow',
         icon: 'star'
       },
       {
@@ -34,7 +34,7 @@ const pages: Array<Page> = [
     icon: 'star',
     children: [
       {
-        pathname: '/pidp/landing',
+        pathname: '/pidp/approach',
         icon: 'star'
       },
       {

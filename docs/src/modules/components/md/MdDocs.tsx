@@ -14,7 +14,7 @@ interface MarkdownDocsProps {
   markdownLocation?: string;
 }
 
-export const useStyles = makeStyles((theme: Theme) =>
+export const useStyles = makeStyles((_theme: Theme) =>
   createStyles({
     header: {
       display: 'flex',
@@ -39,7 +39,7 @@ export const MdDocs = (props: MarkdownDocsProps) => {
   const { content, markdownLocation: markdownLocationProp } = props;
   return (
     <MarkdownDocsContents markdown={content} markdownLocation={markdownLocationProp}>
-      {({ contents, markdownLocation }) => (
+      {({ markdownLocation }) => (
         <AppFrame>
           <AppTableOfContents content={content} />
           <AppContent>

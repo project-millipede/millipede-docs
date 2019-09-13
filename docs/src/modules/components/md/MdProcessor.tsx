@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import markdownToRemarkPlugin from 'remark-parse';
 import remarkToReact from 'remark-react';
 import remarkSlug from 'remark-slug';

@@ -1,4 +1,4 @@
-import { createGenerateClassName, jssPreset, StylesProvider } from '@material-ui/styles';
+import { jssPreset, StylesProvider } from '@material-ui/styles';
 import { useHoux } from 'houx';
 import { create } from 'jss';
 import withRouter, { WithRouterProps } from 'next/dist/client/with-router';
@@ -19,7 +19,7 @@ const jss = create({
   plugins: [...jssPreset().plugins]
 });
 
-const generateClassName = createGenerateClassName();
+// const generateClassName = createGenerateClassName();
 
 const AppWrapper = ({ children, router }: Props) => {
   // Remove the server-side injected CSS.

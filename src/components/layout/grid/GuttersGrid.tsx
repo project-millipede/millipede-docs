@@ -8,7 +8,7 @@ import { withTranslation } from '../../../../i18n';
 import { OverviewProps } from '../../../typings/data/import';
 import ExpandableCard from '../../card/ExpandableCard';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((_theme: Theme) =>
   createStyles({
     root: {
       marginTop: '48px'
