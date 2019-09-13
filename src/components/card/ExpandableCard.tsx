@@ -1,15 +1,4 @@
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  createStyles,
-  IconButton,
-  makeStyles,
-  Theme,
-  useTheme,
-} from '@material-ui/core';
+import { Button, Card, CardActions, CardContent, CardHeader, IconButton, useTheme } from '@material-ui/core';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
@@ -24,10 +13,10 @@ import AvatarGrid from '../avatar/AvatarGrid';
 // import { autoPlay } from 'react-swipeable-views-utils';
 // const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-const useStyles = makeStyles((theme: Theme) => createStyles({}));
+// const useStyles = makeStyles((_theme: Theme) => createStyles({}));
 
 const ExpandableCard = ({ title, description, letter, link, steps = [] }: OverviewProps) => {
-  const classes = useStyles({});
+  // const classes = useStyles({});
   const theme = useTheme();
 
   const [activeStep, setActiveStep] = useState(0);

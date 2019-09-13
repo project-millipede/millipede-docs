@@ -3,18 +3,22 @@
   "change-language": "Sprache ändern",
   "toc": "Inhaltsverzeichnis",
   "search": "Suche…",
+  "next": "Weiter",
+  "back": "Zurück",
   "error-with-status": "Auf dem Server ist ein Fehler ({{statusCode}}) aufgetreten",
   "error-without-status": "Auf dem Server ist ein Fehler aufgetreten",
   "pages": {
     "/": "",
     "/common": "Allgemeines",
     "/common/landing": "Landepunkt",
+    "/common/dataflow": "Datenflüsse",
     "/common/dataflow/comparison": "Vergleich",
     "/guides": "Hilfestellungen",
     "/guides/landing": "Landing",
     "/guides/api": "API",
     "/pidp": "PID/P",
     "/pidp/landing": "Landing",
+    "/pidp/approach": "Ansatz",
     "/pidp/approach/byExample": "Beispiel",
     "/getting-started": "Erste Schritte"
   }

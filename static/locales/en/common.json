@@ -3,18 +3,22 @@
   "change-language": "Change language",
   "toc": "Contents",
   "search": "Search…",
+  "next": "Next",
+  "back": "Back",
   "error-with-status": "A {{statusCode}} error occurred on server",
   "error-without-status": "An error occurred on the server",
   "pages": {
     "/": "",
     "/common": "Common",
     "/common/landing": "Landing",
+    "/common/dataflow": "Dataflow",
     "/common/dataflow/comparison": "Comparison",
     "/guides": "Guides",
     "/guides/landing": "Landing",
     "/guides/api": "API",
     "/pidp": "PID/P",
     "/pidp/landing": "Landing",
+    "/pidp/approach": "Approach",
     "/pidp/approach/byExample": "By example",
     "/getting-started": "Getting Started"
   }

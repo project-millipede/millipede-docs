@@ -27,7 +27,7 @@ const MenuLanguage = () => {
   const { dispatch }: { dispatch: React.Dispatch<LanguageActions> } = useHoux();
   const { i18n, t } = useTranslation();
 
-  const handleSelect = useCallback((event: React.SyntheticEvent, languageCode: string) => {
+  const handleSelect = useCallback((_event: React.SyntheticEvent, languageCode: string) => {
     dispatch(changeUserLanguage(languageCode));
     i18n.changeLanguage(languageCode);
     setLanguageMenu(null);

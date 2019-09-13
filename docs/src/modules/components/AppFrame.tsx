@@ -165,8 +165,10 @@ const AppFrame = ({ children, drawerStyleOverride }: AppFrameProps) => {
   };
 
   return (
+    // <PageTitle>
+    //   {title => {
     <PageTitle>
-      {title => {
+      {() => {
         return (
           <div className={classes.root}>
             <CssBaseline />

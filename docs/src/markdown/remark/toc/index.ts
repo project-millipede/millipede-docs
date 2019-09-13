@@ -6,7 +6,7 @@ import { Options, transform } from './transform';
 //   return transform({ maxDepth: 3, tight: false });
 // };
 
-const attacher = (options?: Options): Transformer => {
+const attacher = (_options?: Options): Transformer => {
   return transform({ maxDepth: 3, tight: false });
 };
 

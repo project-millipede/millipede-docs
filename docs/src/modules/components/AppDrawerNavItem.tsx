@@ -20,7 +20,7 @@ interface AppDrawerNavItemProps extends React.Props<any> {
 
 type Props = AppDrawerNavItemProps & WithRouterProps;
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((_theme: Theme) =>
   createStyles({
     root: { paddingLeft: '8px' }
   })
@@ -57,7 +57,7 @@ const AppDrawerNavItem = ({
 
   return (
     <>
-      <ListItem button onClick={event => handleClick()}>
+      <ListItem button onClick={handleClick}>
         <ListItemIcon className={classes.root}>
           <Icon>{icon}</Icon>
         </ListItemIcon>

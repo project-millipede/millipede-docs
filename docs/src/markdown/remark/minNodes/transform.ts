@@ -1,6 +1,6 @@
 import { Node } from 'unist';
 import visit from 'unist-util-visit';
-import vfile, { VFile } from 'vfile';
+import { VFile } from 'vfile';
 
 export interface Options {
   minDepth: number;
@@ -8,7 +8,7 @@ export interface Options {
 
 export const transform = (options: Options) => (
   tree: Node,
-  file: VFile
+  _file: VFile
 ): Node | Error | Promise<Node> => {
   const { minDepth } = options;
   // file.data = file.data || {};

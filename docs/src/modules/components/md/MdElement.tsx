@@ -236,7 +236,7 @@ function MdElement({ content }: MdElementProps) {
 //   );
 // };
 
-const pre = ({ children, className }) => {
+export const pre = ({ children, className }) => {
   const language = className.replace(/language-/, '');
 
   return (

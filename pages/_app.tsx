@@ -22,7 +22,6 @@ class MillipedeApp extends App {
   }
 
   render() {
-    const fonts = ['https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'];
     const { Component, pageProps } = this.props;
 
     return (
@@ -53,7 +52,7 @@ class MillipedeApp extends App {
 //   return { pageProps };
 // };
 
-MillipedeApp.getInitialProps = async ({ Component, router, ctx }) => {
+MillipedeApp.getInitialProps = async ({ Component, ctx }) => {
   let pageProps = {};
 
   if (Component.getInitialProps) {

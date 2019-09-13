@@ -15,8 +15,8 @@ const load = (userLanguage = ''): any =>
       console.log(error);
     });
 
-const loadInEnglish = load('');
-const loadInGerman = load('-de');
+// const loadInEnglish = load('');
+// const loadInGerman = load('-de');
 
 const Page = () => {
   const [contentMain, setContentMain] = useState('');

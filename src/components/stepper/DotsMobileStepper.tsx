@@ -6,7 +6,9 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { useEffect, useState } from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
+import { useTranslation } from '../../../i18n';
+
+const useStyles = makeStyles((_theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1
@@ -28,6 +30,8 @@ const DotsMobileStepper = ({ steps, currentStep }: StepperProps) => {
     currentStep(activeStep);
   });
 
+  const { t } = useTranslation();
+
   const handleNext = () => {
     setActiveStep(prevActiveStep => prevActiveStep + 1);
   };
@@ -45,14 +49,14 @@ const DotsMobileStepper = ({ steps, currentStep }: StepperProps) => {
       className={classes.root}
       nextButton={
         <Button size='small' onClick={handleNext} disabled={activeStep === steps - 1}>
-          Next
+          {t('next')}
           <KeyboardArrowRight />
         </Button>
       }
       backButton={
         <Button size='small' onClick={handleBack} disabled={activeStep === 0}>
           <KeyboardArrowLeft />
-          Back
+          {t('back')}
         </Button>
       }
     />

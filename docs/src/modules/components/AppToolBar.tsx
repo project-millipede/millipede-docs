@@ -16,7 +16,7 @@ interface AppToolBarProps {
   handleDrawerOpen: () => void;
 }
 
-const useDrawerStyles = makeStyles((theme: Theme) =>
+const useDrawerStyles = makeStyles((_theme: Theme) =>
   createStyles({
     menuButton: {
       marginRight: 36
@@ -27,7 +27,7 @@ const useDrawerStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const useCustomStyles = makeStyles((theme: Theme) =>
+const useCustomStyles = makeStyles((_theme: Theme) =>
   createStyles({
     // grow: {
     //   flexGrow: 1
