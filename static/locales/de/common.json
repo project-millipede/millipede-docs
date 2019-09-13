@@ -1,5 +1,5 @@
 {
-  "changeLanguage": "Sprache ändern",
+  "change-language": "Sprache ändern",
   "toc": "Inhaltsverzeichnis",
   "search": "Suche…",
   "error-with-status": "Auf dem Server ist ein Fehler ({{statusCode}}) aufgetreten",

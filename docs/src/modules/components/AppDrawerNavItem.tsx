@@ -1,6 +1,5 @@
-import { Collapse, List, ListItemIcon, ListItemText, Theme } from '@material-ui/core';
+import { Collapse, Icon, List, ListItemIcon, ListItemText, Theme } from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
-import { SvgIconProps } from '@material-ui/core/SvgIcon';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import { createStyles, makeStyles } from '@material-ui/styles';
@@ -12,7 +11,7 @@ import React, { useState } from 'react';
 
 interface AppDrawerNavItemProps extends React.Props<any> {
   title: string;
-  icon?: React.ReactElement<SvgIconProps>;
+  icon?: string;
   href?: string;
   onClick?: (event: React.SyntheticEvent) => void;
   openImmediately?: boolean;
@@ -47,7 +46,9 @@ const AppDrawerNavItem = ({
     return (
       <Link href={href}>
         <ListItem button onClick={onClick}>
-          <ListItemIcon className={classes.root}>{icon}</ListItemIcon>
+          <ListItemIcon className={classes.root}>
+            <Icon>{icon}</Icon>
+          </ListItemIcon>
           <ListItemText primary={title} />
         </ListItem>
       </Link>
@@ -57,7 +58,9 @@ const AppDrawerNavItem = ({
   return (
     <>
       <ListItem button onClick={event => handleClick()}>
-        <ListItemIcon className={classes.root}>{icon}</ListItemIcon>
+        <ListItemIcon className={classes.root}>
+          <Icon>{icon}</Icon>
+        </ListItemIcon>
         <ListItemText primary={title} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
