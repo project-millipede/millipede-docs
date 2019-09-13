@@ -5,8 +5,9 @@ import Typography from '@material-ui/core/Typography';
 import GithubIcon from '@material-ui/docs/svgIcons/GitHub';
 import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React from 'react';
 
+import { useTranslation } from '../../../../i18n';
 import AppSearch from './AppSearch';
 import MenuLanguage from './MenuLanguage';
 
@@ -41,6 +42,8 @@ const AppToolBar = ({ isDrawerOpen, handleDrawerOpen }: AppToolBarProps) => {
   const drawerClasses = useDrawerStyles({});
   const customStyles = useCustomStyles({});
 
+  const { t } = useTranslation();
+
   return (
     <Toolbar>
       <IconButton
@@ -59,7 +62,7 @@ const AppToolBar = ({ isDrawerOpen, handleDrawerOpen }: AppToolBarProps) => {
         // color="inherit"
         noWrap
       >
-        Project Millipede
+        {t('application-title')}
       </Typography>
 
       <div className={customStyles.grow} />

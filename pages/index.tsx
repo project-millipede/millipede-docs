@@ -4,6 +4,7 @@ import React from 'react';
 
 import AppFrame from '../docs/src/modules/components/AppFrame';
 import Head from '../docs/src/modules/components/Head';
+import { useTranslation } from '../i18n';
 import GuttersGrid from '../src/components/layout/grid/GuttersGrid';
 
 // // --- Post bootstrap -----
@@ -71,6 +72,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Index = () => {
   const classes = useStyles({});
+  const { t } = useTranslation();
+
   return (
     <AppFrame drawerStyleOverride={{ drawer: classes.drawer }}>
       <div className={classes.root}>
@@ -90,7 +93,7 @@ const Index = () => {
                 gutterBottom
                 className={classes.title}
               >
-                {'Project Millipede'}
+                {t('application-title')}
               </Typography>
               <Divider />
               <GuttersGrid />
