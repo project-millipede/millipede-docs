@@ -1,8 +1,9 @@
 {
-  "description": "Dies ist eine Nicht-Seitenkomponente, die einen eigenen Namespace erfordert",
   "changeLanguage": "Sprache ändern",
   "toc": "Inhaltsverzeichnis",
   "search": "Suche…",
+  "error-with-status": "Auf dem Server ist ein Fehler ({{statusCode}}) aufgetreten",
+  "error-without-status": "Auf dem Server ist ein Fehler aufgetreten",
   "pages": {
     "/": "",
     "/common": "Allgemeines",

@@ -1,8 +1,9 @@
 {
-  "description": "This is a non-page component that requires its own namespace",
   "changeLanguage": "Change language",
   "toc": "Contents",
   "search": "Search…",
+  "error-with-status": "A {{statusCode}} error occurred on server",
+  "error-without-status": "An error occurred on the server",
   "pages": {
     "/": "",
     "/common": "Common",
