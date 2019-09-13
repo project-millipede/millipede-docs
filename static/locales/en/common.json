@@ -1,5 +1,5 @@
 {
-  "changeLanguage": "Change language",
+  "change-language": "Change language",
   "toc": "Contents",
   "search": "Search…",
   "error-with-status": "A {{statusCode}} error occurred on server",

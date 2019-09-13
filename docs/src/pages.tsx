@@ -1,48 +1,45 @@
-import StarBorder from '@material-ui/icons/StarBorder';
-import React from 'react';
-
 import { Page } from './modules/redux/features/navigation/type';
 
 const pages: Array<Page> = [
   {
     pathname: '/common',
-    icon: <StarBorder />,
+    icon: 'star',
     children: [
       {
         pathname: '/common/landing',
-        icon: <StarBorder />
+        icon: 'star'
       },
       {
         pathname: '/common/dataflow/comparison',
-        icon: <StarBorder />
+        icon: 'star'
       }
     ]
   },
   {
     pathname: '/guides',
-    icon: <StarBorder />,
+    icon: 'star',
     children: [
       {
         pathname: '/guides/landing',
-        icon: <StarBorder />
+        icon: 'star'
       },
       {
         pathname: '/guides/api',
-        icon: <StarBorder />
+        icon: 'star'
       }
     ]
   },
   {
     pathname: '/pidp',
-    icon: <StarBorder />,
+    icon: 'star',
     children: [
       {
         pathname: '/pidp/landing',
-        icon: <StarBorder />
+        icon: 'star'
       },
       {
         pathname: '/pidp/approach/byExample',
-        icon: <StarBorder />
+        icon: 'star'
       }
     ]
   },

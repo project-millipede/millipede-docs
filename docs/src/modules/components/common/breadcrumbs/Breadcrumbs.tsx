@@ -52,9 +52,11 @@ const Breadcrumbs: React.FC<Props> = props => {
               const last = index === breadcrumbs.length - 1;
               const to = `/${breadcrumbs.slice(0, index + 1).join('/')}`;
               return last ? (
-                <Button disabled>{breadcrumb.name}</Button>
+                <Button key={`breadcrumb-${index}`} disabled>
+                  {breadcrumb.name}
+                </Button>
               ) : (
-                <Link href={breadcrumb.link}>
+                <Link key={`breadcrumb-${index}`} href={breadcrumb.link}>
                   <Button>{breadcrumb.name}</Button>
                 </Link>
               );

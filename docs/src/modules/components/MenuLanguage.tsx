@@ -42,12 +42,12 @@ const MenuLanguage = () => {
 
   return (
     <>
-      <Tooltip title={`${t('changeLanguage')}`} enterDelay={300}>
+      <Tooltip title={`${t('change-language')}`} enterDelay={300}>
         <IconButton
           color='inherit'
           aria-owns={languageMenu ? 'language-menu' : undefined}
           aria-haspopup='true'
-          aria-label={`${t('changeLanguage')}`}
+          aria-label={`${t('change-language')}`}
           onClick={handleLanguageIconClick}
           data-ga-event-category='AppBar'
           data-ga-event-action='language'
