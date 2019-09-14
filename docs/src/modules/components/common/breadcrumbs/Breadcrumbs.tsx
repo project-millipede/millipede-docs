@@ -46,7 +46,7 @@ const Breadcrumbs: React.FC<Props> = props => {
                 </Button>
               ) : (
                 <Link key={`breadcrumb-${index}`} href={breadcrumb.link}>
-                  <Button>{label}`)}</Button>
+                  <Button>{label}</Button>
                 </Link>
               );
             })}
