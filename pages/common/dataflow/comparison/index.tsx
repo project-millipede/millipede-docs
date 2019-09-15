@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 
 import MDXContentLoader, { MDXContentLoaderProps } from '../../../../docs/src/modules/components/loader/MDXContentLoader';
 
