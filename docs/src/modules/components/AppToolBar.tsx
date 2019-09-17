@@ -13,6 +13,7 @@ import React from 'react';
 import { useTranslation } from '../../../../i18n';
 import { ThemeActions } from '../redux/features/actionType';
 import { changeTheme } from '../redux/features/theme/actions';
+import { RootState } from '../redux/reducers';
 import AppSearch from './AppSearch';
 import Language from './Language';
 import MenuLanguage from './MenuLanguage';
@@ -56,7 +57,12 @@ const AppToolBar = ({ isDrawerOpen, handleDrawerOpen }: AppToolBarProps) => {
 
   const theme = useTheme();
 
-  const { dispatch }: { dispatch: React.Dispatch<ThemeActions> } = useHoux();
+  const {
+    dispatch,
+    state: {
+      navigation: { pages }
+    }
+  }: { dispatch: React.Dispatch<ThemeActions>; state: RootState } = useHoux();
 
   const handleTogglePaletteType = () => {
     const paletteType: PaletteType = theme.palette.type === 'light' ? 'dark' : 'light';
@@ -65,17 +71,19 @@ const AppToolBar = ({ isDrawerOpen, handleDrawerOpen }: AppToolBarProps) => {
 
   return (
     <Toolbar>
-      <IconButton
-        color='inherit'
-        aria-label={t('openDrawer')}
-        onClick={handleDrawerOpen}
-        edge='start'
-        className={clsx(drawerClasses.menuButton, {
-          [drawerClasses.hide]: isDrawerOpen
-        })}
-      >
-        <MenuIcon />
-      </IconButton>
+      {pages && pages.length > 0 ? (
+        <IconButton
+          color='inherit'
+          aria-label={t('openDrawer')}
+          onClick={handleDrawerOpen}
+          edge='start'
+          className={clsx(drawerClasses.menuButton, {
+            [drawerClasses.hide]: isDrawerOpen
+          })}
+        >
+          <MenuIcon />
+        </IconButton>
+      ) : null}
       <Typography
         variant='h6'
         // color="inherit"

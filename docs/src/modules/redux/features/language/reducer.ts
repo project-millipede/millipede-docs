@@ -14,7 +14,7 @@ const languageReducer = (state = initialState, action: StoreAction) => {
     case CHANGE_USER_LANGUAGE:
       return {
         ...state,
-        userLanguage: action.payload.newUserLanguage
+        userLanguage: action.payload.userLanguage
       };
     default:
       return state;

@@ -22,10 +22,12 @@ const MarkdownDocsContents = (props: MarkdownDocsContentsProps) => {
   const contents = getContents(markdown);
   const headers = getHeaders(markdown);
 
-  const { state }: { state: RootState } = useHoux();
+  const {
+    state: {
+      navigation: { activePage }
+    }
+  }: { state: RootState } = useHoux();
 
-  const { navigation } = state;
-  const { activePage } = navigation;
   const { pathname } = activePage;
 
   let markdownLocation = markdownLocationProp || pathname;
