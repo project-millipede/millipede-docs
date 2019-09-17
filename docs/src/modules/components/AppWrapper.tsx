@@ -8,7 +8,7 @@ import pages from '../../pages';
 import { NavigationActions } from '../redux/features/actionType';
 import { changeNavigation } from '../redux/features/navigation/actions';
 import { determineCurrenPathname, findActivePage } from '../utils/router';
-import { Provider as ThemeProvider } from './ThemeContext';
+import { ThemeProvider } from './ThemeProvider';
 
 interface OProps extends React.Props<any> {}
 
