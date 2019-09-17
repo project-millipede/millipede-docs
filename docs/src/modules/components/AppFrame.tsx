@@ -7,7 +7,8 @@ import React, { useState } from 'react';
 
 import AppDrawer, { DrawerStyleOverride } from './AppDrawer';
 import AppToolBar from './AppToolBar';
-import PageTitle from './PageTitle';
+
+// import usePageTitle from './usePageTitle';
 
 export const languages = [
   {
@@ -164,32 +165,35 @@ const AppFrame = ({ children, drawerStyleOverride }: AppFrameProps) => {
     setOpen(false);
   };
 
+  // const title = usePageTitle();
+
+  // if (title === null) {
+  //   // home route, don't shift app bar or dock drawer
+  //   disablePermanent = true;
+  //   appBarClassName += ` ${classes.appBarHome}`;
+  // } else {
+  //   navIconClassName = classes.navIconHide;
+  //   appBarClassName += ` ${classes.appBarShift}`;
+  // }
+
   return (
-    // <PageTitle>
-    //   {title => {
-    <PageTitle>
-      {() => {
-        return (
-          <div className={classes.root}>
-            <CssBaseline />
-            <AppBar
-              position='fixed'
-              className={clsx(drawerClasses.appBar, {
-                [drawerClasses.appBarShift]: open
-              })}
-            >
-              <AppToolBar isDrawerOpen={open} handleDrawerOpen={handleDrawerOpen} />
-            </AppBar>
-            <AppDrawer
-              drawerStyleOverride={drawerStyleOverride}
-              isDrawerOpen={open}
-              handleDrawerClose={handleDrawerClose}
-            />
-            {children}
-          </div>
-        );
-      }}
-    </PageTitle>
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar
+        position='fixed'
+        className={clsx(drawerClasses.appBar, {
+          [drawerClasses.appBarShift]: open
+        })}
+      >
+        <AppToolBar isDrawerOpen={open} handleDrawerOpen={handleDrawerOpen} />
+      </AppBar>
+      <AppDrawer
+        drawerStyleOverride={drawerStyleOverride}
+        isDrawerOpen={open}
+        handleDrawerClose={handleDrawerClose}
+      />
+      {children}
+    </div>
   );
 };
 

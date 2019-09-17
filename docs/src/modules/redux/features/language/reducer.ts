@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const initialState: Props = {
-  userLanguage: ''
+  userLanguage: 'en'
 };
 
 const languageReducer = (state = initialState, action: StoreAction) => {

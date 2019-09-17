@@ -23,8 +23,14 @@ export const languages = [
 const MenuLanguage = () => {
   const [languageMenu, setLanguageMenu] = useState<Element & EventTarget>(null);
 
-  const { state }: { state: RootState } = useHoux();
+  const {
+    state: {
+      language: { userLanguage }
+    }
+  }: { state: RootState } = useHoux();
+
   const { dispatch }: { dispatch: React.Dispatch<LanguageActions> } = useHoux();
+
   const { i18n, t } = useTranslation();
 
   const handleSelect = useCallback((_event: React.SyntheticEvent, languageCode: string) => {
@@ -74,7 +80,7 @@ const MenuLanguage = () => {
                 //     : `/${language.code}${canonicalRef.current}`
                 // }
                 key={language.code}
-                selected={state.language.userLanguage === language.code}
+                selected={userLanguage === language.code}
                 onClick={event => handleSelect(event, language.code)}
               >
                 {language.text}
