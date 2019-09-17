@@ -49,7 +49,7 @@
     "lodash": "^4.17.15",
     "mdast-util-to-string": "^1.0.6",
     "mdast-util-toc": "^4.2.0",
-    "next": "^9.0.6-canary.6",
+    "next": "^9.0.6",
     "next-i18next-serverless": "^1.1.33",
     "prism-react-renderer": "^0.1.7",
     "react": "^16.9.0",

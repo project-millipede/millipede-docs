@@ -1,4 +1,5 @@
 import { Collapse, Icon, List, ListItemIcon, ListItemText, Theme } from '@material-ui/core';
+import { blue } from '@material-ui/core/colors';
 import ListItem from '@material-ui/core/ListItem';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
@@ -7,8 +8,6 @@ import withRouter, { WithRouterProps } from 'next/dist/client/with-router';
 import Link from 'next/link';
 import React, { useState } from 'react';
 
-// import MillipedeLink from './button/MillipedeLink';
-
 interface AppDrawerNavItemProps extends React.Props<any> {
   title: string;
   icon?: string;
@@ -16,15 +15,22 @@ interface AppDrawerNavItemProps extends React.Props<any> {
   onClick?: (event: React.SyntheticEvent) => void;
   openImmediately?: boolean;
   depth: number;
+  highlight: boolean;
 }
 
 type Props = AppDrawerNavItemProps & WithRouterProps;
 
 const useStyles = makeStyles((_theme: Theme) =>
   createStyles({
+    listItem: {
+      backgroundColor: blue[700]
+    },
     root: { paddingLeft: '8px' }
   })
 );
+
+// TODO: Identify a clean concept to highlight special drawer items
+// e.g. topics PET and PID/P have in common.
 
 const AppDrawerNavItem = ({
   title,

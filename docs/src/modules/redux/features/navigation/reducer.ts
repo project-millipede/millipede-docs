@@ -1,6 +1,6 @@
-import pages from '../../../../pages';
+import { getPages } from '../../../../pages';
 import { StoreAction } from '../actionType';
-import { CHANGE_NAVIGATION, SETUP_NAVIGATION } from './actionTypes';
+import { CHANGE_NAVIGATION, CHANGE_PAGES, SETUP_NAVIGATION } from './actionTypes';
 import { Page } from './type';
 
 interface Props {
@@ -13,7 +13,7 @@ export const initialState: Props = {
     pathname: 'Test',
     title: ''
   },
-  pages
+  pages: []
 };
 
 const navigationReducer = (state = initialState, action: StoreAction) => {
@@ -21,12 +21,17 @@ const navigationReducer = (state = initialState, action: StoreAction) => {
     case SETUP_NAVIGATION:
       return {
         ...state,
-        pages: action.payload.newPages
+        pages: action.payload.pages
       };
     case CHANGE_NAVIGATION:
       return {
         ...state,
-        activePage: action.payload.newPage
+        activePage: action.payload.activePage
+      };
+    case CHANGE_PAGES:
+      return {
+        ...state,
+        pages: getPages(action.payload.pathname)
       };
     default:
       return state;

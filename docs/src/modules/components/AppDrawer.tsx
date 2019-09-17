@@ -108,7 +108,11 @@ const AppDrawer = (props: AppDrawerProps) => {
 
   const theme: Theme = useTheme();
 
-  const { state }: { state: RootState } = useHoux();
+  const {
+    state: {
+      navigation: { pages, activePage }
+    }
+  }: { state: RootState } = useHoux();
 
   const { t } = useTranslation();
 
@@ -131,7 +135,7 @@ const AppDrawer = (props: AppDrawerProps) => {
     if (currentPage.children && currentPage.children.length > 1) {
       const title = t(`pages.${currentPage.pathname}`);
 
-      const topLevel = activePage.pathname.indexOf(`${currentPage.pathname}/`) === 0;
+      const topLevel = activePage && activePage.pathname.indexOf(`${currentPage.pathname}/`) === 0;
 
       return [
         ...acc,
@@ -141,6 +145,7 @@ const AppDrawer = (props: AppDrawerProps) => {
           openImmediately={topLevel || !!currentPage.subheader}
           title={title}
           icon={currentPage.icon}
+          highlight={currentPage.highlight}
         >
           {renderNavItems(currentPage.children, {
             handleDrawerClose: onClose,
@@ -153,7 +158,7 @@ const AppDrawer = (props: AppDrawerProps) => {
 
     const title = t(`pages.${currentPage.pathname}`);
 
-    const { icon, pathname } =
+    const { icon, pathname, highlight } =
       currentPage.children && currentPage.children.length === 1
         ? currentPage.children[0]
         : currentPage;
@@ -167,6 +172,7 @@ const AppDrawer = (props: AppDrawerProps) => {
         icon={icon}
         href={pathname}
         onClick={onClose}
+        highlight={highlight}
       />
     ];
   };
@@ -183,13 +189,13 @@ const AppDrawer = (props: AppDrawerProps) => {
     );
   };
 
-  const drawer = renderNavItems(state.navigation.pages, {
+  const drawer = renderNavItems(pages, {
     handleDrawerClose,
-    activePage: state.navigation.activePage,
+    activePage,
     depth: 0
   });
 
-  return (
+  return pages && pages.length > 0 ? (
     <div className={classes.root}>
       <Drawer
         variant='permanent'
@@ -213,7 +219,7 @@ const AppDrawer = (props: AppDrawerProps) => {
         {drawer}
       </Drawer>
     </div>
-  );
+  ) : null;
 };
 
 export default AppDrawer;

@@ -4,9 +4,9 @@ import { create } from 'jss';
 import withRouter, { WithRouterProps } from 'next/dist/client/with-router';
 import React, { useEffect } from 'react';
 
-import pages from '../../pages';
 import { NavigationActions } from '../redux/features/actionType';
 import { changeNavigation } from '../redux/features/navigation/actions';
+import { RootState } from '../redux/reducers';
 import { determineCurrenPathname, findActivePage } from '../utils/router';
 import { ThemeProvider } from './ThemeProvider';
 
@@ -28,9 +28,17 @@ const AppWrapper = ({ children, router }: Props) => {
   //   jssStyles.parentNode.removeChild(jssStyles);
   // }
 
+  const { dispatch }: { dispatch: React.Dispatch<NavigationActions> } = useHoux();
+
+  const {
+    state: {
+      navigation: { pages }
+    }
+  }: { state: RootState } = useHoux();
+
   const pathname = determineCurrenPathname(router.pathname);
   const activePage = findActivePage(pages, pathname);
-  const { dispatch }: { dispatch: React.Dispatch<NavigationActions> } = useHoux();
+
   useEffect(() => {
     dispatch(changeNavigation(activePage));
   }, [router.pathname]);
