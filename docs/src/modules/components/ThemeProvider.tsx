@@ -10,6 +10,8 @@ import { changeTheme } from '../redux/features/theme/actions';
 import { RootState } from '../redux/reducers';
 import { getCookie } from '../utils/helpers';
 
+const isBrowser = typeof window !== 'undefined';
+
 export const ThemeProvider = props => {
   const { children } = props;
 
@@ -120,7 +122,7 @@ export const ThemeProvider = props => {
 
   // Restore theme information from cookie
   useEffect(() => {
-    if (process.browser) {
+    if (isBrowser) {
       // const nextPaletteColors = JSON.parse(getCookie('paletteColors') || 'null');
       const nextPaletteType: PaletteType = getCookie('paletteType') as PaletteType;
 
