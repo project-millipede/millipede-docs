@@ -29,13 +29,18 @@ const findActivePage = (currentPages: Array<Page>, pathname: string): Page => {
 
 const determineCurrenPathname = (pathname: string) => {
   // Add support for leading / in development mode.
-  if (pathname !== "/") {
+  if (pathname !== '/') {
     // The leading / is only added to support static hosting (resolve /index.html).
     // We remove it to normalize the pathname.
     // See `_rewriteUrlForNextExport` on Next.js side.
-    return pathname.replace(/\/$/, "");
+    return pathname.replace(/\/$/, '');
   }
   return pathname;
+};
+
+export const determineActivePage = (pages: Array<Page>, pathname: string) => {
+  const currentPathname = determineCurrenPathname(pathname);
+  return findActivePage(pages, currentPathname);
 };
 
 export { findActivePage, determineCurrenPathname };
