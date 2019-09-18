@@ -189,11 +189,14 @@ const AppDrawer = (props: AppDrawerProps) => {
     );
   };
 
-  const drawer = renderNavItems(pages, {
-    handleDrawerClose,
-    activePage,
-    depth: 0
-  });
+  let navItems;
+  if (pages && pages.length > 0) {
+    navItems = renderNavItems(pages, {
+      handleDrawerClose,
+      activePage,
+      depth: 0
+    });
+  }
 
   return pages && pages.length > 0 ? (
     <div className={classes.root}>
@@ -216,7 +219,7 @@ const AppDrawer = (props: AppDrawerProps) => {
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </div>
-        {drawer}
+        {navItems}
       </Drawer>
     </div>
   ) : null;

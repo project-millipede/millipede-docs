@@ -1,4 +1,14 @@
+import _ from 'lodash';
+
 import { Page } from './modules/redux/features/navigation/type';
+
+// export const contains = <T>(array: Array<T>) => (val: T) => array.indexOf(val) !== -1;
+// export const contains = <T>(array: Array<T>) => (val: T) => {
+//   return array.indexOf(val) !== -1;
+// };
+
+const lowerTextIncludes = (text: string, sub: string) =>
+  _.includes(_.lowerCase(text), _.lowerCase(_.trimStart(sub)));
 
 export const getPages = (pathname: string) => {
   if (pathname === '/guides/api') {
@@ -8,6 +18,30 @@ export const getPages = (pathname: string) => {
     return pagesPET;
   }
   if (pathname === '/pidp/approach/byExample') {
+    return pagesPIDP;
+  }
+};
+
+export const loadPages = (pathname: string) => {
+  const linkIncludesText = (link: Page) => lowerTextIncludes(link.pathname, pathname);
+
+  if (pathname === '/') {
+    return [];
+  }
+
+  if (
+    pagesPET.filter(link => {
+      return _.some([link, ...(link.children || [])], linkIncludesText);
+    }).length > 0
+  ) {
+    return pagesPET;
+  }
+
+  if (
+    pagesPIDP.filter(link => {
+      return _.some([link, ...(link.children || [])], linkIncludesText);
+    }).length > 0
+  ) {
     return pagesPIDP;
   }
 };
@@ -51,7 +85,7 @@ export const pagesCommon: Array<Page> = [
 ];
 
 export const pagesPIDP: Array<Page> = [
-  ...pagesCommon,
+  // ...pagesCommon,
   {
     pathname: '/pidp',
     icon: 'star',
@@ -69,8 +103,7 @@ export const pagesPIDP: Array<Page> = [
 ];
 
 export const pagesPET: Array<Page> = [
-  ...pagesCommon,
-
+  // ...pagesCommon,
   {
     pathname: '/common',
     icon: 'star',
@@ -101,3 +134,7 @@ export const pagesPET: Array<Page> = [
   //   ]
   // }
 ];
+
+// const containsPagesCommon = contains(pagesCommon.map(p => p.pathname));
+// const containsPagesPET = contains(pagesPET.map(p => p.pathname));
+// const containsPagesPIDP = contains(pagesPIDP.map(p => p.pathname));

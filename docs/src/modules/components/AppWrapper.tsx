@@ -5,9 +5,7 @@ import withRouter, { WithRouterProps } from 'next/dist/client/with-router';
 import React, { useEffect } from 'react';
 
 import { NavigationActions } from '../redux/features/actionType';
-import { changeNavigation } from '../redux/features/navigation/actions';
-import { RootState } from '../redux/reducers';
-import { determineCurrenPathname, findActivePage } from '../utils/router';
+import { loadPages } from '../redux/features/navigation/actions';
 import { ThemeProvider } from './ThemeProvider';
 
 interface OProps extends React.Props<any> {}
@@ -30,17 +28,8 @@ const AppWrapper = ({ children, router }: Props) => {
 
   const { dispatch }: { dispatch: React.Dispatch<NavigationActions> } = useHoux();
 
-  const {
-    state: {
-      navigation: { pages }
-    }
-  }: { state: RootState } = useHoux();
-
-  const pathname = determineCurrenPathname(router.pathname);
-  const activePage = findActivePage(pages, pathname);
-
   useEffect(() => {
-    dispatch(changeNavigation(activePage));
+    dispatch(loadPages(router.pathname));
   }, [router.pathname]);
 
   // return (
