@@ -7,9 +7,7 @@ import { MdDocs } from '../md';
 const load = (pathSlice = '', userLanguage = ''): any =>
   import(`../../../pages${pathSlice}index${userLanguage}.md`)
     .then(result => {
-      return {
-        content: result.default
-      };
+      return result.default;
     })
     .catch(error => {
       /* eslint-disable no-console */

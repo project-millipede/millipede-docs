@@ -29,12 +29,14 @@ const navigationReducer = (state = initialState, action: StoreAction) => {
         ...state,
         activePage: action.payload.activePage
       };
-    case LOAD_PAGES:
+    case LOAD_PAGES: {
+      const pages = loadPages(action.payload.pathname);
       return {
         ...state,
-        pages: loadPages(action.payload.pathname),
-        activePage: determineActivePage(state.pages, action.payload.pathname)
+        pages: pages,
+        activePage: determineActivePage(pages, action.payload.pathname)
       };
+    }
     default:
       return state;
   }

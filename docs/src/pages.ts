@@ -85,7 +85,7 @@ export const pagesCommon: Array<Page> = [
 ];
 
 export const pagesPIDP: Array<Page> = [
-  // ...pagesCommon,
+  ...pagesCommon,
   {
     pathname: '/pidp',
     icon: 'star',
@@ -103,7 +103,7 @@ export const pagesPIDP: Array<Page> = [
 ];
 
 export const pagesPET: Array<Page> = [
-  // ...pagesCommon,
+  ...pagesCommon,
   {
     pathname: '/common',
     icon: 'star',
