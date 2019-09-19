@@ -1,33 +1,25 @@
 /* eslint-disable no-underscore-dangle */
-import { useHoux } from 'houx';
 import kebabCase from 'lodash/kebabCase';
 import { Router } from 'next/router';
 
-import { RootState } from '../redux/reducers';
+import { Page } from '../redux/features/navigation/type';
 import { getContents, getHeaders } from '../utils/parseMarkdown';
 
-interface ChildrenInput {
-  contents: string;
-  markdownLocation: string;
-}
-
 interface MarkdownDocsContentsProps {
-  children: (children: ChildrenInput) => JSX.Element;
   markdownLocation?: string;
-  markdown: string;
+  markdown?: string;
+  activePage: Page;
 }
 
-const MarkdownDocsContents = (props: MarkdownDocsContentsProps) => {
-  const { children, markdownLocation: markdownLocationProp, markdown } = props;
+export const useMarkdownDocsContents = ({
+  markdownLocation: markdownLocationProp,
+  markdown,
+  activePage = { pathname: '' }
+}: MarkdownDocsContentsProps) => {
   const contents = getContents(markdown);
   const headers = getHeaders(markdown);
 
-  const {
-    state: {
-      navigation: { activePage }
-    }
-  }: { state: RootState } = useHoux();
-
+  debugger;
   const { pathname } = activePage;
 
   let markdownLocation = markdownLocationProp || pathname;
@@ -44,8 +36,6 @@ const MarkdownDocsContents = (props: MarkdownDocsContentsProps) => {
     }
   }
 
-  // const { components } = headers;
-
   if (headers.components.length > 0) {
     const section = markdownLocation.split('/')[4];
     contents.push(`
@@ -61,7 +51,7 @@ ${headers.components
   `);
   }
 
-  return children({ contents, markdownLocation });
+  return { contents, markdownLocation };
 };
 
-export default MarkdownDocsContents;
+export default useMarkdownDocsContents;
