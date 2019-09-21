@@ -2,8 +2,8 @@ import _ from 'lodash';
 import camelCase from 'lodash/camelCase';
 import upperFirst from 'lodash/upperFirst';
 
+import { Page } from '../../../../src/typings/data/import';
 import { LANGUAGES } from '../constants';
-import { Page } from '../redux/features/navigation/type';
 
 // import warning from 'warning';
 

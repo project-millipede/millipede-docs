@@ -1,8 +1,8 @@
+import { Page } from '../../../../../../src/typings/data/import';
 import { loadPages } from '../../../../pages';
 import { determineActivePage } from '../../../utils/router';
 import { StoreAction } from '../actionType';
 import { CHANGE_NAVIGATION, LOAD_PAGES, SETUP_NAVIGATION } from './actionTypes';
-import { Page } from './type';
 
 interface Props {
   activePage: Page;

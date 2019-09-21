@@ -1,9 +1,9 @@
-declare module "*.md" {
+declare module '*.md' {
   const content: any;
   export default content;
 }
 
-declare module "*.mdx" {
+declare module '*.mdx' {
   const code: any;
   const meta: any;
   const ast: any;

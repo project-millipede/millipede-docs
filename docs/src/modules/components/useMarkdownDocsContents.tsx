@@ -2,7 +2,7 @@
 import kebabCase from 'lodash/kebabCase';
 import { Router } from 'next/router';
 
-import { Page } from '../redux/features/navigation/type';
+import { Page } from '../../../../src/typings/data/import';
 import { getContents, getHeaders } from '../utils/parseMarkdown';
 
 interface MarkdownDocsContentsProps {

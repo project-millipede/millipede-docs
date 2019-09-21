@@ -10,7 +10,7 @@ import { useHoux } from 'houx';
 import React from 'react';
 
 import { useTranslation } from '../../../../i18n';
-import { Page } from '../redux/features/navigation/type';
+import { Page } from '../../../../src/typings/data/import';
 import { RootState } from '../redux/reducers';
 import { pathnameToLanguage } from '../utils/helpers';
 import AppDrawerNavItem from './AppDrawerNavItem';

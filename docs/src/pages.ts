@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { Page } from './modules/redux/features/navigation/type';
+import { Page } from '../../src/typings/data/import';
 
 // export const contains = <T>(array: Array<T>) => (val: T) => array.indexOf(val) !== -1;
 // export const contains = <T>(array: Array<T>) => (val: T) => {

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { Page } from '../redux/features/navigation/type';
+import { Page } from '../../../../src/typings/data/import';
 
 const findActivePage = (currentPages: Array<Page>, pathname: string): Page => {
   const activePage = _.find(currentPages, (page: any) => {
