@@ -19,7 +19,6 @@ export const useMarkdownDocsContents = ({
   const contents = getContents(markdown);
   const headers = getHeaders(markdown);
 
-  debugger;
   const { pathname } = activePage;
 
   let markdownLocation = markdownLocationProp || pathname;

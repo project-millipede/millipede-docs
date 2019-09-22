@@ -2,6 +2,7 @@ import { Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
+import { isMobileOnly } from 'react-device-detect';
 
 import AppContent from '../AppContent';
 import AppFrame from '../AppFrame';
@@ -193,6 +194,15 @@ export const useStyles = makeStyles((theme: Theme) =>
       '& img': {
         maxWidth: '100%'
       }
+    },
+
+    header: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      flexDirection: 'row'
+    },
+    appFrameSpace: {
+      flexGrow: 1
     }
   })
 );
@@ -219,11 +229,12 @@ export const MdxDocs = (props: MarkdownDocsProps) => {
 
   return (
     <AppFrame>
-      <AppTableOfContents content={raw} />
       <AppContent className={outerClasses.root}>
-        <Breadcrumbs />
+        {!isMobileOnly ? <Breadcrumbs /> : null}
         <div className={clsx(classes.root, 'markdown-body')}>{markdownFiles}</div>
       </AppContent>
+      <div className={classes.appFrameSpace} />
+      <AppTableOfContents content={raw} />
     </AppFrame>
   );
 };

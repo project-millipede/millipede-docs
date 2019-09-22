@@ -33,8 +33,12 @@ const AvatarGrid = ({ letter }: AvatarGridProps) => {
 
   return (
     <Grid container justify='center' alignItems='center'>
-      {letter.map(l => {
-        return <Avatar className={classes.greenAvatar}>{l}</Avatar>;
+      {letter.map((l, i) => {
+        return (
+          <Avatar key={`${l}-${i}`} className={classes.greenAvatar}>
+            {l}
+          </Avatar>
+        );
       })}
     </Grid>
   );
