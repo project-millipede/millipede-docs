@@ -22,7 +22,7 @@ export const getPages = (pathname: string) => {
   }
 };
 
-export const loadPages = (pathname: string) => {
+export const loadPages = (pathname: string, currentPages: Array<Page>) => {
   const linkIncludesText = (link: Page) => lowerTextIncludes(link.pathname, pathname);
 
   if (pathname === '/') {
@@ -34,7 +34,7 @@ export const loadPages = (pathname: string) => {
       return _.some([link, ...(link.children || [])], linkIncludesText);
     }).length > 0
   ) {
-    return pagesPET;
+    return [...pagesCommon, ...pagesPET];
   }
 
   if (
@@ -42,7 +42,15 @@ export const loadPages = (pathname: string) => {
       return _.some([link, ...(link.children || [])], linkIncludesText);
     }).length > 0
   ) {
-    return pagesPIDP;
+    return [...pagesCommon, ...pagesPIDP];
+  }
+
+  if (
+    pagesCommon.filter(link => {
+      return _.some([link, ...(link.children || [])], linkIncludesText);
+    }).length > 0
+  ) {
+    return [...currentPages];
   }
 };
 
@@ -85,7 +93,6 @@ export const pagesCommon: Array<Page> = [
 ];
 
 export const pagesPIDP: Array<Page> = [
-  ...pagesCommon,
   {
     pathname: '/pidp',
     icon: 'star',
@@ -103,7 +110,6 @@ export const pagesPIDP: Array<Page> = [
 ];
 
 export const pagesPET: Array<Page> = [
-  ...pagesCommon,
   {
     pathname: '/common',
     icon: 'star',
