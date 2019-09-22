@@ -2,6 +2,8 @@
   "application-title": "Project Millipede",
   "change-language": "Change language",
   "github": "Github",
+  "toggleTheme": "Toggle light / dark theme",
+  "editContent": "Edit content",
   "openDrawer": "Open drawer",
   "toc": "Contents",
   "search": "Search…",

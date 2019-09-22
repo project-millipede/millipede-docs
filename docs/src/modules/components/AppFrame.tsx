@@ -10,17 +10,6 @@ import AppToolBar from './AppToolBar';
 
 // import usePageTitle from './usePageTitle';
 
-export const languages = [
-  {
-    code: 'en',
-    text: '🇺🇸 English'
-  },
-  {
-    code: 'de',
-    text: '🇩🇪 Deutsch'
-  }
-];
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -104,35 +93,37 @@ const useDrawerStyles = makeStyles((theme: Theme) =>
         duration: theme.transitions.duration.enteringScreen
       })
     },
-    menuButton: {
-      marginRight: 36
-    },
-    hide: {
-      display: 'none'
-    },
-    drawer: {
-      width: drawerWidth,
-      flexShrink: 0,
-      whiteSpace: 'nowrap'
-    },
-    drawerOpen: {
-      width: drawerWidth,
-      transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen
-      })
-    },
-    drawerClose: {
-      transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen
-      }),
-      overflowX: 'hidden',
-      width: theme.spacing(7) + 1,
-      [theme.breakpoints.up('sm')]: {
-        width: theme.spacing(9) + 1
-      }
-    },
+
+    // menuButton: {
+    //   marginRight: 36
+    // },
+    // hide: {
+    //   display: 'none'
+    // }
+
+    // drawer: {
+    //   width: drawerWidth,
+    //   flexShrink: 0,
+    //   whiteSpace: 'nowrap'
+    // },
+    // drawerOpen: {
+    //   width: drawerWidth,
+    //   transition: theme.transitions.create('width', {
+    //     easing: theme.transitions.easing.sharp,
+    //     duration: theme.transitions.duration.enteringScreen
+    //   })
+    // },
+    // drawerClose: {
+    //   transition: theme.transitions.create('width', {
+    //     easing: theme.transitions.easing.sharp,
+    //     duration: theme.transitions.duration.leavingScreen
+    //   }),
+    //   overflowX: 'hidden',
+    //   width: theme.spacing(7) + 1,
+    //   [theme.breakpoints.up('sm')]: {
+    //     width: theme.spacing(9) + 1
+    //   }
+    // },
     toolbar: {
       display: 'flex',
       alignItems: 'center',
@@ -142,7 +133,9 @@ const useDrawerStyles = makeStyles((theme: Theme) =>
     },
     content: {
       flexGrow: 1,
-      padding: theme.spacing(3)
+      // padding: theme.spacing(3)
+      display: 'flex',
+      flexDirection: 'row'
     }
   })
 );
@@ -192,7 +185,7 @@ const AppFrame = ({ children, drawerStyleOverride }: AppFrameProps) => {
         isDrawerOpen={open}
         handleDrawerClose={handleDrawerClose}
       />
-      {children}
+      <main className={drawerClasses.content}>{children}</main>
     </div>
   );
 };

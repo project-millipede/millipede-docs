@@ -1,3 +1,4 @@
+import { Divider } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
@@ -8,6 +9,7 @@ import { createStyles, makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import { useHoux } from 'houx';
 import React from 'react';
+import { isMobileOnly } from 'react-device-detect';
 
 import { useTranslation } from '../../../../i18n';
 import { Page } from '../../../../src/typings/data/import';
@@ -43,6 +45,7 @@ const useDrawerStyles = makeStyles((theme: Theme) =>
     hide: {
       display: 'none'
     },
+
     drawer: {
       width: drawerWidth,
       flexShrink: 0,
@@ -76,6 +79,9 @@ const useDrawerStyles = makeStyles((theme: Theme) =>
     content: {
       flexGrow: 1,
       padding: theme.spacing(3)
+    },
+    drawerPaper: {
+      width: drawerWidth
     }
   })
 );
@@ -121,6 +127,57 @@ const AppDrawer = (props: AppDrawerProps) => {
     const { canonical } = pathnameToLanguage(window.location.pathname);
     (canonicalRef as any).current = canonical;
   }, []);
+
+  const renderMobileDrawer = (navItems: JSX.Element) => {
+    return (
+      <Drawer
+        variant='temporary'
+        open={isDrawerOpen}
+        onClose={handleDrawerClose}
+        classes={{
+          paper: classes.drawerPaper
+        }}
+        ModalProps={{
+          keepMounted: true
+        }}
+      >
+        <div className={classes.toolbar}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          </IconButton>
+        </div>
+        <Divider />
+        {navItems}
+      </Drawer>
+    );
+  };
+
+  const renderDesktopDrawer = (navItems: JSX.Element) => {
+    return (
+      <Drawer
+        variant='permanent'
+        className={clsx(classes.drawer, {
+          [classes.drawerOpen]: isDrawerOpen,
+          [classes.drawerClose]: !isDrawerOpen
+        })}
+        classes={{
+          paper: clsx({
+            [classes.drawerOpen]: isDrawerOpen,
+            [classes.drawerClose]: !isDrawerOpen
+          })
+        }}
+        open={isDrawerOpen}
+      >
+        <div className={classes.toolbar}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          </IconButton>
+        </div>
+        <Divider />
+        {navItems}
+      </Drawer>
+    );
+  };
 
   const reduceChildRoutes = (
     { acc, currentPage }: DrawerReduceProps,
@@ -189,7 +246,7 @@ const AppDrawer = (props: AppDrawerProps) => {
     );
   };
 
-  let navItems;
+  let navItems: JSX.Element;
   if (pages && pages.length > 0) {
     navItems = renderNavItems(pages, {
       handleDrawerClose,
@@ -198,31 +255,14 @@ const AppDrawer = (props: AppDrawerProps) => {
     });
   }
 
-  return pages && pages.length > 0 ? (
-    <div className={classes.root}>
-      <Drawer
-        variant='permanent'
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: isDrawerOpen,
-          [classes.drawerClose]: !isDrawerOpen
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerOpen]: isDrawerOpen,
-            [classes.drawerClose]: !isDrawerOpen
-          })
-        }}
-        open={isDrawerOpen}
-      >
-        <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </div>
-        {navItems}
-      </Drawer>
-    </div>
-  ) : null;
+  if (pages && pages.length > 0) {
+    if (isMobileOnly) {
+      return renderMobileDrawer(navItems);
+    } else {
+      return renderDesktopDrawer(navItems);
+    }
+  }
+  return null;
 };
 
 export default AppDrawer;

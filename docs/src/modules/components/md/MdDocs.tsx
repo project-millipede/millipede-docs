@@ -1,6 +1,7 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import { useHoux } from 'houx';
 import React from 'react';
+import { isMobileOnly } from 'react-device-detect';
 
 import { Page } from '../../../../../src/typings/data/import';
 import { RootState } from '../../redux/reducers';
@@ -27,10 +28,8 @@ export const useStyles = makeStyles((_theme: Theme) =>
     headerSpace: {
       flexGrow: 1
     },
-    headerItem: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      flexDirection: 'column'
+    appFrameSpace: {
+      flexGrow: 1
     }
   })
 );
@@ -55,15 +54,21 @@ export const MdDocs = (props: MarkdownDocsProps) => {
 
   return (
     <AppFrame>
-      <AppTableOfContents content={content} />
       <AppContent>
-        <div className={classes.header}>
-          <Breadcrumbs />
-          <div className={classes.headerSpace} />
-          <EditPage markdownLocation={markdownLocation} sourceCodeRootUrl={SOURCE_CODE_ROOT_URL} />
-        </div>
+        {!isMobileOnly ? (
+          <div className={classes.header}>
+            <Breadcrumbs />
+            <div className={classes.headerSpace} />
+            <EditPage
+              markdownLocation={markdownLocation}
+              sourceCodeRootUrl={SOURCE_CODE_ROOT_URL}
+            />
+          </div>
+        ) : null}
         <MdElement content={content} />
       </AppContent>
+      <div className={classes.appFrameSpace} />
+      <AppTableOfContents content={content} />
     </AppFrame>
   );
 };

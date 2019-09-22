@@ -2,6 +2,7 @@ import Button from '@material-ui/core/Button';
 import { useHoux } from 'houx';
 import React from 'react';
 
+import { useTranslation } from '../../../../i18n';
 import { RootState } from '../redux/reducers';
 
 const LOCALES = { zh: 'zh-CN', pt: 'pt-BR', es: 'es-ES' };
@@ -17,7 +18,8 @@ export const EditPage = ({ markdownLocation }: EditPageProps) => {
   const { state }: { state: RootState } = useHoux();
   const { userLanguage } = state.language;
 
-  //   const { t } = props;
+  const { t } = useTranslation();
+
   const crowdInLocale = LOCALES[userLanguage] || userLanguage;
   const crowdInPath = markdownLocation.substring(0, markdownLocation.lastIndexOf('/'));
 
@@ -35,8 +37,7 @@ export const EditPage = ({ markdownLocation }: EditPageProps) => {
       data-ga-event-action={userLanguage === 'de' ? undefined : 'edit-button'}
       data-ga-event-label={userLanguage === 'de' ? undefined : userLanguage}
     >
-      {/* {t('editPage')} */}
-      {'Edit Page'}
+      {t('editContent')}
     </Button>
   );
 };
