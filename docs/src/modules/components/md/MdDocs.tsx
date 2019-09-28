@@ -27,9 +27,6 @@ export const useStyles = makeStyles((_theme: Theme) =>
     },
     headerSpace: {
       flexGrow: 1
-    },
-    appFrameSpace: {
-      flexGrow: 1
     }
   })
 );
@@ -67,7 +64,6 @@ export const MdDocs = (props: MarkdownDocsProps) => {
         ) : null}
         <MdElement content={content} />
       </AppContent>
-      <div className={classes.appFrameSpace} />
       <AppTableOfContents content={content} />
     </AppFrame>
   );
