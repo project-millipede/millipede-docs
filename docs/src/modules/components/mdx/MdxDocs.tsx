@@ -200,9 +200,6 @@ export const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       flexWrap: 'wrap',
       flexDirection: 'row'
-    },
-    appFrameSpace: {
-      flexGrow: 1
     }
   })
 );
@@ -233,7 +230,6 @@ export const MdxDocs = (props: MarkdownDocsProps) => {
         {!isMobileOnly ? <Breadcrumbs /> : null}
         <div className={clsx(classes.root, 'markdown-body')}>{markdownFiles}</div>
       </AppContent>
-      <div className={classes.appFrameSpace} />
       <AppTableOfContents content={raw} />
     </AppFrame>
   );
