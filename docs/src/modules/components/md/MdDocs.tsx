@@ -27,7 +27,7 @@ export const MdDocs = (props: MarkdownDocsProps) => {
   const { markdownLocation } = useMarkdownDocsContents({
     markdown: content,
     markdownLocation: markdownLocationProp,
-    activePage: activePage ? activePage : ({ pathname: '' } as Page)
+    activePage: activePage || ({ pathname: '' } as Page)
   });
 
   return (

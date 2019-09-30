@@ -26,6 +26,7 @@ export const ThemeProvider = props => {
 
   const { dense, direction, paletteColors, paletteType = preferredType, spacing } = themeOptions;
 
+  /* eslint-disable no-shadow */
   const usingHighDensity = (themeOptions: Partial<Theme>) => {
     return deepmerge(themeOptions, {
       props: {
@@ -82,6 +83,7 @@ export const ThemeProvider = props => {
     });
   };
 
+  /* eslint-disable no-shadow */
   const usingIdentity = (themeOptions: Partial<Theme>) => {
     return themeOptions;
   };

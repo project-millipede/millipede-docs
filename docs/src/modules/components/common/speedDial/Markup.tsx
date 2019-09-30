@@ -26,8 +26,8 @@ const isBrowser = typeof window !== 'undefined';
 export interface MarkupProps {
   sharingOpen: boolean;
   modal: string;
+  toggleModal: (baseURL: string) => void;
   toggleSharingOpen: () => void;
-  toggleModal: (value: any) => void;
   id: string;
   share: string;
 }
@@ -36,12 +36,8 @@ const getSharing = (data: SocialData, t: TFunction) => {
   const { baseUrl, share, hashTags } = data;
 
   const firstHashTag = hashTags
-    .map((hashTag, index) => {
-      if (index === 0) {
-        return `#${hashTag}`;
-      }
-    })
-    .filter(hashTag => hashTag)
+    .filter((_hashTag, index) => index === 0)
+    .map(hashTag => `#${hashTag}`)
     .join('');
 
   return [
@@ -140,23 +136,30 @@ const creataShareLink = ({ title, icon, action }) => (
   />
 );
 
-const createButtons = (toggleModal, toggleSharingOpen, share, t: TFunction) => {
+const createButtons = (
+  toggleModal: (baseURL: string) => void,
+  toggleSharingOpen: () => void,
+  share: string,
+  t: TFunction
+) => {
+  let baseUrl = '';
+
   if (isBrowser) {
     const url = document.URL.replace(/#.*$/, '');
-    const baseUrl = typeof share === 'string' ? `${url}/#${share}` : url;
-
-    const data: SocialData = {
-      baseUrl,
-      share,
-      hashTags: ['hashTag']
-    };
-
-    const buttonsInfo = getSharing(data, t).map(
-      createObjects(baseUrl, toggleModal, toggleSharingOpen)
-    );
-
-    return buttonsInfo.map(creataShareLink);
+    baseUrl = typeof share === 'string' ? `${url}/#${share}` : url;
   }
+
+  const data: SocialData = {
+    baseUrl,
+    share,
+    hashTags: ['hashTag']
+  };
+
+  const buttonsInfo = getSharing(data, t).map(
+    createObjects(baseUrl, toggleModal, toggleSharingOpen)
+  );
+
+  return buttonsInfo.map(creataShareLink);
 };
 
 const Markup = ({ sharingOpen, toggleSharingOpen, toggleModal, modal }: MarkupProps) => {
