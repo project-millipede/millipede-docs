@@ -1,14 +1,14 @@
-import { SocialMediaURIPathParams } from '../../../../../src/typings/share/social';
+import { SocialMediaURIPathParams } from 'src/typings/share/social';
 
-const encodeURL = (o: SocialMediaURIPathParams) => (
+const encodeURL = (object: SocialMediaURIPathParams) => (
   key: string,
   index: number,
   _array: Array<string>
 ) => {
   if (index === 0) {
-    return `?${key}=${encodeURIComponent(o[key])}`;
+    return `?${key}=${encodeURIComponent(object[key])}`;
   }
-  return `${key}=${encodeURIComponent(o[key])}`;
+  return `${key}=${encodeURIComponent(object[key])}`;
 };
 
 export const objectToGetParams = (object: SocialMediaURIPathParams) => {
