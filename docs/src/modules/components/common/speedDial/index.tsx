@@ -20,12 +20,12 @@ const SpeedDial = ({ id, share }: SpeedDialProps) => {
   };
 
   const passedProps: MarkupProps = {
-    sharingOpen: sharingOpen,
-    modal: modal,
-    toggleSharingOpen: toggleSharingOpen,
-    toggleModal: toggleModal,
-    id: id,
-    share: share
+    sharingOpen,
+    modal,
+    toggleSharingOpen,
+    toggleModal,
+    id,
+    share
   };
 
   return <Markup {...passedProps} />;

@@ -33,7 +33,7 @@ const navigationReducer = (state = initialState, action: StoreAction) => {
       const pages = loadPages(action.payload.pathname, state.pages);
       return {
         ...state,
-        pages: pages,
+        pages,
         activePage: determineActivePage(pages, action.payload.pathname)
       };
     }
