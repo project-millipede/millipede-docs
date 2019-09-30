@@ -2,7 +2,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import ShareIcon from '@material-ui/icons/Share';
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
-import { TFunction } from 'i18next';
+import { TFunction } from 'next-i18next-serverless';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
@@ -146,8 +146,8 @@ const createButtons = (toggleModal, toggleSharingOpen, share, t: TFunction) => {
     const baseUrl = typeof share === 'string' ? `${url}/#${share}` : url;
 
     const data: SocialData = {
-      baseUrl: baseUrl,
-      share: share,
+      baseUrl,
+      share,
       hashTags: ['hashTag']
     };
 
@@ -167,9 +167,9 @@ const Markup = ({ sharingOpen, toggleSharingOpen, toggleModal, modal }: MarkupPr
     <React.Fragment>
       <SpeedDial
         ariaLabel='SpeedDial openIcon example'
-        icon={!!sharingOpen ? <CloseIcon /> : <ShareIcon />}
+        icon={sharingOpen ? <CloseIcon /> : <ShareIcon />}
         onClick={toggleSharingOpen}
-        open={!!sharingOpen}
+        open={sharingOpen}
         direction='left'
       >
         {/* {createButtons(toggleModal, toggleSharingOpen, share)} */}
