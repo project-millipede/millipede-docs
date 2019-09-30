@@ -2,14 +2,10 @@ import _ from 'lodash';
 
 import { Page } from '../../src/typings/data/import';
 
-// export const contains = <T>(array: Array<T>) => (val: T) => array.indexOf(val) !== -1;
-// export const contains = <T>(array: Array<T>) => (val: T) => {
-//   return array.indexOf(val) !== -1;
-// };
-
 const lowerTextIncludes = (text: string, sub: string) =>
   _.includes(_.lowerCase(text), _.lowerCase(_.trimStart(sub)));
 
+/* eslint-disable consistent-return */
 export const getPages = (pathname: string) => {
   if (pathname === '/guides/api') {
     return pagesCommon;
@@ -22,6 +18,7 @@ export const getPages = (pathname: string) => {
   }
 };
 
+/* eslint-disable consistent-return */
 export const loadPages = (pathname: string, currentPages: Array<Page>) => {
   const linkIncludesText = (link: Page) => lowerTextIncludes(link.pathname, pathname);
 
@@ -55,20 +52,6 @@ export const loadPages = (pathname: string, currentPages: Array<Page>) => {
 };
 
 export const pagesCommon: Array<Page> = [
-  // {
-  //   pathname: '/common',
-  //   icon: 'star',
-  //   children: [
-  //     {
-  //       pathname: '/common/dataflow',
-  //       icon: 'star'
-  //     },
-  //     {
-  //       pathname: '/common/dataflow/comparison',
-  //       icon: 'star'
-  //     }
-  //   ]
-  // },
   {
     pathname: '/guides',
     icon: 'star',
@@ -124,23 +107,4 @@ export const pagesPET: Array<Page> = [
       }
     ]
   }
-
-  // {
-  //   pathname: '/guides',
-  //   icon: 'star',
-  //   children: [
-  //     {
-  //       pathname: '/guides/landing',
-  //       icon: 'star'
-  //     },
-  //     {
-  //       pathname: '/guides/api',
-  //       icon: 'star'
-  //     }
-  //   ]
-  // }
 ];
-
-// const containsPagesCommon = contains(pagesCommon.map(p => p.pathname));
-// const containsPagesPET = contains(pagesPET.map(p => p.pathname));
-// const containsPagesPIDP = contains(pagesPIDP.map(p => p.pathname));

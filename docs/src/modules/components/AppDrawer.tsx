@@ -179,6 +179,7 @@ const AppDrawer = (props: AppDrawerProps) => {
     );
   };
 
+  /* eslint-disable no-shadow */
   const reduceChildRoutes = (
     { acc, currentPage }: DrawerReduceProps,
     drawerContext: DrawerContextProps
@@ -258,9 +259,8 @@ const AppDrawer = (props: AppDrawerProps) => {
   if (pages && pages.length > 0) {
     if (isMobileOnly) {
       return renderMobileDrawer(navItems);
-    } else {
-      return renderDesktopDrawer(navItems);
     }
+    return renderDesktopDrawer(navItems);
   }
   return null;
 };

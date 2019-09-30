@@ -66,4 +66,3 @@ const SvgPagesStep0 = props => (
   </svg>
 );
 export default SvgPagesStep0;
-//# sourceMappingURL=PagesStep0.jsx.map
