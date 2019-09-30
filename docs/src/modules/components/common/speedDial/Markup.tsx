@@ -2,10 +2,21 @@ import CloseIcon from '@material-ui/icons/Close';
 import ShareIcon from '@material-ui/icons/Share';
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
+import { TFunction } from 'i18next';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { isMobile } from 'react-device-detect';
+import { useTranslation } from 'react-i18next';
 
-import { Interaction, InteractionMenuItem } from '../../../../../../src/typings/share/social';
+import {
+  Interaction,
+  InteractionMenuItem,
+  SocialData,
+  URIPathParamsFacebook,
+  URIPathParamsLinkedIn,
+  URIPathParamsTwitter,
+  URIPathParamsWhatsApp,
+} from '../../../../../../src/typings/share/social';
 import { objectToGetParams } from '../../../utils/social/objectToGetParams';
 import Icon from './Icon';
 import Modal from './Modal';
@@ -21,30 +32,72 @@ export interface MarkupProps {
   share: string;
 }
 
-const sharing: Array<InteractionMenuItem> = [
-  {
-    type: Interaction.SHARE_LOCAL,
-    title: 'Copy link',
-    url: ''
-  },
-  {
-    type: Interaction.SHARE,
-    title: 'Share on Facebook',
-    url: 'https://www.facebook.com/sharer/sharer.php'
-  },
-  {
-    type: Interaction.SHARE,
+const getSharing = (data: SocialData, t: TFunction) => {
+  const { baseUrl, share, hashTags } = data;
 
-    title: 'Share on Twitter',
-    url: 'https://twitter.com/home?status'
-  },
-  {
-    type: Interaction.SHARE,
+  const firstHashTag = hashTags
+    .map((hashTag, index) => {
+      if (index === 0) {
+        return `#${hashTag}`;
+      }
+    })
+    .filter(hashTag => hashTag)
+    .join('');
 
-    title: 'Share on Linkedin',
-    url: 'https://www.linkedin.com/shareArticle?mini=true&url='
-  }
-];
+  return [
+    {
+      id: 'copy-link',
+      type: Interaction.SHARE_LOCAL,
+      title: t('copy-link'),
+      url: ''
+    },
+    {
+      id: 'facebook',
+      type: Interaction.SHARE,
+      title: `${t('share-on')} Facebook`,
+      url: 'https://www.facebook.com/sharer/sharer.php',
+      params: {
+        u: baseUrl,
+        hashtag: firstHashTag,
+        quote: share
+      } as URIPathParamsFacebook
+    },
+    {
+      id: 'twitter',
+      type: Interaction.SHARE,
+      title: `${t('share-on')} Twitter`,
+      url: 'https://twitter.com/home?status',
+      params: {
+        url: baseUrl,
+        via: baseUrl,
+        text: share,
+        hashtags: hashTags,
+        mini: true
+      } as URIPathParamsTwitter
+    },
+    {
+      id: 'linkedin',
+      type: Interaction.SHARE,
+      title: `${t('share-on')} LinkedIn`,
+      url: 'https://www.linkedin.com/shareArticle',
+      params: {
+        url: baseUrl,
+        source: baseUrl,
+        summary: share,
+        mini: true
+      } as URIPathParamsLinkedIn
+    },
+    {
+      id: 'whatsapp',
+      type: Interaction.SHARE,
+      title: `${t('share-on')} Whatsapp`,
+      url: isMobile ? `https://api.whatsapp.com/send` : `https://web.whatsapp.com/send`,
+      params: {
+        text: share ? `${share} | ${baseUrl}` : `${baseUrl}`
+      } as URIPathParamsWhatsApp
+    }
+  ];
+};
 
 const createNewTab = newUrl => {
   const { focus } = window.open(newUrl, '_blank');
@@ -55,11 +108,11 @@ const createObjects = (
   baseUrl: string,
   toggleModal: (baseURL: string) => void,
   toggleSharingOpen: () => void
-) => ({ type, title, url }: InteractionMenuItem) => {
+) => ({ id, type, title, url, params }: InteractionMenuItem) => {
   if (type === Interaction.SHARE_LOCAL) {
     return {
       title,
-      icon: <Icon {...{ title }} />,
+      icon: <Icon id={id} />,
       action: () => {
         toggleSharingOpen();
         toggleModal(baseUrl);
@@ -69,16 +122,10 @@ const createObjects = (
 
   return {
     title,
-    icon: <Icon {...{ title }} />,
+    icon: <Icon id={id} />,
     action: () => {
       toggleSharingOpen();
-      createNewTab(
-        `${url}${objectToGetParams({
-          u: baseUrl,
-          quote: 'quote',
-          hashtag: '#hashtag'
-        })}`
-      );
+      createNewTab(`${url}${objectToGetParams(params)}`);
     }
   };
 };
@@ -93,18 +140,28 @@ const creataShareLink = ({ title, icon, action }) => (
   />
 );
 
-const createButtons = (toggleModal, toggleSharingOpen, share) => {
+const createButtons = (toggleModal, toggleSharingOpen, share, t: TFunction) => {
   if (isBrowser) {
     const url = document.URL.replace(/#.*$/, '');
     const baseUrl = typeof share === 'string' ? `${url}/#${share}` : url;
-    // const baseUrl = 'http://millipede.me';
-    const buttonsInfo = sharing.map(createObjects(baseUrl, toggleModal, toggleSharingOpen));
+
+    const data: SocialData = {
+      baseUrl: baseUrl,
+      share: share,
+      hashTags: ['hashTag']
+    };
+
+    const buttonsInfo = getSharing(data, t).map(
+      createObjects(baseUrl, toggleModal, toggleSharingOpen)
+    );
+
     return buttonsInfo.map(creataShareLink);
   }
 };
 
 const Markup = ({ sharingOpen, toggleSharingOpen, toggleModal, modal }: MarkupProps) => {
   const router = useRouter();
+  const { t } = useTranslation();
 
   return (
     <React.Fragment>
@@ -116,7 +173,7 @@ const Markup = ({ sharingOpen, toggleSharingOpen, toggleModal, modal }: MarkupPr
         direction='left'
       >
         {/* {createButtons(toggleModal, toggleSharingOpen, share)} */}
-        {createButtons(toggleModal, toggleSharingOpen, router.pathname)}
+        {createButtons(toggleModal, toggleSharingOpen, router.pathname, t)}
       </SpeedDial>
       <Modal open={!!modal} closeModal={() => toggleModal(null)} url={modal} />
     </React.Fragment>
