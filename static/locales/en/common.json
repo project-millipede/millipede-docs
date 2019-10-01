@@ -27,5 +27,7 @@
     "/pidp/approach": "Approach",
     "/pidp/approach/byExample": "By example",
     "/getting-started": "Getting Started"
-  }
+  },
+  "headTitle": "Project Millipede",
+  "strapline": "Web transparency tools"
 }
