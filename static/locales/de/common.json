@@ -27,5 +27,7 @@
     "/pidp/approach": "Ansatz",
     "/pidp/approach/byExample": "Beispiel",
     "/getting-started": "Erste Schritte"
-  }
+  },
+  "headTitle": "Project Millipede",
+  "strapline": "Werkzeuge zur Transparency im Web"
 }

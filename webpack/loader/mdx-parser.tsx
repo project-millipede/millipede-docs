@@ -4,12 +4,9 @@ import matter from 'gray-matter';
 import castArray from 'lodash/castArray';
 import React from 'react';
 import parse from 'remark-parse';
-import remarkToReact from 'remark-react';
 import remarkSlug from 'remark-slug';
 import stringify from 'remark-stringify';
 import unified from 'unified';
-
-import InteractiveHeadForLoader from '../../docs/src/markdown/components/head/InteractiveHeadForLoader';
 
 export interface ParserOptions {
   filePath?: string; // the path to the file
@@ -110,22 +107,7 @@ export async function parser(raw: string, options: ParserOptions) {
 
   const injectRemarkPlugins = [
     // captureMeta,
-    remarkSlug,
-    [
-      remarkToReact,
-      {
-        fragment: React.Fragment,
-        sanitize: { clobberPrefix: '' }, // remove 'user-content' string from generated ids
-        remarkReactComponents: {
-          h2: props => {
-            return <InteractiveHeadForLoader component={'h2'} {...props} />;
-          },
-          h3: props => {
-            return <InteractiveHeadForLoader component={'h3'} {...props} />;
-          }
-        }
-      }
-    ]
+    remarkSlug
   ];
   const injectRehypePlugins = [
     // syncCodeBlocks
