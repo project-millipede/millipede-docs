@@ -6,7 +6,7 @@ import React from 'react';
 
 interface Props extends React.Props<any> {
   className?: string;
-  disableToc?: boolean;
+  disableToc: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const AppContent = ({ className, children, disableToc }: Props) => {
+const AppContent = ({ className, disableToc, children }: Props) => {
   const classes = useStyles({});
 
   return (

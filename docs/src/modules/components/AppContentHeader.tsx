@@ -8,10 +8,14 @@ import Editpage from './Editpage';
 
 export const useStyles = makeStyles((_theme: Theme) =>
   createStyles({
-    header: {
+    headerRow: {
       display: 'flex',
-      flexWrap: 'wrap',
-      flexDirection: 'row'
+      flexDirection: 'row',
+      flexGrow: 1
+    },
+    headerColumn: {
+      display: 'flex',
+      flexDirection: 'column'
     },
     headerSpace: {
       flexGrow: 1
@@ -29,21 +33,23 @@ export const AppContentHeader = ({ markdownLocation }: MarkdownDocsProps) => {
   const classes = useStyles({});
 
   return (
-    <>
+    <div className={classes.headerColumn}>
       {!isMobileOnly ? (
-        <div className={classes.header}>
+        <div className={classes.headerRow}>
           <Breadcrumbs />
-          <div className={classes.headerSpace} />
           {markdownLocation ? (
             <Editpage
               markdownLocation={markdownLocation}
               sourceCodeRootUrl={SOURCE_CODE_ROOT_URL}
             />
           ) : null}
-          <SpeedDial share={'test share'} />
         </div>
       ) : null}
-    </>
+      <div className={classes.headerRow}>
+        <div className={classes.headerSpace} />
+        <SpeedDial share={'test share'} />
+      </div>
+    </div>
   );
 };
 

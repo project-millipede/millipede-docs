@@ -3,6 +3,8 @@ import NextHead from 'next/head';
 import { withRouter } from 'next/router';
 import React from 'react';
 
+import { useTranslation } from '../../../../i18n';
+
 interface OProps extends WithRouterProps {
   description?: string;
   title?: string;
@@ -10,14 +12,14 @@ interface OProps extends WithRouterProps {
 
 type Props = OProps & WithRouterProps;
 
-function Head(props: Props) {
-  const { title = '' } = props;
-
+const Head = ({ title = 'headTitle', description = 'strapline' }: Props) => {
+  const { t } = useTranslation();
   return (
     <NextHead>
-      <title>{title}</title>
+      <title>{t(title)}</title>
+      <meta name='description' content={t(description)} />
     </NextHead>
   );
-}
+};
 
 export default withRouter(Head);

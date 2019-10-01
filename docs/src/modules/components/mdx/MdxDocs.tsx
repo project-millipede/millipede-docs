@@ -7,6 +7,7 @@ import AppContent from '../AppContent';
 import AppContentHeader from '../AppContentHeader';
 import AppFrame from '../AppFrame';
 import AppTableOfContents from '../AppTableOfContents';
+import Head from '../Head';
 
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -210,10 +211,11 @@ interface MarkdownDocsProps extends React.Props<any> {
   headingsMap?: any;
   raw?: string;
   outerClasses?: any;
+  disableToc?: boolean;
 }
 
 export const MdxDocs = (props: MarkdownDocsProps) => {
-  const { content, raw, outerClasses = {} } = props;
+  const { content, raw, outerClasses = {}, disableToc = false } = props;
 
   const classes = useStyles({});
 
@@ -225,11 +227,16 @@ export const MdxDocs = (props: MarkdownDocsProps) => {
 
   return (
     <AppFrame>
-      <AppContent className={outerClasses.root}>
+      {/* <Head
+        title={`${headers.title || getTitle(markdown)} - Project Millipede`}
+        description={headers.description || getDescription(markdown)}
+      /> */}
+      <Head />
+      {disableToc ? null : <AppTableOfContents content={raw} />}
+      <AppContent className={outerClasses.root} disableToc={disableToc}>
         <AppContentHeader />
         <div className={clsx(classes.root, 'markdown-body')}>{markdownFiles}</div>
       </AppContent>
-      <AppTableOfContents content={raw} />
     </AppFrame>
   );
 };
