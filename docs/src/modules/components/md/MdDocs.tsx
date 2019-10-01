@@ -7,16 +7,18 @@ import AppContent from '../AppContent';
 import AppContentHeader from '../AppContentHeader';
 import AppFrame from '../AppFrame';
 import AppTableOfContents from '../AppTableOfContents';
+import Head from '../Head';
 import useMarkdownDocsContents from '../useMarkdownDocsContents';
 import MdElement from './MdElement';
 
 interface MarkdownDocsProps {
   content: string;
   markdownLocation?: string;
+  disableToc?: boolean;
 }
 
 export const MdDocs = (props: MarkdownDocsProps) => {
-  const { content, markdownLocation: markdownLocationProp } = props;
+  const { content, markdownLocation: markdownLocationProp, disableToc = false } = props;
 
   const {
     state: {
@@ -32,11 +34,16 @@ export const MdDocs = (props: MarkdownDocsProps) => {
 
   return (
     <AppFrame>
-      <AppContent>
+      {/* <Head
+        title={`${headers.title || getTitle(markdown)} - Project Millipede`}
+        description={headers.description || getDescription(markdown)}
+      /> */}
+      <Head />
+      {disableToc ? null : <AppTableOfContents content={content} />}
+      <AppContent disableToc={disableToc}>
         <AppContentHeader markdownLocation={markdownLocation} />
         <MdElement content={content} />
       </AppContent>
-      <AppTableOfContents content={content} />
     </AppFrame>
   );
 };

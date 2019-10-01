@@ -68,12 +68,12 @@ const ByExample = ({ elements = [] }: Stack) => {
 
   return (
     <Grid container className={classes.row}>
-      <Grid item xs={8} className={classes.row}>
+      <Grid item xs={12} className={classes.row}>
         <CardContent className={classes.paper}>
           {stepsFiltered(elements, step)[0].image}
         </CardContent>
       </Grid>
-      <Grid item xs={8} className={classes.row}>
+      <Grid item xs={12} className={classes.row}>
         <DotsMobileStepper
           steps={stepsLength(elements)}
           currentStep={(currentStep: number) => {
