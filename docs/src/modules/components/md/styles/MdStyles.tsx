@@ -1,39 +1,49 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import { createStyles, Theme } from '@material-ui/core';
 
-export const useMdStyles = makeStyles((theme: Theme) =>
+export const useMdStyles = (theme: Theme) =>
   createStyles({
     root: {
       fontFamily: theme.typography.fontFamily,
       fontSize: 16,
       color: theme.palette.text.primary,
       '& .anchor-link': {
-        marginTop: -96 - 29, // Offset for the anchor.
+        marginTop: -96, // Offset for the anchor.
         position: 'absolute'
       },
-      '& pre, & pre[class*="language-"]': {
+      '& pre': {
         margin: '24px 0',
         padding: '12px 18px',
-        backgroundColor: theme.palette.background.paper,
+        backgroundColor: '#333',
+        direction: 'ltr',
         borderRadius: theme.shape.borderRadius,
         overflow: 'auto',
         WebkitOverflowScrolling: 'touch' // iOS momentum scrolling.
       },
       '& code': {
         display: 'inline-block',
-        lineHeight: 1.6,
         fontFamily: 'Consolas, "Liberation Mono", Menlo, Courier, monospace',
-        padding: '3px 6px',
+        WebkitFontSmoothing: 'subpixel-antialiased',
+        padding: '2px 6px',
         color: theme.palette.text.primary,
-        backgroundColor: theme.palette.background.paper,
-        fontSize: 14
+        backgroundColor:
+          theme.palette.type === 'dark' ? 'rgba(255,229,100,0.2)' : 'rgba(255,229,100,0.1)',
+        fontSize: 14,
+        borderRadius: 2
+      },
+      '& code[class*="language-"]': {
+        backgroundColor: '#333',
+        color: '#fff'
       },
       '& p code, & ul code, & pre code': {
-        fontSize: 14,
-        lineHeight: 1.6
+        fontSize: 14
+      },
+      '& .token.operator': {
+        background: 'transparent'
       },
       '& h1': {
-        ...theme.typography.h2,
-        margin: '32px 0 16px'
+        ...theme.typography.h3,
+        fontSize: 40,
+        margin: '16px 0'
       },
       '& .description': {
         ...theme.typography.h5,
@@ -41,29 +51,35 @@ export const useMdStyles = makeStyles((theme: Theme) =>
       },
       '& h2': {
         ...theme.typography.h4,
-        margin: '32px 0 24px'
+        fontSize: 30,
+        margin: '40px 0 16px'
       },
       '& h3': {
         ...theme.typography.h5,
-        margin: '32px 0 24px'
+        margin: '40px 0 16px'
       },
       '& h4': {
         ...theme.typography.h6,
-        margin: '24px 0 16px'
+        margin: '32px 0 16px'
       },
       '& h5': {
         ...theme.typography.subtitle2,
-        margin: '24px 0 16px'
+        margin: '32px 0 16px'
       },
       '& p, & ul, & ol': {
-        lineHeight: 1.6
+        lineHeight: 1.6,
+        marginTop: 0,
+        marginBottom: '16px'
+      },
+      '& ul': {
+        paddingLeft: 30
       },
       '& h1, & h2, & h3, & h4': {
         '& code': {
           fontSize: 'inherit',
           lineHeight: 'inherit',
           // Remove scroll on small screens.
-          wordBreak: 'break-word'
+          wordBreak: 'break-all'
         },
         '& .anchor-link-style': {
           opacity: 0,
@@ -91,6 +107,7 @@ export const useMdStyles = makeStyles((theme: Theme) =>
         overflowX: 'auto',
         WebkitOverflowScrolling: 'touch', // iOS momentum scrolling.
         borderCollapse: 'collapse',
+        marginBottom: '16px',
         borderSpacing: 0,
         overflow: 'hidden',
         '& .prop-name': {
@@ -98,12 +115,12 @@ export const useMdStyles = makeStyles((theme: Theme) =>
           fontFamily: 'Consolas, "Liberation Mono", Menlo, monospace'
         },
         '& .required': {
-          color: theme.palette.type === 'light' ? '#006500' : '#9bc89b'
+          color: theme.palette.type === 'light' ? '#006500' : '#a5ffa5'
         },
         '& .prop-type': {
           fontSize: 13,
           fontFamily: 'Consolas, "Liberation Mono", Menlo, monospace',
-          color: theme.palette.type === 'light' ? '#932981' : '#dbb0d0'
+          color: theme.palette.type === 'light' ? '#932981' : '#ffb6ec'
         },
         '& .prop-default': {
           fontSize: 13,
@@ -111,55 +128,33 @@ export const useMdStyles = makeStyles((theme: Theme) =>
           borderBottom: `1px dotted ${theme.palette.text.hint}`
         }
       },
-      '& thead': {
-        fontSize: 14,
-        fontWeight: theme.typography.fontWeightMedium,
-        color: theme.palette.text.secondary
-      },
-      '& tbody': {
-        fontSize: 14,
-        lineHeight: 1.5,
-        color: theme.palette.text.primary
-      },
       '& td': {
+        ...theme.typography.body2,
         borderBottom: `1px solid ${theme.palette.divider}`,
-        padding: '8px 16px 8px 8px',
-        textAlign: 'left'
-      },
-      '& td:last-child': {
-        paddingRight: 24
-      },
-      '& td compact': {
-        paddingRight: 24
+        padding: 16,
+        color: theme.palette.text.primary
       },
       '& td code': {
         fontSize: 13,
         lineHeight: 1.6
       },
       '& th': {
+        fontSize: 14,
+        lineHeight: theme.typography.pxToRem(24),
+        fontWeight: theme.typography.fontWeightMedium,
+        color: theme.palette.text.primary,
         whiteSpace: 'pre',
         borderBottom: `1px solid ${theme.palette.divider}`,
-        fontWeight: theme.typography.fontWeightMedium,
-        padding: '0 16px 0 8px',
-        textAlign: 'left'
-      },
-      '& th:last-child': {
-        paddingRight: 24
-      },
-      '& tr': {
-        height: 48
-      },
-      '& thead tr': {
-        height: 64
-      },
-      '& strong': {
-        fontWeight: theme.typography.fontWeightMedium
+        padding: 16
       },
       '& blockquote': {
-        borderLeft: `5px solid ${theme.palette.text.hint}`,
-        backgroundColor: theme.palette.background.paper,
+        borderLeft: '5px solid #ffe564',
+        backgroundColor: 'rgba(255,229,100,0.2)',
         padding: '4px 24px',
-        margin: '24px 0'
+        margin: '24px 0',
+        '& p': {
+          marginTop: '16px'
+        }
       },
       '& a, & a code': {
         // Style taken from the Link component
@@ -171,7 +166,13 @@ export const useMdStyles = makeStyles((theme: Theme) =>
       },
       '& img': {
         maxWidth: '100%'
+      },
+      '& hr': {
+        height: 1,
+        margin: theme.spacing(6, 0),
+        border: 'none',
+        flexShrink: 0,
+        backgroundColor: theme.palette.divider
       }
     }
-  })
-);
+  });

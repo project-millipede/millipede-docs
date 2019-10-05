@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 
 import Markup, { MarkupProps } from './Markup';
 
-interface SpeedDialProps {
+interface ShareProps {
   id?: string;
   share: string;
 }
 
-const SpeedDial = ({ id, share }: SpeedDialProps) => {
+const Share = ({ id, share }: ShareProps) => {
   const [sharingOpen, setSharingOpen] = useState(false);
   const [modal, setModal] = useState();
 
@@ -31,4 +31,4 @@ const SpeedDial = ({ id, share }: SpeedDialProps) => {
   return <Markup {...passedProps} />;
 };
 
-export default SpeedDial;
+export default Share;

@@ -175,7 +175,6 @@ const Markup = ({ sharingOpen, toggleSharingOpen, toggleModal, modal }: MarkupPr
         open={sharingOpen}
         direction='left'
       >
-        {/* {createButtons(toggleModal, toggleSharingOpen, share)} */}
         {createButtons(toggleModal, toggleSharingOpen, router.pathname, t)}
       </SpeedDial>
       <Modal open={!!modal} closeModal={() => toggleModal(null)} url={modal} />
