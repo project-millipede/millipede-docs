@@ -13,3 +13,15 @@ export const LANGUAGES = ['en', 'de'];
 
 // Work in progress
 export const LANGUAGES_IN_PROGRESS = ['en', 'de', 'es'];
+
+// Valid languages to use in production
+export const LANGUAGES_LABEL = [
+  {
+    code: 'en',
+    text: 'English'
+  },
+  {
+    code: 'de',
+    text: 'Deutsch'
+  }
+];

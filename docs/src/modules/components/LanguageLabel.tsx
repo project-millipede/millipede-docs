@@ -7,12 +7,16 @@ import { RootState } from '../redux/reducers';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     language: {
-      margin: theme.spacing(0, 1.5, 0, 1.5)
+      margin: theme.spacing(0, 1.5, 0, 1.5),
+      display: 'none',
+      [theme.breakpoints.up('md')]: {
+        display: 'block'
+      }
     }
   })
 );
 
-const Language = () => {
+const LanguageLabel = () => {
   const classes = useStyles({});
 
   const {
@@ -20,8 +24,7 @@ const Language = () => {
       language: { userLanguage }
     }
   }: { state: RootState } = useHoux();
-
   return <span className={classes.language}>{userLanguage.toUpperCase()}</span>;
 };
 
-export default Language;
+export default LanguageLabel;
