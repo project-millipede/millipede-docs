@@ -15,8 +15,7 @@ import { ThemeActions } from '../redux/features/actionType';
 import { changeTheme } from '../redux/features/theme/actions';
 import { RootState } from '../redux/reducers';
 import AppSearch from './AppSearch';
-import Language from './Language';
-import MenuLanguage from './MenuLanguage';
+import LanguageMenu from './LanguageMenu';
 
 interface AppToolBarProps {
   isDrawerOpen: boolean;
@@ -95,8 +94,7 @@ const AppToolBar = ({ isDrawerOpen, handleDrawerOpen }: AppToolBarProps) => {
       <div className={customStyles.grow} />
 
       <AppSearch />
-      <MenuLanguage />
-      <Language />
+      <LanguageMenu />
 
       <Tooltip title={t('toggleTheme')} enterDelay={300}>
         <IconButton

@@ -227,7 +227,7 @@ function syncAstNodes(withAst, filePath) {
       //           node.properties["data-parent-heading"] = parentHeading.position.start.line;
       //         }
       //       } catch (error) {
-      //         console.error(`Error parsing headings map for markdown file: ${filePath}`);
+      //         Logger.error(`Error parsing headings map for markdown file: ${filePath}`);
       //       }
       //     }
 

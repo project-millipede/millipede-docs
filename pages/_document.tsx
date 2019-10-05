@@ -6,14 +6,14 @@ import NextDocument, { DocumentContext, DocumentInitialProps, Head, Html, Main, 
 import React from 'react';
 
 import { PathnameToLanguage, pathnameToLanguage } from '../docs/src/modules/utils/helpers';
+import { Logger } from '../docs/src/modules/utils/logging';
 import { NextI18NextInstance } from '../i18n';
 
 const wrapI18n = (req: IncomingMessage, res: ServerResponse) => {
   const middleware = compose(nextI18NextMiddleware(NextI18NextInstance));
 
   const done = () => {
-    /* eslint-disable no-console */
-    console.log('done');
+    Logger.log('done');
   };
 
   middleware(req, res, _next => {

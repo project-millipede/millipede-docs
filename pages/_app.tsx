@@ -65,7 +65,7 @@ MillipedeApp.getInitialProps = async ({ Component, ctx }) => {
   // Fetch correct required namespaces depending on route
   // pageProps.namespacesRequired = namespaces[router.route];
 
-  // console.log('pageProps.namespacesRequired', pageProps.namespacesRequired);
+  // Logger.log('pageProps.namespacesRequired', pageProps.namespacesRequired);
 
   return { pageProps };
 };

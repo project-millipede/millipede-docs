@@ -2,6 +2,7 @@ import { useHoux } from 'houx';
 import React, { useEffect, useState } from 'react';
 
 import { RootState } from '../../redux/reducers';
+import { Logger } from '../../utils/logging';
 import { MdDocs } from '../md';
 
 const load = (pathSlice = '', userLanguage = ''): any =>
@@ -10,8 +11,7 @@ const load = (pathSlice = '', userLanguage = ''): any =>
       return result.default;
     })
     .catch(error => {
-      /* eslint-disable no-console */
-      console.log(error);
+      Logger.log(error);
     });
 
 export interface MDContentLoaderProps {
