@@ -3,7 +3,7 @@ import React from 'react';
 import { isMobileOnly } from 'react-device-detect';
 
 import Breadcrumbs from './common/breadcrumbs';
-import SpeedDial from './common/speedDial';
+import Share from './common/share';
 import Editpage from './Editpage';
 
 export const useStyles = makeStyles((_theme: Theme) =>
@@ -47,7 +47,7 @@ export const AppContentHeader = ({ markdownLocation }: MarkdownDocsProps) => {
       ) : null}
       <div className={classes.headerRow}>
         <div className={classes.headerSpace} />
-        <SpeedDial share={'test share'} />
+        <Share share={'test share'} />
       </div>
     </div>
   );
