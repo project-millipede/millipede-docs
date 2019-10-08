@@ -1,54 +1,34 @@
-const path = require('path');
+/* eslint-disable import/no-extraneous-dependencies */
 
-// const exportPathMap = require('./dist/next/exportPathMap');
+const merge = require('webpack-merge');
+const webpackConfig = require('./webpack/webpack.prod.conf');
 
-module.exports = {
-  // exportPathMap,
+const configuration = {
+  webpack(config, options) {
+    return merge(config, webpackConfig(options));
+  },
+
   target: 'serverless',
-
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
-
-  experimental: { modern: true, documentMiddleware: true },
-
-  // webpack: (config, options) => {
-  webpack: (config, { isServer }) => {
-    config.mode = 'production';
-
-    // Fixes npm packages that depend on `fs` module
-    // config.node = {
-    //   fs: 'empty'
-    // };
-
-    // Fixes npm packages that depend on `fs` module
-    if (!isServer) {
-      config.node = {
-        fs: 'empty'
-      };
-    }
-
-    // The context is two levels out, because next does currently not support
-    // configurations (next.config) in typescript
-    // config.context = path.resolve(__dirname, '../../');
-    // config.resolve = {
-    //   extensions: ['.js', '.jsx', '.ts', '.tsx', '.json']
-    // };
-
-    config.module.rules.push({ test: /\.tsx?$/, loader: 'ts-loader' });
-    config.module.rules.push({
-      test: /\.mdx$/,
-      use: [
-        'babel-loader',
-        {
-          loader: path.join(__dirname, './dist/webpack/loader/mdx-custom-loader')
-        }
-      ]
-    });
-
-    config.module.rules.push({
-      test: /\.md$/,
-      use: ['raw-loader']
-    });
-
-    return config;
-  }
+  experimental: { modern: true, documentMiddleware: true }
 };
+
+module.exports = configuration;
+
+/* next.config in ts */
+/*
+import merge from 'webpack-merge';
+import webpackConfig from './webpack/webpack.prod.conf';
+
+const configuration = {
+  webpack(config: webpack.Configuration, options) {
+    return merge(config, webpackConfig(options));
+  },
+
+  target: 'serverless',
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  experimental: { modern: true, documentMiddleware: true }
+};
+
+export default configuration;
+*/
