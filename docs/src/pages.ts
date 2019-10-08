@@ -6,19 +6,6 @@ const lowerTextIncludes = (text: string, sub: string) =>
   _.includes(_.lowerCase(text), _.lowerCase(_.trimStart(sub)));
 
 /* eslint-disable consistent-return */
-export const getPages = (pathname: string) => {
-  if (pathname === '/guides/api') {
-    return pagesCommon;
-  }
-  if (pathname === '/common/dataflow/comparison') {
-    return pagesPET;
-  }
-  if (pathname === '/pidp/approach/byExample') {
-    return pagesPIDP;
-  }
-};
-
-/* eslint-disable consistent-return */
 export const loadPages = (pathname: string, currentPages: Array<Page>) => {
   const linkIncludesText = (link: Page) => lowerTextIncludes(link.pathname, pathname);
 
@@ -31,7 +18,7 @@ export const loadPages = (pathname: string, currentPages: Array<Page>) => {
       return _.some([link, ...(link.children || [])], linkIncludesText);
     }).length > 0
   ) {
-    return [...pagesCommon, ...pagesPET];
+    return [...pagesCommon, ...pagesPET, ...pagesDiscoverMore];
   }
 
   if (
@@ -39,7 +26,15 @@ export const loadPages = (pathname: string, currentPages: Array<Page>) => {
       return _.some([link, ...(link.children || [])], linkIncludesText);
     }).length > 0
   ) {
-    return [...pagesCommon, ...pagesPIDP];
+    return [...pagesCommon, ...pagesPIDP, ...pagesDiscoverMore];
+  }
+
+  if (
+    pagesDiscoverMore.filter(link => {
+      return _.some([link, ...(link.children || [])], linkIncludesText);
+    }).length > 0
+  ) {
+    return [...currentPages];
   }
 
   if (
@@ -72,12 +67,18 @@ export const pagesCommon: Array<Page> = [
   {
     pathname: '/',
     displayNav: false
-  },
+  }
+];
+
+export const pagesDiscoverMore: Array<Page> = [
   {
     pathname: '/discover-more',
     icon: 'star',
     highlight: true,
-    children: [{ pathname: '/discover-more/team', icon: 'star', highlight: true }]
+    children: [
+      { pathname: '/discover-more/support', icon: 'star', highlight: true },
+      { pathname: '/discover-more/team', icon: 'star', highlight: true }
+    ]
   }
 ];
 
