@@ -26,8 +26,24 @@
     "/pidp/landing": "Landing",
     "/pidp/approach": "Approach",
     "/pidp/approach/byExample": "By example",
-    "/getting-started": "Getting Started"
+    "/getting-started": "Getting Started",
+    "/discover-more": "Discover more",
+    "/discover-more/team": "Team",
+    "/getting-started/support": "Support"
   },
   "headTitle": "Project Millipede",
-  "strapline": "Web transparency tools"
+  "strapline": "Web transparency tools",
+  "active-core-team-title": "Active Core Team",
+  "emeriti-core-team-title": "Retired Core Team",
+  "community-partners-title": "Community Partners",
+  "active-core-team-description": "An international team guides the development of the project and its ecosystem. Some of whom have chosen to be featured below.",
+  "emeriti-core-team-description": "We honor some no-longer-active core team members who have made valuable contributions in the past. They advise us from time-to-time.",
+  "community-partners-description": "Remarkable members of the community, they deserve special mention.",
+  "founder": "Founder",
+  "munich": "Munich",
+  "germany": "Germany",
+  "footerCommunity": "Community",
+  "footerResources": "Resources",
+  "footerRelease": "Currently {{versionNumber}}. Released under the {{license}}.",
+  "license": "MIT License"
 }

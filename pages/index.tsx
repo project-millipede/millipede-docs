@@ -4,6 +4,7 @@ import React from 'react';
 
 import AppFrame from '../docs/src/modules/components/AppFrame';
 import Head from '../docs/src/modules/components/Head';
+import HomeFooter from '../docs/src/modules/components/HomeFooter';
 import { useTranslation } from '../i18n';
 import GuttersGrid from '../src/components/layout/grid/GuttersGrid';
 
@@ -97,6 +98,7 @@ const Index = () => {
               </Typography>
               <Divider />
               <GuttersGrid />
+              <HomeFooter />
             </div>
           </Container>
         </div>
