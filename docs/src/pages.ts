@@ -72,6 +72,12 @@ export const pagesCommon: Array<Page> = [
   {
     pathname: '/',
     displayNav: false
+  },
+  {
+    pathname: '/discover-more',
+    icon: 'star',
+    highlight: true,
+    children: [{ pathname: '/discover-more/team', icon: 'star', highlight: true }]
   }
 ];
 
