@@ -30,12 +30,11 @@ interface MarkdownDocsProps extends React.Props<any> {
   ast?: any;
   headingsMap?: any;
   raw?: string;
-  outerClasses?: any;
   disableToc?: boolean;
 }
 
 export const MdxDocs = (props: MarkdownDocsProps) => {
-  const { content, raw, outerClasses = {}, disableToc = false } = props;
+  const { content, raw, disableToc = false, children } = props;
 
   const classes = useStyles({});
 
@@ -47,10 +46,10 @@ export const MdxDocs = (props: MarkdownDocsProps) => {
       /> */}
       <Head />
       {disableToc ? null : <AppTableOfContents content={raw} />}
-      <AppContent className={outerClasses.root} disableToc={disableToc}>
+      <AppContent>
         <AppContentHeader />
         <div className={clsx(classes.root, 'markdown-body')}>
-          <MdxElement content={content} />
+          {children || <MdxElement content={content} />}
         </div>
       </AppContent>
     </AppFrame>
