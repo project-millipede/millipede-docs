@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
       top: 70,
       // Fix IE 11 position sticky issue.
       marginTop: 70,
-      width: 175,
+      width: 225,
       flexShrink: 0,
       order: 2,
       position: 'sticky',

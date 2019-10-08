@@ -1,5 +1,4 @@
 import { Collapse, Icon, List, ListItemIcon, ListItemText, Theme } from '@material-ui/core';
-import { blue } from '@material-ui/core/colors';
 import ListItem from '@material-ui/core/ListItem';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
@@ -20,12 +19,18 @@ interface AppDrawerNavItemProps extends React.Props<any> {
 
 type Props = AppDrawerNavItemProps & WithRouterProps;
 
-const useStyles = makeStyles((_theme: Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    listItem: {
-      backgroundColor: blue[700]
-    },
-    root: { paddingLeft: '8px' }
+    listItemPadding: {
+      [theme.breakpoints.down('xs')]: {
+        paddingLeft: '16px',
+        paddingRight: '16px'
+      },
+      [theme.breakpoints.up('sm')]: {
+        paddingLeft: '24px',
+        paddingRight: '24px'
+      }
+    }
   })
 );
 
@@ -51,8 +56,8 @@ const AppDrawerNavItem = ({
   if (href) {
     return (
       <Link href={href}>
-        <ListItem button onClick={onClick}>
-          <ListItemIcon className={classes.root}>
+        <ListItem button onClick={onClick} className={classes.listItemPadding}>
+          <ListItemIcon>
             <Icon>{icon}</Icon>
           </ListItemIcon>
           <ListItemText primary={title} />
@@ -63,8 +68,8 @@ const AppDrawerNavItem = ({
 
   return (
     <>
-      <ListItem button onClick={handleClick}>
-        <ListItemIcon className={classes.root}>
+      <ListItem button onClick={handleClick} className={classes.listItemPadding}>
+        <ListItemIcon>
           <Icon>{icon}</Icon>
         </ListItemIcon>
         <ListItemText primary={title} />

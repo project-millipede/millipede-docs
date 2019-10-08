@@ -40,7 +40,7 @@ export const MdDocs = (props: MarkdownDocsProps) => {
       /> */}
       <Head />
       {disableToc ? null : <AppTableOfContents content={content} />}
-      <AppContent disableToc={disableToc}>
+      <AppContent>
         <AppContentHeader markdownLocation={markdownLocation} />
         <MdElement content={content} />
       </AppContent>

@@ -185,7 +185,7 @@ const AppFrame = ({ children, drawerStyleOverride }: AppFrameProps) => {
         isDrawerOpen={open}
         handleDrawerClose={handleDrawerClose}
       />
-      <main className={drawerClasses.content}>{children}</main>
+      <div className={drawerClasses.content}>{children}</div>
     </div>
   );
 };
