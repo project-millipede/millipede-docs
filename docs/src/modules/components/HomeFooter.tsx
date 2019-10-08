@@ -83,7 +83,7 @@ export const HomeFooter = () => {
               <Link
                 color='inherit'
                 // variant='body2'
-                href='/discover-more/team/'
+                href='/discover-more/team'
               >
                 {t('pages./discover-more/team')}
               </Link>
@@ -99,9 +99,9 @@ export const HomeFooter = () => {
               <Link
                 color='inherit'
                 // variant='body2'
-                href='/getting-started/support/'
+                href='/discover-more/support'
               >
-                {t('pages./getting-started/support')}
+                {t('pages./discover-more/support')}
               </Link>
             </li>
           </ul>
