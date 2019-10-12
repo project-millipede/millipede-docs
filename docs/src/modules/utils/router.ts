@@ -38,9 +38,20 @@ const determineCurrenPathname = (pathname: string) => {
   return pathname;
 };
 
-export const determineActivePage = (pages: Array<Page>, pathname: string) => {
+const determineActivePage = (pages: Array<Page>, pathname: string) => {
   const currentPathname = determineCurrenPathname(pathname);
   return findActivePage(pages, currentPathname);
 };
 
-export { findActivePage, determineCurrenPathname };
+const flattenPages = (pages: Array<Page>, current: Array<Page> = []) => {
+  return pages.reduce((items, item) => {
+    if (item.children && item.children.length > 1) {
+      items = flattenPages(item.children, items);
+    } else {
+      items.push(item.children && item.children.length === 1 ? item.children[0] : item);
+    }
+    return items;
+  }, current);
+};
+
+export { findActivePage, determineCurrenPathname, determineActivePage, flattenPages };

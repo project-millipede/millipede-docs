@@ -9,6 +9,7 @@
   "search": "Suche…",
   "next": "Weiter",
   "back": "Zurück",
+  "share-post": "Artikel teilen",
   "copy-link": "Link kopieren",
   "share-on": "Teilen auf",
   "error-with-status": "Auf dem Server ist ein Fehler ({{statusCode}}) aufgetreten",

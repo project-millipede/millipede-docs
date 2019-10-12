@@ -9,6 +9,7 @@
   "search": "Search…",
   "next": "Next",
   "back": "Back",
+  "share-post": "Share post",
   "copy-link": "Copy link",
   "share-on": "Share on",
   "error-with-status": "A {{statusCode}} error occurred on server",

@@ -1,3 +1,4 @@
+import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
 import Assignment from '@material-ui/icons/Assignment';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
@@ -9,6 +10,8 @@ const Icon = ({ id }) => {
   switch (id) {
     case 'copy-link':
       return <Assignment />;
+    case 'mail':
+      return <AlternateEmailIcon />;
     case 'facebook':
       return <FacebookIcon />;
     case 'twitter':

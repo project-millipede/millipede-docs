@@ -1,20 +1,22 @@
 import { Page } from '../../../../../../src/typings/data/import';
 import { loadPages } from '../../../../pages';
-import { determineActivePage } from '../../../utils/router';
+import { determineActivePage, flattenPages } from '../../../utils/router';
 import { StoreAction } from '../actionType';
 import { CHANGE_NAVIGATION, LOAD_PAGES, SETUP_NAVIGATION } from './actionTypes';
 
 interface Props {
-  activePage: Page;
   pages: Array<Page>;
+  flattenedPages: Array<Page>;
+  activePage: Page;
 }
 
 export const initialState: Props = {
+  pages: [],
+  flattenedPages: [],
   activePage: {
     pathname: 'Test',
     title: ''
-  },
-  pages: []
+  }
 };
 
 const navigationReducer = (state = initialState, action: StoreAction) => {
@@ -31,9 +33,11 @@ const navigationReducer = (state = initialState, action: StoreAction) => {
       };
     case LOAD_PAGES: {
       const pages = loadPages(action.payload.pathname, state.pages);
+      const flattenedPages = flattenPages(pages);
       return {
         ...state,
         pages,
+        flattenedPages,
         activePage: determineActivePage(pages, action.payload.pathname)
       };
     }

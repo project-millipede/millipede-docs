@@ -1,14 +1,36 @@
-import { Typography } from '@material-ui/core';
+import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import { MDXProvider } from '@mdx-js/react';
 import React from 'react';
 
 import { InteractiveHead } from '../../../markdown/components/head';
+import Share from '../common/share';
 
 interface MDXProps extends React.Props<any> {
   id: string;
 }
 
-const h1 = ({ children }: MDXProps) => <Typography variant='h1'>{children}</Typography>;
+export const useStyles = makeStyles((_theme: Theme) =>
+  createStyles({
+    headerRow: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      height: '56px'
+    }
+  })
+);
+
+const h1 = ({ children }: MDXProps) => {
+  const classes = useStyles({});
+  return (
+    <div className={classes.headerRow}>
+      <Typography variant='h1' style={{ paddingRight: '16px' }}>
+        {children}
+      </Typography>
+      <Share share={'test share'} />
+    </div>
+  );
+};
 const h2 = ({ children, id }: MDXProps) => (
   <InteractiveHead component='h2' id={id}>
     {children}
