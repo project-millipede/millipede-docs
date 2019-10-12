@@ -2,11 +2,13 @@ import CloseIcon from '@material-ui/icons/Close';
 import ShareIcon from '@material-ui/icons/Share';
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
+import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
 import { TFunction } from 'next-i18next-serverless';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
 
 import {
   Interaction,
@@ -14,6 +16,7 @@ import {
   SocialData,
   URIPathParamsFacebook,
   URIPathParamsLinkedIn,
+  URIPathParamsMail,
   URIPathParamsTwitter,
   URIPathParamsWhatsApp,
 } from '../../../../../../src/typings/share/social';
@@ -22,6 +25,10 @@ import Icon from './Icon';
 import Modal from './Modal';
 
 const isBrowser = typeof window !== 'undefined';
+
+const StyledSpeedDial = styled(SpeedDial)`
+  align-self: flex-start;
+`;
 
 export interface MarkupProps {
   sharingOpen: boolean;
@@ -46,6 +53,16 @@ const getSharing = (data: SocialData, t: TFunction) => {
       type: Interaction.SHARE_LOCAL,
       title: t('copy-link'),
       url: ''
+    },
+    {
+      id: 'mail',
+      type: Interaction.SHARE_MAIL,
+      title: `${t('share-on')} Mail`,
+      url: 'mailto://',
+      params: {
+        subject: share,
+        body: share
+      } as URIPathParamsMail
     },
     {
       id: 'facebook',
@@ -115,6 +132,16 @@ const createObjects = (
       }
     };
   }
+  if (type === Interaction.SHARE_MAIL) {
+    return {
+      title,
+      icon: <Icon id={id} />,
+      action: () => {
+        toggleSharingOpen();
+        createNewTab(`${url}${objectToGetParams(params)}`);
+      }
+    };
+  }
 
   return {
     title,
@@ -132,7 +159,7 @@ const creataShareLink = ({ title, icon, action }) => (
     icon={icon}
     tooltipTitle={title}
     onClick={action}
-    tooltipPlacement={'bottom'}
+    tooltipPlacement={'left'}
   />
 );
 
@@ -168,15 +195,18 @@ const Markup = ({ sharingOpen, toggleSharingOpen, toggleModal, modal }: MarkupPr
 
   return (
     <React.Fragment>
-      <SpeedDial
-        ariaLabel='SpeedDial openIcon example'
-        icon={sharingOpen ? <CloseIcon /> : <ShareIcon />}
+      <StyledSpeedDial
+        ariaLabel={t('share-post')}
+        icon={<SpeedDialIcon icon={<ShareIcon />} openIcon={<CloseIcon />} />}
         onClick={toggleSharingOpen}
+        onClose={toggleSharingOpen}
+        onMouseEnter={toggleSharingOpen}
+        onMouseLeave={toggleSharingOpen}
         open={sharingOpen}
-        direction='left'
+        direction='down'
       >
         {createButtons(toggleModal, toggleSharingOpen, router.pathname, t)}
-      </SpeedDial>
+      </StyledSpeedDial>
       <Modal open={!!modal} closeModal={() => toggleModal(null)} url={modal} />
     </React.Fragment>
   );

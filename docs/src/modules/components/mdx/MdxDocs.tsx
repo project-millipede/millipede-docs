@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import React from 'react';
 
 import AppContent from '../AppContent';
+import AppContentFooter from '../AppContentFooter';
 import AppContentHeader from '../AppContentHeader';
 import AppFrame from '../AppFrame';
 import AppTableOfContents from '../AppTableOfContents';
@@ -51,6 +52,7 @@ export const MdxDocs = (props: MarkdownDocsProps) => {
         <div className={clsx(classes.root, 'markdown-body')}>
           {children || <MdxElement content={content} />}
         </div>
+        <AppContentFooter />
       </AppContent>
     </AppFrame>
   );

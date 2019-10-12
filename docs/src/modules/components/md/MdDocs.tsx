@@ -4,6 +4,7 @@ import React from 'react';
 import { Page } from '../../../../../src/typings/data/import';
 import { RootState } from '../../redux/reducers';
 import AppContent from '../AppContent';
+import AppContentFooter from '../AppContentFooter';
 import AppContentHeader from '../AppContentHeader';
 import AppFrame from '../AppFrame';
 import AppTableOfContents from '../AppTableOfContents';
@@ -43,6 +44,7 @@ export const MdDocs = (props: MarkdownDocsProps) => {
       <AppContent>
         <AppContentHeader markdownLocation={markdownLocation} />
         <MdElement content={content} />
+        <AppContentFooter />
       </AppContent>
     </AppFrame>
   );

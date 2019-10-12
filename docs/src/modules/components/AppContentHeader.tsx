@@ -3,7 +3,6 @@ import React from 'react';
 import { isMobileOnly } from 'react-device-detect';
 
 import Breadcrumbs from './common/breadcrumbs';
-import Share from './common/share';
 import Editpage from './Editpage';
 
 export const useStyles = makeStyles((_theme: Theme) =>
@@ -11,14 +10,8 @@ export const useStyles = makeStyles((_theme: Theme) =>
     headerRow: {
       display: 'flex',
       flexDirection: 'row',
-      flexGrow: 1
-    },
-    headerColumn: {
-      display: 'flex',
-      flexDirection: 'column'
-    },
-    headerSpace: {
-      flexGrow: 1
+      flexGrow: 1,
+      height: '56px'
     }
   })
 );
@@ -32,25 +25,14 @@ const SOURCE_CODE_ROOT_URL = 'https://github.com/gurkerl83/millipede-docs/blob/m
 export const AppContentHeader = ({ markdownLocation }: MarkdownDocsProps) => {
   const classes = useStyles({});
 
-  return (
-    <div className={classes.headerColumn}>
-      {!isMobileOnly ? (
-        <div className={classes.headerRow}>
-          <Breadcrumbs />
-          {markdownLocation ? (
-            <Editpage
-              markdownLocation={markdownLocation}
-              sourceCodeRootUrl={SOURCE_CODE_ROOT_URL}
-            />
-          ) : null}
-        </div>
+  return !isMobileOnly ? (
+    <div className={classes.headerRow}>
+      <Breadcrumbs />
+      {markdownLocation ? (
+        <Editpage markdownLocation={markdownLocation} sourceCodeRootUrl={SOURCE_CODE_ROOT_URL} />
       ) : null}
-      <div className={classes.headerRow}>
-        <div className={classes.headerSpace} />
-        <Share share={'test share'} />
-      </div>
     </div>
-  );
+  ) : null;
 };
 
 export default AppContentHeader;

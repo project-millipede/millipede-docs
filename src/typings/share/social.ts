@@ -4,6 +4,7 @@
 // Figure out if facebook accepts hashtag Array<string> - consolidate hashtag, hashtags
 
 export type SocialMediaURIPathParams =
+  | URIPathParamsMail
   | URIPathParamsFacebook
   | URIPathParamsLinkedIn
   | URIPathParamsTwitter
@@ -13,6 +14,11 @@ export interface SocialData {
   baseUrl: string;
   hashTags: Array<string>;
   share: string;
+}
+
+export interface URIPathParamsMail {
+  subject: string;
+  body: string;
 }
 
 export interface URIPathParamsFacebook {
@@ -43,6 +49,7 @@ export interface URIPathParamsWhatsApp {
 export enum Interaction {
   SHARE,
   SHARE_LOCAL,
+  SHARE_MAIL,
   CONTRIBUTE
 }
 
