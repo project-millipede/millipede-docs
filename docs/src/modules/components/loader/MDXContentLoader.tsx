@@ -20,9 +20,14 @@ const load = (pathSlice = '', userLanguage = ''): any =>
 export interface MDXContentLoaderProps {
   path: string;
   disableToc?: boolean;
+  disableShare?: boolean;
 }
 
-const MDXContentLoader: React.FC<MDXContentLoaderProps> = ({ path, disableToc = false }) => {
+const MDXContentLoader: React.FC<MDXContentLoaderProps> = ({
+  path,
+  disableToc = false,
+  disableShare = false
+}) => {
   const [contentMain, setContentMain] = useState('');
   const [rawMain, setRawMain] = useState('');
   const { state }: { state: RootState } = useHoux();
@@ -40,7 +45,14 @@ const MDXContentLoader: React.FC<MDXContentLoaderProps> = ({ path, disableToc = 
     loadContent();
   }, [state.language.userLanguage]);
 
-  return <MdxDocs content={contentMain} raw={rawMain} disableToc={disableToc} />;
+  return (
+    <MdxDocs
+      content={contentMain}
+      raw={rawMain}
+      disableToc={disableToc}
+      disableShare={disableShare}
+    />
+  );
 };
 
 export default MDXContentLoader;

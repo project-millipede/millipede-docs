@@ -3,8 +3,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import GithubIcon from '@material-ui/docs/svgIcons/GitHub';
-import LightbulbFullIcon from '@material-ui/docs/svgIcons/LightbulbFull';
-import LightbulbOutlineIcon from '@material-ui/docs/svgIcons/LightbulbOutline';
+import Brightness4Icon from '@material-ui/icons/Brightness4';
+import Brightness7Icon from '@material-ui/icons/Brightness7';
 import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
 import { useHoux } from 'houx';
@@ -104,7 +104,7 @@ const AppToolBar = ({ isDrawerOpen, handleDrawerOpen }: AppToolBarProps) => {
           data-ga-event-category='AppBar'
           data-ga-event-action='dark'
         >
-          {theme.palette.type === 'light' ? <LightbulbOutlineIcon /> : <LightbulbFullIcon />}
+          {theme.palette.type === 'light' ? <Brightness4Icon /> : <Brightness7Icon />}
         </IconButton>
       </Tooltip>
 

@@ -1,58 +1,58 @@
-import MuiLink from '@material-ui/core/Link';
-import withRouter, { WithRouterProps } from 'next/dist/client/with-router';
-import React, { Component } from 'react';
+import MuiLink, { LinkProps as MuiLinkProps } from '@material-ui/core/Link';
+import clsx from 'clsx';
+import NextLink, { LinkProps as NextLinkProps } from 'next/link';
+import { useRouter } from 'next/router';
+import React from 'react';
 
-import withInteraction from './LinkHoc';
-import NextLink from './NextLink';
+type NextComposedProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & NextLinkProps;
 
-interface TProps {
-  as?: string;
-  onClick?: (event: React.SyntheticEvent) => void;
-  target?: string;
-  prefetch?: boolean;
-  rel?: string;
+const NextComposed = React.forwardRef<HTMLAnchorElement, NextComposedProps>((props, ref) => {
+  const { as, href, replace, scroll, passHref, shallow, prefetch, ...other } = props;
+
+  return (
+    <NextLink
+      href={href}
+      prefetch={prefetch}
+      as={as}
+      replace={replace}
+      scroll={scroll}
+      shallow={shallow}
+      passHref={passHref}
+    >
+      <a ref={ref} {...other} />
+    </NextLink>
+  );
+});
+
+interface LinkPropsBase {
+  activeClassName?: string;
+  innerRef?: React.Ref<HTMLAnchorElement>;
   naked?: boolean;
-  other?: any;
-  className?: string;
-  display?: 'initial' | 'inline' | 'block';
-  color?:
-    | 'inherit'
-    | 'initial'
-    | 'error'
-    | 'primary'
-    | 'secondary'
-    | 'textPrimary'
-    | 'textSecondary';
-  underline?: 'none' | 'hover' | 'always';
 }
 
-export type TLinkProps = TProps & {
-  activeClassName?: string;
-  href?: string;
+type LinkProps = LinkPropsBase & NextComposedProps & Omit<MuiLinkProps, 'ref'>;
+
+const Link = (props: LinkProps) => {
+  const {
+    activeClassName = 'active',
+    className: classNameProps,
+    innerRef,
+    naked,
+    ...other
+  } = props;
+  const router = useRouter();
+
+  const className = clsx(classNameProps, {
+    [activeClassName]: router.pathname === props.href && activeClassName
+  });
+
+  if (naked) {
+    return <NextComposed className={className} ref={innerRef} {...other} />;
+  }
+
+  return <MuiLink component={NextComposed} className={className} ref={innerRef} {...other} />;
 };
 
-export type TRouterLinkProps = WithRouterProps & TLinkProps;
-
-export class Link extends Component<TRouterLinkProps, {}> {
-  render() {
-    const { onClick, target, rel, naked, className, ...other } = this.props;
-
-    if (naked) {
-      return <NextLink className={className} target={target} rel={rel} {...other} />;
-    }
-
-    return (
-      <MuiLink
-        component={NextLink}
-        onClick={onClick}
-        underline='none'
-        className={className}
-        target={target}
-        rel={rel}
-        {...other}
-      />
-    );
-  }
-}
-
-export default withRouter<TRouterLinkProps>(withInteraction(Link));
+export default React.forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => (
+  <Link {...props} innerRef={ref} />
+));

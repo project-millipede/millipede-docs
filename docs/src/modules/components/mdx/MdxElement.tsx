@@ -9,6 +9,10 @@ interface MDXProps extends React.Props<any> {
   id: string;
 }
 
+interface MDXRenderProps {
+  disableShare?: boolean;
+}
+
 export const useStyles = makeStyles((_theme: Theme) =>
   createStyles({
     headerRow: {
@@ -20,16 +24,18 @@ export const useStyles = makeStyles((_theme: Theme) =>
   })
 );
 
-const h1 = ({ children }: MDXProps) => {
-  const classes = useStyles({});
-  return (
-    <div className={classes.headerRow}>
-      <Typography variant='h1' style={{ paddingRight: '16px' }}>
-        {children}
-      </Typography>
-      <Share share={'test share'} />
-    </div>
-  );
+const h1 = ({ disableShare }: MDXRenderProps) => {
+  return ({ children }: MDXProps) => {
+    const classes = useStyles({});
+    return (
+      <div className={classes.headerRow}>
+        <Typography variant='h1' style={{ paddingRight: '16px' }}>
+          {children}
+        </Typography>
+        {!disableShare ? <Share share={'test share'} /> : null}
+      </div>
+    );
+  };
 };
 const h2 = ({ children, id }: MDXProps) => (
   <InteractiveHead component='h2' id={id}>
@@ -46,7 +52,6 @@ const h5 = ({ children }: MDXProps) => <Typography variant='h5'>{children}</Typo
 const h6 = ({ children }: MDXProps) => <Typography variant='h6'>{children}</Typography>;
 
 const components = {
-  h1,
   h2,
   h3,
   h4,
@@ -56,10 +61,20 @@ const components = {
 
 interface MdxElementProps {
   content: string;
+  disableShare: boolean;
 }
 
-const MdxElement = ({ content }: MdxElementProps) => {
-  return <MDXProvider components={components}>{content}</MDXProvider>;
+const MdxElement = ({ content, ...rest }: MdxElementProps) => {
+  return (
+    <MDXProvider
+      components={{
+        h1: h1(rest),
+        ...components
+      }}
+    >
+      {content}
+    </MDXProvider>
+  );
 };
 
 export default MdxElement;

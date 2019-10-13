@@ -6,6 +6,7 @@ import React from 'react';
 
 import { useTranslation } from '../../../../i18n';
 import { RootState } from '../redux/reducers';
+import Link from './common/link/Link';
 
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -52,8 +53,8 @@ export const AppContentFooter = () => {
         <div className={classes.pagination}>
           {prevPage ? (
             <Button
-              // component={Link}
-              // naked
+              component={Link}
+              naked
               href={prevPage.pathname}
               size='large'
               className={classes.pageLinkButton}
@@ -66,8 +67,8 @@ export const AppContentFooter = () => {
           )}
           {nextPage ? (
             <Button
-              // component={Link}
-              // naked
+              component={Link}
+              naked
               href={nextPage.pathname}
               size='large'
               className={classes.pageLinkButton}

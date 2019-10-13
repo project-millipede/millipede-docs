@@ -27,15 +27,16 @@ const useStyles = makeStyles((theme: Theme) => {
 
 interface MarkdownDocsProps extends React.Props<any> {
   content?: string;
+  raw?: string;
   meta?: any;
   ast?: any;
   headingsMap?: any;
-  raw?: string;
   disableToc?: boolean;
+  disableShare?: boolean;
 }
 
 export const MdxDocs = (props: MarkdownDocsProps) => {
-  const { content, raw, disableToc = false, children } = props;
+  const { content, raw, disableToc, disableShare, children } = props;
 
   const classes = useStyles({});
 
@@ -46,11 +47,11 @@ export const MdxDocs = (props: MarkdownDocsProps) => {
         description={headers.description || getDescription(markdown)}
       /> */}
       <Head />
-      {disableToc ? null : <AppTableOfContents content={raw} />}
+      {!disableToc ? <AppTableOfContents content={raw} /> : null}
       <AppContent>
         <AppContentHeader />
         <div className={clsx(classes.root, 'markdown-body')}>
-          {children || <MdxElement content={content} />}
+          {children || <MdxElement content={content} disableShare={disableShare} />}
         </div>
         <AppContentFooter />
       </AppContent>
