@@ -1,5 +1,5 @@
-import { CardContent, Grid, Theme, Typography } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/styles';
+import { CardContent, Grid, Typography } from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
 
 import DotsMobileStepper from '../../../../../../src/components/stepper/DotsMobileStepper';

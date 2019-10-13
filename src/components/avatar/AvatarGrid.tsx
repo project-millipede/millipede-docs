@@ -1,8 +1,7 @@
-import { Theme } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import { blue, green } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
-import { createStyles, makeStyles } from '@material-ui/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
 
 const useStyles = makeStyles((_theme: Theme) =>

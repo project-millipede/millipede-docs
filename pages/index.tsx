@@ -1,5 +1,5 @@
-import { Container, Divider, Theme, Typography } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/styles';
+import { Container, Divider, Typography } from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
 
 import AppFrame from '../docs/src/modules/components/AppFrame';
