@@ -44,11 +44,14 @@ const determineActivePage = (pages: Array<Page>, pathname: string) => {
 };
 
 const flattenPages = (pages: Array<Page>, current: Array<Page> = []) => {
-  return pages.reduce((items, item) => {
+  return pages.reduce((acc, item) => {
+    let items = [...acc];
     if (item.children && item.children.length > 1) {
-      items = flattenPages(item.children, items);
+      items = [...flattenPages(item.children, items)];
+    } else if (item.children && item.children.length === 1) {
+      items = [...items, item.children[0]];
     } else {
-      items.push(item.children && item.children.length === 1 ? item.children[0] : item);
+      items = [...items, item];
     }
     return items;
   }, current);

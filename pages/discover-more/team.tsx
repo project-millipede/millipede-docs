@@ -5,7 +5,7 @@ import MDXContentLoader, { MDXContentLoaderProps } from '../../docs/src/modules/
 type Props = MDXContentLoaderProps;
 
 const Page: FC<Props> = ({ path }) => {
-  return <MDXContentLoader path={path} disableToc />;
+  return <MDXContentLoader path={path} disableToc disableShare />;
 };
 
 Page.defaultProps = {

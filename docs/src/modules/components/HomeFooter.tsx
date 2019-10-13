@@ -73,18 +73,14 @@ export const HomeFooter = () => {
             <li>
               <Link
                 color='inherit'
-                // variant='body2'
+                variant='body2'
                 href='https://github.com/gurkerl83/millipede-docs'
               >
                 GitHub
               </Link>
             </li>
             <li>
-              <Link
-                color='inherit'
-                // variant='body2'
-                href='/discover-more/team'
-              >
+              <Link color='inherit' variant='body2' href='/discover-more/team'>
                 {t('pages./discover-more/team')}
               </Link>
             </li>
@@ -96,11 +92,7 @@ export const HomeFooter = () => {
           </Typography>
           <ul>
             <li>
-              <Link
-                color='inherit'
-                // variant='body2'
-                href='/discover-more/support'
-              >
+              <Link color='inherit' variant='body2' href='/discover-more/support'>
                 {t('pages./discover-more/support')}
               </Link>
             </li>
