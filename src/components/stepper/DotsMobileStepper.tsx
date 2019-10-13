@@ -1,9 +1,8 @@
-import { Theme } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import MobileStepper from '@material-ui/core/MobileStepper';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { useEffect, useState } from 'react';
 
 import { useTranslation } from '../../../i18n';

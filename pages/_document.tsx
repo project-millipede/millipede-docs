@@ -1,4 +1,4 @@
-import { ServerStyleSheets } from '@material-ui/styles';
+import { ServerStyleSheets } from '@material-ui/core/styles';
 import { compose } from 'compose-middleware';
 import { IncomingMessage, ServerResponse } from 'http';
 import nextI18NextMiddleware from 'next-i18next-serverless/dist/commonjs/middlewares/next-i18next-middleware';

@@ -1,6 +1,5 @@
 import Container from '@material-ui/core/Container';
-import { createStyles, Theme } from '@material-ui/core/styles';
-import { makeStyles } from '@material-ui/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
 
 interface Props extends React.Props<any> {}

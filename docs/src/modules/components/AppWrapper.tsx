@@ -1,4 +1,4 @@
-import { jssPreset, StylesProvider } from '@material-ui/styles';
+import { jssPreset, StylesProvider } from '@material-ui/core/styles';
 import { useHoux } from 'houx';
 import { create } from 'jss';
 import withRouter, { WithRouterProps } from 'next/dist/client/with-router';
