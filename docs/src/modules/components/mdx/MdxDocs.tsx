@@ -1,5 +1,4 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import clsx from 'clsx';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
 
 import AppContent from '../AppContent';
@@ -13,14 +12,9 @@ import MdxElement from './MdxElement';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
-    ...useMdStyles(theme),
-    ...createStyles({
-      header: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        flexDirection: 'row'
-      }
-    })
+    ...useMdStyles(theme)
+    // ...createStyles({
+    // })
   };
 });
 
@@ -48,11 +42,11 @@ export const MdxDocs = (props: MarkdownDocsProps) => {
       <Head />
       {!disableToc ? <AppTableOfContents content={raw} /> : null}
       <AppContent>
-        <AppContentHeader />
-        <div className={clsx(classes.root, 'markdown-body')}>
+        <div className={classes.root}>
+          <AppContentHeader />
           {children || <MdxElement content={content} disableShare={disableShare} />}
+          <AppContentFooter />
         </div>
-        <AppContentFooter />
       </AppContent>
     </AppFrame>
   );
