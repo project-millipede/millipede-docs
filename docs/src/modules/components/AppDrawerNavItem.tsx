@@ -3,9 +3,10 @@ import ListItem from '@material-ui/core/ListItem';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import withRouter, { WithRouterProps } from 'next/dist/client/with-router';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { withRouter } from 'next/router';
+import { WithRouterProps } from 'next/dist/client/with-router';
 
 interface AppDrawerNavItemProps extends React.Props<any> {
   title: string;
