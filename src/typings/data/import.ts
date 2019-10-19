@@ -15,16 +15,27 @@ export interface Allocation {
   size: GridSize;
 }
 
+export interface Description {
+  title?: Array<string>;
+  subTitle?: Array<string>;
+  text?: Array<string>;
+  listing?: Array<string>;
+  summary?: Array<string>;
+  note?: Array<string>;
+}
+
 export interface Slice {
   title?: string;
-  description?: string;
-  image: JSX.Element;
+  subTitle?: string;
+  description?: string | Array<Description>;
+  image?: JSX.Element;
 }
 
 export type Content = Allocation & Slice;
 
 export interface Stack {
-  elements: Array<Content>;
+  elements?: Array<Content>;
+  rows?: Array<Array<Content>>;
 }
 
 // TO be done

@@ -1,0 +1,287 @@
+{
+  "steps": [
+    [
+      {
+        "title": ""
+      },
+      {
+        "title": "Maßnahme zur IT-Sicherheit"
+      },
+      {
+        "title": "Maßnahme zur selbstbestimmten Handlungsfähigkeit"
+      }
+    ],
+    [
+      {
+        "title": "Motivation",
+        "subTitle": "Einflussnahme"
+      },
+      {
+        "description": [
+          {
+            "subTitle": ["Finanzielle Anreize ermöglicht durch"]
+          },
+          {
+            "listing": [
+              "Konkurrierende Unternehmen / Organisationen Störung IT-sensibler Arbeitsabläufe",
+              "Erpressung Unterbrechung des Zugriffs auf den Datenbestand im Klartext"
+            ]
+          }
+        ]
+      },
+      {
+        "description": [
+          {
+            "subTitle": ["Machtsicherung"]
+          },
+          {
+            "text": [
+              "Siehe Kapitel 5.1 – Zielsetzungen und Absichten der Akteure in den Abschnitten – Regime-orientierte Länder, terroristische Gruppen und Populismus."
+            ]
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "title": "Beeinflussung der funktionalen Fähigkeit",
+        "subTitle": "Infektion"
+      },
+      {
+        "description": [
+          {
+            "subTitle": ["Kurzer oder mittlerer Zeitrahmen"]
+          },
+          {
+            "listing": [
+              "Eine Ausweitung der technischen Einschränkung setzt sich über Organisations- oder Unternehmensgrenzen hinweg fort, indem der Angreifer eine unmittelbare Wirkung der Schadsoftware auf dem zunächst infizierten Endgerät verzögert wird.",
+              "Eine weitere Verbreitung erfolgt über das Interaktions- oder Kollaborationsgefüge des Bedieners, dessen Endgerät das Ziel eines erfolgreichen Angriffs wurde. Ein indirekter Übergriff wird möglich, indem eine erneute und automatisierte Übermittlung der E-Mail mit schadhaftem Anhang an die im digitalen Adressbuch hinterlegten Kontakte ausgeführt wird. Die weiteren Empfänger betrachten den Inhalt der Nachricht als relevant da der Ursprung der Nachricht (Adresse des Absenders) als gültig bewertet wird."
+            ]
+          },
+          {
+            "summary": [
+              "Aufgrund des Fehlens eines Verdachtsmoments wird der Infektionsradius schrittweise vergrößert."
+            ]
+          },
+          {
+            "note": [
+              "Hinweis",
+              "Die im Vorfeld ausgeführte Aussage, die Wirkung des genutzten Angriffsvektors sei ausschließlich auf eine lokale Maschine begrenzt muss unter der Betrachtung erweiterter Infektionsmuster angepasst werden."
+            ]
+          }
+        ]
+      },
+      {
+        "description": [
+          {
+            "subTitle": ["Über einen längeren Zeitrahmen hinweg"]
+          },
+          {
+            "listing": [
+              "Gesellschaftliche Problemstellungen zu denen es keinen gewohnten Lösungsweg gibt werden als Unfähigkeit der politischen Elite gewertet.",
+              "In einem zeitlich regelmäßigen Abstand etablieren sich neue Trendthemen, welche über einen ausgedehnten Zeitraum im Fokus der Medien- und Presselandschaft stehen."
+            ]
+          },
+          {
+            "note": [
+              "Die Neutralität des Medienapparats wird vom Einzelnen aufgrund der einseitigen oder oftmals wiederholten Berichterstattung angezweifelt. Dies steht im Widerspruch zu hochwertigen journalistischen Standards und der objektiven Berichterstattung mit dem Fokus dem Leser stets vorurteilsfrei eine eigene Meinungsbildung zu erlauben."
+            ]
+          },
+          {
+            "listing": [
+              "Eine funktionierende Medienlandschaft bildet ein wesentliches Instrument eines demokratischen Gefüges."
+            ]
+          },
+          {
+            "note": [
+              "Die Selbstorganisation eines solchen Gefüges wird durch die kontrollierte und zielgerichtete Erzeugung, Verbreitung oder Streuung von kritischen Inhalten gestört."
+            ]
+          },
+          {
+            "listing": [
+              "Äußere Kräfte mit großen Erfahrungen im Bereich der Propaganda zeigen die Wirkung von nachweislich gefälschten Informationen an.",
+              "Gleichgesinnte innere Kräfte eines greifen die Methoden auf und verstärken die Wirkung, indem Falschinformation mit einem verstärkten regionalen Bezug verbreitet wird."
+            ]
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "subTitle": "Lokal"
+      },
+      {
+        "description": [
+          {
+            "subTitle": ["Unmittelbarer Zeitrahmen"]
+          },
+          {
+            "listing": [
+              "Die technische Funktion eines digitalen Endgeräts oder einer Komponente der digitalen Infrastruktur wird direkt nach der Infektion kompromittiert.",
+              "Abhängig davon, auf welcher digitalen Komponente die Ausführung der Schadsoftware erfolgt ist die Wirkung auf eine einzelne Maschine beschränkt. Übernimmt diese Maschine eine wichtige Aufgabenstellung für andere Maschinen wird der Arbeitsablauf des Bedieners im Verbund unterbrochen."
+            ]
+          },
+          {
+            "note": [
+              "Hinweis",
+              "Dieser Angriffsvektor entspricht dem eines trojanischen Pferds. In der Regel wird bei dieser Art von Angriffsvektor kein Übergriff auf im (lokalen) Netzwerk angeschlossener Endgeräte ausgeführt. Die Wirkung ist auf eine lokale Maschine begrenzt. Das Ausmaß und die Folgen eines Zwischenfalls für andere oder unmittelbar unbeteiligte Teilnehmer werden durch mehrere Faktoren bestimmt. Fragestellungen, ob der elektronische Fingerabdruck (Signatur) einer Schadsoftware von einem Viren-, Spyware- Malware-, Ransomware- Filter erkannt wird oder ob, eine Schadsoftware über ein fortgeschrittenes Verhalten verfügt, die Wirkung defensiver Verfahren imstande ist zu täuschen, müssen betrachtet werden."
+            ]
+          }
+        ]
+      },
+      {
+        "description": [
+          {
+            "subTitle": ["Unmittelbarer Zeitrahmen"]
+          },
+          {
+            "listing": [
+              "Gezielte Einwirkung auf die Fähigkeit der selbstbestimmten Schlussfolgerung des Teilnehmers. Der Nutzer konsumiert Inhalte in digitalen Umgebungen meist nur oberflächlich und setzt sich mit der im Inhalt enthaltenen Aussage nicht im Detail auseinanderzusetzen.",
+              "Das gedankliche Werte- und Meinungsgebilde des Individuums wird durch",
+              " • extreme Aussagen oder",
+              " • unterbewusst wahrgenommene Botschaften beeinflusst.",
+              "Der durchschnittliche Nutzer ist sich dieser Situation oftmals nicht bewusst da Inhalte durch das eigene soziale Gefüge – der sozialräumliche Charakter (Familie, Peer Group, Milieu, Subgruppe) betrachtet werden, welche ein ähnliches Meinungs- und Wertebild vertreten."
+            ]
+          },
+          {
+            "summary": [
+              "Eine auf eigenständige Art und Weise ausgeführte Bewertung der in einem Inhalt enthaltenen Aussage ist nicht möglich, da es wenigstens eine bewertende Stimme eines Teilnehmers gibt, über den fremde Inhalte in den Sichtbereich des Nutzers propagiert werden – siehe Kapitel 20.2.4.5.4 – Eintritt externer oder fremder Inhalte in das Innere eines sozialen Gefüges."
+            ]
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "title": "Verhalten",
+        "subTitle": "Verstärkung der Wirkung durch Interaktion"
+      },
+
+      {
+        "description": [
+          {
+            "subTitle": ["Fehlverhalten – durch eine Interaktion ausgelöst"]
+          },
+          {
+            "listing": [
+              "von ungeschulten Mitarbeitern im Unternehmen im Umgang mit Daten, welche aus nicht vertrauenswürdigen Quellen empfangen werden."
+            ]
+          },
+          {
+            "summary": [
+              "Der Faktor Mensch bildet das schwächste Glied in der Kette von Maßnahmen zu IT-Sicherheit"
+            ]
+          }
+        ]
+      },
+      {
+        "description": [
+          {
+            "subTitle": ["Fehlverhalten – durch eine Interaktion ausgelöst"]
+          },
+          {
+            "listing": [
+              "von Menschen deren Meinungsbild im Vorfeld gezielt manipuliert wurde – siehe Kapitel 21.7.2 – Ambivalenz der Medien in den Unterkapiteln Simplifizierung / Personalisierung, Passivität, Scheinwelten sowie der gezielten Thematisierung"
+            ]
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "subTitle": "Eintritt in das Sichtfeld des Menschen"
+      },
+      {
+        "description": [
+          {
+            "text": [
+              "Authentische und kritische Inhalte werden vom Nutzer nebenläufig konsumiert. Der Anbieter eines elektrischen Postfachs klassifiziert den eingehenden Nachrichtenstrom – Posteingang / Spam. Eine Klassifikation erfolgt, indem die Anzahl der Übersendungen einer identischen Nachricht auf andere Postfächer gemessen wird (Streuung) oder anhand des in einer Nachricht enthaltenen Musters der Wortfolge. Trotz eines aktiven Verfahrens ist die Klassifikation nicht zu 100% verlässlich."
+            ]
+          },
+          {
+            "summary": ["Der Nutzer konsumiert Inhalte, welche als Spam klassifiziert werden."]
+          }
+        ]
+      },
+      {
+        "description": [
+          {
+            "text": [
+              "Der Betreiber einer Social-Media Anwendung bestimmt die Zusammensetzung der im Inhalte- oder Nachrichtenstrom enthaltenen Inhalte.  Der Nutzer konsumiert authentische und kritische Inhalte nebenläufig. Aufgrund des typischen Nutzerverhaltens mehrere Inhalte im Inhalte- oder Nachrichtenstrom in einer nur sehr kurzen Zeitspanne zu konsumieren setzt sich der Nutzer nicht mehr im Detail mit der in einem Inhalt enthaltenen Aussage auseinander. "
+            ]
+          },
+          {
+            "summary": [
+              "Die in einem kritischen Inhalt kommunizierte Aussage verändert das Meinungs- und Entscheidungsverhalten schrittweise."
+            ]
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "title": "Werkzeuge",
+        "subTitle": "Methode der Distribution"
+      },
+      {
+        "description": [
+          {
+            "text": [
+              "Die Verteilung oder Streuung eines kompromittierten Datums erfolgen durch eine primäre, zur digitalen Kommunikation genutzte Technologie.",
+              "Jeder Internetnutzer verfügt über ein elektronisches Postfach."
+            ]
+          }
+        ]
+      },
+      {
+        "description": [
+          {
+            "text": [
+              "Das in Social-Media Anwendungen genutzte virale Distributionsmodell ist ideal zur kontrollierten und zielgerichteten Verbreitung oder Streuung von (kritischen) Inhalten geeignet.",
+              "Der Großteil der Internetnutzer verwendet Social-Media Anwendungen im täglichen Gebrauch, um im digital abgebildeten sozialen Gefüge teilzunehmen."
+            ]
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "subTitle": "Träger"
+      },
+      {
+        "description": [
+          {
+            "subTitle": ["Die Integrität eines Datums wird kompromittiert."],
+            "text": [
+              "Die Integrität eines Datums wird kompromittiert.",
+              "Schadhafte Software wird durch eine Interaktion des Nutzers mit dem Träger am System eingespielt.",
+              "Als Träger eignet sich etwa der an eine E-Mail beigefügte Anhänge.",
+              "Gefälschte Adressen des Absenders und Inhalte einer E-Mail täuschen eine für den Nutzer vermeintlich wichtige Information vor",
+              "Dieser Angriffsvektor entspricht dem eines trojanischen Pferds und wird seit dem Bestehen dieser Kommunikationsform zur Verbreitung von Spy-, und Ransomware missbraucht."
+            ]
+          },
+          {
+            "note": [
+              "Hinweis",
+              "Andere Angriffsvektoren basieren im Wesentlichen auf",
+              "- bekannten, aber durch den Hersteller nicht behobenen",
+              "- oder nicht offengelegten Schwachstellen in Software oder Hardwarekomponenten.",
+              "Diese Angriffsvektoren setzen kein Trägermaterial (keine Interaktion des Nutzers) voraus um eine schadhafte Komponente in ein System einzuspielen.",
+              "Die Wirkung von Schadsoftware kann oft durch den Einsatz von Sicherheitssoftware neutralisiert werden.",
+              "Entsprechende Verfahren werden an dieser Stelle nicht näher betrachtet."
+            ]
+          }
+        ]
+      },
+      {
+        "description": [
+          {
+            "text": [
+              "Versteckte oder extreme Botschaften werden in Beiträge eingebettet, welche im Inhalte- oder Nachrichtenstrom einer Social-Media Anwendung kommuniziert werden."
+            ]
+          }
+        ]
+      }
+    ]
+  ]
+}
