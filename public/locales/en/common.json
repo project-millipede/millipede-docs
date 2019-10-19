@@ -23,6 +23,7 @@
     "/guides": "Guides",
     "/guides/landing": "Landing",
     "/guides/api": "API",
+    "/guides/attackVectors/comparison": "Attack vectors",
     "/pidp": "PID/P",
     "/pidp/landing": "Landing",
     "/pidp/approach": "Approach",

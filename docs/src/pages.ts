@@ -61,6 +61,11 @@ export const pagesCommon: Array<Page> = [
         pathname: '/guides/api',
         icon: 'star',
         highlight: true
+      },
+      {
+        pathname: '/guides/attackVectors/comparison',
+        icon: 'star',
+        highlight: true
       }
     ]
   },
