@@ -1,3 +1,4 @@
+import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import ShareIcon from '@material-ui/icons/Share';
 import SpeedDial from '@material-ui/lab/SpeedDial';
@@ -8,7 +9,6 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 import { useTranslation } from 'react-i18next';
-import styled from 'styled-components';
 
 import {
   Interaction,
@@ -26,9 +26,18 @@ import Modal from './Modal';
 
 const isBrowser = typeof window !== 'undefined';
 
-const StyledSpeedDial = styled(SpeedDial)`
-  align-self: flex-start;
-`;
+const useStyles = makeStyles((_theme: Theme) =>
+  createStyles({
+    speedDial: {
+      height: '56px',
+      paddingTop: '8px',
+      '&.MuiSpeedDial-directionDown': {
+        display: 'unset',
+        flexDirection: 'unset'
+      }
+    }
+  })
+);
 
 export interface MarkupProps {
   sharingOpen: boolean;
@@ -193,9 +202,11 @@ const Markup = ({ sharingOpen, toggleSharingOpen, toggleModal, modal }: MarkupPr
   const router = useRouter();
   const { t } = useTranslation();
 
+  const classes = useStyles({});
+
   return (
     <React.Fragment>
-      <StyledSpeedDial
+      <SpeedDial
         ariaLabel={t('share-post')}
         icon={<SpeedDialIcon icon={<ShareIcon />} openIcon={<CloseIcon />} />}
         onClick={toggleSharingOpen}
@@ -204,9 +215,10 @@ const Markup = ({ sharingOpen, toggleSharingOpen, toggleModal, modal }: MarkupPr
         onMouseLeave={toggleSharingOpen}
         open={sharingOpen}
         direction='down'
+        className={classes.speedDial}
       >
         {createButtons(toggleModal, toggleSharingOpen, router.pathname, t)}
-      </StyledSpeedDial>
+      </SpeedDial>
       <Modal open={!!modal} closeModal={() => toggleModal(null)} url={modal} />
     </React.Fragment>
   );

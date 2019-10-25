@@ -44,11 +44,10 @@ const ByExample = ({ rows = [[]] }: Stack) => {
     return (
       <Grid container spacing={1}>
         {row.map((column, _index) => {
-          let result = [];
+          let intermediateResult = [];
 
           if (_.isArray(column.description)) {
-            result = column.description.map(description => {
-              console.log(description);
+            intermediateResult = column.description.map(description => {
               return (
                 <>
                   {description.subTitle && description.subTitle.length > 0
@@ -92,20 +91,19 @@ const ByExample = ({ rows = [[]] }: Stack) => {
           }
 
           return (
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} md={4}>
               <>
                 {column.title ? (
                   <Typography variant='subtitle1' className={classes.title}>
                     {column.title}
                   </Typography>
                 ) : null}
-
                 {column.subTitle ? (
                   <Typography variant='subtitle1' className={classes.subTitle}>
                     {column.subTitle}
                   </Typography>
                 ) : null}
-                {result}
+                {intermediateResult}
               </>
             </Grid>
           );
