@@ -1,13 +1,13 @@
 import { jssPreset, StylesProvider } from '@material-ui/core/styles';
 import { useHoux } from 'houx';
 import { create } from 'jss';
+import { WithRouterProps } from 'next/dist/client/with-router';
+import { withRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
 import { NavigationActions } from '../redux/features/actionType';
 import { loadPages } from '../redux/features/navigation/actions';
 import { ThemeProvider } from './ThemeProvider';
-import { withRouter } from 'next/router';
-import { WithRouterProps } from 'next/dist/client/with-router';
 
 interface OProps extends React.Props<any> {}
 

@@ -1,11 +1,11 @@
 import { Breadcrumbs as MaterialBreadcrumbs, Button } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import { WithRouterProps } from 'next/dist/client/with-router';
 import Link from 'next/link';
+import { withRouter } from 'next/router';
 import React from 'react';
 
 import { useTranslation } from '../../../../../../i18n';
-import { withRouter } from 'next/router';
-import { WithRouterProps } from 'next/dist/client/with-router';
 
 interface Props extends WithRouterProps {}
 

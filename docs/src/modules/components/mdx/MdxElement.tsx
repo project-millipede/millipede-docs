@@ -17,9 +17,7 @@ export const useStyles = makeStyles((_theme: Theme) =>
   createStyles({
     headerRow: {
       display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      height: '56px'
+      flexDirection: 'row'
     }
   })
 );
