@@ -3,10 +3,10 @@
     [
       {},
       {
-        "title": "Measure towards IT security"
+        "title": "Measure towards digital security"
       },
       {
-        "title": "Measure towards self-determined ability to act"
+        "title": "Measure towards self-determined ability to act"
       }
     ],
     [
@@ -17,11 +17,11 @@
       {
         "description": [
           {
-            "subTitle": ["Financial incentives made possible by"]
+            "subTitle": ["Financial incentives made possible by"]
           },
           {
             "listing": [
-              "Competing companies / organizations - Disruption of IT-sensitive workflows",
+              "Competing companies / organizations - Disruption of IT-sensitive workflows",
               "Extortion - Interruption of access to the database in plain text"
             ]
           }
@@ -30,7 +30,7 @@
       {
         "description": [
           {
-            "subTitle": ["Safeguarding power"]
+            "subTitle": ["Safeguarding power"]
           },
           {
             "text": [
@@ -244,21 +244,29 @@
     ],
     [
       {
-        "subTitle": "Täger"
+        "subTitle": "Carrier"
       },
       {
         "description": [
           {
+            "subTitle": ["The integrity of a data gets compromised."],
             "text": [
               "Die Integrität eines Datums wird kompromittiert.",
-              "Dieser Angriffsvektor entspricht dem eines trojanischen Pferds (Spyware, Ransomware)."
+              "Schadhafte Software wird durch eine Interaktion des Nutzers mit einem Träger am System eingespielt.",
+              "Als Träger eignet sich etwa der an eine E-Mail beigefügte Anhang.",
+              "Gefälschte Absenderadressen und Inhalte in der Betreffzeile einer E-Mail täuschen eine für den Nutzer vermeintlich wichtige Information vor.",
+              "Dieser Angriffsvektor entspricht dem eines trojanischen Pferds und wird seit dem Bestehen dieser Kommunikationsform zur Verbreitung von Spy-, und Ransomware missbraucht."
             ]
           },
           {
             "note": [
               "Hinweis",
-              "Andere Angriffsvektoren basieren im Wesentlichen auf bekannten oder nicht offengelegten Sicherheitslücken in Software oder Hardware.",
-              "Diese Angriffsvektoren setzen kein Trägermaterial voraus um mit dem durchschnittlichen Nutzer zu interagieren. Die Wirkung von Schadsoftware kann oft durch den Einsatz von Sicherheitssoftware neutralisiert werden. Diese Verfahren werden an dieser Stelle nicht näher betrachtet."
+              "Andere Angriffsvektoren basieren im Wesentlichen auf",
+              "- bekannten, aber durch den Hersteller nicht behobenen",
+              "- oder nicht offengelegten Schwachstellen in Software oder Hardwarekomponenten.",
+              "Diese Angriffsvektoren setzen kein Trägermaterial (keine Interaktion des Nutzers) voraus um eine schadhafte Komponente in ein System einzuspielen.",
+              "Die Wirkung von Schadsoftware kann oft durch den Einsatz von Sicherheitssoftware neutralisiert werden.",
+              "Entsprechende Verfahren werden an dieser Stelle nicht näher betrachtet."
             ]
           }
         ]
@@ -267,7 +275,7 @@
         "description": [
           {
             "text": [
-              "Versteckte oder extreme Botschaften werden in Beiträgen eingebettet, welche im Inhalte- oder Nachrichtenstrom einer Social-Media Anwendung kommuniziert wird."
+              "Versteckte oder extreme Botschaften werden in Beiträge eingebettet, welche im Inhalte- oder Nachrichtenstrom einer Social-Media Anwendung kommuniziert werden."
             ]
           }
         ]
