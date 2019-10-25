@@ -51,7 +51,7 @@
     "lodash": "^4.17.15",
     "mdast-util-to-string": "^1.0.6",
     "mdast-util-toc": "^4.2.0",
-    "next": "^9.1.2-canary.8",
+    "next": "^9.1.2-canary.7",
     "next-i18next-serverless": "^1.1.43",
     "polished": "^3.4.1",
     "react": "^16.10.2",
