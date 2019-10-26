@@ -24,8 +24,8 @@ const use = ({ t }: Props) => {
 
 use.getInitialProps = async () => {
   return {
-    namespacesRequired: ['pages/guides/attackVectors/comparison/content']
+    namespacesRequired: ['pages/rethink-security/attackVectors/comparison/content']
   };
 };
 
-export default withTranslation('pages/guides/attackVectors/comparison/content')(use);
+export default withTranslation('pages/rethink-security/attackVectors/comparison/content')(use);

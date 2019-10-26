@@ -18,7 +18,13 @@ export const loadPages = (pathname: string, currentPages: Array<Page>) => {
       return _.some([link, ...(link.children || [])], linkIncludesText);
     }).length > 0
   ) {
-    return [...pagesCommon, ...pagesPET, ...pagesPerspective, ...pagesDiscoverMore];
+    return [
+      ...pagesCommon,
+      ...pagesRethinkSecurity,
+      ...pagesPET,
+      ...pagesPerspective,
+      ...pagesDiscoverMore
+    ];
   }
 
   if (
@@ -26,7 +32,21 @@ export const loadPages = (pathname: string, currentPages: Array<Page>) => {
       return _.some([link, ...(link.children || [])], linkIncludesText);
     }).length > 0
   ) {
-    return [...pagesCommon, ...pagesPIDP, ...pagesPerspective, ...pagesDiscoverMore];
+    return [
+      ...pagesCommon,
+      ...pagesRethinkSecurity,
+      ...pagesPIDP,
+      ...pagesPerspective,
+      ...pagesDiscoverMore
+    ];
+  }
+
+  if (
+    pagesRethinkSecurity.filter(link => {
+      return _.some([link, ...(link.children || [])], linkIncludesText);
+    }).length > 0
+  ) {
+    return [...currentPages];
   }
 
   if (
@@ -67,16 +87,6 @@ export const pagesCommon: Array<Page> = [
       },
       {
         pathname: '/guides/api',
-        icon: 'star',
-        highlight: true
-      },
-      {
-        pathname: '/guides/attackVectors',
-        icon: 'star',
-        highlight: true
-      },
-      {
-        pathname: '/guides/attackVectors/comparison',
         icon: 'star',
         highlight: true
       }
@@ -128,6 +138,23 @@ export const pagesPET: Array<Page> = [
       },
       {
         pathname: '/common/dataflow/comparison',
+        icon: 'star'
+      }
+    ]
+  }
+];
+
+export const pagesRethinkSecurity: Array<Page> = [
+  {
+    pathname: '/rethink-security',
+    icon: 'star',
+    children: [
+      {
+        pathname: '/rethink-security/attackVectors',
+        icon: 'star'
+      },
+      {
+        pathname: '/rethink-security/attackVectors/comparison',
         icon: 'star'
       }
     ]
