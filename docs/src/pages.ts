@@ -18,7 +18,7 @@ export const loadPages = (pathname: string, currentPages: Array<Page>) => {
       return _.some([link, ...(link.children || [])], linkIncludesText);
     }).length > 0
   ) {
-    return [...pagesCommon, ...pagesPET, ...pagesDiscoverMore];
+    return [...pagesCommon, ...pagesPET, ...pagesPerspective, ...pagesDiscoverMore];
   }
 
   if (
@@ -26,11 +26,19 @@ export const loadPages = (pathname: string, currentPages: Array<Page>) => {
       return _.some([link, ...(link.children || [])], linkIncludesText);
     }).length > 0
   ) {
-    return [...pagesCommon, ...pagesPIDP, ...pagesDiscoverMore];
+    return [...pagesCommon, ...pagesPIDP, ...pagesPerspective, ...pagesDiscoverMore];
   }
 
   if (
     pagesDiscoverMore.filter(link => {
+      return _.some([link, ...(link.children || [])], linkIncludesText);
+    }).length > 0
+  ) {
+    return [...currentPages];
+  }
+
+  if (
+    pagesPerspective.filter(link => {
       return _.some([link, ...(link.children || [])], linkIncludesText);
     }).length > 0
   ) {
@@ -120,6 +128,35 @@ export const pagesPET: Array<Page> = [
       },
       {
         pathname: '/common/dataflow/comparison',
+        icon: 'star'
+      }
+    ]
+  }
+];
+
+export const pagesPerspective: Array<Page> = [
+  {
+    pathname: '/perspective',
+    icon: 'star',
+    children: [
+      {
+        pathname: '/perspective/strategy',
+        icon: 'star'
+      },
+      {
+        pathname: '/perspective/cause',
+        icon: 'star'
+      },
+      {
+        pathname: '/perspective/shortsighted',
+        icon: 'star'
+      },
+      {
+        pathname: '/perspective/competence',
+        icon: 'star'
+      },
+      {
+        pathname: '/perspective/reference',
         icon: 'star'
       }
     ]
