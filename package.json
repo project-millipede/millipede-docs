@@ -26,7 +26,8 @@
     "dev": "npm run loader:build && npm run app:build && npm run next:dev",
     "start": "npm run loader:build && npm run app:build && npm run next:build && npm run next:start",
     "now-build": "npm run loader:build && npm run app:build && npm run next:build",
-    "clean": "rm -rf dist/ .next/"
+    "clean": "rm -rf dist/ .next/",
+    "format:mdx": "prettier --parser mdx --print-width 80 --prose-wrap always --write \"docs/src/pages/**/*.mdx\""
   },
   "main": "index.js",
   "dependencies": {
