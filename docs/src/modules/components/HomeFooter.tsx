@@ -92,6 +92,11 @@ export const HomeFooter = () => {
           </Typography>
           <ul>
             <li>
+              <Link color='inherit' variant='body2' href='/discover-more/organisation'>
+                {t('pages./discover-more/organisation')}
+              </Link>
+            </li>
+            <li>
               <Link color='inherit' variant='body2' href='/discover-more/support'>
                 {t('pages./discover-more/support')}
               </Link>
