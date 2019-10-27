@@ -105,7 +105,8 @@ export const pagesDiscoverMore: Array<Page> = [
     highlight: true,
     children: [
       { pathname: '/discover-more/support', icon: 'star', highlight: true },
-      { pathname: '/discover-more/team', icon: 'star', highlight: true }
+      { pathname: '/discover-more/team', icon: 'star', highlight: true },
+      { pathname: '/discover-more/organisation', icon: 'star', highlight: true }
     ]
   }
 ];
