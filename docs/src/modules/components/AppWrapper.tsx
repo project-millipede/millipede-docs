@@ -4,6 +4,7 @@ import { create } from 'jss';
 import { WithRouterProps } from 'next/dist/client/with-router';
 import { withRouter } from 'next/router';
 import React, { useEffect } from 'react';
+import ReactGA from 'react-ga';
 
 import { NavigationActions } from '../redux/features/actionType';
 import { loadPages } from '../redux/features/navigation/actions';
@@ -31,6 +32,7 @@ const AppWrapper = ({ children, router }: Props) => {
 
   useEffect(() => {
     dispatch(loadPages(router.pathname));
+    ReactGA.pageview(router.pathname);
   }, [router.pathname]);
 
   // return (

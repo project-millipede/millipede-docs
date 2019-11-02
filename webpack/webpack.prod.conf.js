@@ -11,6 +11,17 @@ const setFs = isServer => {
   return true;
 };
 
+const setSentry = isServer => {
+  if (!isServer) {
+    return {
+      '@sentry/node': '@sentry/browser'
+    };
+  }
+  return {
+    '@sentry/node': '@sentry/node'
+  };
+};
+
 const webpackConfig = ({ isServer }) => {
   return {
     mode: 'production',
@@ -20,7 +31,8 @@ const webpackConfig = ({ isServer }) => {
     },
 
     resolve: {
-      extensions: ['.js', '.jsx', '.ts', '.tsx', '.json']
+      extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+      alias: setSentry(isServer)
     },
 
     module: {
