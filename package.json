@@ -27,7 +27,8 @@
     "start": "npm run loader:build && npm run app:build && npm run next:build && npm run next:start",
     "now-build": "npm run loader:build && npm run app:build && npm run next:build",
     "clean": "rm -rf dist/ .next/",
-    "format:mdx": "prettier --parser mdx --print-width 80 --prose-wrap always --write \"docs/src/pages/**/*.mdx\""
+    "format:mdx": "prettier --parser mdx --print-width 80 --prose-wrap always --write \"docs/src/pages/**/*.mdx\"",
+    "sitemap": "node sitemap-generator"
   },
   "main": "index.js",
   "dependencies": {
@@ -100,6 +101,7 @@
     "eslint-plugin-react-hooks": "^2.2.0",
     "esm": "^3.2.25",
     "loader-utils": "^1.2.3",
+    "nextjs-sitemap-generator": "^0.3.2",
     "prettier": "^1.18.2",
     "raw-loader": "^3.1.0",
     "ts-loader": "^6.2.1",
