@@ -1,4 +1,4 @@
-import mdastToc from 'mdast-util-toc';
+import mdastToc, { TOCOptions } from 'mdast-util-toc';
 import { Node, Parent } from 'unist';
 
 const findExistingToc = (root: Parent) => {
@@ -19,21 +19,12 @@ const findExistingToc = (root: Parent) => {
   return toc;
 };
 
-const generateTocFromContent = (node: Node, maxDepth: number, tight: boolean) => {
-  const result = mdastToc(node, {
-    maxDepth,
-    tight
-  });
+const generateTocFromContent = (node: Node, options: TOCOptions) => {
+  const result = mdastToc(node, options);
   return result;
 };
 
-export interface Options {
-  maxDepth: number;
-  tight: boolean;
-}
-
-export const transform = (options: Options) => (tree: Parent): Node | Error | Promise<Node> => {
-  const { maxDepth, tight } = options;
+export const transform = (options: TOCOptions) => (tree: Parent): Node | Error | Promise<Node> => {
   const existingToc = findExistingToc(tree);
 
   const treeModified: Parent = {
@@ -43,7 +34,7 @@ export const transform = (options: Options) => (tree: Parent): Node | Error | Pr
   if (existingToc) {
     treeModified.children = existingToc;
   } else {
-    const result = generateTocFromContent(tree, maxDepth, tight);
+    const result = generateTocFromContent(tree, options);
     if (result.map) {
       treeModified.children = [result.map];
     } else {
