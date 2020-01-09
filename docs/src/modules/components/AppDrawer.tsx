@@ -20,31 +20,6 @@ const drawerWidth = 240;
 
 const useDrawerStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      display: 'flex'
-    },
-    appBar: {
-      zIndex: theme.zIndex.drawer + 1,
-      transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen
-      })
-    },
-    appBarShift: {
-      marginLeft: drawerWidth,
-      width: `calc(100% - ${drawerWidth}px)`,
-      transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen
-      })
-    },
-    menuButton: {
-      marginRight: 36
-    },
-    hide: {
-      display: 'none'
-    },
-
     drawer: {
       width: drawerWidth,
       flexShrink: 0,
@@ -72,12 +47,10 @@ const useDrawerStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-end',
+      // at original
+      // padding: theme.spacing(0, 1),
       padding: '0 8px',
       ...theme.mixins.toolbar
-    },
-    content: {
-      flexGrow: 1,
-      padding: theme.spacing(3)
     },
     drawerPaper: {
       width: drawerWidth
@@ -109,7 +82,9 @@ interface DrawerReduceProps {
 const AppDrawer = (props: AppDrawerProps) => {
   const { isDrawerOpen, handleDrawerClose, drawerStyleOverride } = props;
 
-  const classes = useDrawerStyles(drawerStyleOverride ? drawerStyleOverride.drawer : {});
+  const classes = useDrawerStyles(
+    drawerStyleOverride ? drawerStyleOverride.drawer : {}
+  );
 
   const theme: Theme = useTheme();
 
@@ -142,7 +117,11 @@ const AppDrawer = (props: AppDrawerProps) => {
       >
         <div className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            {theme.direction === 'rtl' ? (
+              <ChevronRightIcon />
+            ) : (
+              <ChevronLeftIcon />
+            )}
           </IconButton>
         </div>
         <Divider />
@@ -169,7 +148,11 @@ const AppDrawer = (props: AppDrawerProps) => {
       >
         <div className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            {theme.direction === 'rtl' ? (
+              <ChevronRightIcon />
+            ) : (
+              <ChevronLeftIcon />
+            )}
           </IconButton>
         </div>
         <Divider />
@@ -192,7 +175,9 @@ const AppDrawer = (props: AppDrawerProps) => {
     if (currentPage.children && currentPage.children.length > 1) {
       const title = t(`pages.${currentPage.pathname}`);
 
-      const topLevel = activePage && activePage.pathname.indexOf(`${currentPage.pathname}/`) === 0;
+      const topLevel =
+        activePage &&
+        activePage.pathname.indexOf(`${currentPage.pathname}/`) === 0;
 
       return [
         ...acc,
@@ -234,12 +219,16 @@ const AppDrawer = (props: AppDrawerProps) => {
     ];
   };
 
-  const renderNavItems = (pages: Array<Page>, drawerContext: DrawerContextProps) => {
+  const renderNavItems = (
+    pages: Array<Page>,
+    drawerContext: DrawerContextProps
+  ) => {
     const initValue: Array<JSX.Element> = [];
     return (
       <List dense>
         {pages.reduce(
-          (acc, currentPage) => reduceChildRoutes({ acc, currentPage }, drawerContext),
+          (acc, currentPage) =>
+            reduceChildRoutes({ acc, currentPage }, drawerContext),
           initValue
         )}
       </List>

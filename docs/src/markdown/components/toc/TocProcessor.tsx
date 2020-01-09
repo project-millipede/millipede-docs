@@ -33,7 +33,8 @@ export const generateProcessor = (
               {...props}
             />
           );
-        }
+        },
+
         // ul: props => (
         //   <TocLink
         //     initialvalue={10}
@@ -52,6 +53,16 @@ export const generateProcessor = (
         //     {...props}
         //   />
         // )
+
+        h5: props => (
+          <TocLink
+            initialvalue={10}
+            activeState={activeState}
+            scrollToLink={scrollToLink}
+            secondary={false}
+            {...props}
+          />
+        )
       }
     });
   return processor;
