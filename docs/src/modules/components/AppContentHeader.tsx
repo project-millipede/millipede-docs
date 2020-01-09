@@ -20,16 +20,20 @@ interface MarkdownDocsProps {
   markdownLocation?: string;
 }
 
-const SOURCE_CODE_ROOT_URL = 'https://github.com/gurkerl83/millipede-docs/blob/master/docs/src';
+const SOURCE_CODE_ROOT_URL =
+  'https://github.com/project-millipede/millipede-docs/blob/master/docs/src';
 
-export const AppContentHeader = ({ markdownLocation }: MarkdownDocsProps) => {
+const AppContentHeader = ({ markdownLocation }: MarkdownDocsProps) => {
   const classes = useStyles({});
 
   return !isMobileOnly ? (
     <div className={classes.headerRow}>
       <Breadcrumbs />
       {markdownLocation ? (
-        <Editpage markdownLocation={markdownLocation} sourceCodeRootUrl={SOURCE_CODE_ROOT_URL} />
+        <Editpage
+          markdownLocation={markdownLocation}
+          sourceCodeRootUrl={SOURCE_CODE_ROOT_URL}
+        />
       ) : null}
     </div>
   ) : null;

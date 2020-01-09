@@ -7,7 +7,8 @@ import { RootState } from '../redux/reducers';
 
 const LOCALES = { zh: 'zh-CN', pt: 'pt-BR', es: 'es-ES' };
 const CROWDIN_ROOT_URL = 'https://crowdin.com/project/project-millipede';
-const SOURCE_CODE_ROOT_URL = 'https://github.com/gurkerl83/millipede-docs/edit/master';
+const SOURCE_CODE_ROOT_URL =
+  'https://github.com/project-millipede/millipede-docs/edit/master';
 
 export interface EditPageProps {
   markdownLocation: string;
@@ -21,7 +22,10 @@ export const EditPage = ({ markdownLocation }: EditPageProps) => {
   const { t } = useTranslation();
 
   const crowdInLocale = LOCALES[userLanguage] || userLanguage;
-  const crowdInPath = markdownLocation.substring(0, markdownLocation.lastIndexOf('/'));
+  const crowdInPath = markdownLocation.substring(
+    0,
+    markdownLocation.lastIndexOf('/')
+  );
 
   return (
     <Button

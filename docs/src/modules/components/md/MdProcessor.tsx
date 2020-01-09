@@ -15,10 +15,10 @@ export const generateProcessor = () => {
       sanitize: { clobberPrefix: '' }, // remove 'user-content' string from generated ids
       remarkReactComponents: {
         h2: props => {
-          return <InteractiveHead component={'h2'} {...props} />;
+          return <InteractiveHead variant={'h2'} {...props} />;
         },
         h3: props => {
-          return <InteractiveHead component={'h3'} {...props} />;
+          return <InteractiveHead variant={'h3'} {...props} />;
         }
       }
     });

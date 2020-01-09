@@ -31,7 +31,7 @@ export const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const AppContentFooter = () => {
+const AppContentFooter = () => {
   const classes = useStyles({});
 
   const { t } = useTranslation();
@@ -42,7 +42,9 @@ export const AppContentFooter = () => {
     }
   }: { state: RootState } = useHoux();
 
-  const currentPageNum = flattenedPages.findIndex(page => page.pathname === activePage.pathname);
+  const currentPageNum = flattenedPages.findIndex(
+    page => page.pathname === activePage.pathname
+  );
   const prevPage = flattenedPages[currentPageNum - 1];
   const nextPage = flattenedPages[currentPageNum + 1];
 
@@ -59,7 +61,10 @@ export const AppContentFooter = () => {
               size='large'
               className={classes.pageLinkButton}
             >
-              <ChevronLeftIcon fontSize='small' className={classes.chevronLeftIcon} />
+              <ChevronLeftIcon
+                fontSize='small'
+                className={classes.chevronLeftIcon}
+              />
               {t(`pages.${prevPage.pathname}`)}
             </Button>
           ) : (
@@ -74,7 +79,10 @@ export const AppContentFooter = () => {
               className={classes.pageLinkButton}
             >
               {t(`pages.${nextPage.pathname}`)}
-              <ChevronRightIcon fontSize='small' className={classes.chevronRightIcon} />
+              <ChevronRightIcon
+                fontSize='small'
+                className={classes.chevronRightIcon}
+              />
             </Button>
           ) : null}
         </div>

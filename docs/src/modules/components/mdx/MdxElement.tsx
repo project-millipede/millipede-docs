@@ -36,18 +36,24 @@ const h1 = ({ disableShare }: MDXRenderProps) => {
   };
 };
 const h2 = ({ children, id }: MDXProps) => (
-  <InteractiveHead component='h2' id={id}>
+  <InteractiveHead variant='h2' id={id}>
     {children}
   </InteractiveHead>
 );
 const h3 = ({ children, id }: MDXProps) => (
-  <InteractiveHead component='h3' id={id}>
+  <InteractiveHead variant='h3' id={id}>
     {children}
   </InteractiveHead>
 );
-const h4 = ({ children }: MDXProps) => <Typography variant='h4'>{children}</Typography>;
-const h5 = ({ children }: MDXProps) => <Typography variant='h5'>{children}</Typography>;
-const h6 = ({ children }: MDXProps) => <Typography variant='h6'>{children}</Typography>;
+const h4 = ({ children }: MDXProps) => (
+  <Typography variant='h4'>{children}</Typography>
+);
+const h5 = ({ children }: MDXProps) => (
+  <Typography variant='h5'>{children}</Typography>
+);
+const h6 = ({ children }: MDXProps) => (
+  <Typography variant='h6'>{children}</Typography>
+);
 
 const components = {
   h2,
