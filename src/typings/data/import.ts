@@ -19,9 +19,14 @@ export interface Description {
   title?: Array<string>;
   subTitle?: Array<string>;
   text?: Array<string>;
-  listing?: Array<string>;
+  listing?: Array<Link>;
   summary?: Array<string>;
   note?: Array<string>;
+}
+
+export interface Link {
+  text: string;
+  link: string;
 }
 
 export interface Slice {
@@ -34,8 +39,32 @@ export interface Slice {
 export type Content = Allocation & Slice;
 
 export interface Stack {
-  elements?: Array<Content>;
+  elements?: Array<Content> | Category;
   rows?: Array<Array<Content>>;
+  categories?: CategoryDescriptor;
+}
+
+export interface Stack2 {
+  elements?: Category;
+  rows?: Array<Array<Content>>;
+  categories?: CategoryDescriptor;
+}
+
+export interface Category {
+  [category: string]: Array<OverviewProps>;
+}
+
+export interface Scenario {
+  [szenario: string]: Category;
+}
+
+export interface Descriptor {
+  id: string;
+  title: string;
+  step: number;
+}
+export interface CategoryDescriptor {
+  [category: string]: Descriptor;
 }
 
 // TO be done
@@ -50,10 +79,27 @@ export interface OverviewStep {
   imgPath?: string;
 }
 
+export interface Section {
+  type: 'string';
+  icon: 'string';
+}
+
+export interface ContextLink {
+  id: string;
+  perspectives: Array<Section>;
+}
+
 export interface OverviewProps {
-  title?: string;
-  description?: string;
-  letter: Array<string>;
-  link: string;
-  steps: Array<OverviewStep>;
+  title?: Array<string> | string;
+  subTitle?: Array<string> | string;
+  description?: Array<Description>;
+  letter?: Array<string>;
+  link?: string;
+  steps?: Array<OverviewStep>;
+  scenario?: string;
+  category?: string;
+  icon?: string;
+  order?: number;
+  userFocus?: number;
+  contextLink?: ContextLink;
 }
