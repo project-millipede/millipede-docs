@@ -6,6 +6,7 @@ export const useMdStyles = (theme: Theme) =>
       fontFamily: theme.typography.fontFamily,
       fontSize: 16,
       color: theme.palette.text.primary,
+      wordBreak: 'break-word',
       '& .anchor-link': {
         marginTop: -96, // Offset for the anchor.
         position: 'absolute'
@@ -13,7 +14,7 @@ export const useMdStyles = (theme: Theme) =>
       '& pre': {
         margin: '24px 0',
         padding: '12px 18px',
-        backgroundColor: '#333',
+        backgroundColor: '#272c34',
         direction: 'ltr',
         borderRadius: theme.shape.borderRadius,
         overflow: 'auto',
@@ -26,12 +27,14 @@ export const useMdStyles = (theme: Theme) =>
         padding: '2px 6px',
         color: theme.palette.text.primary,
         backgroundColor:
-          theme.palette.type === 'dark' ? 'rgba(255,229,100,0.2)' : 'rgba(255,229,100,0.1)',
+          theme.palette.type === 'dark'
+            ? 'rgba(255,229,100,0.2)'
+            : 'rgba(255,229,100,0.1)',
         fontSize: 14,
         borderRadius: 2
       },
       '& code[class*="language-"]': {
-        backgroundColor: '#333',
+        backgroundColor: '#272c34',
         color: '#fff'
       },
       '& p code, & ul code, & pre code': {
@@ -51,16 +54,18 @@ export const useMdStyles = (theme: Theme) =>
       },
       '& h2': {
         ...theme.typography.h4,
-        fontSize: 30,
-        margin: '40px 0 16px'
+        fontSize: 30
+        // margin: '40px 0 16px'
       },
       '& h3': {
         ...theme.typography.h5,
-        margin: '40px 0 16px'
+        // margin: '40px 0 16px'
+        margin: '16px 0 16px'
       },
       '& h4': {
         ...theme.typography.h6,
-        margin: '32px 0 16px'
+        // margin: '32px 0 16px'
+        margin: '16x 0 16px'
       },
       '& h5': {
         ...theme.typography.subtitle2,
@@ -82,28 +87,28 @@ export const useMdStyles = (theme: Theme) =>
           wordBreak: 'break-all'
         },
         '& .anchor-link-style': {
-          opacity: 0,
           // To prevent the link to get the focus.
           display: 'none'
         },
+
         '&:hover .anchor-link-style': {
           display: 'inline-block',
-          opacity: 1,
           padding: '0 8px',
-          color: theme.palette.text.hint,
+          color: theme.palette.text.secondary,
           '&:hover': {
-            color: theme.palette.text.secondary
+            color: theme.palette.text.primary
           },
           '& svg': {
-            width: '0.55em',
-            height: '0.55em',
+            width: '0.7em',
+            height: '0.7em',
             fill: 'currentColor'
           }
         }
       },
       '& table': {
-        width: '100%',
+        // Trade display table for scroll overflow
         display: 'block',
+        width: '100%',
         overflowX: 'auto',
         WebkitOverflowScrolling: 'touch', // iOS momentum scrolling.
         borderCollapse: 'collapse',
