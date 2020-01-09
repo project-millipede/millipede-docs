@@ -4,13 +4,19 @@ const merge = require('webpack-merge');
 const webpackConfig = require('./webpack/webpack.prod.conf');
 
 const configuration = {
+  env: {
+    PROJECT_ROOT: __dirname,
+    PROJECT_ROOT_DIRNAME: __dirname,
+    PROJECT_ROOT_CWD: process.cwd()
+  },
+
   webpack(config, options) {
     return merge(config, webpackConfig(options));
   },
 
   target: 'serverless',
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
-  experimental: { modern: true, documentMiddleware: true }
+  experimental: { modern: true, documentMiddleware: true },
 };
 
 module.exports = configuration;

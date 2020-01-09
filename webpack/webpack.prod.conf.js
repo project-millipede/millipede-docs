@@ -46,7 +46,10 @@ const webpackConfig = ({ isServer }) => {
               loader: 'babel-loader'
             },
             {
-              loader: path.join(__dirname, '../dist/webpack/loader/mdx-custom-loader'),
+              loader: path.join(
+                __dirname,
+                '../dist/webpack/loader/mdx-custom-loader'
+              ),
               options: {
                 remarkPlugins: [
                   // options

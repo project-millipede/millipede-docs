@@ -5,7 +5,19 @@
   "builds": [
     {
       "src": "package.json",
-      "use": "@now/next"
+      "use": "@now/next@canary"
     }
-  ]
+  ],
+  "env": {
+    "PROJECT_ROOT": "PROJECT_ROOT env from now.json",
+    "PROJECT_ROOT_DIRNAME": "PROJECT_ROOT_DIRNAME env from now.json",
+    "PROJECT_ROOT_CWD": "PROJECT_ROOT_CWD env from now.json"
+  },
+  "build": {
+    "env": {
+      "PROJECT_ROOT": "PROJECT_ROOT build.env from now.json",
+      "PROJECT_ROOT_DIRNAME": "PROJECT_ROOT_DIRNAME build.env from now.json",
+      "PROJECT_ROOT_CWD": "PROJECT_ROOT_CWD build.env from now.json"
+    }
+  }
 }
