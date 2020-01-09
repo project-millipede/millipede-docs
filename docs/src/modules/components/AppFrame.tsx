@@ -2,81 +2,31 @@ import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import { useHoux } from 'houx';
+import React from 'react';
+import { isMobileOnly } from 'react-device-detect';
 
+import { ViewActions } from '../redux/features/actionType';
+import { handleDrawer } from '../redux/features/view/actions';
+import { RootState } from '../redux/reducers';
 import AppDrawer, { DrawerStyleOverride } from './AppDrawer';
 import AppToolBar from './AppToolBar';
 
 // import usePageTitle from './usePageTitle';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((_theme: Theme) =>
   createStyles({
     root: {
       display: 'flex'
-    },
-    grow: {
-      flex: '1 1 auto'
-    },
-    title: {
-      marginLeft: theme.spacing(2),
-      flex: '0 1 auto'
-    },
-    skipNav: {
-      position: 'fixed',
-      padding: theme.spacing(1),
-      backgroundColor: theme.palette.background.paper,
-      transition: theme.transitions.create('top', {
-        easing: theme.transitions.easing.easeIn,
-        duration: theme.transitions.duration.leavingScreen
-      }),
-      left: theme.spacing(2),
-      top: theme.spacing(-10),
-      zIndex: theme.zIndex.tooltip + 1,
-      '&:focus': {
-        top: theme.spacing(2),
-        transition: theme.transitions.create('top', {
-          easing: theme.transitions.easing.easeOut,
-          duration: theme.transitions.duration.enteringScreen
-        })
-      },
-      '@media print': {
-        display: 'none'
-      }
-    },
-    appBar: {
-      transition: theme.transitions.create('width'),
-      '@media print': {
-        position: 'absolute'
-      }
-    },
-    appBarHome: {
-      boxShadow: 'none'
-    },
-    appBarShift: {
-      [theme.breakpoints.up('lg')]: {
-        width: 'calc(100% - 240px)'
-      }
-    },
-    navIconHide: {
-      [theme.breakpoints.up('lg')]: {
-        display: 'none'
-      }
-    },
-    '@global': {
-      '#main-content': {
-        outline: 'none'
-      }
     }
   })
 );
 
-const drawerWidth = 240;
+const drawerClosedWidth = 73;
+const drawerOpenedWidth = 240;
 
 const useDrawerStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      display: 'flex'
-    },
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
       transition: theme.transitions.create(['width', 'margin'], {
@@ -85,56 +35,20 @@ const useDrawerStyles = makeStyles((theme: Theme) =>
       })
     },
     appBarShift: {
-      marginLeft: drawerWidth,
-      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerOpenedWidth,
+      width: `calc(100% - ${drawerOpenedWidth}px)`,
       transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen
       })
     },
-
-    // menuButton: {
-    //   marginRight: 36
-    // },
-    // hide: {
-    //   display: 'none'
-    // }
-
-    // drawer: {
-    //   width: drawerWidth,
-    //   flexShrink: 0,
-    //   whiteSpace: 'nowrap'
-    // },
-    // drawerOpen: {
-    //   width: drawerWidth,
-    //   transition: theme.transitions.create('width', {
-    //     easing: theme.transitions.easing.sharp,
-    //     duration: theme.transitions.duration.enteringScreen
-    //   })
-    // },
-    // drawerClose: {
-    //   transition: theme.transitions.create('width', {
-    //     easing: theme.transitions.easing.sharp,
-    //     duration: theme.transitions.duration.leavingScreen
-    //   }),
-    //   overflowX: 'hidden',
-    //   width: theme.spacing(7) + 1,
-    //   [theme.breakpoints.up('sm')]: {
-    //     width: theme.spacing(9) + 1
-    //   }
-    // },
-    toolbar: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-end',
-      padding: '0 8px',
-      ...theme.mixins.toolbar
+    contentDrawerClosed: {
+      display: 'contents',
+      width: isMobileOnly ? '100%' : `calc(100% - ${drawerClosedWidth}px)`
     },
-    content: {
-      flexGrow: 1,
-      // padding: theme.spacing(3)
-      display: 'flex',
-      flexDirection: 'row'
+    contentDrawerOpened: {
+      display: 'contents',
+      width: isMobileOnly ? '100%' : `calc(100% - ${drawerOpenedWidth}px)`
     }
   })
 );
@@ -147,26 +61,27 @@ const AppFrame = ({ children, drawerStyleOverride }: AppFrameProps) => {
   const classes = useStyles({});
   const drawerClasses = useDrawerStyles({});
 
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
+
+  const {
+    dispatch,
+    state: {
+      view: { isOpen }
+    }
+  }: {
+    dispatch: React.Dispatch<ViewActions>;
+    state: RootState;
+  } = useHoux();
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    dispatch(handleDrawer(true));
+    // setOpen(true);
   };
 
   const handleDrawerClose = () => {
-    setOpen(false);
+    dispatch(handleDrawer(false));
+    // setOpen(false);
   };
-
-  // const title = usePageTitle();
-
-  // if (title === null) {
-  //   // home route, don't shift app bar or dock drawer
-  //   disablePermanent = true;
-  //   appBarClassName += ` ${classes.appBarHome}`;
-  // } else {
-  //   navIconClassName = classes.navIconHide;
-  //   appBarClassName += ` ${classes.appBarShift}`;
-  // }
 
   return (
     <div className={classes.root}>
@@ -174,17 +89,25 @@ const AppFrame = ({ children, drawerStyleOverride }: AppFrameProps) => {
       <AppBar
         position='fixed'
         className={clsx(drawerClasses.appBar, {
-          [drawerClasses.appBarShift]: open
+          [drawerClasses.appBarShift]: isOpen
         })}
       >
-        <AppToolBar isDrawerOpen={open} handleDrawerOpen={handleDrawerOpen} />
+        <AppToolBar isDrawerOpen={isOpen} handleDrawerOpen={handleDrawerOpen} />
       </AppBar>
       <AppDrawer
         drawerStyleOverride={drawerStyleOverride}
-        isDrawerOpen={open}
+        isDrawerOpen={isOpen}
         handleDrawerClose={handleDrawerClose}
       />
-      <div className={drawerClasses.content}>{children}</div>
+      {/* <div
+        className={
+          isOpen
+            ? drawerClasses.contentDrawerOpened
+            : drawerClasses.contentDrawerClosed
+        }
+      > */}
+      {children}
+      {/* </div> */}
     </div>
   );
 };
