@@ -19,7 +19,7 @@ import {
   URIPathParamsMail,
   URIPathParamsTwitter,
   URIPathParamsWhatsApp,
-} from '../../../../../../src/typings/share/social';
+} from '../../../../../../src/typings/share';
 import { objectToGetParams } from '../../../utils/social/objectToGetParams';
 import Icon from './Icon';
 import Modal from './Modal';
@@ -113,7 +113,9 @@ const getSharing = (data: SocialData, t: TFunction) => {
       id: 'whatsapp',
       type: Interaction.SHARE,
       title: `${t('share-on')} Whatsapp`,
-      url: isMobile ? `https://api.whatsapp.com/send` : `https://web.whatsapp.com/send`,
+      url: isMobile
+        ? `https://api.whatsapp.com/send`
+        : `https://web.whatsapp.com/send`,
       params: {
         text: share ? `${share} | ${baseUrl}` : `${baseUrl}`
       } as URIPathParamsWhatsApp
@@ -198,7 +200,12 @@ const createButtons = (
   return buttonsInfo.map(creataShareLink);
 };
 
-const Markup = ({ sharingOpen, toggleSharingOpen, toggleModal, modal }: MarkupProps) => {
+const Markup = ({
+  sharingOpen,
+  toggleSharingOpen,
+  toggleModal,
+  modal
+}: MarkupProps) => {
   const router = useRouter();
   const { t } = useTranslation();
 
