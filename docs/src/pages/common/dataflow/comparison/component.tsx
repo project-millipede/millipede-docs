@@ -2,7 +2,7 @@ import { CardContent, Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
 
-import DotsMobileStepper from '../../../../../../src/components/stepper/DotsMobileStepper';
+import DotsMobileStepper from '../../../../../../src/components/common/stepper/DotsMobileStepper';
 import { Content, Stack } from '../../../../../../src/typings/data/import';
 
 const useStyles = makeStyles((_theme: Theme) =>
@@ -30,11 +30,15 @@ const useStyles = makeStyles((_theme: Theme) =>
 );
 
 const stepsLength = (array: Array<Content> = []): number => {
-  return array.map(item => item.step).filter((value, index, self) => self.indexOf(value) === index)
-    .length;
+  return array
+    .map(item => item.step)
+    .filter((value, index, self) => self.indexOf(value) === index).length;
 };
 
-const stepsFiltered = (array: Array<Content> = [], step: number): Array<Content> => {
+const stepsFiltered = (
+  array: Array<Content> = [],
+  step: number
+): Array<Content> => {
   return array.map(item => item).filter(value => value.step === step);
 };
 
@@ -47,14 +51,18 @@ const generateGrid = (elements: Array<Content> = [], active: boolean) => {
           <Typography
             variant='subtitle1'
             gutterBottom
-            className={active ? classes.typographyEnabled : classes.typographyDisabled}
+            className={
+              active ? classes.typographyEnabled : classes.typographyDisabled
+            }
           >
             {content.title}
           </Typography>
           <Typography
             variant='subtitle2'
             gutterBottom
-            className={active ? classes.typographyEnabled : classes.typographyDisabled}
+            className={
+              active ? classes.typographyEnabled : classes.typographyDisabled
+            }
           >
             {content.description}
           </Typography>
@@ -73,19 +81,21 @@ const Comparison = ({ elements = [] }: Stack) => {
     <Grid container direction='column' spacing={1}>
       <Grid item>
         <CardContent className={classes.paper}>
-          {stepsFiltered(elements, step)[0].image}
+          {stepsFiltered(elements as Array<Content>, step)[0].image}
         </CardContent>
       </Grid>
 
       <Grid item>
         <DotsMobileStepper
-          steps={stepsLength(elements)}
+          steps={stepsLength(elements as Array<Content>)}
           currentStep={(currentStep: number) => {
             setStep(currentStep);
           }}
         />
       </Grid>
-      <Grid container>{generateGrid(stepsFiltered(elements, step), true)}</Grid>
+      <Grid container>
+        {generateGrid(stepsFiltered(elements as Array<Content>, step), true)}
+      </Grid>
     </Grid>
   );
 };
