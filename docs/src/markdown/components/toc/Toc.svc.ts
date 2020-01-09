@@ -1,7 +1,12 @@
 import vfile, { VFile } from 'vfile';
 
-import { TocProps } from './TocComponent';
 import { generateProcessor } from './TocProcessor';
+
+export interface TocProps {
+  content?: string;
+  activeState: Set<string>;
+  scrollToLink?: (href: string) => void;
+}
 
 export const generateToc = async ({
   content,

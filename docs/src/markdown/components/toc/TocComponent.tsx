@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { generateToc } from './Toc.svc';
-
-export interface TocProps {
-  content?: string;
-  activeState: Set<string>;
-  scrollToLink?: (href: string) => void;
-}
+import { generateToc, TocProps } from './Toc.svc';
 
 const TocComponent = ({ content, activeState, scrollToLink }: TocProps) => {
   const [toc, setToc] = useState('');
@@ -15,7 +9,7 @@ const TocComponent = ({ content, activeState, scrollToLink }: TocProps) => {
     generateToc({ content, activeState, scrollToLink }).then(result =>
       setToc(result.contents as string)
     );
-  }, [content, activeState]);
+  }, [content, activeState.size]);
 
   return <>{toc}</>;
 };
