@@ -3,11 +3,12 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
 
 import AppFrame from '../docs/src/modules/components/AppFrame';
-import Head from '../docs/src/modules/components/Head';
 import HomeFooter from '../docs/src/modules/components/HomeFooter';
 import { useTranslation } from '../i18n';
-import GuttersGrid from '../src/components/layout/grid/GuttersGrid';
+import TopicsDetail from '../src/components/site/landing/TopicsDetail';
+import TopicsHead from '../src/components/site/landing/TopicsHead';
 
+// import Head from '../docs/src/modules/components/Head';
 // // --- Post bootstrap -----
 // const useStyles = makeStyles(_theme => ({
 //   root: {
@@ -35,38 +36,36 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: 'center',
       textAlign: 'center',
       paddingTop: theme.spacing(4),
-      paddingBottom: theme.spacing(8),
-      [theme.breakpoints.up('md')]: {
-        paddingTop: theme.spacing(20),
-        paddingBottom: theme.spacing(20),
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-        textAlign: 'left'
-      }
+      paddingBottom: theme.spacing(8)
+      // [theme.breakpoints.up("md")]: {
+      //   paddingTop: theme.spacing(20),
+      //   paddingBottom: theme.spacing(20),
+      //   // flexDirection: "row",
+      //   alignItems: "flex-start",
+      //   textAlign: "left"
+      // }
     },
     title: {
-      marginLeft: -12,
-      whiteSpace: 'nowrap',
-      letterSpacing: '.7rem',
-      textIndent: '.7rem',
       fontWeight: theme.typography.fontWeightLight,
-      [theme.breakpoints.only('xs')]: {
-        fontSize: 28
-      },
       textAlign: 'center'
+      // marginLeft: -12,
+      // whiteSpace: 'nowrap',
+      // letterSpacing: '.7rem',
+      // textIndent: '.7rem',
+      // [theme.breakpoints.only("xs")]: {
+      //   fontSize: 28
+      // },
     },
-    header: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      flexDirection: 'column'
-    },
-    headerSpace: {
-      flexGrow: 1
-    },
-    headerItem: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      flexDirection: 'row'
+    subtitle: {
+      fontWeight: theme.typography.fontWeightLight,
+      textAlign: 'center'
+      // marginLeft: -12,
+      // whiteSpace: "wrap",
+      // letterSpacing: '.7rem',
+      // textIndent: '.7rem',
+      // [theme.breakpoints.only("xs")]: {
+      //   fontSize: 28
+      // },
     }
   })
 );
@@ -78,15 +77,12 @@ const Index = () => {
   return (
     <AppFrame drawerStyleOverride={{ drawer: classes.drawer }}>
       <div className={classes.root}>
-        <Head />
+        {/* <Head /> */}
         <div className={classes.hero}>
           <Container maxWidth='md' className={classes.content}>
-            {/* <img
-              src='/static/images/material-ui-logo.svg'
-              alt='Material-UI Logo'
-              className={classes.logo}
-            /> */}
-            <div className={classes.header}>
+            <div
+            // className={classes.header}
+            >
               <Typography
                 variant='h3'
                 component='h1'
@@ -96,15 +92,33 @@ const Index = () => {
               >
                 {t('application-title')}
               </Typography>
-              <Divider />
-              <GuttersGrid />
-              <HomeFooter />
+              <Typography
+                variant='h4'
+                component='h1'
+                color='inherit'
+                gutterBottom
+                className={classes.subtitle}
+              >
+                {t('application-subtitle')}
+              </Typography>
             </div>
+            <Divider />
+
+            <TopicsHead />
+            <TopicsDetail />
+
+            <HomeFooter />
           </Container>
         </div>
       </div>
     </AppFrame>
   );
+};
+
+Index.getInitialProps = async () => {
+  return {
+    namespacesRequired: ['common']
+  };
 };
 
 export default Index;

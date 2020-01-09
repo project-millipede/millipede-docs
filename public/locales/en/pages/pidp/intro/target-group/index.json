@@ -1,0 +1,25 @@
+{
+  "topics": [
+    {
+      "scenario": "general",
+      "category": "determination-degree-of-truth",
+      "title": "Children and adolescents",
+      "description": "The development process of the moral value system amongst children and adolescents is not complete. The development of a pronounced media competence is an essential building block for assessing the value and authenticity of content. However, despite the only rudimentarily trained ability of adult people to correctly assess content in digital environments or to determine the intention of the (unknown) counterpart without conflict, parents often allow their children to use unprotected and untrustworthy digital platforms without restriction.",
+      "icon": "star"
+    },
+    {
+      "scenario": "general",
+      "category": "decision-making",
+      "title": "Integrity and authenticity of information",
+      "description": "Assessment of the integrity or authenticity of the content consumed or of the actors acting in digital environments (the counterpart).",
+      "icon": "star"
+    }
+  ],
+  "scenarios": {
+    "general": "From young to old, those who use the web all the time or rarely - Simply anyone"
+  },
+  "categories": {
+    "decision-making": "Assistance of the own ability to make decisions and actions",
+    "determination-degree-of-truth": "Determination of the degree of truth"
+  }
+}

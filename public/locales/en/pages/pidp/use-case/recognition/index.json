@@ -1,0 +1,138 @@
+{
+  "buildingBlocks": "Structure and composition of social media posts",
+  "buildingBlocksPET": "Private content is merged with the public content stream",
+  "buildingBlocksPIDP": "The public content stream is complemented with supplementary content",
+  "attention": "Span of attention",
+  "like": "Like",
+  "share": "Share",
+  "comment": "Comment",
+  "comment_create": "Create comment",
+  "comment_publish": "Publish comment",
+  "content_input": "Type something here...",
+  "content_create": "Create content",
+  "content_publish": "Publish content",
+  "content_empty": "No user input detected",
+  "steps": [
+    {
+      "order": 1,
+      "category": "general",
+      "title": "Avatar",
+      "description": [
+        {
+          "subTitle": ["Publisher's avatar"]
+        },
+        {
+          "text": [
+            "The avatar you use on social media platforms is often a crucial determining factor in regards to the way other users see you. Usually, your avatar will help other users form a first impression of you, especially if you run a business or provide another type of professional service. In most cases, the avatar you choose can even influence a person's decision to interact with you. When choosing an avatar for your social media profiles, you should determine the impression you want to make and select an avatar accordingly."
+          ]
+        }
+      ],
+      "userFocus": 0.1
+    },
+    {
+      "order": 2,
+      "category": "general",
+      "title": "Title",
+      "description": [
+        {
+          "subTitle": ["Title of the article"]
+        }
+      ],
+      "userFocus": 0.2
+    },
+    {
+      "order": 3,
+      "category": "general",
+      "title": "Date",
+      "description": [
+        {
+          "subTitle": ["Date / timestamp of publication"]
+        }
+      ],
+      "userFocus": 0.1
+    },
+    {
+      "order": 4,
+      "category": "content",
+      "title": "Media",
+      "description": [
+        {
+          "subTitle": ["Media desc"]
+        }
+      ],
+      "userFocus": 0.4
+    },
+    {
+      "order": 5,
+      "category": "content",
+      "title": "Content",
+      "description": [
+        {
+          "subTitle": ["Content desc"]
+        }
+      ],
+      "userFocus": 0.2
+    },
+    {
+      "order": 6,
+      "category": "feedback",
+      "title": "Like",
+      "description": [
+        {
+          "subTitle": ["Like desc"]
+        }
+      ],
+      "userFocus": 0.6
+    },
+    {
+      "order": 7,
+      "category": "feedback",
+      "title": "Share",
+      "description": [
+        {
+          "subTitle": ["Share desc"]
+        }
+      ],
+      "userFocus": 0.3
+    },
+    {
+      "order": 8,
+      "category": "feedback",
+      "title": "Comment",
+      "description": [
+        {
+          "subTitle": ["Comment desc"]
+        }
+      ],
+      "userFocus": 0.1
+    },
+    {
+      "order": 9,
+      "category": "comment",
+      "title": "Comment Overview",
+      "description": [
+        {
+          "subTitle": ["Comment overview desc"]
+        }
+      ],
+      "userFocus": 0.8
+    },
+    {
+      "order": 10,
+      "category": "comment",
+      "title": "Comment Detail",
+      "description": [
+        {
+          "subTitle": ["Comment detail desc"]
+        }
+      ],
+      "userFocus": 0.2
+    }
+  ],
+  "categories": {
+    "general": { "id": "general", "title": "General", "step": 0 },
+    "content": { "id": "content", "title": "Content", "step": 1 },
+    "feedback": { "id": "feedback", "title": "Feedback", "step": 2 },
+    "comment": { "id": "comment", "title": "Comment", "step": 3 }
+  }
+}

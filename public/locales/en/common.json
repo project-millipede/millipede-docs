@@ -1,5 +1,6 @@
 {
   "application-title": "Project Millipede",
+  "application-subtitle": "Guidance system to increase self-determination in the digital world",
   "change-language": "Change language",
   "github": "Github",
   "toggleTheme": "Toggle light / dark theme",
@@ -30,6 +31,9 @@
     "/pidp/landing": "Landing",
     "/pidp/approach": "Approach",
     "/pidp/approach/byExample": "By example",
+    "/pidp/use-case": "Features",
+    "/pidp/use-case/recognition": "Instant recognition",
+    "/pidp/use-case/response": "Nimble tagging of critical content",
     "/getting-started": "Getting Started",
     "/discover-more": "Discover more",
     "/discover-more/team": "Team",
@@ -56,5 +60,9 @@
   "footerCommunity": "Community",
   "footerResources": "Resources",
   "footerRelease": "Currently {{versionNumber}}. Released under the {{license}}.",
-  "license": "MIT License"
+  "license": "MIT License",
+  "feature-pet": "Feature PET",
+  "feature-pidp": "Feature PID/P",
+  "target-group-pet": "Target group PET",
+  "target-group-pidp": "Target group PID/P"
 }
