@@ -41,7 +41,10 @@ class MillipedeDocument extends NextDocument {
             rel='stylesheet'
             href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
           />
-          <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons' />
+          <link
+            rel='stylesheet'
+            href='https://fonts.googleapis.com/icon?family=Material+Icons'
+          />
         </Head>
         <body>
           <Main />
@@ -54,7 +57,9 @@ class MillipedeDocument extends NextDocument {
 
 type InitialProps = PathnameToLanguage & DocumentInitialProps;
 
-MillipedeDocument.getInitialProps = async (ctx: DocumentContext): Promise<InitialProps> => {
+MillipedeDocument.getInitialProps = async (
+  ctx: DocumentContext
+): Promise<InitialProps> => {
   // Resolution order
   //
   // On the server:

@@ -8,9 +8,11 @@ import AppWrapper from '../docs/src/modules/components/AppWrapper';
 import reducers from '../docs/src/modules/redux/reducers';
 import { appWithTranslation } from '../i18n';
 
-// import { I18N, namespaces } from '../i18n';
 const USE_STRICT_MODE = false;
 const ReactMode = USE_STRICT_MODE ? React.StrictMode : React.Fragment;
+
+// const TRACKING_CODE_MILLIPEDE = 'UA-151314446-1';
+const TRACKING_CODE_PRIVACY_SHIELD = 'UA-154899959-1';
 
 /* eslint-disable class-methods-use-this */
 class MillipedeApp extends App {
@@ -21,8 +23,11 @@ class MillipedeApp extends App {
     if (jssStyles) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
-    ReactGA.initialize('UA-151314446-1');
-    Sentry.init({ dsn: 'https://ed3aa0e18051477384a59be73931f3b6@sentry.io/1805383' });
+    // ReactGA.initialize(TRACKING_CODE_MILLIPEDE);
+    ReactGA.initialize(TRACKING_CODE_PRIVACY_SHIELD);
+    Sentry.init({
+      dsn: 'https://ed3aa0e18051477384a59be73931f3b6@sentry.io/1805383'
+    });
   }
 
   render() {
@@ -56,22 +61,22 @@ class MillipedeApp extends App {
 //   return { pageProps };
 // };
 
-MillipedeApp.getInitialProps = async ({ Component, ctx }) => {
-  let pageProps = {};
+// MillipedeApp.getInitialProps = async ({ Component, ctx }) => {
+//   let pageProps = {};
 
-  if (Component.getInitialProps) {
-    pageProps = await Component.getInitialProps(ctx);
-  }
+//   if (Component.getInitialProps) {
+//     pageProps = await Component.getInitialProps(ctx);
+//   }
 
-  // Inject env variables into SSR
-  // pageProps.CONFIG = getConfig().publicRuntimeConfig.env as AppConfig;
+//   // Inject env variables into SSR
+//   // pageProps.CONFIG = getConfig().publicRuntimeConfig.env as AppConfig;
 
-  // Fetch correct required namespaces depending on route
-  // pageProps.namespacesRequired = namespaces[router.route];
+//   // Fetch correct required namespaces depending on route
+//   // pageProps.namespacesRequired = namespaces[router.route];
 
-  // Logger.log('pageProps.namespacesRequired', pageProps.namespacesRequired);
+//   // Logger.log('pageProps.namespacesRequired', pageProps.namespacesRequired);
 
-  return { pageProps };
-};
+//   return { pageProps };
+// };
 
 export default appWithTranslation(MillipedeApp);
