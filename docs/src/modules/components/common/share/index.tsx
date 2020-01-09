@@ -12,7 +12,7 @@ const Share = ({ id, share }: ShareProps) => {
   const [modal, setModal] = useState();
 
   const toggleModal = (value = null) => {
-    return setModal(value);
+    setModal(value);
   };
 
   const toggleSharingOpen = () => {
