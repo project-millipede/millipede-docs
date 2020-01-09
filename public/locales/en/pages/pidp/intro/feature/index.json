@@ -1,0 +1,91 @@
+{
+  "topics": [
+    {
+      "scenario": "general",
+      "category": "recognition",
+      "title": "Simple recognition of critical content",
+      "link": "/pidp/use-case/recognition",
+      "icon": "star",
+      "description": [
+        {
+          "subTitle": [
+            "A concurrent display technique lifts supplementary content into the viewer's field of vision."
+          ]
+        },
+        {
+          "listing": [
+            {
+              "link": "/pidp/use-case/recognition#test1",
+              "text": "Indication of the degree of inconsistency (traffic signal)"
+            },
+            {
+              "link": "/pidp/use-case/recognition#test2",
+              "text": "Display of valid corrections, clarification of the motivation and intention pursued by the author"
+            }
+          ]
+        },
+        {
+          "summary": [
+            "The user is able to make an immediate distinction between misleading and truthful content."
+          ]
+        },
+        {
+          "subTitle": [
+            "Exceptionally critical content is removed from the user's field of vision. The procedure is comparable to that of ad blocking technologies - advertising campaigns are removed from a website before they get displayed."
+          ]
+        },
+        {
+          "listing": [
+            {
+              "link": "/pidp/use-case/recognition#test3",
+              "text": "Entire hiding of particularly critical content"
+            }
+          ]
+        },
+        {
+          "note": [
+            "The rendering process does not require any adaptation of existing or accustomed digital workflows, such as the handling of the preferred social media application."
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "general",
+      "category": "recognition",
+      "title": "Labelling of critical content",
+      "link": "/pidp/use-case/response",
+      "icon": "star",
+      "description": [
+        {
+          "subTitle": [
+            "The user is provided with an efficient tool that allows the immediate and fast contradiction of critical contents."
+          ]
+        },
+        {
+          "listing": [
+            {
+              "link": "/pidp/use-case/response#test1",
+              "text": "An intuitive user interface allows the capture of the web and time coordinates of a critical content in any target application."
+            },
+            {
+              "link": "/pidp/use-case/response#test2",
+              "text": "Smart dialogues support the process of determining the degree of contradiction and its nature."
+            }
+          ]
+        },
+        {
+          "note": [
+            "The process of tagging critical content is performed by the average user."
+          ]
+        }
+      ]
+    }
+  ],
+  "scenarios": {
+    "general": "Konsum von Inhalten"
+  },
+  "categories": {
+    "recognition": "Instant recognition",
+    "response": "Nimble tagging"
+  }
+}

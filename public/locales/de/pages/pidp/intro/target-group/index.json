@@ -1,0 +1,62 @@
+{
+  "topics": [
+    {
+      "scenario": "general",
+      "category": "determination-degree-of-truth",
+      "title": "Kinder und Jugendliche",
+      "description": "Der Entwicklungsprozess des moralischen Wertesystems bei Kindern und Jugendlichen ist nicht abgeschlossen. Trotz der nur rudimentär ausgebildeten Fähigkeit erwachsener Menschen, Inhalte in digitalen Umgebungen richtig einzuschätzen oder die Absicht des (unbekannten) Gegenübers konfliktfrei zu bestimmen, erlauben Eltern ihren Kindern oftmals die uneingeschränkte Nutzung ungeschützter und nicht vertrauenswürdiger digitaler Plattformen. Die Bildung einer ausgeprägten Medienkompetenz ist ein wesentlicher Baustein dafür, Inhalte auf ihre Wertigkeit und Echtheit einzuschätzen.",
+      "icon": "star"
+    },
+    {
+      "scenario": "general",
+      "category": "determination-degree-of-truth",
+      "title": "Erwachsene, Eltern und Familienangehörige sowie weitere Bezugspersonen",
+      "description": "Es wird angenommen, dass Erwachsene über ein ausgeprägtes moralisches Wertesystem verfügen. Tatsächlich überschätzen die meisten Erwachsenen oftmals die eigene Fähigkeit bewusst und verantwortlich mit modernen Medienformaten umzugehen. Der Erwachsene weist zwar oberflächliche Kenntnisse auf, eine genutzte digitale Plattform zu bedienen ist aber über mögliche Gefahren oftmals nicht ausreichend informiert, dies gilt insbesondere im Umgang mit Social-Media Anwendungen.",
+      "icon": "star"
+    },
+    {
+      "scenario": "defend",
+      "category": "validation",
+      "title": "Multiplikatoren und Journalisten - Gegen Multiplikatoren gerichtete Sprache und Ausdruck",
+      "description": "TODO",
+      "icon": "star"
+    },
+    {
+      "scenario": "defend",
+      "category": "risk",
+      "title": "Multiplikatoren und Journalisten - Zunehmende Komplexität einer authentischen Berichterstattung",
+      "description": "TODO",
+      "icon": "star"
+    },
+    {
+      "scenario": "protection",
+      "category": "risk",
+      "title": "Zivilgesellschaftliche Akteure und Akteure nichtstaatlicher Organisationen",
+      "description": "TODO",
+      "icon": "star"
+    },
+    {
+      "scenario": "education",
+      "category": "risk",
+      "title": "Pädagogisch wirkende Akteure",
+      "description": "TODO",
+      "icon": "star"
+    },
+    {
+      "scenario": "general",
+      "category": "decision-making",
+      "title": "Integrität und Echtheit von Information",
+      "description": "Einschätzung zur Integrität oder Echtheit der konsumierten Inhalte oder der in diesen Umgebungen wirkenden Akteure (dem Gegenüber).",
+      "icon": "star"
+    }
+  ],
+  "scenarios": {
+    "general": "Von jung bis alt, solche die das Web ständig oder nur selten Nutzen - Einfach jederman"
+  },
+  "categories": {
+    "decision-making": "Unterstützung der eigenen Entscheidungs- und Handlungsfähigkeit",
+    "risk": "Risiko",
+    "determination-degree-of-truth": "Bestimmung des Wahrheitsgrades",
+    "education": "Bildung"
+  }
+}

@@ -7,7 +7,8 @@ const lowerTextIncludes = (text: string, sub: string) =>
 
 /* eslint-disable consistent-return */
 export const loadPages = (pathname: string, currentPages: Array<Page>) => {
-  const linkIncludesText = (link: Page) => lowerTextIncludes(link.pathname, pathname);
+  const linkIncludesText = (link: Page) =>
+    lowerTextIncludes(link.pathname, pathname);
 
   if (pathname === '/') {
     return [];
@@ -122,6 +123,18 @@ export const pagesPIDP: Array<Page> = [
       },
       {
         pathname: '/pidp/approach/byExample',
+        icon: 'star'
+      },
+      {
+        pathname: '/pidp/use-case',
+        icon: 'star'
+      },
+      {
+        pathname: '/pidp/use-case/recognition',
+        icon: 'star'
+      },
+      {
+        pathname: '/pidp/use-case/response',
         icon: 'star'
       }
     ]

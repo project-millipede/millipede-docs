@@ -1,0 +1,91 @@
+{
+  "topics": [
+    {
+      "scenario": "general",
+      "category": "recognition",
+      "title": "Einfache Erkennung kritischer Inhalte",
+      "link": "/pidp/use-case/recognition",
+      "icon": "star",
+      "description": [
+        {
+          "subTitle": [
+            "Ein nebenläufiges Darstellungsverfahren hebt ergänzende Inhalte in das Sichtfeld des Betrachters."
+          ]
+        },
+        {
+          "listing": [
+            {
+              "link": "/pidp/use-case/recognition#test1",
+              "text": "Hinweis zum Grad des Widerspruchs (Ampelsystem)"
+            },
+            {
+              "link": "/pidp/use-case/recognition#test2",
+              "text": "Darstellung valider Korrekturen, Klarstellung der vom Autor verfolgten Motivation und Absicht"
+            }
+          ]
+        },
+        {
+          "summary": [
+            "Der Nutzer in die Lage, eine unmittelbare Differenzierung zwischen falschen und wahren Inhalten auszuführen."
+          ]
+        },
+        {
+          "subTitle": [
+            "Besonders kritische Inhalte werden aus dem Sichtfeld des Nutzers entfernt. Das Vorgehen ähnelt dem Vorgehen von Ad-Blocking Technologien - Werbekampagnen werden vor der Betrachtung aus einer Website entfernt."
+          ]
+        },
+        {
+          "listing": [
+            {
+              "link": "/pidp/use-case/recognition#test3",
+              "text": "Vollständige Ausblendung besonders kritischer Inhalte"
+            }
+          ]
+        },
+        {
+          "note": [
+            "Das Darstellungsverfahren setzt keine Umgewöhnung bestehender oder gewohnter digitaler Workflows, etwa der Bedienung der favorisierten Social-Media Anwendung voraus."
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "general",
+      "category": "recognition",
+      "title": "Kennzeichnung kritischer Inhalte",
+      "link": "/pidp/use-case/response",
+      "icon": "star",
+      "description": [
+        {
+          "subTitle": [
+            "Dem Nutzer wird ein effizientes Werkzeug bereitgestellt, welches den unmittelbaren und flinken Widerspruch von kritischen Inhalten erlaubt."
+          ]
+        },
+        {
+          "listing": [
+            {
+              "link": "/pidp/use-case/response#test1",
+              "text": "Ein intuitiv zu bedienende Nutzeroberfläche erlaubt die Erfassung der Web- und Zeitkoordinate eines kritischen Beitrags in einer beliebigen Zielanwendung."
+            },
+            {
+              "link": "/pidp/use-case/response#test2",
+              "text": "Intelligente Dialoge unterstützen den Vorgang den Grad des Widerspruchs und dessen Art zu bestimmen."
+            }
+          ]
+        },
+        {
+          "note": [
+            "Der Vorgang der Kennzeichnung von kritischen Inhalten wird vom durchschnittlichen Nutzer ausgeführt."
+          ]
+        }
+      ]
+    }
+  ],
+  "scenarios": {
+    "general": "Konsum von Inhalten"
+  },
+  "categories": {
+    "recognition": "Unmittelbare Wahrnehmung",
+    "response": "Flinke Kennzeichnung von Falschinformation"
+  }
+}

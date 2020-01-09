@@ -1,14 +1,48 @@
 {
   "topics": [
     {
-      "title": "Privacy Enhancing Technology / PET",
-      "description": "Make untrusted envrionments trusted",
-      "steps": [{ "label": "Step - 1" }, { "label": "Step - 2" }, { "label": "Step - 3" }]
+      "title": ["Privacy", "Enhancing", "Technology"],
+      "subTitle": ["Make untrusted", "environments trusted"],
+      "steps": [
+        { "label": "Step - 1" },
+        { "label": "Step - 2" },
+        { "label": "Step - 3" }
+      ],
+      "contextLink": {
+        "id": "pet",
+        "perspectives": [
+          {
+            "type": "feature",
+            "icon": "fas fa-rocket"
+          },
+          {
+            "type": "target-group",
+            "icon": "fas fa-user-circle"
+          }
+        ]
+      }
     },
     {
-      "title": "Personal Intrusion Detection and Prevention / PID-P",
-      "description": "Approach to fight fake news",
-      "steps": [{ "label": "Step - 4" }, { "label": "Step - 5" }, { "label": "Step - 6" }]
+      "title": ["Personal", "Intrusion", "Detection and Prevention"],
+      "subTitle": ["Approach to fight", "fake news"],
+      "steps": [
+        { "label": "Step - 4" },
+        { "label": "Step - 5" },
+        { "label": "Step - 6" }
+      ],
+      "contextLink": {
+        "id": "pidp",
+        "perspectives": [
+          {
+            "type": "feature",
+            "icon": "fas fa-rocket"
+          },
+          {
+            "type": "target-group",
+            "icon": "fas fa-user-circle"
+          }
+        ]
+      }
     }
   ]
 }

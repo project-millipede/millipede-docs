@@ -1,5 +1,6 @@
 {
   "application-title": "Projekt Millipede",
+  "application-subtitle": "Assistenzsystem zur Erhöhung der Selbstbestimmung in der digitalen Welt",
   "change-language": "Sprache ändern",
   "github": "Github",
   "toggleTheme": "Motiv hell / dunkel wechseln",
@@ -30,6 +31,9 @@
     "/pidp/landing": "Landepunkt",
     "/pidp/approach": "Ansatz",
     "/pidp/approach/byExample": "Beispiel",
+    "/pidp/use-case": "Features",
+    "/pidp/use-case/recognition": "Unmittelbare Wahrnehmung",
+    "/pidp/use-case/response": "Flinke Kennzeichnung von Falschinformation",
     "/getting-started": "Erste Schritte",
     "/discover-more": "Erfahre mehr",
     "/discover-more/team": "Team",
@@ -56,5 +60,9 @@
   "footerCommunity": "Gemeinschaft",
   "footerResources": "Resourcen",
   "footerRelease": "Aktuell {{versionNumber}}. Veröffentlicht unter der {{license}}.",
-  "license": "MIT-Lizenz"
+  "license": "MIT-Lizenz",
+  "feature-pet": "Feature PET",
+  "feature-pidp": "Feature PID/P",
+  "target-group-pet": "Zielgruppe PET",
+  "target-group-pidp": "Zielgruppe PID/P"
 }
