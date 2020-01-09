@@ -1,10 +1,35 @@
-const path = require('path');
-const sitemapGenerator = require('nextjs-sitemap-generator');
+const fs = require('fs');
+const sitemap = require('nextjs-sitemap-generator');
 
-const baseUrl = 'https://millipede.me';
+const urls = [
+  { baseUrl: 'https://millipede.me', targetDirectory: 'public/' },
+  {
+    baseUrl: 'https://privacy-shield.io',
+    targetDirectory: 'public/privacy-shield'
+  },
+  {
+    baseUrl: 'https://privly.io',
+    targetDirectory: 'public/privly'
+  }
+];
 
-sitemapGenerator({
-  baseUrl,
-  pagesDirectory: path.join(__dirname, 'pages'),
-  targetDirectory: 'public/'
+const ignoreIndexFiles = true;
+
+urls.forEach(url => {
+  !fs.existsSync(url.targetDirectory) && fs.mkdirSync(url.targetDirectory);
+
+  sitemap({
+    baseUrl: url.baseUrl,
+    ignoreIndexFiles,
+    pagesDirectory: __dirname + '/pages',
+    targetDirectory: url.targetDirectory,
+    nextConfigPath: __dirname + '/next.config.js',
+    ignoredExtensions: ['png', 'jpg'],
+    pagesConfig: {
+      '/': {
+        priority: '0.5',
+        changefreq: 'daily'
+      }
+    }
+  });
 });
