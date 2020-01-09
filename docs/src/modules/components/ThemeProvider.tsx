@@ -24,7 +24,13 @@ export const ThemeProvider = props => {
   const prefersDarkMode = useMediaQuery('@media (prefers-color-scheme: dark)');
   const preferredType = prefersDarkMode ? 'dark' : 'light';
 
-  const { dense, direction, paletteColors, paletteType = preferredType, spacing } = themeOptions;
+  const {
+    dense,
+    direction,
+    paletteColors,
+    paletteType = preferredType,
+    spacing
+  } = themeOptions;
 
   /* eslint-disable no-shadow */
   const usingHighDensity = (themeOptions: Partial<Theme>) => {
@@ -126,7 +132,9 @@ export const ThemeProvider = props => {
   useEffect(() => {
     if (isBrowser) {
       // const nextPaletteColors = JSON.parse(getCookie('paletteColors') || 'null');
-      const nextPaletteType: PaletteType = getCookie('paletteType') as PaletteType;
+      const nextPaletteType: PaletteType = getCookie(
+        'paletteType'
+      ) as PaletteType;
 
       dispatch(
         changeTheme({

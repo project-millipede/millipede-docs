@@ -43,12 +43,16 @@ const useStyles = makeStyles((theme: Theme) =>
       boxSizing: 'content-box',
       '&:hover': {
         borderLeft: `4px solid ${
-          theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[900]
+          theme.palette.type === 'light'
+            ? theme.palette.grey[200]
+            : theme.palette.grey[900]
         }`
       },
       '&$active,&:active': {
         borderLeft: `4px solid ${
-          theme.palette.type === 'light' ? theme.palette.grey[300] : theme.palette.grey[800]
+          theme.palette.type === 'light'
+            ? theme.palette.grey[300]
+            : theme.palette.grey[800]
         }`
       }
     },
@@ -59,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const scrollToLink = (href: string) => {
+export const scrollToLink = (href: string) => {
   scroller.scrollTo(href.slice(1), {
     duration: 600,
     offset: -85,
@@ -80,8 +84,8 @@ const AppTableOfContents = ({ content }: AppTableOfContentsProps) => {
 
   const { t } = useTranslation();
 
-  const handleClick = (hash: string) => {
-    scrollToLink(hash);
+  const handleClick = (_hash: string) => {
+    // scrollToLink(hash);
   };
 
   return (

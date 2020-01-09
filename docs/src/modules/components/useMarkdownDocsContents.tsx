@@ -11,7 +11,7 @@ interface MarkdownDocsContentsProps {
   activePage: Page;
 }
 
-export const useMarkdownDocsContents = ({
+const useMarkdownDocsContents = ({
   markdownLocation: markdownLocationProp,
   markdown,
   activePage = { pathname: '' }

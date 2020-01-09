@@ -1,4 +1,4 @@
-import { Divider } from '@material-ui/core';
+import { Divider, Link as MUILink } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const HomeFooter = () => {
+const HomeFooter = () => {
   const classes = useStyles({});
 
   const { t } = useTranslation();
@@ -71,13 +71,15 @@ export const HomeFooter = () => {
           </Typography>
           <ul>
             <li>
-              <Link
-                color='inherit'
-                variant='body2'
-                href='https://github.com/gurkerl83/millipede-docs'
-              >
-                GitHub
-              </Link>
+              <Typography>
+                <MUILink
+                  href='https://github.com/project-millipede/millipede-docs'
+                  color='inherit'
+                  variant='body2'
+                >
+                  GitHub
+                </MUILink>
+              </Typography>
             </li>
             <li>
               <Link color='inherit' variant='body2' href='/discover-more/team'>
@@ -92,12 +94,20 @@ export const HomeFooter = () => {
           </Typography>
           <ul>
             <li>
-              <Link color='inherit' variant='body2' href='/discover-more/organisation'>
+              <Link
+                color='inherit'
+                variant='body2'
+                href='/discover-more/organisation'
+              >
                 {t('pages./discover-more/organisation')}
               </Link>
             </li>
             <li>
-              <Link color='inherit' variant='body2' href='/discover-more/support'>
+              <Link
+                color='inherit'
+                variant='body2'
+                href='/discover-more/support'
+              >
                 {t('pages./discover-more/support')}
               </Link>
             </li>
@@ -107,7 +117,11 @@ export const HomeFooter = () => {
           <ul className={classes.list} />
         </Grid>
       </Grid>
-      <Typography className={classes.version} color='textSecondary' variant='body2'>
+      <Typography
+        className={classes.version}
+        color='textSecondary'
+        variant='body2'
+      >
         {t('footerRelease', {
           versionNumber: `v${process.env.PROJECT_VERSION}`,
           license: t('license')

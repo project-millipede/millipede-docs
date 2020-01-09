@@ -10,10 +10,10 @@ import { addScrollNavigation, removeScrollNavigation } from '../../../modules/re
 interface HeadProps extends React.Props<any> {
   // id generated through slug
   id: string;
-  component: 'h2' | 'h3';
+  variant: 'h2' | 'h3';
 }
 
-const InderaktiveHead = ({ id, component, children }: HeadProps) => {
+const InteraktiveHead = ({ id, variant, children }: HeadProps) => {
   const { dispatch }: { dispatch: React.Dispatch<ScrollActions> } = useHoux();
 
   const [ref, inView, entry] = useInView({ threshold: 0 });
@@ -38,10 +38,10 @@ const InderaktiveHead = ({ id, component, children }: HeadProps) => {
   return (
     <div ref={ref} id={id}>
       <Element name={id}>
-        <Typography variant={component}>{children}</Typography>
+        <Typography variant={variant}>{children}</Typography>
       </Element>
     </div>
   );
 };
 
-export default InderaktiveHead;
+export default InteraktiveHead;

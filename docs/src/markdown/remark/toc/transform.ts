@@ -24,7 +24,9 @@ const generateTocFromContent = (node: Node, options: TOCOptions) => {
   return result;
 };
 
-export const transform = (options: TOCOptions) => (tree: Parent): Node | Error | Promise<Node> => {
+export const transform = (options: TOCOptions) => (
+  tree: Parent
+): Node | Error | Promise<Node> => {
   const existingToc = findExistingToc(tree);
 
   const treeModified: Parent = {
