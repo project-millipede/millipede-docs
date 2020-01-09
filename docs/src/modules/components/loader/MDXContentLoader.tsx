@@ -10,7 +10,10 @@ const load = (pathSlice = '', userLanguage = ''): any =>
     .then(result => {
       return {
         content: result.default,
-        raw: result.raw
+        raw: result.raw,
+        // meta: result.metadata2
+        meta: result.a,
+        timeToRead: result.timeToRead
       };
     })
     .catch(error => {
@@ -29,7 +32,9 @@ const MDXContentLoader: React.FC<MDXContentLoaderProps> = ({
   disableShare = false
 }) => {
   const [contentMain, setContentMain] = useState('');
+  const [metaMain, setMetaMain] = useState('');
   const [rawMain, setRawMain] = useState('');
+  const [timeToReadMain, setTimeToReadMain] = useState();
   const { state }: { state: RootState } = useHoux();
   useEffect(() => {
     const loadContent = async () => {
@@ -41,6 +46,8 @@ const MDXContentLoader: React.FC<MDXContentLoaderProps> = ({
       }
       setContentMain(content.content);
       setRawMain(content.raw);
+      setMetaMain(content.meta);
+      setTimeToReadMain(content.timeToRead);
     };
     loadContent();
   }, [state.language.userLanguage]);
@@ -49,6 +56,8 @@ const MDXContentLoader: React.FC<MDXContentLoaderProps> = ({
     <MdxDocs
       content={contentMain}
       raw={rawMain}
+      meta={metaMain}
+      timeToRead={timeToReadMain}
       disableToc={disableToc}
       disableShare={disableShare}
     />

@@ -8,6 +8,7 @@ import remarkSlug from 'remark-slug';
 import stringify from 'remark-stringify';
 import unified from 'unified';
 
+// import { readingTime } from 'reading-time-estimator';
 export interface ParserOptions {
   filePath?: string; // the path to the file
   babel: boolean; // whether to transpile otherwise es6 / jsx output returned from mdx
@@ -115,7 +116,12 @@ export async function parser(raw: string, options: ParserOptions) {
 
   const toMdx = (a, o) => toMDXAST(o)(a);
   const getAst = () => mdxast || toMdx(ast, options);
-  const result = await compile(content, options, injectRemarkPlugins, injectRemarkPlugins);
+  const result = await compile(
+    content,
+    options,
+    injectRemarkPlugins,
+    injectRemarkPlugins
+  );
 
   let headingsMap;
 
@@ -149,14 +155,20 @@ export async function parser(raw: string, options: ParserOptions) {
 
   const injectLines = castArray(options.injectCode).filter(v => v && v.length);
 
+  // const timeToRead = readingTime(raw);
+
   const code = [
     `import React from 'react'`,
     `import { mdx } from '@mdx-js/react'`,
     !result.match('export const meta') ? 'export const meta = {}' : undefined,
-    `typeof meta !== 'undefined' && Object.assign(meta, ${JSON.stringify(meta)}, meta)`,
+    `typeof meta !== 'undefined' && Object.assign(meta, ${JSON.stringify(
+      meta
+    )}, meta)`,
     `export const ast = ${JSON.stringify(mdxast || getAst(), null, 2)}`,
     `export const raw = ${JSON.stringify(raw)}`,
     `export const headingsMap = ${JSON.stringify(headingsMap, null, 2)}`,
+    // `export const timeToRead = ${JSON.stringify(timeToRead)}`,
+    `export const timeToRead = ''`,
     ...injectLines,
     result
   ].filter(Boolean);
