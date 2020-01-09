@@ -1,4 +1,4 @@
-import { SocialMediaURIPathParams } from 'src/typings/share/social';
+import { SocialMediaURIPathParams } from 'src/typings/share';
 
 const encodeURL = (object: SocialMediaURIPathParams) => (
   key: string,
