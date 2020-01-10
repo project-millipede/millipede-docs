@@ -1,9 +1,18 @@
 import produce from 'immer';
 
-import { Timeline, UseCaseEntities } from '../../../../../../src/typings/social';
-import { arrayInsert, insertAtWithPreserve } from '../../../utils/collection/array';
+import { CollectionUtil } from '../../../utils';
+
+import {
+  Timeline,
+  UseCaseEntities
+} from '../../../../../../src/typings/social';
 import { StoreAction } from '../actionType';
-import { ADD_COMMENT, ADD_POST, NORMALIZE_DATA } from './actionTypes';
+import {
+  ADD_COMMENT,
+  ADD_POST,
+  NORMALIZE_DATA,
+  DELETE_POST
+} from './actionTypes';
 
 export type TimelineMap = Record<string, Timeline>;
 
@@ -41,16 +50,34 @@ const timelineReducer = (state = initialState, action: StoreAction) =>
 
         const post = entities.posts[result];
         draftState.entities.posts[result] = post;
-        // draftState.entities.timelines[timelineId].posts = insertAtWithPreserve(
-        //   state.entities.timelines[timelineId].posts,
-        //   result,
-        //   0
-        // );
-        draftState.entities.timelines[timelineId].posts = arrayInsert(
+        draftState.entities.timelines[
+          timelineId
+        ].posts = CollectionUtil.Array.insertAtWithPreserve(
           state.entities.timelines[timelineId].posts,
           result,
-          state.entities.timelines[timelineId].posts.length
+          0
         );
+        break;
+      }
+      case DELETE_POST: {
+        const { timelineId, postId } = action.payload;
+
+        draftState.entities.posts = CollectionUtil.Object.removePropertyFromObject(
+          state.entities.posts,
+          postId
+        );
+
+        const postIndex = state.entities.timelines[timelineId].posts.findIndex(
+          post => post === postId
+        );
+
+        draftState.entities.timelines[
+          timelineId
+        ].posts = CollectionUtil.Array.omitAtIndex(
+          state.entities.timelines[timelineId].posts,
+          postIndex
+        );
+
         break;
       }
       case ADD_COMMENT: {
@@ -61,7 +88,9 @@ const timelineReducer = (state = initialState, action: StoreAction) =>
 
         const comment = entities.comments[result];
         draftState.entities.comments[result] = comment;
-        draftState.entities.posts[postId].comments = insertAtWithPreserve(
+        draftState.entities.posts[
+          postId
+        ].comments = CollectionUtil.Array.insertAtWithPreserve(
           state.entities.posts[postId].comments,
           result,
           0

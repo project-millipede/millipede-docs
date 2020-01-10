@@ -9,6 +9,7 @@ import {
   Post,
   timelineSchema,
   UseCaseEntities,
+  mediaFactory
 } from '../../../typings/social';
 
 export const handleCreatePost = (
@@ -40,11 +41,7 @@ export const handleCreatePost = (
     content: {
       ...postTemplate.content,
       text,
-      media: {
-        id: uuid(),
-        imageHref: '/images/cards/paella.jpg',
-        imageTitle: 'PIDP features'
-      }
+      media: mediaFactory.build()
     }
   };
 

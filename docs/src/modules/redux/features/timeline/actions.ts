@@ -9,9 +9,14 @@ import {
   postSchema,
   usecaseData,
   UseCaseEntities,
-  useCaseSchema,
+  useCaseSchema
 } from '../../../../../../src/typings/social';
-import { ADD_COMMENT, ADD_POST, NORMALIZE_DATA } from './actionTypes';
+import {
+  ADD_COMMENT,
+  DELETE_POST,
+  ADD_POST,
+  NORMALIZE_DATA
+} from './actionTypes';
 
 export const normalizeData = () => {
   const { entities, result } = normalizeWrapper<UseCaseEntities>(
@@ -24,6 +29,10 @@ export const normalizeData = () => {
 export const createPost = (timelineId: number, newPost: Post) => {
   const post = normalizeWrapper<PostEntities>(newPost, postSchema);
   return action(ADD_POST, { timelineId, post });
+};
+
+export const removePost = (timelineId: number, postId: number) => {
+  return action(DELETE_POST, { timelineId, postId });
 };
 
 export const createComment = (postId: number, newComment: Comment) => {
