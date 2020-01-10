@@ -67,7 +67,7 @@
     "lodash": "^4.17.15",
     "mdast-util-toc": "^5.0.0",
     "mui-rte": "^1.11.0",
-    "next": "^9.1.8-canary.7",
+    "next": "^9.1.8-canary.9",
     "next-i18next-serverless": "^1.1.72",
     "normalizr": "^3.4.1",
     "polished": "^3.4.2",

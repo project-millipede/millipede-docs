@@ -15,6 +15,7 @@ import { Page } from '../../../../src/typings/data/import';
 import { RootState } from '../redux/reducers';
 import { pathnameToLanguage } from '../utils/helpers';
 import AppDrawerNavItem from './AppDrawerNavItem';
+import Link from './common/link/Link';
 
 const drawerWidth = 240;
 
@@ -49,6 +50,13 @@ const useDrawerStyles = makeStyles((theme: Theme) =>
       justifyContent: 'flex-end',
       // at original
       // padding: theme.spacing(0, 1),
+      padding: '0 8px',
+      ...theme.mixins.toolbar
+    },
+    toolbarTitle: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
       padding: '0 8px',
       ...theme.mixins.toolbar
     },
@@ -116,6 +124,15 @@ const AppDrawer = (props: AppDrawerProps) => {
         }}
       >
         <div className={classes.toolbar}>
+          <Link
+            className={classes.toolbarTitle}
+            href='/'
+            onClick={handleDrawerClose}
+            variant='h6'
+            color='inherit'
+          >
+            {t('application-title')}
+          </Link>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? (
               <ChevronRightIcon />
@@ -147,6 +164,15 @@ const AppDrawer = (props: AppDrawerProps) => {
         open={isDrawerOpen}
       >
         <div className={classes.toolbar}>
+          <Link
+            className={classes.toolbarTitle}
+            href='/'
+            onClick={handleDrawerClose}
+            variant='h6'
+            color='inherit'
+          >
+            {t('application-title')}
+          </Link>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? (
               <ChevronRightIcon />

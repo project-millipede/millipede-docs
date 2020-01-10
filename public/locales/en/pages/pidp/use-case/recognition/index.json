@@ -5,6 +5,7 @@
   "attention": "Span of attention",
   "like": "Like",
   "share": "Share",
+  "delete": "Delete",
   "comment": "Comment",
   "comment_create": "Create comment",
   "comment_publish": "Publish comment",

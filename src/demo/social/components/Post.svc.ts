@@ -1,14 +1,17 @@
 import { TimelineActions } from 'docs/src/modules/redux/features/actionType';
 import uuid from 'uuid';
 
-import { createComment } from '../../../../docs/src/modules/redux/features/timeline/actions';
+import {
+  createComment,
+  removePost
+} from '../../../../docs/src/modules/redux/features/timeline/actions';
 import {
   Comment,
   contentFactory,
   currentTimeStamps,
   denormalizeWrapper,
   timelineSchema,
-  UseCaseEntities,
+  UseCaseEntities
 } from '../../../typings/social';
 
 export const handleCreateComment = (
@@ -42,5 +45,15 @@ export const handleCreateComment = (
   };
 
   dispatch(createComment(postId, comment));
+  callback();
+};
+
+export const handleDeletePost = (
+  timelineId: number,
+  postId: number,
+  dispatch: React.Dispatch<TimelineActions>,
+  callback: () => void = () => ({})
+) => {
+  dispatch(removePost(timelineId, postId));
   callback();
 };

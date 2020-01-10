@@ -2,7 +2,11 @@ import { formatDistance } from 'date-fns';
 import { enGB } from 'date-fns/locale';
 import * as Factory from 'factory.ts';
 import faker from 'faker';
-import { denormalize as denormalizeFn, normalize as normalizeFn, schema } from 'normalizr';
+import {
+  denormalize as denormalizeFn,
+  normalize as normalizeFn,
+  schema
+} from 'normalizr';
 
 export const enum TimelineSchemaKeys {
   usecases = 'usecases',
@@ -140,7 +144,7 @@ export const currentTimeStamps = Factory.Sync.makeFactory({
   )
 });
 
-const mediaFactory = Factory.Sync.makeFactory({
+export const mediaFactory = Factory.Sync.makeFactory({
   id: Factory.each(i => i),
   imageHref: Factory.each(() => faker.image.imageUrl(300, 300, '', true)),
   imageTitle: Factory.each(() => faker.lorem.sentences(3))

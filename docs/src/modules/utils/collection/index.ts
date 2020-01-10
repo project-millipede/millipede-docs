@@ -1,3 +1,4 @@
 import * as Array from './array';
+import * as Object from './object';
 
-export { Array };
+export { Array, Object };
