@@ -1,7 +1,7 @@
 import { Link } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import React from 'react';
+import React, { FC } from 'react';
 
 // import NextComposed from '../../../modules/components/common/button/NextComposed';
 // import NextLinkMuiLink from '../../../modules/components/common/button/NextLinkMuiLink';
@@ -13,9 +13,6 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(0.5, 0, 0.5, 1),
       borderLeft: '4px solid transparent',
       boxSizing: 'content-box',
-
-      // padding: "inherit",
-
       '&:hover': {
         borderLeft: `4px solid ${
           theme.palette.type === 'light'
@@ -32,8 +29,6 @@ const useStyles = makeStyles((theme: Theme) =>
       }
     },
     secondaryItem: {
-      // padding: "inherit",
-
       paddingLeft: theme.spacing(2.5)
     },
     active: {},
@@ -43,31 +38,29 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface Props extends React.Props<any> {
-  initialvalue: number;
+interface TocLinkProps extends React.Props<any> {
   activeState: Set<string>;
   href: string;
   secondary: boolean;
-  scrollToLink?: (href: string) => void;
 }
 
-const TocLink = (props: Props) => {
+const TocLink: FC<TocLinkProps> = ({
+  activeState,
+  href,
+  secondary,
+  children
+}) => {
   const classes = useStyles({});
 
-  const handleClick = () => {
-    const { href, scrollToLink } = props;
-    scrollToLink(href);
-  };
-
   const isActive =
-    Array.from(props.activeState).filter(
-      activeState => activeState === decodeURI(props.href).replace('#', '')
+    Array.from(activeState).filter(
+      activeState => activeState === decodeURI(href).replace('#', '')
     ).length > 0;
 
   return (
     // <>
     //   <NextLinkMuiLink
-    //     href={props.href}
+    //     href={href}
     //     component={NextComposed}
     //     onClick={handleClick}
     //     display="block"
@@ -75,29 +68,28 @@ const TocLink = (props: Props) => {
     //     color={isActive ? "textPrimary" : "textSecondary"}
     //     className={clsx(
     //       classes.item,
-    //       { [classes.secondaryItem]: props.secondary },
+    //       { [classes.secondaryItem]: secondary },
     //       isActive ? classes.active : undefined
     //     )}
     //   >
-    //     {props.children}
+    //     {children}
     //   </NextLinkMuiLink>
     //   </>
 
     <div className={classes.list}>
       <Link
-        key={props.href}
-        href={props.href}
-        onClick={handleClick}
+        key={href}
+        href={href}
         display='block'
         underline='none'
         color={isActive ? 'textPrimary' : 'textSecondary'}
         className={clsx(
           classes.item,
-          { [classes.secondaryItem]: props.secondary },
+          { [classes.secondaryItem]: secondary },
           isActive ? classes.active : undefined
         )}
       >
-        {props.children}
+        {children}
       </Link>
     </div>
   );

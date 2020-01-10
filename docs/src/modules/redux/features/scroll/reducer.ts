@@ -11,28 +11,18 @@ export const initialState: Props = {
   position: new Set()
 };
 
-const scrollReducer = (draft = initialState, action: StoreAction) => {
-  switch (action.type) {
-    case SCROLL_NAVIGATION_ADD: {
-      const newPosition = new Set(draft.position);
-      newPosition.add(action.payload.newPosition);
-
-      /* eslint-disable no-param-reassign */
-      draft.position = newPosition;
-      return draft;
+const scrollReducer = (state = initialState, action: StoreAction) =>
+  produce(state, draftState => {
+    switch (action.type) {
+      case SCROLL_NAVIGATION_ADD:
+        draftState.position.add(action.payload.newPosition);
+        break;
+      case SCROLL_NAVIGATION_REMOVE:
+        draftState.position.delete(action.payload.newPosition);
+        break;
+      default:
+        break;
     }
-    case SCROLL_NAVIGATION_REMOVE: {
-      const newPosition = new Set(draft.position);
-      newPosition.delete(action.payload.newPosition);
+  });
 
-      /* eslint-disable no-param-reassign */
-      draft.position = newPosition;
-      return draft;
-    }
-    default:
-      return draft;
-  }
-};
-
-export const curriedScrollReducer = produce(scrollReducer);
-export default curriedScrollReducer;
+export default scrollReducer;

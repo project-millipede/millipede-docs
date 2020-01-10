@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 import { generateToc, TocProps } from './Toc.svc';
 
-const TocComponent = ({ content, activeState, scrollToLink }: TocProps) => {
+const TocComponent = ({ content, activeState }: TocProps) => {
   const [toc, setToc] = useState('');
 
   useEffect(() => {
-    generateToc({ content, activeState, scrollToLink }).then(result =>
+    generateToc({ content, activeState }).then(result =>
       setToc(result.contents as string)
     );
   }, [content, activeState.size]);
