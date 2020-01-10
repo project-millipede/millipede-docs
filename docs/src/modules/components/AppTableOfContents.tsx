@@ -1,7 +1,6 @@
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import { useHoux } from 'houx';
 import React from 'react';
-import { scroller } from 'react-scroll';
 
 import { useTranslation } from '../../../../i18n';
 import TOCComponent from '../../markdown/components/toc/TocComponent';
@@ -63,16 +62,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const scrollToLink = (href: string) => {
-  scroller.scrollTo(href.slice(1), {
-    duration: 600,
-    offset: -85,
-    delay: 0,
-    smooth: 'ease',
-    containerId: 'main-content'
-  });
-};
-
 interface AppTableOfContentsProps {
   content: string;
 }
@@ -80,13 +69,13 @@ interface AppTableOfContentsProps {
 const AppTableOfContents = ({ content }: AppTableOfContentsProps) => {
   const classes = useStyles({});
 
-  const { state }: { state: RootState } = useHoux();
+  const {
+    state: {
+      scroll: { position }
+    }
+  }: { state: RootState } = useHoux();
 
   const { t } = useTranslation();
-
-  const handleClick = (_hash: string) => {
-    // scrollToLink(hash);
-  };
 
   return (
     <nav className={classes.root} aria-label={t('toc')}>
@@ -94,11 +83,7 @@ const AppTableOfContents = ({ content }: AppTableOfContentsProps) => {
         <Typography gutterBottom className={classes.contents}>
           {t('toc')}
         </Typography>
-        <TOCComponent
-          content={content}
-          activeState={state.scroll.position as Set<string>}
-          scrollToLink={handleClick}
-        />
+        <TOCComponent content={content} activeState={position} />
       </React.Fragment>
     </nav>
   );

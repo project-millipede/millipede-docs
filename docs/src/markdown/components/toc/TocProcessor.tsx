@@ -8,10 +8,7 @@ import remarkMinNodes from '../../remark/minNodes';
 import remarkToc from '../../remark/toc';
 import TocLink from './TocLink';
 
-export const generateProcessor = (
-  activeState: Set<string>,
-  scrollToLink?: (href: string) => void
-) => {
+export const generateProcessor = (activeState: Set<string>) => {
   const processor = unified()
     .use(remarkParse)
     .use(remarkSlug)
@@ -25,15 +22,8 @@ export const generateProcessor = (
         // Redefining the anchor element overrides the results generated in a
         // before executed effort of remark-slug to produce anchor elements
         a: props => {
-          return (
-            <TocLink
-              initialvalue={10}
-              activeState={activeState}
-              scrollToLink={scrollToLink}
-              {...props}
-            />
-          );
-        },
+          return <TocLink activeState={activeState} {...props} />;
+        }
 
         // ul: props => (
         //   <TocLink
@@ -53,16 +43,6 @@ export const generateProcessor = (
         //     {...props}
         //   />
         // )
-
-        h5: props => (
-          <TocLink
-            initialvalue={10}
-            activeState={activeState}
-            scrollToLink={scrollToLink}
-            secondary={false}
-            {...props}
-          />
-        )
       }
     });
   return processor;
