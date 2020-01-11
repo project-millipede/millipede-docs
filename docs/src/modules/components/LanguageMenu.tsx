@@ -10,7 +10,7 @@ import { changeUserLanguage } from '../redux/features/language/actions';
 import { RootState } from '../redux/reducers';
 import LanguageLabel from './LanguageLabel';
 
-const LanguageMenu = () => {
+export const LanguageMenu = () => {
   const [languageMenu, setLanguageMenu] = useState<Element & EventTarget>(null);
 
   const {
@@ -23,11 +23,14 @@ const LanguageMenu = () => {
 
   const { i18n, t } = useTranslation();
 
-  const handleSelect = useCallback((_event: React.SyntheticEvent, languageCode: string) => {
-    dispatch(changeUserLanguage(languageCode));
-    i18n.changeLanguage(languageCode);
-    setLanguageMenu(null);
-  }, []);
+  const handleSelect = useCallback(
+    (_event: React.SyntheticEvent, languageCode: string) => {
+      dispatch(changeUserLanguage(languageCode));
+      i18n.changeLanguage(languageCode);
+      setLanguageMenu(null);
+    },
+    []
+  );
 
   const handleLanguageIconClick = (event: SyntheticEvent) => {
     setLanguageMenu(event.currentTarget);
@@ -77,5 +80,3 @@ const LanguageMenu = () => {
     </>
   );
 };
-
-export default LanguageMenu;

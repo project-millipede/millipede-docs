@@ -3,12 +3,8 @@ import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
 import Highlight from 'react-highlight';
 
-import { generateMdElement } from './MdElement.svc';
+import { generateMdElement, MdElementProps } from './MdElement.svc';
 import { useMdStyles } from './styles/MdStyles';
-
-export interface MdElementProps {
-  content: string;
-}
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
@@ -22,7 +18,9 @@ const MdElement = ({ content }: MdElementProps) => {
   const classes = useStyles({});
 
   useEffect(() => {
-    generateMdElement({ content }).then(result => setMarkdown(result.contents as string));
+    generateMdElement({ content }).then(result =>
+      setMarkdown(result.contents as string)
+    );
   }, [content]);
 
   return <div className={clsx(classes.root, 'markdown-body')}>{markdown}</div>;
