@@ -34,7 +34,7 @@
           },
           {
             "text": [
-              "Siehe Kapitel 5.1 – Zielsetzungen und Absichten der Akteure in den Abschnitten – Regime-orientierte Länder, terroristische Gruppen und Populismus."
+              "See Chapter 5.1 - Objectives and intentions of actors in chapters - Regime-oriented countries, terrorist groups and populism."
             ]
           }
         ]
@@ -52,19 +52,19 @@
           },
           {
             "listing": [
-              "Eine Ausweitung der technischen Einschränkung setzt sich über Organisations- oder Unternehmensgrenzen hinweg fort, indem der Angreifer eine unmittelbare Wirkung der Schadsoftware auf dem zunächst infizierten Endgerät verzögert wird.",
-              "Eine weitere Verbreitung erfolgt über das Interaktions- oder Kollaborationsgefüge des Bedieners, dessen Endgerät das Ziel eines erfolgreichen Angriffs wurde. Ein indirekter Übergriff wird möglich, indem eine erneute und automatisierte Übermittlung der E-Mail mit schadhaftem Anhang an die im digitalen Adressbuch hinterlegten Kontakte ausgeführt wird. Die weiteren Empfänger betrachten den Inhalt der Nachricht als relevant da der Ursprung der Nachricht (Adresse des Absenders) als gültig bewertet wird."
+              "An extension of the technical restriction continues beyond organizational or corporate boundaries by delaying the attacker from taking immediate effect of the malicious software on the initially infected end device.",
+              "A further spread is carried out via the means of interaction or collaboration of the user whose end device had become the target of a successful attack. An indirect attack becomes possible by carrying out a renewed and automated transmission of the e-mail with defective attachment to the contacts stored in the digital address book. Subsequent recipients consider the content of the message to be relevant as the origin of the message (sender's address) is considered valid."
             ]
           },
           {
             "summary": [
-              "Aufgrund des Fehlens eines Verdachtsmoments wird der Infektionsradius schrittweise vergrößert."
+              "Due to the absence of a suspicious factor, the radius of infection increases progressively."
             ]
           },
           {
             "note": [
               "Notice",
-              "Die im Vorfeld ausgeführte Aussage, die Wirkung des genutzten Angriffsvektors sei ausschließlich auf eine lokale Maschine begrenzt muss unter der Betrachtung erweiterter Infektionsmuster angepasst werden."
+              "The statement made in the previous section that the effect of the attack vector used is exclusively limited to a local machine must be revised to reflect more extensive patterns of infection."
             ]
           }
         ]
@@ -76,29 +76,29 @@
           },
           {
             "listing": [
-              "Gesellschaftliche Problemstellungen zu denen es keinen gewohnten Lösungsweg gibt werden als Unfähigkeit der politischen Elite gewertet.",
-              "In einem zeitlich regelmäßigen Abstand etablieren sich neue Trendthemen, welche über einen ausgedehnten Zeitraum im Fokus der Medien- und Presselandschaft stehen."
+              "Societal problems to which there is no conventional method of resolution are perceived as an inability of the political leadership.",
+              "New trend subjects are established at regular intervals, which are in the focus of the media and press landscape over an extended period of time."
             ]
           },
           {
             "note": [
-              "Die Neutralität des Medienapparats wird vom Einzelnen aufgrund der einseitigen oder oftmals wiederholten Berichterstattung angezweifelt. Dies steht im Widerspruch zu hochwertigen journalistischen Standards und der objektiven Berichterstattung mit dem Fokus dem Leser stets vorurteilsfrei eine eigene Meinungsbildung zu erlauben."
+              "The individual doubts the neutrality of the media apparatus because of the one-sided or often repeated reporting. This contradicts high-quality journalistic standards and objective reporting with the focus on enabling people to form their own opinions without prejudice."
             ]
           },
           {
             "listing": [
-              "Eine funktionierende Medienlandschaft bildet ein wesentliches Instrument eines demokratischen Gefüges."
+              "A well-functioning media landscape constitutes a fundamental instrument of any democratic society."
             ]
           },
           {
             "note": [
-              "Die Selbstorganisation eines solchen Gefüges wird durch die kontrollierte und zielgerichtete Erzeugung, Verbreitung oder Streuung von kritischen Inhalten gestört."
+              "The self-organisation of such a structure is being disturbed by the controlled and targeted production, distribution or scattering of critical content."
             ]
           },
           {
             "listing": [
-              "Äußere Kräfte mit großen Erfahrungen im Bereich der Propaganda zeigen die Wirkung von nachweislich gefälschten Informationen an.",
-              "Gleichgesinnte innere Kräfte eines greifen die Methoden auf und verstärken die Wirkung, indem Falschinformation mit einem verstärkten regionalen Bezug verbreitet wird."
+              "External forces with great experience in the field of propaganda indicate the effect of proven falsified information.",
+              "Similarly minded inner forces take up the methods and strengthen the effect by spreading false information with a stronger regional focus."
             ]
           }
         ]
@@ -115,14 +115,14 @@
           },
           {
             "listing": [
-              "Die technische Funktion eines digitalen Endgeräts oder einer Komponente der digitalen Infrastruktur wird direkt nach der Infektion kompromittiert.",
-              "Abhängig davon, auf welcher digitalen Komponente die Ausführung der Schadsoftware erfolgt ist die Wirkung auf eine einzelne Maschine beschränkt. Übernimmt diese Maschine eine wichtige Aufgabenstellung für andere Maschinen wird der Arbeitsablauf des Bedieners im Verbund unterbrochen."
+              "The functional integrity of a digital device or component of a digital infrastructure is compromised immediately after infection.",
+              "Depending on the digital component on which the malware is executed, the effect is limited to a single machine. If one machine provides services for other machines, the overall workflow will be interrupted."
             ]
           },
           {
             "note": [
-              "Hinweis",
-              "Dieser Angriffsvektor entspricht dem eines trojanischen Pferds. In der Regel wird bei dieser Art von Angriffsvektor kein Übergriff auf im (lokalen) Netzwerk angeschlossener Endgeräte ausgeführt. Die Wirkung ist auf eine lokale Maschine begrenzt. Das Ausmaß und die Folgen eines Zwischenfalls für andere oder unmittelbar unbeteiligte Teilnehmer werden durch mehrere Faktoren bestimmt. Fragestellungen, ob der elektronische Fingerabdruck (Signatur) einer Schadsoftware von einem Viren-, Spyware- Malware-, Ransomware- Filter erkannt wird oder ob, eine Schadsoftware über ein fortgeschrittenes Verhalten verfügt, die Wirkung defensiver Verfahren imstande ist zu täuschen, müssen betrachtet werden."
+              "Note",
+              "This attack vector corresponds to that of a Trojan horse. As a rule, this type of attack vector does not attack end devices connected in the (local) network. The effect is limited to a local machine. The extent and consequences of an incident for other or directly uninvolved participants are determined by several factors. Questions as to whether the electronic fingerprint (signature) of a malicious software is detected by a virus, spyware, malware, ransomware filter or whether, if a malicious software has an advanced behaviour, the effect of defensive methods is capable of deceiving must be considered."
             ]
           }
         ]
@@ -134,16 +134,16 @@
           },
           {
             "listing": [
-              "Gezielte Einwirkung auf die Fähigkeit der selbstbestimmten Schlussfolgerung des Teilnehmers. Der Nutzer konsumiert Inhalte in digitalen Umgebungen meist nur oberflächlich und setzt sich mit der im Inhalt enthaltenen Aussage nicht im Detail auseinanderzusetzen.",
-              "Das gedankliche Werte- und Meinungsgebilde des Individuums wird durch",
-              " • extreme Aussagen oder",
-              " • unterbewusst wahrgenommene Botschaften beeinflusst.",
-              "Der durchschnittliche Nutzer ist sich dieser Situation oftmals nicht bewusst da Inhalte durch das eigene soziale Gefüge – der sozialräumliche Charakter (Familie, Peer Group, Milieu, Subgruppe) betrachtet werden, welche ein ähnliches Meinungs- und Wertebild vertreten."
+              "Specific influence on the participants' ability to draw self-determined conclusions. The user usually consumes content in digital environments only superficially and does not deal with the statement contained in the content in detail.",
+              "The intellectual construct of moral values and opinions of the individual is influenced through",
+              " • extreme statements or",
+              " • subconsciously perceived messages.",
+              "The average user is often not aware of this situation because content is considered in terms of its own social structure - the social-spatial character (family, peer group, milieu, subgroup), which represent a shared set of opinions and moral values."
             ]
           },
           {
             "summary": [
-              "Eine auf eigenständige Art und Weise ausgeführte Bewertung der in einem Inhalt enthaltenen Aussage ist nicht möglich, da es wenigstens eine bewertende Stimme eines Teilnehmers gibt, über den fremde Inhalte in den Sichtbereich des Nutzers propagiert werden – siehe Kapitel 20.2.4.5.4 – Eintritt externer oder fremder Inhalte in das Innere eines sozialen Gefüges."
+              "An independent evaluation of the statement contained in a content is not possible, since there is at least one evaluating voice of a participant through which external content is propagated into the user's field of vision - see Chapter 20.2.4.5.4 - Entry of external or third-party content into the inner structure of a social fabric."
             ]
           }
         ]
@@ -151,23 +151,23 @@
     ],
     [
       {
-        "title": "Verhalten",
-        "subTitle": "Verstärkung der Wirkung durch Interaktion"
+        "title": "Behaviour",
+        "subTitle": "Enhancing the effect through interaction"
       },
 
       {
         "description": [
           {
-            "subTitle": ["Fehlverhalten – durch eine Interaktion ausgelöst"]
+            "subTitle": ["Faulty behaviour - triggered by interaction"]
           },
           {
             "listing": [
-              "von ungeschulten Mitarbeitern im Unternehmen im Umgang mit Daten, welche aus nicht vertrauenswürdigen Quellen empfangen werden."
+              "by untrained employees within an organization in dealing with data received from untrusted sources."
             ]
           },
           {
             "summary": [
-              "Der Faktor Mensch bildet das schwächste Glied in der Kette von Maßnahmen zu IT-Sicherheit"
+              "The human factor is the weakest link in the chain of measures for IT security"
             ]
           }
         ]
@@ -175,11 +175,11 @@
       {
         "description": [
           {
-            "subTitle": ["Fehlverhalten – durch eine Interaktion ausgelöst"]
+            "subTitle": ["Faulty behaviour - triggered by interaction"]
           },
           {
             "listing": [
-              "von Menschen deren Meinungsbild im Vorfeld gezielt manipuliert wurde – siehe Kapitel 21.7.2 – Ambivalenz der Medien in den Unterkapiteln Simplifizierung / Personalisierung, Passivität, Scheinwelten sowie der gezielten Thematisierung"
+              "by people whose perception of opinion has been deliberately manipulated in advance - see Chapter 21.7.2 - Ambivalence of the media in the subchapters Simplification / Personalisation, Passivity, Apparent Worlds as well as the targeted thematisation"
             ]
           }
         ]
@@ -187,17 +187,19 @@
     ],
     [
       {
-        "subTitle": "Eintritt in das Sichtfeld des Menschen"
+        "subTitle": "Entering the user's field of vision"
       },
       {
         "description": [
           {
             "text": [
-              "Authentische und kritische Inhalte werden vom Nutzer nebenläufig konsumiert. Der Anbieter eines elektrischen Postfachs klassifiziert den eingehenden Nachrichtenstrom – Posteingang / Spam. Eine Klassifikation erfolgt, indem die Anzahl der Übersendungen einer identischen Nachricht auf andere Postfächer gemessen wird (Streuung) oder anhand des in einer Nachricht enthaltenen Musters der Wortfolge. Trotz eines aktiven Verfahrens ist die Klassifikation nicht zu 100% verlässlich."
+              "Authentic and critical content is consumed by the user in parallel. The provider of an electronic mailbox classifies the inbound message stream - inbox / spam. The classification is done by measuring the number of transmissions of an identical message to other mailboxes (scattering) or by using the pattern of word order contained in a message. Despite an active procedure, the classification is not 100% reliable."
             ]
           },
           {
-            "summary": ["Der Nutzer konsumiert Inhalte, welche als Spam klassifiziert werden."]
+            "summary": [
+              "The user consumes content which is identified as spam."
+            ]
           }
         ]
       },
@@ -205,12 +207,12 @@
         "description": [
           {
             "text": [
-              "Der Betreiber einer Social-Media Anwendung bestimmt die Zusammensetzung der im Inhalte- oder Nachrichtenstrom enthaltenen Inhalte.  Der Nutzer konsumiert authentische und kritische Inhalte nebenläufig. Aufgrund des typischen Nutzerverhaltens mehrere Inhalte im Inhalte- oder Nachrichtenstrom in einer nur sehr kurzen Zeitspanne zu konsumieren setzt sich der Nutzer nicht mehr im Detail mit der in einem Inhalt enthaltenen Aussage auseinander. "
+              "The operator of a social media application determines the composition of the content contained in the news or content stream.  The user consumes authentic and critical content in parallel. Due to the typical user behavior of consuming multiple items of content in a very short period of time, the user no longer deals in detail with the message embedded in a piece of content."
             ]
           },
           {
             "summary": [
-              "Die in einem kritischen Inhalt kommunizierte Aussage verändert das Meinungs- und Entscheidungsverhalten schrittweise."
+              "The statement communicated in a critical content changes the opinion and decision behaviour progressively."
             ]
           }
         ]
@@ -218,15 +220,15 @@
     ],
     [
       {
-        "title": "Werkzeuge",
-        "subTitle": "Methode der Distribution"
+        "title": "Toolbox",
+        "subTitle": "Method of distribution"
       },
       {
         "description": [
           {
             "text": [
-              "Die Verteilung oder Streuung eines kompromittierten Datums erfolgen durch eine primäre, zur digitalen Kommunikation genutzte Technologie.",
-              "Jeder Internetnutzer verfügt über ein elektronisches Postfach."
+              "The distribution or dispersion of a compromised date is carried out by means of a primary technology used for digital communication.",
+              "Everyone who uses the Internet has an electronic mailbox."
             ]
           }
         ]
@@ -235,8 +237,8 @@
         "description": [
           {
             "text": [
-              "Das in Social-Media Anwendungen genutzte virale Distributionsmodell ist ideal zur kontrollierten und zielgerichteten Verbreitung oder Streuung von (kritischen) Inhalten geeignet.",
-              "Der Großteil der Internetnutzer verwendet Social-Media Anwendungen im täglichen Gebrauch, um im digital abgebildeten sozialen Gefüge teilzunehmen."
+              "The viral distribution model used in social media applications is ideally suited for the controlled and targeted distribution or spreading of (critical) content.",
+              "The vast majority of Internet users are using social media applications on a daily basis to participate in the digitally mapped social fabric."
             ]
           }
         ]
@@ -251,22 +253,21 @@
           {
             "subTitle": ["The integrity of a data gets compromised."],
             "text": [
-              "Die Integrität eines Datums wird kompromittiert.",
-              "Schadhafte Software wird durch eine Interaktion des Nutzers mit einem Träger am System eingespielt.",
-              "Als Träger eignet sich etwa der an eine E-Mail beigefügte Anhang.",
-              "Gefälschte Absenderadressen und Inhalte in der Betreffzeile einer E-Mail täuschen eine für den Nutzer vermeintlich wichtige Information vor.",
-              "Dieser Angriffsvektor entspricht dem eines trojanischen Pferds und wird seit dem Bestehen dieser Kommunikationsform zur Verbreitung von Spy-, und Ransomware missbraucht."
+              "Malicious software is injected into the operating system through an interaction of the user with the carrier.",
+              "The most suitable carrier is for instance the attachment to an e-mail.",
+              "Fake sender addresses and contents in the subject line of an e-mail pretend to be important information for the user.",
+              "This attack vector is similar to that of a Trojan horse and has been used to spread spyware and ransomware since the inception of this form of communication."
             ]
           },
           {
             "note": [
-              "Hinweis",
-              "Andere Angriffsvektoren basieren im Wesentlichen auf",
-              "- bekannten, aber durch den Hersteller nicht behobenen",
-              "- oder nicht offengelegten Schwachstellen in Software oder Hardwarekomponenten.",
-              "Diese Angriffsvektoren setzen kein Trägermaterial (keine Interaktion des Nutzers) voraus um eine schadhafte Komponente in ein System einzuspielen.",
-              "Die Wirkung von Schadsoftware kann oft durch den Einsatz von Sicherheitssoftware neutralisiert werden.",
-              "Entsprechende Verfahren werden an dieser Stelle nicht näher betrachtet."
+              "Note",
+              "Other attack vectors are mainly based on",
+              "- known, but not eliminated by the manufacturer",
+              "- or undisclosed vulnerabilities in software or hardware components.",
+              "These attack vectors do not require a carrier medium (no user interaction) to introduce a malicious component into a given system.",
+              "The effect of malicious software can often be neutralised by the use of protection software.",
+              "Corresponding procedures will not be described in detail at this point."
             ]
           }
         ]
@@ -275,7 +276,7 @@
         "description": [
           {
             "text": [
-              "Versteckte oder extreme Botschaften werden in Beiträge eingebettet, welche im Inhalte- oder Nachrichtenstrom einer Social-Media Anwendung kommuniziert werden."
+              "Hidden or extreme messages are embedded in posts that are communicated in the content or message stream of social media applications."
             ]
           }
         ]
