@@ -28,6 +28,7 @@
     "now-build": "npm run loader:build && npm run app:build && npm run next:build",
     "clean": "rm -rf dist/ .next/",
     "format:mdx": "prettier --parser mdx --print-width 80 --prose-wrap always --write \"docs/src/pages/**/*.mdx\"",
+    "format:json": "prettier --parser json --print-width 80 --use-tabs --write \"public/locales/de/pages/rethink-security/attackVectors/comparison/content.json\"",
     "sitemap": "node sitemap-generator",
     "schema": "ts-json-schema-generator --jsDoc extended --path src/typings/social/index.ts > src/typings/social/index.json"
   },
