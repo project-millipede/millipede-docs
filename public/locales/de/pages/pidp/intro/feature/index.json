@@ -26,7 +26,7 @@
         },
         {
           "summary": [
-            "Der Nutzer in die Lage, eine unmittelbare Differenzierung zwischen falschen und wahren Inhalten auszuführen."
+            "Der Nutzer in die Lage, eine unmittelbare Differenzierung zwischen wahren und falschen Inhalten auszuführen."
           ]
         },
         {
@@ -65,7 +65,7 @@
           "listing": [
             {
               "link": "/pidp/use-case/response#test1",
-              "text": "Ein intuitiv zu bedienende Nutzeroberfläche erlaubt die Erfassung der Web- und Zeitkoordinate eines kritischen Beitrags in einer beliebigen Zielanwendung."
+              "text": "Eine intuitiv zu bedienende Nutzeroberfläche erlaubt die Erfassung der Web- und Zeitkoordinate eines kritischen Beitrags in einer beliebigen Zielanwendung."
             },
             {
               "link": "/pidp/use-case/response#test2",

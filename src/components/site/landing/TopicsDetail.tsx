@@ -17,21 +17,17 @@ const generateIntro = (router: NextRouter, t: TFunction) => {
     if (aspect != null) {
       return (
         <div
-          key={`feature-${featureName}`}
+          key={`${aspect}-${featureName}`}
           style={{
             display: 'flex',
             flexDirection: 'column',
             textAlign: 'left'
           }}
         >
-          <InteractiveHead variant={'h3'} id={'pidp'}>
-            {t(`feature-${featureName}`)}
+          <InteractiveHead variant={'h3'} id={`head-${aspect}-${featureName}`}>
+            {t(`${aspect}-${featureName}`)}
           </InteractiveHead>
-          <Topics
-            key={`feature-${aspect}-${featureName}`}
-            featureName={featureName as string}
-            aspect={aspect}
-          />
+          <Topics featureName={featureName as string} aspect={aspect} />
         </div>
       );
     }
