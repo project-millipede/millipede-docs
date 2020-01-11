@@ -18,7 +18,7 @@ interface MarkdownDocsProps {
   disableToc?: boolean;
 }
 
-export const MdDocs = (props: MarkdownDocsProps) => {
+const MdDocs = (props: MarkdownDocsProps) => {
   const {
     content,
     markdownLocation: markdownLocationProp,

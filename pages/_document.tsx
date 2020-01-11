@@ -86,12 +86,15 @@ MillipedeDocument.getInitialProps = async (
   const sheets = new ServerStyleSheets();
   const originalRenderPage = ctx.renderPage;
 
-  ctx.renderPage = () =>
-    originalRenderPage({
-      enhanceApp: App => props => sheets.collect(<App {...props} />)
-    });
+  const newCtx = {
+    ...ctx,
+    renderPage: () =>
+      originalRenderPage({
+        enhanceApp: App => props => sheets.collect(<App {...props} />)
+      })
+  };
 
-  const initialProps = await NextDocument.getInitialProps(ctx);
+  const initialProps = await NextDocument.getInitialProps(newCtx);
 
   return {
     ...initialProps,

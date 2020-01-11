@@ -11,8 +11,8 @@ import React from 'react';
 import { useTranslation } from '../../../../i18n';
 import { ThemeActions } from '../redux/features/actionType';
 import { RootState } from '../redux/reducers';
-import AppSearch from './AppSearch';
-import LanguageMenu from './LanguageMenu';
+import { AppSearch } from './AppSearch';
+import { LanguageMenu } from './LanguageMenu';
 
 interface AppToolBarProps {
   isDrawerOpen: boolean;

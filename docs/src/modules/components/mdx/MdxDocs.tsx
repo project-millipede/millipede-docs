@@ -31,7 +31,7 @@ interface MarkdownDocsProps extends React.Props<any> {
   disableShare?: boolean;
 }
 
-export const MdxDocs = (props: MarkdownDocsProps) => {
+const MdxDocs = (props: MarkdownDocsProps) => {
   const {
     content,
     raw,

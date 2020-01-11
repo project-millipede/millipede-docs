@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-has-content */
 import MuiLink, { LinkProps as MuiLinkProps } from '@material-ui/core/Link';
 import clsx from 'clsx';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
@@ -43,13 +42,13 @@ interface LinkPropsBase {
   naked?: boolean;
 }
 
-type LinkProps = LinkPropsBase & NextComposedProps & Omit<MuiLinkProps, "ref">;
+type LinkProps = LinkPropsBase & NextComposedProps & Omit<MuiLinkProps, 'ref'>;
 
 // A styled version of the Next.js Link component:
 // https://nextjs.org/docs/#with-link
 function Link(props: LinkProps) {
   const {
-    activeClassName = "active",
+    activeClassName = 'active',
     className: classNameProps,
     innerRef,
     naked,

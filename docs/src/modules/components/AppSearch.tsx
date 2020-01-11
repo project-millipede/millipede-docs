@@ -192,7 +192,10 @@ export const AppSearch = () => {
   });
 
   return (
-    <div className={classes.root} style={{ display: desktop ? 'flex' : 'none' }}>
+    <div
+      className={classes.root}
+      style={{ display: desktop ? 'flex' : 'none' }}
+    >
       <div className={classes.search}>
         <SearchIcon />
       </div>
@@ -212,5 +215,3 @@ export const AppSearch = () => {
     </div>
   );
 };
-
-export default AppSearch;

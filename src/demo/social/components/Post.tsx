@@ -9,13 +9,13 @@ import {
   CardMedia,
   Collapse,
   IconButton,
-  Typography
+  Typography,
 } from '@material-ui/core';
 import { red } from '@material-ui/core/colors';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import clsx from 'clsx';
 import { useHoux } from 'houx';
@@ -201,11 +201,7 @@ const Post: FC<PostProps> = ({ timelineId, postId }) => {
             variant='text'
             color='primary'
             startIcon={<DeleteOutlineIcon />}
-            onClick={() =>
-              handleDeletePost(timelineId, postId, dispatch, () => {
-                console.log('Post deleted');
-              })
-            }
+            onClick={() => handleDeletePost(timelineId, postId, dispatch)}
             aria-label='delete'
           >
             {t('delete')}
