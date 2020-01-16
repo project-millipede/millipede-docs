@@ -2,7 +2,7 @@ import { createStyles, makeStyles, Theme, Tooltip } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import GithubIcon from '@material-ui/docs/svgIcons/GitHub';
+import GitHubIcon from '@material-ui/icons/GitHub';
 import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
 import { useHoux } from 'houx';
@@ -115,7 +115,7 @@ const AppToolBar = ({ isDrawerOpen, handleDrawerOpen }: AppToolBarProps) => {
           data-ga-event-category='AppBar'
           data-ga-event-action='github'
         >
-          <GithubIcon />
+          <GitHubIcon />
         </IconButton>
       </Tooltip>
     </Toolbar>
