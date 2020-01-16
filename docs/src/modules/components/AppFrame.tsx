@@ -61,8 +61,6 @@ const AppFrame = ({ children, drawerStyleOverride }: AppFrameProps) => {
   const classes = useStyles({});
   const drawerClasses = useDrawerStyles({});
 
-  // const [open, setOpen] = useState(false);
-
   const {
     dispatch,
     state: {
@@ -75,12 +73,10 @@ const AppFrame = ({ children, drawerStyleOverride }: AppFrameProps) => {
 
   const handleDrawerOpen = () => {
     dispatch(handleDrawer(true));
-    // setOpen(true);
   };
 
   const handleDrawerClose = () => {
     dispatch(handleDrawer(false));
-    // setOpen(false);
   };
 
   return (
@@ -99,15 +95,7 @@ const AppFrame = ({ children, drawerStyleOverride }: AppFrameProps) => {
         isDrawerOpen={isOpen}
         handleDrawerClose={handleDrawerClose}
       />
-      {/* <div
-        className={
-          isOpen
-            ? drawerClasses.contentDrawerOpened
-            : drawerClasses.contentDrawerClosed
-        }
-      > */}
       {children}
-      {/* </div> */}
     </div>
   );
 };

@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import GithubIcon from '@material-ui/docs/svgIcons/GitHub';
+import GitHubIcon from '@material-ui/icons/GitHub';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import { TFunction } from 'next-i18next-serverless';
 import React from 'react';
@@ -97,7 +97,7 @@ const Group = (props: GroupProps) => {
                           href={`https://github.com/${member.github}`}
                           className={classes.icon}
                         >
-                          <GithubIcon fontSize='inherit' />
+                          <GitHubIcon fontSize='inherit' />
                         </IconButton>
                       )}
                       {member.twitter && (
