@@ -7,10 +7,10 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { WithTranslation } from 'react-i18next';
 
+import CustomIcon from '../../../../docs/src/modules/components/icon/CustomIcon';
 import { withTranslation } from '../../../../i18n';
 import { OverviewProps } from '../../../typings/data/import';
 import { TopReveal } from '../../animation/framer/components/text/TopReveal';
-import FAIcon from './FAIcon';
 
 const useStyles = makeStyles((_theme: Theme) =>
   createStyles({
@@ -50,7 +50,7 @@ const renderTopics = (topics: Array<OverviewProps>) => {
                             );
                           }}
                         >
-                          <FAIcon icon={perspective.icon} />
+                          <CustomIcon icon={perspective.icon} />
                         </IconButton>
                       );
                     })

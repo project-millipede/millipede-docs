@@ -1,16 +1,19 @@
-import { Collapse, Icon, List, ListItemIcon, ListItemText } from '@material-ui/core';
+import { Collapse, List, ListItemIcon, ListItemText } from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import Link from 'next/link';
-import React, { useState } from 'react';
-import { withRouter } from 'next/router';
 import { WithRouterProps } from 'next/dist/client/with-router';
+import Link from 'next/link';
+import { withRouter } from 'next/router';
+import React, { useState } from 'react';
+
+import { Icon } from '../../../../src/typings/data/import';
+import CustomIcon from './icon/CustomIcon';
 
 interface AppDrawerNavItemProps extends React.Props<any> {
   title: string;
-  icon?: string;
+  icon?: Icon;
   href?: string;
   onClick?: (event: React.SyntheticEvent) => void;
   openImmediately?: boolean;
@@ -59,7 +62,7 @@ const AppDrawerNavItem = ({
       <Link href={href}>
         <ListItem button onClick={onClick} className={classes.listItemPadding}>
           <ListItemIcon>
-            <Icon>{icon}</Icon>
+            <CustomIcon icon={icon} />
           </ListItemIcon>
           <ListItemText primary={title} />
         </ListItem>
@@ -69,9 +72,13 @@ const AppDrawerNavItem = ({
 
   return (
     <>
-      <ListItem button onClick={handleClick} className={classes.listItemPadding}>
+      <ListItem
+        button
+        onClick={handleClick}
+        className={classes.listItemPadding}
+      >
         <ListItemIcon>
-          <Icon>{icon}</Icon>
+          <CustomIcon icon={icon} />
         </ListItemIcon>
         <ListItemText primary={title} />
         {open ? <ExpandLess /> : <ExpandMore />}

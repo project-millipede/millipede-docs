@@ -5,6 +5,7 @@ import React from 'react';
 import ReactGA from 'react-ga';
 
 import AppWrapper from '../docs/src/modules/components/AppWrapper';
+import { loadFAIcons } from '../docs/src/modules/components/icon/FAIconLoader';
 import reducers from '../docs/src/modules/redux/reducers';
 import { appWithTranslation } from '../i18n';
 
@@ -13,6 +14,8 @@ const ReactMode = USE_STRICT_MODE ? React.StrictMode : React.Fragment;
 
 // const TRACKING_CODE_MILLIPEDE = 'UA-151314446-1';
 const TRACKING_CODE_PRIVACY_SHIELD = 'UA-154899959-1';
+
+loadFAIcons();
 
 /* eslint-disable class-methods-use-this */
 class MillipedeApp extends App {

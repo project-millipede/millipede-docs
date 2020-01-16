@@ -1,12 +1,22 @@
 import { GridSize } from '@material-ui/core/Grid';
 
+export enum IconType {
+  MUI = 'MUI',
+  FA = 'FA'
+}
+
+export interface Icon {
+  type: IconType;
+  name: string;
+}
+
 export interface Page {
   pathname: string;
   title?: string;
   children?: Array<Page>;
   displayNav?: boolean;
   subheader?: string;
-  icon?: string;
+  icon?: Icon;
   highlight?: boolean;
 }
 
@@ -81,7 +91,7 @@ export interface OverviewStep {
 
 export interface Section {
   type: 'string';
-  icon: 'string';
+  icon: Icon;
 }
 
 export interface ContextLink {
