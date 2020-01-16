@@ -1,7 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 const merge = require('webpack-merge');
-const webpackConfig = require('./webpack/webpack.prod.conf');
+const webpackConfigProd = require('./webpack/webpack.prod.conf');
+const webpackConfigDev = require('./webpack/webpack.dev.conf');
 
 const configuration = {
   env: {
@@ -11,12 +12,12 @@ const configuration = {
   },
 
   webpack(config, options) {
-    return merge(config, webpackConfig(options));
+    return merge(config, process.env.NODE_ENV === "development" ? webpackConfigDev(options) : webpackConfigProd(options));
   },
 
   target: 'serverless',
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
-  experimental: { modern: true, documentMiddleware: true },
+  experimental: { modern: true, documentMiddleware: true }
 };
 
 module.exports = configuration;

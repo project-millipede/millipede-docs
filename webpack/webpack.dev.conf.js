@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const HappyPack = require('happypack');
 
 const pkg = require('../package.json');
 
@@ -24,7 +25,7 @@ const setSentry = isServer => {
 
 const webpackConfig = ({ isServer }) => {
   return {
-    mode: 'production',
+    mode: 'development',
 
     node: {
       fs: setFs(isServer)
@@ -37,18 +38,13 @@ const webpackConfig = ({ isServer }) => {
 
     module: {
       rules: [
-        // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-        { test: /\.tsx?$/, loader: 'ts-loader' },
+        {
+          test: /\.(ts|tsx)$/,
+          loader: 'happypack/loader?id=ts'
+        },
         {
           test: /\.mdx$/,
-          use: [
-            {
-              loader: 'babel-loader'
-            },
-            {
-              loader: path.join(__dirname, '../dist/loader/mdx-custom-loader'),
-            }
-          ]
+          loader: 'happypack/loader?id=mdx'
         },
         {
           test: /\.md$/,
@@ -62,6 +58,33 @@ const webpackConfig = ({ isServer }) => {
         'process.env': {
           PROJECT_VERSION: JSON.stringify(pkg.version)
         }
+      }),
+      new HappyPack({
+        // id declaration references to the loader definition: 'happypack/loader?id=ts'
+        id: 'ts',
+        threads: 3,
+        loaders: [
+          {
+            path: 'ts-loader',
+            query: { happyPackMode: true },
+            options: {
+              // disable type checker - typechecking is handeled by fork-ts-checker-webpack-plugin
+              transpileOnly: true
+            }
+          }
+        ]
+      }),
+      new HappyPack({
+        id: 'mdx',
+        threads: 2,
+        loaders: [
+          {
+            path: 'babel-loader'
+          },
+          {
+            loader: path.join(__dirname, '../dist/loader/mdx-custom-loader')
+          }
+        ]
       })
     ]
   };
