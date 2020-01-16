@@ -13,11 +13,17 @@
         "perspectives": [
           {
             "type": "feature",
-            "icon": "fas fa-rocket"
+            "icon": {
+              "type": "FA",
+              "name": "rocket"
+            }
           },
           {
             "type": "target-group",
-            "icon": "fas fa-user-circle"
+            "icon": {
+              "type": "FA",
+              "name": "user-circle"
+            }
           }
         ]
       }
@@ -35,11 +41,17 @@
         "perspectives": [
           {
             "type": "feature",
-            "icon": "fas fa-rocket"
+            "icon": {
+              "type": "FA",
+              "name": "rocket"
+            }
           },
           {
             "type": "target-group",
-            "icon": "fas fa-user-circle"
+            "icon": {
+              "type": "FA",
+              "name": "user-circle"
+            }
           }
         ]
       }

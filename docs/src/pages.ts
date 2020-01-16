@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { Page } from '../../src/typings/data/import';
+import { Icon, IconType, Page } from '../../src/typings/data/import';
 
 const lowerTextIncludes = (text: string, sub: string) =>
   _.includes(_.lowerCase(text), _.lowerCase(_.trimStart(sub)));
@@ -75,20 +75,30 @@ export const loadPages = (pathname: string, currentPages: Array<Page>) => {
   }
 };
 
+export const defaultIcon: Icon = {
+  type: IconType.MUI,
+  name: 'star'
+};
+
+export const defaultFAIcon: Icon = {
+  type: IconType.FA,
+  name: ''
+};
+
 export const pagesCommon: Array<Page> = [
   {
     pathname: '/guides',
-    icon: 'star',
+    icon: { ...defaultIcon, name: 'explore' },
     highlight: true,
     children: [
       {
         pathname: '/guides/landing',
-        icon: 'star',
+        icon: defaultIcon,
         highlight: true
       },
       {
         pathname: '/guides/api',
-        icon: 'star',
+        icon: { ...defaultIcon, name: 'code' },
         highlight: true
       }
     ]
@@ -102,12 +112,33 @@ export const pagesCommon: Array<Page> = [
 export const pagesDiscoverMore: Array<Page> = [
   {
     pathname: '/discover-more',
-    icon: 'star',
+    icon: { ...defaultIcon, name: 'info' },
     highlight: true,
     children: [
-      { pathname: '/discover-more/support', icon: 'star', highlight: true },
-      { pathname: '/discover-more/team', icon: 'star', highlight: true },
-      { pathname: '/discover-more/organisation', icon: 'star', highlight: true }
+      {
+        pathname: '/discover-more/support',
+        icon: {
+          ...defaultIcon,
+          name: 'contact_support'
+        },
+        highlight: true
+      },
+      {
+        pathname: '/discover-more/team',
+        icon: {
+          ...defaultIcon,
+          name: 'group_work'
+        },
+        highlight: true
+      },
+      {
+        pathname: '/discover-more/organisation',
+        icon: {
+          ...defaultIcon,
+          name: 'business'
+        },
+        highlight: true
+      }
     ]
   }
 ];
@@ -115,27 +146,27 @@ export const pagesDiscoverMore: Array<Page> = [
 export const pagesPIDP: Array<Page> = [
   {
     pathname: '/pidp',
-    icon: 'star',
+    icon: defaultIcon,
     children: [
       {
         pathname: '/pidp/approach',
-        icon: 'star'
+        icon: { ...defaultIcon, name: 'filter_center_focus' }
       },
       {
         pathname: '/pidp/approach/byExample',
-        icon: 'star'
+        icon: { ...defaultIcon, name: 'touch_app' }
       },
       {
         pathname: '/pidp/use-case',
-        icon: 'star'
+        icon: { ...defaultIcon, name: 'extension' }
       },
       {
         pathname: '/pidp/use-case/recognition',
-        icon: 'star'
+        icon: { ...defaultIcon, name: 'flip' }
       },
       {
         pathname: '/pidp/use-case/response',
-        icon: 'star'
+        icon: { ...defaultIcon, name: 'create' }
       }
     ]
   }
@@ -144,15 +175,15 @@ export const pagesPIDP: Array<Page> = [
 export const pagesPET: Array<Page> = [
   {
     pathname: '/common',
-    icon: 'star',
+    icon: defaultIcon,
     children: [
       {
         pathname: '/common/dataflow',
-        icon: 'star'
+        icon: { ...defaultIcon, name: 'waves' }
       },
       {
         pathname: '/common/dataflow/comparison',
-        icon: 'star'
+        icon: { ...defaultIcon, name: 'compare_arrows' }
       }
     ]
   }
@@ -161,15 +192,15 @@ export const pagesPET: Array<Page> = [
 export const pagesRethinkSecurity: Array<Page> = [
   {
     pathname: '/rethink-security',
-    icon: 'star',
+    icon: { ...defaultIcon, name: 'security' },
     children: [
       {
         pathname: '/rethink-security/attackVectors',
-        icon: 'star'
+        icon: { ...defaultIcon, name: 'bug_report' }
       },
       {
         pathname: '/rethink-security/attackVectors/comparison',
-        icon: 'star'
+        icon: { ...defaultIcon, name: 'compare_arrows' }
       }
     ]
   }
@@ -178,27 +209,27 @@ export const pagesRethinkSecurity: Array<Page> = [
 export const pagesPerspective: Array<Page> = [
   {
     pathname: '/perspective',
-    icon: 'star',
+    icon: { ...defaultIcon, name: 'layers' },
     children: [
       {
         pathname: '/perspective/strategy',
-        icon: 'star'
+        icon: { ...defaultIcon, name: 'list' }
       },
       {
         pathname: '/perspective/cause',
-        icon: 'star'
+        icon: { ...defaultIcon, name: 'warning' }
       },
       {
         pathname: '/perspective/shortsighted',
-        icon: 'star'
+        icon: { ...defaultIcon, name: 'trending_down' }
       },
       {
         pathname: '/perspective/competence',
-        icon: 'star'
+        icon: { ...defaultIcon, name: 'flash_on' }
       },
       {
         pathname: '/perspective/reference',
-        icon: 'star'
+        icon: { ...defaultIcon, name: 'format_quote' }
       }
     ]
   }
