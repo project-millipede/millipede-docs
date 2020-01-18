@@ -54,8 +54,8 @@ export const useMdStyles = (theme: Theme) =>
       },
       '& h2': {
         ...theme.typography.h4,
-        fontSize: 30
-        // margin: '40px 0 16px'
+        fontSize: 30,
+        margin: '40px 0 16px'
       },
       '& h3': {
         ...theme.typography.h5,

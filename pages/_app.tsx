@@ -1,3 +1,5 @@
+import './diagram.css';
+
 import * as Sentry from '@sentry/browser';
 import { HouxProvider } from 'houx';
 import App from 'next/app';
