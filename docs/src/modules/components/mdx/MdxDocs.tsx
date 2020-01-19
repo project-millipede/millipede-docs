@@ -57,7 +57,11 @@ const MdxDocs = (props: MarkdownDocsProps) => {
           <AppContentHeader />
           {/* <AppContentSubHeader timeToRead={timeToRead} /> */}
           {children || (
-            <MdxElement content={content} disableShare={disableShare} />
+            <MdxElement
+              content={content}
+              disableShare={disableShare}
+              meta={meta}
+            />
           )}
           <AppContentFooter />
         </div>

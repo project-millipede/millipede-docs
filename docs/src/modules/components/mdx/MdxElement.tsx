@@ -1,9 +1,10 @@
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import { MDXProvider } from '@mdx-js/react';
 import React from 'react';
+import { MetaProps } from 'src/typings/share';
 
 import { InteractiveHead } from '../../../markdown/components/head';
-import Share from '../common/share';
+import { Share } from '../common/share';
 
 interface MDXProps extends React.Props<any> {
   id: string;
@@ -11,6 +12,7 @@ interface MDXProps extends React.Props<any> {
 
 interface MDXRenderProps {
   disableShare?: boolean;
+  meta?: MetaProps;
 }
 
 export const useStyles = makeStyles((_theme: Theme) =>
@@ -22,15 +24,16 @@ export const useStyles = makeStyles((_theme: Theme) =>
   })
 );
 
-const h1 = ({ disableShare }: MDXRenderProps) => {
+const h1 = ({ disableShare, meta }: MDXRenderProps) => {
   return ({ children }: MDXProps) => {
     const classes = useStyles({});
+
     return (
       <div className={classes.headerRow}>
         <Typography variant='h1' style={{ paddingRight: '16px' }}>
           {children}
         </Typography>
-        {!disableShare ? <Share share={'test share'} /> : null}
+        {!disableShare ? <Share {...meta} /> : null}
       </div>
     );
   };
@@ -66,6 +69,7 @@ const components = {
 interface MdxElementProps {
   content: string;
   disableShare: boolean;
+  meta: MetaProps;
 }
 
 const MdxElement = ({ content, ...rest }: MdxElementProps) => {
