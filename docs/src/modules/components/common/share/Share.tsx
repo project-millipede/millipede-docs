@@ -1,30 +1,38 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import { createStyles, Fade, makeStyles, Snackbar, Theme } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import ShareIcon from '@material-ui/icons/Share';
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
+import windowOpenPromise from '@vangware/window-open-promise';
+import copy from 'copy-to-clipboard';
+import _ from 'lodash';
 import { TFunction } from 'next-i18next-serverless';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import { isMobile } from 'react-device-detect';
-import { useTranslation } from 'react-i18next';
 
+import { useTranslation } from '../../../../../../i18n';
 import {
   Interaction,
   InteractionMenuItem,
-  SocialData,
+  MetaProps,
   URIPathParamsFacebook,
   URIPathParamsLinkedIn,
   URIPathParamsMail,
   URIPathParamsTwitter,
   URIPathParamsWhatsApp,
 } from '../../../../../../src/typings/share';
+import { StringUtil } from '../../../utils';
 import { objectToGetParams } from '../../../utils/social/objectToGetParams';
 import Icon from './Icon';
-import Modal from './Modal';
 
 const isBrowser = typeof window !== 'undefined';
+
+export interface ShareProps {
+  meta: MetaProps;
+  url: string;
+}
 
 const useStyles = makeStyles((_theme: Theme) =>
   createStyles({
@@ -39,17 +47,17 @@ const useStyles = makeStyles((_theme: Theme) =>
   })
 );
 
-export interface MarkupProps {
-  sharingOpen: boolean;
-  modal: string;
-  toggleModal: (baseURL: string) => void;
-  toggleSharingOpen: () => void;
-  id: string;
-  share: string;
-}
+const getSharing = (
+  getShareProps: () => ShareProps,
+  baseUrl: string,
+  t: TFunction
+) => {
+  const { meta } = getShareProps();
+  const { title, description, keywords } = meta;
 
-const getSharing = (data: SocialData, t: TFunction) => {
-  const { baseUrl, share, hashTags } = data;
+  const hashTags = _.isArray(keywords)
+    ? keywords
+    : StringUtil.stringToArray(keywords);
 
   const firstHashTag = hashTags
     .filter((_hashTag, index) => index === 0)
@@ -66,11 +74,11 @@ const getSharing = (data: SocialData, t: TFunction) => {
     {
       id: 'mail',
       type: Interaction.SHARE_MAIL,
-      title: `${t('share-on')} Mail`,
+      title: `${t('share-via')} Mail`,
       url: 'mailto://',
       params: {
-        subject: share,
-        body: share
+        subject: title,
+        body: description
       } as URIPathParamsMail
     },
     {
@@ -81,7 +89,7 @@ const getSharing = (data: SocialData, t: TFunction) => {
       params: {
         u: baseUrl,
         hashtag: firstHashTag,
-        quote: share
+        quote: title
       } as URIPathParamsFacebook
     },
     {
@@ -92,7 +100,7 @@ const getSharing = (data: SocialData, t: TFunction) => {
       params: {
         url: baseUrl,
         via: baseUrl,
-        text: share,
+        text: title,
         hashtags: hashTags,
         mini: true
       } as URIPathParamsTwitter
@@ -105,7 +113,7 @@ const getSharing = (data: SocialData, t: TFunction) => {
       params: {
         url: baseUrl,
         source: baseUrl,
-        summary: share,
+        summary: title,
         mini: true
       } as URIPathParamsLinkedIn
     },
@@ -117,49 +125,45 @@ const getSharing = (data: SocialData, t: TFunction) => {
         ? `https://api.whatsapp.com/send`
         : `https://web.whatsapp.com/send`,
       params: {
-        text: share ? `${share} | ${baseUrl}` : `${baseUrl}`
+        text: title ? `${title} | ${baseUrl}` : `${baseUrl}`
       } as URIPathParamsWhatsApp
     }
   ];
 };
 
-const createNewTab = newUrl => {
-  const { focus } = window.open(newUrl, '_blank');
-  return focus();
+const createNewTab = async (
+  newUrl: string,
+  hideSpeedDial: (type?: Interaction) => void
+) => {
+  const newWindow = await windowOpenPromise({
+    url: newUrl,
+    target: '_blank'
+  });
+  newWindow.addEventListener('beforeunload', _event => {
+    hideSpeedDial();
+  });
+  newWindow.focus();
 };
 
 const createObjects = (
   baseUrl: string,
-  toggleModal: (baseURL: string) => void,
-  toggleSharingOpen: () => void
+  hideSpeedDial: (type: Interaction) => void
 ) => ({ id, type, title, url, params }: InteractionMenuItem) => {
   if (type === Interaction.SHARE_LOCAL) {
     return {
       title,
       icon: <Icon id={id} />,
       action: () => {
-        toggleSharingOpen();
-        toggleModal(baseUrl);
+        copy(baseUrl);
+        hideSpeedDial(Interaction.SHARE_LOCAL);
       }
     };
   }
-  if (type === Interaction.SHARE_MAIL) {
-    return {
-      title,
-      icon: <Icon id={id} />,
-      action: () => {
-        toggleSharingOpen();
-        createNewTab(`${url}${objectToGetParams(params)}`);
-      }
-    };
-  }
-
   return {
     title,
     icon: <Icon id={id} />,
     action: () => {
-      toggleSharingOpen();
-      createNewTab(`${url}${objectToGetParams(params)}`);
+      createNewTab(`${url}${objectToGetParams(params)}`, hideSpeedDial);
     }
   };
 };
@@ -175,60 +179,97 @@ const creataShareLink = ({ title, icon, action }) => (
 );
 
 const createButtons = (
-  toggleModal: (baseURL: string) => void,
-  toggleSharingOpen: () => void,
-  share: string,
+  hideSpeedDial: (type: Interaction) => void,
+  getShareProps: () => ShareProps,
   t: TFunction
 ) => {
   let baseUrl = '';
 
   if (isBrowser) {
     const url = document.URL.replace(/#.*$/, '');
-    baseUrl = typeof share === 'string' ? `${url}/#${share}` : url;
+    // baseUrl = typeof share === 'string' ? `${url}/#${share}` : url;
+    baseUrl = url;
   }
 
-  const data: SocialData = {
-    baseUrl,
-    share,
-    hashTags: ['hashTag']
-  };
-
-  const buttonsInfo = getSharing(data, t).map(
-    createObjects(baseUrl, toggleModal, toggleSharingOpen)
+  const buttonsInfo = getSharing(getShareProps, baseUrl, t).map(
+    createObjects(baseUrl, hideSpeedDial)
   );
 
   return buttonsInfo.map(creataShareLink);
 };
 
-const Markup = ({
-  sharingOpen,
-  toggleSharingOpen,
-  toggleModal,
-  modal
-}: MarkupProps) => {
-  const router = useRouter();
-  const { t } = useTranslation();
-
+const Share: FC<MetaProps> = props => {
   const classes = useStyles({});
 
+  const { t } = useTranslation();
+
+  const router = useRouter();
+
+  const [speedDialOpen, setSpeedDialOpen] = useState(false);
+
+  const [feedback, setFeedback] = useState({
+    open: false,
+    message: ''
+  });
+
+  const handleSpeedDialOpen = () => {
+    setSpeedDialOpen(true);
+  };
+
+  const handleSpeedDialClose = () => {
+    setSpeedDialOpen(false);
+  };
+
+  const handleSpeedDialCloseWithFeedback = (type?: Interaction) => {
+    setSpeedDialOpen(false);
+
+    if (type === Interaction.SHARE_LOCAL) {
+      setFeedback({
+        open: true,
+        message: t('link-copied')
+      });
+    }
+  };
+
+  const handleFeedbackClose = (
+    _event?: React.SyntheticEvent,
+    reason?: string
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setFeedback({ open: false, message: '' });
+  };
+
+  const getShareProps = useCallback(() => {
+    return {
+      meta: props,
+      url: router.pathname
+    };
+  }, [router.pathname, props.title]);
+
   return (
-    <React.Fragment>
+    <>
       <SpeedDial
         ariaLabel={t('share-post')}
         icon={<SpeedDialIcon icon={<ShareIcon />} openIcon={<CloseIcon />} />}
-        onClick={toggleSharingOpen}
-        onClose={toggleSharingOpen}
-        onMouseEnter={toggleSharingOpen}
-        onMouseLeave={toggleSharingOpen}
-        open={sharingOpen}
+        onClose={handleSpeedDialClose}
+        onOpen={handleSpeedDialOpen}
+        open={speedDialOpen}
         direction='down'
         className={classes.speedDial}
       >
-        {createButtons(toggleModal, toggleSharingOpen, router.pathname, t)}
+        {createButtons(handleSpeedDialCloseWithFeedback, getShareProps, t)}
       </SpeedDial>
-      <Modal open={!!modal} closeModal={() => toggleModal(null)} url={modal} />
-    </React.Fragment>
+      <Snackbar
+        open={feedback.open}
+        TransitionComponent={Fade}
+        message={feedback.message}
+        autoHideDuration={3000}
+        onClose={handleFeedbackClose}
+      />
+    </>
   );
 };
 
-export default Markup;
+export default Share;

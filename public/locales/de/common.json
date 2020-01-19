@@ -12,6 +12,8 @@
   "back": "Zurück",
   "share-post": "Artikel teilen",
   "copy-link": "Link kopieren",
+  "link-copied": "Link des Artikels in die Zwischenablage kopiert",
+  "share-via": "Teilen per",
   "share-on": "Teilen auf",
   "error-with-status": "Auf dem Server ist ein Fehler ({{statusCode}}) aufgetreten",
   "error-without-status": "Auf dem Server ist ein Fehler aufgetreten",

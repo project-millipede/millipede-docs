@@ -60,3 +60,11 @@ export interface InteractionMenuItem {
   url: string;
   params: SocialMediaURIPathParams;
 }
+
+export interface MetaProps {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  author?: string;
+  date?: string;
+}

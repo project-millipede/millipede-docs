@@ -12,6 +12,8 @@
   "back": "Back",
   "share-post": "Share post",
   "copy-link": "Copy link",
+  "link-copied": "Link of the article copied to the clipboard",
+  "share-via": "Share via",
   "share-on": "Share on",
   "error-with-status": "A {{statusCode}} error occurred on server",
   "error-without-status": "An error occurred on the server",

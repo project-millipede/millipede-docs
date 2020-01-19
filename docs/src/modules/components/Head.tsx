@@ -4,14 +4,8 @@ import { withRouter } from 'next/router';
 import React, { FC } from 'react';
 
 import { useTranslation } from '../../../../i18n';
+import { MetaProps } from '../../../../src/typings/share';
 
-interface MetaProps {
-  title?: string;
-  description?: string;
-  keywords?: string;
-  author?: string;
-  date?: string;
-}
 interface OProps extends WithRouterProps {
   meta?: MetaProps;
 }
