@@ -2,11 +2,11 @@ import produce from 'immer';
 
 import { CollectionUtil } from '../../../utils';
 
-import {
-  Timeline,
-  UseCaseEntities
-} from '../../../../../../src/typings/social';
+import { Timeline } from '../../../../../../src/typings/social';
 import { StoreAction } from '../actionType';
+
+import { UseCaseEntities } from '../../../../../../src/typings/social/schema';
+
 import {
   ADD_COMMENT,
   ADD_POST,

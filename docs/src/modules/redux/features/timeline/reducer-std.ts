@@ -1,7 +1,8 @@
-import { UseCaseEntities } from '../../../../../../src/typings/social';
 import { insertAtWithPreserve } from '../../../utils/collection/array';
 import { StoreAction } from '../actionType';
 import { ADD_COMMENT, ADD_POST, NORMALIZE_DATA } from './actionTypes';
+
+import { UseCaseEntities } from '../../../../../../src/typings/social/schema';
 
 interface Props {
   entities: UseCaseEntities;

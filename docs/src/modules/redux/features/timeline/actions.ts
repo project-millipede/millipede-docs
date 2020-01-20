@@ -1,22 +1,21 @@
 import { action } from 'typesafe-actions';
+import { Comment, Post } from '../../../../../../src/typings/social';
+import { schema, mocks } from '../../../../../../src/data/social';
 
 import {
-  Comment,
-  commentSchema,
-  normalizeWrapper,
-  Post,
-  PostEntities,
-  postSchema,
-  usecaseData,
   UseCaseEntities,
-  useCaseSchema
-} from '../../../../../../src/typings/social';
+  PostEntities
+} from '../../../../../../src/typings/social/schema';
+
 import {
   ADD_COMMENT,
   DELETE_POST,
   ADD_POST,
   NORMALIZE_DATA
 } from './actionTypes';
+
+const { commentSchema, postSchema, useCaseSchema, normalizeWrapper } = schema;
+const { usecaseData } = mocks;
 
 export const normalizeData = () => {
   const { entities, result } = normalizeWrapper<UseCaseEntities>(
