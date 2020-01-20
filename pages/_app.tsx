@@ -1,4 +1,4 @@
-import './diagram.css';
+import '../docs/css/diagram.css';
 
 import * as Sentry from '@sentry/browser';
 import { HouxProvider } from 'houx';
