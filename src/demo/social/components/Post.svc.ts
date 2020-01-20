@@ -5,14 +5,13 @@ import {
   createComment,
   removePost
 } from '../../../../docs/src/modules/redux/features/timeline/actions';
-import {
-  Comment,
-  contentFactory,
-  currentTimeStamps,
-  denormalizeWrapper,
-  timelineSchema,
-  UseCaseEntities
-} from '../../../typings/social';
+import { Comment } from '../../../typings/social';
+
+import { factories, schema } from '../../../data/social';
+import { UseCaseEntities } from '../../../typings/social/schema';
+
+const { contentFactory, currentTimeStampFactory } = factories;
+const { denormalizeWrapper, timelineSchema } = schema;
 
 export const handleCreateComment = (
   timelineId: number,
@@ -32,7 +31,7 @@ export const handleCreateComment = (
     id: uuid(),
 
     commenter: { id: -1 },
-    content: contentFactory.combine(currentTimeStamps).build()
+    content: contentFactory.combine(currentTimeStampFactory).build()
   };
 
   const comment: Comment = {
