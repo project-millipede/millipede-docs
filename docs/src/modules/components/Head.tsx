@@ -1,16 +1,12 @@
-import { WithRouterProps } from 'next/dist/client/with-router';
 import NextHead from 'next/head';
-import { withRouter } from 'next/router';
 import React, { FC } from 'react';
 
 import { useTranslation } from '../../../../i18n';
 import { MetaProps } from '../../../../src/typings/share';
 
-interface OProps extends WithRouterProps {
+interface Props {
   meta?: MetaProps;
 }
-
-type Props = OProps & WithRouterProps;
 
 const Head: FC<Props> = ({
   meta: {
@@ -43,4 +39,4 @@ Head.defaultProps = {
   meta: {}
 };
 
-export default withRouter(Head);
+export default Head;

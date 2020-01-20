@@ -76,7 +76,10 @@ export interface PathnameToLanguage {
 export const pathnameToLanguage = (pathname: string): PathnameToLanguage => {
   const userLanguage = pathname.substring(1, 3);
 
-  if (LANGUAGES.indexOf(userLanguage) !== -1 && pathname.indexOf(`/${userLanguage}/`) === 0) {
+  if (
+    LANGUAGES.indexOf(userLanguage) !== -1 &&
+    pathname.indexOf(`/${userLanguage}/`) === 0
+  ) {
     return {
       userLanguage,
       canonical: userLanguage === 'en' ? pathname : pathname.substring(3)

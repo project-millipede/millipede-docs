@@ -1,13 +1,12 @@
 import { Breadcrumbs as MaterialBreadcrumbs, Button } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { WithRouterProps } from 'next/dist/client/with-router';
 import Link from 'next/link';
-import { withRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 import { useTranslation } from '../../../../../../i18n';
 
-interface Props extends WithRouterProps {}
+interface Props {}
 
 interface BreadCrumb {
   link: string;
@@ -21,10 +20,12 @@ export const createBreadcrumbs = (pathname: string): Array<BreadCrumb> =>
       link: `/${arr.slice(0, index + 1).join('/')}`
     }));
 
-const Breadcrumbs: React.FC<Props> = props => {
+const Breadcrumbs: React.FC<Props> = () => {
   const { t } = useTranslation();
 
-  const breadcrumbs = createBreadcrumbs(props.router.pathname);
+  const router = useRouter();
+
+  const breadcrumbs = createBreadcrumbs(router.pathname);
 
   if (breadcrumbs.length < 2) {
     return null;
@@ -58,4 +59,4 @@ const Breadcrumbs: React.FC<Props> = props => {
   );
 };
 
-export default withRouter(Breadcrumbs);
+export default Breadcrumbs;

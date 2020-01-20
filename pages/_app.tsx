@@ -56,32 +56,4 @@ class MillipedeApp extends App {
   }
 }
 
-// MillipedeApp.getInitialProps = async ({ Component, ctx }: any): Promise<any> => {
-//   let pageProps = {};
-
-//   if (Component.getInitialProps) {
-//     pageProps = await Component.getInitialProps(ctx);
-//   }
-
-//   return { pageProps };
-// };
-
-// MillipedeApp.getInitialProps = async ({ Component, ctx }) => {
-//   let pageProps = {};
-
-//   if (Component.getInitialProps) {
-//     pageProps = await Component.getInitialProps(ctx);
-//   }
-
-//   // Inject env variables into SSR
-//   // pageProps.CONFIG = getConfig().publicRuntimeConfig.env as AppConfig;
-
-//   // Fetch correct required namespaces depending on route
-//   // pageProps.namespacesRequired = namespaces[router.route];
-
-//   // Logger.log('pageProps.namespacesRequired', pageProps.namespacesRequired);
-
-//   return { pageProps };
-// };
-
 export default appWithTranslation(MillipedeApp);

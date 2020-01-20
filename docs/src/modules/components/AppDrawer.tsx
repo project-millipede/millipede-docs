@@ -208,8 +208,8 @@ const AppDrawer = (props: AppDrawerProps) => {
       return [
         ...acc,
         <AppDrawerNavItem
+          key={currentPage.pathname}
           depth={depth}
-          key={title}
           openImmediately={topLevel || !!currentPage.subheader}
           title={title}
           icon={currentPage.icon}
@@ -234,8 +234,8 @@ const AppDrawer = (props: AppDrawerProps) => {
     return [
       ...acc,
       <AppDrawerNavItem
+        key={currentPage.pathname}
         depth={depth}
-        key={title}
         title={title}
         icon={icon}
         href={pathname}
@@ -249,9 +249,13 @@ const AppDrawer = (props: AppDrawerProps) => {
     pages: Array<Page>,
     drawerContext: DrawerContextProps
   ) => {
+    const {
+      activePage: { pathname }
+    } = drawerContext;
+
     const initValue: Array<JSX.Element> = [];
     return (
-      <List dense>
+      <List key={pathname} dense>
         {pages.reduce(
           (acc, currentPage) =>
             reduceChildRoutes({ acc, currentPage }, drawerContext),

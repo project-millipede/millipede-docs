@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import { WithTranslation } from 'react-i18next';
 
 import { Item } from '../../../../../docs/src/modules/components/common/grid/Item';
-import { Category, CategoryDescriptor, Content, Stack2 } from '../../../../typings/data/import';
 import DotsMobileStepper from '../../../../components/common/stepper/DotsMobileStepper';
+import { Category, CategoryDescriptor, Content, Stack2 } from '../../../../typings/data/import';
 
 export const useStyles = makeStyles((_theme: Theme) =>
   createStyles({
@@ -73,7 +73,6 @@ export const generateGrid = (
                         // icon={data.icon}
                       />
                       <Typography variant='subtitle1' className={classes.title}>
-                        {/* Aufmerksamkeitsspanne */}
                         {t('attention')}
                       </Typography>
                       {element.userFocus && element.userFocus > 0 ? (
