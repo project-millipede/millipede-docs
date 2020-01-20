@@ -3,9 +3,7 @@ import ListItem from '@material-ui/core/ListItem';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import { WithRouterProps } from 'next/dist/client/with-router';
 import Link from 'next/link';
-import { withRouter } from 'next/router';
 import React, { useState } from 'react';
 
 import { Icon } from '../../../../src/typings/data/import';
@@ -21,7 +19,7 @@ interface AppDrawerNavItemProps extends React.Props<any> {
   highlight: boolean;
 }
 
-type Props = AppDrawerNavItemProps & WithRouterProps;
+type Props = AppDrawerNavItemProps;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,6 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
 // e.g. topics PET and PID/P have in common.
 
 const AppDrawerNavItem = ({
+  key,
   title,
   icon,
   href,
@@ -60,7 +59,12 @@ const AppDrawerNavItem = ({
   if (href) {
     return (
       <Link href={href}>
-        <ListItem button onClick={onClick} className={classes.listItemPadding}>
+        <ListItem
+          button
+          onClick={onClick}
+          className={classes.listItemPadding}
+          key={key}
+        >
           <ListItemIcon>
             <CustomIcon icon={icon} />
           </ListItemIcon>
@@ -76,6 +80,7 @@ const AppDrawerNavItem = ({
         button
         onClick={handleClick}
         className={classes.listItemPadding}
+        key={key}
       >
         <ListItemIcon>
           <CustomIcon icon={icon} />
@@ -92,4 +97,4 @@ const AppDrawerNavItem = ({
   );
 };
 
-export default withRouter(AppDrawerNavItem);
+export default AppDrawerNavItem;

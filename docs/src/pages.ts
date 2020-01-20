@@ -14,19 +14,19 @@ export const loadPages = (pathname: string, currentPages: Array<Page>) => {
     return [];
   }
 
-  if (
-    pagesPET.filter(link => {
-      return _.some([link, ...(link.children || [])], linkIncludesText);
-    }).length > 0
-  ) {
-    return [
-      ...pagesCommon,
-      ...pagesRethinkSecurity,
-      ...pagesPET,
-      ...pagesPerspective,
-      ...pagesDiscoverMore
-    ];
-  }
+  // if (
+  //   pagesPET.filter(link => {
+  //     return _.some([link, ...(link.children || [])], linkIncludesText);
+  //   }).length > 0
+  // ) {
+  //   return [
+  //     // ...pagesCommon,
+  //     ...pagesRethinkSecurity,
+  //     ...pagesPET,
+  //     ...pagesPerspective,
+  //     ...pagesDiscoverMore
+  //   ];
+  // }
 
   if (
     pagesPIDP.filter(link => {
@@ -34,7 +34,17 @@ export const loadPages = (pathname: string, currentPages: Array<Page>) => {
     }).length > 0
   ) {
     return [
-      ...pagesCommon,
+      // ...pagesCommon,
+      ...pagesRethinkSecurity,
+      ...pagesPIDP,
+      ...pagesPerspective,
+      ...pagesDiscoverMore
+    ];
+  }
+
+  if (currentPages.length === 0) {
+    return [
+      // ...pagesCommon,
       ...pagesRethinkSecurity,
       ...pagesPIDP,
       ...pagesPerspective,
@@ -66,13 +76,13 @@ export const loadPages = (pathname: string, currentPages: Array<Page>) => {
     return [...currentPages];
   }
 
-  if (
-    pagesCommon.filter(link => {
-      return _.some([link, ...(link.children || [])], linkIncludesText);
-    }).length > 0
-  ) {
-    return [...currentPages];
-  }
+  // if (
+  //   pagesCommon.filter(link => {
+  //     return _.some([link, ...(link.children || [])], linkIncludesText);
+  //   }).length > 0
+  // ) {
+  //   return [...currentPages];
+  // }
 };
 
 export const defaultIcon: Icon = {
@@ -85,59 +95,48 @@ export const defaultFAIcon: Icon = {
   name: ''
 };
 
-export const pagesCommon: Array<Page> = [
-  {
-    pathname: '/guides',
-    icon: { ...defaultIcon, name: 'explore' },
-    highlight: true,
-    children: [
-      {
-        pathname: '/guides/landing',
-        icon: defaultIcon,
-        highlight: true
-      },
-      {
-        pathname: '/guides/api',
-        icon: { ...defaultIcon, name: 'code' },
-        highlight: true
-      }
-    ]
-  },
-  {
-    pathname: '/',
-    displayNav: false
-  }
-];
+// export const pagesCommon: Array<Page> = [
+//   {
+//     pathname: '/guides',
+//     icon: { ...defaultIcon, name: 'explore' },
+//     children: [
+//       {
+//         pathname: '/guides/api',
+//         icon: { ...defaultIcon, name: 'code' }
+//       }
+//     ]
+//   },
+//   {
+//     pathname: '/',
+//     displayNav: false
+//   }
+// ];
 
 export const pagesDiscoverMore: Array<Page> = [
   {
     pathname: '/discover-more',
     icon: { ...defaultIcon, name: 'info' },
-    highlight: true,
     children: [
       {
         pathname: '/discover-more/support',
         icon: {
           ...defaultIcon,
           name: 'contact_support'
-        },
-        highlight: true
+        }
       },
       {
         pathname: '/discover-more/team',
         icon: {
           ...defaultIcon,
           name: 'group_work'
-        },
-        highlight: true
+        }
       },
       {
         pathname: '/discover-more/organisation',
         icon: {
           ...defaultIcon,
           name: 'business'
-        },
-        highlight: true
+        }
       }
     ]
   }

@@ -17,7 +17,6 @@ interface TProps {
   // router?: PublicRouterInstance;
 }
 
-// type Props = WithRouterProps & TProps;
 type Props = TProps;
 
 export class MillipedeLink extends Component<Props, {}> {
@@ -26,7 +25,9 @@ export class MillipedeLink extends Component<Props, {}> {
     const { naked, href, onClick, target, rel, className } = this.props;
 
     if (naked) {
-      return <NextLinkButton component={Link} href={href} className={className} />;
+      return (
+        <NextLinkButton component={Link} href={href} className={className} />
+      );
     }
 
     return (

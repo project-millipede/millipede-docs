@@ -11,8 +11,7 @@ const load = (pathSlice = '', userLanguage = ''): any =>
       return {
         content: result.default,
         raw: result.raw,
-        // meta: result.metadata2
-        meta: result.a,
+        meta: result.meta,
         timeToRead: result.timeToRead
       };
     })
