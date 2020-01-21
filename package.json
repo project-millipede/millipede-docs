@@ -100,7 +100,7 @@
     "@babel/preset-react": "^7.8.3",
     "@types/faker": "^4.1.9",
     "@types/lodash": "^4.14.149",
-    "@types/react": "^16.9.17",
+    "@types/react": "^16.9.18",
     "@types/react-dom": "^16.9.5",
     "@types/styled-components": "^4.4.2",
     "@types/webpack-merge": "^4.1.5",
