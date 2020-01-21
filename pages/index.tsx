@@ -101,6 +101,15 @@ const Index = () => {
               >
                 {t('application-subtitle')}
               </Typography>
+              <Typography
+                variant='h5'
+                component='h2'
+                color='inherit'
+                gutterBottom
+                className={classes.subtitle}
+              >
+                {t('application-sub-subtitle')}
+              </Typography>
             </div>
             <Divider />
 
