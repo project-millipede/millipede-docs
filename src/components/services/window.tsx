@@ -10,7 +10,6 @@ import React, {
 
 import { PREVIEW } from '../app/previews/Preview';
 
-import { HomeView } from '../app/views';
 import { ViewOptions, WINDOW_TYPE } from '../app/views/ViewOptions';
 
 // export type WindowOptions<TComponent extends React.ComponentType<any> = any> = {
@@ -43,7 +42,7 @@ export type WindowOptions = {
   onClose?: (...args: Array<any>) => void;
 };
 
-interface WindowState {
+export interface WindowState {
   windowStack: Array<WindowOptions>;
   headerTitle?: string;
   preview?: PREVIEW;
@@ -175,25 +174,13 @@ export const useWindowService = (): WindowServiceHook => {
 
 interface Props {
   children: React.ReactChild;
+  initialWindowState: WindowState;
 }
 
-const WindowProvider = ({ children }: Props) => {
-  const windowStack: Array<WindowOptions> = [
-    {
-      id: ViewOptions.home.id,
-      type: WINDOW_TYPE.SPLIT,
-      // type: WINDOW_TYPE.FULL,
-      component: HomeView
-    }
-  ];
-  const [windowState, setWindowState] = useState<WindowState>({
-    windowStack,
-    headerTitle: ViewOptions.home.title,
-
-    // Setup view
-    // preview: PREVIEW.MUSIC
-    preview: PREVIEW.SETTINGS
-  });
+const WindowProvider = ({ children, initialWindowState }: Props) => {
+  const [windowState, setWindowState] = useState<WindowState>(
+    initialWindowState
+  );
 
   return (
     <WindowContext.Provider value={[windowState, setWindowState]}>

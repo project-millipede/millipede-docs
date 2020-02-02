@@ -6,7 +6,10 @@ import { Screen } from '../components/constants';
 import { ScrollWheel } from '../components';
 import FooterView from '../device/browser/views/FooterView';
 import Interface from '../interface';
-import WindowProvider from '../services/window';
+import WindowProvider, { WindowState } from '../services/window';
+import { HomeView } from './views';
+import { ViewOptions, WINDOW_TYPE } from './views/ViewOptions';
+import { PREVIEW } from './previews/Preview';
 
 const Container = styled('div')`
   display: flex;
@@ -43,13 +46,24 @@ const Shell = styled('div')`
   } */
 `;
 
+const initialWindowState: WindowState = {
+  windowStack: [
+    {
+      id: ViewOptions.home.id,
+      type: WINDOW_TYPE.SPLIT,
+      component: HomeView
+    }
+  ],
+  headerTitle: ViewOptions.home.title,
+  preview: PREVIEW.SETTINGS
+};
+
 const App: React.FC = () => {
   return (
     <Container>
-      <WindowProvider>
+      <WindowProvider initialWindowState={initialWindowState}>
         <Shell>
           <Interface />
-
           <ScrollWheel />
           <FooterView />
         </Shell>
