@@ -2,8 +2,10 @@ import { AnimatePresence } from 'framer-motion';
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-import { PREVIEW, Previews } from '../../app/previews';
+import { Previews } from '../../app/previews';
 import { useWindowService } from '../../services/window';
+
+import { PREVIEW } from '../../app/previews/Preview';
 
 export interface ContainerProps {
   isHidden: boolean;

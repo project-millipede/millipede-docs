@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { ViewOptions } from '..';
+import { ViewOptions } from '../ViewOptions';
 import { useMenuHideWindow } from '../../../hooks';
 
 // import {

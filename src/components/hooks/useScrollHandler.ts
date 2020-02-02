@@ -1,10 +1,11 @@
 import { useCallback, useState } from 'react';
 
-import { ViewOptions } from '../app/views';
-import { SelectableListOption } from '../components';
 import { useAudioService } from '../services/audio';
 import { useWindowService } from '../services/window';
 import useEventListener from './useEventListener';
+
+import { SelectableListOption } from '../components/selectableList/SelectableListOption';
+import { ViewOptions } from '../app/views/ViewOptions';
 
 /** Accepts a list of options and will maintain a scroll index capped at the list's length. */
 const useScrollHandler = (

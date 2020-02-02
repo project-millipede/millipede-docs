@@ -2,12 +2,14 @@ import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
 import SyncIcon from '@material-ui/icons/Sync';
 import TimelineIcon from '@material-ui/icons/Timeline';
 import React, { useState } from 'react';
-import { ViewOptions, TimelineView, ElementsView } from '../../../app/views';
-import { PREVIEW } from '../../../app/previews';
+import { TimelineView, ElementsView } from '../../../app/views';
+import { PREVIEW } from '../../../app/previews/Preview';
+
 import { useWindowService } from '../../../services/window';
+import { ViewOptions } from '../../../app/views/ViewOptions';
 
 import { BottomRevealMin } from '../../../animation/framer/components/container/BottomRevealMin';
-import { SelectableListOption } from '../../../components';
+import { SelectableListOption } from '../../../components/selectableList/SelectableListOption';
 
 export interface FooterViewProps {}
 
@@ -29,12 +31,6 @@ const FooterView: React.FC<FooterViewProps> = () => {
       viewId: ViewOptions.music.id,
       preview: PREVIEW.MUSIC
     },
-    // {
-    //   label: 'Games',
-    //   value: () => <GamesView />,
-    //   viewId: ViewOptions.games.id,
-    //   preview: PREVIEW.GAMES
-    // },
     {
       label: 'Settings',
       // value: () => <SettingsView />,

@@ -1,8 +1,17 @@
 /* eslint-disable import/no-duplicates */
-import React, { ComponentProps, ComponentType, createContext, useCallback, useContext, useState } from 'react';
+import React, {
+  ComponentProps,
+  ComponentType,
+  createContext,
+  useCallback,
+  useContext,
+  useState
+} from 'react';
 
-import { PREVIEW } from '../app/previews';
-import { HomeView, ViewOptions, WINDOW_TYPE } from '../app/views';
+import { PREVIEW } from '../app/previews/Preview';
+
+import { HomeView } from '../app/views';
+import { ViewOptions, WINDOW_TYPE } from '../app/views/ViewOptions';
 
 // export type WindowOptions<TComponent extends React.ComponentType<any> = any> = {
 //   /** A unique ID for each window. */

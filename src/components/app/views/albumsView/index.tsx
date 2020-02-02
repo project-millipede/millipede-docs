@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 
-import { ViewOptions } from '..';
-import { SelectableList, SelectableListOption } from '../../../components';
+import { ViewOptions } from '../ViewOptions';
+import { SelectableList } from '../../../components/selectableList';
+import { SelectableListOption } from '../../../components/selectableList/SelectableListOption';
+
 import { useMenuHideWindow, useScrollHandler } from '../../../hooks';
 
 const AlbumsView = () => {

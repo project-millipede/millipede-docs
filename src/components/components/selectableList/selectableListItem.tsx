@@ -1,10 +1,9 @@
-/* eslint-disable import/no-cycle */
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { SelectableListOption } from './SelectableListOption';
 
-import { SelectableListOption, Unit } from '..';
+import { Unit } from '../constants';
 
-// eslint-disable-next-line import/no-cycle
 export interface ContainerProps {
   isActive: boolean;
 }

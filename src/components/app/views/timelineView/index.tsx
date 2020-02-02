@@ -1,7 +1,8 @@
 import { useHoux } from 'houx';
 import React, { useCallback, useEffect } from 'react';
 
-import { ViewOptions } from '..';
+import { ViewOptions } from '../ViewOptions';
+
 import { TimelineActions } from '../../../../../docs/src/modules/redux/features/actionType';
 import { normalizeData } from '../../../../../docs/src/modules/redux/features/timeline/actions';
 import { RootState } from '../../../../../docs/src/modules/redux/reducers';

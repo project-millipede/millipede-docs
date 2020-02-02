@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 
-import { ViewOptions } from '..';
-import { SelectableList, SelectableListOption } from '../../../components';
+import { ViewOptions } from '../ViewOptions';
+
+import { SelectableList } from '../../../components/selectableList';
 import { useMenuHideWindow, useScrollHandler } from '../../../hooks';
+import { SelectableListOption } from '../../../components/selectableList/SelectableListOption';
 
 export interface Props {
   name: string;

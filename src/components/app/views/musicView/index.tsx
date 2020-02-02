@@ -1,12 +1,19 @@
 import React from 'react';
 
-import { AlbumsView, ArtistsView, ViewOptions } from '..';
-import { SelectableList, SelectableListOption } from '../../../components';
+import AlbumsView from '../albumsView';
+import ArtistsView from '../artistsView';
+
+import { ViewOptions } from '../ViewOptions';
+
+import { SelectableList } from '../../../components/selectableList';
 import { useMenuHideWindow, useScrollHandler } from '../../../hooks';
-import { PREVIEW } from '../../previews';
+
+import { SelectableListOption } from '../../../components/selectableList/SelectableListOption';
+import { PREVIEW } from '../../previews/Preview';
 
 const MusicView = () => {
   useMenuHideWindow(ViewOptions.music.id);
+
   const options: Array<SelectableListOption> = [
     {
       label: 'Artists',

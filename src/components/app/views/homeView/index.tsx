@@ -1,12 +1,8 @@
-// import ViewOptions, { CoverFlowView, GamesView, MusicView, NowPlayingView, SettingsView } from 'App/views';
-import React from // useCallback, useEffect, useState
+// import ViewOptions, { CoverFlowView, MusicView, NowPlayingView, SettingsView } from 'App/views';
+import React from 'react';
 
-'react';
+import TimelineView from '../timelineView';
 
-import {
-  TimelineView
-  // ViewOptions
-} from '..';
 // import { SelectableList, SelectableListOption } from '../../../components';
 // import { useScrollHandler } from '../../../hooks';
 // import { useAudioService } from '../../../services/audio';
@@ -34,12 +30,6 @@ const HomeView = () => {
   //     preview: PREVIEW.MUSIC
   //   }
 
-  //   // {
-  //   //   label: 'Games',
-  //   //   value: () => <GamesView />,
-  //   //   viewId: ViewOptions.games.id,
-  //   //   preview: PREVIEW.GAMES
-  //   // },
   //   // {
   //   //   label: 'Settings',
   //   //   value: () => <SettingsView />,

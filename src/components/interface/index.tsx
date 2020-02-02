@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { WINDOW_TYPE } from '../app/views';
-import { Screen, Unit } from '../components';
+import { WINDOW_TYPE } from '../app/views/ViewOptions';
+
+import { Screen, Unit } from '../components/constants';
 import { useWindowService } from '../services/window';
 import CoverFlowInterface from './CoverFlowInterface';
 import FullScreenInterface from './FullScreenInterface';

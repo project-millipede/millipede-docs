@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ViewOptions } from '..';
+import { ViewOptions } from '../ViewOptions';
 import ElementDescription from '../../../../demo/social/components/aspects/ElementDescription';
 import { useMenuHideWindow } from '../../../hooks';
 

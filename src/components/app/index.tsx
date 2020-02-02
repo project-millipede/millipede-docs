@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Screen, ScrollWheel } from '../components';
+import { Screen } from '../components/constants';
+
+import { ScrollWheel } from '../components';
 import FooterView from '../device/browser/views/FooterView';
 import Interface from '../interface';
 import WindowProvider from '../services/window';
