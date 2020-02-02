@@ -55,6 +55,34 @@
           }
         ]
       }
+    },
+    {
+      "title": ["A", "B", "C"],
+      "subTitle": ["Approach to fight", "fake news"],
+      "steps": [
+        { "label": "Step - 4" },
+        { "label": "Step - 5" },
+        { "label": "Step - 6" }
+      ],
+      "contextLink": {
+        "id": "pidp",
+        "perspectives": [
+          {
+            "type": "feature",
+            "icon": {
+              "type": "FA",
+              "name": "rocket"
+            }
+          },
+          {
+            "type": "target-group",
+            "icon": {
+              "type": "FA",
+              "name": "user-circle"
+            }
+          }
+        ]
+      }
     }
   ]
 }

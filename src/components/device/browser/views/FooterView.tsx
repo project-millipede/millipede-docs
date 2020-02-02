@@ -1,43 +1,92 @@
 import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import FolderIcon from '@material-ui/icons/Folder';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import RestoreIcon from '@material-ui/icons/Restore';
-import React from 'react';
+import SyncIcon from '@material-ui/icons/Sync';
+import TimelineIcon from '@material-ui/icons/Timeline';
+import React, { useState } from 'react';
+import { ViewOptions, TimelineView, ElementsView } from '../../../app/views';
+import { PREVIEW } from '../../../app/previews';
+import { useWindowService } from '../../../services/window';
 
 import { BottomRevealMin } from '../../../animation/framer/components/container/BottomRevealMin';
+import { SelectableListOption } from '../../../components';
 
 export interface FooterViewProps {}
 
 const FooterView: React.FC<FooterViewProps> = () => {
-  const [value, setValue] = React.useState('recents');
+  const [value] = React.useState('recents');
+
+  const initialOptions: Array<SelectableListOption> = [
+    // {
+    //   label: 'Cover Flow',
+    //   value: () => <CoverFlowView />,
+    //   viewId: ViewOptions.coverFlow.id,
+    //   preview: PREVIEW.MUSIC
+    // },
+    // Setup view
+    {
+      label: 'Music',
+      // value: () => <MusicView />,
+      value: () => <TimelineView />,
+      viewId: ViewOptions.music.id,
+      preview: PREVIEW.MUSIC
+    },
+    // {
+    //   label: 'Games',
+    //   value: () => <GamesView />,
+    //   viewId: ViewOptions.games.id,
+    //   preview: PREVIEW.GAMES
+    // },
+    {
+      label: 'Settings',
+      // value: () => <SettingsView />,
+      value: () => <ElementsView />,
+      viewId: ViewOptions.settings.id,
+      preview: PREVIEW.SETTINGS
+    }
+  ];
+
+  const [options] = useState(initialOptions);
+
+  const { windowStack, showWindow } = useWindowService();
+
+  console.log('windowStack: ', windowStack);
 
   const handleChange = (_event: React.ChangeEvent<{}>, newValue: string) => {
-    setValue(newValue);
+    // const isActive = windowStack[windowStack.length - 1].id === newValue;
+
+    const option = options[newValue];
+    // if (!isActive || !option) return;
+
+    if (option.viewId) {
+      const View = option.value;
+      const viewOptions = ViewOptions[option.viewId];
+
+      showWindow({
+        type: viewOptions.type,
+        id: option.viewId,
+        component: View
+      });
+    }
+
+    // setValue(newValue);
   };
 
   return (
     <BottomRevealMin id={`header-${1}`} toggle={true}>
       <BottomNavigation value={value} onChange={handleChange}>
         <BottomNavigationAction
-          label='Recents'
-          value='recents'
-          icon={<RestoreIcon />}
+          label='Timeline'
+          value={0}
+          icon={<TimelineIcon />}
         />
         <BottomNavigationAction
-          label='Favorites'
-          value='favorites'
-          icon={<FavoriteIcon />}
+          label='Data synchronisation'
+          value={1}
+          icon={<SyncIcon />}
         />
         <BottomNavigationAction
-          label='Nearby'
-          value='nearby'
-          icon={<LocationOnIcon />}
-        />
-        <BottomNavigationAction
-          label='Folder'
-          value='folder'
-          icon={<FolderIcon />}
+          label='Timeline enhanced'
+          value={2}
+          icon={<TimelineIcon />}
         />
       </BottomNavigation>
     </BottomRevealMin>

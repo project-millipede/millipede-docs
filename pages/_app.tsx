@@ -28,9 +28,10 @@ class MillipedeApp extends App {
     // TODO - determine purpose
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
-    if (jssStyles) {
+    if (jssStyles && jssStyles.parentNode) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
+
     // ReactGA.initialize(TRACKING_CODE_MILLIPEDE);
     ReactGA.initialize(TRACKING_CODE_PRIVACY_SHIELD);
     Sentry.init({
