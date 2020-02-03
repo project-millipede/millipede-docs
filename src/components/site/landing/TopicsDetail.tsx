@@ -1,4 +1,4 @@
-import { TFunction } from 'next-i18next-serverless';
+// import { TFunction } from 'next-i18next-serverless';
 import { NextRouter, useRouter } from 'next/router';
 import React from 'react';
 
@@ -6,7 +6,8 @@ import { InteractiveHead } from '../../../../docs/src/markdown/components/head';
 import { useTranslation } from '../../../../i18n';
 import { Topics } from './Topics';
 
-const generateIntro = (router: NextRouter, t: TFunction) => {
+// const generateIntro = (router: NextRouter, t: TFunction) => {
+const generateIntro = (router: NextRouter, t: any) => {
   const { query } = router;
 
   const entries = Object.entries(query);

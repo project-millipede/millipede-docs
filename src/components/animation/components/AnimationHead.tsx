@@ -1,13 +1,14 @@
 import { Typography } from '@material-ui/core';
 import { useHoux } from 'houx';
-import { TFunction } from 'next-i18next-serverless';
 import React from 'react';
 
 import { RootState } from '../../../../docs/src/modules/redux/reducers';
 import { Szenario } from '../../../typings/animation';
 
+// import { TFunction } from 'next-i18next-serverless';
 interface AnimationHeadProps {
-  t: TFunction;
+  // t: TFunction;
+  t: any;
 }
 
 const AnimationHead: React.FC<AnimationHeadProps> = ({ t }) => {

@@ -1,15 +1,16 @@
 import groupArray from 'group-array';
 import _ from 'lodash';
-import { TFunction } from 'next-i18next-serverless';
 import React from 'react';
 
 import { useTranslation } from '../../../../../i18n';
 import { Category, CategoryDescriptor, OverviewProps } from '../../../../typings/data/import';
 import Component from './ElementComponent';
 
+// import { TFunction } from 'next-i18next-serverless';
 const ns = 'pages/pidp/use-case/recognition/index';
 
-const generateTopicData = (t: TFunction): Array<OverviewProps> => {
+// const generateTopicData = (t: TFunction): Array<OverviewProps> => {
+const generateTopicData = (t: any): Array<OverviewProps> => {
   const topics: Array<OverviewProps> = t('steps', { returnObjects: true });
 
   if (_.isArray(topics)) {

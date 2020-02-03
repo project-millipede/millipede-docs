@@ -1,15 +1,18 @@
 // import { ServerStyleSheets } from '@material-ui/core/styles';
-import { ServerStyleSheets as MaterialUiServerStyleSheets } from '@material-ui/core/styles';
-import { compose } from 'compose-middleware';
-import { IncomingMessage, ServerResponse } from 'http';
-import nextI18NextMiddleware from 'next-i18next-serverless/dist/commonjs/middlewares/next-i18next-middleware';
-import NextDocument, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
+import getConfig from 'next/config';
+import Document, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
 import React from 'react';
-import { ServerStyleSheet as StyledComponentSheets } from 'styled-components';
 
 import { PathnameToLanguage } from '../docs/src/modules/utils/helpers';
-import { Logger } from '../docs/src/modules/utils/logging';
-import { NextI18NextInstance } from '../i18n';
+import { testDirectory } from '../i18n';
+
+const config = getConfig();
+
+// import { compose } from 'compose-middleware';
+// import { IncomingMessage, ServerResponse } from 'http';
+// import nextI18NextMiddleware from 'next-i18next-serverless/dist/commonjs/middlewares/next-i18next-middleware';
+// import { Logger } from '../docs/src/modules/utils/logging';
+// import { NextI18NextInstance } from '../i18n';
 
 // MillipedeDocument.getInitialProps = async (
 //   ctx: DocumentContext
@@ -67,24 +70,29 @@ import { NextI18NextInstance } from '../i18n';
 //   };
 // };
 
-const wrapI18n = (req: IncomingMessage, res: ServerResponse) => {
-  const middleware = compose(nextI18NextMiddleware(NextI18NextInstance));
+// const wrapI18n = (req: IncomingMessage, res: ServerResponse) => {
+//   const middleware = compose(nextI18NextMiddleware(NextI18NextInstance));
 
-  const done = () => {
-    Logger.log('done');
-  };
+//   const done = () => {
+//     Logger.log('done');
+//   };
 
-  middleware(req, res, _next => {
-    return done();
-  });
-};
+//   middleware(req, res, _next => {
+//     return done();
+//   });
+// };
 
-export const middleware = async ({ req, res }: DocumentContext) => {
-  await wrapI18n(req, res);
-};
+// export const middleware = async () => {
+//   // await wrapI18n(req, res);
+//   // testDirectory();
+// };
 
 /* eslint-disable class-methods-use-this */
-class MillipedeDocument extends NextDocument {
+class MillipedeDocument extends Document {
+  componentDidMount() {
+    testDirectory();
+  }
+
   render() {
     return (
       <Html lang='en'>
@@ -105,6 +113,7 @@ class MillipedeDocument extends NextDocument {
           />
         </Head>
         <body>
+          <div id='doc-config'>{JSON.stringify(config)}</div>
           <Main />
           <NextScript />
         </body>
@@ -115,36 +124,41 @@ class MillipedeDocument extends NextDocument {
 
 export type InitialProps = PathnameToLanguage & DocumentInitialProps;
 
+// MillipedeDocument.getInitialProps = async (ctx: DocumentContext) => {
+//   const styledComponentSheet = new StyledComponentSheets();
+//   const materialUiSheets = new MaterialUiServerStyleSheets();
+//   const originalRenderPage = ctx.renderPage;
+
+//   try {
+//     /* eslint-disable no-param-reassign */
+//     ctx.renderPage = () =>
+//       originalRenderPage({
+//         enhanceApp: App => props =>
+//           styledComponentSheet.collectStyles(
+//             materialUiSheets.collect(<App {...props} />)
+//           )
+//       });
+
+//     const initialProps = await NextDocument.getInitialProps(ctx);
+
+//     return {
+//       ...initialProps,
+//       styles: [
+//         <React.Fragment key='styles'>
+//           {initialProps.styles}
+//           {materialUiSheets.getStyleElement()}
+//           {styledComponentSheet.getStyleElement()}
+//         </React.Fragment>
+//       ]
+//     };
+//   } finally {
+//     styledComponentSheet.seal();
+//   }
+// };
+
 MillipedeDocument.getInitialProps = async (ctx: DocumentContext) => {
-  const styledComponentSheet = new StyledComponentSheets();
-  const materialUiSheets = new MaterialUiServerStyleSheets();
-  const originalRenderPage = ctx.renderPage;
-
-  try {
-    /* eslint-disable no-param-reassign */
-    ctx.renderPage = () =>
-      originalRenderPage({
-        enhanceApp: App => props =>
-          styledComponentSheet.collectStyles(
-            materialUiSheets.collect(<App {...props} />)
-          )
-      });
-
-    const initialProps = await NextDocument.getInitialProps(ctx);
-
-    return {
-      ...initialProps,
-      styles: [
-        <React.Fragment key='styles'>
-          {initialProps.styles}
-          {materialUiSheets.getStyleElement()}
-          {styledComponentSheet.getStyleElement()}
-        </React.Fragment>
-      ]
-    };
-  } finally {
-    styledComponentSheet.seal();
-  }
+  const initialProps = await Document.getInitialProps(ctx);
+  return { ...initialProps };
 };
 
 export default MillipedeDocument;

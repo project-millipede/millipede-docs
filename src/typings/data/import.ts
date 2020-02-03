@@ -58,6 +58,7 @@ export interface Stack2 {
   elements?: Category;
   rows?: Array<Array<Content>>;
   categories?: CategoryDescriptor;
+  t: any;
 }
 
 export interface Category {

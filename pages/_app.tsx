@@ -9,7 +9,8 @@ import ReactGA from 'react-ga';
 import AppWrapper from '../docs/src/modules/components/AppWrapper';
 import { loadFAIcons } from '../docs/src/modules/components/icon/FAIconLoader';
 import reducers from '../docs/src/modules/redux/reducers';
-import { appWithTranslation } from '../i18n';
+
+// import { appWithTranslation } from '../i18n';
 
 const USE_STRICT_MODE = false;
 const ReactMode = USE_STRICT_MODE ? React.StrictMode : React.Fragment;
@@ -57,4 +58,5 @@ class MillipedeApp extends App {
   }
 }
 
-export default appWithTranslation(MillipedeApp);
+// export default appWithTranslation(MillipedeApp);
+export default MillipedeApp;

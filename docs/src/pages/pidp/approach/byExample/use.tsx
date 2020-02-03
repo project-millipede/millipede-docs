@@ -1,4 +1,4 @@
-import { TFunction } from 'next-i18next-serverless';
+// import { TFunction } from 'next-i18next-serverless';
 import React from 'react';
 
 import { useTranslation } from '../../../../../../i18n';
@@ -7,7 +7,8 @@ import Step2 from '../../../../../../src/assets/pidp/approach/byExample/Step2';
 import { Content } from '../../../../../../src/typings/data/import';
 import Component from './component';
 
-const generateContent = (t: TFunction): Array<Content> => {
+// const generateContent = (t: TFunction): Array<Content> => {
+const generateContent = (t: any): Array<Content> => {
   const steps: Array<Content> = t('steps', { returnObjects: true });
 
   const template: Array<Content> = [

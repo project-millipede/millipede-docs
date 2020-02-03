@@ -1,7 +1,6 @@
 import { Button, Container as MUIContainer } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import _ from 'lodash';
-import { TFunction } from 'next-i18next-serverless';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
@@ -10,6 +9,7 @@ import { OverviewProps } from '../../../typings/data/import';
 import { TopReveal } from '../../animation/framer/components/text/TopReveal';
 import FullScreenInterface from '../../interface/FullScreenInterfaceByComponent';
 
+// import { TFunction } from 'next-i18next-serverless';
 // import Grid from '@material-ui/core/Grid';
 export const Container = styled('div')`
   position: relative;
@@ -43,7 +43,8 @@ export const useStyles = makeStyles((_theme: Theme) =>
   })
 );
 
-const generateTopics = (t: TFunction): Array<OverviewProps> => {
+// const generateTopics = (t: TFunction): Array<OverviewProps> => {
+const generateTopics = (t: any): Array<OverviewProps> => {
   const topics: Array<OverviewProps> = t('topics', { returnObjects: true });
   if (_.isArray(topics)) {
     return topics;

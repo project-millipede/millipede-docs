@@ -4,20 +4,17 @@ import SmartphoneRoundedIcon from '@material-ui/icons/SmartphoneRounded';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import { useHoux } from 'houx';
-import { TFunction } from 'next-i18next-serverless';
 import React, { FC } from 'react';
 
 import { AnimationActions } from '../../../../docs/src/modules/redux/features/actionType';
-import {
-  changeArea,
-  changeDevice,
-  changeSzenario,
-} from '../../../../docs/src/modules/redux/features/animation/actions';
+import { changeArea, changeDevice, changeSzenario } from '../../../../docs/src/modules/redux/features/animation/actions';
 import { RootState } from '../../../../docs/src/modules/redux/reducers';
 import { Area, Device, Szenario } from '../../../typings/animation';
 
+// import { TFunction } from 'next-i18next-serverless';
 interface ControlsProps {
-  t?: TFunction;
+  // t?: TFunction;
+  t?: any;
 }
 
 const useStyles = makeStyles((theme: Theme) =>

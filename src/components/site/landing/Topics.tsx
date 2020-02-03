@@ -3,13 +3,13 @@ import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import groupArray from 'group-array';
 import _ from 'lodash';
-import { TFunction } from 'next-i18next-serverless';
 import React, { FC } from 'react';
 
 import { Item } from '../../../../docs/src/modules/components/common/grid/Item';
 import { useTranslation } from '../../../../i18n';
 import { OverviewProps, Scenario } from '../../../typings/data/import';
 
+// import { TFunction } from 'next-i18next-serverless';
 const useStyles = makeStyles((_theme: Theme) =>
   createStyles({
     root: {
@@ -22,7 +22,8 @@ const useStyles = makeStyles((_theme: Theme) =>
   })
 );
 
-const generateTopicData = (t: TFunction): Array<OverviewProps> => {
+// const generateTopicData = (t: TFunction): Array<OverviewProps> => {
+const generateTopicData = (t: any): Array<OverviewProps> => {
   const topics: Array<OverviewProps> = t('topics', { returnObjects: true });
   if (_.isArray(topics)) {
     return topics;

@@ -1,11 +1,12 @@
-import { TFunction } from 'next-i18next-serverless';
+// import { TFunction } from 'next-i18next-serverless';
 import React from 'react';
 
 import { useTranslation } from '../../../../../../i18n';
 import { Content } from '../../../../../../src/typings/data/import';
 import Component from './component';
 
-const generateContent = (t: TFunction): Array<Content> | any => {
+// const generateContent = (t: TFunction): Array<Content> | any => {
+const generateContent = (t: any): Array<Content> | any => {
   const steps: Array<Array<Content>> | string = t('steps', {
     returnObjects: true
   });

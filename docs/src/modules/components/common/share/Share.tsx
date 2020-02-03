@@ -7,7 +7,6 @@ import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
 import windowOpenPromise from '@vangware/window-open-promise';
 import copy from 'copy-to-clipboard';
 import _ from 'lodash';
-import { TFunction } from 'next-i18next-serverless';
 import { useRouter } from 'next/router';
 import React, { FC, useCallback, useState } from 'react';
 import { isMobile } from 'react-device-detect';
@@ -27,6 +26,7 @@ import { StringUtil } from '../../../utils';
 import { objectToGetParams } from '../../../utils/social/objectToGetParams';
 import Icon from './Icon';
 
+// import { TFunction } from 'next-i18next-serverless';
 const isBrowser = typeof window !== 'undefined';
 
 export interface ShareProps {
@@ -50,7 +50,8 @@ const useStyles = makeStyles((_theme: Theme) =>
 const getSharing = (
   getShareProps: () => ShareProps,
   baseUrl: string,
-  t: TFunction
+  // t: TFunction
+  t: any
 ) => {
   const { meta } = getShareProps();
   const { title, description, keywords } = meta;
@@ -181,7 +182,8 @@ const creataShareLink = ({ title, icon, action }) => (
 const createButtons = (
   hideSpeedDial: (type: Interaction) => void,
   getShareProps: () => ShareProps,
-  t: TFunction
+  // t: TFunction
+  t: any
 ) => {
   let baseUrl = '';
 

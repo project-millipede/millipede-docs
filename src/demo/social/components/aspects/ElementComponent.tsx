@@ -1,12 +1,11 @@
 import { createStyles, makeStyles, Slider, Theme, Typography } from '@material-ui/core';
-import { TFunction } from 'next-i18next-serverless';
 import React, { useState } from 'react';
-import { WithTranslation } from 'react-i18next';
 
 import { Item } from '../../../../../docs/src/modules/components/common/grid/Item';
 import DotsMobileStepper from '../../../../components/common/stepper/DotsMobileStepper';
 import { Category, CategoryDescriptor, Content, Stack2 } from '../../../../typings/data/import';
 
+// import { TFunction } from 'next-i18next-serverless';
 export const useStyles = makeStyles((_theme: Theme) =>
   createStyles({
     paper: {
@@ -50,7 +49,8 @@ export const generateGrid = (
   categories: CategoryDescriptor,
   step: number,
   classes: Record<any, string>,
-  t: TFunction
+  // t: TFunction
+  t: any
 ) => {
   return (
     <div
@@ -91,7 +91,7 @@ export const generateGrid = (
   );
 };
 
-type Props = Stack2 & Partial<WithTranslation>;
+type Props = Stack2;
 
 const ByExample = ({ elements, categories, t }: Props) => {
   const classes = useStyles({});

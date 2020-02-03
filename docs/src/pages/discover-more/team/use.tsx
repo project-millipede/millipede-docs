@@ -6,12 +6,14 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import TwitterIcon from '@material-ui/icons/Twitter';
-import { TFunction } from 'next-i18next-serverless';
 import React from 'react';
 
 import { useTranslation } from '../../../../../i18n';
 
-export const getActiveCoreMembers = (t: TFunction) => [
+// import { TFunction } from 'next-i18next-serverless';
+
+// export const getActiveCoreMembers = (t: TFunction) => [
+export const getActiveCoreMembers = (t: any) => [
   {
     name: 'Gritsch Markus',
     github: 'gurkerl83',
