@@ -1,12 +1,12 @@
 // import { ServerStyleSheets } from '@material-ui/core/styles';
-import getConfig from 'next/config';
+// import getConfig from 'next/config';
 import Document, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
 import React from 'react';
 
 import { PathnameToLanguage } from '../docs/src/modules/utils/helpers';
 import { testDirectory } from '../i18n';
 
-const config = getConfig();
+// const config = getConfig();
 
 // import { compose } from 'compose-middleware';
 // import { IncomingMessage, ServerResponse } from 'http';
@@ -82,14 +82,19 @@ const config = getConfig();
 //   });
 // };
 
-// export const middleware = async () => {
-//   // await wrapI18n(req, res);
-//   // testDirectory();
-// };
+export const middleware = async () => {
+  console.log('from Middleware');
+
+  testDirectory();
+
+  // await wrapI18n(req, res);
+  // testDirectory();
+};
 
 /* eslint-disable class-methods-use-this */
 class MillipedeDocument extends Document {
   componentDidMount() {
+    console.log('from componentDidMount');
     testDirectory();
   }
 
@@ -113,7 +118,7 @@ class MillipedeDocument extends Document {
           />
         </Head>
         <body>
-          <div id='doc-config'>{JSON.stringify(config)}</div>
+          {/* <div id='doc-config'>{JSON.stringify(config)}</div> */}
           <Main />
           <NextScript />
         </body>

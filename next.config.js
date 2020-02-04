@@ -21,7 +21,7 @@ const configuration = {
 
   target: 'serverless',
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
-  // experimental: { modern: true, documentMiddleware: true },
+  experimental: { modern: true, documentMiddleware: true },
   // experimental: { documentMiddleware: true },
 
   publicRuntimeConfig: {
