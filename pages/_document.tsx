@@ -3,8 +3,8 @@
 import Document, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
 import React from 'react';
 
+import { instantiateTestMiddleware } from '../docs/src/middleware/testMiddleware';
 import { PathnameToLanguage } from '../docs/src/modules/utils/helpers';
-import { testDirectory } from '../i18n';
 
 // const config = getConfig();
 
@@ -82,21 +82,18 @@ import { testDirectory } from '../i18n';
 //   });
 // };
 
-export const middleware = async () => {
-  console.log('from Middleware');
-
-  testDirectory();
-
+export const middleware = async ({ req, res }: DocumentContext) => {
   // await wrapI18n(req, res);
-  // testDirectory();
+
+  instantiateTestMiddleware(req, res);
 };
 
 /* eslint-disable class-methods-use-this */
 class MillipedeDocument extends Document {
-  componentDidMount() {
-    console.log('from componentDidMount');
-    testDirectory();
-  }
+  // componentDidMount() {
+  //   console.log('from componentDidMount');
+  //   testDirectory();
+  // }
 
   render() {
     return (

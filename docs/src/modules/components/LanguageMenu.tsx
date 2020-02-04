@@ -21,12 +21,13 @@ export const LanguageMenu = () => {
 
   const { dispatch }: { dispatch: React.Dispatch<LanguageActions> } = useHoux();
 
-  const { i18n, t } = useTranslation();
+  // const { i18n, t } = useTranslation();
+  const { t } = useTranslation();
 
   const handleSelect = useCallback(
     (_event: React.SyntheticEvent, languageCode: string) => {
       dispatch(changeUserLanguage(languageCode));
-      i18n.changeLanguage(languageCode);
+      // i18n.changeLanguage(languageCode);
       setLanguageMenu(null);
     },
     []
