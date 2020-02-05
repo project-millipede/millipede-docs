@@ -19,7 +19,7 @@ export const testDirectory = () => {
     : false;
 
   const publicLocales = !isBrowser
-    ? fs.readFileSync(
+    ? fs.existsSync(
         path.join(
           publicRuntimeConfig.PROJECT_ROOT,
           './public/locales/en/common.json'
