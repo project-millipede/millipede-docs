@@ -1,5 +1,5 @@
 import { ServerStyleSheets } from '@material-ui/core/styles';
-import { compose } from 'compose-middleware';
+import { compose, Handler, RequestHandler } from 'compose-middleware';
 import { IncomingMessage, ServerResponse } from 'http';
 import nextI18NextMiddleware from 'next-i18next-serverless/dist/commonjs/middlewares/next-i18next-middleware';
 import NextDocument, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
@@ -9,20 +9,30 @@ import { PathnameToLanguage, pathnameToLanguage } from '../docs/src/modules/util
 import { Logger } from '../docs/src/modules/utils/logging';
 import { NextI18NextInstance } from '../i18n';
 
-const wrapI18n = (req: IncomingMessage, res: ServerResponse) => {
-  const middleware = compose(nextI18NextMiddleware(NextI18NextInstance));
+export const composeTestMiddleware = (
+  req: IncomingMessage,
+  res: ServerResponse
+) => (middlewares: Array<Handler<IncomingMessage, ServerResponse>>) => {
+  const handler: RequestHandler<IncomingMessage, ServerResponse> = compose(
+    middlewares
+  );
 
   const done = () => {
     Logger.log('done');
   };
 
-  middleware(req, res, _next => {
+  handler(req, res, _next => {
     return done();
   });
+
+  return handler;
 };
 
-export const middleware = async ({ req, res }: DocumentContext) => {
-  await wrapI18n(req, res);
+export const instantiateTestMiddleware = (
+  req: IncomingMessage,
+  res: ServerResponse
+) => {
+  composeTestMiddleware(req, res)(nextI18NextMiddleware(NextI18NextInstance));
 };
 
 /* eslint-disable class-methods-use-this */
@@ -60,6 +70,8 @@ type InitialProps = PathnameToLanguage & DocumentInitialProps;
 MillipedeDocument.getInitialProps = async (
   ctx: DocumentContext
 ): Promise<InitialProps> => {
+  instantiateTestMiddleware(ctx.req, ctx.res);
+
   // Resolution order
   //
   // On the server:

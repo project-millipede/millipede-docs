@@ -5,19 +5,24 @@ const webpackConfigProd = require('./webpack/webpack.prod.conf');
 const webpackConfigDev = require('./webpack/webpack.dev.conf');
 
 const configuration = {
-  env: {
-    PROJECT_ROOT: __dirname,
-    PROJECT_ROOT_DIRNAME: __dirname,
-    PROJECT_ROOT_CWD: process.cwd()
+  webpack(config, options) {
+    return merge(
+      config,
+      process.env.NODE_ENV === 'development'
+        ? webpackConfigDev(options)
+        : webpackConfigProd(options)
+    );
   },
 
-  webpack(config, options) {
-    return merge(config, process.env.NODE_ENV === "development" ? webpackConfigDev(options) : webpackConfigProd(options));
-  },
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
 
   target: 'serverless',
-  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
-  experimental: { modern: true, documentMiddleware: true }
+
+  publicRuntimeConfig: {
+    rootDir: __dirname
+  },
+
+  experimental: { modern: true }
 };
 
 module.exports = configuration;

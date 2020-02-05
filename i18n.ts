@@ -1,21 +1,23 @@
-import NextI18Next from 'next-i18next-serverless';
+import NextI18Next, { NextRuntimeConfig } from 'next-i18next-serverless';
+import getConfig from 'next/config';
 
-export const NextI18NextInstance = new NextI18Next({
-  projectRoot: process.env.PROJECT_ROOT,
-  browserLanguageDetection: false,
-  serverLanguageDetection: false,
-  partialBundledLanguages: false,
-  ns: ['common'],
-  defaultNS: 'common',
-  defaultLanguage: 'en',
-  otherLanguages: ['de'],
-  lng: 'en'
-});
+const getNextI18NextInstance = (nextConfig: NextRuntimeConfig) => {
+  return new NextI18Next(nextConfig, {
+    browserLanguageDetection: false,
+    serverLanguageDetection: false,
+    partialBundledLanguages: false,
+    defaultLanguage: 'en',
+    otherLanguages: ['de'],
+    lng: 'en',
+    allLanguages: ['en', 'de']
+  });
+};
 
-/* Optionally, export class methods as named exports */
 export const {
   appWithTranslation,
   useTranslation,
   withTranslation,
   i18n
-} = NextI18NextInstance;
+} = getNextI18NextInstance(getConfig());
+
+export const NextI18NextInstance = getNextI18NextInstance(getConfig());
