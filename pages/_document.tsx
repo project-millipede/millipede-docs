@@ -1,7 +1,7 @@
 import { ServerStyleSheets } from '@material-ui/core/styles';
 import { compose, Handler, RequestHandler } from 'compose-middleware';
 import { IncomingMessage, ServerResponse } from 'http';
-import nextI18NextMiddleware from 'next-i18next-serverless/dist/commonjs/middlewares/next-i18next-middleware';
+import { nextI18NextMiddleware } from 'next-i18next-serverless';
 import NextDocument, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
 import React from 'react';
 
@@ -31,10 +31,8 @@ export const composeTestMiddleware = (
 export const instantiateTestMiddleware = (
   req: IncomingMessage,
   res: ServerResponse
-) => {
+) =>
   composeTestMiddleware(req, res)(nextI18NextMiddleware(NextI18NextInstance));
-};
-
 /* eslint-disable class-methods-use-this */
 class MillipedeDocument extends NextDocument {
   render() {

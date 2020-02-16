@@ -39,7 +39,7 @@ const configuration = {
 
   target: 'serverless',
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
-  experimental: { modern: true, documentMiddleware: true }
+  experimental: { modern: true }
 };
 
 export default configuration;
