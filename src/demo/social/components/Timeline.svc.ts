@@ -1,12 +1,10 @@
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 import { TimelineActions } from '../../../../docs/src/modules/redux/features/actionType';
 import { createPost } from '../../../../docs/src/modules/redux/features/timeline/actions';
-
+import { factories, schema } from '../../../data/social';
 import { Post } from '../../../typings/social';
 import { UseCaseEntities } from '../../../typings/social/schema';
-
-import { factories, schema } from '../../../data/social';
 
 const { contentFactory, currentTimeStampFactory, mediaFactory } = factories;
 const { denormalizeWrapper, timelineSchema } = schema;
@@ -24,7 +22,7 @@ export const handleCreatePost = (
   );
 
   const postTemplate: Post = {
-    id: uuid(),
+    id: uuidv4(),
 
     author: { id: -1 },
 
