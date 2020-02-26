@@ -20,7 +20,7 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import clsx from 'clsx';
 import { useHoux } from 'houx';
 import React, { FC } from 'react';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 import { TimelineActions } from '../../../../docs/src/modules/redux/features/actionType';
 import { RootState } from '../../../../docs/src/modules/redux/reducers';
@@ -95,7 +95,7 @@ const Post: FC<PostProps> = ({ timelineId, postId }) => {
       updatedAt: '',
       text: '',
       title: '',
-      media: { id: uuid(), imageTitle: '', imageHref: '' }
+      media: { id: uuidv4(), imageTitle: '', imageHref: '' }
     },
     comments: [],
     votes: []

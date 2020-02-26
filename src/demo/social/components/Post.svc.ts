@@ -1,13 +1,9 @@
 import { TimelineActions } from 'docs/src/modules/redux/features/actionType';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
-import {
-  createComment,
-  removePost
-} from '../../../../docs/src/modules/redux/features/timeline/actions';
-import { Comment } from '../../../typings/social';
-
+import { createComment, removePost } from '../../../../docs/src/modules/redux/features/timeline/actions';
 import { factories, schema } from '../../../data/social';
+import { Comment } from '../../../typings/social';
 import { UseCaseEntities } from '../../../typings/social/schema';
 
 const { contentFactory, currentTimeStampFactory } = factories;
@@ -28,7 +24,7 @@ export const handleCreateComment = (
   );
 
   const commentTemplate: Comment = {
-    id: uuid(),
+    id: uuidv4(),
 
     commenter: { id: -1 },
     content: contentFactory.combine(currentTimeStampFactory).build()
