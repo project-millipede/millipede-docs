@@ -5,7 +5,7 @@
       "category": "recognition",
       "title": "Einfache Erkennung kritischer Inhalte",
       "link": "/pidp/use-case/recognition",
-      "icon": "star",
+      "icon": "visibility",
       "description": [
         {
           "subTitle": [
@@ -54,7 +54,7 @@
       "category": "recognition",
       "title": "Kennzeichnung kritischer Inhalte",
       "link": "/pidp/use-case/response",
-      "icon": "star",
+      "icon": "label",
       "description": [
         {
           "subTitle": [
