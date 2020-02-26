@@ -12,6 +12,7 @@ module.exports = {
   extends: [
     'airbnb-base',
     'plugin:@typescript-eslint/recommended',
+    'plugin:mdx/recommended',
     'prettier',
     'prettier/@typescript-eslint'
   ],
