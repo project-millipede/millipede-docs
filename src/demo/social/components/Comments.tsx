@@ -3,7 +3,7 @@ import Avatar from '@material-ui/core/Avatar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import React, { FC } from 'react';
+import React, { FC, Fragment } from 'react';
 
 import { Comment } from '../../../typings/social';
 
@@ -25,10 +25,16 @@ export const useStyles = makeStyles((_theme: Theme) =>
 );
 
 interface AlignItemsListProps {
+  timelineId: number;
+  postId: number;
   comments?: Array<Comment>;
 }
 
-const Comments: FC<AlignItemsListProps> = ({ comments = [] }) => {
+const Comments: FC<AlignItemsListProps> = ({
+  timelineId,
+  postId,
+  comments = []
+}) => {
   const classes = useStyles({});
 
   const items = comments.map((comment, index, orgComments) => {
@@ -36,11 +42,14 @@ const Comments: FC<AlignItemsListProps> = ({ comments = [] }) => {
       commenter: {
         profile: { firstName, lastName, avatar }
       },
+      id: commentId,
       content: { text, createdAt }
     } = comment;
 
     return (
-      <>
+      <Fragment
+        key={`timeline-${timelineId}-post-${postId}-comment-${commentId}`}
+      >
         <ListItem alignItems='flex-start'>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <CardHeader
@@ -92,7 +101,7 @@ const Comments: FC<AlignItemsListProps> = ({ comments = [] }) => {
         {index < orgComments.length - 1 ? (
           <Divider variant='inset' component='li' />
         ) : null}
-      </>
+      </Fragment>
     );
   });
 

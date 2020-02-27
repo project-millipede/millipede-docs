@@ -1,5 +1,7 @@
-import { userFactory, commentFactory, contentFactory } from './factories';
+import { v4 as uuidv4 } from 'uuid';
+
 import { Post, Timeline, UseCase } from '../../typings/social';
+import { commentFactory, contentFactory, userFactory } from './factories';
 
 export const owner0 = userFactory.build();
 export const owner1 = userFactory.build();
@@ -22,7 +24,7 @@ const content2 = contentFactory.build();
 const content3 = contentFactory.build();
 
 export const post0: Post = {
-  id: 123,
+  id: uuidv4(),
   author: user0,
   content: content0,
   comments: comments0,
@@ -30,7 +32,7 @@ export const post0: Post = {
 };
 
 export const post1: Post = {
-  id: 124,
+  id: uuidv4(),
   author: user1,
   content: content1,
   comments: comments1,
@@ -38,7 +40,7 @@ export const post1: Post = {
 };
 
 export const post2: Post = {
-  id: 125,
+  id: uuidv4(),
   author: user2,
   content: content2,
   comments: comments2,
@@ -46,7 +48,7 @@ export const post2: Post = {
 };
 
 export const post3: Post = {
-  id: 126,
+  id: uuidv4(),
   author: user3,
   content: content3,
   comments: comments3,
@@ -55,18 +57,18 @@ export const post3: Post = {
 
 export const timelineData: Array<Timeline> = [
   {
-    id: 1000,
+    id: uuidv4(),
     owner: owner0,
     posts: [post0, post1]
   },
   {
-    id: 1001,
+    id: uuidv4(),
     owner: owner1,
     posts: [post2, post3]
   }
 ];
 
 export const usecaseData: UseCase = {
-  id: 7777,
+  id: uuidv4(),
   timelines: timelineData
 };

@@ -1,9 +1,10 @@
-import * as Factory from 'factory.ts';
-import faker from 'faker';
 import { formatDistance } from 'date-fns';
 import { enGB } from 'date-fns/locale';
+import * as Factory from 'factory.ts';
+import faker from 'faker';
 
-import { User, Profile, Content, Comment } from '../../typings/social';
+import { Comment, Content, Profile, User } from '../../typings/social';
+import { generateImageURL } from './images/picsum';
 
 export const profileFactory = Factory.Sync.makeFactory<Profile>({
   firstName: Factory.each(() => faker.name.firstName()),
@@ -39,7 +40,7 @@ export const userFactory: Factory.Sync.Factory<User> = Factory.makeFactory({
 
 export const mediaFactory = Factory.Sync.makeFactory({
   id: Factory.each(i => i),
-  imageHref: Factory.each(() => faker.image.imageUrl(300, 300, '', true)),
+  imageHref: Factory.each(() => generateImageURL()),
   imageTitle: Factory.each(() => faker.lorem.sentences(3))
 });
 

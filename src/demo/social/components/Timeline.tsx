@@ -3,15 +3,16 @@ import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import { useHoux } from 'houx';
 import React, { FC, useRef } from 'react';
 
+import { TimelineActions } from '../../../../docs/src/modules/redux/features/actionType';
 import { RootState } from '../../../../docs/src/modules/redux/reducers';
 import { useTranslation } from '../../../../i18n';
+import { HeaderView } from '../../../components/device/browser/views';
 import CommentEditor from './CommentEditor';
 import { PostProps } from './Post';
-import Search from './Search';
+import SimpleSearch from './SimpleSearch';
 import { handleCreatePost } from './Timeline.svc';
 
-import { TimelineActions } from '../../../../docs/src/modules/redux/features/actionType';
-
+// import Search from './Search';
 interface TimelineProps {
   Comp: React.FC<PostProps>;
   timelineId?: number;
@@ -55,14 +56,30 @@ const Timeline: FC<TimelineProps> = ({ Comp, timelineId }) => {
         overflowY: 'auto'
       }}
     >
-      <Search />
+      <HeaderView />
+      {/* <Search /> */}
+      <SimpleSearch />
       {displayEditor ? (
         <CommentEditor
-          create={text =>
-            handleCreatePost(timelineId, text, entities, dispatch, () => {
-              setDisplayEditor(false);
-            })
-          }
+          create={text => {
+            Object.keys(timelines)
+              .filter(
+                currentTimelineId =>
+                  ((currentTimelineId as unknown) as number) !== timelineId
+              )
+              .forEach(timelineIdTarget => {
+                handleCreatePost(
+                  timelineId,
+                  (timelineIdTarget as unknown) as number,
+                  text,
+                  entities,
+                  dispatch,
+                  () => {
+                    setDisplayEditor(false);
+                  }
+                );
+              });
+          }}
           isComment={false}
         />
       ) : (
@@ -86,7 +103,13 @@ const Timeline: FC<TimelineProps> = ({ Comp, timelineId }) => {
       )}
       {postIds.length > 0
         ? postIds.map(postId => {
-            return <Comp timelineId={timelineId} postId={postId} />;
+            return (
+              <Comp
+                timelineId={timelineId}
+                postId={postId}
+                key={`timeline-${timelineId}-post-${postId}`}
+              />
+            );
           })
         : null}
     </div>

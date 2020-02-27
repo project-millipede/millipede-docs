@@ -20,15 +20,13 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import clsx from 'clsx';
 import { useHoux } from 'houx';
 import React, { FC } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 import { TimelineActions } from '../../../../docs/src/modules/redux/features/actionType';
 import { RootState } from '../../../../docs/src/modules/redux/reducers';
 import { useTranslation } from '../../../../i18n';
-import { Post as ModelPost } from '../../../typings/social';
 import CommentEditor from './CommentEditor';
 import Comments from './Comments';
-import { handleCreateComment, handleDeletePost } from './Post.svc';
+import { handleCreateComment, handleDeletePost, selectPost } from './Post.svc';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -86,52 +84,6 @@ const Post: FC<PostProps> = ({ timelineId, postId }) => {
     setExpanded(!expanded);
   };
 
-  let post: ModelPost = {
-    id: 0,
-    author: { id: 0, profile: { firstName: '', lastName: '' } },
-    content: {
-      id: 0,
-      createdAt: '',
-      updatedAt: '',
-      text: '',
-      title: '',
-      media: { id: uuidv4(), imageTitle: '', imageHref: '' }
-    },
-    comments: [],
-    votes: []
-  };
-
-  if (entities && postId) {
-    const { posts, users, comments } = entities;
-
-    const userId = (posts[postId].author as unknown) as number;
-    const commentIds = posts[postId].comments;
-
-    const commentsLoaded = commentIds.map((commentId: number) => {
-      const commenterId = (comments[commentId].commenter as unknown) as number;
-      const commenter = users[commenterId] || {
-        id: 0,
-        profile: { firstName: '', lastName: '' }
-      };
-
-      return {
-        ...comments[commentId],
-        commenter
-      };
-    });
-
-    post = {
-      ...posts[postId],
-      // author: users[post.author[0]]
-      author: users[userId] || {
-        id: 0,
-        profile: { firstName: '', lastName: '' }
-      },
-      comments: commentsLoaded,
-      votes: []
-    };
-  }
-
   const {
     author: {
       profile: { avatar, firstName, lastName }
@@ -143,13 +95,16 @@ const Post: FC<PostProps> = ({ timelineId, postId }) => {
       media: { imageTitle, imageHref }
     },
     comments
-  } = post;
+  } = selectPost(postId, entities);
 
   const initialComments = comments.slice(0, 3);
   const restComments = comments.slice(3, comments.length);
 
   return (
-    <Card className={classes.card}>
+    <Card
+      className={classes.card}
+      key={`timeline-${timelineId}-post-${postId}`}
+    >
       <CardHeader
         avatar={<Avatar alt={`${firstName} ${lastName}`} src={avatar} />}
         title={`${firstName} ${lastName}`}
@@ -225,7 +180,11 @@ const Post: FC<PostProps> = ({ timelineId, postId }) => {
           isComment
         />
       ) : null}
-      <Comments comments={initialComments} />
+      <Comments
+        comments={initialComments}
+        timelineId={timelineId}
+        postId={postId}
+      />
       {restComments.length > 0 ? (
         <>
           <CardActions disableSpacing>
@@ -241,7 +200,11 @@ const Post: FC<PostProps> = ({ timelineId, postId }) => {
             </IconButton>
           </CardActions>
           <Collapse in={expanded} timeout='auto' unmountOnExit>
-            <Comments comments={restComments} />
+            <Comments
+              comments={restComments}
+              timelineId={timelineId}
+              postId={postId}
+            />
           </Collapse>
         </>
       ) : null}

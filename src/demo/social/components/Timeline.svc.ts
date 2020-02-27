@@ -10,6 +10,7 @@ const { contentFactory, currentTimeStampFactory, mediaFactory } = factories;
 const { denormalizeWrapper, timelineSchema } = schema;
 export const handleCreatePost = (
   timelineId: number,
+  timelineIdTarget: number,
   text: string,
   entities: Partial<UseCaseEntities>,
   dispatch: React.Dispatch<TimelineActions>,
@@ -41,6 +42,6 @@ export const handleCreatePost = (
     }
   };
 
-  dispatch(createPost(timelineId, post));
+  dispatch(createPost(timelineIdTarget, post));
   callback();
 };
