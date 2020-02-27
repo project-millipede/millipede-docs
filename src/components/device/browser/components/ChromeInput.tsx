@@ -1,41 +1,59 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
-import InfoOutlined from '@material-ui/icons/InfoOutlined';
-import StarBorder from '@material-ui/icons/StarBorder';
-import React from 'react';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import SecurityIcon from '@material-ui/icons/Security';
+import React, { useState } from 'react';
 
-export const useStyles = makeStyles((_theme: Theme) =>
-  createStyles({
+export const useStyles = makeStyles(({ spacing }: Theme) => {
+  const minHeight = 36;
+  const borderRadius = minHeight / 2;
+
+  const space = spacing(1); // default = 8;
+  const backgroundColor = '#F1F3F4';
+
+  const inputPadding = space / 4;
+  return createStyles({
     root: {
-      padding: '2px',
-      borderRadius: '100px',
-      backgroundColor: '#F1F3F4'
-      // marginTop: '8px',
-      // marginBottom: '8px'
+      backgroundColor,
+      borderRadius: `${borderRadius}px`,
+      padding: inputPadding
     },
     icon: {
-      padding: '4px 8px',
-      borderRadius: '100px'
+      padding: `${space / 2}px ${space}px`,
+      borderRadius: `${borderRadius}px`
+    },
+    security: {
+      padding: `${space / 2}px ${space}px`,
+      borderRadius: `${borderRadius}px`,
+      zIndex: 1000,
+      color: '#00FF00'
     }
-  })
-);
+  });
+});
 
 const ChromeInput = () => {
-  //   const styles = useChromeInputStyles();
   const styles = useStyles({});
+
+  const [enabled, setEnabled] = useState(false);
+
   return (
     <InputBase
       className={styles.root}
       placeholder={'https://bookface.com'}
       startAdornment={
         <IconButton className={styles.icon}>
-          <InfoOutlined />
+          <InfoOutlinedIcon />
         </IconButton>
       }
       endAdornment={
-        <IconButton className={styles.icon}>
-          <StarBorder />
+        <IconButton
+          className={enabled ? styles.security : styles.icon}
+          onClick={() => {
+            setEnabled(!enabled);
+          }}
+        >
+          <SecurityIcon />
         </IconButton>
       }
     />
