@@ -29,17 +29,17 @@ export interface URIPathParamsFacebook {
 
 export interface URIPathParamsLinkedIn {
   url: string;
-  source: string;
+  title: string;
   summary: string;
+  source: string;
   mini: boolean;
 }
 
 export interface URIPathParamsTwitter {
   url: string;
-  via: string;
+  via?: string;
   text: string;
   hashtags: Array<string>;
-  mini: boolean;
 }
 
 export interface URIPathParamsWhatsApp {
@@ -65,6 +65,7 @@ export interface MetaProps {
   title?: string;
   description?: string;
   keywords?: string;
+  hashtags?: string;
   author?: string;
   date?: string;
 }
