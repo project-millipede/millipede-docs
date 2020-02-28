@@ -3,12 +3,12 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
 
 import AppFrame from '../docs/src/modules/components/AppFrame';
+import Head from '../docs/src/modules/components/Head';
 import HomeFooter from '../docs/src/modules/components/HomeFooter';
 import { useTranslation } from '../i18n';
 import TopicsDetail from '../src/components/site/landing/TopicsDetail';
 import TopicsHead from '../src/components/site/landing/TopicsHead';
 
-// import Head from '../docs/src/modules/components/Head';
 // // --- Post bootstrap -----
 // const useStyles = makeStyles(_theme => ({
 //   root: {
@@ -77,7 +77,7 @@ const Index = () => {
   return (
     <AppFrame drawerStyleOverride={{ drawer: classes.drawer }}>
       <div className={classes.root}>
-        {/* <Head /> */}
+        <Head />
         <div className={classes.hero}>
           <Container maxWidth='md' className={classes.content}>
             <div

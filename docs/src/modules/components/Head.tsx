@@ -8,24 +8,27 @@ interface Props {
   meta?: MetaProps;
 }
 
-const Head: FC<Props> = ({
-  meta: {
-    title = 'headTitle',
-    description = 'strapline',
+const defaultTitle = 'headTitle';
+const defaultDescription = 'strapline';
+
+const Head: FC<Props> = ({ meta = {} }) => {
+  const {
+    title = defaultTitle,
+    description = defaultDescription,
     keywords,
     author,
     date
-  }
-}) => {
-  const { t } = useTranslation();
+  } = meta;
+
+  const { t } = useTranslation([]);
 
   return (
     <NextHead>
-      <title>{title.indexOf('headTitle') ? t(title) : title}</title>
+      <title>{title === defaultTitle ? t(title) : title}</title>
       <meta
         name='description'
         content={
-          description.indexOf('strapline') ? t(description) : description
+          description === defaultDescription ? t(description) : description
         }
       />
       {keywords ? <meta name='keywords' content={keywords} /> : null}
@@ -33,10 +36,6 @@ const Head: FC<Props> = ({
       {date ? <meta name='date' content={date} /> : null}
     </NextHead>
   );
-};
-
-Head.defaultProps = {
-  meta: {}
 };
 
 export default Head;
