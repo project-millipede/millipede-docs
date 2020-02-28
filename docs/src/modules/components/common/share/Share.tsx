@@ -111,7 +111,7 @@ const getSharing = (
       params: {
         url: baseUrl,
         title,
-        summary: `Summary - ${title}`,
+        summary: description,
         source: t('application-title'),
         mini: true
       } as URIPathParamsLinkedIn

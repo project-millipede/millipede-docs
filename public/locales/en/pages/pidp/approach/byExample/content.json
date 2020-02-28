@@ -2,15 +2,15 @@
   "steps": [
     {
       "title": "Left-sided arranged book page",
-      "description": "In the initial state, the book on the left does not exist and can be equated with the representation of a placeholder."
+      "description": "In the initial state, the book page arranged on the left side is not present and can be equated with the representation of a placeholder."
     },
     {
       "title": "Right-sided book page",
-      "description": "Corresponds to the original of a website or mobile application or the message stream communicated to the user by the application type."
+      "description": "Corresponds to the original of a website or mobile application or the content stream communicated to the user via such an application type."
     },
     {
       "title": "Behavior",
-      "description": "The technique transforms the display and presentation format of any application on the user`s device. This action, carried out during the handling of an existing application, generates the left-sided book page. The book page inserted in this manner encompasses content that supplements or corrects the original content on the opposing book page."
+      "description": "During runtime, the method extends the display and presentation format of any application on the user's end device; the book page on the left-hand side is generated. While operating an application, the user takes advantage of non-application-specific interface components for dialogue and interaction that are not provided by the original application. The book page embedded in this way comprises contents that supplement or correct the original contents on the opposite book page."
     }
   ]
 }

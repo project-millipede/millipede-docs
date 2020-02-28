@@ -19,7 +19,6 @@ const useStyles = makeStyles((_theme: Theme) =>
       // color: theme.palette.text.primary
     },
     row: {
-      alignItems: 'center',
       flexDirection: 'row',
       justifyContent: 'center'
     }
