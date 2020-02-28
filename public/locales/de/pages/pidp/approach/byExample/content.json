@@ -6,11 +6,11 @@
     },
     {
       "title": "Rechtsseitig angeordnete Buchseite",
-      "description": "Entspricht dem Original einer Website oder mobilen Anwendung bzw. dem über den Anwendungstyp an den Nutzer kommunizierten Nachrichtenstrom."
+      "description": "Entspricht dem Original einer Website oder mobilen Anwendung bzw. dem über einem solchen Anwendungstyp an den Nutzer kommunizierten Nachrichtenstrom."
     },
     {
       "title": "Verhalten",
-      "description": "Das Verfahren verändert das Anzeige- und Darstellungsformat einer beliebigen Anwendung auf dem Endgerät des Benutzers. Diese während der Bedienung einer bestehenden Anwendung durchgeführte Maßnahme erzeugt die linke Buchseite. Die auf diese Art und Weise eingebettete Buchseite umfasst Inhalte, die den ursprünglichen Inhalt auf der gegenüberliegenden Buchseite ergänzen oder korrigieren."
+      "description": "Das Verfahren erweitert das Anzeige- und Darstellungsformat einer beliebigen Anwendung zur Laufzeit am Endgerät des Nutzers; die linksseitig angeordnete Buchseite wird erzeugt. Der Nutzer nimmt während der Bedienung einer Anwendung anwendungsfremde Oberflächenkomponenten für Dialog und Interaktion war, welche von der im original vorliegenden Anwendung nicht bereit gestellt werden. Eine auf diese Art und Weise eingebettete Buchseite umfasst Inhalte, welche die ursprünglichen Inhalte auf der gegenüberliegenden Buchseite ergänzen oder korrigieren."
     }
   ]
 }
