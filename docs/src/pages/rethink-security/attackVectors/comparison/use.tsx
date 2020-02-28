@@ -7,7 +7,9 @@ import { Content } from '../../../../../../src/typings/data/import';
 import Component from './component';
 
 const generateContent = (t: TFunction): Array<Content> | any => {
-  const steps: Array<Array<Content>> | string = t('steps', { returnObjects: true });
+  const steps: Array<Array<Content>> | string = t('steps', {
+    returnObjects: true
+  });
   if (steps === 'steps') {
     return [[]];
   }
@@ -24,8 +26,12 @@ const use = ({ t }: Props) => {
 
 use.getInitialProps = async () => {
   return {
-    namespacesRequired: ['pages/rethink-security/attackVectors/comparison/content']
+    namespacesRequired: [
+      'pages/rethink-security/attackVectors/comparison/content'
+    ]
   };
 };
 
-export default withTranslation('pages/rethink-security/attackVectors/comparison/content')(use);
+export default withTranslation(
+  'pages/rethink-security/attackVectors/comparison/content'
+)(use);

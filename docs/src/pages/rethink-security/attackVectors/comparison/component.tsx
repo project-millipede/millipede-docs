@@ -42,7 +42,7 @@ const ByExample = ({ rows = [[]] }: Stack) => {
 
   const result = rows.map(row => {
     return (
-      <Grid container spacing={1}>
+      <Grid container spacing={8}>
         {row.map((column, _index) => {
           let intermediateResult = [];
 
@@ -52,13 +52,18 @@ const ByExample = ({ rows = [[]] }: Stack) => {
                 <>
                   {description.subTitle && description.subTitle.length > 0
                     ? description.subTitle.map(t => (
-                        <Typography variant='subtitle1' className={classes.subTitle}>
+                        <Typography
+                          variant='subtitle1'
+                          className={classes.subTitle}
+                        >
                           {t}
                         </Typography>
                       ))
                     : null}
                   {description.text && description.text.length > 0
-                    ? description.text.map(t => <Typography variant='subtitle1'>{t}</Typography>)
+                    ? description.text.map(t => (
+                        <Typography variant='subtitle1'>{t}</Typography>
+                      ))
                     : null}
                   {description.listing && description.listing.length > 0 ? (
                     <ul>
@@ -71,7 +76,10 @@ const ByExample = ({ rows = [[]] }: Stack) => {
                   ) : null}
                   {description.summary && description.summary.length > 0
                     ? description.summary.map(t => (
-                        <Typography variant='subtitle1' className={classes.summary}>
+                        <Typography
+                          variant='subtitle1'
+                          className={classes.summary}
+                        >
                           {t}
                         </Typography>
                       ))
@@ -79,7 +87,10 @@ const ByExample = ({ rows = [[]] }: Stack) => {
                   {description.note && description.note.length > 0 ? (
                     <blockquote>
                       {description.note.map(t => (
-                        <Typography variant='subtitle1' className={classes.summary}>
+                        <Typography
+                          variant='subtitle1'
+                          className={classes.summary}
+                        >
                           {t}
                         </Typography>
                       ))}
@@ -89,7 +100,6 @@ const ByExample = ({ rows = [[]] }: Stack) => {
               );
             });
           }
-
           return (
             <Grid item xs={12} md={4}>
               <>
@@ -114,5 +124,4 @@ const ByExample = ({ rows = [[]] }: Stack) => {
   return <>{result}</>;
 };
 
-export { ByExample };
 export default ByExample;
