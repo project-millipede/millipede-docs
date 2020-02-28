@@ -53,13 +53,13 @@ const getSharing = (
   t: TFunction
 ) => {
   const { meta } = getShareProps();
-  const { title, description, keywords } = meta;
+  const { title, description, hashtags } = meta;
 
-  const hashTags = _.isArray(keywords)
-    ? keywords
-    : StringUtil.stringToArray(keywords);
+  const hashtagCollection = _.isArray(hashtags)
+    ? hashtags
+    : StringUtil.stringToArray(hashtags);
 
-  const firstHashTag = hashTags
+  const firstHashtag = hashtagCollection
     .filter((_hashTag, index) => index === 0)
     .map(hashTag => `#${hashTag}`)
     .join('');
@@ -88,7 +88,7 @@ const getSharing = (
       url: 'https://www.facebook.com/sharer/sharer.php',
       params: {
         u: baseUrl,
-        hashtag: firstHashTag,
+        hashtag: firstHashtag,
         quote: title
       } as URIPathParamsFacebook
     },
@@ -96,24 +96,23 @@ const getSharing = (
       id: 'twitter',
       type: Interaction.SHARE,
       title: `${t('share-on')} Twitter`,
-      url: 'https://twitter.com/home?status',
+      url: 'https://twitter.com/share',
       params: {
         url: baseUrl,
-        via: baseUrl,
         text: title,
-        hashtags: hashTags,
-        mini: true
+        hashtags: hashtagCollection
       } as URIPathParamsTwitter
     },
     {
       id: 'linkedin',
       type: Interaction.SHARE,
       title: `${t('share-on')} LinkedIn`,
-      url: 'https://www.linkedin.com/shareArticle',
+      url: 'https://linkedin.com/shareArticle',
       params: {
         url: baseUrl,
-        source: baseUrl,
-        summary: title,
+        title,
+        summary: `Summary - ${title}`,
+        source: t('application-title'),
         mini: true
       } as URIPathParamsLinkedIn
     },
