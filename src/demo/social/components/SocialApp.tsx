@@ -6,7 +6,9 @@ import SwipeableViews from 'react-swipeable-views';
 import { TimelineActions } from '../../../../docs/src/modules/redux/features/actionType';
 import { normalizeData } from '../../../../docs/src/modules/redux/features/timeline/actions';
 import { RootState } from '../../../../docs/src/modules/redux/reducers';
+import { generateData } from '../../../data/social/mocks';
 import { Area, Device, Szenario } from '../../../typings/animation';
+import { UseCase } from '../../../typings/social';
 import ElementDescription from './aspects/ElementDescription';
 import PetDescription from './aspects/PetDescription';
 import PidpDescription from './aspects/PidpDescription';
@@ -68,16 +70,21 @@ const SocialApp = (props: SocialAppProps) => {
     dispatch: React.Dispatch<TimelineActions>;
   } = useHoux();
 
-  const loadPosts = useCallback(() => {
-    dispatch(normalizeData());
+  const loadPosts = useCallback(async () => {
+    return generateData();
+  }, []);
+
+  const normalizePosts = useCallback((usecaseData: UseCase) => {
+    dispatch(normalizeData(usecaseData));
   }, []);
 
   useEffect(() => {
-    const loadContent = async () => {
-      loadPosts();
+    const onBoardContent = async () => {
+      const data = await loadPosts();
+      await normalizePosts(data);
     };
-    loadContent();
-  }, []);
+    onBoardContent();
+  }, [generateData]);
 
   return isBrowser ? (
     <div
