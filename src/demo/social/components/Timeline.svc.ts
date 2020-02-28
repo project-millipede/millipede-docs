@@ -8,7 +8,7 @@ import { UseCaseEntities } from '../../../typings/social/schema';
 
 const { contentFactory, currentTimeStampFactory, mediaFactory } = factories;
 const { denormalizeWrapper, timelineSchema } = schema;
-export const handleCreatePost = (
+export const handleCreatePost = async (
   timelineId: number,
   timelineIdTarget: number,
   text: string,
@@ -27,7 +27,7 @@ export const handleCreatePost = (
 
     author: { id: -1 },
 
-    content: contentFactory.combine(currentTimeStampFactory).build(),
+    content: await contentFactory.combine(currentTimeStampFactory).build(),
     comments: [],
     votes: []
   };
@@ -38,7 +38,7 @@ export const handleCreatePost = (
     content: {
       ...postTemplate.content,
       text,
-      media: mediaFactory.build()
+      media: await mediaFactory.build()
     }
   };
 

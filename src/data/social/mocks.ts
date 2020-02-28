@@ -1,74 +1,75 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { Post, Timeline, UseCase } from '../../typings/social';
+import { MathUtil } from '../../../docs/src/modules/utils';
+import { Comment, Content, Post, UseCase, User } from '../../typings/social';
 import { commentFactory, contentFactory, userFactory } from './factories';
 
-export const owner0 = userFactory.build();
-export const owner1 = userFactory.build();
+let users: Array<User> = [];
+let owners: Array<User> = [];
+let comments: Array<Array<Comment>> = [];
+let contents: Array<Content> = [];
+let posts: Array<Post> = [];
 
-export const user0 = userFactory.build();
-export const user1 = userFactory.build();
-export const user2 = userFactory.build();
-export const user3 = userFactory.build();
-
-const comments0 = commentFactory.buildList(3);
-const comments1 = commentFactory.buildList(4);
-
-const comments2 = commentFactory.buildList(3);
-const comments3 = commentFactory.buildList(4);
-
-const content0 = contentFactory.build();
-const content1 = contentFactory.build();
-
-const content2 = contentFactory.build();
-const content3 = contentFactory.build();
-
-export const post0: Post = {
-  id: uuidv4(),
-  author: user0,
-  content: content0,
-  comments: comments0,
-  votes: []
-};
-
-export const post1: Post = {
-  id: uuidv4(),
-  author: user1,
-  content: content1,
-  comments: comments1,
-  votes: []
-};
-
-export const post2: Post = {
-  id: uuidv4(),
-  author: user2,
-  content: content2,
-  comments: comments2,
-  votes: []
-};
-
-export const post3: Post = {
-  id: uuidv4(),
-  author: user3,
-  content: content3,
-  comments: comments3,
-  votes: []
-};
-
-export const timelineData: Array<Timeline> = [
-  {
-    id: uuidv4(),
-    owner: owner0,
-    posts: [post0, post1]
-  },
-  {
-    id: uuidv4(),
-    owner: owner1,
-    posts: [post2, post3]
+export const getEntity = <T>(entityCollection: Array<T>, index: number) => {
+  if (
+    entityCollection &&
+    entityCollection.length >= index &&
+    entityCollection[index] !== undefined
+  ) {
+    return entityCollection[index];
   }
-];
+  return null;
+};
 
-export const usecaseData: UseCase = {
-  id: uuidv4(),
-  timelines: timelineData
+export const generateComments = async (
+  countCommentSections: number,
+  countPerCommentSection: number
+) => {
+  return Promise.all(
+    [...new Array(countCommentSections)].map(() => {
+      return commentFactory.buildList(
+        MathUtil.generateRandomInteger(0, countPerCommentSection)
+      );
+    })
+  );
+};
+
+export const generatePosts = (entityCollection: Array<Post>, size: number) => {
+  if (entityCollection.length === 0) {
+    return [...new Array(size)].map((_item, index) => {
+      return {
+        id: uuidv4(),
+        author: getEntity<User>(users, index),
+        content: getEntity<Content>(contents, index),
+        comments: getEntity<Array<Comment>>(comments, index),
+        votes: []
+      };
+    });
+  }
+  return entityCollection;
+};
+
+export const generateData = async () => {
+  users = await userFactory.buildList(4);
+  owners = await userFactory.buildList(2);
+  comments = await generateComments(4, 4);
+  contents = await contentFactory.buildList(4);
+  posts = generatePosts(posts, 4);
+
+  const usecaseData: UseCase = {
+    id: uuidv4(),
+    timelines: [
+      {
+        id: uuidv4(),
+        owner: getEntity<User>(owners, 0),
+        posts: [posts[0], posts[1]]
+      },
+      {
+        id: uuidv4(),
+        owner: getEntity<User>(owners, 1),
+        posts: [posts[2], posts[3]]
+      }
+    ]
+  };
+  return usecaseData;
 };

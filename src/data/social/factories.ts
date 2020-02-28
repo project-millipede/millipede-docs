@@ -1,15 +1,15 @@
 import { formatDistance } from 'date-fns';
 import { enGB } from 'date-fns/locale';
-import * as Factory from 'factory.ts';
+import { Async } from 'factory.ts';
 import faker from 'faker';
 
-import { Comment, Content, Profile, User } from '../../typings/social';
+import { Comment, Content, Media, Profile, User } from '../../typings/social';
 import { generateImageURL } from './images/picsum';
 
-export const profileFactory = Factory.Sync.makeFactory<Profile>({
-  firstName: Factory.each(() => faker.name.firstName()),
-  lastName: Factory.each(() => faker.name.lastName()),
-  avatar: Factory.each(() => faker.image.avatar())
+const profileFactory = Async.makeFactory<Profile>({
+  firstName: Async.each(() => faker.name.firstName()),
+  lastName: Async.each(() => faker.name.lastName()),
+  avatar: Async.each(() => faker.image.avatar())
 });
 
 const autoUserNameFactory = profileFactory.withDerivation2(
@@ -33,53 +33,48 @@ export const autoAvatarFactory = profileFactory.withDerivation2(
 const completeProfile = profileFactory.combine(autoUserNameFactory);
 // .combine(autoAvatarFactory);
 
-export const userFactory: Factory.Sync.Factory<User> = Factory.makeFactory({
-  id: Factory.each(i => i),
-  profile: Factory.each(() => completeProfile.build())
+export const userFactory: Async.Factory<User> = Async.makeFactory({
+  id: Async.each(i => i),
+  profile: Async.each(() => completeProfile.build())
 });
 
-export const mediaFactory = Factory.Sync.makeFactory({
-  id: Factory.each(i => i),
-  imageHref: Factory.each(() => generateImageURL()),
-  imageTitle: Factory.each(() => faker.lorem.sentences(3))
+export const mediaFactory: Async.Factory<Media> = Async.makeFactory({
+  id: Async.each(i => i),
+  imageHref: Async.each(() => generateImageURL()),
+  imageTitle: Async.each(() => faker.lorem.sentences(3))
 });
 
-const timeStampFactory = Factory.Sync.makeFactory({
-  createdAt: Factory.Sync.each(() =>
+const timeStampFactory = Async.makeFactory({
+  createdAt: Async.each(() =>
     formatDistance(new Date(2018, 7, 1), new Date(), { locale: enGB })
   ),
-  updatedAt: Factory.Sync.each(() =>
+  updatedAt: Async.each(() =>
     formatDistance(new Date(2019, 7, 1), new Date(), { locale: enGB })
   )
 });
 
-export const currentTimeStampFactory = Factory.Sync.makeFactory({
-  createdAt: Factory.Sync.each(() =>
+export const currentTimeStampFactory = Async.makeFactory({
+  createdAt: Async.each(() =>
     formatDistance(new Date(), new Date(), { locale: enGB })
   ),
-  updatedAt: Factory.Sync.each(() =>
+  updatedAt: Async.each(() =>
     formatDistance(new Date(), new Date(), { locale: enGB })
   )
 });
 
-export const contentFactory: Factory.Sync.Factory<Content> = Factory.makeFactory(
-  {
-    id: Factory.each(i => i),
-    content: Factory.each(() => faker.lorem.paragraph(5)),
-    title: Factory.each(() => faker.lorem.slug(5)),
-    text: Factory.each(() => faker.lorem.sentences(3)),
-    media: Factory.each(() => mediaFactory.build())
-  }
-).combine(timeStampFactory);
+export const contentFactory: Async.Factory<Content> = Async.makeFactory({
+  id: Async.each(i => i),
+  title: Async.each(() => faker.lorem.slug(5)),
+  text: Async.each(() => faker.lorem.sentences(3)),
+  media: Async.each(() => mediaFactory.build())
+}).combine(timeStampFactory);
 
-export const commentFactory: Factory.Sync.Factory<Comment> = Factory.makeFactory(
-  {
-    id: Factory.each(i => i),
-    commenter: Factory.each(() => userFactory.build()),
-    content: Factory.each(() =>
-      contentFactory.build({
-        media: {}
-      })
-    )
-  }
-);
+export const commentFactory: Async.Factory<Comment> = Async.makeFactory({
+  id: Async.each(i => i),
+  commenter: Async.each(() => userFactory.build()),
+  content: Async.each(() =>
+    contentFactory.build({
+      media: {}
+    })
+  )
+});

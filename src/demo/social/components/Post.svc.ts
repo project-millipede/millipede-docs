@@ -62,7 +62,7 @@ export const selectPost = (
   return post;
 };
 
-export const handleCreateComment = (
+export const handleCreateComment = async (
   timelineId: number,
   postId: number,
   text: string,
@@ -80,7 +80,7 @@ export const handleCreateComment = (
     id: uuidv4(),
 
     commenter: { id: -1 },
-    content: contentFactory.combine(currentTimeStampFactory).build()
+    content: await contentFactory.combine(currentTimeStampFactory).build()
   };
 
   const comment: Comment = {
