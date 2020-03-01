@@ -33,8 +33,8 @@ export interface Content {
   id: number;
   createdAt: string;
   updatedAt: string;
-  title: string;
-  text: string;
+  title?: string;
+  text?: string;
   media?: Media;
 }
 
@@ -58,7 +58,7 @@ export interface Media {
 export interface Comment {
   id: number;
   commenter: User;
-  content?: Content;
+  content: Content;
 }
 
 export interface Vote {
