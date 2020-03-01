@@ -6,7 +6,7 @@ import { factories, schema } from '../../../data/social';
 import { Comment, Post } from '../../../typings/social';
 import { UseCaseEntities } from '../../../typings/social/schema';
 
-const { contentFactory, currentTimeStampFactory } = factories;
+const { contentCommentFactory, currentTimeStampFactory } = factories;
 const { denormalizeWrapper, timelineSchema } = schema;
 
 export const selectPost = (
@@ -80,7 +80,9 @@ export const handleCreateComment = async (
     id: uuidv4(),
 
     commenter: { id: -1 },
-    content: await contentFactory.combine(currentTimeStampFactory).build()
+    content: await contentCommentFactory
+      .combine(currentTimeStampFactory)
+      .build()
   };
 
   const comment: Comment = {
