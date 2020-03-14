@@ -2,6 +2,7 @@ import '../docs/css/diagram.css';
 
 import * as Sentry from '@sentry/browser';
 import { HouxProvider } from 'houx';
+import { enableMapSet } from 'immer';
 import App from 'next/app';
 import React from 'react';
 import ReactGA from 'react-ga';
@@ -18,6 +19,8 @@ const ReactMode = USE_STRICT_MODE ? React.StrictMode : React.Fragment;
 const TRACKING_CODE_PRIVACY_SHIELD = 'UA-154899959-1';
 
 loadFAIcons();
+
+enableMapSet();
 
 /* eslint-disable class-methods-use-this */
 class MillipedeApp extends App {
