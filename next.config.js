@@ -18,10 +18,6 @@ const configuration = {
 
   target: 'serverless',
 
-  publicRuntimeConfig: {
-    rootDir: __dirname
-  },
-
   experimental: { modern: true }
 };
 
