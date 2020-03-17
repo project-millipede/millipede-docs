@@ -12,23 +12,20 @@ const use = () => {
     <VictoryChart theme={VictoryTheme.material}>
       <VictoryAxis
         tickCount={10}
-        domain={[0, 1]}
         style={{
-          axis: { stroke: '#756f6a' },
-          axisLabel: { fontSize: 15, padding: 30 },
+          axisLabel: { fontSize: 8 },
           grid: {
             stroke: ({ tick }) => {
-              if (tick > 0.2) {
+              if (tick > 0.4) {
                 return 'green';
               }
-              if (tick < -0.2) {
+              if (tick < -0.4) {
                 return 'red';
               }
               return 'grey';
             }
           },
-          // ticks: { stroke: 'grey', size: 5 },
-          tickLabels: { fontSize: 15, padding: 15 }
+          tickLabels: { fontSize: 8 }
         }}
       />
       <VictoryBar
@@ -39,7 +36,7 @@ const use = () => {
             fill: ({ datum }) => datum.color
           },
           labels: {
-            fontSize: 15
+            fontSize: 8
           }
         }}
         data={[

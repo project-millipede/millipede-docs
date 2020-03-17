@@ -253,19 +253,19 @@ export const pagesPerspective: Array<Page> = [
 export const pagesGuides: Array<Page> = [
   {
     pathname: '/guides',
-    icon: defaultIcon,
+    icon: { ...defaultIcon, name: 'explore' },
     children: [
       {
         pathname: '/guides/disinformation',
-        icon: { ...defaultIcon, name: 'create' },
+        icon: { ...defaultIcon, name: 'info' },
         children: [
           {
             pathname: '/guides/disinformation/general',
-            icon: { ...defaultIcon, name: 'create' }
+            icon: { ...defaultIcon, name: 'toc' }
           },
           {
             pathname: '/guides/disinformation/objectives',
-            icon: { ...defaultIcon, name: 'create' }
+            icon: { ...defaultIcon, name: 'assessment' }
           }
         ]
       }
