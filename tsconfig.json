@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "./dist",
-    "allowJs": false,
+    "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "jsx": "preserve",
@@ -31,6 +31,7 @@
     "next/**/*.tsx",
     "pages/**/*.ts",
     "pages/**/*.tsx",
+    "src/**/*.js",
     "src/**/*.ts",
     "src/**/*.tsx",
     "webpack/**/*.js"
