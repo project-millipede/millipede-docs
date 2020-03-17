@@ -1,21 +1,15 @@
 import React from 'react';
-import { VictoryAxis, VictoryBar, VictoryChart, VictoryLabel } from 'victory';
+import { VictoryAxis, VictoryBar, VictoryChart, VictoryTheme } from 'victory';
 
-const Test = () => {
+import { useTranslation } from '../../../../../../i18n';
+
+const ns = 'pages/guides/disinformation/general/index';
+
+const use = () => {
+  const { t } = useTranslation(ns);
+
   return (
-    <VictoryChart>
-      <VictoryLabel
-        style={{
-          fontWeight: 'bold',
-          fontSize: 15
-        }}
-        // y='1.2em'
-        // y={1.2}
-        dy={10}
-        text={'Types of false information'}
-        // standalone={true}
-      />
-
+    <VictoryChart theme={VictoryTheme.material}>
       <VictoryAxis
         tickCount={10}
         domain={[0, 1]}
@@ -49,9 +43,9 @@ const Test = () => {
           }
         }}
         data={[
-          { x: 1, y: 0.2, y0: 0.8, label: 'Misinformation', color: 'green' },
-          { x: -0, y: 0.2, y0: 0.8, label: 'Hoax', color: 'grey' },
-          { x: -1, y: 0.2, y0: 0.8, label: 'Disinformation', color: 'red' }
+          { x: 1, y: 0.2, y0: 0.8, label: t('misinformation'), color: 'green' },
+          { x: -0, y: 0.2, y0: 0.8, label: t('disinformation'), color: 'grey' },
+          { x: -1, y: 0.2, y0: 0.8, label: t('malinformation'), color: 'red' }
         ]}
         labels={({ datum }) => datum.label}
       />
@@ -59,4 +53,4 @@ const Test = () => {
   );
 };
 
-export default Test;
+export default use;
