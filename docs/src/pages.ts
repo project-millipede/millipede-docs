@@ -5,8 +5,23 @@ import { Icon, IconType, Page } from '../../src/typings/data/import';
 const lowerTextIncludes = (text: string, sub: string) =>
   _.includes(_.lowerCase(text), _.lowerCase(_.trimStart(sub)));
 
+export const loadPages = (pathname: string, _currentPages: Array<Page>) => {
+  if (pathname === '/') {
+    return [];
+  }
+  return [
+    ...pagesRethinkSecurity,
+    ...pagesPIDP,
+    ...pagesPerspective,
+    ...pagesDiscoverMore
+  ];
+};
+
 /* eslint-disable consistent-return */
-export const loadPages = (pathname: string, currentPages: Array<Page>) => {
+export const loadPagesToRefactor = (
+  pathname: string,
+  currentPages: Array<Page>
+) => {
   const linkIncludesText = (link: Page) =>
     lowerTextIncludes(link.pathname, pathname);
 
