@@ -1,8 +1,5 @@
 {
-  "misinformation": "Misinformation",
-  "misinformation_description": "Unintentional mistakes such as inaccurate photo captions, dates, statistics, translations, or when satire is taken seriously.",
+  "misinformation": "Falschinformation",
   "disinformation": "Desinformation",
-  "disinformation_description": "Fabricated or deliberately manipulated audio/visual content. Intentionally created conspiracy theories or rumors.",
-  "malinformation": "Malinformation",
-  "malinformation_description": "Deliberate publication of private information for personal or corporate rather than public interest such as revenge porn. Deliberate change of context, date, or time of genuine content."
+  "malinformation": "Schadinformation"
 }
