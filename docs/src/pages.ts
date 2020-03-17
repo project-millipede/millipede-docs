@@ -13,6 +13,7 @@ export const loadPages = (pathname: string, _currentPages: Array<Page>) => {
     ...pagesRethinkSecurity,
     ...pagesPIDP,
     ...pagesPerspective,
+    ...pagesGuides,
     ...pagesDiscoverMore
   ];
 };
@@ -244,6 +245,29 @@ export const pagesPerspective: Array<Page> = [
       {
         pathname: '/perspective/reference',
         icon: { ...defaultIcon, name: 'format_quote' }
+      }
+    ]
+  }
+];
+
+export const pagesGuides: Array<Page> = [
+  {
+    pathname: '/guides',
+    icon: defaultIcon,
+    children: [
+      {
+        pathname: '/guides/disinformation',
+        icon: { ...defaultIcon, name: 'create' },
+        children: [
+          {
+            pathname: '/guides/disinformation/general',
+            icon: { ...defaultIcon, name: 'create' }
+          },
+          {
+            pathname: '/guides/disinformation/objectives',
+            icon: { ...defaultIcon, name: 'create' }
+          }
+        ]
       }
     ]
   }
