@@ -1,7 +1,6 @@
 import { Divider } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -11,11 +10,10 @@ import React from 'react';
 import { isMobileOnly } from 'react-device-detect';
 
 import { useTranslation } from '../../../../i18n';
-import { Page } from '../../../../src/typings/data/import';
 import { RootState } from '../redux/reducers';
 import { pathnameToLanguage } from '../utils/helpers';
-import AppDrawerNavItem from './AppDrawerNavItem';
 import Link from './common/link/Link';
+import { Tree } from './tree/Tree';
 
 const drawerWidth = 240;
 
@@ -76,17 +74,6 @@ interface AppDrawerProps {
   drawerStyleOverride: DrawerStyleOverride;
 }
 
-interface DrawerContextProps {
-  activePage: Page;
-  depth: number;
-  handleDrawerClose?: () => void;
-}
-
-interface DrawerReduceProps {
-  acc: Array<JSX.Element>;
-  currentPage: Page;
-}
-
 const AppDrawer = (props: AppDrawerProps) => {
   const { isDrawerOpen, handleDrawerClose, drawerStyleOverride } = props;
 
@@ -110,7 +97,7 @@ const AppDrawer = (props: AppDrawerProps) => {
     (canonicalRef as any).current = canonical;
   }, []);
 
-  const renderMobileDrawer = (navItems: JSX.Element) => {
+  const renderMobileDrawer = () => {
     return (
       <Drawer
         variant='temporary'
@@ -142,12 +129,12 @@ const AppDrawer = (props: AppDrawerProps) => {
           </IconButton>
         </div>
         <Divider />
-        {navItems}
+        <Tree data={pages} activePage={activePage} />
       </Drawer>
     );
   };
 
-  const renderDesktopDrawer = (navItems: JSX.Element) => {
+  const renderDesktopDrawer = () => {
     return (
       <Drawer
         variant='permanent'
@@ -182,103 +169,16 @@ const AppDrawer = (props: AppDrawerProps) => {
           </IconButton>
         </div>
         <Divider />
-        {navItems}
+        <Tree data={pages} activePage={activePage} />
       </Drawer>
     );
   };
 
-  /* eslint-disable no-shadow */
-  const reduceChildRoutes = (
-    { acc, currentPage }: DrawerReduceProps,
-    drawerContext: DrawerContextProps
-  ) => {
-    const { activePage, depth, handleDrawerClose: onClose } = drawerContext;
-
-    if (currentPage.displayNav === false) {
-      return acc;
-    }
-
-    if (currentPage.children && currentPage.children.length > 1) {
-      const title = t(`pages.${currentPage.pathname}`);
-
-      const topLevel =
-        activePage &&
-        activePage.pathname.indexOf(`${currentPage.pathname}/`) === 0;
-
-      return [
-        ...acc,
-        <AppDrawerNavItem
-          key={currentPage.pathname}
-          depth={depth}
-          openImmediately={topLevel || !!currentPage.subheader}
-          title={title}
-          icon={currentPage.icon}
-          highlight={currentPage.highlight}
-        >
-          {renderNavItems(currentPage.children, {
-            handleDrawerClose: onClose,
-            activePage,
-            depth: depth + 1
-          })}
-        </AppDrawerNavItem>
-      ];
-    }
-
-    const title = t(`pages.${currentPage.pathname}`);
-
-    const { icon, pathname, highlight } =
-      currentPage.children && currentPage.children.length === 1
-        ? currentPage.children[0]
-        : currentPage;
-
-    return [
-      ...acc,
-      <AppDrawerNavItem
-        key={currentPage.pathname}
-        depth={depth}
-        title={title}
-        icon={icon}
-        href={pathname}
-        onClick={onClose}
-        highlight={highlight}
-      />
-    ];
-  };
-
-  const renderNavItems = (
-    pages: Array<Page>,
-    drawerContext: DrawerContextProps
-  ) => {
-    const {
-      activePage: { pathname }
-    } = drawerContext;
-
-    const initValue: Array<JSX.Element> = [];
-    return (
-      <List key={pathname} dense>
-        {pages.reduce(
-          (acc, currentPage) =>
-            reduceChildRoutes({ acc, currentPage }, drawerContext),
-          initValue
-        )}
-      </List>
-    );
-  };
-
-  let navItems: JSX.Element;
-  if (pages && pages.length > 0) {
-    navItems = renderNavItems(pages, {
-      handleDrawerClose,
-      activePage,
-      depth: 0
-    });
-  }
-
   if (pages && pages.length > 0) {
     if (isMobileOnly) {
-      return renderMobileDrawer(navItems);
+      return renderMobileDrawer();
     }
-    return renderDesktopDrawer(navItems);
+    return renderDesktopDrawer();
   }
   return null;
 };
