@@ -1,7 +1,6 @@
 import { createStyles, makeStyles, Slider, Theme, Typography } from '@material-ui/core';
 import { TFunction } from 'next-i18next-serverless';
 import React, { useState } from 'react';
-import { WithTranslation } from 'react-i18next';
 
 import { Item } from '../../../../../docs/src/modules/components/common/grid/Item';
 import DotsMobileStepper from '../../../../components/common/stepper/DotsMobileStepper';
@@ -91,9 +90,13 @@ export const generateGrid = (
   );
 };
 
-type Props = Stack2 & Partial<WithTranslation>;
+interface TranslationProps {
+  t: TFunction;
+}
 
-const ByExample = ({ elements, categories, t }: Props) => {
+type Props = Stack2 & TranslationProps;
+
+const ElementComponent = ({ elements, categories, t }: Props) => {
   const classes = useStyles({});
 
   const [step, setStep] = useState(0);
@@ -153,5 +156,4 @@ const ByExample = ({ elements, categories, t }: Props) => {
   );
 };
 
-export { ByExample };
-export default ByExample;
+export default ElementComponent;

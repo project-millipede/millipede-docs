@@ -5,10 +5,9 @@ import _ from 'lodash';
 import { TFunction } from 'next-i18next-serverless';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { WithTranslation } from 'react-i18next';
 
 import CustomIcon from '../../../../docs/src/modules/components/icon/CustomIcon';
-import { withTranslation } from '../../../../i18n';
+import { useTranslation } from '../../../../i18n';
 import { OverviewProps } from '../../../typings/data/import';
 import { TopReveal } from '../../animation/framer/components/text/TopReveal';
 
@@ -63,9 +62,11 @@ const renderTopics = (topics: Array<OverviewProps>) => {
   );
 };
 
-type Props = WithTranslation;
+const ns = 'pages/topics/index';
 
-const TopicsHead = ({ t }: Props) => {
+const TopicsHead = () => {
+  const { t } = useTranslation(ns);
+
   const classes = useStyles({});
 
   const topics = generateTopics(t);
@@ -77,10 +78,4 @@ const TopicsHead = ({ t }: Props) => {
   );
 };
 
-TopicsHead.getInitialProps = async () => {
-  return {
-    namespacesRequired: ['pages/topics/index']
-  };
-};
-
-export default withTranslation('pages/topics/index')(TopicsHead);
+export default TopicsHead;
