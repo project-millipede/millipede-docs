@@ -8,10 +8,19 @@ import React, { useEffect } from 'react';
 
 import { useTranslation } from '../../../../../i18n';
 import { Icon, Page } from '../../../../../src/typings/data/import';
-import { omitAtIndex } from '../../utils/collection/array';
 import CustomIcon from '../icon/CustomIcon';
 import TreeItem, { TreeItemProps } from '../mui/TreeItem';
 import TreeView from '../mui/TreeView';
+
+interface LabelProps {
+  labelText: string;
+  icon: Icon;
+}
+
+interface TreeProps {
+  data: Array<Page>;
+  activePage: Page;
+}
 
 export const TransitionComponent = (props: TransitionProps) => {
   return <Collapse {...props} />;
@@ -26,24 +35,6 @@ const StyledTreeItem = withStyles((_theme: Theme) =>
 )((props: TreeItemProps) => (
   <TreeItem {...props} TransitionComponent={TransitionComponent} />
 ));
-
-export const useStyles = makeStyles(
-  createStyles({
-    root: {
-      width: '100%'
-    }
-  })
-);
-
-interface Props {
-  data: Array<Page>;
-  activePage: Page;
-}
-
-interface LabelProps {
-  labelText: string;
-  icon: Icon;
-}
 
 const useStylesTreeLabel = makeStyles((theme: Theme) =>
   createStyles({
@@ -82,55 +73,35 @@ const TreeLabel: React.FC<LabelProps> = ({ labelText, icon }) => {
   );
 };
 
-export const createBreadcrumbs = (pathname: string): Array<string> =>
+const generatePartialPathnames = (pathname: string): Array<string> =>
   (pathname || '')
     .split('/')
     .filter(s => !!s)
     .map((_name, index, arr) => `/${arr.slice(0, index + 1).join('/')}`);
 
-export const Tree: React.FC<Props> = ({ data, activePage }) => {
-  // const classes = useStyles();
-
+export const Tree: React.FC<TreeProps> = ({ data, activePage }) => {
   const { t } = useTranslation();
 
   const [expanded, setExpanded] = React.useState<Array<string>>(undefined);
   const [selected, setSelected] = React.useState<string>(undefined);
 
-  const handleToggle = (
-    _event: React.ChangeEvent<{}>,
-    nodeIds: Array<string>
-  ) => {
-    setExpanded(nodeIds);
-  };
-
   useEffect(() => {
-    const resultTemp = createBreadcrumbs(activePage.pathname);
-    const result = omitAtIndex(resultTemp, resultTemp.length - 1);
-    setExpanded(result);
+    const pathnames = generatePartialPathnames(activePage.pathname);
+    setExpanded(pathnames);
     setSelected(activePage.pathname);
   }, [activePage.pathname]);
 
   const createItem = ({ children, ...rest }: Page) => {
     const title = t(`pages.${rest.pathname}`);
-
-    if (children && children.length > 0) {
-      return (
-        <StyledTreeItem
-          key={rest.pathname}
-          nodeId={rest.pathname}
-          label={<TreeLabel labelText={title} icon={rest.icon} />}
-        >
-          {children.map(createItem)}
-        </StyledTreeItem>
-      );
-    }
     return (
       <Link href={rest.pathname} key={`link-${rest.pathname}`}>
         <StyledTreeItem
           key={rest.pathname}
           nodeId={rest.pathname}
           label={<TreeLabel labelText={title} icon={rest.icon} />}
-        />
+        >
+          {children && children.length > 0 ? children.map(createItem) : null}
+        </StyledTreeItem>
       </Link>
     );
   };
@@ -139,10 +110,8 @@ export const Tree: React.FC<Props> = ({ data, activePage }) => {
     <TreeView
       defaultExpanded={expanded}
       defaultSelected={selected}
-      onNodeToggle={handleToggle}
       expanded={expanded}
       selected={selected}
-      // className={classes.root}
     >
       {data.map(createItem)}
     </TreeView>
