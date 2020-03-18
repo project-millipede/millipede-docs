@@ -1,8 +1,7 @@
 import { TFunction } from 'next-i18next-serverless';
 import React from 'react';
-import { WithTranslation } from 'react-i18next';
 
-import { withTranslation } from '../../../../../../i18n';
+import { useTranslation } from '../../../../../../i18n';
 import Step1 from '../../../../../../src/assets/pidp/approach/byExample/Step1';
 import Step2 from '../../../../../../src/assets/pidp/approach/byExample/Step2';
 import { Content } from '../../../../../../src/typings/data/import';
@@ -38,16 +37,12 @@ const generateContent = (t: TFunction): Array<Content> => {
   });
 };
 
-type Props = WithTranslation;
+const ns = 'pages/pidp/approach/byExample/content';
 
-const use = ({ t }: Props) => {
+const use = () => {
+  const { t } = useTranslation(ns);
+
   return <Component elements={generateContent(t)} />;
 };
 
-use.getInitialProps = async () => {
-  return {
-    namespacesRequired: ['pages/pidp/approach/byExample/content']
-  };
-};
-
-export default withTranslation('pages/pidp/approach/byExample/content')(use);
+export default use;
