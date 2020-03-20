@@ -66,9 +66,6 @@ export const ThemeProvider = props => {
         MuiFab: {
           size: 'small'
         },
-        MuiTable: {
-          size: 'small'
-        },
         MuiTextField: {
           margin: 'dense'
         },

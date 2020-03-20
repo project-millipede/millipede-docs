@@ -399,7 +399,7 @@ const TreeItem = React.forwardRef(function TreeItem(props, ref) {
         onMouseDown={handleMouseDown}
         ref={contentRef}
       >
-        {/* <div className={classes.iconContainer}>{icon}</div>*/}
+        {icon && <div className={classes.iconContainer}>{icon}</div>}
         <Typography component='div' className={classes.label}>
           {label}
         </Typography>
