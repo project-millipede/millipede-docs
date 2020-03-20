@@ -59,7 +59,9 @@
 						]
 					},
 					{
-						"summary": ["Aufgrund des Fehlens eines Verdachtsmoments wird der Infektionsradius schrittweise vergrößert."]
+						"summary": [
+							"Aufgrund des Fehlens eines Verdachtsmoments wird der Infektionsradius schrittweise vergrößert."
+						]
 					},
 					{
 						"note": [
@@ -86,7 +88,9 @@
 						]
 					},
 					{
-						"listing": ["Eine funktionierende Medienlandschaft bildet ein wesentliches Instrument eines demokratischen Gefüges."]
+						"listing": [
+							"Eine funktionierende Medienlandschaft bildet ein wesentliches Instrument eines demokratischen Gefüges."
+						]
 					},
 					{
 						"note": [
@@ -162,7 +166,9 @@
 						]
 					},
 					{
-						"summary": ["Der Faktor Mensch bildet das schwächste Glied in der Kette von Maßnahmen zu digitalen Sicherheit"]
+						"summary": [
+							"Der Faktor Mensch bildet das schwächste Glied in der Kette von Maßnahmen zu digitalen Sicherheit"
+						]
 					}
 				]
 			},
@@ -191,7 +197,9 @@
 						]
 					},
 					{
-						"summary": ["Der Nutzer konsumiert Inhalte, welche als Spam klassifiziert werden."]
+						"summary": [
+							"Der Nutzer konsumiert Inhalte, welche als Spam klassifiziert werden."
+						]
 					}
 				]
 			},

@@ -1,0 +1,87 @@
+{
+  "header": {
+    "label": "Title",
+    "meta": "Language | Status | Scope",
+    "reference": "Reference",
+    "description": "Description",
+    "structure": "Structure and Composition"
+  },
+  "rows": [
+    {
+      "head": "Personal Intrusion Detection and Prevention - PID/P",
+      "body": [
+        {
+          "title": "Detailed description PID/P",
+          "meta": "German | Work in Progress (Estimated completion – end of October 2017) | Current Volume 120 pages – Planed Volume about 130 page",
+          "reference": "http://millipede.me/docs/german/PID-P.pdf",
+          "description": "Detailed description of the technology to reduce thespread of critical content including misinformation, propaganda, racist or xenophobic content throughout social media nor requiring any technical support of the operator (Personal Intrusion Detection and Prevention (PID/P)",
+          "structure": "Detailed analysis of the problem and a suitable problem-solving approach. The document provides • A detailed description of the base operations implemented in the editorial components. • Comparison to other projects. • Full-stack description of work-packages #1-8. • Dissemination strategy, etc."
+        },
+        {
+          "title": "Initial description PID/P",
+          "meta": "English | Work in Progress (Estimated completion – end of December 2017) | Current Volume 30 pages – Planed Volume about 100 pages",
+          "reference": "http://millipede.me/docs/english/PID-P.pdf",
+          "description": "Initial description of the technology to reduce the spread of critical content including misinformation, propaganda, racist or xenophobic content throughout social media nor requiring any technical support of the operator (Personal Intrusion Detection and Prevention (PID/P)",
+          "structure": "Initial analysis of the problem and a suitable problem- solving approach."
+        }
+      ]
+    },
+    {
+      "head": "Privacy enhancing technology - PET",
+      "body": [
+        {
+          "title": "Detailed description of the technology for the protection of privacy (Privacy Enhancing Technology – PET)",
+          "meta": "English | Complete | Volume > 40 pages",
+          "reference": "http://millipede.me/docs/english/PET.pdf",
+          "description": "Detailed description of the technology for the protection of privacy (Privacy Enhancing Technology – PET)",
+          "structure": "General description, structure and technique"
+        },
+        {
+          "title": "Detailed description of Project Millipedes fundamental technology stack",
+          "meta": "English | Work in Progress | Current Volume > 305 pages – Planed Volume about 340 pages",
+          "reference": "http://millipede.me/docs/german/PM-Beschreibung-WIP.pdf",
+          "description": "Detailed description of Project Millipedes fundamental technology stack",
+          "structure": "General description, structure and technique"
+        }
+      ]
+    },
+    {
+      "head": "Application Instrumentation - AI",
+      "body": [
+        {
+          "title": "Application instrumentation (AI) – Detailed Description",
+          "meta": "English | Work in Progress (Estimated completion – end of November 2017) | Current Volume 36 pages – Planed Volume about 60 pages",
+          "reference": "http://millipede.me/docs/english/AI.pdf",
+          "description": "Application instrumentation (AI) – Detailed Description",
+          "structure": "Technical description / Specification"
+        },
+        {
+          "title": "Digital News Initiative (DNI) – Proposal – Application Instrumentation on mobile devices",
+          "meta": "English | Complete | Volume 11 pages",
+          "reference": "http://millipede.me/docs/english/DNI/DNI-Application.pdf",
+          "description": "Digital News Initiative (DNI) – Proposal – Application Instrumentation on mobile devices",
+          "structure": ""
+        },
+        {
+          "title": "Digital News Initiative (DNI) – Support Documents – Application Instrumentation on mobile devices",
+          "meta": "English | Complete | Volume 20 pages",
+          "reference": "http://millipede.me/docs/english/DNI/DNI-Support-Documents.pdf",
+          "description": "Digital News Initiative (DNI) – Support Documents – Application Instrumentation on mobile devices",
+          "structure": ""
+        }
+      ]
+    },
+    {
+      "head": "Reputation",
+      "body": [
+        {
+          "title": "Curriculum Vitae",
+          "meta": "English | Complete | Volume 3 pages",
+          "reference": "http://millipede.me/Curriculum+Vitae+-+Markus+Gritsch.pdf",
+          "description": "",
+          "structure": ""
+        }
+      ]
+    }
+  ]
+}

@@ -256,6 +256,35 @@ export const pagesGuides: Array<Page> = [
     icon: { ...defaultIcon, name: 'explore' },
     children: [
       {
+        pathname: '/guides/engineering',
+        icon: {
+          ...defaultIcon,
+          name: 'code'
+        },
+        children: [
+          {
+            pathname: '/guides/engineering/applicationTypes',
+            icon: {
+              ...defaultIcon,
+              name: 'call_split'
+            }
+          }
+        ]
+      },
+      {
+        pathname: '/guides/research',
+        icon: {
+          ...defaultIcon,
+          name: 'book'
+        },
+        children: [
+          {
+            pathname: '/guides/research/paper',
+            icon: { ...defaultIcon, name: 'book' }
+          }
+        ]
+      },
+      {
         pathname: '/guides/disinformation',
         icon: { ...defaultIcon, name: 'info' },
         children: [
