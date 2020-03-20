@@ -8,9 +8,11 @@ import TableRow from '@material-ui/core/TableRow';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import LinkIcon from '@material-ui/icons/Link';
+import _ from 'lodash';
 import { TFunction } from 'next-i18next-serverless';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { isBrowser, isSafari } from 'react-device-detect';
 
 import { useTranslation } from '../../../../../../i18n';
 import { omitAtIndex } from '../../../../modules/utils/collection/array';
@@ -147,11 +149,11 @@ const ExpandableRow = ({
 
 const ns = 'pages/guides/research/paper/index';
 
-const generateContent = (t: TFunction): Array<HeadAndBody> | any => {
-  const rows: Array<HeadAndBody> | string = t('rows', {
+const generateContent = (t: TFunction): Array<HeadAndBody> => {
+  const rows: any = t('rows', {
     returnObjects: true
   });
-  if (rows === 'rows') {
+  if (_.isString(rows) && rows === 'rows') {
     return [];
   }
   return rows;
@@ -185,30 +187,36 @@ export const StickyHeadTable = () => {
           </TableRow>
         </TableHead>
 
-        {rows.map(row => {
-          const { head, body } = row;
-          return (
-            <>
-              <TableHead>
+        <TableBody>
+          {rows.map(row => {
+            const { body, head } = row;
+            return (
+              <>
                 <TableRow>
-                  <TableCell style={{ top: 57 }} colSpan={4}>
+                  <TableCell
+                    variant={'head'}
+                    style={{
+                      top: isBrowser && !isSafari ? 57 : 0
+                    }}
+                    colSpan={4}
+                  >
                     {head}
                   </TableCell>
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {body.map(row => (
-                  <ExpandableRow
-                    key={row.title}
-                    rowData={row}
-                    columns={columnsReduced}
-                    header={header}
-                  />
-                ))}
-              </TableBody>
-            </>
-          );
-        })}
+                {body.map(row => {
+                  return (
+                    <ExpandableRow
+                      key={row.title}
+                      rowData={row}
+                      columns={columnsReduced}
+                      header={header}
+                    />
+                  );
+                })}
+              </>
+            );
+          })}
+        </TableBody>
       </Table>
     </TableContainer>
   );
