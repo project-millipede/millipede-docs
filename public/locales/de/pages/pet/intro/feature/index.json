@@ -1,5 +1,71 @@
 {
-  "topics": [],
-  "scenarios": {},
-  "categories": {}
+  "topics": [
+    {
+      "scenario": "general",
+      "category": "publish",
+      "title": "Social Media Anwendungen auch für die Verbreitung sensibler Inhalte nutzen",
+      "link": "/pet/use-case/publish",
+      "icon": "publish",
+      "description": [
+        {
+          "subTitle": [
+            "Einbettung eines zusätzlichen Sicherheitskontextes in bestehende Anwendungen"
+          ]
+        },
+        {
+          "listing": [
+            {
+              "link": "/pet/use-case/publish#test1",
+              "text": "Erweiterung des von Social Media Anwendungen bereitgestellten Funktionsspektrums um Features zum Schutz der Privatsphäre - Relevanz dieser Vorgehensweise."
+            }
+          ]
+        },
+        {
+          "subTitle": [
+            "Private Inhalte werden dem Sichtfeld des Nutzers zugeführt ohne, dass dies vom Betreiber der Plattform wahrgenommen wird. Das Vorgehen ähnelt dem umgekehrten Vorgehen von Ad-Blocking Technologien - anstatt Werbekampagnen vor der Betrachtung aus einer Website zu entfernen, werden private Inhalte auf Nutzerseite eingebettet."
+          ]
+        },
+        {
+          "note": [
+            "Das Verfahren setzt kein Umgewöhnung an neuartige digitale Workflows voraus. Bestehende oder gewohnte Workflows, etwa die Bedienung der favorisierten Social-Media Anwendung sind unterbrechungsfrei weiterzuverwenden."
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "general",
+      "category": "publish",
+      "title": "Physischer Zugriff auf ein Datum obliegt dem Autor",
+      "link": "/pet/use-case/access",
+      "icon": "security",
+      "description": [
+        {
+          "subTitle": [
+            "Der Verfasser oder Urheber eines Datums entscheidet darüber, welchem Personenkreis der Zugriff auf das Datum gewährt wird und wann ein Datum gelöscht wird."
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "general",
+      "category": "analytics",
+      "title": "Neutralisierung von Analyseverfahren",
+      "link": "/pet/use-case/analytics",
+      "icon": "timeline",
+      "description": [
+        {
+          "subTitle": [
+            "Dämpfung der Wirkung der vom Betreiber einer Social-Media Anwendung eingesetzten Analyseverfahren."
+          ]
+        }
+      ]
+    }
+  ],
+  "scenarios": {
+    "general": "Handhabung persönlicher Daten"
+  },
+  "categories": {
+    "publish": "Sicheres und Selbstbestimmtes veröffentlichen privater Inhalte in ungeschützten Umgebungen.",
+    "analytics": "Eine Bestimmung des Nutzerverhaltens wird verhindert."
+  }
 }

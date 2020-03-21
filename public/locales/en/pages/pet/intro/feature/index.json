@@ -1,5 +1,71 @@
 {
-  "topics": [],
-  "scenarios": {},
-  "categories": {}
+  "topics": [
+    {
+      "scenario": "general",
+      "category": "publish",
+      "title": "Use social media applications also for the distribution of sensitive content",
+      "link": "/pet/use-case/publish",
+      "icon": "publish",
+      "description": [
+        {
+          "subTitle": [
+            "Integrate an additional security context into existing applications"
+          ]
+        },
+        {
+          "listing": [
+            {
+              "link": "/pet/use-case/publish#test1",
+              "text": "Extending the range of functionality provided by social media applications to include privacy features - relevance of this approach."
+            }
+          ]
+        },
+        {
+          "subTitle": [
+            "Private content is supplied to the user's field of vision without being noticed by the platform operator. The procedure is similar to the reverse of ad-blocking technologies - instead of removing advertising campaigns from a website before viewing, private content is embedded on the user's side."
+          ]
+        },
+        {
+          "note": [
+            "The procedure does not require getting used to new digital workflows. Existing or familiar workflows, such as the handling of the preferred social media application, remain uninterrupted."
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "general",
+      "category": "publish",
+      "title": "Physical access to a date is the exclusive obligation of the author",
+      "link": "/pet/use-case/access",
+      "icon": "security",
+      "description": [
+        {
+          "subTitle": [
+            "The author or originator of a date decides which group of people is granted access to the date and when a date is deleted."
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "general",
+      "category": "analytics",
+      "title": "Neutralisation of analytical methods.",
+      "link": "/pet/use-case/analytics",
+      "icon": "timeline",
+      "description": [
+        {
+          "subTitle": [
+            "Dampening the effect of the analytical methods used by the operator of a social media application."
+          ]
+        }
+      ]
+    }
+  ],
+  "scenarios": {
+    "general": "Handling of personal data"
+  },
+  "categories": {
+    "publish": "Secure and self-determined publishing of private content in unprotected environments.",
+    "analytics": "The determination of user behaviour is prevented."
+  }
 }
