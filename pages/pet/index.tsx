@@ -9,7 +9,7 @@ const Page: FC<Props> = ({ path }) => {
 };
 
 Page.defaultProps = {
-  path: '/pidp/'
+  path: '/pet/'
 };
 
 export default Page;

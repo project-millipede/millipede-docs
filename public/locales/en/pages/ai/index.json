@@ -1,0 +1,12 @@
+{
+  "steps": [
+    {
+      "title": "Denotes the flow of a normal program",
+      "description": "In the function body (a) function (b) is called. The variable (c) is defined in the function body (b) and returned to the calling function. The return value of the function call is assigned to variable (x)."
+    },
+    {
+      "title": "Illustrates the flow of a program with a hook",
+      "description": "The block highlighted in green shows a function (b_hook) added to the application at runtime. The block highlighted in red indicates the original function (b). Function (b) is called in function body (a). The intervention carried out beforehand replaces the position of function address (b) with function address (b_hook). In the function body (b_hook) the variable (d) is defined and returned to the calling function. The return value of the function call is assigned to variable (x)."
+    }
+  ]
+}

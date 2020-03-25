@@ -1,0 +1,12 @@
+{
+  "steps": [
+    {
+      "title": "Beschreibt den Ablauf eines normalen Programms",
+      "description": "Im Funktionskörper (a) wird Funktion (b) aufgerufen. Im Funktionskörper (b) wird die Variable (c) definiert und an die aufrufende Funktion zurückgegeben. Der Rückgabewert des Funktionsaufrufs wird der Variable (x) zugewiesen."
+    },
+    {
+      "title": "Veranschaulicht den Ablauf eines Programms durch das ersetzen von Methoden",
+      "description": "Der in grüner Farbe gekennzeichnete Block zeigte eine in die Anwendung zur Laufzeit hinzugefügte Funktion (b_hook). Der in roter Farbe hinterlegte Block kennzeichnet die ursprüngliche Funktion (b). Im Funktionskörper (a) wird Funktion (b) aufgerufen. Durch den im Vorfeld ausgeführten Eingriff wird die Position der Funktionsadresse (b) mit der Funktionsadresse (b_hook) ersetzt. Im Funktionskörper (b_hook) wird die Variable (d) definiert und an die aufrufende Funktion zurückgegeben. Der Rückgabewert des Funktionsaufrufs wird der Variable (x) zugewiesen."
+    }
+  ]
+}

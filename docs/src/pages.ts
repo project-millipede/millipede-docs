@@ -10,8 +10,10 @@ export const loadPages = (pathname: string, _currentPages: Array<Page>) => {
     return [];
   }
   return [
+    ...pagesAI,
     ...pagesRethinkSecurity,
     ...pagesPIDP,
+    ...pagesPET,
     ...pagesPerspective,
     ...pagesGuides,
     ...pagesDiscoverMore
@@ -187,20 +189,54 @@ export const pagesPIDP: Array<Page> = [
   }
 ];
 
-export const pagesPET: Array<Page> = [
+export const pagesAI: Array<Page> = [
   {
-    pathname: '/common',
+    pathname: '/ai',
     icon: defaultIcon,
     children: [
       {
-        pathname: '/common/dataflow',
-        icon: { ...defaultIcon, name: 'waves' }
+        pathname: '/ai/objectives',
+        icon: { ...defaultIcon, name: 'offline_bolt' }
       },
       {
-        pathname: '/common/dataflow/comparison',
-        icon: { ...defaultIcon, name: 'compare_arrows' }
+        pathname: '/ai/general',
+        icon: { ...defaultIcon, name: 'toc' }
+      },
+      {
+        pathname: '/ai/reverse',
+        icon: { ...defaultIcon, name: 'find_replace' },
+        children: [
+          {
+            pathname: '/ai/reverse/hooks',
+            icon: { ...defaultIcon, name: 'functions' }
+          }
+        ]
       }
     ]
+  }
+];
+
+// export const pagesPET: Array<Page> = [
+//   {
+//     pathname: '/common',
+//     icon: defaultIcon,
+//     children: [
+//       {
+//         pathname: '/common/dataflow',
+//         icon: { ...defaultIcon, name: 'waves' },
+//       },
+//       {
+//         pathname: '/common/dataflow/comparison',
+//         icon: { ...defaultIcon, name: 'compare_arrows' },
+//       },
+//     ],
+//   },
+// ];
+
+export const pagesPET: Array<Page> = [
+  {
+    pathname: '/pet',
+    icon: defaultIcon
   }
 ];
 
