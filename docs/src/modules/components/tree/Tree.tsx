@@ -30,6 +30,9 @@ const StyledTreeItem = withStyles((_theme: Theme) =>
   createStyles({
     group: {
       marginLeft: 0
+    },
+    label: {
+      paddingLeft: 0
     }
   })
 )((props: TreeItemProps) => (
@@ -47,15 +50,6 @@ const useStylesTreeLabel = makeStyles((theme: Theme) =>
         paddingLeft: '24px',
         paddingRight: '24px'
       }
-    },
-    labelRoot: {
-      display: 'flex',
-      alignItems: 'center',
-      padding: theme.spacing(0.5, 0)
-    },
-    labelText: {
-      fontWeight: 'inherit',
-      flexGrow: 1
     }
   })
 );
