@@ -1,4 +1,4 @@
-import { Container, Divider, Typography } from '@material-ui/core';
+import { Container, Divider, Link, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
 
@@ -101,6 +101,17 @@ const Index = () => {
               >
                 {t('application-subtitle')}
               </Typography>
+              <Link href={'/ai'}>
+                <Typography
+                  variant='h4'
+                  component='h1'
+                  color='inherit'
+                  gutterBottom
+                  className={classes.subtitle}
+                >
+                  {t('application-subtitle_ai')}
+                </Typography>
+              </Link>
               <Typography
                 variant='h5'
                 component='h2'

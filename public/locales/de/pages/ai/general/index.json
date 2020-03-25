@@ -1,0 +1,11 @@
+{
+  "program": "Program",
+  "agent": "Agent",
+  "environment": "Environment",
+  "communication_process": "Kommunikations-Prozess",
+  "preparation_process": "Vorbereitungs-Prozess",
+  "render_process": "Darstellungs-Prozess",
+  "communication_process_abbreviation": "(KP)",
+  "preparation_process_abbreviation": "(VP)",
+  "render_process_abbreviation": "(DP)"
+}
