@@ -81,6 +81,9 @@ export const ThemeProvider = props => {
             marginRight: 4,
             padding: 12
           }
+        },
+        MuiDrawerPaper: {
+          overflowY: 'hidden'
         }
       }
     });

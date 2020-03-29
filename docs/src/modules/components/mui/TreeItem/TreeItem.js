@@ -1,6 +1,7 @@
-import { Typography } from '@material-ui/core';
+/* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions  */
 import Collapse from '@material-ui/core/Collapse';
 import { fade, useTheme, withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import { useForkRef } from '@material-ui/core/utils';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -8,7 +9,6 @@ import * as React from 'react';
 
 import TreeViewContext from '../TreeView/TreeViewContext';
 
-/* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions  */
 export const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
@@ -126,7 +126,6 @@ const TreeItem = React.forwardRef(function TreeItem(props, ref) {
     isSelected,
     isTabbable,
     multiSelect,
-    selectionDisabled,
     getParent,
     mapFirstChar,
     addNodeToNodeMap,
@@ -178,16 +177,14 @@ const TreeItem = React.forwardRef(function TreeItem(props, ref) {
       toggleExpansion(event, nodeId);
     }
 
-    if (!selectionDisabled) {
-      if (multiple) {
-        if (event.shiftKey) {
-          selectRange(event, { end: nodeId });
-        } else {
-          selectNode(event, nodeId, true);
-        }
+    if (multiple) {
+      if (event.shiftKey) {
+        selectRange(event, { end: nodeId });
       } else {
-        selectNode(event, nodeId);
+        selectNode(event, nodeId, true);
       }
+    } else {
+      selectNode(event, nodeId);
     }
 
     if (onClick) {
@@ -252,14 +249,12 @@ const TreeItem = React.forwardRef(function TreeItem(props, ref) {
       case ' ':
         if (nodeRef.current === event.currentTarget) {
           if (multiSelect && event.shiftKey) {
-            selectRange(event, { end: nodeId });
+            flag = selectRange(event, { end: nodeId });
           } else if (multiSelect) {
-            selectNode(event, nodeId, true);
+            flag = selectNode(event, nodeId, true);
           } else {
-            selectNode(event, nodeId);
+            flag = selectNode(event, nodeId);
           }
-
-          flag = true;
         }
         event.stopPropagation();
         break;
@@ -317,8 +312,7 @@ const TreeItem = React.forwardRef(function TreeItem(props, ref) {
           expandAllSiblings(event, nodeId);
           flag = true;
         } else if (multiSelect && ctrlPressed && key.toLowerCase() === 'a') {
-          selectAllNodes(event);
-          flag = true;
+          flag = selectAllNodes(event);
         } else if (isPrintableCharacter(key)) {
           flag = printableCharacter(event, key);
         }
@@ -335,7 +329,7 @@ const TreeItem = React.forwardRef(function TreeItem(props, ref) {
   };
 
   const handleFocus = event => {
-    if (!focused && tabbable) {
+    if (!focused && event.currentTarget === event.target) {
       focus(nodeId);
     }
 
@@ -376,6 +370,14 @@ const TreeItem = React.forwardRef(function TreeItem(props, ref) {
     }
   }, [focused]);
 
+  let ariaSelected;
+  if (multiSelect) {
+    ariaSelected = selected;
+  } else if (selected) {
+    // single-selection trees unset aria-selected
+    ariaSelected = true;
+  }
+
   return (
     <li
       className={clsx(classes.root, className, {
@@ -386,9 +388,7 @@ const TreeItem = React.forwardRef(function TreeItem(props, ref) {
       onKeyDown={handleKeyDown}
       onFocus={handleFocus}
       aria-expanded={expandable ? expanded : null}
-      aria-selected={
-        !selectionDisabled && isSelected ? isSelected(nodeId) : undefined
-      }
+      aria-selected={ariaSelected}
       ref={handleRef}
       tabIndex={tabbable ? 0 : -1}
       {...other}
