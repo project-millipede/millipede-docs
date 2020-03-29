@@ -8,7 +8,7 @@ import { useTranslation } from '../../../../../../i18n';
 
 interface Props {}
 
-interface BreadCrumb {
+export interface BreadCrumb {
   link: string;
 }
 
@@ -26,10 +26,6 @@ const Breadcrumbs: React.FC<Props> = () => {
   const router = useRouter();
 
   const breadcrumbs = createBreadcrumbs(router.pathname);
-
-  if (breadcrumbs.length < 2) {
-    return null;
-  }
 
   return (
     <React.Fragment>

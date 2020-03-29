@@ -1,12 +1,15 @@
 import { IconButton } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { useHoux } from 'houx';
 import _ from 'lodash';
 import { TFunction } from 'next-i18next-serverless';
 import { useRouter } from 'next/router';
 import React from 'react';
 
 import CustomIcon from '../../../../docs/src/modules/components/icon/CustomIcon';
+import { NavigationActions } from '../../../../docs/src/modules/redux/features/actionType';
+import { loadPages } from '../../../../docs/src/modules/redux/features/navigation/actions';
 import { useTranslation } from '../../../../i18n';
 import { OverviewProps } from '../../../typings/data/import';
 import { TopReveal } from '../../animation/framer/components/text/TopReveal';
@@ -29,6 +32,11 @@ const generateTopics = (t: TFunction): Array<OverviewProps> => {
 
 const renderTopics = (topics: Array<OverviewProps>) => {
   const router = useRouter();
+
+  const {
+    dispatch
+  }: { dispatch: React.Dispatch<NavigationActions> } = useHoux();
+
   return (
     <>
       {topics.length > 0
@@ -47,6 +55,7 @@ const renderTopics = (topics: Array<OverviewProps>) => {
                             router.push(
                               `${router.pathname}?${perspective.type}=${topic.contextLink.id}#${topic.contextLink.id}`
                             );
+                            dispatch(loadPages(`/${topic.contextLink.id}`));
                           }}
                         >
                           <CustomIcon icon={perspective.icon} />

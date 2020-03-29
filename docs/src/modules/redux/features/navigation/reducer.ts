@@ -34,11 +34,12 @@ const navigationReducer = (state = initialState, action: StoreAction) => {
     case LOAD_PAGES: {
       const pages = loadPages(action.payload.pathname, state.pages);
       const flattenedPages = flattenPages(pages);
+      const activePage = determineActivePage(pages, action.payload.pathname);
       return {
         ...state,
         pages,
         flattenedPages,
-        activePage: determineActivePage(pages, action.payload.pathname)
+        activePage
       };
     }
     default:
