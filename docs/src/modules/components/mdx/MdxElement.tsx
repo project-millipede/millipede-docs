@@ -20,6 +20,12 @@ export const useStyles = makeStyles((_theme: Theme) =>
     headerRow: {
       display: 'flex',
       flexDirection: 'row'
+    },
+    headerText: {
+      hyphens: 'auto',
+      '-ms-hyphens': 'auto',
+      '-moz-hyphens': 'auto',
+      '-webkit-hyphens': 'auto'
     }
   })
 );
@@ -30,7 +36,11 @@ const h1 = ({ disableShare, meta }: MDXRenderProps) => {
 
     return (
       <div className={classes.headerRow}>
-        <Typography variant='h1' style={{ paddingRight: '16px' }}>
+        <Typography
+          variant='h1'
+          style={{ paddingRight: '16px' }}
+          className={classes.headerText}
+        >
           {children}
         </Typography>
         {!disableShare ? <Share {...meta} /> : null}

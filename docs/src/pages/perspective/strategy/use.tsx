@@ -2,8 +2,10 @@ import { Box, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
 import { ArcherContainer, ArcherElement } from 'react-archer';
+import Hyphenated from 'react-hyphen';
 
 import { useTranslation } from '../../../../../i18n';
+import { CustomBox } from './CustomBox';
 
 const useStyles = makeStyles((_theme: Theme) =>
   createStyles({
@@ -22,9 +24,15 @@ const useStyles = makeStyles((_theme: Theme) =>
       maxWidth: '100px'
     },
     title: {
-      whiteSpace: 'pre-wrap',
       textAlign: 'center',
       fontWeight: 'bold'
+    },
+    boxHover: {
+      cursor: 'pointer',
+      padding: '10px',
+      border: '3px solid black',
+      maxWidth: '100px',
+      backgroundColor: '#888888'
     }
   })
 );
@@ -52,7 +60,7 @@ const Diagram = () => {
           >
             <Box className={classes.box}>
               <Typography variant='subtitle1' className={classes.title}>
-                {t('individual')}
+                <Hyphenated>{t('individual')}</Hyphenated>
               </Typography>
             </Box>
           </ArcherElement>
@@ -61,7 +69,7 @@ const Diagram = () => {
           <ArcherElement id='data'>
             <Box className={classes.box}>
               <Typography variant='subtitle1' className={classes.title}>
-                {t('dataCentric')}
+                <Hyphenated>{t('dataCentric')}</Hyphenated>
               </Typography>
             </Box>
           </ArcherElement>
@@ -86,11 +94,13 @@ const Diagram = () => {
             }
           ]}
         >
-          <Box bgcolor='error.main' className={classes.box}>
+          <CustomBox id='general' bgcolor='error.main'>
             <Typography variant='subtitle1' className={classes.title}>
-              {`${t('general')} ${t('problemSolving')}`}
+              <Hyphenated>{`${t('general')} ${t(
+                'problemSolving'
+              )}`}</Hyphenated>
             </Typography>
-          </Box>
+          </CustomBox>
         </ArcherElement>
 
         <ArcherElement
@@ -108,11 +118,13 @@ const Diagram = () => {
             }
           ]}
         >
-          <Box bgcolor='success.main' className={classes.box}>
+          <CustomBox id='realistic' bgcolor='success.main'>
             <Typography variant='subtitle1' className={classes.title}>
-              {`${t('realistic')} ${t('problemSolving')}`}
+              <Hyphenated>{`${t('realistic')} ${t(
+                'problemSolving'
+              )}`}</Hyphenated>
             </Typography>
-          </Box>
+          </CustomBox>
         </ArcherElement>
 
         <ArcherElement
@@ -125,20 +137,22 @@ const Diagram = () => {
             }
           ]}
         >
-          <Box bgcolor='warning.main' className={classes.box}>
+          <CustomBox id='specific' bgcolor='warning.main'>
             <Typography variant='subtitle1' className={classes.title}>
-              {`${t('specific')} ${t('problemSolving')}`}
+              <Hyphenated>{`${t('specific')} ${t(
+                'problemSolving'
+              )}`}</Hyphenated>
             </Typography>
-          </Box>
+          </CustomBox>
         </ArcherElement>
       </div>
       <div className={classes.singleElement}>
         <ArcherElement id='society'>
-          <div className={classes.box}>
+          <Box className={classes.box}>
             <Typography variant='subtitle1' className={classes.title}>
-              {t('society')}
+              <Hyphenated>{t('society')}</Hyphenated>
             </Typography>
-          </div>
+          </Box>
         </ArcherElement>
       </div>
     </ArcherContainer>
