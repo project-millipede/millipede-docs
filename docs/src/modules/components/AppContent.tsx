@@ -12,17 +12,13 @@ interface Props extends React.Props<any> {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    // root: {
-    //   paddingTop: 80 + 16
-    // }
-
     root: {
       paddingTop: 80 + 16,
-      flex: '1 1 100%',
-      position: 'relative',
-      maxWidth: '100%',
-      margin: '0 auto',
-      outline: 'none'
+      outline: 'none',
+      hyphens: 'auto',
+      '-ms-hyphens': 'auto',
+      '-moz-hyphens': 'auto',
+      '-webkit-hyphens': 'auto'
     },
     openedDrawer: {
       [theme.breakpoints.up('sm')]: {
@@ -76,7 +72,6 @@ const AppContent = ({ children, disableToc }: Props) => {
         [classes.closedDrawer]: !isOpen,
         [classes.disableToc]: disableToc
       })}
-      // className={classes.root}
     >
       {children}
     </Container>

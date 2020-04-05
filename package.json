@@ -72,6 +72,7 @@
     "react-dom": "^16.13.1",
     "react-ga": "^2.7.0",
     "react-highlight": "^0.12.0",
+    "react-hyphen": "^1.3.0",
     "react-i18next": "^11.3.4",
     "react-in-viewport": "^1.0.0-alpha.11",
     "react-intersection-observer": "^8.26.1",

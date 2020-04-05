@@ -6,7 +6,6 @@ export const useMdStyles = (theme: Theme) =>
       fontFamily: theme.typography.fontFamily,
       fontSize: 16,
       color: theme.palette.text.primary,
-      wordBreak: 'break-word',
       '& .anchor-link': {
         marginTop: -96, // Offset for the anchor.
         position: 'absolute'
@@ -80,12 +79,6 @@ export const useMdStyles = (theme: Theme) =>
         paddingLeft: 30
       },
       '& h1, & h2, & h3, & h4': {
-        '& code': {
-          fontSize: 'inherit',
-          lineHeight: 'inherit',
-          // Remove scroll on small screens.
-          wordBreak: 'break-all'
-        },
         '& .anchor-link-style': {
           // To prevent the link to get the focus.
           display: 'none'
