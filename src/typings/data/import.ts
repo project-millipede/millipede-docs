@@ -49,7 +49,7 @@ export interface Slice {
 export type Content = Allocation & Slice;
 
 export interface Stack {
-  elements?: Array<Content> | Category;
+  elements?: Array<Content>;
   rows?: Array<Array<Content>>;
   categories?: CategoryDescriptor;
 }

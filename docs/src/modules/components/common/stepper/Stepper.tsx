@@ -5,8 +5,6 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import React, { useEffect, useState } from 'react';
 
-import { useTranslation } from '../../../../i18n';
-
 const useStyles = makeStyles((_theme: Theme) =>
   createStyles({
     root: {
@@ -15,12 +13,24 @@ const useStyles = makeStyles((_theme: Theme) =>
   })
 );
 
+interface TranslationProps {
+  labelBack: string;
+  labelNext: string;
+}
+
 interface StepperProps {
   steps: number;
   currentStep: (step: number) => void;
 }
 
-const DotsMobileStepper = ({ steps, currentStep }: StepperProps) => {
+type Props = StepperProps & TranslationProps;
+
+export const Stepper = ({
+  steps,
+  currentStep,
+  labelBack,
+  labelNext
+}: Props) => {
   const classes = useStyles({});
 
   const [activeStep, setActiveStep] = useState(0);
@@ -28,8 +38,6 @@ const DotsMobileStepper = ({ steps, currentStep }: StepperProps) => {
   useEffect(() => {
     currentStep(activeStep);
   });
-
-  const { t } = useTranslation();
 
   const handleNext = () => {
     setActiveStep(prevActiveStep => prevActiveStep + 1);
@@ -47,19 +55,21 @@ const DotsMobileStepper = ({ steps, currentStep }: StepperProps) => {
       activeStep={activeStep}
       className={classes.root}
       nextButton={
-        <Button size='small' onClick={handleNext} disabled={activeStep === steps - 1}>
-          {t('next')}
+        <Button
+          size='small'
+          onClick={handleNext}
+          disabled={activeStep === steps - 1}
+        >
+          {labelNext}
           <KeyboardArrowRight />
         </Button>
       }
       backButton={
         <Button size='small' onClick={handleBack} disabled={activeStep === 0}>
           <KeyboardArrowLeft />
-          {t('back')}
+          {labelBack}
         </Button>
       }
     />
   );
 };
-
-export default DotsMobileStepper;

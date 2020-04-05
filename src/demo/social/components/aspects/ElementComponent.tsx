@@ -3,7 +3,7 @@ import { TFunction } from 'next-i18next-serverless';
 import React, { useState } from 'react';
 
 import { Item } from '../../../../../docs/src/modules/components/common/grid/Item';
-import DotsMobileStepper from '../../../../components/common/stepper/DotsMobileStepper';
+import Stepper from '../../../../components/common/stepper/Stepper';
 import { Category, CategoryDescriptor, Content, Stack2 } from '../../../../typings/data/import';
 
 export const useStyles = makeStyles((_theme: Theme) =>
@@ -143,7 +143,7 @@ const ElementComponent = ({ elements, categories, t }: Props) => {
           }
         }
       >
-        <DotsMobileStepper
+        <Stepper
           steps={
             Object.values(elements).reduce((a, b) => a.concat(b), []).length + 1
           }
