@@ -5,7 +5,7 @@ import { useTranslation } from '../../../../../../i18n';
 import Step1 from '../../../../../../src/assets/pidp/approach/byExample/Step1';
 import Step2 from '../../../../../../src/assets/pidp/approach/byExample/Step2';
 import { Content } from '../../../../../../src/typings/data/import';
-import Component from './component';
+import { StepperContent } from '../../../../modules/components/common/stepper';
 
 const generateContent = (t: TFunction): Array<Content> => {
   const steps: Array<Content> = t('steps', { returnObjects: true });
@@ -41,8 +41,7 @@ const ns = 'pages/pidp/approach/byExample/content';
 
 const use = () => {
   const { t } = useTranslation(ns);
-
-  return <Component elements={generateContent(t)} />;
+  return <StepperContent elements={generateContent(t)} />;
 };
 
 export default use;
