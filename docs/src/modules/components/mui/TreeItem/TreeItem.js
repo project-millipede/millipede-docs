@@ -202,14 +202,6 @@ const TreeItem = React.forwardRef(function TreeItem(props, ref) {
     }
   };
 
-  const printableCharacter = (event, key) => {
-    if (isPrintableCharacter(key)) {
-      focusByFirstCharacter(nodeId, key);
-      return true;
-    }
-    return false;
-  };
-
   const handleNextArrow = event => {
     if (expandable) {
       if (expanded) {
@@ -313,8 +305,13 @@ const TreeItem = React.forwardRef(function TreeItem(props, ref) {
           flag = true;
         } else if (multiSelect && ctrlPressed && key.toLowerCase() === 'a') {
           flag = selectAllNodes(event);
-        } else if (isPrintableCharacter(key)) {
-          flag = printableCharacter(event, key);
+        } else if (
+          !ctrlPressed &&
+          !event.shiftKey &&
+          isPrintableCharacter(key)
+        ) {
+          focusByFirstCharacter(nodeId, key);
+          flag = true;
         }
     }
 
@@ -339,9 +336,13 @@ const TreeItem = React.forwardRef(function TreeItem(props, ref) {
   };
 
   React.useEffect(() => {
-    const childIds =
-      React.Children.map(children, child => child.props.nodeId) || [];
     if (addNodeToNodeMap) {
+      const childIds = [];
+      React.Children.forEach(children, child => {
+        if (React.isValidElement(child) && child.props.nodeId) {
+          childIds.push(child.props.nodeId);
+        }
+      });
       addNodeToNodeMap(nodeId, childIds);
     }
   }, [children, nodeId, addNodeToNodeMap]);
