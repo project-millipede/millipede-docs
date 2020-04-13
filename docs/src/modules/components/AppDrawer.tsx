@@ -1,21 +1,25 @@
-import { Divider } from '@material-ui/core';
-import Drawer from '@material-ui/core/Drawer';
-import IconButton from '@material-ui/core/IconButton';
-import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import {
+  createStyles,
+  Divider,
+  Drawer,
+  IconButton,
+  Link,
+  makeStyles,
+  SwipeableDrawer,
+  Theme,
+  useTheme,
+} from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import clsx from 'clsx';
 import { useHoux } from 'houx';
 import React from 'react';
-import { isMobileOnly } from 'react-device-detect';
 
 import { useTranslation } from '../../../../i18n';
 import { RootState } from '../redux/reducers';
-import { pathnameToLanguage } from '../utils/helpers';
-import Link from './common/link/Link';
 import { Tree } from './tree/Tree';
 
-const drawerWidth = 240;
+const drawerWidth = 280;
 
 const useDrawerStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -58,54 +62,52 @@ const useDrawerStyles = makeStyles((theme: Theme) =>
       padding: '0 8px',
       ...theme.mixins.toolbar
     },
-    drawerPaper: {
+    paper: {
       width: drawerWidth
     }
   })
 );
-
-export interface DrawerStyleOverride {
-  drawer: string;
-}
+const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
 interface AppDrawerProps {
-  isDrawerOpen: boolean;
+  isDrawerExpanded: boolean;
+  handleDrawerOpen: () => void;
   handleDrawerClose: () => void;
-  drawerStyleOverride: DrawerStyleOverride;
+  mobileOpen: boolean;
 }
 
 const AppDrawer = (props: AppDrawerProps) => {
-  const { isDrawerOpen, handleDrawerClose, drawerStyleOverride } = props;
+  const {
+    mobileOpen,
+    isDrawerExpanded,
+    handleDrawerOpen,
+    handleDrawerClose
+  } = props;
 
-  const classes = useDrawerStyles(
-    drawerStyleOverride ? drawerStyleOverride.drawer : {}
-  );
+  const classes = useDrawerStyles();
 
   const theme: Theme = useTheme();
 
   const {
     state: {
-      navigation: { pages, activePage }
+      navigation: { pages, activePage },
+      view: { isMobile }
     }
   }: { state: RootState } = useHoux();
 
   const { t } = useTranslation();
 
-  const canonicalRef = React.useRef();
-  React.useEffect(() => {
-    const { canonical } = pathnameToLanguage(window.location.pathname);
-    (canonicalRef as any).current = canonical;
-  }, []);
-
   const renderMobileDrawer = () => {
     return (
-      <Drawer
+      <SwipeableDrawer
         variant='temporary'
-        open={isDrawerOpen}
-        onClose={handleDrawerClose}
         classes={{
-          paper: classes.drawerPaper
+          paper: classes.paper
         }}
+        disableBackdropTransition={!iOS}
+        open={mobileOpen}
+        onClose={handleDrawerClose}
+        onOpen={handleDrawerOpen}
         ModalProps={{
           keepMounted: true
         }}
@@ -130,7 +132,7 @@ const AppDrawer = (props: AppDrawerProps) => {
         </div>
         <Divider />
         <Tree data={pages} activePage={activePage} />
-      </Drawer>
+      </SwipeableDrawer>
     );
   };
 
@@ -139,16 +141,16 @@ const AppDrawer = (props: AppDrawerProps) => {
       <Drawer
         variant='permanent'
         className={clsx(classes.drawer, {
-          [classes.drawerOpen]: isDrawerOpen,
-          [classes.drawerClose]: !isDrawerOpen
+          [classes.drawerOpen]: isDrawerExpanded,
+          [classes.drawerClose]: !isDrawerExpanded
         })}
         classes={{
           paper: clsx({
-            [classes.drawerOpen]: isDrawerOpen,
-            [classes.drawerClose]: !isDrawerOpen
+            [classes.drawerOpen]: isDrawerExpanded,
+            [classes.drawerClose]: !isDrawerExpanded
           })
         }}
-        open={isDrawerOpen}
+        open={isDrawerExpanded}
       >
         <div className={classes.toolbar}>
           <Link
@@ -175,7 +177,7 @@ const AppDrawer = (props: AppDrawerProps) => {
   };
 
   if (pages && pages.length > 0) {
-    if (isMobileOnly) {
+    if (isMobile) {
       return renderMobileDrawer();
     }
     return renderDesktopDrawer();
