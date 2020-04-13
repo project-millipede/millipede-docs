@@ -3,18 +3,15 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import { useHoux } from 'houx';
-import React from 'react';
-import { isMobileOnly } from 'react-device-detect';
+import React, { Dispatch, ReactNode, useCallback, useState } from 'react';
 
 import { ViewActions } from '../redux/features/actionType';
 import { handleDrawer } from '../redux/features/view/actions';
 import { RootState } from '../redux/reducers';
-import AppDrawer, { DrawerStyleOverride } from './AppDrawer';
+import AppDrawer from './AppDrawer';
 import AppToolBar from './AppToolBar';
 
-// import usePageTitle from './usePageTitle';
-
-const useStyles = makeStyles((_theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       display: 'flex'
@@ -22,8 +19,7 @@ const useStyles = makeStyles((_theme: Theme) =>
   })
 );
 
-const drawerClosedWidth = 73;
-const drawerOpenedWidth = 240;
+const drawerOpenedWidth = 280;
 
 const useDrawerStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,43 +37,43 @@ const useDrawerStyles = makeStyles((theme: Theme) =>
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen
       })
-    },
-    contentDrawerClosed: {
-      display: 'contents',
-      width: isMobileOnly ? '100%' : `calc(100% - ${drawerClosedWidth}px)`
-    },
-    contentDrawerOpened: {
-      display: 'contents',
-      width: isMobileOnly ? '100%' : `calc(100% - ${drawerOpenedWidth}px)`
     }
   })
 );
 
-interface AppFrameProps extends React.Props<any> {
-  drawerStyleOverride?: DrawerStyleOverride;
+interface AppFrameProps {
+  children: ReactNode;
 }
 
-const AppFrame = ({ children, drawerStyleOverride }: AppFrameProps) => {
-  const classes = useStyles({});
+const AppFrame = ({ children }: AppFrameProps) => {
+  const classes = useStyles();
   const drawerClasses = useDrawerStyles({});
+
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const {
     dispatch,
     state: {
-      view: { isOpen }
+      view: { isDrawerExpanded, isMobile }
     }
   }: {
-    dispatch: React.Dispatch<ViewActions>;
+    dispatch: Dispatch<ViewActions>;
     state: RootState;
   } = useHoux();
 
-  const handleDrawerOpen = () => {
-    dispatch(handleDrawer(true));
-  };
+  const handleDrawerOpen = useCallback(() => {
+    setMobileOpen(true);
+    if (!isMobile) {
+      dispatch(handleDrawer(true));
+    }
+  }, [dispatch, handleDrawer]);
 
-  const handleDrawerClose = () => {
-    dispatch(handleDrawer(false));
-  };
+  const handleDrawerClose = useCallback(() => {
+    setMobileOpen(false);
+    if (!isMobile) {
+      dispatch(handleDrawer(false));
+    }
+  }, [dispatch, handleDrawer]);
 
   return (
     <div className={classes.root}>
@@ -85,15 +81,20 @@ const AppFrame = ({ children, drawerStyleOverride }: AppFrameProps) => {
       <AppBar
         position='fixed'
         className={clsx(drawerClasses.appBar, {
-          [drawerClasses.appBarShift]: isOpen
+          [drawerClasses.appBarShift]: isDrawerExpanded
         })}
       >
-        <AppToolBar isDrawerOpen={isOpen} handleDrawerOpen={handleDrawerOpen} />
+        <AppToolBar
+          isDrawerExpanded={isDrawerExpanded}
+          handleDrawerOpen={handleDrawerOpen}
+        />
       </AppBar>
+
       <AppDrawer
-        drawerStyleOverride={drawerStyleOverride}
-        isDrawerOpen={isOpen}
+        handleDrawerOpen={handleDrawerOpen}
         handleDrawerClose={handleDrawerClose}
+        mobileOpen={mobileOpen}
+        isDrawerExpanded={isDrawerExpanded}
       />
       {children}
     </div>
