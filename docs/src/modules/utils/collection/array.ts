@@ -76,3 +76,6 @@ export const updateAt = <T>(
   item: T,
   index: number
 ): Array<T> => [...source.slice(0, index), item, ...source.slice(index + 1)];
+
+export const contains = <T>(array: Array<T>) => (val: T) =>
+  array.indexOf(val) !== -1;

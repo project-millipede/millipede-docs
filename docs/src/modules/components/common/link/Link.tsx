@@ -1,13 +1,11 @@
 import MuiLink, { LinkProps as MuiLinkProps } from '@material-ui/core/Link';
-import clsx from 'clsx';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
-import { useRouter } from 'next/router';
-import * as React from 'react';
+import React, { AnchorHTMLAttributes, forwardRef, Ref } from 'react';
 
-type NextComposedProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
+type NextComposedProps = AnchorHTMLAttributes<HTMLAnchorElement> &
   NextLinkProps;
 
-const NextComposed = React.forwardRef<HTMLAnchorElement, NextComposedProps>(
+const NextComposed = forwardRef<HTMLAnchorElement, NextComposedProps>(
   (props, ref) => {
     const {
       as,
@@ -38,7 +36,7 @@ const NextComposed = React.forwardRef<HTMLAnchorElement, NextComposedProps>(
 
 interface LinkPropsBase {
   activeClassName?: string;
-  innerRef?: React.Ref<HTMLAnchorElement>;
+  innerRef?: Ref<HTMLAnchorElement>;
   naked?: boolean;
 }
 
@@ -49,16 +47,11 @@ type LinkProps = LinkPropsBase & NextComposedProps & Omit<MuiLinkProps, 'ref'>;
 function Link(props: LinkProps) {
   const {
     activeClassName = 'active',
-    className: classNameProps,
+    className,
     innerRef,
     naked,
     ...other
   } = props;
-  const router = useRouter();
-
-  const className = clsx(classNameProps, {
-    [activeClassName]: router.pathname === props.href && activeClassName
-  });
 
   if (naked) {
     return <NextComposed className={className} ref={innerRef} {...other} />;
@@ -74,6 +67,6 @@ function Link(props: LinkProps) {
   );
 }
 
-export default React.forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => (
+export default forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => (
   <Link {...props} innerRef={ref} />
 ));
