@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import camelCase from 'lodash/camelCase';
 import upperFirst from 'lodash/upperFirst';
 
@@ -37,40 +36,14 @@ export const pageToTitle = (page: Page) => {
   return titleize(name);
 };
 
-export const pageToTitleI18n = (
-  page: Page,
-  _translate: (title: string, options: object) => string
-) => {
-  // return translate(`pages.${page.pathname}`, { ignoreWarning: true }) || pageToTitle(page);
-  // return translate
-  //   ? translate(`pages.${page.pathname}`, { ignoreWarning: true })
-  //   : pageToTitle(page);
-  return _.truncate(page.title, {
-    length: 10,
-    separator: ' '
-  });
-
-  // if (!page) {
-  //   return null;
-  // }
-
-  // if (!page.title) {
-  //   return null;
-  // }
-
-  // if (page.title) {
-  //   return page.title;
-  // }
-};
-
 export const getCookie = (name: string) => {
   const regex = new RegExp(`(?:(?:^|.*;*)${name}*=*([^;]*).*$)|^.*$`);
   return document.cookie.replace(regex, '$1');
 };
 
 export interface PathnameToLanguage {
-  userLanguage: string;
-  canonical: string;
+  userLanguage?: string;
+  canonical?: string;
 }
 
 export const pathnameToLanguage = (pathname: string): PathnameToLanguage => {
