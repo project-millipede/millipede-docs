@@ -18,6 +18,7 @@ interface TopRevealProps {
   // animation property
   stagger?: number;
   loop?: boolean;
+  outerIndex: number;
 }
 
 export const TopReveal = (props: TopRevealProps) => {
@@ -91,7 +92,7 @@ export const TopReveal = (props: TopRevealProps) => {
       <motion.div
         style={{
           width: '100%',
-          height: (fontSize * 1.5 + lineGap) * items.length * 2 + 30
+          height: (fontSize * 1.5 + lineGap) * items.length * 2 + 24
         }}
         initial={'before'}
         animate={'after'}
@@ -116,7 +117,7 @@ export const TopReveal = (props: TopRevealProps) => {
                 }}
                 variants={textVariants}
               >
-                <Typography variant='h2' style={{ fontSize: '30px' }}>
+                <Typography variant='h3' style={{ fontSize: '24px' }}>
                   {item}
                 </Typography>
               </motion.div>
@@ -158,8 +159,8 @@ export const TopReveal = (props: TopRevealProps) => {
 TopReveal.defaultProps = {
   width: 200,
   lineGap: 0,
-  fontSize: 30,
+  fontSize: 24,
   fontColor: '#000000',
   stagger: 0.3,
-  loop: false
+  loop: true
 };
