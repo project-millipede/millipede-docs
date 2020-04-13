@@ -75,7 +75,7 @@ const Index = () => {
   const { t } = useTranslation();
 
   return (
-    <AppFrame drawerStyleOverride={{ drawer: classes.drawer }}>
+    <AppFrame>
       <div className={classes.root}>
         <Head />
         <div className={classes.hero}>
