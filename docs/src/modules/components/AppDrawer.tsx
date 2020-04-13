@@ -67,7 +67,9 @@ const useDrawerStyles = makeStyles((theme: Theme) =>
     }
   })
 );
-const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+// disalbe iOS detection for now
+// const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
 interface AppDrawerProps {
   isDrawerExpanded: boolean;
@@ -104,7 +106,7 @@ const AppDrawer = (props: AppDrawerProps) => {
         classes={{
           paper: classes.paper
         }}
-        disableBackdropTransition={!iOS}
+        // disableBackdropTransition={!iOS}
         open={mobileOpen}
         onClose={handleDrawerClose}
         onOpen={handleDrawerOpen}
