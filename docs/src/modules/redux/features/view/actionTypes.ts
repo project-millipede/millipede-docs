@@ -1,1 +1,2 @@
 export const HANDLE_DRAWER = 'HANDLE_DRAWER';
+export const HANDLE_DEVICE = 'HANDLE_DEVICE';

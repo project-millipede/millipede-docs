@@ -1,5 +1,8 @@
 import { action } from 'typesafe-actions';
 
-import { HANDLE_DRAWER } from './actionTypes';
+import { HANDLE_DEVICE, HANDLE_DRAWER } from './actionTypes';
 
-export const handleDrawer = isOpen => action(HANDLE_DRAWER, { isOpen });
+export const handleDrawer = isDrawerExpanded =>
+  action(HANDLE_DRAWER, { isDrawerExpanded });
+
+export const handleDevice = isMobile => action(HANDLE_DEVICE, { isMobile });
