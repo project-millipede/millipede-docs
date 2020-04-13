@@ -6,7 +6,7 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
 import { useHoux } from 'houx';
-import React from 'react';
+import React, { Dispatch } from 'react';
 
 import { useTranslation } from '../../../../i18n';
 import { ThemeActions } from '../redux/features/actionType';
@@ -15,7 +15,7 @@ import { AppSearch } from './AppSearch';
 import { LanguageMenu } from './LanguageMenu';
 
 interface AppToolBarProps {
-  isDrawerOpen: boolean;
+  isDrawerExpanded: boolean;
   handleDrawerOpen: () => void;
 }
 
@@ -45,7 +45,10 @@ const useCustomStyles = makeStyles((_theme: Theme) =>
   })
 );
 
-const AppToolBar = ({ isDrawerOpen, handleDrawerOpen }: AppToolBarProps) => {
+const AppToolBar = ({
+  isDrawerExpanded,
+  handleDrawerOpen
+}: AppToolBarProps) => {
   const drawerClasses = useDrawerStyles({});
   const customStyles = useCustomStyles({});
 
@@ -58,7 +61,7 @@ const AppToolBar = ({ isDrawerOpen, handleDrawerOpen }: AppToolBarProps) => {
     state: {
       navigation: { pages }
     }
-  }: { dispatch: React.Dispatch<ThemeActions>; state: RootState } = useHoux();
+  }: { dispatch: Dispatch<ThemeActions>; state: RootState } = useHoux();
 
   // const handleTogglePaletteType = () => {
   //   const paletteType: PaletteType = theme.palette.type === 'light' ? 'dark' : 'light';
@@ -74,7 +77,7 @@ const AppToolBar = ({ isDrawerOpen, handleDrawerOpen }: AppToolBarProps) => {
           onClick={handleDrawerOpen}
           edge='start'
           className={clsx(drawerClasses.menuButton, {
-            [drawerClasses.hide]: isDrawerOpen
+            [drawerClasses.hide]: isDrawerExpanded
           })}
         >
           <MenuIcon />
