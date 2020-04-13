@@ -1,11 +1,12 @@
-import { ServerStyleSheets } from '@material-ui/core/styles';
+import { ServerStyleSheets as MaterialServerStyleSheets } from '@material-ui/core';
 import { compose, Handler, RequestHandler } from 'compose-middleware';
 import { IncomingMessage, ServerResponse } from 'http';
 import nextI18NextMiddleware from 'next-i18next-serverless/dist/commonjs/middlewares/next-i18next-middleware';
 import NextDocument, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
-import React from 'react';
+import React, { Fragment } from 'react';
+import { ServerStyleSheet as StyledComponentSheets } from 'styled-components';
 
-import { PathnameToLanguage, pathnameToLanguage } from '../docs/src/modules/utils/helpers';
+import { PathnameToLanguage } from '../docs/src/modules/utils/helpers';
 import { Logger } from '../docs/src/modules/utils/logging';
 import { NextI18NextInstance } from '../i18n';
 
@@ -18,7 +19,7 @@ export const composeTestMiddleware = (
   );
 
   const done = () => {
-    Logger.log('done');
+    Logger.log('Execution of middleware succeeded');
   };
 
   handler(req, res, _next => {
@@ -33,6 +34,7 @@ export const instantiateTestMiddleware = (
   res: ServerResponse
 ) =>
   composeTestMiddleware(req, res)(nextI18NextMiddleware(NextI18NextInstance));
+
 /* eslint-disable class-methods-use-this */
 class MillipedeDocument extends NextDocument {
   render() {
@@ -70,57 +72,37 @@ MillipedeDocument.getInitialProps = async (
 ): Promise<InitialProps> => {
   instantiateTestMiddleware(ctx.req, ctx.res);
 
-  // Resolution order
-  //
-  // On the server:
-  // 1. app.getInitialProps
-  // 2. page.getInitialProps
-  // 3. document.getInitialProps
-  // 4. app.render
-  // 5. page.render
-  // 6. document.render
-  //
-  // On the server with error:
-  // 1. document.getInitialProps
-  // 2. app.render
-  // 3. page.render
-  // 4. document.render
-  //
-  // On the client
-  // 1. app.getInitialProps
-  // 2. page.getInitialProps
-  // 3. app.render
-  // 4. page.render
-
-  // Render app and page and get the context of the page with collected side effects.
-  const sheets = new ServerStyleSheets();
+  const styledComponentSheet = new StyledComponentSheets();
+  const materialSheets = new MaterialServerStyleSheets();
   const originalRenderPage = ctx.renderPage;
 
-  const newCtx = {
-    ...ctx,
-    renderPage: () =>
-      originalRenderPage({
-        enhanceApp: App => props => sheets.collect(<App {...props} />)
-      })
-  };
+  try {
+    const newCtx = {
+      ...ctx,
+      renderPage: () =>
+        originalRenderPage({
+          enhanceApp: App => props =>
+            styledComponentSheet.collectStyles(
+              materialSheets.collect(<App {...props} />)
+            )
+        })
+    };
 
-  const initialProps = await NextDocument.getInitialProps(newCtx);
+    const initialProps = await NextDocument.getInitialProps(newCtx);
 
-  return {
-    ...initialProps,
-
-    canonical: pathnameToLanguage(ctx.req.url).canonical,
-    userLanguage: ctx.query.userLanguage as string,
-
-    // Styles fragment is rendered after the app and page rendering finish.
-    styles: (
-      <React.Fragment>
-        {initialProps.styles}
-        {sheets.getStyleElement()}
-      </React.Fragment>
-    ) as any
-    // styles: [...(initialProps.styles || []), sheets.getStyleElement()]
-  };
+    return {
+      ...initialProps,
+      styles: (
+        <Fragment key='styles'>
+          {initialProps.styles}
+          {materialSheets.getStyleElement()}
+          {styledComponentSheet.getStyleElement()}
+        </Fragment>
+      )
+    };
+  } finally {
+    styledComponentSheet.seal();
+  }
 };
 
 export default MillipedeDocument;
