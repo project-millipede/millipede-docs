@@ -2,31 +2,41 @@ import { jssPreset, StylesProvider } from '@material-ui/core/styles';
 import { useHoux } from 'houx';
 import { create } from 'jss';
 import { useRouter } from 'next/router';
-import React, { ReactNode, useEffect } from 'react';
+import React, { Dispatch, FC, ReactNode, useEffect } from 'react';
 import ReactGA from 'react-ga';
 
-import { NavigationActions } from '../redux/features/actionType';
+import { NavigationActions, ViewActions } from '../redux/features/actionType';
 import { loadPages } from '../redux/features/navigation/actions';
+import { handleDevice } from '../redux/features/view/actions';
 import { ThemeProvider } from './ThemeProvider';
 
-interface Props {
-  children?: ReactNode;
+interface AppWrapperProps {
+  children: ReactNode;
+  isMobile: boolean;
 }
 
-const jss = create({
+export const jss = create({
   plugins: [...jssPreset().plugins]
-  // insertionPoint: process.browser ? document.querySelector('#insertion-point-jss') : null,
 });
 
-const AppWrapper = ({ children }: Props) => {
+const AppWrapper: FC<AppWrapperProps> = ({ children, isMobile }) => {
   const router = useRouter();
 
   const {
-    dispatch
-  }: { dispatch: React.Dispatch<NavigationActions> } = useHoux();
+    dispatch: dispatchNavigationActions
+  }: {
+    dispatch: Dispatch<NavigationActions>;
+  } = useHoux();
+
+  const {
+    dispatch: dispatchViewActions
+  }: {
+    dispatch: Dispatch<ViewActions>;
+  } = useHoux();
 
   useEffect(() => {
-    dispatch(loadPages(router.pathname));
+    dispatchViewActions(handleDevice(isMobile));
+    dispatchNavigationActions(loadPages(router.pathname));
     ReactGA.pageview(router.pathname);
   }, [router.pathname]);
 

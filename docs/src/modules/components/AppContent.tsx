@@ -2,12 +2,13 @@ import Container from '@material-ui/core/Container';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import { useHoux } from 'houx';
-import React from 'react';
+import React, { FC, ReactNode } from 'react';
 
 import { RootState } from '../redux/reducers';
 
-interface Props extends React.Props<any> {
+interface AppContentProps {
   disableToc?: boolean;
+  children: ReactNode;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.up('lg')]: {
         paddingLeft: theme.spacing(6),
         paddingRight: theme.spacing(6),
-        maxWidth: 'calc(100% - 225px - 240px)'
+        maxWidth: 'calc(100% - 225px - 280px)'
       }
     },
     closedDrawer: {
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.up('lg')]: {
         paddingLeft: theme.spacing(6),
         paddingRight: theme.spacing(6),
-        maxWidth: 'calc(100% - 73px - 240px)'
+        maxWidth: 'calc(100% - 73px - 280px)'
       }
     },
     disableToc: {
@@ -45,18 +46,18 @@ const useStyles = makeStyles((theme: Theme) =>
         maxWidth: 'calc(100%)'
       },
       [theme.breakpoints.up('lg')]: {
-        maxWidth: 'calc(100% - 240px)'
+        maxWidth: 'calc(100% - 280px)'
       }
     }
   })
 );
 
-const AppContent = ({ children, disableToc }: Props) => {
-  const classes = useStyles({});
+const AppContent: FC<AppContentProps> = ({ children, disableToc }) => {
+  const classes = useStyles();
 
   const {
     state: {
-      view: { isOpen }
+      view: { isDrawerExpanded, isMobile }
     }
   }: {
     state: RootState;
@@ -68,8 +69,8 @@ const AppContent = ({ children, disableToc }: Props) => {
       id='main-content'
       tabIndex={-1}
       className={clsx(classes.root, {
-        [classes.openedDrawer]: isOpen,
-        [classes.closedDrawer]: !isOpen,
+        [classes.openedDrawer]: !isMobile && isDrawerExpanded,
+        [classes.closedDrawer]: !isMobile && !isDrawerExpanded,
         [classes.disableToc]: disableToc
       })}
     >

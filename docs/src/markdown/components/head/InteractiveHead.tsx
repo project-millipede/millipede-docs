@@ -1,45 +1,54 @@
 import { Typography } from '@material-ui/core';
 import { useHoux } from 'houx';
-import React, { useEffect } from 'react';
+import React, { Dispatch, ReactNode, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { Element } from 'react-scroll';
 
 import { ScrollActions } from '../../../modules/redux/features/actionType';
 import { addScrollNavigation, removeScrollNavigation } from '../../../modules/redux/features/scroll/actions';
+import { RootState } from '../../../modules/redux/reducers';
 
-interface HeadProps extends React.Props<any> {
+interface HeadProps {
   // id generated through slug
   id: string;
-  variant: 'h2' | 'h3';
+  variant: 'h2' | 'h3' | 'h4';
+  children: ReactNode;
 }
 
 const InteraktiveHead = ({ id, variant, children }: HeadProps) => {
-  const { dispatch }: { dispatch: React.Dispatch<ScrollActions> } = useHoux();
+  const {
+    state: {
+      view: { isMobile }
+    },
+    dispatch
+  }: { state: RootState; dispatch: Dispatch<ScrollActions> } = useHoux();
 
-  const [ref, inView, entry] = useInView({ threshold: 0 });
-  const target = entry && entry.target;
+  const [ref, inView, entry = { target: { id: '' } }] = useInView({
+    threshold: 0
+  });
+  const { target } = entry;
 
   useEffect(() => {
-    if (inView && ref) {
-      const handleScroll = () => {
-        if (!target) return;
-        dispatch(addScrollNavigation(target.id));
-      };
-      handleScroll();
-    } else if (!inView && ref) {
-      const handleScroll = () => {
-        if (!target) return;
-        dispatch(removeScrollNavigation(target.id));
-      };
-      handleScroll();
+    if (isMobile) {
+      return;
     }
-  }, [inView, target]);
+    if (inView && ref) {
+      dispatch(addScrollNavigation(target.id));
+    }
+    if (!inView && ref) {
+      dispatch(removeScrollNavigation(target.id));
+    }
+  }, [inView, target.id]);
 
   return (
-    <div ref={ref} id={id}>
-      <Element name={id}>
+    <div key={id} id={id} ref={ref}>
+      {isMobile ? (
         <Typography variant={variant}>{children}</Typography>
-      </Element>
+      ) : (
+        <Element name={id}>
+          <Typography variant={variant}>{children}</Typography>
+        </Element>
+      )}
     </div>
   );
 };

@@ -1,13 +1,14 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/core';
+import { useHoux } from 'houx';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { isMobileOnly } from 'react-device-detect';
 
+import { RootState } from '../redux/reducers';
 import Breadcrumbs from './common/breadcrumbs';
 import { createBreadcrumbs } from './common/breadcrumbs/Breadcrumbs';
 import Editpage from './Editpage';
 
-export const useStyles = makeStyles((_theme: Theme) =>
+export const useStyles = makeStyles(() =>
   createStyles({
     headerRow: {
       display: 'flex',
@@ -26,13 +27,19 @@ const SOURCE_CODE_ROOT_URL =
   'https://github.com/project-millipede/millipede-docs/blob/master/docs/src';
 
 const AppContentHeader = ({ markdownLocation }: MarkdownDocsProps) => {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   const router = useRouter();
 
+  const {
+    state: {
+      view: { isMobile }
+    }
+  }: { state: RootState } = useHoux();
+
   const breadcrumbs = createBreadcrumbs(router.pathname);
 
-  return !isMobileOnly && breadcrumbs.length >= 2 ? (
+  return !isMobile && breadcrumbs.length >= 2 ? (
     <div className={classes.headerRow}>
       <Breadcrumbs />
       {markdownLocation ? (
