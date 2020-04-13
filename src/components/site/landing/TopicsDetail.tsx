@@ -24,7 +24,7 @@ const generateIntro = (router: NextRouter, t: TFunction) => {
             textAlign: 'left'
           }}
         >
-          <InteractiveHead variant={'h3'} id={`head-${aspect}-${featureName}`}>
+          <InteractiveHead variant={'h4'} id={`head-${aspect}-${featureName}`}>
             {t(`${aspect}-${featureName}`)}
           </InteractiveHead>
           <Topics featureName={featureName as string} aspect={aspect} />
@@ -39,15 +39,7 @@ const TopicsDetail = () => {
   const router = useRouter();
   const { t } = useTranslation();
   const intro = generateIntro(router, t);
-  return (
-    <div
-      style={{
-        marginTop: '60px'
-      }}
-    >
-      {intro}
-    </div>
-  );
+  return <div>{intro}</div>;
 };
 
 export default TopicsDetail;

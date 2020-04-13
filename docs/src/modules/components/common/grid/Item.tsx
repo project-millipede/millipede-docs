@@ -56,51 +56,66 @@ export const Item = ({ title, description, link, icon }: OverviewProps) => {
   let intermediateResult = [];
 
   if (_.isArray(description)) {
-    intermediateResult = description.map(description => {
+    intermediateResult = description.map((d, index) => {
       const {
         subTitle = [],
         text = [],
         listing = [],
         summary = [],
         note = []
-      } = description;
+      } = d;
 
       return (
-        <div className={classes.note}>
-          {subTitle.map(t => (
-            <Typography variant='subtitle1' className={classes.subTitle}>
+        // <div key={`description-${d}-${index}`} className={classes.note}>
+        <div key={`description-${index}`} className={classes.note}>
+          {subTitle.map((t, index) => (
+            <Typography
+              key={`subTitle-${index}`}
+              variant='subtitle1'
+              className={classes.subTitle}
+            >
               {t}
             </Typography>
           ))}
-          {text.map(t => (
-            <Typography variant='subtitle1'>{t}</Typography>
+          {text.map((t, index) => (
+            <Typography key={`text-${index}`} variant='subtitle1'>
+              {t}
+            </Typography>
           ))}
           {listing.length > 0 ? (
-            <ol>
-              {listing.map(item => {
+            <ol key={`listing-${index}`}>
+              {listing.map((item, index) => {
                 return item.link ? (
-                  <li>
+                  <li key={`listing-element-${index}`}>
                     <Link href={item.link} variant='h6' color='inherit'>
                       <Typography variant='h6'>{item.text}</Typography>
                     </Link>
                   </li>
                 ) : (
-                  <li>
+                  <li key={`listing-element-${index}`}>
                     <Typography variant='h6'>{item.text}</Typography>
                   </li>
                 );
               })}
             </ol>
           ) : null}
-          {summary.map(t => (
-            <Typography variant='subtitle1' className={classes.summary}>
+          {summary.map((t, index) => (
+            <Typography
+              key={`summary-${index}`}
+              variant='subtitle1'
+              className={classes.summary}
+            >
               {t}
             </Typography>
           ))}
           {note.length > 0 ? (
             <blockquote>
-              {note.map(item => (
-                <Typography variant='subtitle1' className={classes.note}>
+              {note.map((item, index) => (
+                <Typography
+                  key={`note-${index}`}
+                  variant='subtitle1'
+                  className={classes.note}
+                >
                   {item}
                 </Typography>
               ))}
@@ -121,17 +136,13 @@ export const Item = ({ title, description, link, icon }: OverviewProps) => {
         </Link>
       ) : null}
       <div className={classes.column}>
-        <Typography variant='h5' component='h5' className={classes.title}>
+        <Typography variant='h5' className={classes.title}>
           {title}
         </Typography>
         {_.isArray(description) ? (
           intermediateResult
         ) : (
-          <Typography
-            variant='h6'
-            component='h6'
-            className={classes.description}
-          >
+          <Typography variant='h6' className={classes.description}>
             {description}
           </Typography>
         )}

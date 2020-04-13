@@ -1,4 +1,4 @@
-import { Container, Divider, Link, Typography } from '@material-ui/core';
+import { Container, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
 
@@ -9,63 +9,29 @@ import { useTranslation } from '../i18n';
 import TopicsDetail from '../src/components/site/landing/TopicsDetail';
 import TopicsHead from '../src/components/site/landing/TopicsHead';
 
-// // --- Post bootstrap -----
-// const useStyles = makeStyles(_theme => ({
-//   root: {
-//     textAlign: "center"
-//     // paddingTop: theme.spacing(2)
-//     // paddingTop: theme.spacing.unit * 20
-//   }
-// }));
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flex: '1 1 100%'
     },
-    drawer: {
-      width: 0
-    },
     hero: {
-      paddingTop: 64,
+      paddingTop: theme.spacing(8),
       color: theme.palette.primary.main
     },
     content: {
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
       textAlign: 'center',
       paddingTop: theme.spacing(4),
-      paddingBottom: theme.spacing(8)
-      // [theme.breakpoints.up("md")]: {
-      //   paddingTop: theme.spacing(20),
-      //   paddingBottom: theme.spacing(20),
-      //   // flexDirection: "row",
-      //   alignItems: "flex-start",
-      //   textAlign: "left"
-      // }
+      paddingBottom: theme.spacing(4)
     },
     title: {
-      fontWeight: theme.typography.fontWeightLight,
+      fontWeight: theme.typography.fontWeightMedium,
       textAlign: 'center'
-      // marginLeft: -12,
-      // whiteSpace: 'nowrap',
-      // letterSpacing: '.7rem',
-      // textIndent: '.7rem',
-      // [theme.breakpoints.only("xs")]: {
-      //   fontSize: 28
-      // },
     },
     subtitle: {
-      fontWeight: theme.typography.fontWeightLight,
+      fontWeight: theme.typography.fontWeightRegular,
       textAlign: 'center'
-      // marginLeft: -12,
-      // whiteSpace: "wrap",
-      // letterSpacing: '.7rem',
-      // textIndent: '.7rem',
-      // [theme.breakpoints.only("xs")]: {
-      //   fontSize: 28
-      // },
     }
   })
 );
@@ -80,49 +46,12 @@ const Index = () => {
         <Head />
         <div className={classes.hero}>
           <Container maxWidth='md' className={classes.content}>
-            <div
-            // className={classes.header}
-            >
-              <Typography
-                variant='h3'
-                component='h1'
-                color='inherit'
-                gutterBottom
-                className={classes.title}
-              >
-                {t('application-title')}
-              </Typography>
-              <Typography
-                variant='h4'
-                component='h1'
-                color='inherit'
-                gutterBottom
-                className={classes.subtitle}
-              >
-                {t('application-subtitle')}
-              </Typography>
-              <Link href={'/ai'}>
-                <Typography
-                  variant='h4'
-                  component='h1'
-                  color='inherit'
-                  gutterBottom
-                  className={classes.subtitle}
-                >
-                  {t('application-subtitle_ai')}
-                </Typography>
-              </Link>
-              <Typography
-                variant='h5'
-                component='h2'
-                color='inherit'
-                gutterBottom
-                className={classes.subtitle}
-              >
-                {t('application-sub-subtitle')}
-              </Typography>
-            </div>
-            <Divider />
+            <Typography variant='h2' gutterBottom className={classes.title}>
+              {t('application-title')}
+            </Typography>
+            <Typography variant='h4' gutterBottom className={classes.subtitle}>
+              {t('application-subtitle')}
+            </Typography>
 
             <TopicsHead />
             <TopicsDetail />
@@ -133,12 +62,6 @@ const Index = () => {
       </div>
     </AppFrame>
   );
-};
-
-Index.getInitialProps = async () => {
-  return {
-    namespacesRequired: ['common']
-  };
 };
 
 export default Index;
