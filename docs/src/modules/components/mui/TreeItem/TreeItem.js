@@ -229,7 +229,7 @@ const TreeItem = React.forwardRef(function TreeItem(props, ref) {
 
   const handleKeyDown = event => {
     let flag = false;
-    const key = event.key;
+    const { key } = event;
 
     if (event.altKey || event.currentTarget !== event.target) {
       return;

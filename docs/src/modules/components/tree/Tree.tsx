@@ -1,13 +1,16 @@
 /* eslint-disable import/named */
 import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import Collapse from '@material-ui/core/Collapse';
-import { createStyles, makeStyles, Theme, withStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { TransitionProps } from '@material-ui/core/transitions';
-import Link from 'next/link';
-import React, { useEffect } from 'react';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 
 import { useTranslation } from '../../../../../i18n';
 import { Icon, Page } from '../../../../../src/typings/data/import';
+import { contains } from '../../utils/collection/array';
+import Link from '../common/link/Link';
 import CustomIcon from '../icon/CustomIcon';
 import TreeItem, { TreeItemProps } from '../mui/TreeItem';
 import TreeView from '../mui/TreeView';
@@ -15,6 +18,9 @@ import TreeView from '../mui/TreeView';
 interface LabelProps {
   labelText: string;
   icon: Icon;
+  pathname?: string;
+  hasChildren?: boolean;
+  expandedNodeIds?: Array<string>;
 }
 
 interface TreeProps {
@@ -22,22 +28,62 @@ interface TreeProps {
   activePage: Page;
 }
 
-export const TransitionComponent = (props: TransitionProps) => {
+const useStylesTreeNode = makeStyles((theme: Theme) =>
+  createStyles({
+    node: {
+      display: 'block',
+      color: theme.palette.text.secondary,
+      textDecoration: 'none'
+    }
+  })
+);
+
+export const TransitionComponent: FC<TransitionProps> = props => {
   return <Collapse {...props} />;
 };
 
-const StyledTreeItem = withStyles((_theme: Theme) =>
+export const useTreeItemStyles = makeStyles((theme: Theme) =>
   createStyles({
+    root: {},
+    expanded: {
+      '&:hover >$content $label, &:focus > $content $label, &$selected > $content $label, &$selected > $content $label:hover, &$selected:focus > $content $label': {
+        borderRight: `2px solid ${theme.palette.primary.main}`
+      }
+    },
+    selected: {
+      '&:hover >$content $label, &:focus > $content $label, &$selected > $content $label, &$selected > $content $label:hover, &$selected:focus > $content $label': {
+        borderRight: `2px solid ${theme.palette.primary.main}`
+      }
+    },
     group: {
       marginLeft: 0
     },
+    content: {},
+    iconContainer: {},
     label: {
       paddingLeft: 0
     }
   })
-)((props: TreeItemProps) => (
-  <TreeItem {...props} TransitionComponent={TransitionComponent} />
-));
+);
+
+const StyledTreeItem: FC<TreeItemProps> = props => {
+  const classes = useTreeItemStyles();
+  return (
+    <TreeItem
+      classes={{
+        root: classes.root,
+        expanded: classes.expanded,
+        selected: classes.selected,
+        group: classes.group,
+        content: classes.content,
+        iconContainer: classes.iconContainer,
+        label: classes.label
+      }}
+      {...props}
+      TransitionComponent={TransitionComponent}
+    />
+  );
+};
 
 const useStylesTreeLabel = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,8 +100,26 @@ const useStylesTreeLabel = makeStyles((theme: Theme) =>
   })
 );
 
-const TreeLabel: React.FC<LabelProps> = ({ labelText, icon }) => {
-  const classes = useStylesTreeLabel({});
+const TreeLabel: FC<LabelProps> = ({
+  labelText,
+  icon,
+  pathname,
+  hasChildren,
+  expandedNodeIds
+}) => {
+  const classes = useStylesTreeLabel();
+
+  const handleExpansion = contains([...expandedNodeIds]);
+
+  let renderExpand = null;
+
+  if (hasChildren) {
+    if (handleExpansion(pathname)) {
+      renderExpand = <ExpandLess />;
+    } else {
+      renderExpand = <ExpandMore />;
+    }
+  }
 
   return (
     <ListItem button className={classes.listItemPadding}>
@@ -63,51 +127,109 @@ const TreeLabel: React.FC<LabelProps> = ({ labelText, icon }) => {
         <CustomIcon icon={icon} />
       </ListItemIcon>
       <ListItemText secondary={labelText} />
+      {renderExpand}
     </ListItem>
   );
 };
 
-const generatePartialPathnames = (pathname: string): Array<string> =>
+export const generatePartialPathnames = (
+  pathname: string,
+  exact: boolean
+): Array<string> =>
   (pathname || '')
     .split('/')
     .filter(s => !!s)
-    .map((_name, index, arr) => `/${arr.slice(0, index + 1).join('/')}`);
+    .map(
+      (_name, index, arr) =>
+        `/${arr.slice(0, exact ? index + 1 : index).join('/')}`
+    );
 
-export const Tree: React.FC<TreeProps> = ({ data, activePage }) => {
+export const Tree: FC<TreeProps> = ({ data, activePage = {} }) => {
   const { t } = useTranslation();
 
-  const [expanded, setExpanded] = React.useState<Array<string>>(undefined);
-  const [selected, setSelected] = React.useState<string>(undefined);
+  const classes = useStylesTreeNode();
+
+  const [expanded, setExpanded] = useState<Array<string>>(
+    generatePartialPathnames(activePage.pathname, false)
+  );
+  const [selected, setSelected] = useState<Array<string>>(
+    generatePartialPathnames(activePage.pathname, true)
+  );
 
   useEffect(() => {
-    const pathnames = generatePartialPathnames(activePage.pathname);
-    setExpanded(pathnames);
-    setSelected(activePage.pathname);
+    setExpanded(generatePartialPathnames(activePage.pathname, false));
+    setSelected(generatePartialPathnames(activePage.pathname, true));
   }, [activePage.pathname]);
 
   const createItem = ({ children, ...rest }: Page) => {
     const title = t(`pages.${rest.pathname}`);
     return (
-      <Link href={rest.pathname} key={`link-${rest.pathname}`}>
-        <StyledTreeItem
-          key={rest.pathname}
-          nodeId={rest.pathname}
-          label={<TreeLabel labelText={title} icon={rest.icon} />}
-        >
-          {children && children.length > 0 ? children.map(createItem) : null}
-        </StyledTreeItem>
-      </Link>
+      <StyledTreeItem
+        key={rest.pathname}
+        nodeId={rest.pathname}
+        label={<TreeLabel labelText={title} icon={rest.icon} />}
+      >
+        {children && children.length > 0 ? children.map(createItem) : null}
+      </StyledTreeItem>
     );
   };
 
-  return expanded && selected ? (
+  const buildTreeItems = (nodes: Array<Page>) => {
+    if (!nodes) {
+      return null;
+    }
+    return nodes.map(node => {
+      const title = t(`pages.${node.pathname}`);
+      const item = (
+        <StyledTreeItem
+          key={node.pathname}
+          nodeId={node.pathname}
+          label={
+            <TreeLabel
+              labelText={title}
+              icon={node.icon}
+              hasChildren={node.children && node.children.length > 0}
+              expandedNodeIds={expanded}
+              pathname={node.pathname}
+            />
+          }
+        >
+          {node.children && node.children.length > 0
+            ? buildTreeItems(node.children)
+            : null}
+        </StyledTreeItem>
+      );
+
+      return node.children && node.children.length > 0 ? (
+        item
+      ) : (
+        <Link
+          key={`link-${node.pathname}`}
+          href={node.pathname}
+          className={classes.node}
+          naked
+        >
+          {item}
+        </Link>
+      );
+    });
+  };
+
+  const handleNodeToggle = (
+    _event: ChangeEvent<{}>,
+    nodeIds: Array<string>
+  ) => {
+    setExpanded(nodeIds);
+  };
+
+  return (
     <TreeView
-      defaultExpanded={expanded}
-      defaultSelected={selected}
       expanded={expanded}
       selected={selected}
+      onNodeToggle={handleNodeToggle}
+      multiSelect={true}
     >
-      {data.map(createItem)}
+      {buildTreeItems(data)}
     </TreeView>
-  ) : null;
+  );
 };

@@ -2,7 +2,7 @@ import { Button, Container, createStyles, Divider, makeStyles, Theme } from '@ma
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { useHoux } from 'houx';
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { useTranslation } from '../../../../i18n';
 import { RootState } from '../redux/reducers';
@@ -10,29 +10,28 @@ import Link from './common/link/Link';
 
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    footer: {
-      marginTop: theme.spacing(12)
-    },
     pagination: {
-      margin: theme.spacing(3, 0, 4),
       display: 'flex',
       justifyContent: 'space-between'
     },
     pageLinkButton: {
+      size: 'large',
       textTransform: 'none',
       fontWeight: theme.typography.fontWeightRegular
     },
     chevronLeftIcon: {
-      marginRight: theme.spacing(1)
+      marginRight: theme.spacing(1),
+      fontSize: 'large'
     },
     chevronRightIcon: {
-      marginLeft: theme.spacing(1)
+      marginLeft: theme.spacing(1),
+      fontSize: 'large'
     }
   })
 );
 
 const AppContentFooter = () => {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   const { t } = useTranslation();
 
@@ -42,15 +41,16 @@ const AppContentFooter = () => {
     }
   }: { state: RootState } = useHoux();
 
-  const currentPageNum = flattenedPages.findIndex(
+  const currentPageNumber = flattenedPages.findIndex(
     page => page.pathname === activePage.pathname
   );
-  const prevPage = flattenedPages[currentPageNum - 1];
-  const nextPage = flattenedPages[currentPageNum + 1];
+
+  const prevPage = flattenedPages[currentPageNumber - 1];
+  const nextPage = flattenedPages[currentPageNumber + 1];
 
   return (
-    <Container component='footer' className={classes.footer}>
-      <React.Fragment>
+    <Container component='footer'>
+      <Fragment>
         <Divider />
         <div className={classes.pagination}>
           {prevPage ? (
@@ -58,13 +58,9 @@ const AppContentFooter = () => {
               component={Link}
               naked
               href={prevPage.pathname}
-              size='large'
               className={classes.pageLinkButton}
             >
-              <ChevronLeftIcon
-                fontSize='small'
-                className={classes.chevronLeftIcon}
-              />
+              <ChevronLeftIcon className={classes.chevronLeftIcon} />
               {t(`pages.${prevPage.pathname}`)}
             </Button>
           ) : (
@@ -75,18 +71,14 @@ const AppContentFooter = () => {
               component={Link}
               naked
               href={nextPage.pathname}
-              size='large'
               className={classes.pageLinkButton}
             >
               {t(`pages.${nextPage.pathname}`)}
-              <ChevronRightIcon
-                fontSize='small'
-                className={classes.chevronRightIcon}
-              />
+              <ChevronRightIcon className={classes.chevronRightIcon} />
             </Button>
           ) : null}
         </div>
-      </React.Fragment>
+      </Fragment>
     </Container>
   );
 };
