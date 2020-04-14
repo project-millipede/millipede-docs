@@ -105,7 +105,6 @@ export interface OverviewProps {
   description?: Array<Description>;
   letter?: Array<string>;
   link?: string;
-  steps?: Array<OverviewStep>;
   scenario?: string;
   category?: string;
   icon?: string;

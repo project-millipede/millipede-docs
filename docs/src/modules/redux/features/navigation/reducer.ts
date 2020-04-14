@@ -14,7 +14,7 @@ export const initialState: Props = {
   pages: [],
   flattenedPages: [],
   activePage: {
-    pathname: 'Test',
+    pathname: '',
     title: ''
   }
 };
