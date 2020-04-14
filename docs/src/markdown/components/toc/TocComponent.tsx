@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { VFileContents } from 'vfile';
 
 import { generateToc, TocProps } from './Toc.svc';
 
 const TocComponent = ({ content, activeState }: TocProps) => {
-  const [toc, setToc] = useState<VFileContents>();
+  const [toc, setToc] = useState<unknown>();
 
   useEffect(() => {
-    generateToc({ content, activeState }).then(result =>
-      setToc(result.contents)
-    );
+    generateToc({ content, activeState }).then(file => setToc(file.result));
   }, [content, activeState.size]);
 
   return <>{toc}</>;

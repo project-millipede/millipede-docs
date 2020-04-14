@@ -1,16 +1,17 @@
-import vfile, { VFile } from 'vfile';
+import { VFile, VFileCompatible } from 'vfile';
 
 import { generateProcessor } from './MdProcessor';
 
+type VFileExtended = VFile & { result?: unknown };
+
 export interface MdElementProps {
-  content: string;
+  content: VFileCompatible;
 }
 
 export const generateMdElement = async ({
   content
-}: MdElementProps): Promise<VFile> => {
+}: MdElementProps): Promise<VFileExtended> => {
   const processor = generateProcessor();
-  const file: VFile = vfile(content);
-  const result = await processor.process(file);
-  return result;
+  const file = await processor.process(content);
+  return file;
 };
