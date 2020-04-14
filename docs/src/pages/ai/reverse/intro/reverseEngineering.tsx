@@ -3,7 +3,7 @@ import { createStyles, lighten, makeStyles, Theme } from '@material-ui/core/styl
 import React from 'react';
 import { ArcherContainer, ArcherElement } from 'react-archer';
 
-import { useTranslation } from '../../../../../i18n';
+import { useTranslation } from '../../../../../../i18n';
 
 const useStyles = makeStyles((_theme: Theme) =>
   createStyles({

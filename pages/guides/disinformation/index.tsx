@@ -8,8 +8,12 @@ const Page: FC<Props> = ({ path }) => {
   return <MDXContentLoader path={path} />;
 };
 
+// Page.defaultProps = {
+//   path: '/guides/disinformation/'
+// };
+
 Page.defaultProps = {
-  path: '/guides/disinformation/'
+  path: '/guides/disinformation/general/'
 };
 
 export default Page;

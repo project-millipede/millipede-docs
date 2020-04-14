@@ -9,7 +9,7 @@ const Page: FC<Props> = ({ path }) => {
 };
 
 Page.defaultProps = {
-  path: '/ai/'
+  path: '/ai/objectives/'
 };
 
 export default Page;
