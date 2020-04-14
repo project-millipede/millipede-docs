@@ -13,14 +13,12 @@ const useStyles = makeStyles((theme: Theme) => {
 });
 
 const MdElement = ({ content }: MdElementProps) => {
-  const [markdown, setMarkdown] = useState('');
+  const [markdown, setMarkdown] = useState<unknown>();
 
   const classes = useStyles({});
 
   useEffect(() => {
-    generateMdElement({ content }).then(result =>
-      setMarkdown(result.contents as string)
-    );
+    generateMdElement({ content }).then(file => setMarkdown(file.result));
   }, [content]);
 
   return <div className={clsx(classes.root, 'markdown-body')}>{markdown}</div>;

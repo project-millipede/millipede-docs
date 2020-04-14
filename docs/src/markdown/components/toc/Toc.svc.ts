@@ -1,18 +1,19 @@
-import vfile, { VFile } from 'vfile';
+import { VFile, VFileCompatible } from 'vfile';
 
 import { generateProcessor } from './TocProcessor';
 
+type VFileExtended = VFile & { result?: unknown };
+
 export interface TocProps {
-  content?: string;
+  content?: VFileCompatible;
   activeState: Set<string>;
 }
 
 export const generateToc = async ({
   content,
   activeState
-}: TocProps): Promise<VFile> => {
+}: TocProps): Promise<VFileExtended> => {
   const processor = generateProcessor(activeState);
-  const file: VFile = vfile(content);
-  const result = await processor.process(file);
-  return result;
+  const file = await processor.process(content);
+  return file;
 };
