@@ -6,59 +6,36 @@ import { useTranslation } from '../../../../i18n';
 import TOCComponent from '../../markdown/components/toc/TocComponent';
 import { RootState } from '../redux/reducers';
 
+export const WIDTH_TOC = 225;
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      top: 70,
-      // Fix IE 11 position sticky issue.
-      marginTop: 70,
-      width: 225,
-      flexShrink: 0,
+      width: WIDTH_TOC,
+      top: 96,
       order: 2,
+      flexShrink: 0,
       position: 'sticky',
-      height: 'calc(100vh - 70px)',
+      height: 'calc(100% - 96px)',
       overflowY: 'auto',
-      padding: theme.spacing(2, 2, 2, 0),
       display: 'none',
       [theme.breakpoints.up('sm')]: {
         display: 'block'
-      }
-    },
-    contents: {
-      marginTop: theme.spacing(2),
-      paddingLeft: theme.spacing(1.5)
-    },
-
-    // TODO: Somehow this rule does not get applied
-    ul: {
-      padding: 0,
-      margin: 0,
-      listStyleType: 'none'
-    },
-    item: {
-      fontSize: 13,
-      padding: theme.spacing(0.5, 0, 0.5, 1),
-      borderLeft: '4px solid transparent',
-      boxSizing: 'content-box',
-      '&:hover': {
-        borderLeft: `4px solid ${
-          theme.palette.type === 'light'
-            ? theme.palette.grey[200]
-            : theme.palette.grey[900]
-        }`
       },
-      '&$active,&:active': {
-        borderLeft: `4px solid ${
-          theme.palette.type === 'light'
-            ? theme.palette.grey[300]
-            : theme.palette.grey[800]
-        }`
-      }
+      '& ul': {
+        paddingLeft: 0,
+        listStyle: 'none',
+        '& li': {
+          // paddingLeft: theme.spacing(2),
+          color: theme.palette.text.primary
+        }
+      },
+      margin: theme.spacing(3)
     },
-    secondaryItem: {
-      paddingLeft: theme.spacing(2.5)
-    },
-    active: {}
+    tocHeader: {
+      height: 56,
+      padding: theme.spacing(1)
+    }
   })
 );
 
@@ -67,7 +44,7 @@ interface AppTableOfContentsProps {
 }
 
 const AppTableOfContents = ({ content }: AppTableOfContentsProps) => {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   const {
     state: {
@@ -78,13 +55,9 @@ const AppTableOfContents = ({ content }: AppTableOfContentsProps) => {
   const { t } = useTranslation();
 
   return (
-    <nav className={classes.root} aria-label={t('toc')}>
-      <React.Fragment>
-        <Typography gutterBottom className={classes.contents}>
-          {t('toc')}
-        </Typography>
-        <TOCComponent content={content} activeState={position} />
-      </React.Fragment>
+    <nav className={classes.root}>
+      <Typography className={classes.tocHeader}>{t('toc')}</Typography>
+      <TOCComponent content={content} activeState={position} />
     </nav>
   );
 };
