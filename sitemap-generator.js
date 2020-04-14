@@ -12,6 +12,10 @@ const urls = [
     targetDirectory: 'public/privly'
   },
   {
+    baseUrl: 'https://privatesphere.org',
+    targetDirectory: 'public/privatesphere'
+  },
+  {
     baseUrl: 'https://privatheit.org',
     targetDirectory: 'public/privatheit'
   }
