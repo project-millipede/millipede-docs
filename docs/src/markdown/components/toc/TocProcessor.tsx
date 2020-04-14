@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import remarkParse from 'remark-parse';
 import remarkToReact from 'remark-react';
 import remarkSlug from 'remark-slug';
@@ -12,37 +12,15 @@ export const generateProcessor = (activeState: Set<string>) => {
   const processor = unified()
     .use(remarkParse)
     .use(remarkSlug)
-    // .use(remarkTitle)
     .use(remarkMinNodes)
     .use(remarkToc)
     .use(remarkToReact, {
-      // sanitize: true,
-      fragment: React.Fragment,
+      sanitize: true,
+      fragment: Fragment,
       remarkReactComponents: {
-        // Redefining the anchor element overrides the results generated in a
-        // before executed effort of remark-slug to produce anchor elements
         a: props => {
           return <TocLink activeState={activeState} {...props} />;
         }
-
-        // ul: props => (
-        //   <TocLink
-        //     initialvalue={10}
-        //     activeState={activeState}
-        //     scrollToLink={scrollToLink}
-        //     secondary={false}
-        //     {...props}
-        //   />
-        // ),
-        // li: props => (
-        //   <TocLink
-        //     initialvalue={10}
-        //     activeState={activeState}
-        //     scrollToLink={scrollToLink}
-        //     secondary={true}
-        //     {...props}
-        //   />
-        // )
       }
     });
   return processor;
