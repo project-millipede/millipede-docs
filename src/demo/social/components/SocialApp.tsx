@@ -1,5 +1,5 @@
 import { useHoux } from 'houx';
-import React, { useCallback, useEffect } from 'react';
+import React, { Dispatch, FC, useCallback, useEffect } from 'react';
 import { isBrowser } from 'react-device-detect';
 import SwipeableViews from 'react-swipeable-views';
 
@@ -27,7 +27,7 @@ export interface SocialAppProps {
   stagger?: number;
   loop?: boolean;
 
-  Comp: React.FC<PostProps>;
+  Comp: FC<PostProps>;
 }
 
 const styles = {
@@ -67,7 +67,7 @@ const SocialApp = (props: SocialAppProps) => {
     dispatch
   }: {
     state: RootState;
-    dispatch: React.Dispatch<TimelineActions>;
+    dispatch: Dispatch<TimelineActions>;
   } = useHoux();
 
   const loadPosts = useCallback(async () => {

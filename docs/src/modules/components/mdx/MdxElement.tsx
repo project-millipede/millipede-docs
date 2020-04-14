@@ -1,13 +1,14 @@
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import { MDXProvider } from '@mdx-js/react';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { MetaProps } from 'src/typings/share';
 
 import { InteractiveHead } from '../../../markdown/components/head';
 import { Share } from '../common/share';
 
-interface MDXProps extends React.Props<any> {
+interface MDXProps {
   id: string;
+  children: ReactNode;
 }
 
 interface MDXRenderProps {

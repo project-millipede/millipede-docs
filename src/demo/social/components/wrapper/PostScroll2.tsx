@@ -1,5 +1,5 @@
 import { useHoux } from 'houx';
-import React, { FC, useEffect } from 'react';
+import React, { Dispatch, FC, useEffect } from 'react';
 import useMeasure from 'react-use-measure';
 
 import { AnimationActions } from '../../../../../docs/src/modules/redux/features/actionType';
@@ -9,7 +9,7 @@ import Post, { PostProps } from '../Post';
 
 // interface ViewPortProps {
 //   inViewport: boolean;
-//   forwardedRef: React.RefObject<HTMLDivElement>;
+//   forwardedRef: RefObject<HTMLDivElement>;
 // }
 
 interface InternalPostScroll2Props {
@@ -34,11 +34,11 @@ export const PostScroll2: FC<PostScroll2Props> = props => {
       }
     }
   }: {
-    dispatch: React.Dispatch<AnimationActions>;
+    dispatch: Dispatch<AnimationActions>;
     state: RootState;
   } = useHoux();
 
-  // const outerRef = React.useRef(null);
+  // const outerRef = useRef(null);
   // useRectEffect(
   //   rect => {
   //     if (

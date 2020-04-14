@@ -2,31 +2,43 @@ import MuiLink, { LinkProps as MuiLinkProps } from '@material-ui/core/Link';
 import clsx from 'clsx';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { AnchorHTMLAttributes, forwardRef, Ref } from 'react';
 
-type NextComposedProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & NextLinkProps;
+type NextComposedProps = AnchorHTMLAttributes<HTMLAnchorElement> &
+  NextLinkProps;
 
-const NextComposed = React.forwardRef<HTMLAnchorElement, NextComposedProps>((props, ref) => {
-  const { as, href, replace, scroll, passHref, shallow, prefetch, ...other } = props;
+const NextComposed = forwardRef<HTMLAnchorElement, NextComposedProps>(
+  (props, ref) => {
+    const {
+      as,
+      href,
+      replace,
+      scroll,
+      passHref,
+      shallow,
+      prefetch,
+      ...other
+    } = props;
 
-  return (
-    <NextLink
-      href={href}
-      prefetch={prefetch}
-      as={as}
-      replace={replace}
-      scroll={scroll}
-      shallow={shallow}
-      passHref={passHref}
-    >
-      <a ref={ref} {...other} />
-    </NextLink>
-  );
-});
+    return (
+      <NextLink
+        href={href}
+        prefetch={prefetch}
+        as={as}
+        replace={replace}
+        scroll={scroll}
+        shallow={shallow}
+        passHref={passHref}
+      >
+        <a ref={ref} {...other} />
+      </NextLink>
+    );
+  }
+);
 
 interface LinkPropsBase {
   activeClassName?: string;
-  innerRef?: React.Ref<HTMLAnchorElement>;
+  innerRef?: Ref<HTMLAnchorElement>;
   naked?: boolean;
 }
 
@@ -50,9 +62,16 @@ const Link = (props: LinkProps) => {
     return <NextComposed className={className} ref={innerRef} {...other} />;
   }
 
-  return <MuiLink component={NextComposed} className={className} ref={innerRef} {...other} />;
+  return (
+    <MuiLink
+      component={NextComposed}
+      className={className}
+      ref={innerRef}
+      {...other}
+    />
+  );
 };
 
-export default React.forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => (
+export default forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => (
   <Link {...props} innerRef={ref} />
 ));

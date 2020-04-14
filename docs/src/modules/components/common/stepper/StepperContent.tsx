@@ -1,6 +1,6 @@
 import { CardContent, Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useTranslation } from '../../../../../../i18n';
 import { Content, Stack } from '../../../../../../src/typings/data/import';
@@ -55,7 +55,7 @@ export const renderTitleAndDescription = (elements: Array<Content> = []) => {
 export const StepperContent = ({ elements = [] }: Stack) => {
   const { t } = useTranslation();
 
-  const [step, setStep] = React.useState(0);
+  const [step, setStep] = useState(0);
 
   const max = getStepsLength(elements);
 

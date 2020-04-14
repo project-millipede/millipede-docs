@@ -1,6 +1,6 @@
 import { motion, useAnimation, Variants } from 'framer-motion';
 import { useHoux } from 'houx';
-import React, { FC, useEffect } from 'react';
+import React, { FC, ReactNode, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { RootState } from '../../../../../../docs/src/modules/redux/reducers';
@@ -21,7 +21,9 @@ const AppRoot = styled(motion.div)`
   border-style: double;
 `;
 
-interface CollapseExpandProps extends React.Props<any> {}
+interface CollapseExpandProps {
+  children: ReactNode;
+}
 
 export const CollapseExpand: FC<CollapseExpandProps> = ({ children }) => {
   const {

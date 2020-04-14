@@ -1,4 +1,5 @@
 import { TimelineActions } from 'docs/src/modules/redux/features/actionType';
+import { Dispatch } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { createComment, removePost } from '../../../../docs/src/modules/redux/features/timeline/actions';
@@ -67,7 +68,7 @@ export const handleCreateComment = async (
   postId: number,
   text: string,
   entities: Partial<UseCaseEntities>,
-  dispatch: React.Dispatch<TimelineActions>,
+  dispatch: Dispatch<TimelineActions>,
   callback: () => void = () => ({})
 ) => {
   const denormalizedTimeline = denormalizeWrapper(
@@ -101,7 +102,7 @@ export const handleCreateComment = async (
 export const handleDeletePost = (
   timelineId: number,
   postId: number,
-  dispatch: React.Dispatch<TimelineActions>,
+  dispatch: Dispatch<TimelineActions>,
   callback: () => void = () => ({})
 ) => {
   dispatch(removePost(timelineId, postId));

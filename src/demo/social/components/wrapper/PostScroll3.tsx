@@ -1,11 +1,11 @@
-import React, { FC } from 'react';
+import React, { FC, RefObject } from 'react';
 import { useScrollPercentage } from 'react-scroll-percentage';
 
 import Post, { PostProps } from '../Post';
 
 interface ViewPortProps {
   inViewport: boolean;
-  forwardedRef: React.RefObject<HTMLDivElement>;
+  forwardedRef: RefObject<HTMLDivElement>;
 }
 
 interface InternalPostScroll3Props {

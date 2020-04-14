@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { Component } from 'react';
+import React, { Component, SyntheticEvent } from 'react';
 
 import NextLinkButton from './NextLinkButton';
 import NextLinkMuiLink from './NextLinkMuiLink';
@@ -9,7 +9,7 @@ interface TProps {
   naked?: boolean;
 
   // Material Link Props
-  onClick?: (event: React.SyntheticEvent) => void;
+  onClick?: (event: SyntheticEvent) => void;
   target?: string;
   rel?: string;
   className?: string;
@@ -42,5 +42,3 @@ export class MillipedeLink extends Component<Props, {}> {
     );
   }
 }
-
-export default MillipedeLink;

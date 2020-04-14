@@ -1,6 +1,6 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import { useHoux } from 'houx';
-import React from 'react';
+import React, { FC } from 'react';
 
 import { RootState } from '../../../../../docs/src/modules/redux/reducers';
 import { Device } from '../../../../typings/animation';
@@ -35,8 +35,8 @@ const useStyles = makeStyles((_theme: Theme) =>
 
 export interface HeaderViewProps {}
 
-const HeaderView: React.FC<HeaderViewProps> = () => {
-  const classes = useStyles({});
+const HeaderView: FC<HeaderViewProps> = () => {
+  const classes = useStyles();
 
   const { browserBar, circlesContainer, circle } = classes;
 

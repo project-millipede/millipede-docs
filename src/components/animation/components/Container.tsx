@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 import { useTranslation } from '../../../../i18n';
@@ -10,7 +10,7 @@ const Root = styled('div')``;
 
 const ns = 'pages/pidp/use-case/recognition/index';
 
-export const Container: React.FC = props => {
+export const Container: FC = props => {
   const { t } = useTranslation(ns);
 
   return (

@@ -1,7 +1,7 @@
 import { Button, Menu, MenuItem, NoSsr, Tooltip } from '@material-ui/core';
 import LanguageIcon from '@material-ui/icons/Language';
 import { useHoux } from 'houx';
-import React, { SyntheticEvent, useCallback, useState } from 'react';
+import React, { Dispatch, SyntheticEvent, useCallback, useState } from 'react';
 
 import { useTranslation } from '../../../../i18n';
 import { LANGUAGES_LABEL } from '../constants';
@@ -19,12 +19,12 @@ export const LanguageMenu = () => {
     }
   }: { state: RootState } = useHoux();
 
-  const { dispatch }: { dispatch: React.Dispatch<LanguageActions> } = useHoux();
+  const { dispatch }: { dispatch: Dispatch<LanguageActions> } = useHoux();
 
   const { i18n, t } = useTranslation();
 
   const handleSelect = useCallback(
-    (_event: React.SyntheticEvent, languageCode: string) => {
+    (_event: SyntheticEvent, languageCode: string) => {
       dispatch(changeUserLanguage(languageCode));
       i18n.changeLanguage(languageCode);
       setLanguageMenu(null);

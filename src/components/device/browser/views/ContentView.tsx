@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { FC, ReactNode } from 'react';
 
-export interface ContentViewProps extends React.Props<any> {}
+export interface ContentViewProps {
+  children: ReactNode;
+}
 
-const ContentView: React.FC<ContentViewProps> = ({ children }) => {
+const ContentView: FC<ContentViewProps> = ({ children }) => {
   return <div>{children}</div>;
 };
 

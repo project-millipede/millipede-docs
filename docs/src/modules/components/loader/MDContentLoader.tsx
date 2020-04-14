@@ -1,5 +1,5 @@
 import { useHoux } from 'houx';
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 import { RootState } from '../../redux/reducers';
 import { Logger } from '../../utils/logging';
@@ -18,7 +18,7 @@ export interface MDContentLoaderProps {
   path: string;
 }
 
-const MDContentLoader: React.FC<MDContentLoaderProps> = ({ path }) => {
+const MDContentLoader: FC<MDContentLoaderProps> = ({ path }) => {
   const [contentMain, setContentMain] = useState('');
   const { state }: { state: RootState } = useHoux();
   useEffect(() => {

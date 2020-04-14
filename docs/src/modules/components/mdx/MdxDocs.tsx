@@ -1,5 +1,5 @@
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { IReadingTime } from 'reading-time-estimator';
 
 import AppContent from '../AppContent';
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => {
   };
 });
 
-interface MarkdownDocsProps extends React.Props<any> {
+interface MarkdownDocsProps {
   content?: string;
   raw?: string;
   meta?: any;
@@ -29,6 +29,7 @@ interface MarkdownDocsProps extends React.Props<any> {
   headingsMap?: any;
   disableToc?: boolean;
   disableShare?: boolean;
+  children?: ReactNode;
 }
 
 const MdxDocs = (props: MarkdownDocsProps) => {
@@ -42,14 +43,10 @@ const MdxDocs = (props: MarkdownDocsProps) => {
     children
   } = props;
 
-  const classes = useStyles({});
+  const classes = useStyles();
 
   return (
     <AppFrame>
-      {/* <Head
-        title={`${headers.title || getTitle(markdown)} - Project Millipede`}
-        description={headers.description || getDescription(markdown)}
-      /> */}
       <Head meta={meta} />
       {!disableToc ? <AppTableOfContents content={raw} /> : null}
       <AppContent disableToc={disableToc}>

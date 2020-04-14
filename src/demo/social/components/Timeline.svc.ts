@@ -1,3 +1,4 @@
+import { Dispatch } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { TimelineActions } from '../../../../docs/src/modules/redux/features/actionType';
@@ -13,7 +14,7 @@ export const handleCreatePost = async (
   timelineIdTarget: number,
   text: string,
   entities: Partial<UseCaseEntities>,
-  dispatch: React.Dispatch<TimelineActions>,
+  dispatch: Dispatch<TimelineActions>,
   callback: () => void = () => ({})
 ) => {
   const denormalizedTimeline = denormalizeWrapper(

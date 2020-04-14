@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import markdownToRemarkPlugin from 'remark-parse';
 import remarkToReact from 'remark-react';
 import remarkSlug from 'remark-slug';
@@ -11,7 +11,7 @@ export const generateProcessor = () => {
     .use(markdownToRemarkPlugin)
     .use(remarkSlug)
     .use(remarkToReact, {
-      fragment: React.Fragment,
+      fragment: Fragment,
       sanitize: { clobberPrefix: '' }, // remove 'user-content' string from generated ids
       remarkReactComponents: {
         h2: props => {
