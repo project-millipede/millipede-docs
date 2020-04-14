@@ -20,11 +20,17 @@ export interface MDContentLoaderProps {
 
 const MDContentLoader: FC<MDContentLoaderProps> = ({ path }) => {
   const [contentMain, setContentMain] = useState('');
-  const { state }: { state: RootState } = useHoux();
+
+  const {
+    state: {
+      language: { userLanguage }
+    }
+  }: { state: RootState } = useHoux();
+
   useEffect(() => {
     const loadContent = async () => {
       let content: any;
-      if (state.language.userLanguage === 'en') {
+      if (userLanguage === 'en') {
         content = await load(path, '-en');
       } else {
         content = await load(path);
@@ -32,7 +38,7 @@ const MDContentLoader: FC<MDContentLoaderProps> = ({ path }) => {
       setContentMain(content);
     };
     loadContent();
-  }, [state.language.userLanguage]);
+  }, [userLanguage]);
 
   return <MdDocs content={contentMain} />;
 };

@@ -33,9 +33,7 @@ const useStyles = makeStyles((_theme: Theme) =>
   })
 );
 
-export interface HeaderViewProps {}
-
-const HeaderView: FC<HeaderViewProps> = () => {
+const HeaderView: FC = () => {
   const classes = useStyles();
 
   const { browserBar, circlesContainer, circle } = classes;
