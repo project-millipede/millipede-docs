@@ -1,13 +1,8 @@
 {
   "topics": [
     {
-      "title": ["Privacy", "Enhancing", "Technology"],
+      "title": ["Privacy Enhancing", "Technology"],
       "subTitle": ["Make untrusted", "environments trusted"],
-      "steps": [
-        { "label": "Step - 1" },
-        { "label": "Step - 2" },
-        { "label": "Step - 3" }
-      ],
       "contextLink": {
         "id": "pet",
         "perspectives": [
@@ -29,15 +24,37 @@
       }
     },
     {
-      "title": ["Personal", "Intrusion", "Detection and Prevention"],
+      "title": ["Personal Intrusion", "Detection / Prevention"],
       "subTitle": ["Approach to fight", "fake news"],
-      "steps": [
-        { "label": "Step - 4" },
-        { "label": "Step - 5" },
-        { "label": "Step - 6" }
-      ],
       "contextLink": {
         "id": "pidp",
+        "perspectives": [
+          {
+            "type": "feature",
+            "icon": {
+              "type": "FA",
+              "name": "rocket"
+            }
+          },
+          {
+            "type": "target-group",
+            "icon": {
+              "type": "FA",
+              "name": "user-circle"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "title": ["Enabled through", "App Instrumentation"],
+      "subTitle": [
+        "Integration of an",
+        "external UI into",
+        "existing applications"
+      ],
+      "contextLink": {
+        "id": "ai",
         "perspectives": [
           {
             "type": "feature",

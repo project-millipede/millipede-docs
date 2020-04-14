@@ -1,8 +1,8 @@
 {
   "topics": [
     {
-      "title": ["Privacy", "Enhancing", "Technology"],
-      "subTitle": ["Etablierung von Vertrauen", "in unsicheren Umgegebugen"],
+      "title": ["Privacy Enhancing", "Technology"],
+      "subTitle": ["Etablierung von", "Vertrauen in", "unsicheren Umgegebugen"],
       "contextLink": {
         "id": "pet",
         "perspectives": [
@@ -24,10 +24,37 @@
       }
     },
     {
-      "title": ["Personal", "Intrusion", "Detection and Prevention"],
+      "title": ["Personal Intrusion", "Detection / Prevention"],
       "subTitle": ["Ansatz zur Eindämmung", "von Falschinformation"],
       "contextLink": {
         "id": "pidp",
+        "perspectives": [
+          {
+            "type": "feature",
+            "icon": {
+              "type": "FA",
+              "name": "rocket"
+            }
+          },
+          {
+            "type": "target-group",
+            "icon": {
+              "type": "FA",
+              "name": "user-circle"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "title": ["Ermöglicht durch", "App Instrumentation"],
+      "subTitle": [
+        "Integration eines",
+        "zusätzlichen UI in",
+        "bestehende Anwendungen"
+      ],
+      "contextLink": {
+        "id": "ai",
         "perspectives": [
           {
             "type": "feature",
