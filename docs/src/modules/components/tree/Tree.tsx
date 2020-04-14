@@ -15,7 +15,7 @@ import CustomIcon from '../icon/CustomIcon';
 import TreeItem, { TreeItemProps } from '../mui/TreeItem';
 import TreeView from '../mui/TreeView';
 
-interface LabelProps {
+interface TreeLabelProps {
   labelText: string;
   icon: Icon;
   pathname?: string;
@@ -100,7 +100,7 @@ const useStylesTreeLabel = makeStyles((theme: Theme) =>
   })
 );
 
-const TreeLabel: FC<LabelProps> = ({
+const TreeLabel: FC<TreeLabelProps> = ({
   labelText,
   icon,
   pathname,

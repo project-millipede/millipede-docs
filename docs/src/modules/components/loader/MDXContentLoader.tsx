@@ -34,11 +34,17 @@ const MDXContentLoader: FC<MDXContentLoaderProps> = ({
   const [metaMain, setMetaMain] = useState('');
   const [rawMain, setRawMain] = useState('');
   const [timeToReadMain, setTimeToReadMain] = useState();
-  const { state }: { state: RootState } = useHoux();
+
+  const {
+    state: {
+      language: { userLanguage }
+    }
+  }: { state: RootState } = useHoux();
+
   useEffect(() => {
     const loadContent = async () => {
       let content: any;
-      if (state.language.userLanguage === 'de') {
+      if (userLanguage === 'de') {
         content = await load(path, '-de');
       } else {
         content = await load(path);
@@ -49,7 +55,7 @@ const MDXContentLoader: FC<MDXContentLoaderProps> = ({
       setTimeToReadMain(content.timeToRead);
     };
     loadContent();
-  }, [state.language.userLanguage]);
+  }, [userLanguage]);
 
   return (
     <MdxDocs

@@ -24,17 +24,13 @@ export const useStyles = makeStyles((_theme: Theme) =>
   })
 );
 
-interface AlignItemsListProps {
+interface CommentsProps {
   timelineId: number;
   postId: number;
   comments?: Array<Comment>;
 }
 
-const Comments: FC<AlignItemsListProps> = ({
-  timelineId,
-  postId,
-  comments = []
-}) => {
+const Comments: FC<CommentsProps> = ({ timelineId, postId, comments = [] }) => {
   const classes = useStyles({});
 
   const items = comments.map((comment, index, orgComments) => {

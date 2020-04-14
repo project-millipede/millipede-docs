@@ -3,16 +3,16 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import FolderIcon from '@material-ui/icons/Folder';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import RestoreIcon from '@material-ui/icons/Restore';
-import React from 'react';
+import React, { ChangeEvent, FC, useState } from 'react';
 
 import { BottomRevealMin } from '../../../animation/framer/components/container/BottomRevealMin';
 
 export interface FooterViewProps {}
 
-const FooterView: React.FC<FooterViewProps> = () => {
-  const [value, setValue] = React.useState('recents');
+const FooterView: FC<FooterViewProps> = () => {
+  const [value, setValue] = useState('recents');
 
-  const handleChange = (_event: React.ChangeEvent<{}>, newValue: string) => {
+  const handleChange = (_event: ChangeEvent<{}>, newValue: string) => {
     setValue(newValue);
   };
 

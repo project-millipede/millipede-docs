@@ -16,8 +16,11 @@ export interface EditPageProps {
 }
 
 export const EditPage = ({ markdownLocation }: EditPageProps) => {
-  const { state }: { state: RootState } = useHoux();
-  const { userLanguage } = state.language;
+  const {
+    state: {
+      language: { userLanguage }
+    }
+  }: { state: RootState } = useHoux();
 
   const { t } = useTranslation();
 

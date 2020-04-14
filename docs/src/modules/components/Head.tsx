@@ -4,14 +4,14 @@ import React, { FC } from 'react';
 import { useTranslation } from '../../../../i18n';
 import { MetaProps } from '../../../../src/typings/share';
 
-interface Props {
+interface HeadProps {
   meta?: MetaProps;
 }
 
 const defaultTitle = 'headTitle';
 const defaultDescription = 'strapline';
 
-const Head: FC<Props> = ({ meta = {} }) => {
+const Head: FC<HeadProps> = ({ meta = {} }) => {
   const {
     title = defaultTitle,
     description = defaultDescription,

@@ -1,7 +1,7 @@
 import { Button, Menu, MenuItem, NoSsr, Tooltip } from '@material-ui/core';
 import LanguageIcon from '@material-ui/icons/Language';
 import { useHoux } from 'houx';
-import React, { Dispatch, SyntheticEvent, useCallback, useState } from 'react';
+import React, { Dispatch, FC, SyntheticEvent, useCallback, useState } from 'react';
 
 import { useTranslation } from '../../../../i18n';
 import { LANGUAGES_LABEL } from '../constants';
@@ -10,7 +10,7 @@ import { changeUserLanguage } from '../redux/features/language/actions';
 import { RootState } from '../redux/reducers';
 import LanguageLabel from './LanguageLabel';
 
-export const LanguageMenu = () => {
+export const LanguageMenu: FC = () => {
   const [languageMenu, setLanguageMenu] = useState<Element & EventTarget>(null);
 
   const {

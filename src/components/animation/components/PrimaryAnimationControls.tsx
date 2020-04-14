@@ -5,14 +5,10 @@ import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import { useHoux } from 'houx';
 import { TFunction } from 'next-i18next-serverless';
-import React, { FC } from 'react';
+import React, { Dispatch, FC, MouseEvent } from 'react';
 
 import { AnimationActions } from '../../../../docs/src/modules/redux/features/actionType';
-import {
-  changeArea,
-  changeDevice,
-  changeSzenario,
-} from '../../../../docs/src/modules/redux/features/animation/actions';
+import { changeArea, changeDevice, changeSzenario } from '../../../../docs/src/modules/redux/features/animation/actions';
 import { RootState } from '../../../../docs/src/modules/redux/reducers';
 import { Area, Device, Szenario } from '../../../typings/animation';
 
@@ -53,12 +49,12 @@ export const PrimaryAnimationControls: FC<ControlsProps> = ({ t }) => {
       animation: { szenario }
     }
   }: {
-    dispatch: React.Dispatch<AnimationActions>;
+    dispatch: Dispatch<AnimationActions>;
     state: RootState;
   } = useHoux();
 
   const handleChange = (
-    _event: React.MouseEvent<HTMLElement>,
+    _event: MouseEvent<HTMLElement>,
     newSzenario: Szenario
   ) => {
     dispatch(changeSzenario(newSzenario));
@@ -113,14 +109,11 @@ export const SecondaryAnimationControls: FC<ControlsProps> = ({ t }) => {
       animation: { area }
     }
   }: {
-    dispatch: React.Dispatch<AnimationActions>;
+    dispatch: Dispatch<AnimationActions>;
     state: RootState;
   } = useHoux();
 
-  const handleAreaChange = (
-    _event: React.MouseEvent<HTMLElement>,
-    newArea: Area
-  ) => {
+  const handleAreaChange = (_event: MouseEvent<HTMLElement>, newArea: Area) => {
     dispatch(changeArea(newArea));
   };
 
@@ -170,7 +163,7 @@ export const DeviceControls: FC<ControlsProps> = ({ t }) => {
       animation: { device }
     }
   }: {
-    dispatch: React.Dispatch<AnimationActions>;
+    dispatch: Dispatch<AnimationActions>;
     state: RootState;
   } = useHoux();
 

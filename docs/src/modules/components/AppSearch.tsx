@@ -2,7 +2,7 @@ import { useMediaQuery } from '@material-ui/core';
 import Input from '@material-ui/core/Input';
 import { createStyles, fade, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { useTranslation } from '../../../../i18n';
 
@@ -155,12 +155,12 @@ export const AppSearch = () => {
   // const { userLanguage } = state.language;
 
   const classes = useStyles({});
-  const inputRef = React.useRef(null);
+  const inputRef = useRef(null);
   const theme = useTheme();
 
   const { t } = useTranslation();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleKeyDown = event => {
       // Use event.keyCode to support IE 11
       if (
@@ -184,7 +184,7 @@ export const AppSearch = () => {
 
   const desktop = useMediaQuery(theme.breakpoints.up('sm'));
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (desktop) {
       // loadDependencies();
       // initDocsearch(userLanguage);
