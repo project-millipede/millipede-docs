@@ -1,11 +1,6 @@
 {
   "application-title": "Project Millipede",
-  "application-subtitle_old": "Self-determination in the digital world through application instrumentation",
   "application-subtitle": "Self-determination in the digital world",
-  "application-subtitle_ai_pre": "Self-determination in the digital world through",
-  "application-subtitle_ai": "application instrumentation",
-  "application-sub-subtitle_old": "A virtual layer on top of the user interface of existing applications - cloak user data and interaction, dampen the effect of analytics",
-  "application-sub-subtitle_old_min": "Cloak user data and interaction, dampen the effect of analytics",
   "change-language": "Change language",
   "github": "Github",
   "toggleTheme": "Toggle light / dark theme",

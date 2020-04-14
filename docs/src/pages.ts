@@ -32,27 +32,12 @@ export const loadPagesToRefactor = (
     return [];
   }
 
-  // if (
-  //   pagesPET.filter(link => {
-  //     return _.some([link, ...(link.children || [])], linkIncludesText);
-  //   }).length > 0
-  // ) {
-  //   return [
-  //     // ...pagesCommon,
-  //     ...pagesRethinkSecurity,
-  //     ...pagesPET,
-  //     ...pagesPerspective,
-  //     ...pagesDiscoverMore
-  //   ];
-  // }
-
   if (
     pagesPIDP.filter(link => {
       return _.some([link, ...(link.children || [])], linkIncludesText);
     }).length > 0
   ) {
     return [
-      // ...pagesCommon,
       ...pagesRethinkSecurity,
       ...pagesPIDP,
       ...pagesPerspective,
@@ -62,7 +47,6 @@ export const loadPagesToRefactor = (
 
   if (currentPages.length === 0) {
     return [
-      // ...pagesCommon,
       ...pagesRethinkSecurity,
       ...pagesPIDP,
       ...pagesPerspective,
@@ -93,14 +77,6 @@ export const loadPagesToRefactor = (
   ) {
     return [...currentPages];
   }
-
-  // if (
-  //   pagesCommon.filter(link => {
-  //     return _.some([link, ...(link.children || [])], linkIncludesText);
-  //   }).length > 0
-  // ) {
-  //   return [...currentPages];
-  // }
 };
 
 export const defaultIcon: Icon = {
@@ -112,23 +88,6 @@ export const defaultFAIcon: Icon = {
   type: IconType.FA,
   name: ''
 };
-
-// export const pagesCommon: Array<Page> = [
-//   {
-//     pathname: '/guides',
-//     icon: { ...defaultIcon, name: 'explore' },
-//     children: [
-//       {
-//         pathname: '/guides/api',
-//         icon: { ...defaultIcon, name: 'code' }
-//       }
-//     ]
-//   },
-//   {
-//     pathname: '/',
-//     displayNav: false
-//   }
-// ];
 
 export const pagesDiscoverMore: Array<Page> = [
   {
@@ -166,24 +125,40 @@ export const pagesPIDP: Array<Page> = [
     icon: defaultIcon,
     children: [
       {
-        pathname: '/pidp/approach',
-        icon: { ...defaultIcon, name: 'filter_center_focus' }
+        pathname: '/pidp/intro',
+        icon: { ...defaultIcon, name: 'slideshow' }
       },
       {
-        pathname: '/pidp/approach/byExample',
-        icon: { ...defaultIcon, name: 'touch_app' }
+        pathname: '/pidp/approach',
+        icon: { ...defaultIcon, name: 'filter_center_focus' },
+        children: [
+          {
+            pathname: '/pidp/approach/intro',
+            icon: { ...defaultIcon, name: 'slideshow' }
+          },
+          {
+            pathname: '/pidp/approach/byExample',
+            icon: { ...defaultIcon, name: 'touch_app' }
+          }
+        ]
       },
       {
         pathname: '/pidp/use-case',
-        icon: { ...defaultIcon, name: 'extension' }
-      },
-      {
-        pathname: '/pidp/use-case/recognition',
-        icon: { ...defaultIcon, name: 'flip' }
-      },
-      {
-        pathname: '/pidp/use-case/response',
-        icon: { ...defaultIcon, name: 'create' }
+        icon: { ...defaultIcon, name: 'extension' },
+        children: [
+          {
+            pathname: '/pidp/use-case/intro',
+            icon: { ...defaultIcon, name: 'slideshow' }
+          },
+          {
+            pathname: '/pidp/use-case/recognition',
+            icon: { ...defaultIcon, name: 'flip' }
+          },
+          {
+            pathname: '/pidp/use-case/response',
+            icon: { ...defaultIcon, name: 'create' }
+          }
+        ]
       }
     ]
   }
@@ -206,6 +181,10 @@ export const pagesAI: Array<Page> = [
         pathname: '/ai/reverse',
         icon: { ...defaultIcon, name: 'find_replace' },
         children: [
+          {
+            pathname: '/ai/reverse/intro',
+            icon: { ...defaultIcon, name: 'slideshow' }
+          },
           {
             pathname: '/ai/reverse/hooks',
             icon: { ...defaultIcon, name: 'functions' }
@@ -246,12 +225,22 @@ export const pagesRethinkSecurity: Array<Page> = [
     icon: { ...defaultIcon, name: 'security' },
     children: [
       {
-        pathname: '/rethink-security/attackVectors',
-        icon: { ...defaultIcon, name: 'bug_report' }
+        pathname: '/rethink-security/intro',
+        icon: { ...defaultIcon, name: 'slideshow' }
       },
       {
-        pathname: '/rethink-security/attackVectors/comparison',
-        icon: { ...defaultIcon, name: 'compare_arrows' }
+        pathname: '/rethink-security/attackVectors',
+        icon: { ...defaultIcon, name: 'bug_report' },
+        children: [
+          {
+            pathname: '/rethink-security/attackVectors/intro',
+            icon: { ...defaultIcon, name: 'slideshow' }
+          },
+          {
+            pathname: '/rethink-security/attackVectors/comparison',
+            icon: { ...defaultIcon, name: 'compare_arrows' }
+          }
+        ]
       }
     ]
   }

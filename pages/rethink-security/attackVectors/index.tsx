@@ -9,7 +9,7 @@ const Page: FC<Props> = ({ path }) => {
 };
 
 Page.defaultProps = {
-  path: '/rethink-security/attackVectors/'
+  path: '/rethink-security/attackVectors/intro'
 };
 
 export default Page;

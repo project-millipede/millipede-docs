@@ -1,11 +1,6 @@
 {
   "application-title": "Projekt Millipede",
-  "application-subtitle_old": "Selbstbestimmung in der digitalen Welt mittels Anwendungsinstrumentierung",
   "application-subtitle": "Selbstbestimmung in der digitalen Welt",
-  "application-subtitle_ai_pre": "Selbstbestimmung in der digitalen Welt mittels",
-  "application-subtitle_ai": "Anwendungsinstrumentierung",
-  "application-sub-subtitle_old": "Eine transparente, über der Benutzeroberfläche einer bestehenden Anwendung angeordnete Lage - verschleiert Daten und Interaktion des Nutzers, dämpft die Wirkung von Analyseverfahren",
-  "application-sub-subtitle_old_min": "Verschleiert Daten und Interaktion des Nutzers, dämpft die Wirkung von Analyseverfahren",
   "change-language": "Sprache ändern",
   "github": "Github",
   "toggleTheme": "Motiv hell / dunkel wechseln",
