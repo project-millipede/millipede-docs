@@ -1,5 +1,5 @@
 import { useHoux } from 'houx';
-import React, { FC, useEffect } from 'react';
+import React, { Dispatch, FC, RefObject, useEffect } from 'react';
 import handleViewport from 'react-in-viewport';
 import useMeasure from 'react-use-measure';
 
@@ -10,7 +10,7 @@ import Post, { PostProps } from '../Post';
 
 interface ViewPortProps {
   inViewport: boolean;
-  forwardedRef: React.RefObject<HTMLDivElement>;
+  forwardedRef: RefObject<HTMLDivElement>;
 }
 
 interface InternalPostScrollProps {
@@ -30,7 +30,7 @@ export const PostScroll: FC<PostScrollProps> = props => {
       animation: { progress }
     }
   }: {
-    dispatch: React.Dispatch<AnimationActions>;
+    dispatch: Dispatch<AnimationActions>;
     state: RootState;
   } = useHoux();
 

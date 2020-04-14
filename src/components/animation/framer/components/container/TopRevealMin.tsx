@@ -1,7 +1,7 @@
 import { motion, useAnimation, Variants } from 'framer-motion';
-import React, { useEffect } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 
-export interface TopRevealMinProps extends React.Props<any> {
+export interface TopRevealMinProps {
   id: string;
 
   fontColor?: string;
@@ -14,6 +14,7 @@ export interface TopRevealMinProps extends React.Props<any> {
   stagger?: number;
   loop?: boolean;
   toggle?: boolean;
+  children: ReactNode;
 }
 
 export const TopRevealMin = (props: TopRevealMinProps) => {

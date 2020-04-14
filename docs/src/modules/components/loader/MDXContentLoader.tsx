@@ -1,5 +1,5 @@
 import { useHoux } from 'houx';
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 import { RootState } from '../../redux/reducers';
 import { Logger } from '../../utils/logging';
@@ -25,7 +25,7 @@ export interface MDXContentLoaderProps {
   disableShare?: boolean;
 }
 
-const MDXContentLoader: React.FC<MDXContentLoaderProps> = ({
+const MDXContentLoader: FC<MDXContentLoaderProps> = ({
   path,
   disableToc = false,
   disableShare = false

@@ -1,7 +1,7 @@
 import { motion, useAnimation, Variants } from 'framer-motion';
-import React, { useEffect } from 'react';
+import React, { FC, ReactNode, useEffect } from 'react';
 
-export interface BottomRevealMinProps extends React.Props<any> {
+export interface BottomRevealMinProps {
   id: string;
 
   fontColor?: string;
@@ -14,9 +14,10 @@ export interface BottomRevealMinProps extends React.Props<any> {
   stagger?: number;
   loop?: boolean;
   toggle?: boolean;
+  children: ReactNode;
 }
 
-export const BottomRevealMin = (props: BottomRevealMinProps) => {
+export const BottomRevealMin: FC<BottomRevealMinProps> = props => {
   const {
     // lineGap,
     // fontSize,
@@ -146,7 +147,6 @@ export const BottomRevealMin = (props: BottomRevealMinProps) => {
 };
 
 BottomRevealMin.defaultProps = {
-  width: 200,
   lineGap: 0,
   fontSize: 30,
   fontColor: '#000000',

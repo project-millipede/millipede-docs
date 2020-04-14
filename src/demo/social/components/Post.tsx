@@ -19,7 +19,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import clsx from 'clsx';
 import { useHoux } from 'houx';
-import React, { FC } from 'react';
+import React, { Dispatch, FC, useState } from 'react';
 
 import { TimelineActions } from '../../../../docs/src/modules/redux/features/actionType';
 import { RootState } from '../../../../docs/src/modules/redux/reducers';
@@ -66,9 +66,9 @@ const Post: FC<PostProps> = ({ timelineId, postId }) => {
 
   const { t } = useTranslation(ns);
 
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
 
-  const [displayEditor, setDisplayEditor] = React.useState(false);
+  const [displayEditor, setDisplayEditor] = useState(false);
 
   const {
     dispatch,
@@ -76,7 +76,7 @@ const Post: FC<PostProps> = ({ timelineId, postId }) => {
       timeline: { entities }
     }
   }: {
-    dispatch: React.Dispatch<TimelineActions>;
+    dispatch: Dispatch<TimelineActions>;
     state: RootState;
   } = useHoux();
 

@@ -1,7 +1,7 @@
 import { Button, ButtonGroup } from '@material-ui/core';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import { useHoux } from 'houx';
-import React, { FC, useRef } from 'react';
+import React, { Dispatch, FC, useRef, useState } from 'react';
 
 import { TimelineActions } from '../../../../docs/src/modules/redux/features/actionType';
 import { RootState } from '../../../../docs/src/modules/redux/reducers';
@@ -14,14 +14,14 @@ import { handleCreatePost } from './Timeline.svc';
 
 // import Search from './Search';
 interface TimelineProps {
-  Comp: React.FC<PostProps>;
+  Comp: FC<PostProps>;
   timelineId?: number;
 }
 
 const ns = 'pages/pidp/use-case/recognition/index';
 
 const Timeline: FC<TimelineProps> = ({ Comp, timelineId }) => {
-  const [displayEditor, setDisplayEditor] = React.useState(false);
+  const [displayEditor, setDisplayEditor] = useState(false);
 
   const { t } = useTranslation(ns);
 
@@ -34,7 +34,7 @@ const Timeline: FC<TimelineProps> = ({ Comp, timelineId }) => {
       }
     }
   }: {
-    dispatch: React.Dispatch<TimelineActions>;
+    dispatch: Dispatch<TimelineActions>;
     state: RootState;
   } = useHoux();
 

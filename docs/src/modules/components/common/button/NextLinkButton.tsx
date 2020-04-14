@@ -1,13 +1,13 @@
 import { Omit } from '@material-ui/core';
 import Button, { ButtonProps } from '@material-ui/core/Button';
 import { LinkProps as NextLinkProps } from 'next/link';
-import React from 'react';
+import React, { ComponentType, forwardRef } from 'react';
 
 type ComponentWorkaroundProps<P extends {}> = P & {
-  component?: React.ComponentType<P>;
+  component?: ComponentType<P>;
 };
 
-const NextLinkButton = React.forwardRef<
+const NextLinkButton = forwardRef<
   HTMLButtonElement,
   Omit<ButtonProps, 'component'> & ComponentWorkaroundProps<NextLinkProps>
 >(({ children, ...props }, ref) => {

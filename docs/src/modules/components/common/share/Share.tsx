@@ -9,7 +9,7 @@ import copy from 'copy-to-clipboard';
 import _ from 'lodash';
 import { TFunction } from 'next-i18next-serverless';
 import { useRouter } from 'next/router';
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, SyntheticEvent, useCallback, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { useTranslation } from '../../../../../../i18n';
@@ -230,10 +230,7 @@ const Share: FC<MetaProps> = props => {
     }
   };
 
-  const handleFeedbackClose = (
-    _event?: React.SyntheticEvent,
-    reason?: string
-  ) => {
+  const handleFeedbackClose = (_event?: SyntheticEvent, reason?: string) => {
     if (reason === 'clickaway') {
       return;
     }
