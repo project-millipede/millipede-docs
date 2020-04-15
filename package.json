@@ -121,6 +121,7 @@
     "eslint-plugin-react-hooks": "^3.0.0",
     "esm": "^3.2.25",
     "happypack": "^5.0.1",
+    "loader-utils": "^2.0.0",
     "nextjs-sitemap-generator": "^0.5.0",
     "prettier": "^2.0.4",
     "raw-loader": "^4.0.1",
