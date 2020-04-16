@@ -29,23 +29,23 @@ const stepsFiltered = (
   return array.filter(value => value.step === step).map(value => value);
 };
 
-export const renderTitleAndDescription = (elements: Array<Content> = []) => {
+export const renderTitleAndDescription = (items: Array<Content> = []) => {
   const classes = useStyles();
 
-  return elements.map((content, index) => {
+  return items.map((item, index) => {
     return (
       <Grid
         item
-        xs={content.size}
+        xs={item.size}
         className={classes.row}
-        key={`${content.title} ${index}`}
+        key={`title-description-${index}`}
       >
         <CardContent>
           <Typography variant='subtitle1' gutterBottom>
-            {content.title}
+            {item.title}
           </Typography>
           <Typography variant='subtitle2' gutterBottom>
-            {content.description}
+            {item.description}
           </Typography>
         </CardContent>
       </Grid>
