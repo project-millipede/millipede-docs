@@ -1,11 +1,11 @@
 import { Box, Typography } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { ArcherContainer, ArcherElement } from 'react-archer';
 
 import { useTranslation } from '../../../../../i18n';
 
-const useStyles = makeStyles((_theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     row: {
       margin: '100px 0',
@@ -28,7 +28,7 @@ const useStyles = makeStyles((_theme: Theme) =>
 const ns = 'pages/ai/general/index';
 
 const Diagram = () => {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   const { t } = useTranslation(ns);
 

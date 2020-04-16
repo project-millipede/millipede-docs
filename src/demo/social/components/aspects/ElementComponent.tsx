@@ -1,4 +1,4 @@
-import { createStyles, makeStyles, Slider, Theme, Typography } from '@material-ui/core';
+import { createStyles, makeStyles, Slider, Typography } from '@material-ui/core';
 import { TFunction } from 'next-i18next-serverless';
 import React, { useState } from 'react';
 
@@ -6,7 +6,7 @@ import { Item } from '../../../../../docs/src/modules/components/common/grid/Ite
 import Stepper from '../../../../components/common/stepper/Stepper';
 import { Category, CategoryDescriptor, Content, Stack2 } from '../../../../typings/data/import';
 
-export const useStyles = makeStyles((_theme: Theme) =>
+export const useStyles = makeStyles(() =>
   createStyles({
     paper: {
       // padding: theme.spacing(2),
@@ -97,7 +97,7 @@ interface TranslationProps {
 type Props = Stack2 & TranslationProps;
 
 const ElementComponent = ({ elements, categories, t }: Props) => {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   const [step, setStep] = useState(0);
 

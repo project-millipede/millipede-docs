@@ -1,4 +1,4 @@
-import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { createStyles, makeStyles, Typography } from '@material-ui/core';
 import { MDXProvider } from '@mdx-js/react';
 import React, { ReactNode } from 'react';
 import { MetaProps } from 'src/typings/share';
@@ -16,7 +16,7 @@ interface MDXRenderProps {
   meta?: MetaProps;
 }
 
-export const useStyles = makeStyles((_theme: Theme) =>
+export const useStyles = makeStyles(() =>
   createStyles({
     headerRow: {
       display: 'flex',
@@ -33,7 +33,7 @@ export const useStyles = makeStyles((_theme: Theme) =>
 
 const h1 = ({ disableShare, meta }: MDXRenderProps) => {
   return ({ children }: MDXProps) => {
-    const classes = useStyles({});
+    const classes = useStyles();
 
     return (
       <div className={classes.headerRow}>

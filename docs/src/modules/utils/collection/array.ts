@@ -70,7 +70,6 @@ export const insertAtWithPreserve = <T>(
   return [...array, item];
 };
 
-// TODO: GRI: A test is neccessary
 export const updateAt = <T>(
   source: Array<T>,
   item: T,

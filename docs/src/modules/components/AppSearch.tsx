@@ -154,9 +154,10 @@ export const AppSearch = () => {
   // const { state }: { state: RootState } = useHoux();
   // const { userLanguage } = state.language;
 
-  const classes = useStyles({});
-  const inputRef = useRef(null);
+  const classes = useStyles();
   const theme = useTheme();
+
+  const inputRef = useRef(null);
 
   const { t } = useTranslation();
 

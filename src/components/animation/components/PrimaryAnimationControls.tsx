@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const PrimaryAnimationControls: FC<ControlsProps> = ({ t }) => {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   const {
     dispatch,
@@ -101,7 +101,7 @@ export const PrimaryAnimationControls: FC<ControlsProps> = ({ t }) => {
 };
 
 export const SecondaryAnimationControls: FC<ControlsProps> = ({ t }) => {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   const {
     dispatch,
@@ -155,7 +155,7 @@ export const SecondaryAnimationControls: FC<ControlsProps> = ({ t }) => {
 };
 
 export const DeviceControls: FC<ControlsProps> = ({ t }) => {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   const {
     dispatch,

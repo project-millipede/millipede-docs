@@ -1,4 +1,4 @@
-import { createStyles, Fade, makeStyles, Snackbar, Theme } from '@material-ui/core';
+import { createStyles, Fade, makeStyles, Snackbar } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import ShareIcon from '@material-ui/icons/Share';
 import SpeedDial from '@material-ui/lab/SpeedDial';
@@ -34,7 +34,7 @@ export interface ShareProps {
   url: string;
 }
 
-const useStyles = makeStyles((_theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     speedDial: {
       height: '56px',
@@ -198,7 +198,7 @@ const createButtons = (
 };
 
 const Share: FC<MetaProps> = props => {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   const { t } = useTranslation();
 

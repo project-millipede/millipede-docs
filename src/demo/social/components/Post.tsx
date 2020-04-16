@@ -62,7 +62,7 @@ export interface PostProps {
 const ns = 'pages/pidp/use-case/recognition/index';
 
 const Post: FC<PostProps> = ({ timelineId, postId }) => {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   const { t } = useTranslation(ns);
 

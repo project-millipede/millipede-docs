@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) => {
 const MdElement = ({ content }: MdElementProps) => {
   const [markdown, setMarkdown] = useState<unknown>();
 
-  const classes = useStyles({});
+  const classes = useStyles();
 
   useEffect(() => {
     generateMdElement({ content }).then(file => setMarkdown(file.result));

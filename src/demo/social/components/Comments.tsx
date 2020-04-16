@@ -2,13 +2,13 @@ import { CardHeader, Divider, Typography } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React, { FC, Fragment } from 'react';
 
 import { Comment } from '../../../typings/social';
 
 // import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-export const useStyles = makeStyles((_theme: Theme) =>
+export const useStyles = makeStyles(() =>
   createStyles({
     // root: {
     //   // width: '100%',
@@ -31,7 +31,7 @@ interface CommentsProps {
 }
 
 const Comments: FC<CommentsProps> = ({ timelineId, postId, comments = [] }) => {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   const items = comments.map((comment, index, orgComments) => {
     const {

@@ -34,21 +34,11 @@ const CommentEditor: FC<CommentEditorProps> = ({ isComment, create }) => {
 
   const [commentState, setCommentState] = useState(EditorState.createEmpty());
   const [commentError, setCommentError] = useState(false);
-  const classes = useStyles({});
+  const classes = useStyles();
 
   const handlePostComment = useCallback(() => {
-    if (
-      commentState
-        .getCurrentContent()
-        .getPlainText()
-        .trim()
-    ) {
-      create(
-        commentState
-          .getCurrentContent()
-          .getPlainText()
-          .trim()
-      );
+    if (commentState.getCurrentContent().getPlainText().trim()) {
+      create(commentState.getCurrentContent().getPlainText().trim());
       return;
     }
     setCommentError(true);
