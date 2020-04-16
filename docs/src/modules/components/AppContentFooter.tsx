@@ -1,8 +1,8 @@
-import { Button, Container, createStyles, Divider, makeStyles, Theme } from '@material-ui/core';
+import { Button, Container, createStyles, makeStyles, Theme } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { useHoux } from 'houx';
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import { useTranslation } from '../../../../i18n';
 import { RootState } from '../redux/reducers';
@@ -10,6 +10,12 @@ import Link from './common/link/Link';
 
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    footer: {
+      padding: theme.spacing(4, 0),
+      [theme.breakpoints.up('sm')]: {
+        padding: theme.spacing(8, 0)
+      }
+    },
     pagination: {
       display: 'flex',
       justifyContent: 'space-between'
@@ -49,9 +55,8 @@ const AppContentFooter = () => {
   const nextPage = flattenedPages[currentPageNumber + 1];
 
   return (
-    <Container component='footer'>
-      <Fragment>
-        <Divider />
+    <Container maxWidth='md'>
+      <footer className={classes.footer}>
         <div className={classes.pagination}>
           {prevPage ? (
             <Button
@@ -76,9 +81,11 @@ const AppContentFooter = () => {
               {t(`pages.${nextPage.pathname}`)}
               <ChevronRightIcon className={classes.chevronRightIcon} />
             </Button>
-          ) : null}
+          ) : (
+            <div />
+          )}
         </div>
-      </Fragment>
+      </footer>
     </Container>
   );
 };

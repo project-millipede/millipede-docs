@@ -107,13 +107,8 @@ export const useMdStyles = (theme: Theme) =>
           marginTop: '16px'
         }
       },
-      '& a, & a code': {
-        // Style taken from the Link component
-        color: theme.palette.secondary.main,
-        textDecoration: 'none',
-        '&:hover': {
-          textDecoration: 'underline'
-        }
+      '& a': {
+        color: theme.palette.primary.main
       },
       '& img': {
         maxWidth: '100%'
