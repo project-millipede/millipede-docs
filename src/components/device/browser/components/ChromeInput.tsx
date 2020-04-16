@@ -33,7 +33,7 @@ export const useStyles = makeStyles(({ spacing }: Theme) => {
 });
 
 const ChromeInput = () => {
-  const styles = useStyles({});
+  const styles = useStyles();
 
   const [enabled, setEnabled] = useState(false);
 

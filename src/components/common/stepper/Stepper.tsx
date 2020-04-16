@@ -1,13 +1,13 @@
 import Button from '@material-ui/core/Button';
 import MobileStepper from '@material-ui/core/MobileStepper';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import React, { useEffect, useState } from 'react';
 
 import { useTranslation } from '../../../../i18n';
 
-const useStyles = makeStyles((_theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       flexGrow: 1
@@ -21,7 +21,7 @@ interface StepperProps {
 }
 
 const Stepper = ({ steps, currentStep }: StepperProps) => {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   const [activeStep, setActiveStep] = useState(0);
 

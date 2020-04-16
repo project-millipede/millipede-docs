@@ -1,4 +1,4 @@
-import { createStyles, makeStyles, Theme, Tooltip } from '@material-ui/core';
+import { createStyles, makeStyles, Tooltip } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -19,7 +19,7 @@ interface AppToolBarProps {
   handleDrawerOpen: () => void;
 }
 
-const useDrawerStyles = makeStyles((_theme: Theme) =>
+const useDrawerStyles = makeStyles(() =>
   createStyles({
     menuButton: {
       marginRight: 36
@@ -30,15 +30,8 @@ const useDrawerStyles = makeStyles((_theme: Theme) =>
   })
 );
 
-const useCustomStyles = makeStyles((_theme: Theme) =>
+const useCustomStyles = makeStyles(() =>
   createStyles({
-    // root: {
-    //   display: 'flex',
-    //   backgroundColor: theme.palette.background.level1,
-    // },
-    // grow: {
-    //   flexGrow: 1
-    // },
     grow: {
       flex: '1 1 auto'
     }
@@ -49,24 +42,16 @@ const AppToolBar = ({
   isDrawerExpanded,
   handleDrawerOpen
 }: AppToolBarProps) => {
-  const drawerClasses = useDrawerStyles({});
-  const customStyles = useCustomStyles({});
+  const drawerClasses = useDrawerStyles();
+  const customStyles = useCustomStyles();
 
   const { t } = useTranslation();
 
-  // const theme = useTheme();
-
   const {
-    // dispatch,
     state: {
       navigation: { pages }
     }
   }: { dispatch: Dispatch<ThemeActions>; state: RootState } = useHoux();
-
-  // const handleTogglePaletteType = () => {
-  //   const paletteType: PaletteType = theme.palette.type === 'light' ? 'dark' : 'light';
-  //   dispatch(changeTheme({ paletteType }));
-  // };
 
   return (
     <Toolbar>
@@ -83,11 +68,7 @@ const AppToolBar = ({
           <MenuIcon />
         </IconButton>
       ) : null}
-      <Typography
-        variant='h6'
-        // color="inherit"
-        noWrap
-      >
+      <Typography variant='h6' noWrap>
         {t('application-title')}
       </Typography>
 
@@ -95,18 +76,6 @@ const AppToolBar = ({
 
       <AppSearch />
       <LanguageMenu />
-
-      {/* <Tooltip title={t('toggleTheme')} enterDelay={300}>
-        <IconButton
-          color='inherit'
-          onClick={handleTogglePaletteType}
-          aria-label={t('toggleTheme')}
-          data-ga-event-category='AppBar'
-          data-ga-event-action='dark'
-        >
-          {theme.palette.type === 'light' ? <Brightness4Icon /> : <Brightness7Icon />}
-        </IconButton>
-      </Tooltip> */}
 
       <Tooltip title={t('github')} enterDelay={300}>
         <IconButton

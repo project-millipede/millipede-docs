@@ -1,5 +1,5 @@
 import { Box, Typography } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { ArcherContainer, ArcherElement } from 'react-archer';
 import Hyphenated from 'react-hyphen';
@@ -7,7 +7,7 @@ import Hyphenated from 'react-hyphen';
 import { useTranslation } from '../../../../../i18n';
 import { CustomBox } from './CustomBox';
 
-const useStyles = makeStyles((_theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     singleElement: {
       display: 'flex',
@@ -40,7 +40,7 @@ const useStyles = makeStyles((_theme: Theme) =>
 const ns = 'pages/perspective/index';
 
 const Diagram = () => {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   const { t } = useTranslation(ns);
 

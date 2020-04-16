@@ -1,11 +1,11 @@
-import { Avatar, createStyles, Icon, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Avatar, createStyles, Icon, makeStyles, Typography } from '@material-ui/core';
 import _ from 'lodash';
 import React from 'react';
 
 import { OverviewProps } from '../../../../../../src/typings/data/import';
 import Link from '../link/Link';
 
-const useStyles = makeStyles((_theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     row: {
       display: 'flex',
@@ -51,7 +51,7 @@ const useStyles = makeStyles((_theme: Theme) =>
 );
 
 export const Item = ({ title, description, link, icon }: OverviewProps) => {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   let intermediateResult = [];
 

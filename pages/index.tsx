@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const Index = () => {
-  const classes = useStyles({});
+  const classes = useStyles();
   const { t } = useTranslation();
 
   return (

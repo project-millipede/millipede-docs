@@ -1,4 +1,4 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/core';
 import { useHoux } from 'houx';
 import React, { FC } from 'react';
 
@@ -7,7 +7,7 @@ import { Device } from '../../../../typings/animation';
 import { TopRevealMin } from '../../../animation/framer/components/container/TopRevealMin';
 import ChromeInput from '../components/ChromeInput';
 
-const useStyles = makeStyles((_theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     browserBar: {
       // backgroundColor: '#ffffff',

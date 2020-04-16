@@ -56,7 +56,7 @@ interface GroupProps {
 const Group = (props: GroupProps) => {
   const { title, description, members } = props;
 
-  const classes = useStyles({});
+  const classes = useStyles();
 
   return (
     <div>

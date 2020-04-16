@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const LanguageLabel: FC = () => {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   const {
     state: {

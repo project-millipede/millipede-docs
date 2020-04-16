@@ -1,9 +1,9 @@
 import { Box } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { useRouter } from 'next/router';
 import React, { FC, ReactNode, useState } from 'react';
 
-const useStyles = makeStyles((_theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     box: {
       padding: '10px',
@@ -27,7 +27,7 @@ interface CustomBoxProps {
 }
 
 export const CustomBox: FC<CustomBoxProps> = ({ children, id, bgcolor }) => {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   const router = useRouter();
   const [selected, setSelected] = useState(false);

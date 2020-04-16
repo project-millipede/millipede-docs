@@ -6,7 +6,6 @@ import NextDocument, { DocumentContext, DocumentInitialProps, Head, Html, Main, 
 import React, { Fragment } from 'react';
 import { ServerStyleSheet as StyledComponentSheets } from 'styled-components';
 
-import { PathnameToLanguage } from '../docs/src/modules/utils/helpers';
 import { Logger } from '../docs/src/modules/utils/logging';
 import { NextI18NextInstance } from '../i18n';
 
@@ -65,7 +64,7 @@ class MillipedeDocument extends NextDocument {
   }
 }
 
-type InitialProps = PathnameToLanguage & DocumentInitialProps;
+type InitialProps = DocumentInitialProps;
 
 MillipedeDocument.getInitialProps = async (
   ctx: DocumentContext

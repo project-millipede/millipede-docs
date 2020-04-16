@@ -1,11 +1,11 @@
 import { Box } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { ArcherContainer, ArcherElement } from 'react-archer';
 
 import { NoteText } from './text';
 
-const useStyles = makeStyles((_theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     // row: {
     //   margin: '100px 0',
@@ -113,7 +113,7 @@ const contentFunctionHookResult = `public int a(){
 }`;
 
 const Diagram = () => {
-  const classes = useStyles({});
+  const classes = useStyles();
   return (
     <ArcherContainer noCurves strokeColor='gray'>
       {/* <div className='center-flex__2-of-2'> */}
@@ -214,7 +214,7 @@ const Diagram = () => {
 };
 
 export const FunctionBeahvior = () => {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   return (
     <ArcherContainer noCurves strokeColor='gray'>
@@ -262,7 +262,7 @@ export const FunctionBeahvior = () => {
 };
 
 export const HookedFunctionBeahvior = () => {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   return (
     <ArcherContainer noCurves strokeColor='gray'>

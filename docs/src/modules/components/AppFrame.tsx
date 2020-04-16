@@ -47,7 +47,7 @@ interface AppFrameProps {
 
 const AppFrame = ({ children }: AppFrameProps) => {
   const classes = useStyles();
-  const drawerClasses = useDrawerStyles({});
+  const drawerClasses = useDrawerStyles();
 
   const [mobileOpen, setMobileOpen] = useState(false);
 

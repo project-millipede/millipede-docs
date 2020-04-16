@@ -1,11 +1,11 @@
 import { Grid, Typography } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import _ from 'lodash';
 import React from 'react';
 
 import { Stack } from '../../../../../../src/typings/data/import';
 
-export const useStyles = makeStyles((_theme: Theme) =>
+export const useStyles = makeStyles(() =>
   createStyles({
     paper: {
       // padding: theme.spacing(2),
@@ -38,7 +38,7 @@ export const useStyles = makeStyles((_theme: Theme) =>
 );
 
 const ByExample = ({ rows = [[]] }: Stack) => {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   const result = rows.map(row => {
     return (

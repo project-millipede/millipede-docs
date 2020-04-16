@@ -1,12 +1,12 @@
 import { CardContent, Grid, Typography } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React, { useState } from 'react';
 
 import { useTranslation } from '../../../../../../i18n';
 import { Content, Stack } from '../../../../../../src/typings/data/import';
 import { Stepper } from './Stepper';
 
-const useStyles = makeStyles((_theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     row: {
       justifyContent: 'center'
@@ -30,7 +30,8 @@ const stepsFiltered = (
 };
 
 export const renderTitleAndDescription = (elements: Array<Content> = []) => {
-  const classes = useStyles({});
+  const classes = useStyles();
+
   return elements.map((content, index) => {
     return (
       <Grid

@@ -1,4 +1,4 @@
-import { Chip, createStyles, makeStyles, Theme } from '@material-ui/core';
+import { Chip, createStyles, makeStyles } from '@material-ui/core';
 import ClassOutlinedIcon from '@material-ui/icons/ClassOutlined';
 import React from 'react';
 
@@ -7,7 +7,7 @@ export interface TagProps {
   id: string;
 }
 
-const useStyles = makeStyles((_theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     chip: {
       marginTop: '16px',
@@ -17,7 +17,7 @@ const useStyles = makeStyles((_theme: Theme) =>
 );
 
 export const Tag = ({ text, id }) => {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   return (
     <Chip
