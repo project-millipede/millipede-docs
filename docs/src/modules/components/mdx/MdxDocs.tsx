@@ -15,8 +15,6 @@ import MdxElement from './MdxElement';
 const useStyles = makeStyles((theme: Theme) => {
   return {
     ...useMdStyles(theme)
-    // ...createStyles({
-    // })
   };
 });
 
