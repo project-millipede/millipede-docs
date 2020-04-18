@@ -1,4 +1,4 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import { useHoux } from 'houx';
 import _ from 'lodash';
 import { TFunction } from 'next-i18next-serverless';
@@ -18,15 +18,6 @@ const loadTopics = (t: TFunction): Array<OverviewProps> => {
   return [];
 };
 
-export const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      marginTop: theme.spacing(6),
-      marginBottom: theme.spacing(6)
-    }
-  })
-);
-
 const ns = 'pages/topics/index';
 
 const TopicsHead = () => {
@@ -38,18 +29,16 @@ const TopicsHead = () => {
   }: {
     state: RootState;
   } = useHoux();
-  const classes = useStyles();
-
   const topics = loadTopics(t);
 
   return (
-    <div className={classes.root}>
+    <Container maxWidth='md'>
       {isMobile ? (
         <TopicsViewMobile topics={topics} />
       ) : (
         <TopicsViewDesktop topics={topics} />
       )}
-    </div>
+    </Container>
   );
 };
 

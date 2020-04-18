@@ -1,4 +1,4 @@
-import { IconButton } from '@material-ui/core';
+import { createStyles, IconButton, makeStyles, Theme } from '@material-ui/core';
 import { motion } from 'framer-motion';
 import { useHoux } from 'houx';
 import { useRouter } from 'next/router';
@@ -12,7 +12,18 @@ import { loadPages } from '../../../docs/src/modules/redux/features/navigation/a
 import { noAnimation } from '../animation';
 import { TopReveal } from '../animation/framer/components/text/TopReveal';
 
-export const Container = styled(motion.div)``;
+export const AnimationContainer = styled(motion.div)``;
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    container: {
+      padding: theme.spacing(2, 0),
+      [theme.breakpoints.up('sm')]: {
+        padding: theme.spacing(4, 0)
+      }
+    }
+  })
+);
 
 interface WindowProps {
   windowStackData?: Array<OverviewProps>;
@@ -21,43 +32,49 @@ interface WindowProps {
 
 const Window: FC<WindowProps> = ({ windowStackData, index }) => {
   const router = useRouter();
+  const classes = useStyles();
 
   const { dispatch }: { dispatch: Dispatch<NavigationActions> } = useHoux();
 
   return windowStackData != null && windowStackData.length > 0 ? (
-    <Container key={`topic-${index}`} {...noAnimation}>
-      <TopReveal
-        id={`animation-${index}`}
-        key={`animation-${index}`}
-        text={[
-          ...windowStackData[index].title,
-          ...windowStackData[index].subTitle
-        ]}
-        outerIndex={index}
-      />
-
-      {windowStackData[index].contextLink
-        ? windowStackData[index].contextLink.perspectives.map(
-            (perspective, pIndex) => {
-              return (
-                <IconButton
-                  key={`perspective-${pIndex}`}
-                  onClick={() => {
-                    router.push(
-                      `${router.pathname}?${perspective.type}=${windowStackData[index].contextLink.id}#${windowStackData[index].contextLink.id}`
-                    );
-                    dispatch(
-                      loadPages(`/${windowStackData[index].contextLink.id}`)
-                    );
-                  }}
-                >
-                  <CustomIcon icon={perspective.icon} />
-                </IconButton>
-              );
-            }
-          )
-        : null}
-    </Container>
+    <div className={classes.container}>
+      <div className={classes.container}>
+        <AnimationContainer key={`topic-${index}`} {...noAnimation}>
+          <TopReveal
+            id={`animation-${index}`}
+            key={`animation-${index}`}
+            text={[
+              ...windowStackData[index].title,
+              ...windowStackData[index].subTitle
+            ]}
+            outerIndex={index}
+          />
+        </AnimationContainer>
+      </div>
+      <div className={classes.container}>
+        {windowStackData[index].contextLink
+          ? windowStackData[index].contextLink.perspectives.map(
+              (perspective, pIndex) => {
+                return (
+                  <IconButton
+                    key={`perspective-${pIndex}`}
+                    onClick={() => {
+                      router.push(
+                        `${router.pathname}?${perspective.type}=${windowStackData[index].contextLink.id}#${windowStackData[index].contextLink.id}`
+                      );
+                      dispatch(
+                        loadPages(`/${windowStackData[index].contextLink.id}`)
+                      );
+                    }}
+                  >
+                    <CustomIcon icon={perspective.icon} />
+                  </IconButton>
+                );
+              }
+            )
+          : null}
+      </div>
+    </div>
   ) : null;
 };
 
