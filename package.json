@@ -76,7 +76,6 @@
     "react-i18next": "^11.3.4",
     "react-in-viewport": "^1.0.0-alpha.11",
     "react-intersection-observer": "^8.26.1",
-    "react-scroll": "^1.7.16",
     "react-scroll-percentage": "^4.2.0",
     "react-swipeable-views": "0.13.9",
     "react-swipeable-views-utils": "0.13.9",

@@ -1,21 +1,47 @@
-import { Typography } from '@material-ui/core';
+import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import LinkIcon from '@material-ui/icons/Link';
 import { useHoux } from 'houx';
 import React, { Dispatch, ReactNode, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { Element } from 'react-scroll';
 
 import { ScrollActions } from '../../../modules/redux/features/actionType';
 import { addScrollNavigation, removeScrollNavigation } from '../../../modules/redux/features/scroll/actions';
 import { RootState } from '../../../modules/redux/reducers';
 
-interface HeadProps {
+interface InteraktiveHeadProps {
   // id generated through slug
   id: string;
   variant: 'h2' | 'h3' | 'h4';
   children: ReactNode;
 }
 
-const InteraktiveHead = ({ id, variant, children }: HeadProps) => {
+export const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    element: {
+      position: 'absolute',
+      marginTop: '-96px'
+    },
+    heading: {
+      '& h2, & h3, & h4': {
+        '& a': {
+          display: 'none',
+          padding: `0 ${theme.spacing(1)}px`
+        },
+        '&:hover a': {
+          display: 'inline-block',
+          color: theme.palette.text.secondary,
+          '&:hover': {
+            color: theme.palette.text.primary
+          }
+        }
+      }
+    }
+  })
+);
+
+const InteraktiveHead = ({ id, variant, children }: InteraktiveHeadProps) => {
+  const classes = useStyles();
+
   const {
     state: {
       view: { isMobile }
@@ -23,32 +49,36 @@ const InteraktiveHead = ({ id, variant, children }: HeadProps) => {
     dispatch
   }: { state: RootState; dispatch: Dispatch<ScrollActions> } = useHoux();
 
-  const [ref, inView, entry = { target: { id: '' } }] = useInView({
-    threshold: 0
-  });
-  const { target } = entry;
+  const [ref, inView, entry] = useInView();
 
   useEffect(() => {
     if (isMobile) {
       return;
     }
-    if (inView && ref) {
-      dispatch(addScrollNavigation(target.id));
+    if (entry && entry.target) {
+      const {
+        target: { id: inViewElementId }
+      } = entry;
+      if (inView) {
+        dispatch(addScrollNavigation(inViewElementId));
+      }
+      if (!inView) {
+        dispatch(removeScrollNavigation(inViewElementId));
+      }
     }
-    if (!inView && ref) {
-      dispatch(removeScrollNavigation(target.id));
-    }
-  }, [inView, target.id]);
+  }, [inView, id]);
 
-  return (
-    <div key={id} id={id} ref={ref}>
-      {isMobile ? (
-        <Typography variant={variant}>{children}</Typography>
-      ) : (
-        <Element name={id}>
-          <Typography variant={variant}>{children}</Typography>
-        </Element>
-      )}
+  return isMobile ? (
+    <Typography variant={variant}>{children}</Typography>
+  ) : (
+    <div className={classes.heading}>
+      <Typography id={id} ref={ref} component='a' className={classes.element} />
+      <Typography variant={variant}>
+        {children}
+        <Typography component='a' href={`#${id}`}>
+          <LinkIcon />
+        </Typography>
+      </Typography>
     </div>
   );
 };
