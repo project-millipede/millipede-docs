@@ -68,9 +68,7 @@ const InteraktiveHead = ({ id, variant, children }: InteraktiveHeadProps) => {
     }
   }, [inView, id]);
 
-  return isMobile ? (
-    <Typography variant={variant}>{children}</Typography>
-  ) : (
+  return (
     <div className={classes.heading}>
       <Typography id={id} ref={ref} component='a' className={classes.element} />
       <Typography variant={variant}>
