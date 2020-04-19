@@ -8,7 +8,7 @@ import remarkMinNodes from '../../remark/minNodes';
 import remarkToc from '../../remark/toc';
 import TocLink from './TocLink';
 
-export const generateProcessor = (activeState: Set<string>) => {
+export const generateProcessor = () => {
   const processor = unified()
     .use(remarkParse)
     .use(remarkSlug)
@@ -19,7 +19,7 @@ export const generateProcessor = (activeState: Set<string>) => {
       fragment: Fragment,
       remarkReactComponents: {
         a: props => {
-          return <TocLink activeState={activeState} {...props} />;
+          return <TocLink {...props} />;
         }
       }
     });

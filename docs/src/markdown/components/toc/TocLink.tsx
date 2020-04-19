@@ -1,8 +1,10 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
+import { useHoux } from 'houx';
 import React, { FC, ReactNode, useMemo } from 'react';
 
 import Link from '../../../modules/components/common/link/Link';
+import { RootState } from '../../../modules/redux/reducers';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,7 +22,6 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface TocLinkProps {
-  activeState: Set<string>;
   href: string;
   children: ReactNode;
 }
@@ -33,12 +34,18 @@ const processLink = (activeState: Set<string>, href: string) => {
   );
 };
 
-const TocLink: FC<TocLinkProps> = ({ activeState, href, children }) => {
+const TocLink: FC<TocLinkProps> = ({ href, children }) => {
   const classes = useStyles();
+
+  const {
+    state: {
+      scroll: { position: activeState }
+    }
+  }: { state: RootState } = useHoux();
 
   const isActive = useMemo(() => processLink(activeState, href), [
     href,
-    activeState
+    activeState.size
   ]);
 
   return (
