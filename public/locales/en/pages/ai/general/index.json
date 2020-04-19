@@ -9,6 +9,7 @@
   "render_process": "Render Process",
   "shared_render_process": "Shared Render Process",
   "custom_render_process": "Custom Render Process",
+  "dedicated_render_process": "Dedicated Render Process",
   "preparation_process_custom": "Custom Preparation Process",
   "communication_process_custom": "Custom Communication Process",
   "communication_process_abbreviation": "(CP)",
