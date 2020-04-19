@@ -6,10 +6,6 @@ export const useMdStyles = (theme: Theme) =>
       fontFamily: theme.typography.fontFamily,
       fontSize: 16,
       color: theme.palette.text.primary,
-      '& .anchor-link': {
-        marginTop: -96, // Offset for the anchor.
-        position: 'absolute'
-      },
       '& pre': {
         margin: '24px 0',
         padding: '12px 18px',
@@ -78,26 +74,6 @@ export const useMdStyles = (theme: Theme) =>
       '& ul': {
         paddingLeft: 30
       },
-      '& h1, & h2, & h3, & h4': {
-        '& .anchor-link-style': {
-          // To prevent the link to get the focus.
-          display: 'none'
-        },
-
-        '&:hover .anchor-link-style': {
-          display: 'inline-block',
-          padding: '0 8px',
-          color: theme.palette.text.secondary,
-          '&:hover': {
-            color: theme.palette.text.primary
-          },
-          '& svg': {
-            width: '0.7em',
-            height: '0.7em',
-            fill: 'currentColor'
-          }
-        }
-      },
       '& blockquote': {
         borderLeft: '5px solid #ffe564',
         backgroundColor: 'rgba(255,229,100,0.2)',
@@ -106,9 +82,6 @@ export const useMdStyles = (theme: Theme) =>
         '& p': {
           marginTop: '16px'
         }
-      },
-      '& a': {
-        color: theme.palette.primary.main
       },
       '& img': {
         maxWidth: '100%'
