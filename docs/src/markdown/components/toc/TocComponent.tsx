@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useMemo } from 'react';
 
 import { generateToc, TocProps } from './Toc.svc';
 
-const TocComponent = ({ content, activeState }: TocProps) => {
-  const [toc, setToc] = useState<unknown>();
-
-  useEffect(() => {
-    generateToc({ content, activeState }).then(file => setToc(file.result));
-  }, [content, activeState.size]);
+const TocComponent = ({ content }: TocProps) => {
+  const toc = useMemo(() => {
+    return generateToc({ content }).result;
+  }, [content]);
 
   return <>{toc}</>;
 };

@@ -1,10 +1,8 @@
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
-import { useHoux } from 'houx';
 import React from 'react';
 
 import { useTranslation } from '../../../../i18n';
 import TOCComponent from '../../markdown/components/toc/TocComponent';
-import { RootState } from '../redux/reducers';
 
 export const WIDTH_TOC = 225;
 
@@ -46,18 +44,12 @@ interface AppTableOfContentsProps {
 const AppTableOfContents = ({ content }: AppTableOfContentsProps) => {
   const classes = useStyles();
 
-  const {
-    state: {
-      scroll: { position }
-    }
-  }: { state: RootState } = useHoux();
-
   const { t } = useTranslation();
 
   return (
     <nav className={classes.root}>
       <Typography className={classes.tocHeader}>{t('toc')}</Typography>
-      <TOCComponent content={content} activeState={position} />
+      <TOCComponent content={content} />
     </nav>
   );
 };
