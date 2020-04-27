@@ -430,9 +430,20 @@ const TreeView = React.forwardRef(function TreeView(props, ref) {
     return nodes;
   }, []);
 
+  const cleanUpFirstCharMap = React.useCallback(nodes => {
+    const newMap = { ...firstCharMap.current };
+    nodes.forEach(node => {
+      if (newMap[node]) {
+        delete newMap[node];
+      }
+    });
+    firstCharMap.current = newMap;
+  }, []);
+
   const removeNodeFromNodeMap = React.useCallback(
     id => {
       const nodes = getNodesToRemove(id);
+      cleanUpFirstCharMap(nodes);
       const newMap = { ...nodeMap.current };
 
       nodes.forEach(node => {
@@ -458,7 +469,7 @@ const TreeView = React.forwardRef(function TreeView(props, ref) {
         return oldFocusedNodeId;
       });
     },
-    [getNodesToRemove]
+    [getNodesToRemove, cleanUpFirstCharMap]
   );
 
   const mapFirstChar = (id, firstChar) => {
