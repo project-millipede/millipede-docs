@@ -1,10 +1,11 @@
 import { Box, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import { ArcherContainer, ArcherElement } from 'react-archer';
 import Hyphenated from 'react-hyphen';
 
 import { useTranslation } from '../../../../../i18n';
+import CustomArcherContainer from './ArcherContainer';
+import CustomArcherElement from './ArcherElement';
 import { CustomBox } from './CustomBox';
 
 const useStyles = makeStyles(() =>
@@ -45,10 +46,10 @@ const Diagram = () => {
   const { t } = useTranslation(ns);
 
   return (
-    <ArcherContainer noCurves strokeColor='gray'>
+    <CustomArcherContainer noCurves strokeColor='gray'>
       <div className='center-flex__1-of-2'>
         <div>
-          <ArcherElement
+          <CustomArcherElement
             id='individual'
             relations={[
               {
@@ -63,21 +64,21 @@ const Diagram = () => {
                 <Hyphenated>{t('individual')}</Hyphenated>
               </Typography>
             </Box>
-          </ArcherElement>
+          </CustomArcherElement>
         </div>
         <div>
-          <ArcherElement id='data'>
+          <CustomArcherElement id='data'>
             <Box className={classes.box}>
               <Typography variant='subtitle1' className={classes.title}>
                 <Hyphenated>{t('dataCentric')}</Hyphenated>
               </Typography>
             </Box>
-          </ArcherElement>
+          </CustomArcherElement>
         </div>
       </div>
 
       <div className={classes.row}>
-        <ArcherElement
+        <CustomArcherElement
           id='general'
           relations={[
             {
@@ -101,9 +102,9 @@ const Diagram = () => {
               )}`}</Hyphenated>
             </Typography>
           </CustomBox>
-        </ArcherElement>
+        </CustomArcherElement>
 
-        <ArcherElement
+        <CustomArcherElement
           id='realistic'
           relations={[
             {
@@ -125,9 +126,9 @@ const Diagram = () => {
               )}`}</Hyphenated>
             </Typography>
           </CustomBox>
-        </ArcherElement>
+        </CustomArcherElement>
 
-        <ArcherElement
+        <CustomArcherElement
           id='specific'
           relations={[
             {
@@ -144,18 +145,18 @@ const Diagram = () => {
               )}`}</Hyphenated>
             </Typography>
           </CustomBox>
-        </ArcherElement>
+        </CustomArcherElement>
       </div>
       <div className={classes.singleElement}>
-        <ArcherElement id='society'>
+        <CustomArcherElement id='society'>
           <Box className={classes.box}>
             <Typography variant='subtitle1' className={classes.title}>
               <Hyphenated>{t('society')}</Hyphenated>
             </Typography>
           </Box>
-        </ArcherElement>
+        </CustomArcherElement>
       </div>
-    </ArcherContainer>
+    </CustomArcherContainer>
   );
 };
 
