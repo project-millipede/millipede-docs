@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 import { Box, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
@@ -6,8 +7,9 @@ import Hyphenated from 'react-hyphen';
 import { useTranslation } from '../../../../../i18n';
 import CustomArcherContainer from './ArcherContainer';
 import CustomArcherElement from './ArcherElement';
-import { CustomBox } from './CustomBox';
+import CustomBox from './CustomBoxFcForward';
 
+// import { CustomBox } from './CustomBox';
 const useStyles = makeStyles(() =>
   createStyles({
     singleElement: {

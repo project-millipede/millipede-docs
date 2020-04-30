@@ -29,7 +29,7 @@ type JaggedSourceToTargetsArrayType = Array<SourceToTargetsArrayType>;
 
 type State = {
   refs: {
-    [value: string]: HTMLElement;
+    [value: string]: React.RefObject<HTMLElement>;
   };
   sourceToTargetsMap: {
     [value: string]: SourceToTargetsArrayType;
@@ -43,7 +43,8 @@ const defaultSvgContainerStyle = {
   width: '100%',
   height: '100%',
   top: 0,
-  left: 0
+  left: 0,
+  pointerEvents: 'none'
 };
 
 function rectToPoint(rect: ClientRect) {
@@ -71,7 +72,7 @@ function computeCoordinatesFromAnchorPosition(
 }
 
 export type ArcherContainerContextType = {
-  registerChild?: (id: string, ref: HTMLElement) => void;
+  registerChild?: (id: string, ref: React.RefObject<HTMLElement>) => void;
   registerTransitions?: (
     elementId: string,
     newSourceToTargets: Array<SourceToTargetType>
@@ -109,6 +110,10 @@ export class ArcherContainer extends React.Component<Props, State> {
     this.arrowMarkerUniquePrefix = `arrow${arrowMarkerRandomNumber}`;
   }
 
+  parentRef: React.RefObject<HTMLDivElement> = React.createRef<
+    HTMLDivElement
+  >();
+
   static defaultProps = {
     arrowLength: 10,
     arrowThickness: 6,
@@ -125,7 +130,7 @@ export class ArcherContainer extends React.Component<Props, State> {
     const { observer } = this.state;
 
     Object.keys(this.state.refs).map(elementKey => {
-      return observer.unobserve(this.state.refs[elementKey]);
+      return observer.unobserve(this.state.refs[elementKey].current);
     });
 
     if (window) window.removeEventListener('resize', this.refreshScreen);
@@ -135,20 +140,21 @@ export class ArcherContainer extends React.Component<Props, State> {
     this.setState({ ...this.state });
   };
 
-  _storeParent = (ref: HTMLElement): void => {
-    if (this.state.parent) return;
+  // _storeParent = (ref: HTMLElement): void => {
+  //   if (this.state.parent) return;
 
-    this.setState(currentState => ({ ...currentState, parent: ref }));
-  };
+  //   this.setState(currentState => ({ ...currentState, parent: ref }));
+  // };
 
-  _getRectFromRef = (ref: HTMLElement): ClientRect => {
-    if (!ref) return null;
+  _getRectFromRef = (element: HTMLElement): ClientRect => {
+    if (!element) return null;
 
-    return ref.getBoundingClientRect();
+    return element.getBoundingClientRect();
   };
 
   _getParentCoordinates = (): Point => {
-    const rectp = this._getRectFromRef(this.state.parent);
+    // const rectp = this._getRectFromRef(this.state.parent);
+    const rectp = this._getRectFromRef(this.parentRef.current);
 
     if (!rectp) {
       return new Point(0, 0);
@@ -161,7 +167,7 @@ export class ArcherContainer extends React.Component<Props, State> {
     index: string,
     parentCoordinates: Point
   ): Point => {
-    const rect = this._getRectFromRef(this.state.refs[index]);
+    const rect = this._getRectFromRef(this.state.refs[index].current);
 
     if (!rect) {
       return new Point(0, 0);
@@ -194,9 +200,19 @@ export class ArcherContainer extends React.Component<Props, State> {
     });
   };
 
-  _registerChild = (id: string, ref: HTMLElement): void => {
+  // _registerChild = (id: string, ref: HTMLElement): void => {
+  //   if (!this.state.refs[id]) {
+  //     this.state.observer.observe(ref);
+
+  //     this.setState((currentState: State) => ({
+  //       refs: { ...currentState.refs, [id]: ref }
+  //     }));
+  //   }
+  // };
+
+  _registerChild = (id: string, ref: React.RefObject<HTMLElement>): void => {
     if (!this.state.refs[id]) {
-      this.state.observer.observe(ref);
+      this.state.observer.observe(ref.current);
 
       this.setState((currentState: State) => ({
         refs: { ...currentState.refs, [id]: ref }
@@ -207,7 +223,7 @@ export class ArcherContainer extends React.Component<Props, State> {
   _unregisterChild = (id: string): void => {
     this.setState((currentState: State) => {
       if (currentState.refs[id]) {
-        currentState.observer.unobserve(currentState.refs[id]);
+        currentState.observer.unobserve(currentState.refs[id].current);
       }
       const newRefs = { ...currentState.refs };
       delete newRefs[id];
@@ -369,14 +385,22 @@ export class ArcherContainer extends React.Component<Props, State> {
           style={{ ...this.props.style, position: 'relative' }}
           className={this.props.className}
         >
+          {/* <div style={{ height: '100%' }} ref={this._storeParent}>
+            {this.props.children}
+          </div> */}
+
+          <div style={{ height: '100%' }} ref={this.parentRef}>
+            {this.props.children}
+          </div>
+
           <svg style={this._svgContainerStyle() as any}>
             <defs>{this._generateAllArrowMarkers()}</defs>
             {SvgArrows}
           </svg>
 
-          <div style={{ height: '100%' }} ref={this._storeParent}>
+          {/* <div style={{ height: '100%' }} ref={this._storeParent}>
             {this.props.children}
-          </div>
+          </div> */}
         </div>
       </ArcherContainerContextProvider>
     );

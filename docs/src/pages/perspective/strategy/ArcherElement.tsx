@@ -5,15 +5,8 @@ import isEqual from 'react-fast-compare';
 import { ArcherContainerContextConsumer } from './ArcherContainer';
 import { RelationType, SourceToTargetType } from './types';
 
-// const ArcherContainerContext = React.createContext<ArcherContainerContextType>(
-//   {}
-// );
-
-// export const ArcherContainerContextProvider = ArcherContainerContext.Provider;
-// export const ArcherContainerContextConsumer = ArcherContainerContext.Consumer;
-
 interface ArcherContainerContextType {
-  registerChild?: (id: string, ref: HTMLElement) => void;
+  registerChild?: (id: string, ref: React.RefObject<HTMLElement>) => void;
   registerTransitions?: (
     elementId: string,
     newSourceToTargets: Array<SourceToTargetType>
@@ -37,6 +30,8 @@ export class ArcherElementNoContext extends React.Component<InnerProps> {
     relations: []
   };
 
+  elementRef: React.RefObject<HTMLElement> = React.createRef<HTMLElement>();
+
   componentDidUpdate(prevProps: InnerProps) {
     if (isEqual(prevProps.relations, this.props.relations)) return;
 
@@ -44,15 +39,12 @@ export class ArcherElementNoContext extends React.Component<InnerProps> {
   }
 
   componentDidMount() {
-    if (this.props.relations.length === 0) {
-      return;
-    }
-
     this.registerTransitions(this.props.relations);
+    this.props.context.registerChild(this.props.id, this.elementRef);
   }
 
   componentWillUnmount() {
-    this.unregisterChild();
+    this.unSetRef();
     this.unregisterTransitions();
   }
 
@@ -101,19 +93,30 @@ export class ArcherElementNoContext extends React.Component<InnerProps> {
     this.props.context.unregisterTransitions(this.props.id);
   };
 
-  onRefUpdate = (ref: HTMLElement) => {
-    if (!ref) return;
-    if (!this.props.context.registerChild) {
-      throw new Error(
-        `Could not find "registerChild" in the context of ` +
-          `<ArcherElement>. Wrap the component in a <ArcherContainer>.`
-      );
-    }
+  // refSet = (ref: HTMLElement) => {
+  //   if (!ref) return;
+  //   if (!this.props.context.registerChild) {
+  //     throw new Error(
+  //       `Could not find "registerChild" in the context of ` +
+  //         `<ArcherElement>. Wrap the component in a <ArcherContainer>.`
+  //     );
+  //   }
 
-    this.props.context.registerChild(this.props.id, ref);
-  };
+  //   this.props.context.registerChild(this.props.id, ref);
+  // };
 
-  unregisterChild = () => {
+  // unregisterChild = () => {
+  //   if (!this.props.context.unregisterChild) {
+  //     throw new Error(
+  //       `Could not find "unregisterChild" in the context of ` +
+  //         `<ArcherElement>. Wrap the component in a <ArcherContainer>.`
+  //     );
+  //   }
+
+  //   this.props.context.unregisterChild(this.props.id);
+  // };
+
+  unSetRef = () => {
     if (!this.props.context.unregisterChild) {
       throw new Error(
         `Could not find "unregisterChild" in the context of ` +
@@ -125,40 +128,11 @@ export class ArcherElementNoContext extends React.Component<InnerProps> {
   };
 
   render() {
-    // Check that we only have one child to ArcherElement
-    React.Children.only(this.props.children);
-
-    // Now, we'll render this child by getting its ref. The ref will be used to compute the element's position.
-    // I'm pretty sure there's a cleaner way to get the ref of the child... feel free to suggest it!
-    const child = this.props.children;
-    return React.cloneElement(child as any, {
-      ...(child.props as any),
-      ref: this.onRefUpdate
+    const { children } = this.props;
+    return React.cloneElement(children, {
+      ref: this.elementRef
     });
   }
-
-  //   render() {
-  //     return (
-  //       <div
-  //         style={{ ...this.props.style, position: 'relative' }}
-  //         className={this.props.className}
-  //         ref={this.onRefUpdate}
-  //       >
-  //         {this.props.children}
-  //       </div>
-  //     );
-  //   }
-  // render() {
-  //   return (
-  //     <div
-  //       style={{ position: 'relative' }}
-  //       // className={this.props.className}
-  //       ref={this.onRefUpdate}
-  //     >
-  //       {this.props.children}
-  //     </div>
-  //   );
-  // }
 }
 
 const ArcherElementWithContext = (props: OuterProps) => (
