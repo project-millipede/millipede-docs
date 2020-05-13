@@ -1,4 +1,4 @@
-class Point {
+export class Point {
   x: number;
   y: number;
 
@@ -15,5 +15,3 @@ class Point {
     return new Point(this.x - point.x, this.y - point.y);
   }
 }
-
-export default Point;

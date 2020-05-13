@@ -3,14 +3,14 @@
 /* eslint-disable operator-assignment */
 import React, { ReactNode } from 'react';
 
-import Point from './Point';
-import { AnchorPositionType } from './types';
+import { Point } from './Point';
+import { AnchorPosition } from './types';
 
 type Props = {
   startingPoint: Point;
-  startingAnchorOrientation: AnchorPositionType;
+  startingAnchorOrientation: AnchorPosition;
   endingPoint: Point;
-  endingAnchorOrientation: AnchorPositionType;
+  endingAnchorOrientation: AnchorPosition;
   strokeColor: string;
   arrowLength: number;
   strokeWidth: number;
@@ -41,7 +41,7 @@ export function computeEndingPointAccordingToArrowHead(
   yArrowHeadEnd: number,
   arrowLength: number,
   strokeWidth: number,
-  endingAnchorOrientation: AnchorPositionType
+  endingAnchorOrientation: AnchorPosition
 ) {
   const endingVector = computeEndingArrowDirectionVector(
     endingAnchorOrientation
@@ -60,7 +60,7 @@ export function computeStartingAnchorPosition(
   yStart: number,
   xEnd: number,
   yEnd: number,
-  startingAnchorOrientation: AnchorPositionType
+  startingAnchorOrientation: AnchorPosition
 ): { xAnchor1: number; yAnchor1: number } {
   if (
     startingAnchorOrientation === 'top' ||
@@ -89,7 +89,7 @@ export function computeEndingAnchorPosition(
   yStart: number,
   xEnd: number,
   yEnd: number,
-  endingAnchorOrientation: AnchorPositionType
+  endingAnchorOrientation: AnchorPosition
 ): { xAnchor2: number; yAnchor2: number } {
   if (
     endingAnchorOrientation === 'top' ||

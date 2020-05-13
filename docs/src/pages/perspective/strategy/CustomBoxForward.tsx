@@ -1,6 +1,7 @@
+import { Box } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { useRouter } from 'next/router';
-import React, { forwardRef, ForwardRefRenderFunction, ReactNode, useEffect, useState } from 'react';
+import React, { forwardRef, ForwardRefRenderFunction, ReactNode, useState } from 'react';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -28,47 +29,15 @@ interface CustomBoxProps {
 export const CustomBox: ForwardRefRenderFunction<
   HTMLDivElement,
   CustomBoxProps
-> = (
-  {
-    children,
-    id,
-    // bgcolor
-    ...rest
-  },
-  ref
-) => {
+> = ({ children, id, bgcolor }, ref) => {
   const classes = useStyles();
 
   const router = useRouter();
   const [selected, setSelected] = useState(false);
 
-  useEffect(() => {
-    console.log('rest: ', rest);
-    console.log((ref as React.MutableRefObject<HTMLDivElement>).current);
-  }, [ref]);
-
-  // return (
-  //   <Box
-  //     bgcolor={bgcolor}
-  //     className={selected ? classes.boxHover : classes.box}
-  //     onClick={_e => {
-  //       router.push(`${router.pathname}#${id}`);
-  //     }}
-  //     onMouseEnter={_e => {
-  //       setSelected(true);
-  //     }}
-  //     onMouseLeave={_e => {
-  //       setSelected(false);
-  //     }}
-  //     // Workaround - Missing ref prop from mui-typescript
-  //     {...{ ref }}
-  //   >
-  //     {children}
-  //   </Box>
-  // );
   return (
-    <div
-      // bgcolor={bgcolor}
+    <Box
+      bgcolor={bgcolor}
       className={selected ? classes.boxHover : classes.box}
       onClick={_e => {
         router.push(`${router.pathname}#${id}`);
@@ -80,11 +49,30 @@ export const CustomBox: ForwardRefRenderFunction<
         setSelected(false);
       }}
       // Workaround - Missing ref prop from mui-typescript
-      ref={ref}
+      {...{ ref }}
     >
       {children}
-    </div>
+    </Box>
   );
+  // return (
+  //   <div
+  //     // bgcolor={bgcolor}
+  //     className={selected ? classes.boxHover : classes.box}
+  //     onClick={_e => {
+  //       router.push(`${router.pathname}#${id}`);
+  //     }}
+  //     onMouseEnter={_e => {
+  //       setSelected(true);
+  //     }}
+  //     onMouseLeave={_e => {
+  //       setSelected(false);
+  //     }}
+  //     // Workaround - Missing ref prop from mui-typescript
+  //     ref={ref}
+  //   >
+  //     {children}
+  //   </div>
+  // );
 };
 
 export default forwardRef(CustomBox);
