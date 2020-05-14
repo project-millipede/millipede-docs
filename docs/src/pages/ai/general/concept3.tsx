@@ -1,9 +1,9 @@
 import { Box, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import { ArcherContainer, ArcherElement } from 'react-archer';
 
 import { useTranslation } from '../../../../../i18n';
+import { ArcherContainer, ArcherElement } from '../../../modules/components/archer';
 
 const useStyles = makeStyles(() =>
   createStyles({
