@@ -90,6 +90,7 @@
     "typesafe-actions": "^5.1.0",
     "unified": "^9.0.0",
     "unist-util-visit": "^2.0.2",
+    "use-resize-observer": "^6.1.0-alpha.3",
     "uuid": "^8.0.0",
     "vfile": "^4.1.0",
     "victory": "^34.3.0"
