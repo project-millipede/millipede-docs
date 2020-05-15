@@ -8,6 +8,27 @@ import React, { FC, useCallback, useState } from 'react';
 
 import { useTranslation } from '../../../../i18n';
 
+/**
+ * The following style override is necessary because of a bug in the mui-rte library.
+ * The commit referenced introduced a regression defining positions for container and placeholder elements.
+ * To make it work override the container and placeholder position attribute with unset.
+ * https://github.com/niuware/mui-rte/commit/7035c222a44fc2e232863c895c8dbfc82605c869
+ */
+
+const useStylesRTE = makeStyles(() =>
+  createStyles({
+    root: {},
+    container: {
+      // position: "relative", <- breaks layout
+      position: 'unset'
+    },
+    placeHolder: {
+      // position: "absolute" <- breaks layout
+      position: 'unset'
+    }
+  })
+);
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     formHelperText: {
@@ -34,6 +55,8 @@ const CommentEditor: FC<CommentEditorProps> = ({ isComment, create }) => {
 
   const [commentState, setCommentState] = useState(EditorState.createEmpty());
   const [commentError, setCommentError] = useState(false);
+
+  const classesRTE = useStylesRTE();
   const classes = useStyles();
 
   const handlePostComment = useCallback(() => {
@@ -51,6 +74,7 @@ const CommentEditor: FC<CommentEditorProps> = ({ isComment, create }) => {
       </Typography>
       <NoSsr>
         <MUIRichTextEditor
+          classes={classesRTE}
           onChange={data => {
             setCommentError(false);
             setCommentState(data);
