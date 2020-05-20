@@ -2,7 +2,6 @@ import { Container, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
 
-import AppFrame from '../docs/src/modules/components/AppFrame';
 import Head from '../docs/src/modules/components/Head';
 import HomeFooter from '../docs/src/modules/components/HomeFooter';
 import { useTranslation } from '../i18n';
@@ -41,26 +40,24 @@ const Index = () => {
   const { t } = useTranslation();
 
   return (
-    <AppFrame>
-      <div className={classes.root}>
-        <Head />
-        <div className={classes.hero}>
-          <Container maxWidth='md' className={classes.content}>
-            <Typography variant='h2' gutterBottom className={classes.title}>
-              {t('application-title')}
-            </Typography>
-            <Typography variant='h4' gutterBottom className={classes.subtitle}>
-              {t('application-subtitle')}
-            </Typography>
+    <div className={classes.root}>
+      <Head />
+      <div className={classes.hero}>
+        <Container maxWidth='md' className={classes.content}>
+          <Typography variant='h2' gutterBottom className={classes.title}>
+            {t('application-title')}
+          </Typography>
+          <Typography variant='h4' gutterBottom className={classes.subtitle}>
+            {t('application-subtitle')}
+          </Typography>
 
-            <TopicsHead />
-            <TopicsDetail />
+          <TopicsHead />
+          <TopicsDetail />
 
-            <HomeFooter />
-          </Container>
-        </div>
+          <HomeFooter />
+        </Container>
       </div>
-    </AppFrame>
+    </div>
   );
 };
 
