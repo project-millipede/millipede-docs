@@ -6,6 +6,7 @@ import App, { AppContext } from 'next/app';
 import React from 'react';
 import ReactGA from 'react-ga';
 
+import AppFrame from '../docs/src/modules/components/AppFrame';
 import AppWrapper from '../docs/src/modules/components/AppWrapper';
 import { loadFAIcons } from '../docs/src/modules/components/icon/FAIconLoader';
 import reducers from '../docs/src/modules/redux/reducers';
@@ -60,7 +61,9 @@ class MillipedeApp extends App<Props> {
     return (
       <HouxProvider reducers={reducers} logDispatchedActions>
         <AppWrapper isMobile={isMobile}>
-          <Component {...pageProps} />
+          <AppFrame>
+            <Component {...pageProps} />
+          </AppFrame>
         </AppWrapper>
       </HouxProvider>
     );
