@@ -7,6 +7,10 @@ export interface TreeViewPropsBase
     TreeViewClassKey
   > {
   /**
+   * The content of the component.
+   */
+  children?: React.ReactNode;
+  /**
    * The default icon used to collapse the node.
    */
   defaultCollapseIcon?: React.ReactNode;
