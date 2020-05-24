@@ -43,7 +43,7 @@
     "@mdx-js/mdxast": "^1.1.1",
     "@mdx-js/react": "^1.6.4",
     "@sentry/browser": "^5.15.5",
-    "@vangware/window-open-promise": "2.5.0",
+    "@vangware/window-open-promise": "^2.6.0",
     "classnames": "^2.2.6",
     "clsx": "^1.1.0",
     "compose-middleware": "^5.0.1",
