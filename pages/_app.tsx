@@ -59,7 +59,7 @@ class MillipedeApp extends App<Props> {
     const { isMobile } = pageProps;
 
     return (
-      <HouxProvider reducers={reducers} logDispatchedActions>
+      <HouxProvider reducers={reducers}>
         <AppWrapper isMobile={isMobile}>
           <AppFrame>
             <Component {...pageProps} />

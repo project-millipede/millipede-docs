@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "paths": {
+      "houx": ["docs/src/modules/redux/houx/index.tsx"]
+    },
     "baseUrl": ".",
     "outDir": "./dist",
     "allowJs": true,

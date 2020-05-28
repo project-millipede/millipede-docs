@@ -18,7 +18,10 @@ const configuration = {
 
   target: 'serverless',
 
-  experimental: { modern: true }
+  experimental: {
+    jsconfigPaths: true,
+    modern: true
+  }
 };
 
 module.exports = configuration;
