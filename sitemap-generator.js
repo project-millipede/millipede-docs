@@ -18,6 +18,10 @@ const urls = [
   {
     baseUrl: 'https://privatheit.org',
     targetDirectory: 'public/privatheit'
+  },
+  {
+    baseUrl: 'https://encrypt.org',
+    targetDirectory: 'public/encrypt'
   }
 ];
 
