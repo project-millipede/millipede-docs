@@ -15,32 +15,8 @@ export const styles = theme => ({
     listStyle: 'none',
     margin: 0,
     padding: 0,
-    outline: 0,
-    WebkitTapHighlightColor: 'transparent',
-    '&:focus > $content $label': {
-      backgroundColor: theme.palette.action.hover
-    },
-    '&$selected > $content $label': {
-      backgroundColor: fade(
-        theme.palette.primary.main,
-        theme.palette.action.selectedOpacity
-      )
-    },
-    '&$selected > $content $label:hover, &$selected:focus > $content $label': {
-      backgroundColor: fade(
-        theme.palette.primary.main,
-        theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity
-      ),
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        backgroundColor: 'transparent'
-      }
-    }
+    outline: 0
   },
-  /* Pseudo-class applied to the root element when expanded. */
-  expanded: {},
-  /* Pseudo-class applied to the root element when selected. */
-  selected: {},
   /* Styles applied to the `role="group"` element. */
   group: {
     margin: 0,
@@ -49,11 +25,56 @@ export const styles = theme => ({
   },
   /* Styles applied to the tree node content. */
   content: {
+    padding: '0 8px',
     width: '100%',
     display: 'flex',
     alignItems: 'center',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    WebkitTapHighlightColor: 'transparent',
+    '&:hover': {
+      backgroundColor: theme.palette.action.hover,
+      // Reset on touch devices, it doesn't add specificity
+      '@media (hover: none)': {
+        backgroundColor: 'transparent'
+      }
+    },
+    '&$focused': {
+      backgroundColor: theme.palette.action.focus
+    },
+    '&$selected': {
+      backgroundColor: fade(
+        theme.palette.primary.main,
+        theme.palette.action.selectedOpacity
+      ),
+      '&:hover': {
+        backgroundColor: fade(
+          theme.palette.primary.main,
+          theme.palette.action.selectedOpacity +
+            theme.palette.action.hoverOpacity
+        ),
+        // Reset on touch devices, it doesn't add specificity
+        '@media (hover: none)': {
+          backgroundColor: fade(
+            theme.palette.primary.main,
+            theme.palette.action.selectedOpacity
+          )
+        }
+      },
+      '&$focused': {
+        backgroundColor: fade(
+          theme.palette.primary.main,
+          theme.palette.action.selectedOpacity +
+            theme.palette.action.focusOpacity
+        )
+      }
+    }
   },
+  /* Pseudo-class applied to the content element when expanded. */
+  expanded: {},
+  /* Pseudo-class applied to the content element when selected. */
+  selected: {},
+  /* Pseudo-class applied to the content element when focused. */
+  focused: {},
   /* Styles applied to the tree node icon and collapse/expand icon. */
   iconContainer: {
     marginRight: 4,
@@ -69,14 +90,7 @@ export const styles = theme => ({
   label: {
     width: '100%',
     paddingLeft: 4,
-    position: 'relative',
-    '&:hover': {
-      backgroundColor: theme.palette.action.hover,
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        backgroundColor: 'transparent'
-      }
-    }
+    position: 'relative'
   }
 });
 
@@ -200,6 +214,7 @@ const TreeItem = React.forwardRef(function TreeItem(props, ref) {
 
   const handleMouseDown = event => {
     if (event.shiftKey || event.ctrlKey || event.metaKey) {
+      // Prevent text selection
       event.preventDefault();
     }
 
@@ -381,16 +396,18 @@ const TreeItem = React.forwardRef(function TreeItem(props, ref) {
   if (multiSelect) {
     ariaSelected = selected;
   } else if (selected) {
-    // single-selection trees unset aria-selected
+    /* single-selection trees unset aria-selected on un-selected items.
+     *
+     * If the tree does not support multiple selection, aria-selected
+     * is set to true for the selected node and it is not present on any other node in the tree.
+     * Source: https://www.w3.org/TR/wai-aria-practices/#TreeView
+     */
     ariaSelected = true;
   }
 
   return (
     <li
-      className={clsx(classes.root, className, {
-        [classes.expanded]: expanded,
-        [classes.selected]: selected
-      })}
+      className={clsx(classes.root, className)}
       role='treeitem'
       onKeyDown={handleKeyDown}
       onFocus={handleFocus}
@@ -401,7 +418,11 @@ const TreeItem = React.forwardRef(function TreeItem(props, ref) {
       {...other}
     >
       <div
-        className={classes.content}
+        className={clsx(classes.content, {
+          [classes.expanded]: expanded,
+          [classes.selected]: selected,
+          [classes.focused]: focused
+        })}
         onClick={handleClick}
         onMouseDown={handleMouseDown}
         ref={contentRef}
