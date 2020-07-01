@@ -5,6 +5,8 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { TransitionProps } from '@material-ui/core/transitions';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import TreeItem, { TreeItemProps } from '@material-ui/lab/TreeItem';
+import TreeView from '@material-ui/lab/TreeView';
 import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 
 import { useTranslation } from '../../../../../i18n';
@@ -12,8 +14,6 @@ import { Icon, Page } from '../../../../../src/typings/data/import';
 import { contains } from '../../utils/collection/array';
 import Link from '../common/link/Link';
 import CustomIcon from '../icon/CustomIcon';
-import TreeItem, { TreeItemProps } from '../mui/TreeItem';
-import TreeView from '../mui/TreeView';
 
 interface TreeLabelProps {
   labelText: string;
@@ -46,20 +46,21 @@ export const useTreeItemStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {},
     expanded: {
-      '&:hover >$content $label, &:focus > $content $label, &$selected > $content $label, &$selected > $content $label:hover, &$selected:focus > $content $label': {
-        borderRight: `2px solid ${theme.palette.primary.main}`
-      }
+      borderRight: `2px solid ${theme.palette.primary.main}`
     },
     selected: {
-      '&:hover >$content $label, &:focus > $content $label, &$selected > $content $label, &$selected > $content $label:hover, &$selected:focus > $content $label': {
-        borderRight: `2px solid ${theme.palette.primary.main}`
-      }
+      borderRight: `2px solid ${theme.palette.primary.main}`
     },
     group: {
-      marginLeft: 0
+      margin: 0
     },
-    content: {},
-    iconContainer: {},
+    content: {
+      padding: 0
+    },
+    iconContainer: {
+      width: 0,
+      marginRight: 0
+    },
     label: {
       paddingLeft: 0
     }
