@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
+
 const webpackConfigProd = require('./webpack/webpack.prod.conf');
 const webpackConfigDev = require('./webpack/webpack.dev.conf');
 
@@ -25,7 +26,7 @@ module.exports = configuration;
 
 /* next.config in ts */
 /*
-import merge from 'webpack-merge';
+import { merge } from 'webpack-merge';
 import webpackConfig from './webpack/webpack.prod.conf';
 
 const configuration = {
