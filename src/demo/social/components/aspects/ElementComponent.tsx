@@ -1,5 +1,5 @@
 import { createStyles, makeStyles, Slider, Typography } from '@material-ui/core';
-import { TFunction } from 'next-i18next-serverless';
+import { TFunction } from 'next-i18next';
 import React, { useState } from 'react';
 
 import { Item } from '../../../../../docs/src/modules/components/common/grid/Item';

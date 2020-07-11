@@ -7,7 +7,7 @@ import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
 import windowOpenPromise from '@vangware/window-open-promise';
 import copy from 'copy-to-clipboard';
 import _ from 'lodash';
-import { TFunction } from 'next-i18next-serverless';
+import { TFunction } from 'next-i18next';
 import { useRouter } from 'next/router';
 import React, { FC, SyntheticEvent, useCallback, useState } from 'react';
 import { isMobile } from 'react-device-detect';

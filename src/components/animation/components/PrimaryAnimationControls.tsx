@@ -4,7 +4,7 @@ import SmartphoneRoundedIcon from '@material-ui/icons/SmartphoneRounded';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import { useHoux } from 'houx';
-import { TFunction } from 'next-i18next-serverless';
+import { TFunction } from 'next-i18next';
 import React, { Dispatch, FC, MouseEvent } from 'react';
 
 import { AnimationActions } from '../../../../docs/src/modules/redux/features/actionType';

@@ -1,4 +1,4 @@
-import { TFunction } from 'next-i18next-serverless';
+import { TFunction } from 'next-i18next';
 import { NextRouter, useRouter } from 'next/router';
 import React from 'react';
 

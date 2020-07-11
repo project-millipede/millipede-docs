@@ -4,6 +4,9 @@ const { merge } = require('webpack-merge');
 
 const webpackConfigProd = require('./webpack/webpack.prod.conf');
 const webpackConfigDev = require('./webpack/webpack.dev.conf');
+const { nextI18NextRewrites } = require('next-i18next/rewrites');
+
+const localeSubpaths = { en: 'en', de: 'de' };
 
 const configuration = {
   webpack(config, options) {
@@ -19,7 +22,16 @@ const configuration = {
 
   target: 'serverless',
 
-  experimental: { modern: true }
+  publicRuntimeConfig: {
+    localeSubpaths
+  },
+
+  experimental: {
+    // modern: true,
+    async rewrites() {
+      return [...nextI18NextRewrites(localeSubpaths)];
+    }
+  }
 };
 
 module.exports = configuration;

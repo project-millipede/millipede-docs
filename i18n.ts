@@ -1,15 +1,18 @@
-import NextI18Next, { NextRuntimeConfig } from 'next-i18next-serverless';
+import NextI18Next from 'next-i18next';
 import getConfig from 'next/config';
+import path from 'path';
 
-const getNextI18NextInstance = (nextConfig: NextRuntimeConfig) => {
-  return new NextI18Next(nextConfig, {
-    browserLanguageDetection: false,
-    serverLanguageDetection: false,
-    partialBundledLanguages: false,
-    defaultLanguage: 'en',
+const getNextI18NextInstance = (_nextConfig: any) => {
+  // const {
+  //   publicRuntimeConfig: { localeSubpaths }
+  // } = nextConfig;
+
+  return new NextI18Next({
+    // localeSubpaths,
     otherLanguages: ['de'],
-    lng: 'en',
-    allLanguages: ['en', 'de']
+    localePath: path.resolve('./public/static/locales'),
+    defaultLanguage: 'en',
+    defaultNS: 'common'
   });
 };
 

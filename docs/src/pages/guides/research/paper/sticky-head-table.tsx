@@ -9,7 +9,7 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import LinkIcon from '@material-ui/icons/Link';
 import _ from 'lodash';
-import { TFunction } from 'next-i18next-serverless';
+import { TFunction } from 'next-i18next';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { isBrowser, isSafari } from 'react-device-detect';
