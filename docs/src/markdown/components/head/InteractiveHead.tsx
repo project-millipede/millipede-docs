@@ -1,11 +1,10 @@
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import LinkIcon from '@material-ui/icons/Link';
 import { useHoux } from 'houx';
-import React, { Dispatch, ReactNode, useEffect } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { atom, useRecoilState } from 'recoil';
 
-import { ScrollActions } from '../../../modules/redux/features/actionType';
-import { addScrollNavigation, removeScrollNavigation } from '../../../modules/redux/features/scroll/actions';
 import { RootState } from '../../../modules/redux/reducers';
 
 interface InteraktiveHeadProps {
@@ -39,17 +38,25 @@ export const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+export const selectedElementIdsState = atom<Set<string>>({
+  key: 'selectedElementIds',
+  default: new Set()
+});
+
 const InteraktiveHead = ({ id, variant, children }: InteraktiveHeadProps) => {
   const classes = useStyles();
 
   const {
     state: {
       view: { isMobile }
-    },
-    dispatch
-  }: { state: RootState; dispatch: Dispatch<ScrollActions> } = useHoux();
+    }
+  }: { state: RootState } = useHoux();
 
   const [ref, inView, entry] = useInView();
+
+  const [selectedElements, setSelectedElements] = useRecoilState(
+    selectedElementIdsState
+  );
 
   useEffect(() => {
     if (isMobile) {
@@ -60,10 +67,12 @@ const InteraktiveHead = ({ id, variant, children }: InteraktiveHeadProps) => {
         target: { id: inViewElementId }
       } = entry;
       if (inView) {
-        dispatch(addScrollNavigation(inViewElementId));
+        selectedElements.add(inViewElementId);
+        setSelectedElements(selectedElements);
       }
       if (!inView) {
-        dispatch(removeScrollNavigation(inViewElementId));
+        selectedElements.delete(inViewElementId);
+        setSelectedElements(selectedElements);
       }
     }
   }, [inView, id]);
