@@ -5,6 +5,7 @@ import { enableMapSet } from 'immer';
 import App, { AppContext } from 'next/app';
 import React from 'react';
 import ReactGA from 'react-ga';
+import { RecoilRoot } from 'recoil';
 
 import AppFrame from '../docs/src/modules/components/AppFrame';
 import AppWrapper from '../docs/src/modules/components/AppWrapper';
@@ -60,11 +61,13 @@ class MillipedeApp extends App<Props> {
 
     return (
       <HouxProvider reducers={reducers} logDispatchedActions>
-        <AppWrapper isMobile={isMobile}>
-          <AppFrame>
-            <Component {...pageProps} />
-          </AppFrame>
-        </AppWrapper>
+        <RecoilRoot>
+          <AppWrapper isMobile={isMobile}>
+            <AppFrame>
+              <Component {...pageProps} />
+            </AppFrame>
+          </AppWrapper>
+        </RecoilRoot>
       </HouxProvider>
     );
   }
