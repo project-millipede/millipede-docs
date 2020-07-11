@@ -7,7 +7,7 @@ const Page: FC<MDXContentLoaderProps> = ({ path }) => {
 };
 
 Page.defaultProps = {
-  path: '/rethink-security/attackVectors/intro'
+  path: '/rethink-security/attackVectors/intro/'
 };
 
 export default Page;
