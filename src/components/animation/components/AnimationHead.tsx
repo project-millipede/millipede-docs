@@ -1,6 +1,6 @@
 import { Typography } from '@material-ui/core';
 import { useHoux } from 'houx';
-import { TFunction } from 'next-i18next-serverless';
+import { TFunction } from 'next-i18next';
 import React, { FC } from 'react';
 
 import { RootState } from '../../../../docs/src/modules/redux/reducers';

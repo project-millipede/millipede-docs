@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { TFunction } from 'next-i18next-serverless';
+import { TFunction } from 'next-i18next';
 
 export const translateContent = <T>(t: TFunction, field: string): Array<T> => {
   const topics = t<Array<T>>(field, {

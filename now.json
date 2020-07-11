@@ -1,11 +1,10 @@
 {
   "version": 2,
-  "name": "millipede-docs",
   "public": true,
   "builds": [
     {
       "src": "package.json",
-      "use": "@now/next@canary"
+      "use": "@vercel/next"
     }
   ]
 }

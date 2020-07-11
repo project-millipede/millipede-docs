@@ -1,4 +1,4 @@
-import { TFunction } from 'next-i18next-serverless';
+import { TFunction } from 'next-i18next';
 import React from 'react';
 
 import { useTranslation } from '../../../../../../i18n';

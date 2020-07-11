@@ -6,7 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import TwitterIcon from '@material-ui/icons/Twitter';
-import { TFunction } from 'next-i18next-serverless';
+import { TFunction } from 'next-i18next';
 import React from 'react';
 
 import { useTranslation } from '../../../../../i18n';
