@@ -1,11 +1,11 @@
+import { useHoux } from '@houx';
 import { Button, ButtonGroup } from '@material-ui/core';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-import { useHoux } from 'houx';
+import useTranslation from 'next-translate/useTranslation';
 import React, { Dispatch, FC, useRef, useState } from 'react';
 
 import { TimelineActions } from '../../../../docs/src/modules/redux/features/actionType';
 import { RootState } from '../../../../docs/src/modules/redux/reducers';
-import { useTranslation } from '../../../../i18n';
 import { HeaderView } from '../../../components/device/browser/views';
 import CommentEditor from './CommentEditor';
 import { PostProps } from './Post';
@@ -18,12 +18,10 @@ interface TimelineProps {
   timelineId?: number;
 }
 
-const ns = 'pages/pidp/use-case/recognition/index';
-
 const Timeline: FC<TimelineProps> = ({ Comp, timelineId }) => {
   const [displayEditor, setDisplayEditor] = useState(false);
 
-  const { t } = useTranslation(ns);
+  const { t } = useTranslation();
 
   const {
     dispatch,
@@ -94,10 +92,12 @@ const Timeline: FC<TimelineProps> = ({ Comp, timelineId }) => {
             color='primary'
             startIcon={<ChatBubbleOutlineIcon />}
             onClick={() => setDisplayEditor(!displayEditor)}
-            aria-label={t('content_create')}
+            aria-label={t(
+              'pages/pidp/use-case/recognition/index:content_create'
+            )}
             style={{ margin: 'auto' }}
           >
-            {t('content_create')}
+            {t('pages/pidp/use-case/recognition/index:content_create')}
           </Button>
         </ButtonGroup>
       )}

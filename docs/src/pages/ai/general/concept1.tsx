@@ -1,8 +1,8 @@
 import { Box, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-import { useTranslation } from '../../../../../i18n';
 import { ArcherContainer, ArcherElement } from '../../../modules/components/archer';
 
 const useStyles = makeStyles(() =>
@@ -25,12 +25,10 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const ns = 'pages/ai/general/index';
-
 const Diagram = () => {
   const classes = useStyles();
 
-  const { t } = useTranslation(ns);
+  const { t } = useTranslation();
 
   return (
     <ArcherContainer noCurves strokeColor='gray'>
@@ -47,8 +45,8 @@ const Diagram = () => {
         >
           <div className={classes.box}>
             <Typography variant='subtitle1' className={classes.title}>
-              {`${t('communication_process')} ${t(
-                'communication_process_abbreviation'
+              {`${t('pages/ai/general/index:communication_process')} ${t(
+                'pages/ai/general/index:communication_process_abbreviation'
               )}`}
             </Typography>
           </div>
@@ -67,8 +65,8 @@ const Diagram = () => {
         >
           <Box className={classes.box}>
             <Typography variant='subtitle1' className={classes.title}>
-              {`${t('preparation_process')} ${t(
-                'preparation_process_abbreviation'
+              {`${t('pages/ai/general/index:preparation_process')} ${t(
+                'pages/ai/general/index:preparation_process_abbreviation'
               )}`}
             </Typography>
           </Box>
@@ -78,7 +76,9 @@ const Diagram = () => {
         <ArcherElement id='render'>
           <div className={classes.box}>
             <Typography variant='subtitle1' className={classes.title}>
-              {`${t('render_process')} ${t('render_process_abbreviation')}`}
+              {`${t('pages/ai/general/index:render_process')} ${t(
+                'pages/ai/general/index:render_process_abbreviation'
+              )}`}
             </Typography>
           </div>
         </ArcherElement>

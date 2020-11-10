@@ -1,8 +1,8 @@
+import { useHoux } from '@houx';
 import Button from '@material-ui/core/Button';
-import { useHoux } from 'houx';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-import { useTranslation } from '../../../../i18n';
 import { RootState } from '../redux/reducers';
 
 const LOCALES = { zh: 'zh-CN', pt: 'pt-BR', es: 'es-ES' };
@@ -44,7 +44,7 @@ export const EditPage = ({ markdownLocation }: EditPageProps) => {
       data-ga-event-action={userLanguage === 'de' ? undefined : 'edit-button'}
       data-ga-event-label={userLanguage === 'de' ? undefined : userLanguage}
     >
-      {t('editContent')}
+      {t('common:editContent')}
     </Button>
   );
 };

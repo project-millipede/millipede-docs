@@ -1,4 +1,4 @@
-import { useHoux } from 'houx';
+import { useHoux } from '@houx';
 import React, { Dispatch, FC, RefObject, useEffect } from 'react';
 import handleViewport from 'react-in-viewport';
 import useMeasure from 'react-use-measure';

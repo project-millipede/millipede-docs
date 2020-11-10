@@ -7,12 +7,12 @@ import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
 import windowOpenPromise from '@vangware/window-open-promise';
 import copy from 'copy-to-clipboard';
 import _ from 'lodash';
-import { TFunction } from 'next-i18next';
+import { Translate } from 'next-translate';
+import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import React, { FC, SyntheticEvent, useCallback, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { useTranslation } from '../../../../../../i18n';
 import {
   Interaction,
   InteractionMenuItem,
@@ -50,7 +50,7 @@ const useStyles = makeStyles(() =>
 const getSharing = (
   getShareProps: () => ShareProps,
   baseUrl: string,
-  t: TFunction
+  t: Translate
 ) => {
   const { meta } = getShareProps();
   const { title, description, hashtags } = meta;
@@ -68,13 +68,13 @@ const getSharing = (
     {
       id: 'copy-link',
       type: Interaction.SHARE_LOCAL,
-      title: t('copy-link'),
+      title: t('common:copy-link'),
       url: ''
     },
     {
       id: 'mail',
       type: Interaction.SHARE_MAIL,
-      title: `${t('share-via')} Mail`,
+      title: `${t('common:share-via')} Mail`,
       url: 'mailto://',
       params: {
         subject: title,
@@ -84,7 +84,7 @@ const getSharing = (
     {
       id: 'facebook',
       type: Interaction.SHARE,
-      title: `${t('share-on')} Facebook`,
+      title: `${t('common:share-on')} Facebook`,
       url: 'https://www.facebook.com/sharer/sharer.php',
       params: {
         u: baseUrl,
@@ -106,20 +106,20 @@ const getSharing = (
     {
       id: 'linkedin',
       type: Interaction.SHARE,
-      title: `${t('share-on')} LinkedIn`,
+      title: `${t('common:share-on')} LinkedIn`,
       url: 'https://linkedin.com/shareArticle',
       params: {
         url: baseUrl,
         title,
         summary: description,
-        source: t('application-title'),
+        source: t('common:application-title'),
         mini: true
       } as URIPathParamsLinkedIn
     },
     {
       id: 'whatsapp',
       type: Interaction.SHARE,
-      title: `${t('share-on')} Whatsapp`,
+      title: `${t('common:share-on')} Whatsapp`,
       url: isMobile
         ? `https://api.whatsapp.com/send`
         : `https://web.whatsapp.com/send`,
@@ -180,7 +180,7 @@ const creataShareLink = ({ title, icon, action }) => (
 const createButtons = (
   hideSpeedDial: (type: Interaction) => void,
   getShareProps: () => ShareProps,
-  t: TFunction
+  t: any
 ) => {
   let baseUrl = '';
 
@@ -225,7 +225,7 @@ const Share: FC<MetaProps> = props => {
     if (type === Interaction.SHARE_LOCAL) {
       setFeedback({
         open: true,
-        message: t('link-copied')
+        message: t('common:link-copied')
       });
     }
   };
@@ -247,7 +247,7 @@ const Share: FC<MetaProps> = props => {
   return (
     <>
       <SpeedDial
-        ariaLabel={t('share-post')}
+        ariaLabel={t('common:share-post')}
         icon={<SpeedDialIcon icon={<ShareIcon />} openIcon={<CloseIcon />} />}
         onClose={handleSpeedDialClose}
         onOpen={handleSpeedDialOpen}

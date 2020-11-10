@@ -1,12 +1,9 @@
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 import { VictoryAxis, VictoryBar, VictoryChart, VictoryTheme } from 'victory';
 
-import { useTranslation } from '../../../../../../i18n';
-
-const ns = 'pages/guides/disinformation/general/index';
-
 const use = () => {
-  const { t } = useTranslation(ns);
+  const { t } = useTranslation();
 
   return (
     <VictoryChart theme={VictoryTheme.material}>
@@ -40,9 +37,33 @@ const use = () => {
           }
         }}
         data={[
-          { x: 1, y: 0.2, y0: 0.8, label: t('misinformation'), color: 'green' },
-          { x: -0, y: 0.2, y0: 0.8, label: t('disinformation'), color: 'grey' },
-          { x: -1, y: 0.2, y0: 0.8, label: t('malinformation'), color: 'red' }
+          {
+            x: 1,
+            y: 0.2,
+            y0: 0.8,
+            label: t(
+              'pages/guides/disinformation/general/index:misinformation'
+            ),
+            color: 'green'
+          },
+          {
+            x: -0,
+            y: 0.2,
+            y0: 0.8,
+            label: t(
+              'pages/guides/disinformation/general/index:disinformation'
+            ),
+            color: 'grey'
+          },
+          {
+            x: -1,
+            y: 0.2,
+            y0: 0.8,
+            label: t(
+              'pages/guides/disinformation/general/index:malinformation'
+            ),
+            color: 'red'
+          }
         ]}
         labels={({ datum }) => datum.label}
       />

@@ -2,9 +2,8 @@ import { useMediaQuery } from '@material-ui/core';
 import Input from '@material-ui/core/Input';
 import { createStyles, fade, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
+import useTranslation from 'next-translate/useTranslation';
 import React, { useEffect, useRef } from 'react';
-
-import { useTranslation } from '../../../../i18n';
 
 // let searchTimer;
 // let initialized = false;
@@ -202,9 +201,9 @@ export const AppSearch = () => {
       </div>
       <Input
         disableUnderline
-        placeholder={`${t('search')}`}
+        placeholder={`${t('common:search')}`}
         inputProps={{
-          'aria-label': t('search')
+          'aria-label': t('common:search')
         }}
         id='docsearch-input'
         inputRef={inputRef}

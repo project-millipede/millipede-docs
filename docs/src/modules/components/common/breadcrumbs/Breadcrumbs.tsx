@@ -1,10 +1,9 @@
 import { Breadcrumbs as MaterialBreadcrumbs, Button } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { FC } from 'react';
-
-import { useTranslation } from '../../../../../../i18n';
 
 export interface BreadCrumb {
   link: string;
@@ -32,7 +31,7 @@ const Breadcrumbs: FC = () => {
     >
       {breadcrumbs.map((breadcrumb, index) => {
         const last = index === breadcrumbs.length - 1;
-        const label = t(`pages.${breadcrumb.link}`);
+        const label = t(`common:pages.${breadcrumb.link}`);
         return last ? (
           <Button key={`breadcrumb-${index}`} disabled>
             {label}

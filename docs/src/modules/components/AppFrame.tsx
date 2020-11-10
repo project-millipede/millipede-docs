@@ -1,8 +1,8 @@
+import { useHoux } from '@houx';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import { useHoux } from 'houx';
 import React, { Dispatch, ReactNode, useCallback, useState } from 'react';
 
 import { ViewActions } from '../redux/features/actionType';

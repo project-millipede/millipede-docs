@@ -1,8 +1,8 @@
 import { Box, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-import { useTranslation } from '../../../../../i18n';
 import { ArcherContainer, ArcherElement } from '../../../modules/components/archer';
 
 const useStyles = makeStyles(() =>
@@ -34,18 +34,16 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const ns = 'pages/ai/general/index';
-
 const Diagram = () => {
   const classes = useStyles();
 
-  const { t } = useTranslation(ns);
+  const { t } = useTranslation();
 
   return (
     <ArcherContainer noCurves strokeColor='gray'>
       <div className={classes.boxWrapper}>
         <Typography variant='subtitle1' className={classes.title}>
-          {t('target_application')}
+          {t('pages/ai/general/index:target_application')}
         </Typography>
         <div className={classes.row}>
           <ArcherElement
@@ -60,8 +58,8 @@ const Diagram = () => {
           >
             <div className={classes.box}>
               <Typography variant='subtitle1' className={classes.title}>
-                {`${t('communication_process')} ${t(
-                  'communication_process_abbreviation'
+                {`${t('pages/ai/general/index:communication_process')} ${t(
+                  'pages/ai/general/index:communication_process_abbreviation'
                 )}`}
               </Typography>
             </div>
@@ -78,8 +76,8 @@ const Diagram = () => {
           >
             <Box className={classes.box}>
               <Typography variant='subtitle1' className={classes.title}>
-                {`${t('preparation_process')} ${t(
-                  'preparation_process_abbreviation'
+                {`${t('pages/ai/general/index:preparation_process')} ${t(
+                  'pages/ai/general/index:preparation_process_abbreviation'
                 )}`}
               </Typography>
             </Box>
@@ -89,7 +87,7 @@ const Diagram = () => {
 
       <div className={classes.boxWrapper}>
         <Typography variant='subtitle1' className={classes.title}>
-          {t('dedicated_render_process')}
+          {t('pages/ai/general/index:dedicated_render_process')}
         </Typography>
 
         <div className={classes.row}>
@@ -105,7 +103,7 @@ const Diagram = () => {
           >
             <div className={classes.box}>
               <Typography variant='subtitle1' className={classes.title}>
-                {`${t('react_observe')}`}
+                {`${t('pages/ai/general/index:react_observe')}`}
               </Typography>
             </div>
           </ArcherElement>
@@ -122,7 +120,9 @@ const Diagram = () => {
           >
             <div className={classes.box}>
               <Typography variant='subtitle1' className={classes.title}>
-                {`${t('render_process')} ${t('render_process_abbreviation')}`}
+                {`${t('pages/ai/general/index:render_process')} ${t(
+                  'pages/ai/general/index:render_process_abbreviation'
+                )}`}
               </Typography>
             </div>
           </ArcherElement>
@@ -132,7 +132,7 @@ const Diagram = () => {
           <ArcherElement id='coordination'>
             <Box className={classes.box}>
               <Typography variant='subtitle1' className={classes.title}>
-                {`${t('coordination')}`}
+                {`${t('pages/ai/general/index:coordination')}`}
               </Typography>
             </Box>
           </ArcherElement>
@@ -151,7 +151,7 @@ const Diagram = () => {
           >
             <div className={classes.box}>
               <Typography variant='subtitle1' className={classes.title}>
-                {`${t('custom_render_process')} ${t(
+                {`${t('pages/ai/general/index:custom_render_process')} ${t(
                   'custom_render_process_abbreviation'
                 )}`}
               </Typography>
@@ -170,7 +170,7 @@ const Diagram = () => {
           >
             <div className={classes.box}>
               <Typography variant='subtitle1' className={classes.title}>
-                {`${t('observe_react')}`}
+                {`${t('pages/ai/general/index:observe_react')}`}
               </Typography>
             </div>
           </ArcherElement>
@@ -191,8 +191,8 @@ const Diagram = () => {
           >
             <Box className={classes.box}>
               <Typography variant='subtitle1' className={classes.title}>
-                {`${t('preparation_process_custom')} ${t(
-                  'preparation_process_custom_abbreviation'
+                {`${t('pages/ai/general/index:preparation_process_custom')} ${t(
+                  'pages/ai/general/index:preparation_process_custom_abbreviation'
                 )}`}
               </Typography>
             </Box>
@@ -209,15 +209,17 @@ const Diagram = () => {
           >
             <div className={classes.box}>
               <Typography variant='subtitle1' className={classes.title}>
-                {`${t('communication_process_custom')} ${t(
-                  'communication_process_custom_abbreviation'
+                {`${t(
+                  'pages/ai/general/index:communication_process_custom'
+                )} ${t(
+                  'pages/ai/general/index:communication_process_custom_abbreviation'
                 )}`}
               </Typography>
             </div>
           </ArcherElement>
         </div>
         <Typography variant='subtitle1' className={classes.title}>
-          {t('project_millipede')}
+          {t('pages/ai/general/index:project_millipede')}
         </Typography>
       </div>
     </ArcherContainer>

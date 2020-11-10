@@ -1,16 +1,18 @@
 import groupArray from 'group-array';
 import _ from 'lodash';
-import { TFunction } from 'next-i18next';
+import { Translate } from 'next-translate';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-import { useTranslation } from '../../../../../i18n';
 import { Category, CategoryDescriptor, OverviewProps } from '../../../../typings/data/import';
 import Component from './ElementComponent';
 
-const ns = 'pages/pidp/use-case/recognition/index';
-
-const generateTopicData = (t: TFunction): Array<OverviewProps> => {
-  const topics: Array<OverviewProps> = t('steps', { returnObjects: true });
+const generateTopicData = (t: Translate): Array<OverviewProps> => {
+  const topics: Array<OverviewProps> = t(
+    'pages/pidp/use-case/recognition/index:steps',
+    {},
+    { returnObjects: true }
+  );
 
   if (_.isArray(topics)) {
     return topics;
@@ -19,11 +21,15 @@ const generateTopicData = (t: TFunction): Array<OverviewProps> => {
 };
 
 const ElementDescription = () => {
-  const { t } = useTranslation(ns);
+  const { t } = useTranslation();
 
-  const categoriesRaw: CategoryDescriptor = t('categories', {
-    returnObjects: true
-  });
+  const categoriesRaw: CategoryDescriptor = t(
+    'pages/pidp/use-case/recognition/index:categories',
+    {},
+    {
+      returnObjects: true
+    }
+  );
 
   const topics = generateTopicData(t);
 

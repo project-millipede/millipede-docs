@@ -1,6 +1,5 @@
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
-
-import { useTranslation } from '../i18n';
 
 interface ErrorProps {
   statusCode?: number;
@@ -11,8 +10,8 @@ const Error = ({ statusCode }: ErrorProps) => {
   return (
     <p>
       {statusCode
-        ? t('error-with-status', { statusCode })
-        : t('error-without-status')}
+        ? t('common:error-with-status', { statusCode })
+        : t('common:error-without-status')}
     </p>
   );
 };

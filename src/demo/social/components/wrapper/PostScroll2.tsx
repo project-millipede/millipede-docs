@@ -1,4 +1,4 @@
-import { useHoux } from 'houx';
+import { useHoux } from '@houx';
 import React, { Dispatch, FC, useEffect } from 'react';
 import useMeasure from 'react-use-measure';
 

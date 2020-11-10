@@ -1,7 +1,7 @@
+import { useHoux } from '@houx';
 import Container from '@material-ui/core/Container';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import { useHoux } from 'houx';
 import React, { FC, ReactNode } from 'react';
 
 import { RootState } from '../redux/reducers';

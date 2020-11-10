@@ -1,3 +1,4 @@
+import { useHoux } from '@houx';
 import { createStyles, makeStyles, Tooltip } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -5,10 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
-import { useHoux } from 'houx';
+import useTranslation from 'next-translate/useTranslation';
 import React, { Dispatch } from 'react';
 
-import { useTranslation } from '../../../../i18n';
 import { ThemeActions } from '../redux/features/actionType';
 import { RootState } from '../redux/reducers';
 import { AppSearch } from './AppSearch';
@@ -58,7 +58,7 @@ const AppToolBar = ({
       {pages && pages.length > 0 ? (
         <IconButton
           color='inherit'
-          aria-label={t('openDrawer')}
+          aria-label={t('common:openDrawer')}
           onClick={handleDrawerOpen}
           edge='start'
           className={clsx(drawerClasses.menuButton, {
@@ -69,7 +69,7 @@ const AppToolBar = ({
         </IconButton>
       ) : null}
       <Typography variant='h6' noWrap>
-        {t('application-title')}
+        {t('common:application-title')}
       </Typography>
 
       <div className={customStyles.grow} />
@@ -77,13 +77,13 @@ const AppToolBar = ({
       <AppSearch />
       <LanguageMenu />
 
-      <Tooltip title={t('github')} enterDelay={300}>
+      <Tooltip title={t('common:github')} enterDelay={300}>
         <IconButton
           edge='end'
           component='a'
           color='inherit'
           href='https://github.com/project-millipede/millipede-docs'
-          aria-label={t('github')}
+          aria-label={t('common:github')}
           data-ga-event-category='AppBar'
           data-ga-event-action='github'
         >

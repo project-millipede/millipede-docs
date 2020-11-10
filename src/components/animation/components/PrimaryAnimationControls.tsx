@@ -1,10 +1,10 @@
+import { useHoux } from '@houx';
 import { createStyles, IconButton, makeStyles, Paper, Theme, Typography } from '@material-ui/core';
 import DesktopWindowsIcon from '@material-ui/icons/DesktopWindows';
 import SmartphoneRoundedIcon from '@material-ui/icons/SmartphoneRounded';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import { useHoux } from 'houx';
-import { TFunction } from 'next-i18next';
+import { Translate } from 'next-translate';
 import React, { Dispatch, FC, MouseEvent } from 'react';
 
 import { AnimationActions } from '../../../../docs/src/modules/redux/features/actionType';
@@ -13,7 +13,7 @@ import { RootState } from '../../../../docs/src/modules/redux/reducers';
 import { Area, Device, Szenario } from '../../../typings/animation';
 
 interface ControlsProps {
-  t?: TFunction;
+  t?: Translate;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -62,13 +62,13 @@ export const PrimaryAnimationControls: FC<ControlsProps> = ({ t }) => {
 
   const children = [
     <ToggleButton key={1} value={Szenario.Default}>
-      {t('Default')}
+      {t('pages/pidp/use-case/recognition/index:Default')}
     </ToggleButton>,
     <ToggleButton key={2} value={Szenario.Pet}>
-      {t('PET')}
+      {t('pages/pidp/use-case/recognition/index:PET')}
     </ToggleButton>,
     <ToggleButton key={3} value={Szenario.Pidp}>
-      {t('PID/P')}
+      {t('pages/pidp/use-case/recognition/index:PID/P')}
     </ToggleButton>
   ];
 
@@ -85,7 +85,7 @@ export const PrimaryAnimationControls: FC<ControlsProps> = ({ t }) => {
         component='h4'
         variant='h6'
       >
-        {t('Szenario')}
+        {t('pages/pidp/use-case/recognition/index:Szenario')}
       </Typography>
       <ToggleButtonGroup
         className={classes.group}
@@ -119,10 +119,10 @@ export const SecondaryAnimationControls: FC<ControlsProps> = ({ t }) => {
 
   const children = [
     <ToggleButton key={1} value={Area.Local}>
-      {t('Local')}
+      {t('pages/pidp/use-case/recognition/index:Local')}
     </ToggleButton>,
     <ToggleButton key={2} value={Area.Global}>
-      {t('Global')}
+      {t('pages/pidp/use-case/recognition/index:Global')}
     </ToggleButton>
   ];
 
@@ -139,7 +139,7 @@ export const SecondaryAnimationControls: FC<ControlsProps> = ({ t }) => {
         component='h4'
         variant='h6'
       >
-        {t('Layout')}
+        {t('pages/pidp/use-case/recognition/index:Layout')}
       </Typography>
       <ToggleButtonGroup
         className={classes.group}
@@ -188,7 +188,7 @@ export const DeviceControls: FC<ControlsProps> = ({ t }) => {
         component='h4'
         variant='h6'
       >
-        {t('Device')}
+        {t('pages/pidp/use-case/recognition/index:Device')}
       </Typography>
       <IconButton
         className={classes.icon}

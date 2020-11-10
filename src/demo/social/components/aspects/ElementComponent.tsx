@@ -1,5 +1,5 @@
 import { createStyles, makeStyles, Slider, Typography } from '@material-ui/core';
-import { TFunction } from 'next-i18next';
+import { Translate } from 'next-translate';
 import React, { useState } from 'react';
 
 import { Item } from '../../../../../docs/src/modules/components/common/grid/Item';
@@ -49,7 +49,7 @@ export const generateGrid = (
   categories: CategoryDescriptor,
   step: number,
   classes: Record<any, string>,
-  t: TFunction
+  t: Translate
 ) => {
   return (
     <div
@@ -91,7 +91,7 @@ export const generateGrid = (
 };
 
 interface TranslationProps {
-  t: TFunction;
+  t: Translate;
 }
 
 type Props = Stack2 & TranslationProps;

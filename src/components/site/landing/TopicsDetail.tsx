@@ -1,12 +1,11 @@
-import { TFunction } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { NextRouter, useRouter } from 'next/router';
 import React from 'react';
 
 import { InteractiveHead } from '../../../../docs/src/markdown/components/head';
-import { useTranslation } from '../../../../i18n';
 import { Topics } from './Topics';
 
-const generateIntro = (router: NextRouter, t: TFunction) => {
+const generateIntro = (router: NextRouter, t: any) => {
   const { query } = router;
 
   const entries = Object.entries(query);
@@ -25,7 +24,7 @@ const generateIntro = (router: NextRouter, t: TFunction) => {
           }}
         >
           <InteractiveHead variant={'h4'} id={`head-${aspect}-${featureName}`}>
-            {t(`${aspect}-${featureName}`)}
+            {t(`common:${aspect}-${featureName}`)}
           </InteractiveHead>
           <Topics featureName={featureName as string} aspect={aspect} />
         </div>

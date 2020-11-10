@@ -1,14 +1,18 @@
-import { TFunction } from 'next-i18next';
+import { Translate } from 'next-translate';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-import { useTranslation } from '../../../../../../i18n';
 import Step1 from '../../../../../../src/assets/pidp/approach/byExample/Step1';
 import Step2 from '../../../../../../src/assets/pidp/approach/byExample/Step2';
 import { Content } from '../../../../../../src/typings/data/import';
 import { StepperContent } from '../../../../modules/components/common/stepper';
 
-const generateContent = (t: TFunction): Array<Content> => {
-  const steps: Array<Content> = t('steps', { returnObjects: true });
+const generateContent = (t: Translate): Array<Content> => {
+  const steps: Array<Content> = t(
+    'pages/pidp/approach/byExample/content:steps',
+    {},
+    { returnObjects: true }
+  );
 
   const template: Array<Content> = [
     {
@@ -37,10 +41,8 @@ const generateContent = (t: TFunction): Array<Content> => {
   });
 };
 
-const ns = 'pages/pidp/approach/byExample/content';
-
 const use = () => {
-  const { t } = useTranslation(ns);
+  const { t } = useTranslation();
   return <StepperContent elements={generateContent(t)} />;
 };
 

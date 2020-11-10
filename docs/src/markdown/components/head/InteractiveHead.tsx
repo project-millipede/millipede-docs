@@ -1,6 +1,6 @@
+import { useHoux } from '@houx';
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import LinkIcon from '@material-ui/icons/Link';
-import { useHoux } from 'houx';
 import React, { ReactNode, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { atom, useRecoilState } from 'recoil';

@@ -1,4 +1,4 @@
-import { useHoux } from 'houx';
+import { useHoux } from '@houx';
 import React from 'react';
 
 import { RootState } from '../../../../../docs/src/modules/redux/reducers';

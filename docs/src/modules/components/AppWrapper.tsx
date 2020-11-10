@@ -1,5 +1,5 @@
+import { useHoux } from '@houx';
 import { jssPreset, StylesProvider } from '@material-ui/core/styles';
-import { useHoux } from 'houx';
 import { create } from 'jss';
 import { useRouter } from 'next/router';
 import React, { Dispatch, FC, ReactNode, useEffect } from 'react';

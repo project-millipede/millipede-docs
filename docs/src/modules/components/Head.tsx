@@ -1,7 +1,7 @@
+import useTranslation from 'next-translate/useTranslation';
 import NextHead from 'next/head';
 import React, { FC } from 'react';
 
-import { useTranslation } from '../../../../i18n';
 import { MetaProps } from '../../../../src/typings/share';
 
 interface HeadProps {
@@ -20,15 +20,17 @@ const Head: FC<HeadProps> = ({ meta = {} }) => {
     date
   } = meta;
 
-  const { t } = useTranslation([]);
+  const { t } = useTranslation();
 
   return (
     <NextHead>
-      <title>{title === defaultTitle ? t(title) : title}</title>
+      <title>{title === defaultTitle ? t(`common:${title}`) : title}</title>
       <meta
         name='description'
         content={
-          description === defaultDescription ? t(description) : description
+          description === defaultDescription
+            ? t(`common:${description}`)
+            : description
         }
       />
       {keywords ? <meta name='keywords' content={keywords} /> : null}
