@@ -1,14 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { getOptions } from 'loader-utils';
-import webpack from 'webpack';
 
 import { parser } from './mdx-parser';
 
 export async function loader(
-  this: webpack.loader.LoaderContext,
+  this,
   source: string
 ) {
-  const callback: webpack.loader.loaderCallback = this.async();
+  const callback = this.async();
 
   const options = getOptions(this);
 

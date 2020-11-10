@@ -156,7 +156,7 @@
       "title": "Auf die Veröffentlichung bezogene Information",
       "step": 0
     },
-    "content": { "id": "content", "title": "Primärere Inhalte", "step": 1 },
+    "content": { "id": "content", "title": "Primärer Inhalt", "step": 1 },
     "feedback": { "id": "feedback", "title": "Feedback", "step": 2 },
     "comment": {
       "id": "comment",

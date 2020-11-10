@@ -1,3 +1,4 @@
+import { useHoux } from '@houx';
 import {
   createStyles,
   Divider,
@@ -12,10 +13,9 @@ import {
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import clsx from 'clsx';
-import { useHoux } from 'houx';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-import { useTranslation } from '../../../../i18n';
 import { RootState } from '../redux/reducers';
 import { Tree } from './tree/Tree';
 
@@ -122,7 +122,7 @@ const AppDrawer = (props: AppDrawerProps) => {
             variant='h6'
             color='inherit'
           >
-            {t('application-title')}
+            {t('common:application-title')}
           </Link>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? (
@@ -162,7 +162,7 @@ const AppDrawer = (props: AppDrawerProps) => {
             variant='h6'
             color='inherit'
           >
-            {t('application-title')}
+            {t('common:application-title')}
           </Link>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? (

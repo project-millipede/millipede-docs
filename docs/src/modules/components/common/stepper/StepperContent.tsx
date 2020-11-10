@@ -1,8 +1,8 @@
 import { CardContent, Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import useTranslation from 'next-translate/useTranslation';
 import React, { useState } from 'react';
 
-import { useTranslation } from '../../../../../../i18n';
 import { Content, Stack } from '../../../../../../src/typings/data/import';
 import { Stepper } from './Stepper';
 
@@ -74,8 +74,8 @@ export const StepperContent = ({ elements = [] }: Stack) => {
           currentStep={(currentStep: number) => {
             setStep(currentStep);
           }}
-          labelNext={t('next')}
-          labelBack={t('back')}
+          labelNext={t('common:next')}
+          labelBack={t('common:back')}
         />
       </Grid>
       {renderTitleAndDescription(currentSteps)}

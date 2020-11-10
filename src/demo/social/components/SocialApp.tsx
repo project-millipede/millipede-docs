@@ -1,4 +1,4 @@
-import { useHoux } from 'houx';
+import { useHoux } from '@houx';
 import React, { Dispatch, FC, useCallback, useEffect } from 'react';
 import { isBrowser } from 'react-device-detect';
 import SwipeableViews from 'react-swipeable-views';

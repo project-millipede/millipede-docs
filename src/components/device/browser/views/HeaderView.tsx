@@ -1,5 +1,5 @@
+import { useHoux } from '@houx';
 import { createStyles, makeStyles } from '@material-ui/core';
-import { useHoux } from 'houx';
 import React, { FC } from 'react';
 
 import { RootState } from '../../../../../docs/src/modules/redux/reducers';

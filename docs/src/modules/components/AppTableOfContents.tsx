@@ -1,7 +1,7 @@
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-import { useTranslation } from '../../../../i18n';
 import TOCComponent from '../../markdown/components/toc/TocComponent';
 
 export const WIDTH_TOC = 225;
@@ -48,7 +48,7 @@ const AppTableOfContents = ({ content }: AppTableOfContentsProps) => {
 
   return (
     <nav className={classes.root}>
-      <Typography className={classes.tocHeader}>{t('toc')}</Typography>
+      <Typography className={classes.tocHeader}>{t('common:toc')}</Typography>
       <TOCComponent content={content} />
     </nav>
   );

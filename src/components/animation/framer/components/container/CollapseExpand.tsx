@@ -1,5 +1,5 @@
+import { useHoux } from '@houx';
 import { motion, useAnimation, Variants } from 'framer-motion';
-import { useHoux } from 'houx';
 import React, { FC, ReactNode, useEffect } from 'react';
 import styled from 'styled-components';
 

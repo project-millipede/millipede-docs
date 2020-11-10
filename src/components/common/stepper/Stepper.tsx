@@ -3,9 +3,8 @@ import MobileStepper from '@material-ui/core/MobileStepper';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import useTranslation from 'next-translate/useTranslation';
 import React, { useEffect, useState } from 'react';
-
-import { useTranslation } from '../../../../i18n';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -52,14 +51,14 @@ const Stepper = ({ steps, currentStep }: StepperProps) => {
           onClick={handleNext}
           disabled={activeStep === steps - 1}
         >
-          {t('next')}
+          {t('common:next')}
           <KeyboardArrowRight />
         </Button>
       }
       backButton={
         <Button size='small' onClick={handleBack} disabled={activeStep === 0}>
           <KeyboardArrowLeft />
-          {t('back')}
+          {t('common:back')}
         </Button>
       }
     />

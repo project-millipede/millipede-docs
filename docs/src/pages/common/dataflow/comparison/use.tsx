@@ -1,14 +1,17 @@
-import { TFunction } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-import { useTranslation } from '../../../../../../i18n';
 import Step1 from '../../../../../../src/assets/common/dataFlow/comparison/Step1';
 import Step2 from '../../../../../../src/assets/common/dataFlow/comparison/Step2';
 import { Content } from '../../../../../../src/typings/data/import';
 import { StepperContent } from '../../../../modules/components/common/stepper';
 
-const generateContent = (t: TFunction): Array<Content> => {
-  const steps: Array<Content> = t('stepss', { returnObjects: true });
+const generateContent = (t: any): Array<Content> => {
+  const steps: Array<Content> = t(
+    'pages/common/dataflow/comparison/content:stepss',
+    {},
+    { returnObjects: true }
+  );
 
   const template: Array<Content> = [
     {
@@ -52,10 +55,8 @@ const generateContent = (t: TFunction): Array<Content> => {
   });
 };
 
-const ns = 'pages/common/dataflow/comparison/content';
-
 const use = () => {
-  const { t } = useTranslation(ns);
+  const { t } = useTranslation();
   return <StepperContent elements={generateContent(t)} />;
 };
 

@@ -1,10 +1,10 @@
 /* eslint-disable import/no-named-as-default */
 import { Box, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 import Hyphenated from 'react-hyphen';
 
-import { useTranslation } from '../../../../../i18n';
 import { ArcherContainer, ArcherElement } from '../../../modules/components/archer';
 import CustomBox from '../../../modules/components/archer/CustomBoxForward';
 
@@ -38,12 +38,10 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const ns = 'pages/perspective/index';
-
 const Diagram = () => {
   const classes = useStyles();
 
-  const { t } = useTranslation(ns);
+  const { t } = useTranslation();
 
   return (
     <ArcherContainer noCurves strokeColor='gray'>
@@ -70,7 +68,9 @@ const Diagram = () => {
           <ArcherElement id='data'>
             <Box className={classes.box}>
               <Typography variant='subtitle1' className={classes.title}>
-                <Hyphenated>{t('dataCentric')}</Hyphenated>
+                <Hyphenated>
+                  {t('pages/perspective/index:dataCentric')}
+                </Hyphenated>
               </Typography>
             </Box>
           </ArcherElement>
@@ -97,8 +97,8 @@ const Diagram = () => {
         >
           <CustomBox id='general' bgcolor='error.main'>
             <Typography variant='subtitle1' className={classes.title}>
-              <Hyphenated>{`${t('general')} ${t(
-                'problemSolving'
+              <Hyphenated>{`${t('pages/perspective/index:general')} ${t(
+                'pages/perspective/index:problemSolving'
               )}`}</Hyphenated>
             </Typography>
           </CustomBox>
@@ -121,8 +121,8 @@ const Diagram = () => {
         >
           <CustomBox id='realistic' bgcolor='success.main'>
             <Typography variant='subtitle1' className={classes.title}>
-              <Hyphenated>{`${t('realistic')} ${t(
-                'problemSolving'
+              <Hyphenated>{`${t('pages/perspective/index:realistic')} ${t(
+                'pages/perspective/index:problemSolving'
               )}`}</Hyphenated>
             </Typography>
           </CustomBox>
@@ -140,8 +140,8 @@ const Diagram = () => {
         >
           <CustomBox id='specific' bgcolor='warning.main'>
             <Typography variant='subtitle1' className={classes.title}>
-              <Hyphenated>{`${t('specific')} ${t(
-                'problemSolving'
+              <Hyphenated>{`${t('pages/perspective/index:specific')} ${t(
+                'pages/perspective/index:problemSolving'
               )}`}</Hyphenated>
             </Typography>
           </CustomBox>
@@ -151,7 +151,7 @@ const Diagram = () => {
         <ArcherElement id='society'>
           <Box className={classes.box}>
             <Typography variant='subtitle1' className={classes.title}>
-              <Hyphenated>{t('society')}</Hyphenated>
+              <Hyphenated>{t('pages/perspective/index:society')}</Hyphenated>
             </Typography>
           </Box>
         </ArcherElement>

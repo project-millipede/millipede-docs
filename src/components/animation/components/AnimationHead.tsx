@@ -1,13 +1,13 @@
+import { useHoux } from '@houx';
 import { Typography } from '@material-ui/core';
-import { useHoux } from 'houx';
-import { TFunction } from 'next-i18next';
+import { Translate } from 'next-translate';
 import React, { FC } from 'react';
 
 import { RootState } from '../../../../docs/src/modules/redux/reducers';
 import { Szenario } from '../../../typings/animation';
 
 interface AnimationHeadProps {
-  t: TFunction;
+  t: Translate;
 }
 
 const AnimationHead: FC<AnimationHeadProps> = ({ t }) => {
@@ -22,13 +22,13 @@ const AnimationHead: FC<AnimationHeadProps> = ({ t }) => {
   let title = '';
 
   if (szenario === Szenario.Default) {
-    title = t('buildingBlocks');
+    title = t('pages/pidp/use-case/recognition/index:buildingBlocks');
   }
   if (szenario === Szenario.Pet) {
-    title = t('buildingBlocksPET');
+    title = t('pages/pidp/use-case/recognition/index:buildingBlocksPET');
   }
   if (szenario === Szenario.Pidp) {
-    title = t('buildingBlocksPIDP');
+    title = t('pages/pidp/use-case/recognition/index:buildingBlocksPIDP');
   }
 
   return <Typography variant='h3'>{title}</Typography>;

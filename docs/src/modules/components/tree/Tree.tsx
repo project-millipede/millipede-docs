@@ -7,9 +7,9 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import TreeItem, { TreeItemProps } from '@material-ui/lab/TreeItem';
 import TreeView from '@material-ui/lab/TreeView';
+import useTranslation from 'next-translate/useTranslation';
 import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 
-import { useTranslation } from '../../../../../i18n';
 import { Icon, Page } from '../../../../../src/typings/data/import';
 import { contains } from '../../utils/collection/array';
 import Link from '../common/link/Link';
@@ -163,7 +163,7 @@ export const Tree: FC<TreeProps> = ({ data, activePage = {} }) => {
   }, [activePage.pathname]);
 
   const createItem = ({ children, ...rest }: Page) => {
-    const title = t(`pages.${rest.pathname}`);
+    const title = t(`common:pages.${rest.pathname}`);
     return (
       <StyledTreeItem
         key={rest.pathname}
@@ -180,7 +180,7 @@ export const Tree: FC<TreeProps> = ({ data, activePage = {} }) => {
       return null;
     }
     return nodes.map(node => {
-      const title = t(`pages.${node.pathname}`);
+      const title = t(`common:pages.${node.pathname}`);
       const item = (
         <StyledTreeItem
           key={node.pathname}

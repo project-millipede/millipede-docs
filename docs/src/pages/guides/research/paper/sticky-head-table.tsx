@@ -9,12 +9,12 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import LinkIcon from '@material-ui/icons/Link';
 import _ from 'lodash';
-import { TFunction } from 'next-i18next';
+import { Translate } from 'next-translate';
+import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { isBrowser, isSafari } from 'react-device-detect';
 
-import { useTranslation } from '../../../../../../i18n';
 import { omitAtIndex } from '../../../../modules/utils/collection/array';
 
 interface ColumnDescriptor {
@@ -146,13 +146,14 @@ const ExpandableRow = ({
     </>
   );
 };
-
-const ns = 'pages/guides/research/paper/index';
-
-const generateContent = (t: TFunction): Array<HeadAndBody> => {
-  const rows: any = t('rows', {
-    returnObjects: true
-  });
+const generateContent = (t: Translate): Array<HeadAndBody> => {
+  const rows: any = t(
+    'pages/guides/research/paper/index:rows',
+    {},
+    {
+      returnObjects: true
+    }
+  );
   if (_.isString(rows) && rows === 'rows') {
     return [];
   }
@@ -160,15 +161,19 @@ const generateContent = (t: TFunction): Array<HeadAndBody> => {
 };
 
 export const StickyHeadTable = () => {
-  const { t } = useTranslation(ns);
+  const { t } = useTranslation();
 
   const classes = useStyles();
 
   const rows = generateContent(t);
 
-  const header: RowDescriptor = t('header', {
-    returnObjects: true
-  });
+  const header: RowDescriptor = t(
+    'pages/guides/research/paper/index:header',
+    {},
+    {
+      returnObjects: true
+    }
+  );
 
   const columns = getColumns(header);
 

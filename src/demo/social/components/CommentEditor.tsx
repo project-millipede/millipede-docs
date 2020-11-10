@@ -4,9 +4,8 @@ import NoSsr from '@material-ui/core/NoSsr';
 import Typography from '@material-ui/core/Typography';
 import { EditorState } from 'draft-js';
 import MUIRichTextEditor from 'mui-rte';
+import useTranslation from 'next-translate/useTranslation';
 import React, { FC, useCallback, useState } from 'react';
-
-import { useTranslation } from '../../../../i18n';
 
 /**
  * The following style override is necessary because of a bug in the mui-rte library.
@@ -42,16 +41,22 @@ interface CommentEditorProps {
   create?: (content: string) => void;
 }
 
-const ns = 'pages/pidp/use-case/recognition/index';
-
 const CommentEditor: FC<CommentEditorProps> = ({ isComment, create }) => {
-  const { t } = useTranslation(ns);
+  const { t } = useTranslation();
 
-  const title = t(isComment ? 'comment_create' : 'content_create');
-  const postButtonTitle = t(isComment ? 'comment_publish' : 'content_publish');
-  const contentEmpty = t('content_empty');
+  const title = t(
+    `pages/pidp/use-case/recognition/index:${
+      isComment ? 'comment_create' : 'content_create'
+    }`
+  );
+  const postButtonTitle = t(
+    `pages/pidp/use-case/recognition/index:${
+      isComment ? 'comment_publish' : 'content_publish'
+    }`
+  );
+  const contentEmpty = t('pages/pidp/use-case/recognition/index:content_empty');
 
-  const contentInput = t('content_input');
+  const contentInput = t('pages/pidp/use-case/recognition/index:content_input');
 
   const [commentState, setCommentState] = useState(EditorState.createEmpty());
   const [commentError, setCommentError] = useState(false);

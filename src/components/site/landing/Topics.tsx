@@ -3,10 +3,10 @@ import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import groupArray from 'group-array';
 import _ from 'lodash';
+import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
 import { Item } from '../../../../docs/src/modules/components/common/grid/Item';
-import { useTranslation } from '../../../../i18n';
 import { OverviewProps, Scenario } from '../../../typings/data/import';
 import { translateContent } from './TranslateService';
 
@@ -32,15 +32,27 @@ interface TopicsProps {
 export const Topics: FC<TopicsProps> = ({ featureName, aspect }) => {
   const classes = useStyles();
 
-  const { t } = useTranslation(`pages/${featureName}/intro/${aspect}/index`);
+  const { t } = useTranslation();
 
-  const scenariosRaw: any = t('scenarios', { returnObjects: true });
+  const scenariosRaw: any = t(
+    `pages/${featureName}/intro/${aspect}/index:scenarios`,
+    {},
+    { returnObjects: true }
+  );
+
   const scenarioKeys = Object.keys(scenariosRaw);
 
-  const categoriesRaw: any = t('categories', { returnObjects: true });
+  const categoriesRaw: any = t(
+    `pages/${featureName}/intro/${aspect}/index:categories`,
+    {},
+    { returnObjects: true }
+  );
   const categoriesKeys = Object.keys(categoriesRaw);
 
-  const data = translateContent<OverviewProps>(t, 'topics');
+  const data = translateContent<OverviewProps>(
+    t,
+    `pages/${featureName}/intro/${aspect}/index:topics`
+  );
 
   const dataGrouped: Scenario = groupArray(data, 'scenario', 'category');
 

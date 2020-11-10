@@ -3,9 +3,9 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-import { useTranslation } from '../../../../i18n';
 import Link from './common/link/Link';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -51,13 +51,13 @@ const HomeFooter = () => {
           <Grid item xs={12} md={4}>
             <div className={classes.titleContainer}>
               <Typography className={classes.title}>
-                {t('headTitle')}
+                {t('common:headTitle')}
               </Typography>
             </div>
           </Grid>
           <Grid item xs={6} md={4}>
             <Typography className={classes.title} gutterBottom>
-              {t('footerCommunity')}
+              {t('common:footerCommunity')}
             </Typography>
             <ul className={classes.list}>
               <li>
@@ -77,14 +77,14 @@ const HomeFooter = () => {
                   variant='body2'
                   href='/discover-more/team'
                 >
-                  {t('pages./discover-more/team')}
+                  {t('common:pages./discover-more/team')}
                 </Link>
               </li>
             </ul>
           </Grid>
           <Grid item xs={6} md={4}>
             <Typography className={classes.title} gutterBottom>
-              {t('footerResources')}
+              {t('common:footerResources')}
             </Typography>
             <ul className={classes.list}>
               <li>
@@ -93,7 +93,7 @@ const HomeFooter = () => {
                   variant='body2'
                   href='/discover-more/organisation'
                 >
-                  {t('pages./discover-more/organisation')}
+                  {t('common:pages./discover-more/organisation')}
                 </Link>
               </li>
               <li>
@@ -102,7 +102,7 @@ const HomeFooter = () => {
                   variant='body2'
                   href='/discover-more/support'
                 >
-                  {t('pages./discover-more/support')}
+                  {t('common:pages./discover-more/support')}
                 </Link>
               </li>
             </ul>
@@ -113,9 +113,9 @@ const HomeFooter = () => {
           color='textSecondary'
           variant='body2'
         >
-          {t('footerRelease', {
+          {t('common:footerRelease', {
             versionNumber: `v${process.env.PROJECT_VERSION}`,
-            license: t('license')
+            license: t('common:license')
           })}
           {' Copyright © '}
           {new Date().getFullYear()}

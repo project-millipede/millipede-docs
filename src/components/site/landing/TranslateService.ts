@@ -1,10 +1,11 @@
 import _ from 'lodash';
-import { TFunction } from 'next-i18next';
+import { Translate } from 'next-translate';
 
-export const translateContent = <T>(t: TFunction, field: string): Array<T> => {
-  const topics = t<Array<T>>(field, {
+export const translateContent = <T>(t: Translate, field: string): Array<T> => {
+  const topics = t<Array<T>>(field, {}, {
     returnObjects: true
   });
+
   if (_.isArray(topics)) {
     return topics;
   }

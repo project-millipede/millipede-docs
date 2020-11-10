@@ -1,10 +1,10 @@
+import { useHoux } from '@houx';
 import { Button, Container, createStyles, makeStyles, Theme } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { useHoux } from 'houx';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-import { useTranslation } from '../../../../i18n';
 import { RootState } from '../redux/reducers';
 import Link from './common/link/Link';
 
@@ -66,7 +66,7 @@ const AppContentFooter = () => {
               className={classes.pageLinkButton}
             >
               <ChevronLeftIcon className={classes.chevronLeftIcon} />
-              {t(`pages.${prevPage.pathname}`)}
+              {t(`common:pages.${prevPage.pathname}`)}
             </Button>
           ) : (
             <div />
@@ -78,7 +78,7 @@ const AppContentFooter = () => {
               href={nextPage.pathname}
               className={classes.pageLinkButton}
             >
-              {t(`pages.${nextPage.pathname}`)}
+              {t(`common:pages.${nextPage.pathname}`)}
               <ChevronRightIcon className={classes.chevronRightIcon} />
             </Button>
           ) : (

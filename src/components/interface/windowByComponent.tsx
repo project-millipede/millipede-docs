@@ -1,6 +1,6 @@
+import { useHoux } from '@houx';
 import { createStyles, IconButton, makeStyles, Theme } from '@material-ui/core';
 import { motion } from 'framer-motion';
-import { useHoux } from 'houx';
 import { useRouter } from 'next/router';
 import React, { Dispatch, FC } from 'react';
 import { OverviewProps } from 'src/typings/data/import';

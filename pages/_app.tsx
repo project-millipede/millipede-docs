@@ -1,9 +1,13 @@
 import '../docs/css/diagram.css';
 
-import { HouxProvider } from 'houx';
+import { HouxProvider } from '@houx';
+import { detectDevice } from 'docs/src/modules/utils/device';
 import { enableMapSet } from 'immer';
-import App, { AppContext } from 'next/app';
-import React from 'react';
+import { NextComponentType } from 'next';
+import I18nProvider from 'next-translate/I18nProvider';
+import { AppContext, AppInitialProps, AppProps } from 'next/app';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
 import ReactGA from 'react-ga';
 import { RecoilRoot } from 'recoil';
 
@@ -11,8 +15,8 @@ import AppFrame from '../docs/src/modules/components/AppFrame';
 import AppWrapper from '../docs/src/modules/components/AppWrapper';
 import { loadFAIcons } from '../docs/src/modules/components/icon/FAIconLoader';
 import reducers from '../docs/src/modules/redux/reducers';
-import { detectDevice } from '../docs/src/modules/utils/device';
-import { appWithTranslation } from '../i18n';
+
+// import { appWithTranslation } from '../i18n';
 
 // const TRACKING_CODE_MILLIPEDE = 'UA-151314446-1';
 const TRACKING_CODE_PRIVACY_SHIELD = 'UA-154899959-1';
@@ -21,30 +25,20 @@ loadFAIcons();
 
 enableMapSet();
 
-interface PageProps {
-  isMobile: boolean;
-}
+// interface PageProps {
+//   isMobile: boolean;
+// }
 
-interface Props extends AppContext {
-  pageProps: PageProps;
-}
+// interface Props extends AppContext {
+//   pageProps: PageProps;
+// }
 
-class MillipedeApp extends App<Props> {
-  static async getInitialProps({ Component, ctx }: AppContext) {
-    const isMobile = detectDevice(ctx.req);
-
-    const pageProps = Component.getInitialProps
-      ? {
-          ...(await Component.getInitialProps(ctx)),
-          isMobile
-        }
-      : { isMobile };
-
-    return { pageProps };
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  componentDidMount() {
+const MillipedeApp: NextComponentType<
+  AppContext,
+  AppInitialProps,
+  AppProps
+> = ({ Component, pageProps }) => {
+  useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
@@ -52,14 +46,15 @@ class MillipedeApp extends App<Props> {
     }
     // ReactGA.initialize(TRACKING_CODE_MILLIPEDE);
     ReactGA.initialize(TRACKING_CODE_PRIVACY_SHIELD);
-  }
+  }, []);
 
-  render() {
-    const { Component, pageProps } = this.props;
+  const { isMobile } = pageProps;
 
-    const { isMobile } = pageProps;
+  const router = useRouter();
 
-    return (
+  return (
+    // eslint-disable-next-line no-underscore-dangle
+    <I18nProvider lang={router.locale} namespaces={pageProps._ns}>
       <HouxProvider reducers={reducers} logDispatchedActions>
         <RecoilRoot>
           <AppWrapper isMobile={isMobile}>
@@ -69,8 +64,31 @@ class MillipedeApp extends App<Props> {
           </AppWrapper>
         </RecoilRoot>
       </HouxProvider>
-    );
-  }
-}
+    </I18nProvider>
+  );
+};
 
-export default appWithTranslation(MillipedeApp);
+// Only uncomment this method if you have blocking data requirements for
+// every single page in your application. This disables the ability to
+// perform automatic static optimization, causing every page in your app to
+// be server-side rendered.
+
+// MyApp.getInitialProps = async (appContext) => {
+//   const appProps = await App.getInitialProps(appContext)
+//   return { ...appProps }
+// }
+
+MillipedeApp.getInitialProps = async ({ Component, ctx }: AppContext) => {
+  const isMobile = detectDevice(ctx.req);
+
+  const pageProps = Component.getInitialProps
+    ? {
+        ...(await Component.getInitialProps(ctx)),
+        isMobile
+      }
+    : { isMobile };
+
+  return { pageProps };
+};
+
+export default MillipedeApp;

@@ -1,17 +1,15 @@
+import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-import { useTranslation } from '../../../../i18n';
 import AnimationControls from './AnimationControls';
 import AnimationHead from './AnimationHead';
 import { DeviceControls, PrimaryAnimationControls, SecondaryAnimationControls } from './PrimaryAnimationControls';
 
 const Root = styled('div')``;
 
-const ns = 'pages/pidp/use-case/recognition/index';
-
 export const Container: FC = props => {
-  const { t } = useTranslation(ns);
+  const { t } = useTranslation();
 
   return (
     <Root>

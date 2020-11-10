@@ -1,24 +1,26 @@
-import { TFunction } from 'next-i18next';
+import { Translate } from 'next-translate';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-import { useTranslation } from '../../../../../../i18n';
 import { Content } from '../../../../../../src/typings/data/import';
 import Component from './component';
 
-const generateContent = (t: TFunction): Array<Content> | any => {
-  const steps: Array<Array<Content>> | string = t('steps', {
-    returnObjects: true
-  });
+const generateContent = (t: Translate): Array<Content> | any => {
+  const steps: Array<Array<Content>> | string = t(
+    'pages/rethink-security/attackVectors/comparison/content:steps',
+    {},
+    {
+      returnObjects: true
+    }
+  );
   if (steps === 'steps') {
     return [[]];
   }
   return steps;
 };
 
-const ns = 'pages/rethink-security/attackVectors/comparison/content';
-
 const use = () => {
-  const { t } = useTranslation(ns);
+  const { t } = useTranslation();
 
   const content = generateContent(t);
 

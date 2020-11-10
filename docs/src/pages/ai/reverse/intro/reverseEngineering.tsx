@@ -1,8 +1,8 @@
 import { Box, Typography } from '@material-ui/core';
 import { createStyles, lighten, makeStyles } from '@material-ui/core/styles';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-import { useTranslation } from '../../../../../../i18n';
 import { ArcherContainer, ArcherElement } from '../../../../modules/components/archer';
 
 const useStyles = makeStyles(() =>
@@ -63,25 +63,23 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const ns = 'pages/ai/general/index';
-
 const AnalyseAndImplant = () => {
   const classes = useStyles();
 
-  const { t } = useTranslation(ns);
+  const { t } = useTranslation();
 
   return (
     <ArcherContainer noCurves strokeColor='gray'>
       <Box className={classes.boxWrapper2}>
         <Typography variant='subtitle1' className={classes.title}>
-          {t('program')}
+          {t('pages/ai/general/index:program')}
         </Typography>
 
         <div className={classes.boxInner}>
           <ArcherElement id='function'>
             <Box className={classes.box} style={{ height: '100%' }}>
               <Typography variant='subtitle1' className={classes.title}>
-                {t('Function')}
+                {t('pages/ai/general/index:function')}
               </Typography>
             </Box>
           </ArcherElement>
@@ -102,7 +100,7 @@ const AnalyseAndImplant = () => {
           >
             <Box className={classes.boxNoBorder}>
               <Typography variant='subtitle1' className={classes.title}>
-                {t('Instrument function')}
+                {t('pages/ai/general/index:instrument_function')}
               </Typography>
             </Box>
           </ArcherElement>
@@ -111,7 +109,7 @@ const AnalyseAndImplant = () => {
 
       <Box className={classes.boxWrapper2}>
         <Typography variant='subtitle1' className={classes.title}>
-          {t('Analysis')}
+          {t('pages/ai/general/index:analysis')}
         </Typography>
         <div className={classes.rowRight}>
           <ArcherElement
@@ -126,7 +124,7 @@ const AnalyseAndImplant = () => {
           >
             <Box className={classes.box}>
               <Typography variant='subtitle1' className={classes.title}>
-                {t('Determine behavior')}
+                {t('pages/ai/general/index:determine_behavior')}
               </Typography>
             </Box>
           </ArcherElement>
@@ -135,7 +133,7 @@ const AnalyseAndImplant = () => {
 
       <Box className={classes.boxWrapper2}>
         <Typography variant='subtitle1' className={classes.title}>
-          {t('Exposure')}
+          {t('pages/ai/general/index:exposure')}
         </Typography>
         <div className={classes.boxInner}>
           <ArcherElement
@@ -150,7 +148,7 @@ const AnalyseAndImplant = () => {
           >
             <Box className={classes.box}>
               <Typography variant='subtitle1' className={classes.title}>
-                {t('Apply attack vector')}
+                {t('pages/ai/general/index:apply_attack_vector')}
               </Typography>
             </Box>
           </ArcherElement>
@@ -166,7 +164,7 @@ const AnalyseAndImplant = () => {
           >
             <Box className={classes.box}>
               <Typography variant='subtitle1' className={classes.title}>
-                {t('Derive attack vector')}
+                {t('pages/ai/general/index:derive_attack_vector')}
               </Typography>
             </Box>
           </ArcherElement>

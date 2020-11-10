@@ -1,7 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-import kebabCase from 'lodash/kebabCase';
-import { Router } from 'next/router';
-
 import { Page } from '../../../../src/typings/data/import';
 import { getContents, getHeaders } from '../utils/parseMarkdown';
 
@@ -35,20 +32,20 @@ const useMarkdownDocsContents = ({
     }
   }
 
-  if (headers.components.length > 0) {
-    const section = markdownLocation.split('/')[4];
-    contents.push(`
-## API
-${headers.components
-  .map(
-    component =>
-      `- [&lt;${component} /&gt;](${
-        section === 'lab' ? '/lab/api' : '/api'
-      }/${Router._rewriteUrlForNextExport(kebabCase(component))})`
-  )
-  .join('\n')}
-  `);
-  }
+  //   if (headers.components.length > 0) {
+  //     const section = markdownLocation.split('/')[4];
+  //     contents.push(`
+  // ## API
+  // ${headers.components
+  //   .map(
+  //     component =>
+  //       `- [&lt;${component} /&gt;](${
+  //         section === 'lab' ? '/lab/api' : '/api'
+  //       }/${Router._rewriteUrlForNextExport(kebabCase(component))})`
+  //   )
+  //   .join('\n')}
+  //   `);
+  //   }
 
   return { contents, markdownLocation };
 };

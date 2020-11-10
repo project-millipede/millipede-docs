@@ -1,3 +1,4 @@
+import { useHoux } from '@houx';
 import {
   Avatar,
   Button,
@@ -18,12 +19,11 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import clsx from 'clsx';
-import { useHoux } from 'houx';
+import useTranslation from 'next-translate/useTranslation';
 import React, { Dispatch, FC, useState } from 'react';
 
 import { TimelineActions } from '../../../../docs/src/modules/redux/features/actionType';
 import { RootState } from '../../../../docs/src/modules/redux/reducers';
-import { useTranslation } from '../../../../i18n';
 import CommentEditor from './CommentEditor';
 import Comments from './Comments';
 import { handleCreateComment, handleDeletePost, selectPost } from './Post.svc';
@@ -59,12 +59,10 @@ export interface PostProps {
   postId: number;
 }
 
-const ns = 'pages/pidp/use-case/recognition/index';
-
 const Post: FC<PostProps> = ({ timelineId, postId }) => {
   const classes = useStyles();
 
-  const { t } = useTranslation(ns);
+  const { t } = useTranslation();
 
   const [expanded, setExpanded] = useState(false);
 
@@ -133,7 +131,7 @@ const Post: FC<PostProps> = ({ timelineId, postId }) => {
             startIcon={<ThumbUpIcon />}
             aria-label='like'
           >
-            {t('like')}
+            {t('pages/pidp/use-case/recognition/index:like')}
           </Button>
           {/* <Button
               variant='text'
@@ -141,7 +139,7 @@ const Post: FC<PostProps> = ({ timelineId, postId }) => {
               startIcon={<ShareIcon />}
               aria-label='share'
             >
-              {t('share')}
+              {t('pages/pidp/use-case/recognition/index:share')}
             </Button> */}
           <Button
             variant='text'
@@ -150,7 +148,7 @@ const Post: FC<PostProps> = ({ timelineId, postId }) => {
             onClick={() => setDisplayEditor(!displayEditor)}
             aria-label='comment'
           >
-            {t('comment')}
+            {t('pages/pidp/use-case/recognition/index:comment')}
           </Button>
           <Button
             variant='text'
@@ -159,7 +157,7 @@ const Post: FC<PostProps> = ({ timelineId, postId }) => {
             onClick={() => handleDeletePost(timelineId, postId, dispatch)}
             aria-label='delete'
           >
-            {t('delete')}
+            {t('pages/pidp/use-case/recognition/index:delete')}
           </Button>
         </ButtonGroup>
       </CardActions>

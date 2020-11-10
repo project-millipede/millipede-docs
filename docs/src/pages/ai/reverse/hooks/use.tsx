@@ -1,13 +1,18 @@
-import { TFunction } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-import { useTranslation } from '../../../../../../i18n';
 import { Content } from '../../../../../../src/typings/data/import';
 import { StepperContent } from '../../../../modules/components/common/stepper';
 import { FunctionBeahvior, HookedFunctionBeahvior } from './methodHooking';
 
-const generateContent = (t: TFunction): Array<Content> => {
-  const steps: Array<Content> = t('steps', { returnObjects: true });
+const generateContent = (t: any): Array<Content> => {
+  const steps: Array<Content> = t(
+    'pages/ai/index:steps',
+    {},
+    {
+      returnObjects: true
+    }
+  );
 
   const template: Array<Content> = [
     {
@@ -31,10 +36,8 @@ const generateContent = (t: TFunction): Array<Content> => {
   });
 };
 
-const ns = 'pages/ai/index';
-
 const use = () => {
-  const { t } = useTranslation(ns);
+  const { t } = useTranslation();
   return <StepperContent elements={generateContent(t)} />;
 };
 

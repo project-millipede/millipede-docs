@@ -6,17 +6,16 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import TwitterIcon from '@material-ui/icons/Twitter';
-import { TFunction } from 'next-i18next';
+import { Translate } from 'next-translate';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-import { useTranslation } from '../../../../../i18n';
-
-export const getActiveCoreMembers = (t: TFunction) => [
+export const getActiveCoreMembers = (t: Translate) => [
   {
     name: 'Gritsch Markus',
     github: 'gurkerl83',
-    flag: t('founder'),
-    city: `${t('munich')}, ${t('germany')}`
+    flag: t('common:founder'),
+    city: `${t('common:munich')}, ${t('common:germany')}`
   }
 ];
 
@@ -127,20 +126,20 @@ const Team = (props: any) => {
   return (
     <div>
       <Group
-        title={t('active-core-team-title')}
-        description={t('active-core-team-description')}
+        title={t('common:active-core-team-title')}
+        description={t('common:active-core-team-description')}
         members={getActiveCoreMembers(t)}
         {...props}
       />
       <Group
-        title={t('emeriti-core-team-title')}
-        description={t('emeriti-core-team-description')}
+        title={t('common:emeriti-core-team-title')}
+        description={t('common:emeriti-core-team-description')}
         members={getEmeritiCoreMembers()}
         {...props}
       />
       <Group
-        title={t('community-partners-title')}
-        description={t('community-partners-description')}
+        title={t('common:community-partners-title')}
+        description={t('common:community-partners-description')}
         members={getCommunityPartners()}
         {...props}
       />
