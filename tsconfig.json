@@ -21,7 +21,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "typeRoots": ["./node_modules/@types"],
-    "lib": ["dom", "dom.iterable", "esnext.array"]
+    "lib": ["dom", "dom.iterable", "esnext.array"],
+    "paths": {
+      "houx": ["docs/src/modules/redux/houx/index.tsx"]
+    }
   },
   "include": [
     "next-env.d.ts",
@@ -36,5 +39,5 @@
     "src/**/*.tsx",
     "webpack/**/*.js"
   ],
-  "exclude": ["node_modules", "loader", "next.config.json"]
+  "exclude": ["node_modules", "loader"]
 }
