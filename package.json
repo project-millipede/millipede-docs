@@ -23,9 +23,9 @@
     "next:start": "next start",
     "app:build": "tsc --project tsconfig.json",
     "loader:build": "tsc --project ./loader/tsconfig.json",
-    "dev": "NODE_ENV=development npm run loader:build && npm run app:build && npm run next:dev",
-    "start": "NODE_ENV=production npm run loader:build && npm run app:build && npm run next:build && npm run next:start",
-    "now-build": "npm run loader:build && npm run app:build && npm run next:build",
+    "dev": "NODE_ENV=development && yarn run loader:build && yarn run app:build && yarn run next:dev",
+    "start": "NODE_ENV=production yarn run loader:build && yarn run app:build && yarn run next:build && yarn run next:start",
+    "now-build": "yarn run loader:build && yarn run app:build && yarn run next:build",
     "clean": "rm -rf dist/ .next/",
     "format:mdx": "prettier --parser mdx --print-width 80 --prose-wrap always --single-quote true --write \"docs/src/pages/**/*.mdx\"",
     "format:md": "prettier --parser markdown --print-width 80 --prose-wrap always --single-quote true --write \"docs/src/pages/**/*.md\"",
@@ -117,15 +117,17 @@
     "eslint-plugin-mdx": "^1.7.1",
     "eslint-plugin-react": "^7.20.3",
     "eslint-plugin-react-hooks": "^4.0.8",
-    "happypack": "^5.0.1",
     "loader-utils": "^2.0.0",
     "nextjs-sitemap-generator": "^1.0.0",
     "prettier": "^2.0.5",
     "raw-loader": "^4.0.1",
     "ts-loader": "^8.0.1",
     "typescript": "^3.9.7",
-    "webpack": "^4.43.0",
+    "webpack": "^5.4.0",
     "webpack-merge": "^5.0.9"
+  },
+  "resolutions": {
+    "webpack": "^5.4.0"
   },
   "engines": {
     "node": "12.x"
