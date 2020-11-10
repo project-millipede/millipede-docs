@@ -3,30 +3,28 @@ const webpack = require('webpack');
 
 const pkg = require('../package.json');
 
-const setFs = isServer => {
-  // Fixes npm packages that depend on `fs` module
+const getFallback = isServer => {
   if (!isServer) {
-    return 'empty';
+    return {
+      fs: false
+    };
   }
-  return true;
 };
 
 const webpackConfig = ({ isServer }) => {
   return {
     mode: 'production',
 
-    node: {
-      fs: setFs(isServer)
-    },
-
     resolve: {
-      extensions: ['.js', '.jsx', '.ts', '.tsx', '.json']
+      extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+      fallback: {
+        ...getFallback(isServer)
+      },
     },
 
     module: {
       rules: [
-        // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-        { test: /\.tsx?$/, loader: 'ts-loader' },
+        { test: /\.(ts|tsx)$/, loader: 'ts-loader' },
         {
           test: /\.mdx$/,
           use: [
@@ -50,7 +48,11 @@ const webpackConfig = ({ isServer }) => {
         'process.env': {
           PROJECT_VERSION: JSON.stringify(pkg.version)
         }
-      })
+      }),
+      new webpack.IgnorePlugin({
+        resourceRegExp: /^encoding$/,
+        contextRegExp: /node-fetch/,
+      }),
     ]
   };
 };
