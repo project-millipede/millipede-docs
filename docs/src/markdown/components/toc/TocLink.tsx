@@ -1,10 +1,10 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
-import React, { FC, ReactNode, useMemo } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import Link from '../../../modules/components/common/link/Link';
-import { selectedElementIdsState } from '../head/InteractiveHead';
+import { scrollItemsState } from '../../../modules/recoil/features/scroll/page/reducer';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,9 +26,9 @@ interface TocLinkProps {
   children: ReactNode;
 }
 
-const processLink = (activeState: Set<string>, href: string) => {
+const processLink = (activeState: { [key: string]: string }, href: string) => {
   return (
-    Array.from(activeState).filter(
+    Object.keys(activeState).filter(
       activeState => activeState === decodeURI(href).replace('#', '')
     ).length > 0
   );
@@ -37,16 +37,11 @@ const processLink = (activeState: Set<string>, href: string) => {
 const TocLink: FC<TocLinkProps> = ({ href, children }) => {
   const classes = useStyles();
 
-  const selectedElements = useRecoilValue(selectedElementIdsState);
-
-  const isActive = useMemo(() => processLink(selectedElements, href), [
-    href,
-    selectedElements.size
-  ]);
+  const { scrollItems } = useRecoilValue(scrollItemsState);
+  const isActive = processLink(scrollItems, href);
 
   return (
     <Link
-      key={href}
       href={href}
       className={clsx(classes.item, isActive ? classes.active : undefined)}
       naked
