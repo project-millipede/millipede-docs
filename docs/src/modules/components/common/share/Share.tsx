@@ -4,7 +4,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
-import windowOpenPromise from '@vangware/window-open-promise';
+import { windowOpenPromise } from '@vangware/window-open-promise';
 import copy from 'copy-to-clipboard';
 import _ from 'lodash';
 import { Translate } from 'next-translate';
@@ -134,7 +134,9 @@ const createNewTab = async (
   newUrl: string,
   hideSpeedDial: (type?: Interaction) => void
 ) => {
-  const newWindow = await windowOpenPromise({
+  const windowOpen = windowOpenPromise(window);
+
+  const newWindow = await windowOpen({
     url: newUrl,
     target: '_blank'
   });
