@@ -1,8 +1,6 @@
-import InputAdornment from '@material-ui/core/InputAdornment';
-import InputBase from '@material-ui/core/InputBase';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { createStyles, InputAdornment, InputBase, makeStyles } from '@material-ui/core';
 import Search from '@material-ui/icons/Search';
-import React from 'react';
+import React, { FC } from 'react';
 
 const useInputStyles = makeStyles(() => {
   const minHeight = 36;
@@ -31,7 +29,11 @@ const useAdornStyles = makeStyles(() =>
   })
 );
 
-const SimpleSearch = () => {
+interface SimpleSearchProps {
+  placeholder: string;
+}
+
+const SimpleSearch: FC<SimpleSearchProps> = ({ placeholder }) => {
   const inputStyles = useInputStyles();
   const adornStyles = useAdornStyles();
   return (
@@ -42,7 +44,7 @@ const SimpleSearch = () => {
           <Search />
         </InputAdornment>
       }
-      placeholder={'Search Timeline'}
+      placeholder={placeholder}
     />
   );
 };

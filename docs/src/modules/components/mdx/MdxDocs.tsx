@@ -1,4 +1,4 @@
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core';
 import React, { ReactNode } from 'react';
 import { IReadingTime } from 'reading-time-estimator';
 

@@ -1,5 +1,5 @@
 import { Chip, createStyles, makeStyles } from '@material-ui/core';
-import ClassOutlinedIcon from '@material-ui/icons/ClassOutlined';
+import { ClassOutlined } from '@material-ui/icons';
 import React from 'react';
 
 export interface TagProps {
@@ -24,7 +24,7 @@ export const Tag = ({ text, id }) => {
       id={id}
       variant='outlined'
       color='primary'
-      icon={<ClassOutlinedIcon />}
+      icon={<ClassOutlined />}
       label={text}
       className={classes.chip}
     />

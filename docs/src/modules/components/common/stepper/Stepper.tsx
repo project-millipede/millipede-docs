@@ -1,8 +1,5 @@
-import Button from '@material-ui/core/Button';
-import MobileStepper from '@material-ui/core/MobileStepper';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import { Button, createStyles, makeStyles, MobileStepper } from '@material-ui/core';
+import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
 
 const useStyles = makeStyles(() =>

@@ -1,5 +1,4 @@
-import { CardContent, Grid, Typography } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { CardContent, createStyles, Grid, makeStyles, Typography } from '@material-ui/core';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useState } from 'react';
 

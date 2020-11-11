@@ -1,10 +1,6 @@
 import { useHoux } from '@houx';
-import { createStyles, makeStyles, Tooltip } from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import MenuIcon from '@material-ui/icons/Menu';
+import { createStyles, IconButton, makeStyles, Toolbar, Tooltip, Typography } from '@material-ui/core';
+import { GitHub, Menu } from '@material-ui/icons';
 import clsx from 'clsx';
 import useTranslation from 'next-translate/useTranslation';
 import React, { Dispatch } from 'react';
@@ -65,7 +61,7 @@ const AppToolBar = ({
             [drawerClasses.hide]: isDrawerExpanded
           })}
         >
-          <MenuIcon />
+          <Menu />
         </IconButton>
       ) : null}
       <Typography variant='h6' noWrap>
@@ -87,7 +83,7 @@ const AppToolBar = ({
           data-ga-event-category='AppBar'
           data-ga-event-action='github'
         >
-          <GitHubIcon />
+          <GitHub />
         </IconButton>
       </Tooltip>
     </Toolbar>
