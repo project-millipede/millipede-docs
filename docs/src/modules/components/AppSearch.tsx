@@ -1,6 +1,4 @@
-import { useMediaQuery } from '@material-ui/core';
-import Input from '@material-ui/core/Input';
-import { createStyles, fade, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import { alpha, createStyles, Input, makeStyles, Theme, useMediaQuery, useTheme } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useEffect, useRef } from 'react';
@@ -91,7 +89,7 @@ const useStyles = makeStyles((theme: Theme) =>
           fontWeight: theme.typography.fontWeightRegular
         },
         '& .algolia-docsearch-suggestion--highlight': {
-          color: theme.palette.type === 'light' ? '#174d8c' : '#acccf1'
+          color: theme.palette.mode === 'light' ? '#174d8c' : '#acccf1'
         },
         '& .algolia-docsearch-suggestion': {
           textDecoration: 'none',
@@ -119,9 +117,9 @@ const useStyles = makeStyles((theme: Theme) =>
       marginRight: theme.spacing(2),
       marginLeft: theme.spacing(1),
       borderRadius: theme.shape.borderRadius,
-      backgroundColor: fade(theme.palette.common.white, 0.15),
+      backgroundColor: alpha(theme.palette.common.white, 0.15),
       '&:hover': {
-        backgroundColor: fade(theme.palette.common.white, 0.25)
+        backgroundColor: alpha(theme.palette.common.white, 0.25)
       },
       '& $inputInput': {
         transition: theme.transitions.create('width'),

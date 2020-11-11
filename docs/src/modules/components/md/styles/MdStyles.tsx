@@ -22,7 +22,7 @@ export const useMdStyles = (theme: Theme) =>
         padding: '2px 6px',
         color: theme.palette.text.primary,
         backgroundColor:
-          theme.palette.type === 'dark'
+          theme.palette.mode === 'dark'
             ? 'rgba(255,229,100,0.2)'
             : 'rgba(255,229,100,0.1)',
         fontSize: 14,

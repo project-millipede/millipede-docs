@@ -1,9 +1,5 @@
-import { createStyles, Fade, makeStyles, Snackbar } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
-import ShareIcon from '@material-ui/icons/Share';
-import SpeedDial from '@material-ui/lab/SpeedDial';
-import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
-import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
+import { createStyles, Fade, makeStyles, Snackbar, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@material-ui/core';
+import { Close as CloseIcon, Share as ShareIcon } from '@material-ui/icons';
 import { windowOpenPromise } from '@vangware/window-open-promise';
 import copy from 'copy-to-clipboard';
 import _ from 'lodash';
