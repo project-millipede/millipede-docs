@@ -2,7 +2,8 @@ const path = require('path');
 
 module.exports = {
   env: {
-    browser: true
+    browser: true,
+    jest: true
   },
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -57,6 +58,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-member-accessibility': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
     '@typescript-eslint/array-type': ['error', { default: 'generic' }],
