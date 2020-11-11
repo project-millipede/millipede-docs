@@ -30,10 +30,10 @@ const useAdornStyles = makeStyles(() =>
 );
 
 interface SimpleSearchProps {
-  placeholder: string;
+  placeholder?: string;
 }
 
-const SimpleSearch: FC<SimpleSearchProps> = ({ placeholder }) => {
+const SimpleSearch: FC<SimpleSearchProps> = ({ placeholder = '' }) => {
   const inputStyles = useInputStyles();
   const adornStyles = useAdornStyles();
   return (
