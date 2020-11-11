@@ -95,7 +95,7 @@ const getSharing = (
     {
       id: 'twitter',
       type: Interaction.SHARE,
-      title: `${t('share-on')} Twitter`,
+      title: `${t('common:share-on')} Twitter`,
       url: 'https://twitter.com/share',
       params: {
         url: baseUrl,
@@ -180,7 +180,7 @@ const creataShareLink = ({ title, icon, action }) => (
 const createButtons = (
   hideSpeedDial: (type: Interaction) => void,
   getShareProps: () => ShareProps,
-  t: any
+  t: Translate
 ) => {
   let baseUrl = '';
 

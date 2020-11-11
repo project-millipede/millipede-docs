@@ -1,3 +1,4 @@
+import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
 import { NextRouter, useRouter } from 'next/router';
 import React from 'react';
@@ -5,7 +6,7 @@ import React from 'react';
 import { InteractiveHead } from '../../../../docs/src/markdown/components/head';
 import { Topics } from './Topics';
 
-const generateIntro = (router: NextRouter, t: any) => {
+const generateIntro = (router: NextRouter, t: Translate) => {
   const { query } = router;
 
   const entries = Object.entries(query);

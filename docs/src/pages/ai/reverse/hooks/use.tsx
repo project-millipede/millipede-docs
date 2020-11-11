@@ -1,3 +1,4 @@
+import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
@@ -5,7 +6,7 @@ import { Content } from '../../../../../../src/typings/data/import';
 import { StepperContent } from '../../../../modules/components/common/stepper';
 import { FunctionBeahvior, HookedFunctionBeahvior } from './methodHooking';
 
-const generateContent = (t: any): Array<Content> => {
+const generateContent = (t: Translate): Array<Content> => {
   const steps: Array<Content> = t(
     'pages/ai/index:steps',
     {},
