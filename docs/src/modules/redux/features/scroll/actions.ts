@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { action } from 'typesafe-actions';
 
 import { SCROLL_NAVIGATION_ADD, SCROLL_NAVIGATION_REMOVE } from './actionTypes';
