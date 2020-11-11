@@ -10,8 +10,7 @@ import {
   Theme,
   useTheme,
 } from '@material-ui/core';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { ChevronLeft, ChevronRight } from '@material-ui/icons';
 import clsx from 'clsx';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
@@ -125,11 +124,7 @@ const AppDrawer = (props: AppDrawerProps) => {
             {t('common:application-title')}
           </Link>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
+            {theme.direction === 'rtl' ? <ChevronRight /> : <ChevronLeft />}
           </IconButton>
         </div>
         <Divider />
@@ -165,11 +160,7 @@ const AppDrawer = (props: AppDrawerProps) => {
             {t('common:application-title')}
           </Link>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
+            {theme.direction === 'rtl' ? <ChevronRight /> : <ChevronLeft />}
           </IconButton>
         </div>
         <Divider />

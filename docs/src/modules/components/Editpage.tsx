@@ -1,5 +1,5 @@
 import { useHoux } from '@houx';
-import Button from '@material-ui/core/Button';
+import { Button } from '@material-ui/core';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 

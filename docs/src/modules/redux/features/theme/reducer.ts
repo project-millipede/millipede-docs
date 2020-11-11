@@ -1,5 +1,4 @@
-import { PaletteType } from '@material-ui/core';
-import { Direction, PaletteColorOptions } from '@material-ui/core/styles';
+import { Direction, PaletteColorOptions, PaletteMode } from '@material-ui/core';
 import { Spacing } from '@material-ui/core/styles/createSpacing';
 
 import { StoreAction } from '../actionType';
@@ -10,12 +9,11 @@ export interface RProps {
   spacing?: Spacing;
   dense: boolean;
   paletteColors: PaletteColorOptions;
-  paletteType: PaletteType;
+  paletteType: PaletteMode;
 }
 
 export const initialState: RProps = {
   direction: 'ltr',
-  // spacing: 8,
   dense: false,
   paletteColors: {},
   paletteType: 'light'

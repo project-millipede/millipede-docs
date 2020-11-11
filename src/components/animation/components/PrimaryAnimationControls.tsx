@@ -1,9 +1,15 @@
 import { useHoux } from '@houx';
-import { createStyles, IconButton, makeStyles, Paper, Theme, Typography } from '@material-ui/core';
-import DesktopWindowsIcon from '@material-ui/icons/DesktopWindows';
-import SmartphoneRoundedIcon from '@material-ui/icons/SmartphoneRounded';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import {
+  createStyles,
+  IconButton,
+  makeStyles,
+  Paper,
+  Theme,
+  ToggleButton,
+  ToggleButtonGroup,
+  Typography,
+} from '@material-ui/core';
+import { DesktopWindows, SmartphoneRounded } from '@material-ui/icons';
 import { Translate } from 'next-translate';
 import React, { Dispatch, FC, MouseEvent } from 'react';
 
@@ -200,11 +206,7 @@ export const DeviceControls: FC<ControlsProps> = ({ t }) => {
           }
         }}
       >
-        {device === Device.Desktop ? (
-          <SmartphoneRoundedIcon />
-        ) : (
-          <DesktopWindowsIcon />
-        )}
+        {device === Device.Desktop ? <SmartphoneRounded /> : <DesktopWindows />}
       </IconButton>
     </Paper>
   );

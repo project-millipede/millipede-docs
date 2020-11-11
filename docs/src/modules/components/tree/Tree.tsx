@@ -1,10 +1,7 @@
 /* eslint-disable import/named */
-import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import Collapse from '@material-ui/core/Collapse';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { Collapse, createStyles, ListItem, ListItemIcon, ListItemText, makeStyles, Theme } from '@material-ui/core';
 import { TransitionProps } from '@material-ui/core/transitions';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import TreeItem, { TreeItemProps } from '@material-ui/lab/TreeItem';
 import TreeView from '@material-ui/lab/TreeView';
 import useTranslation from 'next-translate/useTranslation';
@@ -216,10 +213,7 @@ export const Tree: FC<TreeProps> = ({ data, activePage = {} }) => {
     });
   };
 
-  const handleNodeToggle = (
-    _event: ChangeEvent<{}>,
-    nodeIds: Array<string>
-  ) => {
+  const handleNodeToggle = (_event: ChangeEvent, nodeIds: Array<string>) => {
     setExpanded(nodeIds);
   };
 

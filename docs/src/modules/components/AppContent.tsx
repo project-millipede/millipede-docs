@@ -1,6 +1,5 @@
 import { useHoux } from '@houx';
-import Container from '@material-ui/core/Container';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { Container, createStyles, makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 import React, { FC, ReactNode } from 'react';
 

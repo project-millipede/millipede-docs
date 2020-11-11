@@ -1,10 +1,15 @@
-import { Box, Collapse, IconButton, TableContainer } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import {
+  Box,
+  Collapse,
+  IconButton,
+  makeStyles,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@material-ui/core';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import LinkIcon from '@material-ui/icons/Link';
