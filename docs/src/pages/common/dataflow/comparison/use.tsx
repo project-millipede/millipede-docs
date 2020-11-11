@@ -1,3 +1,4 @@
+import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
@@ -6,7 +7,7 @@ import Step2 from '../../../../../../src/assets/common/dataFlow/comparison/Step2
 import { Content } from '../../../../../../src/typings/data/import';
 import { StepperContent } from '../../../../modules/components/common/stepper';
 
-const generateContent = (t: any): Array<Content> => {
+const generateContent = (t: Translate): Array<Content> => {
   const steps: Array<Content> = t(
     'pages/common/dataflow/comparison/content:stepss',
     {},
