@@ -1,33 +1,22 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
-import InputBase from '@material-ui/core/InputBase';
+import { createStyles, IconButton, InputBase, makeStyles, Theme } from '@material-ui/core';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import SecurityIcon from '@material-ui/icons/Security';
 import React, { useState } from 'react';
 
-export const useStyles = makeStyles(({ spacing }: Theme) => {
-  const minHeight = 36;
-  const borderRadius = minHeight / 2;
-
-  const space = spacing(1); // default = 8;
-  const backgroundColor = '#F1F3F4';
-
-  const inputPadding = space / 4;
+export const useStyles = makeStyles((theme: Theme) => {
+  const height = 36;
+  const borderRadius = height / 2;
   return createStyles({
     root: {
-      backgroundColor,
-      borderRadius: `${borderRadius}px`,
-      padding: inputPadding
-    },
-    icon: {
-      padding: `${space / 2}px ${space}px`,
+      backgroundColor: '#f1f3f4',
       borderRadius: `${borderRadius}px`
     },
+    icon: {
+      padding: theme.spacing(1)
+    },
     security: {
-      padding: `${space / 2}px ${space}px`,
-      borderRadius: `${borderRadius}px`,
-      zIndex: 1000,
-      color: '#00FF00'
+      padding: theme.spacing(1),
+      color: '#4caf50' // green
     }
   });
 });
@@ -42,12 +31,13 @@ const ChromeInput = () => {
       className={styles.root}
       placeholder={'https://bookface.com'}
       startAdornment={
-        <IconButton className={styles.icon}>
+        <IconButton size='small' className={styles.icon}>
           <InfoOutlinedIcon />
         </IconButton>
       }
       endAdornment={
         <IconButton
+          size='small'
           className={enabled ? styles.security : styles.icon}
           onClick={() => {
             setEnabled(!enabled);

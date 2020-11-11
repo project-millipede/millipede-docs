@@ -68,13 +68,13 @@ export const PrimaryAnimationControls: FC<ControlsProps> = ({ t }) => {
 
   const children = [
     <ToggleButton key={1} value={Szenario.Default}>
-      {t('pages/pidp/use-case/recognition/index:Default')}
+      {t('pages/pidp/use-case/recognition/index:default')}
     </ToggleButton>,
     <ToggleButton key={2} value={Szenario.Pet}>
-      {t('pages/pidp/use-case/recognition/index:PET')}
+      {t('pages/pidp/use-case/recognition/index:pet')}
     </ToggleButton>,
     <ToggleButton key={3} value={Szenario.Pidp}>
-      {t('pages/pidp/use-case/recognition/index:PID/P')}
+      {t('pages/pidp/use-case/recognition/index:pidp')}
     </ToggleButton>
   ];
 
@@ -91,7 +91,7 @@ export const PrimaryAnimationControls: FC<ControlsProps> = ({ t }) => {
         component='h4'
         variant='h6'
       >
-        {t('pages/pidp/use-case/recognition/index:Szenario')}
+        {t('pages/pidp/use-case/recognition/index:scenario')}
       </Typography>
       <ToggleButtonGroup
         className={classes.group}
@@ -125,10 +125,10 @@ export const SecondaryAnimationControls: FC<ControlsProps> = ({ t }) => {
 
   const children = [
     <ToggleButton key={1} value={Area.Local}>
-      {t('pages/pidp/use-case/recognition/index:Local')}
+      {t('pages/pidp/use-case/recognition/index:local')}
     </ToggleButton>,
     <ToggleButton key={2} value={Area.Global}>
-      {t('pages/pidp/use-case/recognition/index:Global')}
+      {t('pages/pidp/use-case/recognition/index:global')}
     </ToggleButton>
   ];
 
@@ -145,7 +145,7 @@ export const SecondaryAnimationControls: FC<ControlsProps> = ({ t }) => {
         component='h4'
         variant='h6'
       >
-        {t('pages/pidp/use-case/recognition/index:Layout')}
+        {t('pages/pidp/use-case/recognition/index:layout')}
       </Typography>
       <ToggleButtonGroup
         className={classes.group}
@@ -194,7 +194,7 @@ export const DeviceControls: FC<ControlsProps> = ({ t }) => {
         component='h4'
         variant='h6'
       >
-        {t('pages/pidp/use-case/recognition/index:Device')}
+        {t('pages/pidp/use-case/recognition/index:device')}
       </Typography>
       <IconButton
         className={classes.icon}

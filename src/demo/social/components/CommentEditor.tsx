@@ -1,32 +1,9 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-import NoSsr from '@material-ui/core/NoSsr';
-import Typography from '@material-ui/core/Typography';
-import { EditorState } from 'draft-js';
-import MUIRichTextEditor from 'mui-rte';
+import { Button, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { ContentState, Editor, EditorState } from 'draft-js';
 import useTranslation from 'next-translate/useTranslation';
-import React, { FC, useCallback, useState } from 'react';
+import React, { forwardRef, ForwardRefRenderFunction, useCallback, useEffect, useRef, useState } from 'react';
 
-/**
- * The following style override is necessary because of a bug in the mui-rte library.
- * The commit referenced introduced a regression defining positions for container and placeholder elements.
- * To make it work override the container and placeholder position attribute with unset.
- * https://github.com/niuware/mui-rte/commit/7035c222a44fc2e232863c895c8dbfc82605c869
- */
-
-const useStylesRTE = makeStyles(() =>
-  createStyles({
-    root: {},
-    container: {
-      // position: "relative", <- breaks layout
-      position: 'unset'
-    },
-    placeHolder: {
-      // position: "absolute" <- breaks layout
-      position: 'unset'
-    }
-  })
-);
+// import { useWindupString } from 'windups';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,9 +16,36 @@ const useStyles = makeStyles((theme: Theme) =>
 interface CommentEditorProps {
   isComment: boolean;
   create?: (content: string) => void;
+  timelineId?: string;
 }
 
-const CommentEditor: FC<CommentEditorProps> = ({ isComment, create }) => {
+export interface EditorHandles {
+  setRawText: (value: string) => void;
+  handlePostComment: () => void;
+}
+
+const longText = 'Hi @all, my name is Markus.';
+
+const insertText = (text: string) => {
+  const end = text.length;
+
+  const editorState = EditorState.createWithContent(
+    ContentState.createFromText(text)
+  );
+
+  const selection = editorState.getSelection();
+  const selectionAtEnd = selection.merge({
+    anchorOffset: end,
+    focusOffset: end
+  });
+
+  return EditorState.forceSelection(editorState, selectionAtEnd);
+};
+
+const CommentEditor: ForwardRefRenderFunction<
+  HTMLDivElement,
+  CommentEditorProps
+> = ({ isComment = true, create, timelineId }, ref) => {
   const { t } = useTranslation();
 
   const title = t(
@@ -56,37 +60,70 @@ const CommentEditor: FC<CommentEditorProps> = ({ isComment, create }) => {
   );
   const contentEmpty = t('pages/pidp/use-case/recognition/index:content_empty');
 
-  const contentInput = t('pages/pidp/use-case/recognition/index:content_input');
+  // const contentInput = t('pages/pidp/use-case/recognition/index:content_input');
 
-  const [commentState, setCommentState] = useState(EditorState.createEmpty());
+  const [commentState, setCommentState] = useState(() =>
+    EditorState.createEmpty()
+  );
+
   const [commentError, setCommentError] = useState(false);
 
-  const classesRTE = useStylesRTE();
   const classes = useStyles();
+
+  // const [text, setText] = useTypeWriter('');
+
+  // const [rawText] = useState(longText);
+
+  // useEffect(() => {
+  //   setText(rawText);
+  // }, [rawText]);
+
+  // const [text] = useWindupString(longText);
+  const [text] = useState(longText);
+
+  useEffect(() => {
+    setCommentState(insertText(text));
+    setCommentError(false);
+  }, [text]);
 
   const handlePostComment = useCallback(() => {
     if (commentState.getCurrentContent().getPlainText().trim()) {
       create(commentState.getCurrentContent().getPlainText().trim());
-      return;
     }
     setCommentError(true);
   }, [commentState]);
 
+  // const classes = useStyles();
+
+  const editorRef = useRef<Editor>(null);
+
+  useEffect(() => {
+    editorRef.current.focus();
+  }, []);
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', margin: '16px' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        margin: '16px'
+      }}
+      ref={ref}
+    >
       <Typography variant='h4'>
         <strong>{title}</strong>
       </Typography>
-      <NoSsr>
-        <MUIRichTextEditor
-          classes={classesRTE}
-          onChange={data => {
-            setCommentError(false);
-            setCommentState(data);
-          }}
-          label={contentInput}
-        />
-      </NoSsr>
+
+      <Editor
+        ref={editorRef}
+        editorState={commentState}
+        onChange={data => {
+          setCommentError(false);
+          setCommentState(data);
+        }}
+        placeholder='Write something!'
+      />
+
       {commentError && (
         <Typography className={classes.formHelperText}>
           {contentEmpty}
@@ -97,6 +134,7 @@ const CommentEditor: FC<CommentEditorProps> = ({ isComment, create }) => {
         color='primary'
         onClick={handlePostComment}
         aria-label={postButtonTitle}
+        id={`timeline-${timelineId}-content-post`}
       >
         {postButtonTitle}
       </Button>
@@ -104,8 +142,4 @@ const CommentEditor: FC<CommentEditorProps> = ({ isComment, create }) => {
   );
 };
 
-CommentEditor.defaultProps = {
-  isComment: true
-};
-
-export default CommentEditor;
+export default forwardRef(CommentEditor);
