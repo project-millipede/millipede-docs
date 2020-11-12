@@ -62,7 +62,7 @@
     "lodash": "^4.17.20",
     "mdast-util-toc": "^5.0.4",
     "next": "^10.0.2-canary.12",
-    "next-translate": "^1.0.0-experimental.4",
+    "next-translate": "1.0.0-experimental.4",
     "normalizr": "^3.6.1",
     "react": "17.0.1",
     "react-device-detect": "^1.14.0",
