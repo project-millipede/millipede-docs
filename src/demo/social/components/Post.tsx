@@ -33,14 +33,17 @@ import {
 } from './Post.Render.svc';
 import { handleCreateComment, handleDeletePost } from './Post.svc';
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles(theme =>
   createStyles({
-    card: {
-      margin: 'auto'
+    postListItem: {
+      paddingLeft: theme.spacing(1),
+      paddingRight: theme.spacing(1),
+      paddingTop: theme.spacing(0),
+      paddingBottom: theme.spacing(0)
     },
     media: {
       height: 0,
-      paddingTop: '56.25%' // 16:9
+      paddingTop: '56.25%' // perfect 16:9 ratio
     }
   })
 );
@@ -155,21 +158,9 @@ export const Post: FC<PostProps> = ({ timelineId, postId }) => {
   return (
     <ListItem
       id={`timeline-${timelineId}-post-${postId}`}
-      style={{
-        paddingTop: 0,
-        paddingLeft: 0,
-        paddingBottom: 0,
-        paddingRight: 0,
-        marginTop: 0,
-        marginBottom: 0
-      }}
+      className={classes.postListItem}
     >
-      <Card
-        className={classes.card}
-        style={{
-          overflowY: 'auto'
-        }}
-      >
+      <Card>
         {headerComp}
         {mediaComp}
         {contentComp}

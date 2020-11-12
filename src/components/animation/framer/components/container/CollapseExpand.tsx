@@ -7,18 +7,20 @@ import { RootState } from '../../../../../../docs/src/modules/redux/reducers';
 import { Device } from '../../../../../typings/animation';
 
 const AnimationRoot = styled(motion.div)`
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
 `;
 
 const AppRoot = styled(motion.div)`
   width: 100%;
   border-radius: 5px;
-  border-style: double;
+  border-style: solid;
+  border-width: thin;
+  border-color: lightgray;
 `;
 
 interface CollapseExpandProps {

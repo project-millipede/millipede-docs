@@ -1,6 +1,7 @@
 import {
   Avatar,
   CardActions,
+  CardContent,
   CardHeader,
   createStyles,
   IconButton,
@@ -9,6 +10,7 @@ import {
   makeStyles,
   Theme,
   Typography,
+  useTheme
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
@@ -21,8 +23,14 @@ import { Comment } from '../../../typings/social';
 
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    inline: {
-      display: 'inline'
+    commentListItem: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      paddingLeft: theme.spacing(0),
+      paddingRight: theme.spacing(0),
+      paddingTop: theme.spacing(0),
+      paddingBottom: theme.spacing(0)
     },
     expand: {
       transform: 'rotate(0deg)',
@@ -45,6 +53,7 @@ interface CommentsProps {
 
 const Comments: FC<CommentsProps> = ({ timelineId, postId, comments = [] }) => {
   const classes = useStyles();
+  const theme = useTheme();
 
   const [expanded, setExpanded] = useState(false);
 
@@ -83,24 +92,19 @@ const Comments: FC<CommentsProps> = ({ timelineId, postId, comments = [] }) => {
 
     return (
       <ListItem
-        alignItems='flex-start'
+        className={classes.commentListItem}
         key={`timeline-${timelineId}-post-${postId}-comment-${commentId}`}
       >
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <CardHeader
-            avatar={<Avatar alt={`${firstName} ${lastName}`} src={avatar} />}
-            title={`${firstName} ${lastName}`}
-            subheader={createdAt}
-          />
-          <Typography
-            component='p'
-            variant='body2'
-            className={classes.inline}
-            color='textSecondary'
-          >
+        <CardHeader
+          avatar={<Avatar alt={`${firstName} ${lastName}`} src={avatar} />}
+          title={`${firstName} ${lastName}`}
+          subheader={createdAt}
+        />
+        <CardContent>
+          <Typography variant='body2' color='textSecondary' component='p'>
             {text}
           </Typography>
-        </div>
+        </CardContent>
       </ListItem>
     );
   });
@@ -128,7 +132,14 @@ const Comments: FC<CommentsProps> = ({ timelineId, postId, comments = [] }) => {
     ) : null;
 
   return (
-    <List style={{ paddingLeft: 'unset' }}>
+    <List
+      style={{
+        paddingTop: theme.spacing(0),
+        paddingLeft: theme.spacing(0),
+        paddingBottom: theme.spacing(0),
+        marginBottom: theme.spacing(0)
+      }}
+    >
       {[
         ...defaultCommentComps,
         expandButton,

@@ -5,7 +5,8 @@ import {
   List,
   makeStyles,
   Tab,
-  Tabs
+  Tabs,
+  useTheme
 } from '@material-ui/core';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import _ from 'lodash';
@@ -53,6 +54,9 @@ export const Timeline: FC<TimelineProps> = ({
   otherTimelineId
 }) => {
   const { t } = useTranslation();
+
+  const classes = useStyles();
+  const theme = useTheme();
 
   const [timelineView, setTimelineView] = useRecoilState(timelineViewState);
 
@@ -109,8 +113,6 @@ export const Timeline: FC<TimelineProps> = ({
       };
     });
   }, []);
-
-  const classes = useStyles();
 
   return (
     <div className={classes.root}>
@@ -188,10 +190,10 @@ export const Timeline: FC<TimelineProps> = ({
         <List
           key={`timeline-${timelineId}`}
           style={{
-            paddingLeft: 0,
-            marginBottom: 0,
-            paddingTop: 0,
-            paddingBottom: 0
+            paddingTop: theme.spacing(0),
+            paddingLeft: theme.spacing(0),
+            paddingBottom: theme.spacing(0),
+            marginBottom: theme.spacing(0)
           }}
         >
           {postIds.length > 0
