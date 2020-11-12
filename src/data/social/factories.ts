@@ -1,11 +1,17 @@
-import { formatDistance } from 'date-fns';
-import { enGB } from 'date-fns/locale';
 import { Async } from 'factory.ts';
 import faker from 'faker';
 import { v4 as uuidv4 } from 'uuid';
 
 import { generateRandomInteger } from '../../../docs/src/modules/utils/math';
-import { Comment, Content, Media, Post, Profile, Timeline, User } from '../../typings/social';
+import {
+  Comment,
+  Content,
+  Media,
+  Post,
+  Profile,
+  Timeline,
+  User
+} from '../../typings/social';
 import { generateImageURL } from './images/picsum';
 
 const profileFactory = Async.makeFactory<Profile>({
@@ -37,31 +43,22 @@ const completeProfile = profileFactory.combine(autoUserNameFactory);
 
 export const userFactory = Async.makeFactory<User>({
   id: Async.each(() => uuidv4()),
-  profile: Async.each(() => completeProfile.build())
+  profile: Async.each(() => completeProfile.build()),
+  friends: Async.each(() => [])
 });
 
-export const mediaFactory = Async.makeFactory<Media>({
+const mediaFactory = Async.makeFactory<Media>({
   id: Async.each(() => uuidv4()),
   imageHref: Async.each(() => generateImageURL(300, 200)),
   imageTitle: Async.each(() => faker.lorem.sentences(3))
 });
 
 const timeStampFactory = Async.makeFactory({
-  createdAt: Async.each(() =>
-    formatDistance(new Date(2018, 7, 1), new Date(), { locale: enGB })
-  ),
-  updatedAt: Async.each(() =>
-    formatDistance(new Date(2019, 7, 1), new Date(), { locale: enGB })
-  )
+  createdAt: Async.each(() => new Date(2018, 7, 1))
 });
 
 export const currentTimeStampFactory = Async.makeFactory({
-  createdAt: Async.each(() =>
-    formatDistance(new Date(), new Date(), { locale: enGB })
-  ),
-  updatedAt: Async.each(() =>
-    formatDistance(new Date(), new Date(), { locale: enGB })
-  )
+  createdAt: Async.each(() => new Date())
 });
 
 export const contentFactory: Async.Factory<Content> = Async.makeFactory({
@@ -70,6 +67,15 @@ export const contentFactory: Async.Factory<Content> = Async.makeFactory({
   text: Async.each(() => faker.lorem.sentences(3)),
   media: Async.each(() => mediaFactory.build())
 }).combine(timeStampFactory);
+
+export const contentFactoryRealtime: Async.Factory<Content> = Async.makeFactory(
+  {
+    id: Async.each(() => uuidv4()),
+    title: Async.each(() => faker.lorem.slug(5)),
+    text: Async.each(() => faker.lorem.sentences(3)),
+    media: Async.each(() => mediaFactory.build())
+  }
+).combine(currentTimeStampFactory);
 
 export const contentCommentFactory = contentFactory.extend({
   media: {}
@@ -83,7 +89,6 @@ export const commentFactory = Async.makeFactory<Comment>({
 
 export const postFactory = Async.makeFactory<Post>({
   id: Async.each(() => uuidv4()),
-  author: Async.each(() => userFactory.build()),
   content: Async.each(() => contentFactory.build()),
   comments: Async.each(() =>
     commentFactory.buildList(generateRandomInteger(5))
@@ -91,8 +96,15 @@ export const postFactory = Async.makeFactory<Post>({
   votes: []
 });
 
-export const timelineFactory = Async.makeFactory<Timeline>({
+export const postFactoryRealtime = Async.makeFactory<Post>({
   id: Async.each(() => uuidv4()),
-  owner: Async.each(() => userFactory.build()),
-  posts: Async.each(() => postFactory.buildList(2))
+  content: Async.each(() => contentFactoryRealtime.build()),
+  comments: Async.each(() =>
+    commentFactory.buildList(generateRandomInteger(5))
+  ),
+  votes: []
+});
+
+export const timelineFactory = Async.makeFactory<Timeline>({
+  id: Async.each(() => uuidv4())
 });

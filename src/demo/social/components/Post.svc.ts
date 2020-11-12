@@ -1,110 +1,46 @@
-import { TimelineActions } from 'docs/src/modules/redux/features/actionType';
 import { Dispatch } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
+import { TimelineActions } from '../../../../docs/src/modules/redux/features/actionType';
 import { createComment, removePost } from '../../../../docs/src/modules/redux/features/timeline/actions';
-import { factories, schema } from '../../../data/social';
-import { Comment, Post } from '../../../typings/social';
-import { UseCaseEntities } from '../../../typings/social/schema';
+import { factories } from '../../../data/social';
+import { Comment, Content, User } from '../../../typings/social';
 
 const { contentCommentFactory, currentTimeStampFactory } = factories;
-const { denormalizeWrapper, timelineSchema } = schema;
-
-export const selectPost = (
-  postId: number,
-  entities: Partial<UseCaseEntities>
-) => {
-  let post: Post = {
-    id: 0,
-    author: { id: 0, profile: { firstName: '', lastName: '' } },
-    content: {
-      id: 0,
-      createdAt: '',
-      updatedAt: '',
-      text: '',
-      title: '',
-      media: { id: uuidv4(), imageTitle: '', imageHref: '' }
-    },
-    comments: [],
-    votes: []
-  };
-
-  if (entities && postId) {
-    const { posts, users, comments } = entities;
-
-    const userId = (posts[postId].author as unknown) as number;
-    const commentIds = posts[postId].comments;
-
-    const commentsLoaded = commentIds.map((commentId: number) => {
-      const commenterId = (comments[commentId].commenter as unknown) as number;
-      const commenter = users[commenterId] || {
-        id: 0,
-        profile: { firstName: '', lastName: '' }
-      };
-
-      return {
-        ...comments[commentId],
-        commenter
-      };
-    });
-
-    post = {
-      ...posts[postId],
-      // author: users[post.author[0]]
-      author: users[userId] || {
-        id: 0,
-        profile: { firstName: '', lastName: '' }
-      },
-      comments: commentsLoaded,
-      votes: []
-    };
-  }
-
-  return post;
-};
 
 export const handleCreateComment = async (
-  timelineId: number,
-  postId: number,
+  owner: User,
+  postId: string,
   text: string,
-  entities: Partial<UseCaseEntities>,
   dispatch: Dispatch<TimelineActions>,
-  callback: () => void = () => ({})
+  callback: (value: Comment) => void
 ) => {
-  const denormalizedTimeline = denormalizeWrapper(
-    timelineId,
-    timelineSchema,
-    entities
-  );
-
-  const commentTemplate: Comment = {
-    id: uuidv4(),
-
-    commenter: { id: -1 },
-    content: await contentCommentFactory
-      .combine(currentTimeStampFactory)
-      .build()
+  const content: Content = {
+    ...(await contentCommentFactory.combine(currentTimeStampFactory).build()),
+    text
   };
 
   const comment: Comment = {
-    ...commentTemplate,
-    commenter: denormalizedTimeline.owner,
-    content: {
-      ...commentTemplate.content,
-      text
-    }
+    id: uuidv4(),
+    commenter: owner,
+    content
   };
 
   dispatch(createComment(postId, comment));
-  callback();
+  callback(comment);
 };
 
 export const handleDeletePost = (
-  timelineId: number,
-  postId: number,
-  dispatch: Dispatch<TimelineActions>,
-  callback: () => void = () => ({})
+  timelineId: string,
+  postId: string,
+  dispatch: Dispatch<TimelineActions>
 ) => {
   dispatch(removePost(timelineId, postId));
-  callback();
 };
+
+// export const handleDeletePost = (
+//   postId: string,
+//   dispatch: Dispatch<TimelineActions>
+// ) => {
+//   dispatch(removePost(postId));
+// };

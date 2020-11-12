@@ -1,3 +1,6 @@
+import { compareDesc } from 'date-fns';
+import _ from 'lodash';
+
 type FilterFunction<T> = (item: T) => boolean;
 
 /**
@@ -78,3 +81,40 @@ export const updateAt = <T>(
 
 export const contains = <T>(array: Array<T>) => (val: T) =>
   array.indexOf(val) !== -1;
+
+/**
+ * Picks a number of items from an array at random
+ * @param {Array} arr - Array to pick items from
+ * @param {Number} num - Number of items to take
+ * @returns {Array} N number of values taken from array at random
+ *
+ * @example
+ * takeNRandom([1, 2, 3, 4, 5], 3); // [3, 5, 2]
+ */
+
+export const takeNRandom = <T>(arr: Array<T>, num: number) => {
+  const indices = [];
+
+  while (
+    // the indices array is less than the amount we want
+    indices.length < num &&
+    // the indices array is not the same length as the array
+    // this will stop the loop if the indices array becomes the same size as the array
+    indices.length !== arr.length
+  ) {
+    // get a random number according to the array's length
+    const random = Math.floor(Math.random() * arr.length);
+
+    // if the array already includes the item, do not push item
+    if (!indices.includes(random)) {
+      indices.push(random);
+    }
+  }
+
+  // map each index to the item in the array at each index
+  return indices.map(index => arr[index]);
+};
+
+export const compareDescFn = (field: string) => (a: any, b: any) => {
+  return compareDesc(_.get(a, field), _.get(b, field));
+};

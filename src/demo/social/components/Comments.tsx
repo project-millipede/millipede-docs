@@ -1,39 +1,78 @@
-import { CardHeader, Divider, Typography } from '@material-ui/core';
-import Avatar from '@material-ui/core/Avatar';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import React, { FC, Fragment } from 'react';
+import {
+  Avatar,
+  CardActions,
+  CardHeader,
+  createStyles,
+  IconButton,
+  List,
+  ListItem,
+  makeStyles,
+  Theme,
+  Typography,
+} from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import clsx from 'clsx';
+import { formatDistance } from 'date-fns';
+import { enGB } from 'date-fns/locale';
+import React, { FC, useMemo, useState } from 'react';
 
+import { compareDescFn } from '../../../../docs/src/modules/utils/collection/array';
 import { Comment } from '../../../typings/social';
 
-// import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-export const useStyles = makeStyles(() =>
+export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    // root: {
-    //   // width: '100%',
-    //   // maxWidth: 360,
-    //   backgroundColor: theme.palette.background.paper
-    // },
-    root: {
-      paddingLeft: 'unset'
-    },
     inline: {
       display: 'inline'
+    },
+    expand: {
+      transform: 'rotate(0deg)',
+      marginLeft: 'auto',
+      transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shortest
+      })
+    },
+    expandOpen: {
+      transform: 'rotate(180deg)'
     }
   })
 );
 
 interface CommentsProps {
-  timelineId: number;
-  postId: number;
+  timelineId: string;
+  postId: string;
   comments?: Array<Comment>;
 }
 
 const Comments: FC<CommentsProps> = ({ timelineId, postId, comments = [] }) => {
   const classes = useStyles();
 
-  const items = comments.map((comment, index, orgComments) => {
+  const [expanded, setExpanded] = useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+
+  const processedComments = useMemo(
+    () =>
+      comments.sort(compareDescFn('content.createdAt')).map(comment => {
+        const {
+          content: { createdAt }
+        } = comment;
+
+        return {
+          ...comment,
+          content: {
+            ...comment.content,
+            createdAt: formatDistance(createdAt, new Date(), {
+              locale: enGB
+            })
+          }
+        };
+      }),
+    [comments.length]
+  );
+
+  const commentComps = processedComments.map(comment => {
     const {
       commenter: {
         profile: { firstName, lastName, avatar }
@@ -43,65 +82,60 @@ const Comments: FC<CommentsProps> = ({ timelineId, postId, comments = [] }) => {
     } = comment;
 
     return (
-      <Fragment
+      <ListItem
+        alignItems='flex-start'
         key={`timeline-${timelineId}-post-${postId}-comment-${commentId}`}
       >
-        <ListItem alignItems='flex-start'>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <CardHeader
-              avatar={<Avatar alt={`${firstName} ${lastName}`} src={avatar} />}
-              title={`${firstName} ${lastName}`}
-              subheader={createdAt}
-            />
-
-            {/* <ListItemAvatar>
-            <Avatar alt={`${firstName} ${lastName}`} src={avatar} />
-          </ListItemAvatar> */}
-            {/* <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <ListItemText
-              primary={`${firstName} ${lastName}`}
-              secondary={
-                <Typography
-                  component='span'
-                  variant='body2'
-                  className={classes.inline}
-                  color='textPrimary'
-                >
-                  {createdAt.toString()}
-                </Typography>
-              }
-            />
-            <ListItemText
-              secondary={
-                <Typography
-                  component='p'
-                  variant='body2'
-                  className={classes.inline}
-                  color='textSecondary'
-                >
-                  {text}
-                </Typography>
-              }
-            />
-          </div> */}
-            <Typography
-              component='p'
-              variant='body2'
-              className={classes.inline}
-              color='textSecondary'
-            >
-              {text}
-            </Typography>
-          </div>
-        </ListItem>
-        {index < orgComments.length - 1 ? (
-          <Divider variant='inset' component='li' />
-        ) : null}
-      </Fragment>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <CardHeader
+            avatar={<Avatar alt={`${firstName} ${lastName}`} src={avatar} />}
+            title={`${firstName} ${lastName}`}
+            subheader={createdAt}
+          />
+          <Typography
+            component='p'
+            variant='body2'
+            className={classes.inline}
+            color='textSecondary'
+          >
+            {text}
+          </Typography>
+        </div>
+      </ListItem>
     );
   });
 
-  return <List style={{ paddingLeft: 'unset' }}>{items}</List>;
+  const defaultCommentComps = commentComps.slice(0, 3);
+  const restCommentComps = commentComps.slice(3, commentComps.length);
+
+  const expandButton =
+    restCommentComps.length > 0 ? (
+      <CardActions
+        disableSpacing
+        key={`timeline-${timelineId}-post-${postId}-comment-actions`}
+      >
+        <IconButton
+          className={clsx(classes.expand, {
+            [classes.expandOpen]: expanded
+          })}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label='show more'
+        >
+          <ExpandMoreIcon />
+        </IconButton>
+      </CardActions>
+    ) : null;
+
+  return (
+    <List style={{ paddingLeft: 'unset' }}>
+      {[
+        ...defaultCommentComps,
+        expandButton,
+        expanded ? restCommentComps : null
+      ]}
+    </List>
+  );
 };
 
 export default Comments;

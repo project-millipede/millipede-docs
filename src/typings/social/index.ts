@@ -1,23 +1,24 @@
 export interface UseCase {
-  id: number;
+  id: string;
   timelines: Array<Timeline>;
 }
 
 export interface Timeline {
-  id: number;
-  owner: User;
-
-  // right now, posts reflect posts from other users and those from the timeline owner
-  posts: Array<Post>;
+  id: string;
+  owner?: User;
+  // Reflects posts from other users (friends) and those from the timeline owner
+  posts?: Array<Post>;
 }
 
 // Top tier model
 export interface Post {
-  id: number;
-  author: User;
+  id: string;
+  author?: User;
   content: Content;
   comments: Array<Comment>;
   votes?: Array<Vote>;
+
+  active?: boolean;
 }
 
 // Second tier model
@@ -25,14 +26,16 @@ export interface Post {
 // => Post
 
 export interface User {
-  id: number;
+  id?: string;
   profile?: Profile;
+
+  // UserIds of a users friends. Items are generated in a normalized manner
+  friends?: Array<string>;
 }
 
 export interface Content {
-  id: number;
-  createdAt: string;
-  updatedAt: string;
+  id: string;
+  createdAt: Date;
   title?: string;
   text?: string;
   media?: Media;
@@ -50,19 +53,19 @@ export interface Profile {
 
 // => Content
 export interface Media {
-  id: number;
+  id: string;
   imageHref: string;
   imageTitle: string;
 }
 
 export interface Comment {
-  id: number;
-  commenter: User;
+  id: string;
+  commenter?: User;
   content: Content;
 }
 
 export interface Vote {
-  id: number;
+  id: string;
   voter: User;
   emotion?: number;
 }

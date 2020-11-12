@@ -1,25 +1,13 @@
 import produce from 'immer';
 
+import { Entities } from '../../../../../../src/data/social/entities';
 import { CollectionUtil } from '../../../utils';
-
-import { Timeline } from '../../../../../../src/typings/social';
 import { StoreAction } from '../actionType';
-
-import { UseCaseEntities } from '../../../../../../src/typings/social/schema';
-
-import {
-  ADD_COMMENT,
-  ADD_POST,
-  NORMALIZE_DATA,
-  DELETE_POST
-} from './actionTypes';
-
-export type TimelineMap = Record<string, Timeline>;
+import { ADD_COMMENT, ADD_POST, DELETE_POST, NORMALIZE_DATA } from './actionTypes';
 
 interface Props {
-  timelines?: TimelineMap;
-  entities: Partial<UseCaseEntities>;
-  result: number;
+  entities: Entities;
+  result: string;
 }
 
 const initialState: Props = {
@@ -31,7 +19,7 @@ const initialState: Props = {
     comments: {},
     votes: {}
   },
-  result: 0
+  result: ''
 };
 
 const timelineReducer = (state = initialState, action: StoreAction) =>
@@ -44,39 +32,53 @@ const timelineReducer = (state = initialState, action: StoreAction) =>
       }
       case ADD_POST: {
         const {
-          timelineId,
           post: { result, entities }
         } = action.payload;
 
         const post = entities.posts[result];
         draftState.entities.posts[result] = post;
-        draftState.entities.timelines[
-          timelineId
-        ].posts = CollectionUtil.Array.insertAtWithPreserve(
-          state.entities.timelines[timelineId].posts,
-          result,
-          0
-        );
         break;
       }
+
+      // case DELETE_POST: {
+      //   const { timelineId, postId } = action.payload;
+
+      //   draftState.entities.posts = CollectionUtil.Object.removePropertyFromObject(
+      //     state.entities.posts,
+      //     postId
+      //   );
+
+      //   const postIndex = state.entities.timelines[timelineId].posts.findIndex(
+      //     post => post === postId
+      //   );
+
+      //   draftState.entities.timelines[
+      //     timelineId
+      //   ].posts = CollectionUtil.Array.omitAtIndex(
+      //     state.entities.timelines[timelineId].posts,
+      //     postIndex
+      //   );
+
+      //   break;
+      // }
       case DELETE_POST: {
-        const { timelineId, postId } = action.payload;
+        const { postId } = action.payload;
 
         draftState.entities.posts = CollectionUtil.Object.removePropertyFromObject(
           state.entities.posts,
           postId
         );
 
-        const postIndex = state.entities.timelines[timelineId].posts.findIndex(
-          post => post === postId
-        );
+        // const postIndex = state.entities.timelines[timelineId].posts.findIndex(
+        //   post => post === postId
+        // );
 
-        draftState.entities.timelines[
-          timelineId
-        ].posts = CollectionUtil.Array.omitAtIndex(
-          state.entities.timelines[timelineId].posts,
-          postIndex
-        );
+        // draftState.entities.timelines[
+        //   timelineId
+        // ].posts = CollectionUtil.Array.omitAtIndex(
+        //   state.entities.timelines[timelineId].posts,
+        //   postIndex
+        // );
 
         break;
       }
