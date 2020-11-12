@@ -41,6 +41,9 @@ const useStyles = makeStyles(theme =>
       paddingTop: theme.spacing(0),
       paddingBottom: theme.spacing(0)
     },
+    card: {
+      flexGrow: 1
+    },
     media: {
       height: 0,
       paddingTop: '56.25%' // perfect 16:9 ratio
@@ -160,7 +163,7 @@ export const Post: FC<PostProps> = ({ timelineId, postId }) => {
       id={`timeline-${timelineId}-post-${postId}`}
       className={classes.postListItem}
     >
-      <Card>
+      <Card className={classes.card}>
         {headerComp}
         {mediaComp}
         {contentComp}
