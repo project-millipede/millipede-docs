@@ -48,5 +48,5 @@ export const getObserverComp = (
   if (selected && ref != null) {
     return null;
   }
-  return <div>{children}</div>;
+  return <>{children}</>;
 };

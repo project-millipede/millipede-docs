@@ -1,5 +1,9 @@
+import {
+  createMuiTheme,
+  darken,
+  ThemeProvider as MaterialThemeProvider
+} from '@material-ui/core';
 import { blue, pink } from '@material-ui/core/colors';
-import { createMuiTheme, darken, ThemeProvider as MaterialThemeProvider } from '@material-ui/core/styles';
 import React, { FC, ReactNode, useMemo } from 'react';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
@@ -90,6 +94,18 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
             default: '#fff'
           },
           ...paletteColors
+        },
+        components: {
+          MuiPaper: {
+            styleOverrides: {
+              rounded: {
+                borderRadius: '0px'
+              },
+              elevation1: {
+                boxShadow: 'none'
+              }
+            }
+          }
         },
         spacing
       },
