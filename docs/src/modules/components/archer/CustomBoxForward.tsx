@@ -1,60 +1,87 @@
-import { Box } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { Box, makeStyles, Theme } from '@material-ui/core';
+import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import React, {
   forwardRef,
   ForwardRefRenderFunction,
+  MutableRefObject,
   ReactNode,
-  useState
+  useImperativeHandle,
+  useState,
 } from 'react';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    box: {
-      padding: '10px',
-      border: '3px solid black',
-      maxWidth: '100px'
-    },
-    boxHover: {
-      cursor: 'pointer',
-      padding: '10px',
-      border: '3px solid black',
-      maxWidth: '100px',
-      backgroundColor: '#888888'
-    }
-  })
-);
+export interface StyleProps {
+  bgcolor: string;
+}
+
+const useStyles = makeStyles<Theme, StyleProps>(() => ({
+  box: {
+    padding: '10px',
+    border: '3px solid black',
+    maxWidth: '100px',
+    backgroundColor: props => props.bgcolor
+  },
+  boxHover: {
+    cursor: 'pointer',
+    padding: '10px',
+    border: '3px solid black',
+    maxWidth: '100px',
+    backgroundColor: '#E0E0E0'
+  }
+}));
+
+export interface SelectHandles {
+  select: () => void;
+  unSelect: () => void;
+}
 
 interface CustomBoxProps {
-  id?: string;
-  bgcolor?: string;
   children: ReactNode;
+  routeSegement?: string;
+  bgcolor?: string;
+  dynamicRef?: MutableRefObject<SelectHandles>;
 }
 
 export const CustomBox: ForwardRefRenderFunction<
   HTMLDivElement,
   CustomBoxProps
-> = ({ children, id, bgcolor }, ref) => {
-  const classes = useStyles();
+> = ({ routeSegement, children, bgcolor, dynamicRef }, ref) => {
+  const classes = useStyles({ bgcolor });
 
   const { pathname, push } = useRouter();
   const [selected, setSelected] = useState(false);
 
+  useImperativeHandle(
+    dynamicRef,
+    () => ({
+      select: () => {
+        setSelected(true);
+      },
+      unSelect: () => {
+        setSelected(false);
+      }
+    }),
+    []
+  );
+
   return (
     <Box
-      bgcolor={bgcolor}
-      className={selected ? classes.boxHover : classes.box}
+      className={clsx({
+        [classes.boxHover]: selected,
+        [classes.box]: !selected
+      })}
       onClick={_e => {
-        push(`${pathname}#${id}`);
+        if (routeSegement) {
+          push(`${pathname}#${routeSegement}`);
+        }
       }}
-      onMouseEnter={_e => {
-        setSelected(true);
-      }}
-      onMouseLeave={_e => {
-        setSelected(false);
-      }}
-      // Workaround - Box props do not accept a reference prop
-      {...{ ref }}
+      // onMouseEnter={_e => {
+      //   setSelected(true);
+      // }}
+      // onMouseLeave={_e => {
+      //   setSelected(false);
+      // }}
+      ref={ref}
     >
       {children}
     </Box>

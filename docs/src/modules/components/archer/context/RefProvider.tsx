@@ -1,9 +1,9 @@
 import React, { createContext, Dispatch, useContext, useReducer } from 'react';
 
-import { Action, initialState, reducer, State } from './RefReducer';
+import { Action, initialState, reducer, RefsState } from './RefReducer';
 
-const RefStateContext = createContext(null);
-const RefDispatchContext = createContext(null);
+const RefStateContext = createContext<RefsState>(null);
+const RefDispatchContext = createContext<Dispatch<Action>>(null);
 
 export const RefProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -18,7 +18,7 @@ export const RefProvider = ({ children }) => {
 };
 
 export const useRefState = () => {
-  const context = useContext<State>(RefStateContext);
+  const context = useContext(RefStateContext);
   if (context == null) {
     throw new Error('useRefState must be used within a RefProvider');
   }
@@ -26,7 +26,7 @@ export const useRefState = () => {
 };
 
 export const useRefDispatch = () => {
-  const context = useContext<Dispatch<Action>>(RefDispatchContext);
+  const context = useContext(RefDispatchContext);
   if (context == null) {
     throw new Error('useRefDispatch must be used within a RefProvider');
   }

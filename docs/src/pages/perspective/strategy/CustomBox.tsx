@@ -1,5 +1,4 @@
-import { Box } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { Box, createStyles, makeStyles } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React, { FC, ReactNode, useState } from 'react';
 
@@ -15,7 +14,7 @@ const useStyles = makeStyles(() =>
       padding: '10px',
       border: '3px solid black',
       maxWidth: '100px',
-      backgroundColor: '#888888'
+      backgroundColor: '#E0E0E0'
     }
   })
 );

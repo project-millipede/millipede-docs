@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, RefObject, useRef } from 'react';
+import React, { forwardRef, ForwardRefRenderFunction, RefObject, useRef } from 'react';
 import useResizeObserver from 'use-resize-observer';
 
 import { useRefState } from './context/RefProvider';
@@ -6,10 +6,6 @@ import { useTransitionState } from './context/TransitionProvider';
 import { Point } from './Point';
 import SvgArrow from './SvgArrow';
 import { AnchorPosition, ArcherContainerProps, EntityRelationType, SourceToTargetType } from './types';
-
-const rectToPoint = (rect: ClientRect) => {
-  return new Point(rect.left, rect.top);
-};
 
 const computeCoordinatesFromAnchorPosition = (
   anchorPosition: AnchorPosition,
@@ -31,20 +27,23 @@ const computeCoordinatesFromAnchorPosition = (
   }
 };
 
+const rectToPoint = (rect: ClientRect) => {
+  return new Point(rect.left, rect.top);
+};
+
 const getRectFromRef = (element: HTMLElement): ClientRect => {
   if (!element) return null;
-
   return element.getBoundingClientRect();
 };
 
 const getSourceToTargets = (sourceToTargetsMap: {
   [key: string]: Array<SourceToTargetType>;
 }): Array<SourceToTargetType> => {
-  // Object.values is unavailable in IE11
-  const jaggedSourceToTargets: Array<Array<SourceToTargetType>> = Object.keys(
+  const jaggedSourceToTargets: Array<Array<SourceToTargetType>> = Object.values(
     sourceToTargetsMap
-  ).map((key: string) => sourceToTargetsMap[key]);
-  return [].concat(...jaggedSourceToTargets);
+  ).filter(value => value != null);
+  const flattened = [].concat(...jaggedSourceToTargets);
+  return flattened;
 };
 
 const defaultSvgContainerStyle = {
@@ -56,61 +55,72 @@ const defaultSvgContainerStyle = {
   pointerEvents: 'none'
 };
 
-export const ArcherSurface: FC<ArcherContainerProps> = ({
-  arrowLength,
-  arrowThickness,
-  strokeColor,
-  strokeWidth,
-  strokeDasharray,
-  noCurves,
-  style,
-  svgContainerStyle,
-  className,
-  offset,
-  children
-}) => {
+const getMarkerId = (
+  source: EntityRelationType,
+  target: EntityRelationType,
+  arrowMarkerUniquePrefix: string
+): string => {
+  return `${arrowMarkerUniquePrefix}${source.id}${target.id}`;
+};
+
+export const ArcherSurface: ForwardRefRenderFunction<
+  HTMLDivElement,
+  ArcherContainerProps
+> = (
+  {
+    arrowLength = 15,
+    arrowThickness = 9,
+    strokeColor = '#f00',
+    strokeWidth = 1,
+    strokeDasharray,
+    noCurves,
+    style,
+    svgContainerStyle = {},
+    className,
+    offset,
+    children,
+    elementStyle
+  },
+  _ref
+) => {
   const parentRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 
   useResizeObserver({ ref: parentRef });
 
-  const refState = useRefState();
+  const { refs } = useRefState();
   const { sourceToTargetsMap } = useTransitionState();
 
   const arrowMarkerRandomNumber = Math.random().toString().slice(2);
   const arrowMarkerUniquePrefix = `arrow${arrowMarkerRandomNumber}`;
 
-  const getPointCoordinatesFromAnchorPosition = (
+  const getCoordinatesFromAnchorPosition = (
     position: AnchorPosition,
-    index: string,
+    id: string,
     parentCoordinates: Point
   ): Point => {
-    const rect = getRectFromRef(refState.refs[index].current);
+    if (refs != null && refs[id] != null && refs[id].ref.current != null) {
+      const rect = getRectFromRef(refs[id].ref?.current);
 
-    if (!rect) {
+      if (rect != null) {
+        const absolutePosition = computeCoordinatesFromAnchorPosition(
+          position,
+          rect
+        );
+
+        return absolutePosition.substract(parentCoordinates);
+      }
       return new Point(0, 0);
     }
-    const absolutePosition = computeCoordinatesFromAnchorPosition(
-      position,
-      rect
-    );
-
-    return absolutePosition.substract(parentCoordinates);
+    return new Point(0, 0);
   };
 
   const getParentCoordinates = (): Point => {
     const rectp = getRectFromRef(parentRef.current);
 
-    if (!rectp) {
-      return new Point(0, 0);
+    if (rectp != null) {
+      return rectToPoint(rectp);
     }
-    return rectToPoint(rectp);
-  };
-
-  const getMarkerId = (
-    source: EntityRelationType,
-    target: EntityRelationType
-  ): string => {
-    return `${arrowMarkerUniquePrefix}${source.id}${target.id}`;
+    return new Point(0, 0);
   };
 
   const getSvgContainerStyle = () => ({
@@ -118,11 +128,10 @@ export const ArcherSurface: FC<ArcherContainerProps> = ({
     ...svgContainerStyle
   });
 
-  const computeArrows = (): ReactNode => {
-    const parentCoordinates = getParentCoordinates();
-
+  const computeArrows = () => {
     return getSourceToTargets(sourceToTargetsMap).map(
       ({ source, target, label, style = {} }: SourceToTargetType) => {
+        const parentCoordinates = getParentCoordinates();
         // Actual arrowLength value might be 0, which can't work with a simple 'actualValue || defaultValue'
         let arrowLengthDetermined = arrowLength;
         if (style.arrowLength || style.arrowLength === 0) {
@@ -130,22 +139,28 @@ export const ArcherSurface: FC<ArcherContainerProps> = ({
         }
 
         const startingAnchorOrientation = source.anchor;
-        const startingPoint = getPointCoordinatesFromAnchorPosition(
+        const startingPoint = getCoordinatesFromAnchorPosition(
           source.anchor,
           source.id,
           parentCoordinates
         );
 
         const endingAnchorOrientation = target.anchor;
-        const endingPoint = getPointCoordinatesFromAnchorPosition(
+        const endingPoint = getCoordinatesFromAnchorPosition(
           target.anchor,
           target.id,
           parentCoordinates
         );
 
+        const arrowMarkerId = getMarkerId(
+          source,
+          target,
+          arrowMarkerUniquePrefix
+        );
+
         return (
           <SvgArrow
-            key={JSON.stringify({ source, target })}
+            key={arrowMarkerId}
             startingPoint={startingPoint}
             startingAnchorOrientation={startingAnchorOrientation}
             endingPoint={endingPoint}
@@ -155,7 +170,7 @@ export const ArcherSurface: FC<ArcherContainerProps> = ({
             strokeWidth={style.strokeWidth || strokeWidth}
             strokeDasharray={style.strokeDasharray || strokeDasharray}
             arrowLabel={label}
-            arrowMarkerId={getMarkerId(source, target)}
+            arrowMarkerId={arrowMarkerId}
             noCurves={style.noCurves || noCurves}
             offset={offset || 0}
           />
@@ -164,7 +179,7 @@ export const ArcherSurface: FC<ArcherContainerProps> = ({
     );
   };
 
-  const generateAllArrowMarkers = (): ReactNode => {
+  const generateAllArrowMarkers = () => {
     return getSourceToTargets(sourceToTargetsMap).map(
       ({ source, target, style = {} }: SourceToTargetType) => {
         // Actual arrowLength value might be 0, which can't work with a simple 'actualValue || defaultValue'
@@ -175,14 +190,16 @@ export const ArcherSurface: FC<ArcherContainerProps> = ({
 
         const arrowThicknessFinal = style.arrowThickness || arrowThickness;
 
+        const markerId = getMarkerId(source, target, arrowMarkerUniquePrefix);
+
         const arrowPath = `M0,0 L0,${arrowThicknessFinal} L${arrowLength},${
           arrowThicknessFinal / 2
         } z`;
 
         return (
           <marker
-            id={getMarkerId(source, target)}
-            key={getMarkerId(source, target)}
+            id={markerId}
+            key={markerId}
             markerWidth={arrowLengthFinal}
             markerHeight={arrowThicknessFinal}
             refX='0'
@@ -197,26 +214,30 @@ export const ArcherSurface: FC<ArcherContainerProps> = ({
     );
   };
 
-  const SvgArrows = computeArrows();
-
   return (
-    <div style={{ ...style, position: 'relative' }} className={className}>
-      <div style={{ height: '100%' }} ref={parentRef}>
+    <div
+      style={{
+        ...style,
+        position: 'relative'
+      }}
+      className={className}
+    >
+      <div
+        style={{
+          ...elementStyle,
+          height: '100%'
+        }}
+        ref={parentRef}
+      >
         {children}
       </div>
 
       <svg style={getSvgContainerStyle() as any}>
         <defs>{generateAllArrowMarkers()}</defs>
-        {SvgArrows}
+        {computeArrows()}
       </svg>
     </div>
   );
 };
 
-ArcherSurface.defaultProps = {
-  arrowLength: 10,
-  arrowThickness: 6,
-  strokeColor: '#f00',
-  strokeWidth: 2,
-  svgContainerStyle: {}
-};
+export default forwardRef(ArcherSurface);

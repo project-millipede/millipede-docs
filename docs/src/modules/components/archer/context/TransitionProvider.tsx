@@ -1,9 +1,9 @@
 import React, { createContext, Dispatch, useContext, useReducer } from 'react';
 
-import { Action, initialState, reducer, State } from './TransitionReducer';
+import { Action, initialState, reducer, TransitionsState } from './TransitionReducer';
 
-const TransitionStateContext = createContext(null);
-const TransitionDispatchContext = createContext(null);
+const TransitionStateContext = createContext<TransitionsState>(null);
+const TransitionDispatchContext = createContext<Dispatch<Action>>(null);
 
 export const TransitionProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -18,7 +18,7 @@ export const TransitionProvider = ({ children }) => {
 };
 
 export const useTransitionState = () => {
-  const context = useContext<State>(TransitionStateContext);
+  const context = useContext(TransitionStateContext);
   if (context == null) {
     throw new Error(
       'useTransitionState must be used within a TransitionProvider'
@@ -28,7 +28,7 @@ export const useTransitionState = () => {
 };
 
 export const useTransitionDispatch = () => {
-  const context = useContext<Dispatch<Action>>(TransitionDispatchContext);
+  const context = useContext(TransitionDispatchContext);
   if (context == null) {
     throw new Error(
       'useTransitionDispatch must be used within a TransitionProvider'

@@ -1,41 +1,41 @@
 import { SourceToTargetType } from '../types';
 
 export const registerTransitions = (
-  elementId: string,
+  id: string,
   sourceToTargets: Array<SourceToTargetType>
 ) => {
-  return <const>{ type: 'REGISTER', elementId, sourceToTargets };
+  return <const>{ type: 'REGISTER', id, sourceToTargets };
 };
 
-export const unregisterTransitions = (elementId: string) => {
-  return <const>{ type: 'UNREGISTER', elementId };
+export const unregisterTransitions = (id: string) => {
+  return <const>{ type: 'UNREGISTER', id };
 };
 
 export type Action = ReturnType<
   typeof registerTransitions | typeof unregisterTransitions
 >;
 
-export interface State {
+export interface TransitionsState {
   sourceToTargetsMap: { [key: string]: Array<SourceToTargetType> };
 }
 
-export const initialState = {
+export const initialState: TransitionsState = {
   sourceToTargetsMap: {}
 };
 
-export const reducer = (state: State, action: Action) => {
+export const reducer = (state: TransitionsState, action: Action) => {
   switch (action.type) {
     case 'REGISTER':
       return {
         ...state,
         sourceToTargetsMap: {
           ...state.sourceToTargetsMap,
-          [action.elementId]: action.sourceToTargets
+          [action.id]: action.sourceToTargets
         }
       };
     case 'UNREGISTER': {
       const {
-        [action.elementId]: deleted,
+        [action.id]: deleted,
         ...objectWithoutDeletedProp
       } = state.sourceToTargetsMap;
 

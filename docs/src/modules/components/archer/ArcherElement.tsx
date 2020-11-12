@@ -1,7 +1,8 @@
-import React, { cloneElement, FC, useEffect, useRef } from 'react';
+import { cloneElement, FC, useEffect, useRef } from 'react';
 
 import { useRefDispatch } from './context/RefProvider';
 import { useTransitionDispatch } from './context/TransitionProvider';
+import { SelectHandles } from './CustomBoxForward';
 import { ArcherElementProps, Relation, RelationType, SourceToTargetType } from './types';
 
 const generateSourceToTarget = (
@@ -20,37 +21,34 @@ const generateSourceToTarget = (
 
 export const ArcherElement: FC<ArcherElementProps> = ({
   id,
-  relations,
-  children
+  relations = [],
+  children,
+  render
 }) => {
   const refDispatch = useRefDispatch();
   const transitionDispatch = useTransitionDispatch();
 
-  const elementRef: React.RefObject<HTMLElement> = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLElement>(null);
+  const dynamicRef = useRef<SelectHandles>(null);
 
   useEffect(() => {
-    registerTransitions();
-    refDispatch({ type: 'REGISTER', id, ref: elementRef });
+    const sourceToTargets = generateSourceToTarget(id, relations);
+    transitionDispatch({ type: 'REGISTER', id, sourceToTargets });
+    refDispatch({ type: 'REGISTER', id, ref, dynamicRef });
+  }, [id, relations]);
+
+  useEffect(() => {
     return () => {
       refDispatch({ type: 'UNREGISTER', id });
-      transitionDispatch({ type: 'UNREGISTER', elementId: id });
+      transitionDispatch({ type: 'UNREGISTER', id });
     };
   }, []);
 
-  const registerTransitions = () => {
-    const sourceToTargets = generateSourceToTarget(id, relations);
-    transitionDispatch({
-      type: 'REGISTER',
-      elementId: id,
-      sourceToTargets
-    });
-  };
-
+  if (render != null) {
+    return render({ ref, dynamicRef });
+  }
   return cloneElement(children, {
-    ref: elementRef
+    ref,
+    dynamicRef
   });
-};
-
-ArcherElement.defaultProps = {
-  relations: []
 };

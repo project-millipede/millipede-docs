@@ -1,6 +1,5 @@
 /* eslint-disable import/no-named-as-default */
-import { Box, Typography } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 import Hyphenated from 'react-hyphen';
@@ -33,7 +32,7 @@ const useStyles = makeStyles(() =>
       padding: '10px',
       border: '3px solid black',
       maxWidth: '100px',
-      backgroundColor: '#888888'
+      backgroundColor: '#E0E0E0'
     }
   })
 );
@@ -95,7 +94,7 @@ const Diagram = () => {
             }
           ]}
         >
-          <CustomBox id='general' bgcolor='error.main'>
+          <CustomBox bgcolor={'#F44336'}>
             <Typography variant='subtitle1' className={classes.title}>
               <Hyphenated>{`${t('pages/perspective/index:general')} ${t(
                 'pages/perspective/index:problemSolving'
@@ -119,7 +118,7 @@ const Diagram = () => {
             }
           ]}
         >
-          <CustomBox id='realistic' bgcolor='success.main'>
+          <CustomBox bgcolor='#4CAF50'>
             <Typography variant='subtitle1' className={classes.title}>
               <Hyphenated>{`${t('pages/perspective/index:realistic')} ${t(
                 'pages/perspective/index:problemSolving'
@@ -138,7 +137,7 @@ const Diagram = () => {
             }
           ]}
         >
-          <CustomBox id='specific' bgcolor='warning.main'>
+          <CustomBox bgcolor='#FFEB3B'>
             <Typography variant='subtitle1' className={classes.title}>
               <Hyphenated>{`${t('pages/perspective/index:specific')} ${t(
                 'pages/perspective/index:problemSolving'
