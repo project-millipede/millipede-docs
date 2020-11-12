@@ -31,8 +31,9 @@ interface WindowProps {
 }
 
 const Window: FC<WindowProps> = ({ windowStackData, index }) => {
-  const router = useRouter();
   const classes = useStyles();
+
+  const { pathname, push } = useRouter();
 
   const { dispatch }: { dispatch: Dispatch<NavigationActions> } = useHoux();
 
@@ -59,8 +60,8 @@ const Window: FC<WindowProps> = ({ windowStackData, index }) => {
                   <IconButton
                     key={`perspective-${pIndex}`}
                     onClick={() => {
-                      router.push(
-                        `${router.pathname}?${perspective.type}=${windowStackData[index].contextLink.id}#${windowStackData[index].contextLink.id}`
+                      push(
+                        `${pathname}?${perspective.type}=${windowStackData[index].contextLink.id}#${windowStackData[index].contextLink.id}`
                       );
                       dispatch(
                         loadPages(`/${windowStackData[index].contextLink.id}`)

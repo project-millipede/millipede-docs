@@ -1,7 +1,6 @@
-import { useHoux } from '@houx';
+import { useRouter } from 'next/router';
 import React, { FC, useEffect, useState } from 'react';
 
-import { RootState } from '../../redux/reducers';
 import { Logger } from '../../utils/logging';
 import { MdxDocs } from '../mdx';
 
@@ -35,27 +34,23 @@ const MDXContentLoader: FC<MDXContentLoaderProps> = ({
   const [rawMain, setRawMain] = useState('');
   const [timeToReadMain, setTimeToReadMain] = useState();
 
-  const {
-    state: {
-      language: { userLanguage }
-    }
-  }: { state: RootState } = useHoux();
+  const { locale } = useRouter();
 
   useEffect(() => {
     const loadContent = async () => {
       let content: any;
-      if (userLanguage === 'de') {
+      if (locale === 'de') {
         content = await load(path, '-de');
       } else {
         content = await load(path);
       }
-      setContentMain(content.content);
-      setRawMain(content.raw);
-      setMetaMain(content.meta);
-      setTimeToReadMain(content.timeToRead);
+      setContentMain(content?.content);
+      setRawMain(content?.raw);
+      setMetaMain(content?.meta);
+      setTimeToReadMain(content?.timeToRead);
     };
     loadContent();
-  }, [userLanguage]);
+  }, [locale]);
 
   return (
     <MdxDocs

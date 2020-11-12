@@ -1,12 +1,11 @@
-import { useHoux } from '@houx';
+import { useRouter } from 'next/router';
 import React, { FC, useEffect, useState } from 'react';
 
-import { RootState } from '../../redux/reducers';
 import { Logger } from '../../utils/logging';
 import { MdDocs } from '../md';
 
-const load = (pathSlice = '', userLanguage = ''): any =>
-  import(`../../../pages${pathSlice}index${userLanguage}.md`)
+const load = (pathSlice = '', locale = ''): any =>
+  import(`../../../pages${pathSlice}index${locale}.md`)
     .then(result => {
       return result.default;
     })
@@ -21,16 +20,11 @@ export interface MDContentLoaderProps {
 const MDContentLoader: FC<MDContentLoaderProps> = ({ path }) => {
   const [contentMain, setContentMain] = useState('');
 
-  const {
-    state: {
-      language: { userLanguage }
-    }
-  }: { state: RootState } = useHoux();
-
+  const { locale } = useRouter();
   useEffect(() => {
     const loadContent = async () => {
       let content: any;
-      if (userLanguage === 'en') {
+      if (locale === 'en') {
         content = await load(path, '-en');
       } else {
         content = await load(path);
@@ -38,7 +32,7 @@ const MDContentLoader: FC<MDContentLoaderProps> = ({ path }) => {
       setContentMain(content);
     };
     loadContent();
-  }, [userLanguage]);
+  }, [locale]);
 
   return <MdDocs content={contentMain} />;
 };

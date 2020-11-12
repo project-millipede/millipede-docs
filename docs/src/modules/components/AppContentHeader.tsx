@@ -29,7 +29,7 @@ const SOURCE_CODE_ROOT_URL =
 const AppContentHeader = ({ markdownLocation }: MarkdownDocsProps) => {
   const classes = useStyles();
 
-  const router = useRouter();
+  const { pathname } = useRouter();
 
   const {
     state: {
@@ -37,7 +37,7 @@ const AppContentHeader = ({ markdownLocation }: MarkdownDocsProps) => {
     }
   }: { state: RootState } = useHoux();
 
-  const breadcrumbs = createBreadcrumbs(router.pathname);
+  const breadcrumbs = createBreadcrumbs(pathname);
 
   return !isMobile && breadcrumbs.length >= 2 ? (
     <div className={classes.headerRow}>

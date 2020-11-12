@@ -1,38 +1,25 @@
-import { useHoux } from '@houx';
 import { Button, Menu, MenuItem, NoSsr, Tooltip } from '@material-ui/core';
 import LanguageIcon from '@material-ui/icons/Language';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import React, { Dispatch, FC, SyntheticEvent, useCallback, useState } from 'react';
+import React, { FC, SyntheticEvent, useCallback, useState } from 'react';
 
 import { LANGUAGES_LABEL } from '../constants';
-import { LanguageActions } from '../redux/features/actionType';
-import { changeUserLanguage } from '../redux/features/language/actions';
-import { RootState } from '../redux/reducers';
-import LanguageLabel from './LanguageLabel';
+import { LanguageLabel } from './LanguageLabel';
 
 export const LanguageMenu: FC = () => {
-  const [languageMenu, setLanguageMenu] = useState<Element & EventTarget>(null);
-
-  const {
-    state: {
-      language: { userLanguage }
-    }
-  }: { state: RootState } = useHoux();
-
-  const { dispatch }: { dispatch: Dispatch<LanguageActions> } = useHoux();
-
   const { t } = useTranslation();
 
-  const router = useRouter();
+  const [languageMenu, setLanguageMenu] = useState<Element & EventTarget>(null);
+
+  const { locale, route, push } = useRouter();
 
   const handleSelect = useCallback(
     (_event: SyntheticEvent, languageCode: string) => {
-      dispatch(changeUserLanguage(languageCode));
-      router.push(router.route, router.route, { locale: languageCode });
+      push(route, route, { locale: languageCode });
       setLanguageMenu(null);
     },
-    [router.route, router.locale]
+    [route, locale]
   );
 
   const handleLanguageIconClick = (event: SyntheticEvent) => {
@@ -55,7 +42,7 @@ export const LanguageMenu: FC = () => {
           data-ga-event-action='language'
         >
           <LanguageIcon />
-          <LanguageLabel />
+          <LanguageLabel label={locale} />
         </Button>
       </Tooltip>
       <NoSsr>
@@ -70,7 +57,7 @@ export const LanguageMenu: FC = () => {
               component='a'
               data-no-link='true'
               key={language.code}
-              selected={userLanguage === language.code}
+              selected={language.code === locale}
               onClick={event => handleSelect(event, language.code)}
               lang={language.code}
               hrefLang={language.code}

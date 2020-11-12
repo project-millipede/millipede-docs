@@ -20,9 +20,9 @@ export const createBreadcrumbs = (pathname: string): Array<BreadCrumb> =>
 const Breadcrumbs: FC = () => {
   const { t } = useTranslation();
 
-  const router = useRouter();
+  const { pathname } = useRouter();
 
-  const breadcrumbs = createBreadcrumbs(router.pathname);
+  const breadcrumbs = createBreadcrumbs(pathname);
 
   return (
     <MaterialBreadcrumbs

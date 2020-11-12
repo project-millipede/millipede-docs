@@ -20,7 +20,7 @@ export const jss = create({
 });
 
 const AppWrapper: FC<AppWrapperProps> = ({ children, isMobile }) => {
-  const router = useRouter();
+  const { pathname } = useRouter();
 
   const {
     dispatch: dispatchNavigationActions
@@ -36,9 +36,9 @@ const AppWrapper: FC<AppWrapperProps> = ({ children, isMobile }) => {
 
   useEffect(() => {
     dispatchViewActions(handleDevice(isMobile));
-    dispatchNavigationActions(loadPages(router.pathname));
-    ReactGA.pageview(router.pathname);
-  }, [router.pathname]);
+    dispatchNavigationActions(loadPages(pathname));
+    ReactGA.pageview(pathname);
+  }, [pathname]);
 
   return (
     <StylesProvider jss={jss}>

@@ -1,7 +1,12 @@
 import { Box } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { useRouter } from 'next/router';
-import React, { forwardRef, ForwardRefRenderFunction, ReactNode, useState } from 'react';
+import React, {
+  forwardRef,
+  ForwardRefRenderFunction,
+  ReactNode,
+  useState
+} from 'react';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -32,7 +37,7 @@ export const CustomBox: ForwardRefRenderFunction<
 > = ({ children, id, bgcolor }, ref) => {
   const classes = useStyles();
 
-  const router = useRouter();
+  const { pathname, push } = useRouter();
   const [selected, setSelected] = useState(false);
 
   return (
@@ -40,7 +45,7 @@ export const CustomBox: ForwardRefRenderFunction<
       bgcolor={bgcolor}
       className={selected ? classes.boxHover : classes.box}
       onClick={_e => {
-        router.push(`${router.pathname}#${id}`);
+        push(`${pathname}#${id}`);
       }}
       onMouseEnter={_e => {
         setSelected(true);
