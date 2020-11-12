@@ -3,46 +3,29 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { TimelineActions } from '../../../../docs/src/modules/redux/features/actionType';
 import { createPost } from '../../../../docs/src/modules/redux/features/timeline/actions';
-import { factories, schema } from '../../../data/social';
-import { Post } from '../../../typings/social';
-import { UseCaseEntities } from '../../../typings/social/schema';
+import { factories } from '../../../data/social';
+import { Content, Post, User } from '../../../typings/social';
 
-const { contentFactory, currentTimeStampFactory, mediaFactory } = factories;
-const { denormalizeWrapper, timelineSchema } = schema;
+const { contentFactory, currentTimeStampFactory } = factories;
+
 export const handleCreatePost = async (
-  timelineId: number,
-  timelineIdTarget: number,
+  owner: User,
   text: string,
-  entities: Partial<UseCaseEntities>,
   dispatch: Dispatch<TimelineActions>,
-  callback: () => void = () => ({})
+  callback: (value: Post) => void
 ) => {
-  const denormalizedTimeline = denormalizeWrapper(
-    timelineId,
-    timelineSchema,
-    entities
-  );
-
-  const postTemplate: Post = {
-    id: uuidv4(),
-
-    author: { id: -1 },
-
-    content: await contentFactory.combine(currentTimeStampFactory).build(),
-    comments: [],
-    votes: []
+  const content: Content = {
+    ...(await contentFactory.combine(currentTimeStampFactory).build()),
+    text
   };
 
   const post: Post = {
-    ...postTemplate,
-    author: denormalizedTimeline.owner,
-    content: {
-      ...postTemplate.content,
-      text,
-      media: await mediaFactory.build()
-    }
+    id: uuidv4(),
+    author: owner,
+    content,
+    comments: [],
+    votes: []
   };
-
-  dispatch(createPost(timelineIdTarget, post));
-  callback();
+  dispatch(createPost(post));
+  callback(post);
 };

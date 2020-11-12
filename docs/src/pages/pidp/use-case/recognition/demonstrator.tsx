@@ -1,21 +1,14 @@
-import React from 'react';
-import { isBrowser } from 'react-device-detect';
+import React, { FC } from 'react';
 
 import { Container } from '../../../../../../src/components/animation/components/Container';
 import { CollapseExpand } from '../../../../../../src/components/animation/framer/components/container/CollapseExpand';
-import { ContentView, FooterView, HeaderView } from '../../../../../../src/components/device/browser/views';
-import Post from '../../../../../../src/demo/social/components/Post';
-import SocialApp from '../../../../../../src/demo/social/components/SocialApp';
+import { SocialApp } from '../../../../../../src/demo/social/components/SocialApp';
 
-export const Demonstrator = () => {
+export const Demonstrator: FC = () => {
   return (
     <Container>
       <CollapseExpand>
-        {isBrowser ? <HeaderView /> : null}
-        <ContentView>
-          <SocialApp id={`content-${1}`} Comp={Post} />
-        </ContentView>
-        <FooterView />
+        <SocialApp />
       </CollapseExpand>
     </Container>
   );
