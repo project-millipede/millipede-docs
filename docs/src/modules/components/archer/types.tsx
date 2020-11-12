@@ -1,4 +1,6 @@
-import { ReactElement, ReactNode } from 'react';
+import { Component, CSSProperties, MutableRefObject, ReactElement, ReactNode } from 'react';
+
+import { SelectHandles } from './CustomBoxForward';
 
 export type AnchorPosition = 'top' | 'bottom' | 'left' | 'right' | 'middle';
 
@@ -53,12 +55,12 @@ export interface ArcherContainerProps {
    */
   noCurves?: boolean;
 
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 
   /**
    * Style of the SVG container element. Useful if you want to add a z-index to your SVG container to draw the arrows under your elements, for example.
    */
-  svgContainerStyle?: React.CSSProperties;
+  svgContainerStyle?: CSSProperties;
 
   className?: string;
 
@@ -66,7 +68,32 @@ export interface ArcherContainerProps {
    * Optional number for space between element and start/end of stroke
    */
   offset?: number;
+
+  elementStyle?: CSSProperties;
+
+  children?: ReactNode;
 }
+
+export class ArcherContainer extends Component<ArcherContainerProps> {
+  /**
+   * Use this to recompute all the arrow positions. Useful if arrows do not properly rerender
+   * after the viewport or some elements moved.
+   */
+  refreshScreen: () => void;
+}
+
+export type RenderFnSingleParameter = {
+  ref: MutableRefObject<HTMLElement>;
+};
+
+export type RenderSingleFn = ({ ref }: RenderFnSingleParameter) => JSX.Element;
+
+export type RenderFnParameter = {
+  ref: MutableRefObject<HTMLElement>;
+  dynamicRef: MutableRefObject<SelectHandles>;
+};
+
+export type RenderFn = ({ ref, dynamicRef }: RenderFnParameter) => JSX.Element;
 
 export interface ArcherElementProps {
   /**
@@ -74,10 +101,9 @@ export interface ArcherElementProps {
    */
   id: string;
   relations?: Array<Relation>;
-  style?: React.CSSProperties;
-  // className?: string;
-  // label?: React.ReactNode;
-  children: ReactElement;
+  style?: CSSProperties;
+  children?: ReactElement;
+  render?: RenderFn;
 }
 
 // different set of types

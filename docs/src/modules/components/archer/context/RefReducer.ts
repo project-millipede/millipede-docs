@@ -1,7 +1,13 @@
-import { RefObject } from 'react';
+import { MutableRefObject } from 'react';
 
-export const registerRef = (id: string, ref: RefObject<HTMLElement>) => {
-  return <const>{ type: 'REGISTER', id, ref };
+import { SelectHandles } from '../CustomBoxForward';
+
+export const registerRef = (
+  id: string,
+  ref: MutableRefObject<HTMLElement>,
+  dynamicRef: MutableRefObject<SelectHandles>
+) => {
+  return <const>{ type: 'REGISTER', id, ref, dynamicRef };
 };
 
 export const unregisterRef = (id: string) => {
@@ -10,22 +16,30 @@ export const unregisterRef = (id: string) => {
 
 export type Action = ReturnType<typeof registerRef | typeof unregisterRef>;
 
-export interface State {
-  refs: { [key: string]: RefObject<HTMLElement> };
+export interface RefsState {
+  refs: {
+    [key: string]: {
+      ref: MutableRefObject<HTMLElement>;
+      dynamicRef: MutableRefObject<SelectHandles>;
+    };
+  };
 }
 
-export const initialState: State = {
+export const initialState: RefsState = {
   refs: {}
 };
 
-export const reducer = (state: State, action: Action) => {
+export const reducer = (state: RefsState, action: Action) => {
   switch (action.type) {
     case 'REGISTER':
       return {
         ...state,
         refs: {
           ...state.refs,
-          [action.id]: action.ref
+          [action.id]: {
+            ref: action.ref,
+            dynamicRef: action.dynamicRef
+          }
         }
       };
     case 'UNREGISTER': {
