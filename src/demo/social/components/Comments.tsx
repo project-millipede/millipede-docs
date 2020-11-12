@@ -5,33 +5,21 @@ import {
   CardHeader,
   createStyles,
   IconButton,
-  List,
-  ListItem,
   makeStyles,
   Theme,
-  Typography,
-  useTheme
+  Typography
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import { formatDistance } from 'date-fns';
 import { enGB } from 'date-fns/locale';
-import React, { FC, useMemo, useState } from 'react';
+import React, { FC, Fragment, useMemo, useState } from 'react';
 
 import { compareDescFn } from '../../../../docs/src/modules/utils/collection/array';
 import { Comment } from '../../../typings/social';
 
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    commentListItem: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'flex-start',
-      paddingLeft: theme.spacing(0),
-      paddingRight: theme.spacing(0),
-      paddingTop: theme.spacing(0),
-      paddingBottom: theme.spacing(0)
-    },
     expand: {
       transform: 'rotate(0deg)',
       marginLeft: 'auto',
@@ -53,7 +41,6 @@ interface CommentsProps {
 
 const Comments: FC<CommentsProps> = ({ timelineId, postId, comments = [] }) => {
   const classes = useStyles();
-  const theme = useTheme();
 
   const [expanded, setExpanded] = useState(false);
 
@@ -91,8 +78,7 @@ const Comments: FC<CommentsProps> = ({ timelineId, postId, comments = [] }) => {
     } = comment;
 
     return (
-      <ListItem
-        className={classes.commentListItem}
+      <Fragment
         key={`timeline-${timelineId}-post-${postId}-comment-${commentId}`}
       >
         <CardHeader
@@ -105,7 +91,7 @@ const Comments: FC<CommentsProps> = ({ timelineId, postId, comments = [] }) => {
             {text}
           </Typography>
         </CardContent>
-      </ListItem>
+      </Fragment>
     );
   });
 
@@ -132,20 +118,13 @@ const Comments: FC<CommentsProps> = ({ timelineId, postId, comments = [] }) => {
     ) : null;
 
   return (
-    <List
-      style={{
-        paddingTop: theme.spacing(0),
-        paddingLeft: theme.spacing(0),
-        paddingBottom: theme.spacing(0),
-        marginBottom: theme.spacing(0)
-      }}
-    >
+    <>
       {[
         ...defaultCommentComps,
         expandButton,
         expanded ? restCommentComps : null
       ]}
-    </List>
+    </>
   );
 };
 
