@@ -1,5 +1,11 @@
 import { useHoux } from '@houx';
-import { createStyles, Grid, IconButton, makeStyles, Theme } from '@material-ui/core';
+import {
+  createStyles,
+  Grid,
+  IconButton,
+  makeStyles,
+  Theme
+} from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React, { Dispatch, FC } from 'react';
 
@@ -25,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const TopicsViewDesktop: FC<TopicsViewDesktopProps> = ({ topics }) => {
-  const router = useRouter();
+  const { pathname, push } = useRouter();
 
   const classes = useStyles();
 
@@ -59,8 +65,8 @@ export const TopicsViewDesktop: FC<TopicsViewDesktopProps> = ({ topics }) => {
                               <IconButton
                                 key={`perspective-${index}`}
                                 onClick={() => {
-                                  router.push(
-                                    `${router.pathname}?${perspective.type}=${topic.contextLink.id}#${topic.contextLink.id}`
+                                  push(
+                                    `${pathname}?${perspective.type}=${topic.contextLink.id}#${topic.contextLink.id}`
                                   );
                                   dispatch(
                                     loadPages(`/${topic.contextLink.id}`)

@@ -1,9 +1,7 @@
-import { useHoux } from '@houx';
 import { Button } from '@material-ui/core';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 import React from 'react';
-
-import { RootState } from '../redux/reducers';
 
 const LOCALES = { zh: 'zh-CN', pt: 'pt-BR', es: 'es-ES' };
 const CROWDIN_ROOT_URL = 'https://crowdin.com/project/project-millipede';
@@ -16,15 +14,11 @@ export interface EditPageProps {
 }
 
 export const EditPage = ({ markdownLocation }: EditPageProps) => {
-  const {
-    state: {
-      language: { userLanguage }
-    }
-  }: { state: RootState } = useHoux();
-
   const { t } = useTranslation();
 
-  const crowdInLocale = LOCALES[userLanguage] || userLanguage;
+  const { locale } = useRouter();
+
+  const crowdInLocale = LOCALES[locale] || locale;
   const crowdInPath = markdownLocation.substring(
     0,
     markdownLocation.lastIndexOf('/')
@@ -34,15 +28,15 @@ export const EditPage = ({ markdownLocation }: EditPageProps) => {
     <Button
       component='a'
       href={
-        userLanguage === 'de'
+        locale === 'de'
           ? `${SOURCE_CODE_ROOT_URL}${markdownLocation}`
           : `${CROWDIN_ROOT_URL}${crowdInLocale}#/staging${crowdInPath}`
       }
       target='_blank'
       rel='noopener'
-      data-ga-event-category={userLanguage === 'de' ? undefined : 'l10n'}
-      data-ga-event-action={userLanguage === 'de' ? undefined : 'edit-button'}
-      data-ga-event-label={userLanguage === 'de' ? undefined : userLanguage}
+      data-ga-event-category={locale === 'de' ? undefined : 'l10n'}
+      data-ga-event-action={locale === 'de' ? undefined : 'edit-button'}
+      data-ga-event-label={locale === 'de' ? undefined : locale}
     >
       {t('common:editContent')}
     </Button>

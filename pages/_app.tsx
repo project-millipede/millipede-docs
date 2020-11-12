@@ -1,7 +1,6 @@
 import '../docs/css/diagram.css';
 
 import { HouxProvider } from '@houx';
-import { detectDevice } from 'docs/src/modules/utils/device';
 import { enableMapSet } from 'immer';
 import { NextComponentType } from 'next';
 import I18nProvider from 'next-translate/I18nProvider';
@@ -15,6 +14,7 @@ import AppFrame from '../docs/src/modules/components/AppFrame';
 import AppWrapper from '../docs/src/modules/components/AppWrapper';
 import { loadFAIcons } from '../docs/src/modules/components/icon/FAIconLoader';
 import reducers from '../docs/src/modules/redux/reducers';
+import { detectDevice } from '../docs/src/modules/utils/device';
 
 // import { appWithTranslation } from '../i18n';
 
@@ -50,11 +50,11 @@ const MillipedeApp: NextComponentType<
 
   const { isMobile } = pageProps;
 
-  const router = useRouter();
+  const { locale } = useRouter();
 
   return (
     // eslint-disable-next-line no-underscore-dangle
-    <I18nProvider lang={router.locale} namespaces={pageProps._ns}>
+    <I18nProvider lang={locale} namespaces={pageProps._ns}>
       <HouxProvider reducers={reducers} logDispatchedActions>
         <RecoilRoot>
           <AppWrapper isMobile={isMobile}>

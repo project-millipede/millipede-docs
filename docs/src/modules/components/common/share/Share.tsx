@@ -1,4 +1,12 @@
-import { createStyles, Fade, makeStyles, Snackbar, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@material-ui/core';
+import {
+  createStyles,
+  Fade,
+  makeStyles,
+  Snackbar,
+  SpeedDial,
+  SpeedDialAction,
+  SpeedDialIcon
+} from '@material-ui/core';
 import { Close as CloseIcon, Share as ShareIcon } from '@material-ui/icons';
 import { windowOpenPromise } from '@vangware/window-open-promise';
 import copy from 'copy-to-clipboard';
@@ -17,7 +25,7 @@ import {
   URIPathParamsLinkedIn,
   URIPathParamsMail,
   URIPathParamsTwitter,
-  URIPathParamsWhatsApp,
+  URIPathParamsWhatsApp
 } from '../../../../../../src/typings/share';
 import { StringUtil } from '../../../utils';
 import { objectToGetParams } from '../../../utils/social/objectToGetParams';
@@ -200,7 +208,7 @@ const Share: FC<MetaProps> = props => {
 
   const { t } = useTranslation();
 
-  const router = useRouter();
+  const { pathname } = useRouter();
 
   const [speedDialOpen, setSpeedDialOpen] = useState(false);
 
@@ -238,9 +246,9 @@ const Share: FC<MetaProps> = props => {
   const getShareProps = useCallback(() => {
     return {
       meta: props,
-      url: router.pathname
+      url: pathname
     };
-  }, [router.pathname, props.title]);
+  }, [pathname, props.title]);
 
   return (
     <>

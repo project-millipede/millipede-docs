@@ -29,7 +29,7 @@ interface CustomBoxProps {
 export const CustomBox: FC<CustomBoxProps> = ({ children, id, bgcolor }) => {
   const classes = useStyles();
 
-  const router = useRouter();
+  const { pathname, push } = useRouter();
   const [selected, setSelected] = useState(false);
 
   return (
@@ -37,7 +37,7 @@ export const CustomBox: FC<CustomBoxProps> = ({ children, id, bgcolor }) => {
       bgcolor={bgcolor}
       className={selected ? classes.boxHover : classes.box}
       onClick={_e => {
-        router.push(`${router.pathname}#${id}`);
+        push(`${pathname}#${id}`);
       }}
       onMouseEnter={_e => {
         setSelected(true);

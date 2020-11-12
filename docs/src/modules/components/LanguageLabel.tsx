@@ -1,8 +1,5 @@
-import { useHoux } from '@houx';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import React, { FC } from 'react';
-
-import { RootState } from '../redux/reducers';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,15 +13,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const LanguageLabel: FC = () => {
+interface LanguageLabelProps {
+  label: string;
+}
+
+export const LanguageLabel: FC<LanguageLabelProps> = ({ label }) => {
   const classes = useStyles();
-
-  const {
-    state: {
-      language: { userLanguage }
-    }
-  }: { state: RootState } = useHoux();
-  return <span className={classes.language}>{userLanguage.toUpperCase()}</span>;
+  return <span className={classes.language}>{label.toUpperCase()}</span>;
 };
-
-export default LanguageLabel;
