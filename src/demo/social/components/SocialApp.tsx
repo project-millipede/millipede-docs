@@ -74,6 +74,13 @@ export const SocialApp: FC = () => {
           flexDirection: 'column'
         }}
       />
+      {/* {leftTimeline && rightTimeline ? (
+        <InteractionFlow
+          leftTimelineId={leftTimeline.id}
+          rightTimelineId={rightTimeline.id}
+          offSetControls={offSet}
+        />
+      ) : null} */}
       {rightTimelineComp && rightTimelineComp}
     </div>
   );
