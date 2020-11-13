@@ -1,53 +1,50 @@
-import { createStyles, IconButton, InputBase, makeStyles, Theme } from '@material-ui/core';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-import SecurityIcon from '@material-ui/icons/Security';
-import React, { useState } from 'react';
+import { createStyles, IconButton, InputAdornment, InputBase, makeStyles, Theme } from '@material-ui/core';
+import { InfoOutlined, Security } from '@material-ui/icons';
+import React, { FC, useState } from 'react';
 
-export const useStyles = makeStyles((theme: Theme) => {
-  const height = 36;
+export const useStyles = makeStyles((_theme: Theme) => {
+  const height = 48;
   const borderRadius = height / 2;
   return createStyles({
-    root: {
+    input: {
+      height: `${height}px`,
       backgroundColor: '#f1f3f4',
       borderRadius: `${borderRadius}px`
     },
-    icon: {
-      padding: theme.spacing(1)
-    },
     security: {
-      padding: theme.spacing(1),
       color: '#4caf50' // green
     }
   });
 });
 
-const ChromeInput = () => {
-  const styles = useStyles();
+export const ChromeInput: FC = () => {
+  const classes = useStyles();
 
   const [enabled, setEnabled] = useState(false);
 
   return (
     <InputBase
-      className={styles.root}
-      placeholder={'https://bookface.com'}
+      className={classes.input}
       startAdornment={
-        <IconButton size='small' className={styles.icon}>
-          <InfoOutlinedIcon />
-        </IconButton>
+        <InputAdornment position='start'>
+          <IconButton>
+            <InfoOutlined />
+          </IconButton>
+        </InputAdornment>
       }
       endAdornment={
-        <IconButton
-          size='small'
-          className={enabled ? styles.security : styles.icon}
-          onClick={() => {
-            setEnabled(!enabled);
-          }}
-        >
-          <SecurityIcon />
-        </IconButton>
+        <InputAdornment position='end'>
+          <IconButton
+            className={enabled && classes.security}
+            onClick={() => {
+              setEnabled(!enabled);
+            }}
+          >
+            <Security />
+          </IconButton>
+        </InputAdornment>
       }
+      placeholder={'https://bookface.com'}
     />
   );
 };
-
-export default ChromeInput;

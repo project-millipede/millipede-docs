@@ -1,47 +1,34 @@
-import { createStyles, InputAdornment, InputBase, makeStyles } from '@material-ui/core';
+import { createStyles, IconButton, InputAdornment, InputBase, makeStyles, Theme } from '@material-ui/core';
 import Search from '@material-ui/icons/Search';
 import React, { FC } from 'react';
 
-const useInputStyles = makeStyles(() => {
-  const minHeight = 36;
-
+export const useStyles = makeStyles((_theme: Theme) => {
+  const height = 48;
+  const borderRadius = height / 2;
   return createStyles({
-    root: {
-      backgroundColor: 'rgba(0, 0, 0, .04)',
-      borderRadius: `${minHeight / 2}px`,
-      width: '100%'
-    },
     input: {
-      boxSizing: 'border-box',
-      minHeight: `${minHeight}px`
+      width: '100%',
+      height: `${height}px`,
+      backgroundColor: '#f1f3f4',
+      borderRadius: `${borderRadius}px`
     }
   });
 });
-
-const useAdornStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      paddingLeft: 12,
-      '& svg': {
-        color: 'rgba(0,0,0,0.38)'
-      }
-    }
-  })
-);
 
 interface SimpleSearchProps {
   placeholder?: string;
 }
 
 const SimpleSearch: FC<SimpleSearchProps> = ({ placeholder = '' }) => {
-  const inputStyles = useInputStyles();
-  const adornStyles = useAdornStyles();
+  const classes = useStyles();
   return (
     <InputBase
-      classes={inputStyles}
+      className={classes.input}
       startAdornment={
-        <InputAdornment position={'start'} classes={adornStyles}>
-          <Search />
+        <InputAdornment position={'start'}>
+          <IconButton>
+            <Search />
+          </IconButton>
         </InputAdornment>
       }
       placeholder={placeholder}
