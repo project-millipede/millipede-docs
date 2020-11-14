@@ -21,6 +21,28 @@
   "content_create": "Beitrag erstellen",
   "content_publish": "Beitrag veröffentlichen",
   "content_empty": "Eine Nutzereingabe erkannt",
+
+  "publish-node-head": "1",
+	"publish-relation-head": "2",
+	"publish-node-upload": "3",
+	"publish-relation-upload": "4",
+	"publish-node-download": "5",
+	"publish-relation-download": "6",
+	"publish-node-tail": "7",
+
+	"publish-node-headB": "8",
+	"publish-relation-headB": "9",
+	"publish-node-uploadB": "10",
+	"publish-relation-uploadB": "11",
+	"publish-node-downloadB": "12",
+	"publish-relation-downloadB": "13",
+  "publish-node-tailB": "14",
+  
+	"publish-nodeId-head": "Head",
+	"publish-nodeId-upload": "Upload",
+	"publish-nodeId-download": "Download",
+  "publish-nodeId-tail": "Tail",
+  
   "steps": [
     {
       "order": 1,

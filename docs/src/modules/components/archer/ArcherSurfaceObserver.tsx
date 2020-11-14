@@ -19,50 +19,53 @@ export const ArcherSurfaceObserver: FC<ArcherSurfaceObserverProps> = ({
 }) => {
   const [leftTimelineId, rightTimelineId] = timelineIds;
 
-  const setRefContainerScrollLeftTimeline = useSetRecoilState(
+  const setContainerScrollRefLeftTimeline = useSetRecoilState(
     refContainerScrollFromArcherState(leftTimelineId)
   );
 
-  const setRefContainerScrollRightTimeline = useSetRecoilState(
+  const setContainerScrollRefRightTimeline = useSetRecoilState(
     refContainerScrollFromArcherState(rightTimelineId)
   );
 
-  const [containerRef1] = useMeasure({ debounce: 0 });
-  const [containerRef2] = useMeasure({ debounce: 0 });
+  const [containerScrollRefLeftTimeline] = useMeasure({ debounce: 0 });
+  const [containerScrollRefRightTimeline] = useMeasure({ debounce: 0 });
 
-  const updateRefContainerScrollLeftTimeline = useCallback(
+  const updateContainerScrollRefLeftTimeline = useCallback(
     (value: EffectRef<HTMLElement>) => {
-      setRefContainerScrollLeftTimeline(state => {
+      setContainerScrollRefLeftTimeline(state => {
         return {
           ...state,
           refObserved: value
         };
       });
     },
-    [setRefContainerScrollLeftTimeline]
+    [setContainerScrollRefLeftTimeline]
   );
 
-  const updateRefContainerScrollRightTimeline = useCallback(
+  const updateContainerScrollRefRightTimeline = useCallback(
     (value: EffectRef<HTMLElement>) => {
-      setRefContainerScrollRightTimeline(state => {
+      setContainerScrollRefRightTimeline(state => {
         return {
           ...state,
           refObserved: value
         };
       });
     },
-    [setRefContainerScrollRightTimeline]
+    [setContainerScrollRefRightTimeline]
   );
 
   useEffect(() => {
-    updateRefContainerScrollLeftTimeline(containerRef1);
-    updateRefContainerScrollRightTimeline(containerRef2);
+    updateContainerScrollRefLeftTimeline(containerScrollRefLeftTimeline);
+    updateContainerScrollRefRightTimeline(containerScrollRefRightTimeline);
   }, []);
 
-  const combinedRefs = useMergedRef([containerRef1, containerRef2]);
+  const combinedRefs = useMergedRef([
+    containerScrollRefLeftTimeline,
+    containerScrollRefRightTimeline
+  ]);
 
   if (render != null) {
-    return render({ ref: combinedRefs as any });
+    return render({ ref: combinedRefs });
   }
 
   return cloneElement(children, {

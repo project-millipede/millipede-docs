@@ -1,5 +1,6 @@
 import { useHoux } from '@houx';
 import React, { Dispatch, FC, useCallback, useEffect } from 'react';
+import { InteractionFlow } from 'src/components/layout/grid/animation/framer/components/InteractionFlow';
 
 import { TimelineActions } from '../../../../docs/src/modules/redux/features/actionType';
 import { normalizeData } from '../../../../docs/src/modules/redux/features/timeline/actions';
@@ -73,14 +74,15 @@ export const SocialApp: FC = () => {
           display: 'flex',
           flexDirection: 'column'
         }}
-      />
-      {/* {leftTimeline && rightTimeline ? (
-        <InteractionFlow
-          leftTimelineId={leftTimeline.id}
-          rightTimelineId={rightTimeline.id}
-          offSetControls={offSet}
-        />
-      ) : null} */}
+      >
+        {leftTimeline && rightTimeline ? (
+          <InteractionFlow
+            leftTimelineId={leftTimeline.id}
+            rightTimelineId={rightTimeline.id}
+            offSetControls={0}
+          />
+        ) : null}
+      </div>
       {rightTimelineComp && rightTimelineComp}
     </div>
   );

@@ -1,7 +1,9 @@
+import { useEffectRef } from '@huse/effect-ref';
 import { Button, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import { ContentState, Editor, EditorState } from 'draft-js';
+import elementResizeDetectorMaker from 'element-resize-detector';
 import useTranslation from 'next-translate/useTranslation';
-import React, { forwardRef, ForwardRefRenderFunction, useCallback, useEffect, useRef, useState } from 'react';
+import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
 
 // import { useWindupString } from 'windups';
 
@@ -42,10 +44,13 @@ const insertText = (text: string) => {
   return EditorState.forceSelection(editorState, selectionAtEnd);
 };
 
-const CommentEditor: ForwardRefRenderFunction<
-  HTMLDivElement,
-  CommentEditorProps
-> = ({ isComment = true, create, timelineId }, ref) => {
+const resizeDetector = elementResizeDetectorMaker({ strategy: 'scroll' });
+
+export const CommentEditor: FC<CommentEditorProps> = ({
+  isComment = true,
+  create,
+  timelineId
+}) => {
   const { t } = useTranslation();
 
   const title = t(
@@ -101,6 +106,24 @@ const CommentEditor: ForwardRefRenderFunction<
     editorRef.current.focus();
   }, []);
 
+  const [, setSize] = useState({
+    width: 0,
+    height: 0
+  });
+
+  const observeResize = useCallback(element => {
+    const listener = () => {
+      setSize({ width: element.offsetWidth, height: element.offsetHeight });
+    };
+    resizeDetector.listenTo(element, listener);
+
+    return () => {
+      resizeDetector.removeListener(element, listener);
+    };
+  }, []);
+
+  const ref = useEffectRef(observeResize);
+
   return (
     <div
       style={{
@@ -141,5 +164,3 @@ const CommentEditor: ForwardRefRenderFunction<
     </div>
   );
 };
-
-export default forwardRef(CommentEditor);

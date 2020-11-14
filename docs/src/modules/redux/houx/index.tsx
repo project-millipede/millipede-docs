@@ -6,7 +6,7 @@ interface ContextType {
   dispatch: Dispatch<Action>;
 }
 const Context = createContext<ContextType>({
-  state: {} as any,
+  state: null,
   dispatch: null
 });
 const composeReducers = (reducers: ReducerMap) => (state, action) => {

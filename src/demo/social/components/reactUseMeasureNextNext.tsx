@@ -1,4 +1,5 @@
 import { EffectRef, useEffectRef } from '@huse/effect-ref';
+import elementResizeDetectorMaker, { Erd } from 'element-resize-detector';
 import { debounce as createDebounce } from 'lodash';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
@@ -11,6 +12,7 @@ type State = {
   element: HTMLElement | null;
   scrollContainers: Array<HTMLElement> | null;
   lastBounds: Partial<DOMRect>;
+  resizeObserver: Erd;
 };
 
 const findScrollContainers = (element: HTMLElement): Array<HTMLElement> => {
@@ -42,39 +44,79 @@ export const useMeasure = ({
 }: Options): [EffectRef<HTMLElement>, Partial<DOMRect>] => {
   const [bounds, setBounds] = useState<Partial<DOMRect>>({
     top: 0,
-    height: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
+    height: 0
+  });
+
+  const [, setSize] = useState({
     width: 0,
-    x: 0,
-    y: 0
+    height: 0
   });
 
   const state = useRef<State>({
     element: null,
     scrollContainers: null,
-    lastBounds: bounds
+    lastBounds: bounds,
+    resizeObserver: null
   });
+
+  const [scrollChange, resizeChange] = useMemo(() => {
+    const determineBounds = () => {
+      const {
+        current: { element, lastBounds }
+      } = state;
+
+      if (element != null) {
+        const { top, height } = element.getBoundingClientRect();
+
+        if (
+          !areBoundsEqual(lastBounds, {
+            top,
+            height
+          })
+        ) {
+          setBounds(prevState => ({
+            ...prevState,
+            top,
+            height
+          }));
+        }
+      }
+    };
+
+    const resizeChange = () => {
+      const {
+        current: { element }
+      } = state;
+      if (element != null) {
+        setSize({ width: element.offsetWidth, height: element.offsetHeight });
+      }
+    };
+
+    return [
+      debounce > 0
+        ? createDebounce(determineBounds, debounce)
+        : determineBounds,
+      resizeChange
+    ];
+  }, [debounce]);
 
   const removeListeners = () => {
     const {
-      current: { scrollContainers }
+      current: { scrollContainers, resizeObserver, element }
     } = state;
 
     if (scrollContainers != null) {
       scrollContainers.forEach(scrollContainer => {
         scrollContainer.removeEventListener('scroll', scrollChange, true);
       });
-      if (state != null && state.current != null) {
-        state.current.scrollContainers = null;
-      }
+      state.current.scrollContainers = null;
+      resizeObserver.uninstall(element);
     }
   };
 
   const addListeners = () => {
     const {
-      current: { scrollContainers }
+      current: { scrollContainers, element }
     } = state;
 
     if (scrollContainers != null) {
@@ -84,6 +126,7 @@ export const useMeasure = ({
           passive: true
         });
       });
+      state.current.resizeObserver.listenTo(element, resizeChange);
     }
   };
 
@@ -96,7 +139,11 @@ export const useMeasure = ({
       if (state != null && state.current != null) {
         state.current.element = node;
         state.current.scrollContainers = findScrollContainers(node);
+        state.current.resizeObserver = elementResizeDetectorMaker({
+          strategy: 'scroll'
+        });
       }
+
       addListeners();
 
       if (callBack != null) {
@@ -110,56 +157,6 @@ export const useMeasure = ({
   }, []);
 
   const ref = useEffectRef(update);
-
-  const [scrollChange] = useMemo(() => {
-    const determineBounds = () => {
-      const {
-        current: { element, lastBounds }
-      } = state;
-
-      if (element != null) {
-        const {
-          top,
-          height,
-          bottom,
-          left,
-          right,
-          width,
-          x,
-          y
-        } = element.getBoundingClientRect();
-
-        if (
-          !areBoundsEqual(lastBounds, {
-            top,
-            height,
-            bottom,
-            left,
-            right,
-            width,
-            x,
-            y
-          })
-        ) {
-          setBounds(prevState => ({
-            ...prevState,
-            top,
-            height,
-            bottom,
-            left,
-            right,
-            width,
-            x,
-            y
-          }));
-        }
-      }
-    };
-
-    return [
-      debounce > 0 ? createDebounce(determineBounds, debounce) : determineBounds
-    ];
-  }, [debounce, setBounds]);
 
   useEffect(() => removeListeners, []);
 
