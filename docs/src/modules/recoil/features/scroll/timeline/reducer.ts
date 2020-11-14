@@ -86,13 +86,16 @@ type Link = {
 // => publish (fixed)>-node-<(fixed) head
 // => publish (fixed)>-relation-<(fixed) head
 
-export const addTopic = (items: Array<string>, topic: string) => {
+export const addTopic = (
+  items: Array<string>,
+  topic: string,
+  translationKey: string
+) => {
   return items.reduce<Array<Link>>((acc, item) => {
     acc.push({
-      // id: item,
       id: `${topic}-nodeId-${item}`,
-      nodeValue: `${topic}-node-${item}`,
-      value: `${topic}-relation-${item}`
+      nodeValue: `${translationKey}${topic}-node-${item}`,
+      value: `${translationKey}${topic}-relation-${item}`
     });
     return acc;
   }, []);

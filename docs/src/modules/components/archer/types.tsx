@@ -1,4 +1,4 @@
-import { Component, CSSProperties, MutableRefObject, ReactElement, ReactNode } from 'react';
+import { Component, CSSProperties, MutableRefObject, ReactElement, ReactNode, RefCallback } from 'react';
 
 import { SelectHandles } from './CustomBoxForward';
 
@@ -83,7 +83,7 @@ export class ArcherContainer extends Component<ArcherContainerProps> {
 }
 
 export type RenderFnSingleParameter = {
-  ref: MutableRefObject<HTMLElement>;
+  ref: MutableRefObject<HTMLDivElement> | RefCallback<HTMLDivElement>;
 };
 
 export type RenderSingleFn = ({ ref }: RenderFnSingleParameter) => JSX.Element;

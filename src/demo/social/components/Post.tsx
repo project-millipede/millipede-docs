@@ -1,36 +1,28 @@
 import { useHoux } from '@houx';
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  CardActions,
-  createStyles,
-  ListItem,
-  makeStyles
-} from '@material-ui/core';
+import { Button, ButtonGroup, Card, CardActions, createStyles, ListItem, makeStyles } from '@material-ui/core';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import { formatDistance } from 'date-fns';
 import { enGB } from 'date-fns/locale';
+import _ from 'lodash';
 import useTranslation from 'next-translate/useTranslation';
 import React, { Dispatch, FC, useMemo, useState } from 'react';
-import { SerializableParam } from 'recoil';
+import { selectorFamily, SerializableParam, useRecoilValue, useSetRecoilState } from 'recoil';
 
+import { RefPostScroll, refPostScrollState } from '../../../../docs/src/modules/recoil/features/scroll/post/reducer';
+import {
+  addTopic,
+  createNodesWithRelations,
+  nodesWithRelationsWithEdgeState,
+  publishActions,
+} from '../../../../docs/src/modules/recoil/features/scroll/timeline/reducer';
 import { TimelineActions } from '../../../../docs/src/modules/redux/features/actionType';
-import {
-  selectPostById,
-  selectTimelineOwner
-} from '../../../../docs/src/modules/redux/features/timeline/selector';
+import { selectPostById, selectTimelineOwner } from '../../../../docs/src/modules/redux/features/timeline/selector';
 import { RootState } from '../../../../docs/src/modules/redux/reducers';
-import CommentEditor from './CommentEditor';
+import { CommentEditor } from './CommentEditor';
 import Comments from './Comments';
-import {
-  getContent,
-  getHeader,
-  getMedia,
-  getObserverComp
-} from './Post.Render.svc';
+import { getContent, getHeader, getMedia, getObserverComp, getRef } from './Post.Render.svc';
 import { handleCreateComment, handleDeletePost } from './Post.svc';
 
 const useStyles = makeStyles(theme =>
@@ -57,13 +49,26 @@ export interface PostProps {
   postId: string;
 }
 
-export interface TimelinePostKeys {
+interface TimelinePostKeys {
   timelineId: string;
   postId: string;
   [key: string]: SerializableParam;
 }
 
-export const Post: FC<PostProps> = ({ timelineId, postId }) => {
+const refPostScrollSelector = selectorFamily<RefPostScroll, TimelinePostKeys>({
+  key: 'refPostScrollSelector',
+  get: ({ postId, timelineId }) => ({ get }) => {
+    const posts = get(refPostScrollState(postId));
+    const post = _.get(posts, timelineId);
+    return post;
+  }
+});
+
+export const Post: FC<PostProps> = ({
+  timelineId,
+  otherTimelineId,
+  postId
+}) => {
   const classes = useStyles();
 
   const { t } = useTranslation();
@@ -90,6 +95,10 @@ export const Post: FC<PostProps> = ({ timelineId, postId }) => {
     comments
   } = selectPostById(postId)(state);
 
+  const elementRef = useRecoilValue(
+    refPostScrollSelector({ postId, timelineId })
+  );
+
   const date = useMemo(
     () =>
       formatDistance(createdAt, new Date(), {
@@ -99,36 +108,24 @@ export const Post: FC<PostProps> = ({ timelineId, postId }) => {
   );
 
   const { media } = classes;
+  const { refObserved, refObservedSubSlices } = elementRef || {};
 
-  const headerComp = getObserverComp(
-    false,
-    null
-  )(getHeader(firstName, lastName, avatar, date));
+  const getRefForId = getRef(refObservedSubSlices);
 
-  const mediaComp = getObserverComp(
-    false,
-    null
-  )(getMedia(imageHref, imageTitle, media));
+  const headerComp = getObserverComp(getRefForId('header'))(
+    getHeader(firstName, lastName, avatar, date)
+  );
 
-  const contentComp = getObserverComp(false, null)(getContent(text));
+  const mediaComp = getObserverComp(getRefForId('media'))(
+    getMedia(imageHref, imageTitle, media)
+  );
 
-  const sentimentComp = getObserverComp(
-    false,
-    null
-  )(
+  const contentComp = getObserverComp(getRefForId('content'))(getContent(text));
+
+  const sentimentComp = getObserverComp(getRefForId('sentiment'))(
     <CardActions disableSpacing>
-      <ButtonGroup
-        variant='text'
-        color='primary'
-        aria-label='outlined primary button group'
-        style={{ margin: 'auto' }}
-      >
-        <Button
-          variant='text'
-          color='primary'
-          startIcon={<ThumbUpIcon />}
-          aria-label='like'
-        >
+      <ButtonGroup variant='text' color='primary' style={{ margin: 'auto' }}>
+        <Button variant='text' color='primary' startIcon={<ThumbUpIcon />}>
           {t('pages/pidp/use-case/recognition/index:like')}
         </Button>
         <Button
@@ -136,7 +133,6 @@ export const Post: FC<PostProps> = ({ timelineId, postId }) => {
           color='primary'
           startIcon={<ChatBubbleOutlineIcon />}
           onClick={() => setDisplayEditor(true)}
-          aria-label='comment'
         >
           {t('pages/pidp/use-case/recognition/index:comment')}
         </Button>
@@ -145,7 +141,6 @@ export const Post: FC<PostProps> = ({ timelineId, postId }) => {
           color='primary'
           startIcon={<DeleteOutlineIcon />}
           onClick={() => handleDeletePost(timelineId, postId, dispatch)}
-          aria-label='delete'
         >
           {t('pages/pidp/use-case/recognition/index:delete')}
         </Button>
@@ -153,14 +148,18 @@ export const Post: FC<PostProps> = ({ timelineId, postId }) => {
     </CardActions>
   );
 
-  const commentComp = getObserverComp(
-    false,
-    null
-  )(<Comments comments={comments} timelineId={timelineId} postId={postId} />);
+  const commentComp = getObserverComp(getRefForId('comments'))(
+    <Comments comments={comments} timelineId={timelineId} postId={postId} />
+  );
+
+  const setNodesWithRelationsWithEdge = useSetRecoilState(
+    nodesWithRelationsWithEdgeState
+  );
 
   return (
     <ListItem
       id={`timeline-${timelineId}-post-${postId}`}
+      ref={refObserved != null ? refObserved : null}
       className={classes.postListItem}
     >
       <Card className={classes.card}>
@@ -173,7 +172,34 @@ export const Post: FC<PostProps> = ({ timelineId, postId }) => {
           <CommentEditor
             create={text => {
               const owner = selectTimelineOwner(timelineId)(state);
-              handleCreateComment(owner, postId, text, dispatch, _comment => {
+              handleCreateComment(owner, postId, text, dispatch, comment => {
+                const publishActionsExtended = addTopic(
+                  publishActions,
+                  'publish',
+                  'pages/pidp/use-case/recognition/index:'
+                );
+
+                const publishNodesWithRelations = createNodesWithRelations(
+                  publishActionsExtended,
+                  t,
+                  false
+                )([timelineId, otherTimelineId], postId, 'comments');
+
+                setNodesWithRelationsWithEdge(state => {
+                  return {
+                    ...state,
+                    nodesWithRelations: {
+                      ...state.nodesWithRelations,
+                      [comment.id]: {
+                        values: [publishNodesWithRelations],
+                        id: 'Comment Id',
+                        description: 'Comment Description'
+                      }
+                    },
+                    activeId: comment.id
+                  };
+                });
+
                 setDisplayEditor(false);
               });
             }}

@@ -1,11 +1,6 @@
 import { EffectRef } from '@huse/effect-ref';
-import {
-  Avatar,
-  CardContent,
-  CardHeader,
-  CardMedia,
-  Typography
-} from '@material-ui/core';
+import { Avatar, CardContent, CardHeader, CardMedia, Typography } from '@material-ui/core';
+import _ from 'lodash';
 import React from 'react';
 
 export const getHeader = (
@@ -41,12 +36,17 @@ export const getContent = (text: string) => {
   );
 };
 
-export const getObserverComp = (
-  selected: boolean,
-  ref: EffectRef<HTMLElement>
-) => (children: JSX.Element) => {
-  if (selected && ref != null) {
-    return null;
+export const getRef = (refs: { [key: string]: EffectRef<HTMLElement> }) => (
+  id: string
+) => {
+  return _.get(refs, id);
+};
+
+export const getObserverComp = (ref: EffectRef<HTMLElement>) => (
+  children: JSX.Element
+) => {
+  if (ref != null) {
+    return <div ref={ref}>{children}</div>;
   }
   return <>{children}</>;
 };

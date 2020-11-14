@@ -1,35 +1,35 @@
 import { useHoux } from '@houx';
-import {
-  Button,
-  ButtonGroup,
-  List,
-  makeStyles,
-  Tab,
-  Tabs,
-  useTheme
-} from '@material-ui/core';
+import { useMergedRef } from '@huse/merged-ref';
+import { Button, ButtonGroup, List, makeStyles, Tab, Tabs, useTheme } from '@material-ui/core';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import _ from 'lodash';
 import useTranslation from 'next-translate/useTranslation';
 import React, { ChangeEvent, Dispatch, FC, useEffect, useState } from 'react';
 import { isBrowser } from 'react-device-detect';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { postIdsState } from '../../../../docs/src/modules/recoil/features/scroll/post/reducer';
 import {
+  addTopic,
+  createNodesWithRelations,
+  nodesWithRelationsWithEdgeState,
+  publishActions,
+  publishActions2,
+  refContainerScrollFromArcherState,
+  refContainerScrollState,
   timelineViewState,
-  VIEW
+  VIEW,
 } from '../../../../docs/src/modules/recoil/features/scroll/timeline/reducer';
 import { TimelineActions } from '../../../../docs/src/modules/redux/features/actionType';
 import {
   selectPostsOfFriends,
   selectPostsOfOwner,
-  selectTimelineOwner
+  selectTimelineOwner,
 } from '../../../../docs/src/modules/redux/features/timeline/selector';
 import { RootState } from '../../../../docs/src/modules/redux/reducers';
 import { compareDescFn } from '../../../../docs/src/modules/utils/collection/array';
 import HeaderView from '../../../components/device/browser/views/HeaderView';
-import CommentEditor from './CommentEditor';
+import { CommentEditor } from './CommentEditor';
 import { PostProps } from './Post';
 import SimpleSearch from './SimpleSearch';
 import { handleCreatePost } from './Timeline.svc';
@@ -87,6 +87,9 @@ export const Timeline: FC<TimelineProps> = ({
 
   const setPostIds = useSetRecoilState(postIdsState(timelineId));
 
+  // Working include again
+  const otherPostIds = useRecoilValue(postIdsState(otherTimelineId));
+
   const postIds =
     currentView === VIEW.TIMELINE
       ? selectPostsOfFriends(
@@ -114,8 +117,26 @@ export const Timeline: FC<TimelineProps> = ({
     });
   }, []);
 
+  const refContainerScroll = useRecoilValue(
+    refContainerScrollState(timelineId)
+  );
+
+  const refContainerScrollFromArcher = useRecoilValue(
+    refContainerScrollFromArcherState(timelineId)
+  );
+
+  const combinedRef = useMergedRef([
+    refContainerScroll.refObserved,
+    refContainerScrollFromArcher.refObserved
+  ]);
+
+  // Working include again
+  const setNodesWithRelationsWithEdge = useSetRecoilState(
+    nodesWithRelationsWithEdgeState
+  );
+
   return (
-    <div className={classes.root}>
+    <div className={classes.root} ref={combinedRef}>
       {isBrowser ? (
         <div
           style={{
@@ -131,7 +152,6 @@ export const Timeline: FC<TimelineProps> = ({
         indicatorColor='primary'
         textColor='primary'
         variant='fullWidth'
-        aria-label='full width tabs example'
       >
         <Tab label='Timeline' id={`timeline-${timelineId}-tab-timeline`} />
         <Tab label='Posts' id={`timeline-${timelineId}-tab-posts`} />
@@ -156,7 +176,57 @@ export const Timeline: FC<TimelineProps> = ({
           <CommentEditor
             create={text => {
               const owner = selectTimelineOwner(timelineId)(state);
-              handleCreatePost(owner, text, dispatch, _post => {
+              handleCreatePost(owner, text, dispatch, post => {
+                // Working include again - start
+                const publishActionsExtended = addTopic(
+                  publishActions,
+                  'publish',
+                  'pages/pidp/use-case/recognition/index:'
+                );
+
+                const publishNodesWithRelations = createNodesWithRelations(
+                  publishActionsExtended,
+                  t
+                )([timelineId, otherTimelineId], post.id, ['content', 'media']);
+
+                const publishActionsExtended2 = addTopic(
+                  publishActions2,
+                  'publish',
+                  'pages/pidp/use-case/recognition/index:'
+                );
+
+                const publishNodesWithRelationsMore = createNodesWithRelations(
+                  publishActionsExtended2,
+                  t,
+                  false
+                )(
+                  [otherTimelineId, timelineId],
+
+                  // post.id,
+                  [otherPostIds[1], post.id],
+
+                  ['content', 'comments']
+                );
+                // Working include again - end
+
+                // Multiple nodesWithRelations elements
+                setNodesWithRelationsWithEdge(state => {
+                  return {
+                    ...state,
+                    nodesWithRelations: {
+                      ...state.nodesWithRelations,
+                      [post.id]: {
+                        values: [
+                          publishNodesWithRelations,
+                          publishNodesWithRelationsMore
+                        ],
+                        id: 'Post Id',
+                        description: 'Post Description'
+                      }
+                    },
+                    activeId: post.id
+                  };
+                });
                 setDisplayEditor(false);
               });
             }}
@@ -166,22 +236,14 @@ export const Timeline: FC<TimelineProps> = ({
         )}
 
         {currentView === VIEW.POSTS && !displayEditor && (
-          <ButtonGroup
-            variant='text'
-            color='primary'
-            aria-label='outlined primary button group'
-            style={{ width: '100%' }}
-          >
+          <ButtonGroup variant='text' color='primary' style={{ width: '100%' }}>
             <Button
+              id={`timeline-${timelineId}-content-create`}
               variant='text'
               color='primary'
               startIcon={<ChatBubbleOutlineIcon />}
               onClick={() => setDisplayEditor(true)}
-              aria-label={t(
-                'pages/pidp/use-case/recognition/index:content_create'
-              )}
               style={{ margin: 'auto' }}
-              id={`timeline-${timelineId}-content-create`}
             >
               {t('pages/pidp/use-case/recognition/index:content_create')}
             </Button>
