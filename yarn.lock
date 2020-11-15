@@ -1695,20 +1695,20 @@
   resolved "https://registry.yarnpkg.com/@mdx-js/util/-/util-1.6.21.tgz#25f97a0a1b76e78c16ae5d98c6c73e1be8d89e39"
   integrity sha512-6sANhqfEHu6gdHZSrzDjN18Y48mIon8f2Os6J+IFmMHN0IhNG/0PUIIsI07kA1sZ9t6vgZNBloVmcDa5WOSe6A==
 
-"@next/env@10.0.2-canary.16":
-  version "10.0.2-canary.16"
-  resolved "https://registry.yarnpkg.com/@next/env/-/env-10.0.2-canary.16.tgz#b8b38d90509b61e3ad567e18960fcfbdbda0ade3"
-  integrity sha512-B9SzRtVydMaqaMx4IpCu2QOqExkm+IuKFrxnSzBIrDAZFzPy4k/5Vw+YQNCu39wblmnY2s8YIE9pFdbRfJ51yA==
+"@next/env@10.0.2-canary.17":
+  version "10.0.2-canary.17"
+  resolved "https://registry.yarnpkg.com/@next/env/-/env-10.0.2-canary.17.tgz#8bf37393ee4eee4a5f17f315c02c62923345a8c7"
+  integrity sha512-+GPxI2b9zpFNfiWWhBvEhx/k3E874oHeZklzSUDkaJ1GVACqoObxmmWr/24iYgAYl/DnrDtvN8MMOa9cc//Nzw==
 
-"@next/polyfill-module@10.0.2-canary.16":
-  version "10.0.2-canary.16"
-  resolved "https://registry.yarnpkg.com/@next/polyfill-module/-/polyfill-module-10.0.2-canary.16.tgz#78275607c8f2e0c8d96d390b32d2e215104a967a"
-  integrity sha512-3+L3ZoISTvx9V14slUQPpISile6Tn+dSAQcvNUE1qbRb9ZCsLZXHZHp8zW6tz6lNWpOe+KXTCkGdTnbVZWIE+w==
+"@next/polyfill-module@10.0.2-canary.17":
+  version "10.0.2-canary.17"
+  resolved "https://registry.yarnpkg.com/@next/polyfill-module/-/polyfill-module-10.0.2-canary.17.tgz#695edec29f2140887916b38960178ef6897de05f"
+  integrity sha512-TUI6l5i6qbtil23sS67Pekn6MWw+bI0mkPm9N5EquDwUC9IXRPzyifoShjvFo1+C1G8+NJlcX7ij/3WT7AWK+A==
 
-"@next/react-dev-overlay@10.0.2-canary.16":
-  version "10.0.2-canary.16"
-  resolved "https://registry.yarnpkg.com/@next/react-dev-overlay/-/react-dev-overlay-10.0.2-canary.16.tgz#3c528c52ba7d4925a4dfcc6272092605b6d4a55e"
-  integrity sha512-jS1aP4gJ63uY7VnZtXaQLIsTGpWlsINMjuUYFwu3vEStJy5wzV0jH5bnei4ZmZieJROamW41YWsEwr2hqjMUcA==
+"@next/react-dev-overlay@10.0.2-canary.17":
+  version "10.0.2-canary.17"
+  resolved "https://registry.yarnpkg.com/@next/react-dev-overlay/-/react-dev-overlay-10.0.2-canary.17.tgz#b96539ef534581e3b07ca3e51ce69dc787d8ab45"
+  integrity sha512-kBh1Dc2VhJBm6Ym26V5T4cAsxYOdR+nRXmUc4vePj48ksTEtxmwc0PzlFnk/8Jm4hh2oit7WjZYTdz1+Xhog+g==
   dependencies:
     "@babel/code-frame" "7.10.4"
     ally.js "1.4.1"
@@ -1721,10 +1721,10 @@
     stacktrace-parser "0.1.10"
     strip-ansi "6.0.0"
 
-"@next/react-refresh-utils@10.0.2-canary.16":
-  version "10.0.2-canary.16"
-  resolved "https://registry.yarnpkg.com/@next/react-refresh-utils/-/react-refresh-utils-10.0.2-canary.16.tgz#5ab57f40ef9e9c0eb1ab0db86a19e0ba1c2a052c"
-  integrity sha512-bt+yDhFVn6+PKmkm/AF6sp768KHR3NFqid9blq2m8QS6xKEvqws0fjRg1xYAFANOn9oWhz2cCIEG7loBx5E6Gw==
+"@next/react-refresh-utils@10.0.2-canary.17":
+  version "10.0.2-canary.17"
+  resolved "https://registry.yarnpkg.com/@next/react-refresh-utils/-/react-refresh-utils-10.0.2-canary.17.tgz#7252c23dabe65b75a5dcaf19fef6dd54869da002"
+  integrity sha512-4tLZsqsPys0YQQNTCQSXNkJGvc+g34psTyCensQdCeEr0mJ/M/E9EZ3bIXoqFFKEyizPJc76Qu8o6uUHDZ2SBQ==
 
 "@nodelib/fs.scandir@2.1.3":
   version "2.1.3"
@@ -3173,7 +3173,12 @@ camelize@^1.0.0:
   resolved "https://registry.yarnpkg.com/camelize/-/camelize-1.0.0.tgz#164a5483e630fa4321e5af07020e531831b2609b"
   integrity sha1-FkpUg+Yw+kMh5a8HAg5TGDGyYJs=
 
-caniuse-lite@^1.0.30001093, caniuse-lite@^1.0.30001113, caniuse-lite@^1.0.30001154, caniuse-lite@^1.0.30001157:
+caniuse-lite@^1.0.30001093, caniuse-lite@^1.0.30001113, caniuse-lite@^1.0.30001154:
+  version "1.0.30001158"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001158.tgz#fce86d321369603c2bc855ee0e901a7f49f8310b"
+  integrity sha512-s5loVYY+yKpuVA3HyW8BarzrtJvwHReuzugQXlv1iR3LKSReoFXRm86mT6hT7PEF5RxW+XQZg+6nYjlywYzQ+g==
+
+caniuse-lite@^1.0.30001157:
   version "1.0.30001157"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001157.tgz#2d11aaeb239b340bc1aa730eca18a37fdb07a9ab"
   integrity sha512-gOerH9Wz2IRZ2ZPdMfBvyOi3cjaz4O4dgNwPGzx8EhqAs4+2IL/O+fJsbt+znSigujoZG8bVcIAUM/I/E5K3MA==
@@ -6949,7 +6954,7 @@ ms@2.1.2:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
-nanoid@^3.1.12:
+nanoid@^3.1.16:
   version "3.1.16"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.16.tgz#b21f0a7d031196faf75314d7c65d36352beeef64"
   integrity sha512-+AK8MN0WHji40lj8AEuwLOvLSbWYApQpre/aFJZD71r43wVRLrOYS4FmJOPQYon1TqB462RzrrxlfA74XRES8w==
@@ -7003,18 +7008,18 @@ next-translate@1.0.0-experimental.4:
   resolved "https://registry.yarnpkg.com/next-translate/-/next-translate-1.0.0-experimental.4.tgz#6cfcbde816394516cf492867d7924e684cae905e"
   integrity sha512-oWiZZoBcq+RyfNxpoWxQhO9GZNbowPX8B8UkEcJmBKk/sT2PylLVUHTJ+ypxTJWE4GGjtZTj3zhx+gk5gBo2YA==
 
-next@^10.0.2-canary.12:
-  version "10.0.2-canary.16"
-  resolved "https://registry.yarnpkg.com/next/-/next-10.0.2-canary.16.tgz#8969e93c35a798932ca3f0c9616cef2b3ca90c7e"
-  integrity sha512-XyM0WGGD8kbGIitDdxmyzUKfVLHEQoTyoi6osmSGxKYVEetex5k+zwya0Emz9cA54ExA865qvkLeFVVDRwhw1g==
+next@^10.0.2-canary.17:
+  version "10.0.2-canary.17"
+  resolved "https://registry.yarnpkg.com/next/-/next-10.0.2-canary.17.tgz#71d74d9a06b4770e282325f0c7f7550ba9de9e3f"
+  integrity sha512-ZGccudRXlX3KugdC1hPCGuVU5Rw2kEcwOilOuNr3zWvD1KvEFIVeM7+hiX5QgNr3S2yoLTOLWbi+sQF5lJVVaA==
   dependencies:
     "@ampproject/toolbox-optimizer" "2.7.0-alpha.1"
     "@babel/runtime" "7.12.5"
     "@hapi/accept" "5.0.1"
-    "@next/env" "10.0.2-canary.16"
-    "@next/polyfill-module" "10.0.2-canary.16"
-    "@next/react-dev-overlay" "10.0.2-canary.16"
-    "@next/react-refresh-utils" "10.0.2-canary.16"
+    "@next/env" "10.0.2-canary.17"
+    "@next/polyfill-module" "10.0.2-canary.17"
+    "@next/react-dev-overlay" "10.0.2-canary.17"
+    "@next/react-refresh-utils" "10.0.2-canary.17"
     ast-types "0.13.2"
     babel-plugin-transform-define "2.0.0"
     babel-plugin-transform-react-remove-prop-types "0.4.24"
@@ -7035,7 +7040,7 @@ next@^10.0.2-canary.12:
     node-html-parser "1.4.9"
     path-browserify "1.0.1"
     pnp-webpack-plugin "1.6.4"
-    postcss "8.1.1"
+    postcss "8.1.7"
     process "0.11.10"
     prop-types "15.7.2"
     raw-body "2.4.1"
@@ -7644,14 +7649,14 @@ postcss@7.0.32:
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
-postcss@8.1.1:
-  version "8.1.1"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.1.1.tgz#c3a287dd10e4f6c84cb3791052b96a5d859c9389"
-  integrity sha512-9DGLSsjooH3kSNjTZUOt2eIj2ZTW0VI2PZ/3My+8TC7KIbH2OKwUlISfDsf63EP4aiRUt3XkEWMWvyJHvJelEg==
+postcss@8.1.7:
+  version "8.1.7"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.1.7.tgz#ff6a82691bd861f3354fd9b17b2332f88171233f"
+  integrity sha512-llCQW1Pz4MOPwbZLmOddGM9eIJ8Bh7SZ2Oj5sxZva77uVaotYDsYTch1WBTNu7fUY0fpWp0fdt7uW40D4sRiiQ==
   dependencies:
     colorette "^1.2.1"
     line-column "^1.0.2"
-    nanoid "^3.1.12"
+    nanoid "^3.1.16"
     source-map "^0.6.1"
 
 postcss@^7.0.14, postcss@^7.0.26, postcss@^7.0.32, postcss@^7.0.5, postcss@^7.0.6:
@@ -7892,7 +7897,7 @@ react-hyphen@^1.4.0:
   dependencies:
     hyphenated "1.1.1"
 
-react-intersection-observer@^8.30.2:
+react-intersection-observer@^8.30.3:
   version "8.30.3"
   resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-8.30.3.tgz#99850f0aacc5b474dddb04976e58d7ee9315ba19"
   integrity sha512-hKYTJUrU99hAf7h1lNY3pjYXt+09BaPNC6fcLw1B8OLJJUDXTWrwzu4hRuztougeRgPYpxmNaTn1FS4F3EQnhA==
