@@ -25,6 +25,7 @@ import {
   nodesWithRelationsWithEdgeState,
 } from '../../../../../../../docs/src/modules/recoil/features/scroll/timeline/reducer';
 import { InteractionOptions } from './InteractionOptions';
+import { ProgressiveStepBuilder } from './ProgressiveStepBuilder';
 import { ScenarioControlNWithN } from './ScenarioControlNWithN';
 
 const resizeDetector = elementResizeDetectorMaker({ strategy: 'scroll' });
@@ -321,6 +322,14 @@ const ScenarioControl: FC<ScenarioControlProps> = (
         leftTimelineId={leftTimelineId}
         rightTimelineId={rightTimelineId}
       />
+
+      <ProgressiveStepBuilder
+        // ltr={state.ltr}
+        ltr
+        leftTimelineId={leftTimelineId}
+        rightTimelineId={rightTimelineId}
+      />
+
       <FormGroup row>
         <FormControlLabel
           control={

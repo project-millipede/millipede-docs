@@ -1,5 +1,6 @@
 import { useHoux } from '@houx';
-import React, { Dispatch, FC, useCallback, useEffect } from 'react';
+import React, { Dispatch, FC, useCallback, useEffect, useState } from 'react';
+import { AutoPlayFlowControl } from 'src/components/layout/grid/animation/framer/components/AutoPlayFlowControl';
 
 import { RefProvider } from '../../../../docs/src/modules/components/archer/context/RefProvider';
 import { TransitionProvider } from '../../../../docs/src/modules/components/archer/context/TransitionProvider';
@@ -8,7 +9,10 @@ import { normalizeData } from '../../../../docs/src/modules/redux/features/timel
 import { selectUserCaseState } from '../../../../docs/src/modules/redux/features/timeline/selector';
 import { RootState } from '../../../../docs/src/modules/redux/reducers';
 import { InteractionFlow } from '../../../components/layout/grid/animation/framer/components/InteractionFlow';
-import { InteractionFlowControl } from '../../../components/layout/grid/animation/framer/components/InteractionFlowControl';
+import {
+  InteractionFlowControl,
+  InteractionFlowControlObserver,
+} from '../../../components/layout/grid/animation/framer/components/InteractionFlowControl';
 import { generateData } from '../../../data/social/mocks';
 import { UseCase } from '../../../typings/social';
 import { Post } from './Post';
@@ -63,6 +67,8 @@ export const SocialApp: FC = () => {
 
   const [leftTimelineComp, rightTimelineComp] = timelineComponents;
 
+  const [offSet, setOffSet] = useState(0);
+
   return (
     <div
       style={{
@@ -81,10 +87,30 @@ export const SocialApp: FC = () => {
         <RefProvider>
           <TransitionProvider>
             {leftTimeline && rightTimeline ? (
+              <InteractionFlowControlObserver
+                handleControlOffset={value => {
+                  setOffSet(value);
+                }}
+                style={{
+                  marginTop: '0'
+
+                  // position: 'sticky',
+                  // top: '64px',
+                  // backgroundColor: 'white'
+                }}
+              >
+                <AutoPlayFlowControl
+                  leftTimelineId={leftTimeline.id}
+                  rightTimelineId={rightTimeline.id}
+                />
+              </InteractionFlowControlObserver>
+            ) : null}
+
+            {leftTimeline && rightTimeline ? (
               <InteractionFlow
                 leftTimelineId={leftTimeline.id}
                 rightTimelineId={rightTimeline.id}
-                offSetControls={0}
+                offSetControls={offSet}
               />
             ) : null}
 
