@@ -4,8 +4,7 @@ import { ContentState, Editor, EditorState } from 'draft-js';
 import elementResizeDetectorMaker from 'element-resize-detector';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
-
-// import { useWindupString } from 'windups';
+import { useWindupString } from 'windups';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -75,16 +74,7 @@ export const CommentEditor: FC<CommentEditorProps> = ({
 
   const classes = useStyles();
 
-  // const [text, setText] = useTypeWriter('');
-
-  // const [rawText] = useState(longText);
-
-  // useEffect(() => {
-  //   setText(rawText);
-  // }, [rawText]);
-
-  // const [text] = useWindupString(longText);
-  const [text] = useState(longText);
+  const [text] = useWindupString(longText);
 
   useEffect(() => {
     setCommentState(insertText(text));
@@ -97,8 +87,6 @@ export const CommentEditor: FC<CommentEditorProps> = ({
     }
     setCommentError(true);
   }, [commentState]);
-
-  // const classes = useStyles();
 
   const editorRef = useRef<Editor>(null);
 
