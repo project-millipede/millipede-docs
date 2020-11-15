@@ -165,7 +165,7 @@ export const StepsRangeWrapper: FC<AutoPlayFlowProps> = ({
   useStepsProgress(activeStepWithDuration?.duration);
 
   return (
-    <>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
       <Player steps={steps} />
 
       <div
@@ -181,7 +181,7 @@ export const StepsRangeWrapper: FC<AutoPlayFlowProps> = ({
           <Cursor selector={`#${activeStep.selector}`} />
         ) : null}
       </PortalIn>
-    </>
+    </div>
   );
 };
 

@@ -42,7 +42,7 @@ export const useStepsProgress = (delay: number) => {
 
   useInterval(
     () => {
-      if (target === maxStepsCount) {
+      if (target === maxStepsCount - 1) {
         stepDispatch({ type: 'RESET' });
         return;
       }
