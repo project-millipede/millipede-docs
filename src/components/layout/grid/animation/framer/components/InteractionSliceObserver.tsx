@@ -95,11 +95,18 @@ const InteractionSliceObserver: FC<InteractionSliceProps> = ({
           () => ({
             select: () => {
               // with List / ListItem / Card
-              ref.current.parentElement.parentElement.scrollIntoView({
-                block: 'center',
-                inline: 'center',
-                behavior: 'smooth'
-              });
+              if (ref.current) {
+                const {
+                  current: {
+                    parentElement: { parentElement }
+                  }
+                } = ref;
+                parentElement.scrollIntoView({
+                  block: 'center',
+                  inline: 'center',
+                  behavior: 'smooth'
+                });
+              }
               // with Div / Card
               // if (ref.current && ref.current.parentElement) {
               //   ref.current.parentElement.scrollIntoView({
