@@ -1,8 +1,8 @@
 import { createStyles, makeStyles, Typography } from '@material-ui/core';
 import { MDXProvider } from '@mdx-js/react';
 import React, { ReactNode } from 'react';
-import { MetaProps } from 'src/typings/share';
 
+import { MetaProps } from '../../../../../src/typings/share';
 import { InteractiveHead } from '../../../markdown/components/head';
 import { Share } from '../common/share';
 

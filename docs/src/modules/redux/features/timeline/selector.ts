@@ -1,9 +1,11 @@
+import _ from 'lodash';
 import { createSelector } from 'reselect';
 
 import { postEntity } from '../../../../../../src/data/social/entities/post';
 import { timelineEntity } from '../../../../../../src/data/social/entities/timeline';
 import { useCaseEntity } from '../../../../../../src/data/social/entities/usecase';
 import { denormalizer } from '../../../../../../src/data/social/normalizer';
+import { VIEW } from '../../../recoil/features/scroll/timeline/reducer';
 import { RootState } from '../../reducers';
 
 export const selectResult = (state: RootState) => state.timeline.result;
@@ -84,3 +86,45 @@ export const selectPostsOfFriends = (
       return postIds;
     }
   );
+
+export const selectInteractionDataForPostScenario = (
+  timelineId: string,
+  otherTimelineId: string,
+  postIds: Array<string>,
+  currentViews: { [key: string]: VIEW } = {
+    [timelineId]: VIEW.TIMELINE,
+    [otherTimelineId]: VIEW.POSTS
+  },
+  sortFn: (a: any, b: any) => number
+) => {
+  return createSelector(
+    selectPostsOfOwner(otherTimelineId, sortFn),
+    selectPostsOfOwner(timelineId, sortFn),
+    (postsOfOwnerForOtherTimelineId, postsOfOwnerForTimelineId) => {
+      const timelineView = currentViews[timelineId];
+      const otherTimelineView = currentViews[otherTimelineId];
+
+      if (
+        (timelineView === VIEW.TIMELINE &&
+          otherTimelineView === VIEW.TIMELINE) ||
+        (timelineView === VIEW.POSTS && otherTimelineView === VIEW.POSTS)
+      ) {
+        return [];
+      }
+
+      if (timelineView === VIEW.TIMELINE) {
+        return postIds.filter(postId =>
+          _.includes(postsOfOwnerForOtherTimelineId, postId)
+        );
+      }
+
+      if (timelineView === VIEW.POSTS) {
+        return postIds.filter(postId =>
+          _.includes(postsOfOwnerForTimelineId, postId)
+        );
+      }
+
+      return [];
+    }
+  );
+};
