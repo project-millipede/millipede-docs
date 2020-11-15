@@ -1,11 +1,14 @@
 import { useHoux } from '@houx';
 import React, { Dispatch, FC, useCallback, useEffect } from 'react';
-import { InteractionFlow } from 'src/components/layout/grid/animation/framer/components/InteractionFlow';
 
+import { RefProvider } from '../../../../docs/src/modules/components/archer/context/RefProvider';
+import { TransitionProvider } from '../../../../docs/src/modules/components/archer/context/TransitionProvider';
 import { TimelineActions } from '../../../../docs/src/modules/redux/features/actionType';
 import { normalizeData } from '../../../../docs/src/modules/redux/features/timeline/actions';
 import { selectUserCaseState } from '../../../../docs/src/modules/redux/features/timeline/selector';
 import { RootState } from '../../../../docs/src/modules/redux/reducers';
+import { InteractionFlow } from '../../../components/layout/grid/animation/framer/components/InteractionFlow';
+import { InteractionFlowControl } from '../../../components/layout/grid/animation/framer/components/InteractionFlowControl';
 import { generateData } from '../../../data/social/mocks';
 import { UseCase } from '../../../typings/social';
 import { Post } from './Post';
@@ -75,13 +78,35 @@ export const SocialApp: FC = () => {
           flexDirection: 'column'
         }}
       >
-        {leftTimeline && rightTimeline ? (
-          <InteractionFlow
-            leftTimelineId={leftTimeline.id}
-            rightTimelineId={rightTimeline.id}
-            offSetControls={0}
-          />
-        ) : null}
+        <RefProvider>
+          <TransitionProvider>
+            {leftTimeline && rightTimeline ? (
+              <InteractionFlow
+                leftTimelineId={leftTimeline.id}
+                rightTimelineId={rightTimeline.id}
+                offSetControls={0}
+              />
+            ) : null}
+
+            {leftTimeline && rightTimeline ? (
+              <InteractionFlowControl
+                leftTimelineId={leftTimeline.id}
+                rightTimelineId={rightTimeline.id}
+                handleControlOffset={_value => {
+                  // setOffSet(value);
+                }}
+                style={{
+                  marginTop: 'auto',
+                  marginBottom: '0'
+
+                  // position: 'sticky',
+                  // bottom: '0',
+                  // backgroundColor: 'white'
+                }}
+              />
+            ) : null}
+          </TransitionProvider>
+        </RefProvider>
       </div>
       {rightTimelineComp && rightTimelineComp}
     </div>

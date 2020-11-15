@@ -50,6 +50,7 @@
     "@mdx-js/react": "^1.6.21",
     "@rest-hooks/normalizr": "^5.0.6",
     "@vangware/window-open-promise": "^4.0.4",
+    "ahooks": "^2.9.1",
     "classnames": "^2.2.6",
     "clsx": "^1.1.1",
     "copy-to-clipboard": "^3.3.1",

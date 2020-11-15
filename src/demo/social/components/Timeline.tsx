@@ -170,7 +170,7 @@ export const Timeline: FC<TimelineProps> = ({
 
       <div
         key={`timeline-${timelineId}`}
-        style={{ overflowY: 'auto', height: '50vh', marginTop: '8px' }}
+        style={{ overflowY: 'auto', height: '65vh', marginTop: '8px' }}
       >
         {currentView === VIEW.POSTS && displayEditor && (
           <CommentEditor

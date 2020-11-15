@@ -3,12 +3,12 @@ import { createStyles, IconButton, makeStyles, Theme } from '@material-ui/core';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import React, { Dispatch, FC } from 'react';
-import { OverviewProps } from 'src/typings/data/import';
 import styled from 'styled-components';
 
 import CustomIcon from '../../../docs/src/modules/components/icon/CustomIcon';
 import { NavigationActions } from '../../../docs/src/modules/redux/features/actionType';
 import { loadPages } from '../../../docs/src/modules/redux/features/navigation/actions';
+import { OverviewProps } from '../../typings/data/import';
 import { noAnimation } from '../animation';
 import { TopReveal } from '../animation/framer/components/text/TopReveal';
 
