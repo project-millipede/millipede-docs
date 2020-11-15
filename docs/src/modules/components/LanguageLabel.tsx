@@ -19,5 +19,5 @@ interface LanguageLabelProps {
 
 export const LanguageLabel: FC<LanguageLabelProps> = ({ label }) => {
   const classes = useStyles();
-  return <span className={classes.language}>{label.toUpperCase()}</span>;
+  return <span className={classes.language}>{label?.toUpperCase()}</span>;
 };
