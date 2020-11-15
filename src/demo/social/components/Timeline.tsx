@@ -10,11 +10,6 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { postIdsState } from '../../../../docs/src/modules/recoil/features/scroll/post/reducer';
 import {
-  addTopic,
-  createNodesWithRelations,
-  nodesWithRelationsWithEdgeState,
-  publishActions,
-  publishActions2,
   refContainerScrollFromArcherState,
   refContainerScrollState,
   timelineViewState,
@@ -87,9 +82,6 @@ export const Timeline: FC<TimelineProps> = ({
 
   const setPostIds = useSetRecoilState(postIdsState(timelineId));
 
-  // Working include again
-  const otherPostIds = useRecoilValue(postIdsState(otherTimelineId));
-
   const postIds =
     currentView === VIEW.TIMELINE
       ? selectPostsOfFriends(
@@ -129,11 +121,6 @@ export const Timeline: FC<TimelineProps> = ({
     refContainerScroll.refObserved,
     refContainerScrollFromArcher.refObserved
   ]);
-
-  // Working include again
-  const setNodesWithRelationsWithEdge = useSetRecoilState(
-    nodesWithRelationsWithEdgeState
-  );
 
   return (
     <div className={classes.root} ref={combinedRef}>
@@ -176,57 +163,7 @@ export const Timeline: FC<TimelineProps> = ({
           <CommentEditor
             create={text => {
               const owner = selectTimelineOwner(timelineId)(state);
-              handleCreatePost(owner, text, dispatch, post => {
-                // Working include again - start
-                const publishActionsExtended = addTopic(
-                  publishActions,
-                  'publish',
-                  'pages/pidp/use-case/recognition/index:'
-                );
-
-                const publishNodesWithRelations = createNodesWithRelations(
-                  publishActionsExtended,
-                  t
-                )([timelineId, otherTimelineId], post.id, ['content', 'media']);
-
-                const publishActionsExtended2 = addTopic(
-                  publishActions2,
-                  'publish',
-                  'pages/pidp/use-case/recognition/index:'
-                );
-
-                const publishNodesWithRelationsMore = createNodesWithRelations(
-                  publishActionsExtended2,
-                  t,
-                  false
-                )(
-                  [otherTimelineId, timelineId],
-
-                  // post.id,
-                  [otherPostIds[1], post.id],
-
-                  ['content', 'comments']
-                );
-                // Working include again - end
-
-                // Multiple nodesWithRelations elements
-                setNodesWithRelationsWithEdge(state => {
-                  return {
-                    ...state,
-                    nodesWithRelations: {
-                      ...state.nodesWithRelations,
-                      [post.id]: {
-                        values: [
-                          publishNodesWithRelations,
-                          publishNodesWithRelationsMore
-                        ],
-                        id: 'Post Id',
-                        description: 'Post Description'
-                      }
-                    },
-                    activeId: post.id
-                  };
-                });
+              handleCreatePost(owner, text, dispatch, _post => {
                 setDisplayEditor(false);
               });
             }}

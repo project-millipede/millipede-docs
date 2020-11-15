@@ -5,6 +5,9 @@ import React, { CSSProperties, FC, useEffect, useState } from 'react';
 
 import { AbsoluteStep, getStepByTime, getTimeData, useStepsProgress } from './AutoPlayFlowControl.svc';
 import { StepProvider, useStepDispatch, useStepState } from './codehike/site/src/steps/StepProvider';
+import { Cursor } from './cursor/Cursor';
+import { PortalIn } from './shared/portals/portals';
+import { PortalType } from './shared/portals/portals.constants';
 
 interface AutoPlayFlowControlProps {
   leftTimelineId: string;
@@ -172,6 +175,12 @@ export const StepsRangeWrapper: FC<AutoPlayFlowProps> = ({
       >
         <Typography variant='h4'>{activeStep?.description}</Typography>
       </div>
+
+      <PortalIn portalType={PortalType.Cursor}>
+        {playing && activeStep ? (
+          <Cursor selector={`#${activeStep.selector}`} />
+        ) : null}
+      </PortalIn>
     </>
   );
 };

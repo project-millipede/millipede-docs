@@ -48,6 +48,7 @@
     "@material-ui/lab": "^5.0.0-alpha.16",
     "@mdx-js/mdx": "^1.6.21",
     "@mdx-js/react": "^1.6.21",
+    "@plusnew/simulate-dom-events": "^0.1.5",
     "@rest-hooks/normalizr": "^5.0.6",
     "@vangware/window-open-promise": "^4.0.4",
     "ahooks": "^2.9.1",
@@ -91,7 +92,8 @@
     "use-resize-observer": "^7.0.0",
     "uuid": "^8.3.1",
     "vfile": "^4.2.0",
-    "victory": "^35.3.5"
+    "victory": "^35.3.5",
+    "windups": "^1.0.2"
   },
   "devDependencies": {
     "@babel/plugin-proposal-object-rest-spread": "^7.12.1",

@@ -70,7 +70,7 @@ export const ProgressiveStepBuilder: FC<ProgressiveStepBuilderProps> = ({
 
       const result = [activePostId].reduce(
         (acc, activePostId) => {
-          const nodeWithRelationsWithEdge = ['comments'].map(usedSlice => {
+          const nodeWithRelationsWithEdge = ['media'].map(usedSlice => {
             const baseActionsExtended = addTopic(
               progressiveActions,
               'publish',

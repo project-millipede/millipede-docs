@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import ReactGA from 'react-ga';
 import { RecoilRoot } from 'recoil';
+import { PortalProvider } from 'src/components/layout/grid/animation/framer/components/shared/portals/portals';
 
 import AppFrame from '../docs/src/modules/components/AppFrame';
 import AppWrapper from '../docs/src/modules/components/AppWrapper';
@@ -55,15 +56,17 @@ const MillipedeApp: NextComponentType<
   return (
     // eslint-disable-next-line no-underscore-dangle
     <I18nProvider lang={locale} namespaces={pageProps._ns}>
-      <HouxProvider reducers={reducers} logDispatchedActions>
-        <RecoilRoot>
-          <AppWrapper isMobile={isMobile}>
-            <AppFrame>
-              <Component {...pageProps} />
-            </AppFrame>
-          </AppWrapper>
-        </RecoilRoot>
-      </HouxProvider>
+      <PortalProvider>
+        <HouxProvider reducers={reducers} logDispatchedActions>
+          <RecoilRoot>
+            <AppWrapper isMobile={isMobile}>
+              <AppFrame>
+                <Component {...pageProps} />
+              </AppFrame>
+            </AppWrapper>
+          </RecoilRoot>
+        </HouxProvider>
+      </PortalProvider>
     </I18nProvider>
   );
 };
