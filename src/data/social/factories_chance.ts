@@ -1,17 +1,17 @@
+import Chance from 'chance';
 import { Async } from 'factory.ts';
-import faker from 'phaker';
 import { v4 as uuidv4 } from 'uuid';
 
 import { generateRandomInteger } from '../../../docs/src/modules/utils/math';
 import { Comment, Content, Media, Post, Profile, Timeline, User } from '../../typings/social';
 import { generateImageURL } from './images/picsum';
 
+const chance = new Chance();
+
 const profileFactory = Async.makeFactory<Profile>({
-  firstName: Async.each(() => faker.name.firstName()),
-  lastName: Async.each(() => faker.name.lastName()),
-  avatar: Async.each(() =>
-    faker.image.imageUrl(40, 40, 'people', generateRandomInteger(50))
-  )
+  firstName: Async.each(() => chance.first()),
+  lastName: Async.each(() => chance.last()),
+  avatar: Async.each(() => generateImageURL(40, 40))
 });
 
 const autoUserNameFactory = profileFactory.withDerivation2(
@@ -44,7 +44,7 @@ export const userFactory = Async.makeFactory<User>({
 const mediaFactory = Async.makeFactory<Media>({
   id: Async.each(() => uuidv4()),
   imageHref: Async.each(() => generateImageURL(300, 200)),
-  imageTitle: Async.each(() => faker.lorem.sentences(3))
+  imageTitle: Async.each(() => chance.paragraph({ sentences: 3 }))
 });
 
 const timeStampFactory = Async.makeFactory({
@@ -57,16 +57,16 @@ export const currentTimeStampFactory = Async.makeFactory({
 
 export const contentFactory: Async.Factory<Content> = Async.makeFactory({
   id: Async.each(() => uuidv4()),
-  title: Async.each(() => faker.lorem.slug(5)),
-  text: Async.each(() => faker.lorem.sentences(3)),
+  title: Async.each(() => chance.sentence({ words: 5 })),
+  text: Async.each(() => chance.paragraph({ sentences: 3 })),
   media: Async.each(() => mediaFactory.build())
 }).combine(timeStampFactory);
 
 export const contentFactoryRealtime: Async.Factory<Content> = Async.makeFactory(
   {
     id: Async.each(() => uuidv4()),
-    title: Async.each(() => faker.lorem.slug(5)),
-    text: Async.each(() => faker.lorem.sentences(3)),
+    title: Async.each(() => chance.sentence({ words: 5 })),
+    text: Async.each(() => chance.paragraph({ sentences: 3 })),
     media: Async.each(() => mediaFactory.build())
   }
 ).combine(currentTimeStampFactory);
