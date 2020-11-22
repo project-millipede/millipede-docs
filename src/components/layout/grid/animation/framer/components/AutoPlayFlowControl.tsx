@@ -6,7 +6,7 @@ import { useWindupString } from 'windups';
 
 import { getSteps, Step } from './AutoPlayFlowControl.cfg';
 import { getStepByTime, getTimeData, useStepsProgress } from './AutoPlayFlowControl.svc';
-import { useStepDispatch, useStepState } from './codehike/site/src/steps/StepProvider';
+import { StepProvider, useStepDispatch, useStepState } from './codehike/site/src/steps/StepProvider';
 import { CountDown } from './counter/CountDown';
 import { CountUp } from './counter/CountUp';
 import { Cursor } from './cursor/Cursor';
@@ -25,10 +25,12 @@ export const AutoPlayFlowControl: FC<AutoPlayFlowControlProps> = ({
   rightTimelineId
 }) => {
   return (
-    <StepsRangeWrapper
-      leftTimelineId={leftTimelineId}
-      rightTimelineId={rightTimelineId}
-    />
+    <StepProvider>
+      <StepsRangeWrapper
+        leftTimelineId={leftTimelineId}
+        rightTimelineId={rightTimelineId}
+      />
+    </StepProvider>
   );
 };
 
