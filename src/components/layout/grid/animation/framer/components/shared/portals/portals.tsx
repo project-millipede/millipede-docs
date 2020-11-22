@@ -76,7 +76,7 @@ export const PortalOut: FC<IProps> = props => {
   const { portalMap } = useContext(PortalContext);
 
   if (portalMap != null) {
-    const children = portalMap.get(props.portalType) as ReactElement;
+    const children = portalMap.get(portalType) as ReactElement;
     return children
       ? cloneElement(children, {
           ...rest
