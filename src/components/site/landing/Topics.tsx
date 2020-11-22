@@ -34,7 +34,7 @@ export const Topics: FC<TopicsProps> = ({ featureName, aspect }) => {
 
   const { t } = useTranslation();
 
-  const scenariosRaw: any = t(
+  const scenariosRaw = t(
     `pages/${featureName}/intro/${aspect}/index:scenarios`,
     {},
     { returnObjects: true }
@@ -42,7 +42,7 @@ export const Topics: FC<TopicsProps> = ({ featureName, aspect }) => {
 
   const scenarioKeys = Object.keys(scenariosRaw);
 
-  const categoriesRaw: any = t(
+  const categoriesRaw = t(
     `pages/${featureName}/intro/${aspect}/index:categories`,
     {},
     { returnObjects: true }

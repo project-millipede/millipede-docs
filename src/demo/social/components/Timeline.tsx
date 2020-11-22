@@ -1,12 +1,11 @@
 import { useHoux } from '@houx';
 import { useMergedRef } from '@huse/merged-ref';
-import { Button, ButtonGroup, List, makeStyles, Tab, Tabs, useTheme } from '@material-ui/core';
+import { Button, ButtonGroup, List, makeStyles, useTheme } from '@material-ui/core';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import _ from 'lodash';
 import useTranslation from 'next-translate/useTranslation';
-import React, { ChangeEvent, Dispatch, FC, useEffect, useState } from 'react';
-import { isBrowser } from 'react-device-detect';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import React, { Dispatch, FC, useEffect, useState } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { postIdsState } from '../../../../docs/src/modules/recoil/features/scroll/post/reducer';
 import {
@@ -23,11 +22,10 @@ import {
 } from '../../../../docs/src/modules/redux/features/timeline/selector';
 import { RootState } from '../../../../docs/src/modules/redux/reducers';
 import { compareDescFn } from '../../../../docs/src/modules/utils/collection/array';
-import HeaderView from '../../../components/device/browser/views/HeaderView';
 import { CommentEditor } from './CommentEditor';
 import { PostProps } from './Post';
-import SimpleSearch from './SimpleSearch';
 import { handleCreatePost } from './Timeline.svc';
+import { TimelineHeader } from './TimelineHeader';
 
 interface TimelineProps {
   Comp: FC<PostProps>;
@@ -53,19 +51,7 @@ export const Timeline: FC<TimelineProps> = ({
   const classes = useStyles();
   const theme = useTheme();
 
-  const [timelineView, setTimelineView] = useRecoilState(timelineViewState);
-
-  const handleChange = (_event: ChangeEvent, newValue: VIEW) => {
-    setTimelineView(state => {
-      return {
-        ...state,
-        currentViews: {
-          ...state.currentViews,
-          [timelineId]: newValue
-        }
-      };
-    });
-  };
+  const timelineView = useRecoilValue(timelineViewState);
 
   const { currentViews } = timelineView;
   const currentView = _.get(currentViews, timelineId);
@@ -97,18 +83,6 @@ export const Timeline: FC<TimelineProps> = ({
     setPostIds(postIds);
   }, [postIds.length]);
 
-  useEffect(() => {
-    setTimelineView(state => {
-      return {
-        ...state,
-        currentViews: {
-          ...state.currentViews,
-          [timelineId]: VIEW.TIMELINE
-        }
-      };
-    });
-  }, []);
-
   const refContainerScroll = useRecoilValue(
     refContainerScrollState(timelineId)
   );
@@ -124,36 +98,7 @@ export const Timeline: FC<TimelineProps> = ({
 
   return (
     <div className={classes.root} ref={combinedRef}>
-      {isBrowser ? (
-        <div
-          style={{
-            marginTop: '8px'
-          }}
-        >
-          <HeaderView />
-        </div>
-      ) : null}
-      <Tabs
-        value={currentView || VIEW.TIMELINE}
-        onChange={handleChange}
-        indicatorColor='primary'
-        textColor='primary'
-        variant='fullWidth'
-      >
-        <Tab label='Timeline' id={`timeline-${timelineId}-tab-timeline`} />
-        <Tab label='Posts' id={`timeline-${timelineId}-tab-posts`} />
-      </Tabs>
-      <div
-        style={{
-          marginTop: '8px'
-        }}
-      >
-        <SimpleSearch
-          placeholder={
-            currentView === VIEW.TIMELINE ? 'Search Timeline' : 'Search Post'
-          }
-        />
-      </div>
+      <TimelineHeader timelineId={timelineId} />
 
       <div
         key={`timeline-${timelineId}`}
