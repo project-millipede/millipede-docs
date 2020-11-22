@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { takeNRandom } from '../../../docs/src/modules/utils/collection/array';
 import { UseCase } from '../../typings/social';
-import { postFactory, postFactoryRealtime, timelineFactory, userFactory } from './factories';
+import { postFactory, postFactoryRealtime, timelineFactory, userFactory } from './factories_chance';
 import { createFriendships } from './struct';
 
 export const contains = <T>(array: Array<T>) => (val: T) =>
