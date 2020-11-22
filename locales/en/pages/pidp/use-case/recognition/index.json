@@ -42,6 +42,14 @@
 	"publish-nodeId-upload": "Upload",
 	"publish-nodeId-download": "Download",
   "publish-nodeId-tail": "Tail",
+
+  "timeline-tab-posts": "Let's create some content on your favorite social media platform bookface.com. To do so, we navigate to the tab 'Posts.'",
+  "timeline-content-create": "Enter the editor and type your content.",
+  "timeline-content-post": "Once you have completed your post, submit it.",
+  "progressiveStepBuilder-0": "You hand the content to the operator to distribute it among your social contacts, and even further, the content is leaving your range of control.",
+  "progressiveStepBuilder-1": "The content gets uploaded and enters the operator's digital infrastructure.",
+  "progressiveStepBuilder-2": "The operator distributes your content to all your friends and or users subscribed to your social media profile.",
+  "progressiveStepBuilder-3": "On request, the content gets downloaded from the operator's digital infrastructure to the user's device. A typical social media application puts new content at the top of your news feed.",
   
   "steps": [
     {

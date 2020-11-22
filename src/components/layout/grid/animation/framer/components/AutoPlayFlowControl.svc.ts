@@ -3,10 +3,10 @@ import { useEffect, useRef } from 'react';
 
 import { useStepDispatch, useStepState } from './codehike/site/src/steps/StepProvider';
 
-export type Step = {
-  label: string;
+type Step = {
   start: number;
   end: number;
+  label: string;
 };
 
 export type AbsoluteStep = Step & {
