@@ -46,8 +46,6 @@ const InteractionSliceObserver: FC<InteractionSliceProps> = ({
           }
         });
 
-        // const combinedRef = useMergedRef([sliceRef, forwardedRef]);
-
         const setRefPostScroll = useSetRecoilState(refPostScrollState(postId));
 
         const updateItem = useCallback(
