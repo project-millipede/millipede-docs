@@ -1,4 +1,4 @@
-import React, { createContext, Dispatch, FC, ReactNode, useContext, useReducer } from 'react';
+import React, { createContext, Dispatch, FC, useContext, useReducer } from 'react';
 import { Action, StateType } from 'typesafe-actions';
 
 interface ContextType {
@@ -10,17 +10,17 @@ const Context = createContext<ContextType>({
   dispatch: null
 });
 const composeReducers = (reducers: ReducerMap) => (state, action) => {
-  const combinedReducers = {};
-  const schemaEntries = Object.entries(reducers);
-  schemaEntries.forEach(e => {
-    const [namespace, reducer] = e;
-    combinedReducers[namespace] = reducer(state && state[namespace], action);
-  });
+  const combinedReducers = Object.entries(reducers).reduce(
+    (acc, [namespace, reducer]) => {
+      return { ...acc, [namespace]: reducer(state[namespace], action) };
+    },
+    {}
+  );
   return combinedReducers;
 };
 const createStore = (reducers: ReducerMap, logDispatchedActions: boolean) => {
   const rootReducer = composeReducers(reducers);
-  const initialState = rootReducer(undefined, { type: 'STATE_INIT' });
+  const initialState = rootReducer({}, { type: 'STATE_INIT' });
   const [state, dispatch] = useReducer(rootReducer, initialState);
   const localDispatch = action => {
     // enable simple logger
@@ -41,19 +41,16 @@ interface ReducerMap {
   [key: string]: ReducerType;
 }
 interface HouxProviderProps {
-  children: ReactNode;
   logDispatchedActions?: boolean;
   reducers: ReducerMap;
 }
 export const HouxProvider: FC<HouxProviderProps> = ({
   children,
   reducers,
-  logDispatchedActions
+  logDispatchedActions = false
 }) => {
   const store = createStore(reducers, logDispatchedActions);
   return <Context.Provider value={store as any}>{children}</Context.Provider>;
 };
-HouxProvider.defaultProps = {
-  logDispatchedActions: false
-};
+
 export const useHoux = () => useContext(Context);

@@ -11,6 +11,7 @@ export const useStyles = makeStyles((_theme: Theme) => {
       backgroundColor: '#f1f3f4',
       borderRadius: `${borderRadius}px`
     },
+    icon: {},
     security: {
       color: '#4caf50' // green
     }
@@ -35,7 +36,7 @@ export const ChromeInput: FC = () => {
       endAdornment={
         <InputAdornment position='end'>
           <IconButton
-            className={enabled && classes.security}
+            className={enabled ? classes.security : classes.icon}
             onClick={() => {
               setEnabled(!enabled);
             }}
