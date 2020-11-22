@@ -71,6 +71,7 @@
     "next-translate": "1.0.0-experimental.4",
     "normalizr": "^3.6.1",
     "react": "17.0.1",
+    "react-compound-timer": "^1.2.0",
     "react-device-detect": "^1.14.0",
     "react-dom": "17.0.1",
     "react-ga": "^3.2.1",

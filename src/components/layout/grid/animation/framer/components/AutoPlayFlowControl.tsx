@@ -1,10 +1,14 @@
-import { Button, createStyles, makeStyles, Slider, Theme, Typography } from '@material-ui/core';
+import { createStyles, Divider, IconButton, makeStyles, Slider, Theme } from '@material-ui/core';
 import { ArrowLeft, ArrowRight, Pause, PlayArrow } from '@material-ui/icons';
-import clsx from 'clsx';
+import useTranslation from 'next-translate/useTranslation';
 import React, { CSSProperties, FC, useEffect, useState } from 'react';
+import { useWindupString } from 'windups';
 
-import { AbsoluteStep, getStepByTime, getTimeData, useStepsProgress } from './AutoPlayFlowControl.svc';
-import { StepProvider, useStepDispatch, useStepState } from './codehike/site/src/steps/StepProvider';
+import { getSteps, Step } from './AutoPlayFlowControl.cfg';
+import { getStepByTime, getTimeData, useStepsProgress } from './AutoPlayFlowControl.svc';
+import { useStepDispatch, useStepState } from './codehike/site/src/steps/StepProvider';
+import { CountDown } from './counter/CountDown';
+import { CountUp } from './counter/CountUp';
 import { Cursor } from './cursor/Cursor';
 import { PortalIn } from './shared/portals/portals';
 import { PortalType } from './shared/portals/portals.constants';
@@ -16,47 +20,77 @@ interface AutoPlayFlowControlProps {
   style?: CSSProperties;
 }
 
-// Wrapper
-
-// <InteractionFlowControlObserver
-//   handleControlOffset={handleControlOffset}
-//   style={style}
-// >
-
 export const AutoPlayFlowControl: FC<AutoPlayFlowControlProps> = ({
   leftTimelineId,
   rightTimelineId
 }) => {
   return (
-    <StepProvider>
-      <StepsRangeWrapper
-        leftTimelineId={leftTimelineId}
-        rightTimelineId={rightTimelineId}
-      />
-    </StepProvider>
+    <StepsRangeWrapper
+      leftTimelineId={leftTimelineId}
+      rightTimelineId={rightTimelineId}
+    />
   );
 };
 
 type AutoPlayFlowProps = AutoPlayFlowControlProps;
 
 interface ProgressControlProps {
-  stepsWithDuration: Array<AbsoluteStep>;
-  totalSeconds: number;
-  target: number;
+  steps: Array<Step>;
 }
 
-export const ProgressControl: FC<ProgressControlProps> = ({
-  stepsWithDuration,
-  totalSeconds,
-  target
-}) => {
+export const getValue = (
+  playing: boolean,
+  globalEnd: number,
+  target: number
+) => {
+  // Playing
+  if (playing) {
+    return globalEnd;
+  }
+  // Paused
+  if (!playing && target > 0) {
+    return globalEnd;
+  }
+  // Not started / finished
+  return 0;
+};
+
+export const TextProgressControl: FC<ProgressControlProps> = ({ steps }) => {
+  const classes = useStyles();
+
+  const { playing, target, maxStepsCount } = useStepState();
+
+  const { stepsWithDuration, totalSeconds } = getTimeData(steps);
+
+  const { duration } =
+    stepsWithDuration.length > 0 ? stepsWithDuration[target] : { duration: 0 };
+
+  return (
+    <div className={classes.row}>
+      <CountDown startTime={duration} playing={playing} step={target} />
+      {` sec. - `}
+      {`${target} of ${maxStepsCount} steps`}
+      {` / `}
+      <CountUp startTime={0} playing={playing} />
+      {` of ${totalSeconds / 1000} sec.`}
+    </div>
+  );
+};
+
+export const ProgressControl: FC<ProgressControlProps> = ({ steps }) => {
+  const { target } = useStepState();
+
+  const { stepsWithDuration, totalSeconds } = getTimeData(steps);
+
   const stepDispatch = useStepDispatch();
   const { playing } = useStepState();
-  const { globalEnd } = stepsWithDuration[target] || { globalEnd: 0 };
+
+  const { globalEnd } =
+    stepsWithDuration.length > 0 ? stepsWithDuration[target] : { globalEnd: 0 };
 
   return (
     <Slider
-      value={playing ? globalEnd : 0}
+      value={getValue(playing, globalEnd, target)}
       onChange={(_e, value) => {
         const { stepIndex } = getStepByTime(stepsWithDuration, value as number);
         stepDispatch({ type: 'SEEK', target: stepIndex });
@@ -73,64 +107,104 @@ export const ProgressControl: FC<ProgressControlProps> = ({
   );
 };
 
-export const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
+export const useStyles = makeStyles((theme: Theme) => {
+  const height = 48;
+  const borderRadius = height / 2;
+
+  return createStyles({
     row: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+      height: `${height}px`
+    },
+    rowProgressControls: {
       display: 'flex',
       paddingLeft: theme.spacing(3),
       paddingRight: theme.spacing(3),
       alignItems: 'center',
-
-      overflow: 'hidden',
-      transition: 'flex 0.3s ease-out', // note that we're transitioning flex, not height!
-      height: 'auto',
-      flex: '1'
+      justifyContent: 'center',
+      height: `${height}px`
+    },
+    rowProgressText: {
+      display: 'flex',
+      paddingLeft: theme.spacing(3),
+      paddingRight: theme.spacing(3),
+      height: `${height}px`
+    },
+    rowRight: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      margin: 'auto',
+      height: `${height}px`
     },
     column: {
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
+      backgroundColor: '#f1f3f4',
+      borderRadius: `${borderRadius}px`
     },
-    collapsed: {
-      flex: 0
+    input: {
+      height: `${height}px`,
+      backgroundColor: '#f1f3f4',
+      borderRadius: `${borderRadius}px`
     }
-  })
-);
+  });
+});
+
+interface NavigationControlsProps {}
+
+const NavigationControls: FC<NavigationControlsProps> = () => {
+  const classes = useStyles();
+
+  const stepDispatch = useStepDispatch();
+  const { playing } = useStepState();
+
+  return (
+    <div className={classes.row}>
+      <IconButton onClick={() => stepDispatch({ type: 'PREV' })}>
+        <ArrowLeft />
+      </IconButton>
+      <IconButton
+        onClick={() => {
+          stepDispatch({ type: 'TOGGLE' });
+        }}
+      >
+        {playing ? <Pause /> : <PlayArrow />}
+      </IconButton>
+      <IconButton onClick={() => stepDispatch({ type: 'NEXT' })}>
+        <ArrowRight />
+      </IconButton>
+    </div>
+  );
+};
 
 interface PlayerProps {
   steps: Array<Step>;
 }
 
-const Player: FC<PlayerProps> = ({ steps }) => {
+export const Player: FC<PlayerProps> = ({ steps }) => {
   const classes = useStyles();
 
-  const { target, playing } = useStepState();
-  const stepDispatch = useStepDispatch();
+  const { target } = useStepState();
 
-  const { stepsWithDuration, totalSeconds } = getTimeData(steps);
+  const { t } = useTranslation();
+
+  const activeStep = steps[target];
+
+  const [text] = useWindupString(t(activeStep?.description));
 
   return (
     <div className={classes.column}>
-      <div className={classes.row}>
-        <Button onClick={() => stepDispatch({ type: 'PREV' })}>
-          <ArrowLeft />
-        </Button>
-        <Button
-          onClick={() => {
-            stepDispatch({ type: 'TOGGLE' });
-          }}
-        >
-          {playing ? <Pause /> : <PlayArrow />}
-        </Button>
-        <Button onClick={() => stepDispatch({ type: 'NEXT' })}>
-          <ArrowRight />
-        </Button>
-
-        <ProgressControl
-          stepsWithDuration={stepsWithDuration}
-          totalSeconds={totalSeconds}
-          target={target}
-        />
+      <NavigationControls />
+      <Divider variant={'middle'} />
+      <div className={classes.rowProgressControls}>
+        <ProgressControl steps={steps} />
+        <TextProgressControl steps={steps} />
       </div>
+      <Divider variant={'middle'} />
+      <div className={classes.rowProgressText}>{text}</div>
     </div>
   );
 };
@@ -139,8 +213,6 @@ export const StepsRangeWrapper: FC<AutoPlayFlowProps> = ({
   leftTimelineId,
   rightTimelineId
 }) => {
-  const classes = useStyles();
-
   const { target, playing, maxStepsCount } = useStepState();
 
   const stepDispatch = useStepDispatch();
@@ -149,7 +221,7 @@ export const StepsRangeWrapper: FC<AutoPlayFlowProps> = ({
 
   useEffect(() => {
     if (maxStepsCount === 0 && playing) {
-      const steps = getSteps(leftTimelineId, rightTimelineId);
+      const steps = getSteps(leftTimelineId, rightTimelineId).standard;
       stepDispatch({ type: 'INIT', maxStepsCount: steps.length });
       setSteps(steps);
     }
@@ -157,96 +229,23 @@ export const StepsRangeWrapper: FC<AutoPlayFlowProps> = ({
 
   const { stepsWithDuration } = getTimeData(steps);
 
-  const activeStepWithDuration = stepsWithDuration[target];
-
   const activeStep = steps[target];
 
+  const { duration } =
+    stepsWithDuration.length > 0 ? stepsWithDuration[target] : { duration: 0 };
+
   // does the heavy lifting
-  useStepsProgress(activeStepWithDuration?.duration);
+  useStepsProgress(duration);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <>
       <Player steps={steps} />
-
-      <div
-        className={clsx(classes.row, {
-          [classes.collapsed]: !activeStep?.description
-        })}
-      >
-        <Typography variant='h4'>{activeStep?.description}</Typography>
-      </div>
 
       <PortalIn portalType={PortalType.Cursor}>
         {playing && activeStep ? (
-          <Cursor selector={`#${activeStep.selector}`} />
+          <Cursor selector={`#${activeStep?.selector}`} />
         ) : null}
       </PortalIn>
-    </div>
+    </>
   );
 };
-
-interface Step {
-  selector: string;
-  start: number;
-  end: number;
-  label: string;
-  description?: string;
-  timelineId?: string;
-}
-
-const getSteps = (timelineId: string, _rightTimelineId: string) =>
-  [
-    {
-      selector: `timeline-${timelineId}-tab-posts`,
-      start: 0,
-      end: 5000,
-      label: '1',
-      description: `Let's create some content on your favorite social media platform bookface.com. To do so, navigate to the posts tab.`
-    },
-    {
-      selector: `timeline-${timelineId}-content-create`,
-      start: 5000,
-      end: 10000,
-      label: '2',
-      description: `Enter the editor and type your content.`
-    },
-    {
-      selector: `timeline-${timelineId}-content-post`,
-      start: 10000,
-      end: 15000,
-      label: '3',
-      description: `Submit the content once it's finished.`
-    },
-    {
-      selector: `progressiveStepBuilder-${0}`,
-      start: 15000,
-      end: 20000,
-      label: '4',
-      description: `You hand the content to the operator to distribute it among your social contacts, and even further, the content is leaving your range of control.`,
-      timelineId
-    },
-    {
-      selector: `progressiveStepBuilder-${1}`,
-      start: 20000,
-      end: 25000,
-      label: '5',
-      description: `The content gets uploaded and enters the operator's digital infrastructure.`,
-      timelineId
-    },
-    {
-      selector: `progressiveStepBuilder-${2}`,
-      start: 25000,
-      end: 30000,
-      label: '6',
-      description: `The operator distributes your content to all your friends and or users subscribed to your social media profile`,
-      timelineId
-    },
-    {
-      selector: `progressiveStepBuilder-${3}`,
-      start: 30000,
-      end: 35000,
-      label: '7',
-      description: `On request, the content gets downloaded from the operator's digital infrastructure to the user's device. A typical social media application puts new content at the top of your news feed.`,
-      timelineId
-    }
-  ] as Array<Step>;
