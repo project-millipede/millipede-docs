@@ -1,12 +1,8 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { getOptions } from 'loader-utils';
 
 import { parser } from './mdx-parser';
 
-export async function loader(
-  this,
-  source: string
-) {
+export async function loader(this, source: string) {
   const callback = this.async();
 
   const options = getOptions(this);

@@ -5,10 +5,10 @@ import remarkSlug from 'remark-slug';
 // import { readingTime } from 'reading-time-estimator';
 export interface ParserOptions {
   filePath?: string; // the path to the file
-  babel: boolean; // whether to transpile otherwise es6 / jsx output returned from mdx
-  remarkPlugins: Array<() => (tree: any) => any>;
-  rehypePlugins: Array<(options: any) => (tree: any) => void>;
-  injectCode: Array<string>;
+  babel?: boolean; // whether to transpile otherwise es6 / jsx output returned from mdx
+  remarkPlugins?: Array<() => (tree: any) => any>;
+  rehypePlugins?: Array<(options: any) => (tree: any) => void>;
+  injectCode?: Array<string>;
 }
 
 interface ParserProps {
