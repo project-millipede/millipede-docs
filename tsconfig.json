@@ -6,8 +6,8 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "jsx": "preserve",
-    "target": "esnext",
-    "module": "esnext",
+    "target": "ESNext",
+    "module": "ESNext",
     "moduleResolution": "node",
     "noEmit": false,
     "noUnusedLocals": true,
@@ -20,8 +20,11 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "typeRoots": ["./node_modules/@types"],
-    "lib": ["dom", "dom.iterable", "esnext.array"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext.Array"
+    ],
     "paths": {
       "@houx": ["docs/src/modules/redux/houx/index.tsx"]
     }
@@ -30,14 +33,13 @@
     "next-env.d.ts",
     "docs/**/*.ts",
     "docs/**/*.tsx",
-    "next/**/*.ts",
-    "next/**/*.tsx",
     "pages/**/*.ts",
     "pages/**/*.tsx",
     "src/**/*.js",
     "src/**/*.ts",
-    "src/**/*.tsx",
-    "webpack/**/*.js"
+    "src/**/*.tsx"
   ],
-  "exclude": ["node_modules", "loader"]
+  "exclude": [
+    "build", "packages"
+  ]
 }
