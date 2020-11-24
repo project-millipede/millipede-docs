@@ -8,6 +8,12 @@ next-env.d.ts
 node_modules
 dist
 
-.now
 .vercel
+.dist
+
+# yarn v2
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+.pnp.*
 
