@@ -10,12 +10,16 @@ module.exports = {
     project: [path.resolve(__dirname, './tsconfig.json')]
   },
   plugins: ['@typescript-eslint'],
-  extends: [
-    'airbnb-base',
+  extends: [    
+    // 'airbnb-base',
     'plugin:@typescript-eslint/recommended',
     'plugin:mdx/recommended',
     'prettier',
-    'prettier/@typescript-eslint'
+    'prettier/@typescript-eslint',
+    // 'eslint:recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript'
   ],
   settings: {
     'import/parsers': {
