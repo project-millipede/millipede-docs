@@ -1,18 +1,17 @@
-const path = require('path');
 const webpack = require('webpack');
-
 const pkg = require('../package.json');
 
 const getFallback = isServer => {
   if (!isServer) {
     return {
-      fs: false
+      fs: false,
+      process: false,
+      buffer: false
     };
   }
 };
 
 const webpackConfig = ({ isServer }) => {
-  
   return {
     mode: 'development',
 
@@ -40,29 +39,32 @@ const webpackConfig = ({ isServer }) => {
           test: /\.mdx$/,
           use: [
             {
-              loader: 'babel-loader'
+              loader: 'babel-loader',
+              options: {
+                presets: [
+                  ['@babel/preset-react']
+                ],
+                plugins: [
+                ]
+              }
             },
             {
-              loader: path.join(__dirname, '../dist/loader/mdx-custom-loader')
-            },
-          
+              loader: '@app/mdx-loader'
+            },          
           ],
         },
-        {
-          test: /\.md$/,
-          use: 'raw-loader'
-        }
       ]
     },
-
     plugins: [
+      new webpack.ProvidePlugin({
+        process: 'process/browser'
+      }),
       new webpack.DefinePlugin({
         'process.env': {
           PROJECT_VERSION: JSON.stringify(pkg.version)
         }
       }),
     ]
-
   };
 };
 
