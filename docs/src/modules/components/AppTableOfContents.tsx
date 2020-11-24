@@ -1,6 +1,6 @@
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import useTranslation from 'next-translate/useTranslation';
-import React from 'react';
+import React, { FC } from 'react';
 
 import TOCComponent from '../../markdown/components/toc/TocComponent';
 
@@ -41,7 +41,9 @@ interface AppTableOfContentsProps {
   content: string;
 }
 
-const AppTableOfContents = ({ content }: AppTableOfContentsProps) => {
+export const AppTableOfContents: FC<AppTableOfContentsProps> = ({
+  content
+}) => {
   const classes = useStyles();
 
   const { t } = useTranslation();
@@ -53,5 +55,3 @@ const AppTableOfContents = ({ content }: AppTableOfContentsProps) => {
     </nav>
   );
 };
-
-export default AppTableOfContents;

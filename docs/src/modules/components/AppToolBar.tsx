@@ -3,7 +3,7 @@ import { createStyles, IconButton, makeStyles, Toolbar, Tooltip, Typography } fr
 import { GitHub, Menu } from '@material-ui/icons';
 import clsx from 'clsx';
 import useTranslation from 'next-translate/useTranslation';
-import React, { Dispatch } from 'react';
+import React, { Dispatch, FC } from 'react';
 
 import { ThemeActions } from '../redux/features/actionType';
 import { RootState } from '../redux/reducers';
@@ -34,10 +34,10 @@ const useCustomStyles = makeStyles(() =>
   })
 );
 
-const AppToolBar = ({
+export const AppToolBar: FC<AppToolBarProps> = ({
   isDrawerExpanded,
   handleDrawerOpen
-}: AppToolBarProps) => {
+}) => {
   const drawerClasses = useDrawerStyles();
   const customStyles = useCustomStyles();
 
@@ -89,5 +89,3 @@ const AppToolBar = ({
     </Toolbar>
   );
 };
-
-export default AppToolBar;

@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const AppContent: FC<AppContentProps> = ({ children, disableToc }) => {
+export const AppContent: FC<AppContentProps> = ({ children, disableToc }) => {
   const classes = useStyles();
 
   return (
@@ -44,5 +44,3 @@ const AppContent: FC<AppContentProps> = ({ children, disableToc }) => {
     </Container>
   );
 };
-
-export default AppContent;

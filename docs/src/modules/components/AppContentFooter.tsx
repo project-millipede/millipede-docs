@@ -7,7 +7,7 @@ import React, { FC } from 'react';
 import { RootState } from '../redux/reducers';
 import Link from './common/link/Link';
 
-export const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     footer: {
       padding: theme.spacing(4, 0),
@@ -35,7 +35,7 @@ export const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const AppContentFooter: FC = () => {
+export const AppContentFooter: FC = () => {
   const classes = useStyles();
 
   const { t } = useTranslation();
@@ -88,5 +88,3 @@ const AppContentFooter: FC = () => {
     </Container>
   );
 };
-
-export default AppContentFooter;

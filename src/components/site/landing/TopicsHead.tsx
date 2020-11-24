@@ -22,8 +22,9 @@ const loadTopics = (t: Translate): Array<OverviewProps> => {
   return [];
 };
 
-const TopicsHead = () => {
+export const TopicsHead = () => {
   const { t } = useTranslation();
+
   const {
     state: {
       view: { isMobile }
@@ -31,6 +32,7 @@ const TopicsHead = () => {
   }: {
     state: RootState;
   } = useHoux();
+
   const topics = loadTopics(t);
 
   return (
@@ -43,5 +45,3 @@ const TopicsHead = () => {
     </Container>
   );
 };
-
-export default TopicsHead;

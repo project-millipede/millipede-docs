@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const HomeFooter = () => {
+export const HomeFooter = () => {
   const classes = useStyles();
 
   const { t } = useTranslation();
@@ -121,5 +121,3 @@ const HomeFooter = () => {
     </Container>
   );
 };
-
-export default HomeFooter;

@@ -1,4 +1,4 @@
-import React, { createContext, Dispatch, FC, useContext, useReducer } from 'react';
+import React, { createContext, Dispatch, FC, useCallback, useContext, useReducer } from 'react';
 import { Action, StateType } from 'typesafe-actions';
 
 interface ContextType {
@@ -49,8 +49,16 @@ export const HouxProvider: FC<HouxProviderProps> = ({
   reducers,
   logDispatchedActions = false
 }) => {
-  const store = createStore(reducers, logDispatchedActions);
-  return <Context.Provider value={store as any}>{children}</Context.Provider>;
+  const getStore = useCallback(() => {
+    if (reducers != null) {
+      console.log('reducers: ', reducers);
+
+      return createStore(reducers, logDispatchedActions);
+    }
+    console.log('Reducers switched to null / undefined');
+  }, [reducers]);
+
+  return <Context.Provider value={getStore()}>{children}</Context.Provider>;
 };
 
 export const useHoux = () => useContext(Context);

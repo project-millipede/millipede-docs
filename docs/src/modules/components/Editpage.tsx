@@ -1,7 +1,7 @@
 import { Button } from '@material-ui/core';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { FC } from 'react';
 
 const LOCALES = { zh: 'zh-CN', pt: 'pt-BR', es: 'es-ES' };
 const CROWDIN_ROOT_URL = 'https://crowdin.com/project/project-millipede';
@@ -13,7 +13,7 @@ export interface EditPageProps {
   sourceCodeRootUrl: string;
 }
 
-export const EditPage = ({ markdownLocation }: EditPageProps) => {
+export const EditPage: FC<EditPageProps> = ({ markdownLocation }) => {
   const { t } = useTranslation();
 
   const { locale } = useRouter();
@@ -42,5 +42,3 @@ export const EditPage = ({ markdownLocation }: EditPageProps) => {
     </Button>
   );
 };
-
-export default EditPage;

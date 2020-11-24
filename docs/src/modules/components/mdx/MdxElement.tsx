@@ -83,7 +83,7 @@ interface MdxElementProps {
   meta: MetaProps;
 }
 
-const MdxElement = ({ content, ...rest }: MdxElementProps) => {
+export const MdxElement = ({ content, ...rest }: MdxElementProps) => {
   return (
     <MDXProvider
       components={{
@@ -95,5 +95,3 @@ const MdxElement = ({ content, ...rest }: MdxElementProps) => {
     </MDXProvider>
   );
 };
-
-export default MdxElement;

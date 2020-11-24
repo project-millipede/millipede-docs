@@ -3,10 +3,10 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-import Head from '../docs/src/modules/components/Head';
-import HomeFooter from '../docs/src/modules/components/HomeFooter';
-import TopicsDetail from '../src/components/site/landing/TopicsDetail';
-import TopicsHead from '../src/components/site/landing/TopicsHead';
+import { Head } from '../docs/src/modules/components/Head';
+import { HomeFooter } from '../docs/src/modules/components/HomeFooter';
+import { TopicsDetail } from '../src/components/site/landing/TopicsDetail';
+import { TopicsHead } from '../src/components/site/landing/TopicsHead';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
