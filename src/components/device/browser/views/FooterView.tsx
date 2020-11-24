@@ -7,9 +7,7 @@ import React, { ChangeEvent, FC, useState } from 'react';
 
 import { BottomRevealMin } from '../../../animation/framer/components/container/BottomRevealMin';
 
-export interface FooterViewProps {}
-
-const FooterView: FC<FooterViewProps> = () => {
+const FooterView: FC = () => {
   const [value, setValue] = useState('recents');
 
   const handleChange = (_event: ChangeEvent<{}>, newValue: string) => {

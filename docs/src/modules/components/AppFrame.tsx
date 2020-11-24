@@ -3,15 +3,15 @@ import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import React, { Dispatch, ReactNode, useCallback, useState } from 'react';
+import React, { Dispatch, FC, ReactNode, useCallback, useState } from 'react';
 import { PortalOut } from 'src/components/layout/grid/animation/framer/components/shared/portals/portals';
 import { PortalType } from 'src/components/layout/grid/animation/framer/components/shared/portals/portals.constants';
 
 import { ViewActions } from '../redux/features/actionType';
 import { handleDrawer } from '../redux/features/view/actions';
 import { RootState } from '../redux/reducers';
-import AppDrawer from './AppDrawer';
-import AppToolBar from './AppToolBar';
+import { AppDrawer } from './AppDrawer';
+import { AppToolBar } from './AppToolBar';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -47,7 +47,7 @@ interface AppFrameProps {
   children: ReactNode;
 }
 
-const AppFrame = ({ children }: AppFrameProps) => {
+export const AppFrame: FC<AppFrameProps> = ({ children }) => {
   const classes = useStyles();
   const drawerClasses = useDrawerStyles();
 
@@ -105,5 +105,3 @@ const AppFrame = ({ children }: AppFrameProps) => {
     </div>
   );
 };
-
-export default AppFrame;

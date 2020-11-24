@@ -19,7 +19,7 @@ export const jss = create({
   plugins: [...jssPreset().plugins]
 });
 
-const AppWrapper: FC<AppWrapperProps> = ({ children, isMobile }) => {
+export const AppWrapper: FC<AppWrapperProps> = ({ children, isMobile }) => {
   const { pathname } = useRouter();
 
   const {
@@ -46,5 +46,3 @@ const AppWrapper: FC<AppWrapperProps> = ({ children, isMobile }) => {
     </StylesProvider>
   );
 };
-
-export default AppWrapper;

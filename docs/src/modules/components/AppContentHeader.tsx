@@ -1,14 +1,14 @@
 import { useHoux } from '@houx';
 import { createStyles, makeStyles } from '@material-ui/core';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { FC } from 'react';
 
 import { RootState } from '../redux/reducers';
 import Breadcrumbs from './common/breadcrumbs';
 import { createBreadcrumbs } from './common/breadcrumbs/Breadcrumbs';
-import Editpage from './Editpage';
+import { EditPage } from './Editpage';
 
-export const useStyles = makeStyles(() =>
+const useStyles = makeStyles(() =>
   createStyles({
     headerRow: {
       display: 'flex',
@@ -26,7 +26,9 @@ interface MarkdownDocsProps {
 const SOURCE_CODE_ROOT_URL =
   'https://github.com/project-millipede/millipede-docs/blob/master/docs/src';
 
-const AppContentHeader = ({ markdownLocation }: MarkdownDocsProps) => {
+export const AppContentHeader: FC<MarkdownDocsProps> = ({
+  markdownLocation
+}) => {
   const classes = useStyles();
 
   const { pathname } = useRouter();
@@ -43,7 +45,7 @@ const AppContentHeader = ({ markdownLocation }: MarkdownDocsProps) => {
     <div className={classes.headerRow}>
       <Breadcrumbs />
       {markdownLocation ? (
-        <Editpage
+        <EditPage
           markdownLocation={markdownLocation}
           sourceCodeRootUrl={SOURCE_CODE_ROOT_URL}
         />
@@ -51,5 +53,3 @@ const AppContentHeader = ({ markdownLocation }: MarkdownDocsProps) => {
     </div>
   ) : null;
 };
-
-export default AppContentHeader;

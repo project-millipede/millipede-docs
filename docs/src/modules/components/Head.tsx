@@ -11,7 +11,7 @@ interface HeadProps {
 const defaultTitle = 'headTitle';
 const defaultDescription = 'strapline';
 
-const Head: FC<HeadProps> = ({ meta = {} }) => {
+export const Head: FC<HeadProps> = ({ meta = {} }) => {
   const {
     title = defaultTitle,
     description = defaultDescription,
@@ -39,5 +39,3 @@ const Head: FC<HeadProps> = ({ meta = {} }) => {
     </NextHead>
   );
 };
-
-export default Head;

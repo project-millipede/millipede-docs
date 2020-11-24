@@ -13,7 +13,7 @@ import {
 import { ChevronLeft, ChevronRight } from '@material-ui/icons';
 import clsx from 'clsx';
 import useTranslation from 'next-translate/useTranslation';
-import React from 'react';
+import React, { FC } from 'react';
 
 import { RootState } from '../redux/reducers';
 import { Tree } from './tree/Tree';
@@ -77,14 +77,11 @@ interface AppDrawerProps {
   mobileOpen: boolean;
 }
 
-const AppDrawer = (props: AppDrawerProps) => {
-  const {
-    mobileOpen,
-    isDrawerExpanded,
-    handleDrawerOpen,
-    handleDrawerClose
-  } = props;
-
+export const AppDrawer: FC<AppDrawerProps> = ({
+  isDrawerExpanded,
+  handleDrawerOpen,
+  handleDrawerClose
+}) => {
   const classes = useDrawerStyles();
 
   const theme: Theme = useTheme();
@@ -106,7 +103,7 @@ const AppDrawer = (props: AppDrawerProps) => {
           paper: classes.paper
         }}
         // disableBackdropTransition={!iOS}
-        open={mobileOpen}
+        open={isDrawerExpanded}
         onClose={handleDrawerClose}
         onOpen={handleDrawerOpen}
         ModalProps={{
@@ -177,5 +174,3 @@ const AppDrawer = (props: AppDrawerProps) => {
   }
   return null;
 };
-
-export default AppDrawer;

@@ -35,11 +35,9 @@ const generateIntro = (router: NextRouter, t: Translate) => {
   return null;
 };
 
-const TopicsDetail = () => {
+export const TopicsDetail = () => {
   const router = useRouter();
   const { t } = useTranslation();
   const intro = generateIntro(router, t);
   return <div>{intro}</div>;
 };
-
-export default TopicsDetail;
