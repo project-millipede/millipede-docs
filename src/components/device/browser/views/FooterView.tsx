@@ -10,7 +10,7 @@ import { BottomRevealMin } from '../../../animation/framer/components/container/
 const FooterView: FC = () => {
   const [value, setValue] = useState('recents');
 
-  const handleChange = (_event: ChangeEvent<{}>, newValue: string) => {
+  const handleChange = (_event: ChangeEvent, newValue: string) => {
     setValue(newValue);
   };
 

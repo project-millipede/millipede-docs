@@ -1,4 +1,4 @@
-import { useHoux } from '@houx';
+import { useHoux } from '@app/houx';
 import { createStyles, IconButton, makeStyles, Theme } from '@material-ui/core';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';

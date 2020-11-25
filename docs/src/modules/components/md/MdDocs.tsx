@@ -1,4 +1,4 @@
-import { useHoux } from '@houx';
+import { useHoux } from '@app/houx';
 import React from 'react';
 
 import { Page } from '../../../../../src/typings/data/import';

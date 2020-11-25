@@ -1,4 +1,4 @@
-import { useHoux } from '@houx';
+import { useHoux } from '@app/houx';
 import { Typography } from '@material-ui/core';
 import { Translate } from 'next-translate';
 import React, { FC } from 'react';

@@ -1,4 +1,4 @@
-import { useHoux } from '@houx';
+import { useHoux } from '@app/houx';
 import { createStyles, makeStyles } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React, { FC } from 'react';
