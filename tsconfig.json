@@ -24,10 +24,7 @@
       "DOM",
       "DOM.Iterable",
       "ESNext.Array"
-    ],
-    "paths": {
-      "@houx": ["docs/src/modules/redux/houx/index.tsx"]
-    }
+    ]
   },
   "include": [
     "next-env.d.ts",

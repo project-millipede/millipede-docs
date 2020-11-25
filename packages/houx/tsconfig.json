@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext.Array"],
+    "outDir": "dist",
+    "rootDir": "src"
+  },
+  "include": ["**/*.ts", "**/*.tsx"],
+}
