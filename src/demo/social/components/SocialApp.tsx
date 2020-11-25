@@ -1,6 +1,5 @@
-import { useHoux } from '@houx';
+import { useHoux } from '@app/houx';
 import React, { Dispatch, FC, useCallback, useEffect, useState } from 'react';
-import { AutoPlayFlowControl } from 'src/components/layout/grid/animation/framer/components/AutoPlayFlowControl';
 
 import { RefProvider } from '../../../../docs/src/modules/components/archer/context/RefProvider';
 import { TransitionProvider } from '../../../../docs/src/modules/components/archer/context/TransitionProvider';
@@ -8,10 +7,11 @@ import { TimelineActions } from '../../../../docs/src/modules/redux/features/act
 import { normalizeData } from '../../../../docs/src/modules/redux/features/timeline/actions';
 import { selectUserCaseState } from '../../../../docs/src/modules/redux/features/timeline/selector';
 import { RootState } from '../../../../docs/src/modules/redux/reducers';
+import { AutoPlayFlowControl } from '../../../../src/components/layout/grid/animation/framer/components/AutoPlayFlowControl';
 import { InteractionFlow } from '../../../components/layout/grid/animation/framer/components/InteractionFlow';
 import {
   InteractionFlowControl,
-  InteractionFlowControlObserver,
+  InteractionFlowControlObserver
 } from '../../../components/layout/grid/animation/framer/components/InteractionFlowControl';
 import { generateData } from '../../../data/social/mocks';
 import { UseCase } from '../../../typings/social';

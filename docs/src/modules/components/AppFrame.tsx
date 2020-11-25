@@ -1,12 +1,12 @@
-import { useHoux } from '@houx';
+import { useHoux } from '@app/houx';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import React, { Dispatch, FC, ReactNode, useCallback, useState } from 'react';
-import { PortalOut } from 'src/components/layout/grid/animation/framer/components/shared/portals/portals';
-import { PortalType } from 'src/components/layout/grid/animation/framer/components/shared/portals/portals.constants';
 
+import { PortalOut } from '../../../../src/components/layout/grid/animation/framer/components/shared/portals/portals';
+import { PortalType } from '../../../../src/components/layout/grid/animation/framer/components/shared/portals/portals.constants';
 import { ViewActions } from '../redux/features/actionType';
 import { handleDrawer } from '../redux/features/view/actions';
 import { RootState } from '../redux/reducers';

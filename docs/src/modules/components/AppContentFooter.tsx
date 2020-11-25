@@ -1,4 +1,4 @@
-import { useHoux } from '@houx';
+import { useHoux } from '@app/houx';
 import { Button, Container, createStyles, makeStyles, Theme } from '@material-ui/core';
 import { ChevronLeft, ChevronRight } from '@material-ui/icons';
 import useTranslation from 'next-translate/useTranslation';

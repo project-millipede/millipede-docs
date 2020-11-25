@@ -1,4 +1,4 @@
-import { useHoux } from '@houx';
+import { useHoux } from '@app/houx';
 import { Container } from '@material-ui/core';
 import _ from 'lodash';
 import { Translate } from 'next-translate';

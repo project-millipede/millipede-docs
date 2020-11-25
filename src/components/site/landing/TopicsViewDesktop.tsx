@@ -1,11 +1,5 @@
-import { useHoux } from '@houx';
-import {
-  createStyles,
-  Grid,
-  IconButton,
-  makeStyles,
-  Theme
-} from '@material-ui/core';
+import { useHoux } from '@app/houx';
+import { createStyles, Grid, IconButton, makeStyles, Theme } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React, { Dispatch, FC } from 'react';
 

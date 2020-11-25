@@ -1,4 +1,4 @@
-import { useHoux } from '@houx';
+import { useHoux } from '@app/houx';
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import LinkIcon from '@material-ui/icons/Link';
 import React, { ReactNode, useEffect } from 'react';

@@ -1,6 +1,6 @@
 import '../docs/css/diagram.css';
 
-import { HouxProvider } from '@houx';
+import { HouxProvider } from '@app/houx';
 import { enableMapSet } from 'immer';
 import { NextComponentType } from 'next';
 import I18nProvider from 'next-translate/I18nProvider';
@@ -9,13 +9,13 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import ReactGA from 'react-ga';
 import { RecoilRoot } from 'recoil';
-import { PortalProvider } from 'src/components/layout/grid/animation/framer/components/shared/portals/portals';
 
 import { AppFrame } from '../docs/src/modules/components/AppFrame';
 import { AppWrapper } from '../docs/src/modules/components/AppWrapper';
 import { loadFAIcons } from '../docs/src/modules/components/icon/FAIconLoader';
 import reducers from '../docs/src/modules/redux/reducers';
 import { detectDevice } from '../docs/src/modules/utils/device';
+import { PortalProvider } from '../src/components/layout/grid/animation/framer/components/shared/portals/portals';
 
 // import { appWithTranslation } from '../i18n';
 

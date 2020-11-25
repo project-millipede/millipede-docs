@@ -1,4 +1,4 @@
-import { useHoux } from '@houx';
+import { useHoux } from '@app/houx';
 import { useMergedRef } from '@huse/merged-ref';
 import { Button, ButtonGroup, List, makeStyles, useTheme } from '@material-ui/core';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';

@@ -1,4 +1,4 @@
-import { useHoux } from '@houx';
+import { useHoux } from '@app/houx';
 import { createStyles, IconButton, makeStyles, Toolbar, Tooltip, Typography } from '@material-ui/core';
 import { GitHub, Menu } from '@material-ui/icons';
 import clsx from 'clsx';

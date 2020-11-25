@@ -1,4 +1,4 @@
-import { useHoux } from '@houx';
+import { useHoux } from '@app/houx';
 import { jssPreset, StylesProvider } from '@material-ui/core';
 import { create } from 'jss';
 import { useRouter } from 'next/router';
