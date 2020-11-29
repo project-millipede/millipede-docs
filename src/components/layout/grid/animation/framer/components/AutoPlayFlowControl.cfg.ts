@@ -9,7 +9,7 @@ export interface Step {
 
 export const getSteps = (
   timelineId: string,
-  _rightTimelineId: string
+  rightTimelineId: string
 ): {
   [key: string]: Array<Step>;
 } => {
@@ -28,14 +28,16 @@ export const getSteps = (
         end: 10000,
         label: '2',
         selector: `timeline-${timelineId}-content-create`,
-        description: `pages/pidp/use-case/recognition/index:timeline-content-create`
+        description: `pages/pidp/use-case/recognition/index:timeline-content-create`,
+        timelineId: ''
       },
       {
         start: 10000,
         end: 15000,
         label: '3',
         selector: `timeline-${timelineId}-content-post`,
-        description: `pages/pidp/use-case/recognition/index:timeline-content-post`
+        description: `pages/pidp/use-case/recognition/index:timeline-content-post`,
+        timelineId: ''
       },
       {
         start: 15000,
@@ -51,7 +53,7 @@ export const getSteps = (
         label: '5',
         selector: `progressiveStepBuilder-${1}`,
         description: `pages/pidp/use-case/recognition/index:progressiveStepBuilder-1`,
-        timelineId
+        timelineId: ''
       },
       {
         start: 25000,
@@ -59,15 +61,15 @@ export const getSteps = (
         label: '6',
         selector: `progressiveStepBuilder-${2}`,
         description: `pages/pidp/use-case/recognition/index:progressiveStepBuilder-2`,
-        timelineId
+        timelineId: ''
       },
       {
         start: 30000,
-        end: 40000,
+        end: 35000,
         label: '7',
         selector: `progressiveStepBuilder-${3}`,
         description: `pages/pidp/use-case/recognition/index:progressiveStepBuilder-3`,
-        timelineId
+        timelineId: rightTimelineId
       }
     ]
   };

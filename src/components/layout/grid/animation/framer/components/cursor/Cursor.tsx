@@ -1,14 +1,11 @@
 import { click } from '@plusnew/simulate-dom-events';
+import { usePrevious } from 'ahooks';
 import { motion, useAnimation } from 'framer-motion';
 import React, { FC, useCallback, useEffect, useMemo, useRef } from 'react';
 
 import CircleShape from './shapes/circle';
 
-interface CursorProps {
-  selector: string;
-}
-
-export const measure = (element: HTMLElement) => {
+const measure = (element: HTMLElement) => {
   if (element) {
     const rect = element.getBoundingClientRect();
     const x = rect.left + window.pageXOffset;
@@ -17,7 +14,18 @@ export const measure = (element: HTMLElement) => {
   }
 };
 
-export const cursorVariant = {
+const measureOffset = (
+  rectStart: Partial<DOMRect>,
+  rectEnd: Partial<DOMRect>
+) => {
+  const offSet: Partial<DOMRect> = {
+    x: -(rectEnd.x - rectStart.x),
+    y: -(rectEnd.y - rectStart.y)
+  };
+  return offSet;
+};
+
+const cursorVariant = {
   visible: { opacity: 1, scale: 1 },
   hidden: { opacity: 0, scale: 0 }
 };
@@ -26,6 +34,10 @@ const mRadius = 25;
 const mFillColor = '#e57373';
 const mStrokeColor = '#e57373';
 const mStrokeWidth = 1;
+
+interface CursorProps {
+  selector: string;
+}
 
 export const Cursor: FC<CursorProps> = ({ selector }) => {
   const cursorRef = useRef<SVGSVGElement>();
@@ -50,6 +62,18 @@ export const Cursor: FC<CursorProps> = ({ selector }) => {
     return { x: 0, y: 0, width: 0, height: 0 };
   }, [selector]);
 
+  const previousCoordinates = usePrevious(coordinates);
+
+  const distance = useMemo(() => {
+    return measureOffset(
+      { x: coordinates.x, y: coordinates.y },
+      {
+        x: previousCoordinates ? previousCoordinates.x : 0,
+        y: previousCoordinates ? previousCoordinates.y : 0
+      }
+    );
+  }, [selector]);
+
   const show = () => cursorVisiblityControl.start('visible');
   const hide = () => cursorVisiblityControl.start('hidden');
 
@@ -58,50 +82,48 @@ export const Cursor: FC<CursorProps> = ({ selector }) => {
   };
 
   const onComplete = () => {
-    hide();
     const element = getSelectedElement();
     if (element != null) {
       click(element);
     }
+    hide();
   };
 
   return (
-    <div
+    <motion.div
+      key={`animate-${selector}`}
       style={{
         position: 'absolute',
-        top: 0,
-        left: 0
+        top: previousCoordinates ? previousCoordinates.y : 0,
+        left: previousCoordinates ? previousCoordinates.x : 0
       }}
+      animate={{
+        x: distance.x,
+        y: distance.y
+      }}
+      transition={{ type: 'spring', damping: 20, stiffness: 150 }}
+      onAnimationStart={onStart}
+      onAnimationComplete={onComplete}
     >
       <motion.div
-        animate={{
-          x: coordinates?.x,
-          y: coordinates?.y
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: coordinates.width,
+          height: coordinates.height
         }}
-        transition={{ type: 'spring', damping: 20, stiffness: 150 }}
-        onAnimationStart={onStart}
-        onAnimationComplete={onComplete}
+        variants={cursorVariant}
+        animate={cursorVisiblityControl}
       >
-        <motion.div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: coordinates?.width,
-            height: coordinates?.height
-          }}
-          variants={cursorVariant}
-          animate={cursorVisiblityControl}
-        >
-          <CircleShape
-            ref={cursorRef}
-            radius={mRadius}
-            fillColor={mFillColor}
-            strokeColor={mStrokeColor}
-            strokeWidth={mStrokeWidth}
-          />
-        </motion.div>
+        <CircleShape
+          ref={cursorRef}
+          radius={mRadius}
+          fillColor={mFillColor}
+          strokeColor={mStrokeColor}
+          strokeWidth={mStrokeWidth}
+        />
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
