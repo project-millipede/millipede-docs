@@ -1,11 +1,6 @@
 import { Chip, createStyles, makeStyles } from '@material-ui/core';
 import { ClassOutlined } from '@material-ui/icons';
-import React from 'react';
-
-export interface TagProps {
-  text: string;
-  id: string;
-}
+import React, { FC } from 'react';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -16,7 +11,12 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export const Tag = ({ text, id }) => {
+interface TagProps {
+  text: string;
+  id: string;
+}
+
+const Tag: FC<TagProps> = ({ text, id }) => {
   const classes = useStyles();
 
   return (
@@ -30,3 +30,5 @@ export const Tag = ({ text, id }) => {
     />
   );
 };
+
+export default Tag;

@@ -1,9 +1,8 @@
+import { Icon, IconType } from '@app/types';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Icon as MUIIcon } from '@material-ui/core';
 import React, { FC } from 'react';
-
-import { Icon, IconType } from '../../../../../src/typings/data/import';
 
 interface CustomIconProps {
   icon: Icon;
