@@ -1,8 +1,7 @@
+import { Link } from '@app/components';
 import { Container, createStyles, Grid, Link as MUILink, makeStyles, Theme, Typography } from '@material-ui/core';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
-
-import Link from './common/link/Link';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

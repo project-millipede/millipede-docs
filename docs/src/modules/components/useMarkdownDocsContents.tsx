@@ -1,5 +1,5 @@
-/* eslint-disable no-underscore-dangle */
-import { Page } from '../../../../src/typings/data/import';
+import { Page } from '@app/types';
+
 import { getContents, getHeaders } from '../utils/parseMarkdown';
 
 interface MarkdownDocsContentsProps {

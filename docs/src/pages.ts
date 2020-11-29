@@ -1,6 +1,5 @@
+import { Icon, IconType, Page } from '@app/types';
 import _ from 'lodash';
-
-import { Icon, IconType, Page } from '../../src/typings/data/import';
 
 const lowerTextIncludes = (text: string, sub: string) =>
   _.includes(_.lowerCase(text), _.lowerCase(_.trimStart(sub)));

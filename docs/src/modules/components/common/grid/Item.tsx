@@ -1,9 +1,9 @@
+import { Link } from '@app/components';
 import { Avatar, createStyles, Icon, makeStyles, Typography } from '@material-ui/core';
 import _ from 'lodash';
 import React from 'react';
 
 import { OverviewProps } from '../../../../../../src/typings/data/import';
-import Link from '../link/Link';
 
 const useStyles = makeStyles(() =>
   createStyles({
