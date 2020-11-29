@@ -5,8 +5,8 @@ const getFallback = isServer => {
   if (!isServer) {
     return {
       fs: false,
-      process: false,
-      buffer: false
+      process: require.resolve('process/'),
+      buffer: require.resolve('buffer/')
     };
   }
 };
@@ -24,7 +24,7 @@ const webpackConfig = ({ isServer }) => {
 
     module: {
       rules: [
-        { test: /\.(ts|tsx)$/, loader: 'ts-loader' },
+        { test: /\.(ts|tsx)$/, loader: 'ts-loader', exclude: /node_modules/ },
         {
           test: /\.mdx$/,
           use: [
@@ -52,7 +52,8 @@ const webpackConfig = ({ isServer }) => {
 
     plugins: [
       new webpack.ProvidePlugin({
-        process: 'process/browser'
+				'Buffer': ['buffer', 'Buffer'],
+				'process': 'process',
       }),
       new webpack.DefinePlugin({
         'process.env': {
