@@ -1,14 +1,10 @@
 {
+  "extends": "../tsconfig.settings.json",
   "compilerOptions": {
-    "jsx": "react",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext.Array"],
+    "composite": true,
+    "rootDir": "src",
     "outDir": "dist",
-    "rootDir": "src"
+    "jsx": "preserve"
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["src/**/*"]
 }
