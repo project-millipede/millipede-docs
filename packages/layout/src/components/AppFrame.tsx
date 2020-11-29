@@ -1,15 +1,10 @@
-import { useHoux } from '@app/houx';
+import { Portal } from '@app/components';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import React, { Dispatch, FC, ReactNode, useCallback, useState } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 
-import { PortalOut } from '../../../../src/components/layout/grid/animation/framer/components/shared/portals/portals';
-import { PortalType } from '../../../../src/components/layout/grid/animation/framer/components/shared/portals/portals.constants';
-import { ViewActions } from '../redux/features/actionType';
-import { handleDrawer } from '../redux/features/view/actions';
-import { RootState } from '../redux/reducers';
 import { AppDrawer } from './AppDrawer';
 import { AppToolBar } from './AppToolBar';
 
@@ -43,39 +38,19 @@ const useDrawerStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface AppFrameProps {
-  children: ReactNode;
-}
-
-export const AppFrame: FC<AppFrameProps> = ({ children }) => {
+export const AppFrame: FC = ({ children }) => {
   const classes = useStyles();
   const drawerClasses = useDrawerStyles();
 
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  const {
-    dispatch,
-    state: {
-      view: { isDrawerExpanded, isMobile }
-    }
-  }: {
-    dispatch: Dispatch<ViewActions>;
-    state: RootState;
-  } = useHoux();
+  const [isDrawerExpanded, setIsDrawerExpanded] = useState(false);
 
   const handleDrawerOpen = useCallback(() => {
-    setMobileOpen(true);
-    if (!isMobile) {
-      dispatch(handleDrawer(true));
-    }
-  }, [dispatch, handleDrawer]);
+    setIsDrawerExpanded(true);
+  }, []);
 
   const handleDrawerClose = useCallback(() => {
-    setMobileOpen(false);
-    if (!isMobile) {
-      dispatch(handleDrawer(false));
-    }
-  }, [dispatch, handleDrawer]);
+    setIsDrawerExpanded(false);
+  }, []);
 
   return (
     <div className={classes.root}>
@@ -95,11 +70,12 @@ export const AppFrame: FC<AppFrameProps> = ({ children }) => {
       <AppDrawer
         handleDrawerOpen={handleDrawerOpen}
         handleDrawerClose={handleDrawerClose}
-        mobileOpen={mobileOpen}
         isDrawerExpanded={isDrawerExpanded}
       />
 
-      <PortalOut portalType={PortalType.Cursor} />
+      <Portal.Portal.PortalOut
+        portalType={Portal.PortalConstants.PortalType.Cursor}
+      />
 
       {children}
     </div>

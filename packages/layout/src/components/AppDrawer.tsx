@@ -15,7 +15,7 @@ import clsx from 'clsx';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
-import { RootState } from '../redux/reducers';
+import { RootState } from '../redux/features/reducers';
 import { Tree } from './tree/Tree';
 
 const drawerWidth = 280;
@@ -74,7 +74,6 @@ interface AppDrawerProps {
   isDrawerExpanded: boolean;
   handleDrawerOpen: () => void;
   handleDrawerClose: () => void;
-  mobileOpen: boolean;
 }
 
 export const AppDrawer: FC<AppDrawerProps> = ({

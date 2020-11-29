@@ -1,19 +1,16 @@
 import { StoreAction } from '../actionType';
-import { HANDLE_DEVICE, HANDLE_DRAWER } from './actionTypes';
+import { HANDLE_DEVICE } from './actionTypes';
 
-const initialState = {
-  isDrawerExpanded: false,
+export interface ViewProps {
+  isMobile: boolean;
+}
+
+const initialState: ViewProps = {
   isMobile: false
 };
 
 const viewReducer = (state = initialState, action: StoreAction) => {
   switch (action.type) {
-    case HANDLE_DRAWER: {
-      return {
-        ...state,
-        isDrawerExpanded: action.payload.isDrawerExpanded
-      };
-    }
     case HANDLE_DEVICE:
       return {
         ...state,

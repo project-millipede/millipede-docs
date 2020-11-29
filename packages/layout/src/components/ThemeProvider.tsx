@@ -1,8 +1,4 @@
-import {
-  createMuiTheme,
-  darken,
-  ThemeProvider as MaterialThemeProvider
-} from '@material-ui/core';
+import { createMuiTheme, darken, ThemeProvider as MaterialThemeProvider } from '@material-ui/core';
 import { blue, pink } from '@material-ui/core/colors';
 import React, { FC, ReactNode, useMemo } from 'react';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
