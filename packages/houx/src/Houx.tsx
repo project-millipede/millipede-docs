@@ -5,6 +5,7 @@ interface ContextType {
   state: StateType<any>;
   dispatch: Dispatch<Action>;
 }
+
 const Context = createContext<ContextType>({
   state: null,
   dispatch: null
@@ -18,24 +19,7 @@ const composeReducers = (reducers: ReducerMap) => (state, action) => {
   );
   return combinedReducers;
 };
-const createStore = (reducers: ReducerMap, logDispatchedActions: boolean) => {
-  const rootReducer = composeReducers(reducers);
-  const initialState = rootReducer({}, { type: 'STATE_INIT' });
-  const [state, dispatch] = useReducer(rootReducer, initialState);
-  const localDispatch = action => {
-    // enable simple logger
-    if (logDispatchedActions && action.type) {
-      // eslint-disable-next-line no-console
-      console.info(action);
-    }
-    // async actions support
-    if (typeof action === 'function') {
-      return action(localDispatch, state);
-    }
-    return dispatch(action);
-  };
-  return { state, dispatch: localDispatch };
-};
+
 type ReducerType = (state: any, action: any) => any;
 interface ReducerMap {
   [key: string]: ReducerType;
@@ -49,16 +33,33 @@ export const HouxProvider: FC<HouxProviderProps> = ({
   reducers,
   logDispatchedActions = false
 }) => {
-  const getStore = useCallback(() => {
-    if (reducers != null) {
-      console.log('reducers: ', reducers);
+  const createStore = useCallback(
+    (reducers: ReducerMap, logDispatchedActions: boolean) => {
+      const rootReducer = composeReducers(reducers);
+      const initialState = rootReducer({}, { type: 'STATE_INIT' });
+      const [state, dispatch] = useReducer(rootReducer, initialState);
+      const localDispatch = action => {
+        // enable simple logger
+        if (logDispatchedActions && action.type) {
+          // eslint-disable-next-line no-console
+          console.info(action);
+        }
+        // async actions support
+        if (typeof action === 'function') {
+          return action(localDispatch, state);
+        }
+        return dispatch(action);
+      };
+      return { state, dispatch: localDispatch };
+    },
+    [reducers]
+  );
 
-      return createStore(reducers, logDispatchedActions);
-    }
-    console.log('Reducers switched to null / undefined');
-  }, [reducers]);
-
-  return <Context.Provider value={getStore()}>{children}</Context.Provider>;
+  return (
+    <Context.Provider value={createStore(reducers, logDispatchedActions)}>
+      {children}
+    </Context.Provider>
+  );
 };
 
 export const useHoux = () => useContext(Context);
