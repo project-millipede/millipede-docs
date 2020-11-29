@@ -5,6 +5,8 @@ const { merge } = require('webpack-merge');
 
 const webpackConfig = getWebpackConfig()
 
+const withTM = require('next-transpile-modules')(['@app/houx', '@app/types', '@app/analytics', '@app/components', '@app/layout'],  { unstable_webpack5: true });
+
 const nextConfig = {
   webpack: (config, options) => {
     return merge(
@@ -18,4 +20,4 @@ const nextConfig = {
   target: 'serverless',
 };
 
-module.exports = nextTranslate(nextConfig)
+module.exports = withTM(nextTranslate(nextConfig))
