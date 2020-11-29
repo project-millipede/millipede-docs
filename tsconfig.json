@@ -6,8 +6,8 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "jsx": "preserve",
-    "target": "ESNext",
     "module": "ESNext",
+    "target": "ESNext",
     "moduleResolution": "node",
     "noEmit": false,
     "noUnusedLocals": true,
@@ -20,11 +20,7 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ESNext.Array"
-    ]
+    "lib": ["DOM", "DOM.Iterable", "ESNext.Array"]
   },
   "include": [
     "next-env.d.ts",
@@ -36,7 +32,5 @@
     "src/**/*.ts",
     "src/**/*.tsx"
   ],
-  "exclude": [
-    "build", "packages"
-  ]
+  "exclude": ["node_modules"]
 }
