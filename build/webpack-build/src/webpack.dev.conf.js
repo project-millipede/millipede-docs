@@ -5,8 +5,8 @@ const getFallback = isServer => {
   if (!isServer) {
     return {
       fs: false,
-      process: false,
-      buffer: false
+      process: require.resolve('process/'),
+      buffer: require.resolve('buffer/')
     };
   }
 };
@@ -56,6 +56,10 @@ const webpackConfig = ({ isServer }) => {
       ]
     },
     plugins: [
+      new webpack.ProvidePlugin({
+				'Buffer': ['buffer', 'Buffer'],
+				'process': 'process',
+      }),
       new webpack.ProvidePlugin({
         process: 'process/browser'
       }),
