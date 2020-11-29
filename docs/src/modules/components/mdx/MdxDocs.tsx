@@ -4,12 +4,12 @@ import { IReadingTime } from 'reading-time-estimator';
 
 import { AppContent } from '../AppContent';
 import { AppContentFooter } from '../AppContentFooter';
+import { AppContentHeader } from '../AppContentHeader';
 import { AppTableOfContents } from '../AppTableOfContents';
 import { Head } from '../Head';
 import { useMdStyles } from '../md/styles/MdStyles';
 import { MdxElement } from './MdxElement';
 
-// import { AppContentHeader } from '../AppContentHeader';
 // import AppContentSubHeader from '../AppContentSubHeader';
 const useStyles = makeStyles((theme: Theme) => {
   return {
@@ -48,7 +48,7 @@ export const MdxDocs = (props: MarkdownDocsProps) => {
       {!disableToc ? <AppTableOfContents content={raw} /> : null}
       <AppContent disableToc={disableToc}>
         <div className={classes.root}>
-          {/* <AppContentHeader /> */}
+          <AppContentHeader />
           {/* <AppContentSubHeader timeToRead={timeToRead} /> */}
           {children || (
             <MdxElement

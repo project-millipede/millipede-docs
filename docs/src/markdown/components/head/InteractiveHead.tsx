@@ -1,4 +1,5 @@
 import { useHoux } from '@app/houx';
+import { RootState } from '@app/layout';
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import LinkIcon from '@material-ui/icons/Link';
 import React, { ReactNode, useEffect } from 'react';
@@ -6,7 +7,6 @@ import { useInView } from 'react-intersection-observer';
 import { useSetRecoilState } from 'recoil';
 
 import { scrollItemsReducer, scrollItemsState } from '../../../modules/recoil/features/scroll/page/reducer';
-import { RootState } from '../../../modules/redux/reducers';
 
 interface InteraktiveHeadProps {
   // id generated through slug

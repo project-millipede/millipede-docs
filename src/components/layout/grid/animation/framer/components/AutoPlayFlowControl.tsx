@@ -1,3 +1,4 @@
+import { Portal } from '@app/components';
 import { createStyles, Divider, IconButton, makeStyles, Slider, Theme } from '@material-ui/core';
 import { ArrowLeft, ArrowRight, Pause, PlayArrow } from '@material-ui/icons';
 import useTranslation from 'next-translate/useTranslation';
@@ -10,8 +11,6 @@ import { StepProvider, useStepDispatch, useStepState } from './codehike/site/src
 import { CountDown } from './counter/CountDown';
 import { CountUp } from './counter/CountUp';
 import { Cursor } from './cursor/Cursor';
-import { PortalIn } from './shared/portals/portals';
-import { PortalType } from './shared/portals/portals.constants';
 
 interface AutoPlayFlowControlProps {
   leftTimelineId: string;
@@ -229,9 +228,9 @@ export const StepsRangeWrapper: FC<AutoPlayFlowProps> = ({
     }
   }, [leftTimelineId, rightTimelineId, maxStepsCount, playing]);
 
-  const { stepsWithDuration } = getTimeData(steps);
-
   const activeStep = steps[target];
+
+  const { stepsWithDuration } = getTimeData(steps);
 
   const { duration } =
     stepsWithDuration.length > 0 ? stepsWithDuration[target] : { duration: 0 };
@@ -243,11 +242,13 @@ export const StepsRangeWrapper: FC<AutoPlayFlowProps> = ({
     <>
       <Player steps={steps} />
 
-      <PortalIn portalType={PortalType.Cursor}>
+      <Portal.Portal.PortalIn
+        portalType={Portal.PortalConstants.PortalType.Cursor}
+      >
         {playing && activeStep ? (
           <Cursor selector={`#${activeStep?.selector}`} />
         ) : null}
-      </PortalIn>
+      </Portal.Portal.PortalIn>
     </>
   );
 };

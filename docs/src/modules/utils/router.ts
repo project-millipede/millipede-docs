@@ -1,6 +1,5 @@
+import { Page } from '@app/types';
 import _ from 'lodash';
-
-import { Page } from '../../../../src/typings/data/import';
 
 const findActivePage = (currentPages: Array<Page>, pathname: string): Page => {
   const activePage = _.find(currentPages, (page: any) => {
@@ -57,4 +56,9 @@ const flattenPages = (pages: Array<Page>, current: Array<Page> = []) => {
   }, current);
 };
 
-export { findActivePage, determineCurrenPathname, determineActivePage, flattenPages };
+export {
+  findActivePage,
+  determineCurrenPathname,
+  determineActivePage,
+  flattenPages
+};

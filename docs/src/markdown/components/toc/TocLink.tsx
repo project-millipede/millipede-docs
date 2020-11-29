@@ -1,9 +1,9 @@
+import { Link } from '@app/components';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 import React, { FC, ReactNode } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import Link from '../../../modules/components/common/link/Link';
 import { scrollItemsState } from '../../../modules/recoil/features/scroll/page/reducer';
 
 const useStyles = makeStyles((theme: Theme) =>

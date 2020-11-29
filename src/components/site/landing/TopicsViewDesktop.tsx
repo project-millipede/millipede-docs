@@ -1,11 +1,10 @@
+import { CustomIcon } from '@app/components';
 import { useHoux } from '@app/houx';
+import { actions as layoutActions, NavigationActions } from '@app/layout';
 import { createStyles, Grid, IconButton, makeStyles, Theme } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React, { Dispatch, FC } from 'react';
 
-import CustomIcon from '../../../../docs/src/modules/components/icon/CustomIcon';
-import { NavigationActions } from '../../../../docs/src/modules/redux/features/actionType';
-import { loadPages } from '../../../../docs/src/modules/redux/features/navigation/actions';
 import { OverviewProps } from '../../../typings/data/import';
 import { TopReveal } from '../../animation/framer/components/text/TopReveal';
 
@@ -30,6 +29,8 @@ export const TopicsViewDesktop: FC<TopicsViewDesktopProps> = ({ topics }) => {
   const classes = useStyles();
 
   const { dispatch }: { dispatch: Dispatch<NavigationActions> } = useHoux();
+
+  const { navigation } = layoutActions;
 
   return (
     <Grid container>
@@ -63,7 +64,9 @@ export const TopicsViewDesktop: FC<TopicsViewDesktopProps> = ({ topics }) => {
                                     `${pathname}?${perspective.type}=${topic.contextLink.id}#${topic.contextLink.id}`
                                   );
                                   dispatch(
-                                    loadPages(`/${topic.contextLink.id}`)
+                                    navigation.loadPages(
+                                      `/${topic.contextLink.id}`
+                                    )
                                   );
                                 }}
                               >

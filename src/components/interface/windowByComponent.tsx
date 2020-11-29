@@ -1,13 +1,12 @@
+import { CustomIcon } from '@app/components';
 import { useHoux } from '@app/houx';
+import { actions as layoutActions, NavigationActions } from '@app/layout';
 import { createStyles, IconButton, makeStyles, Theme } from '@material-ui/core';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import React, { Dispatch, FC } from 'react';
 import styled from 'styled-components';
 
-import CustomIcon from '../../../docs/src/modules/components/icon/CustomIcon';
-import { NavigationActions } from '../../../docs/src/modules/redux/features/actionType';
-import { loadPages } from '../../../docs/src/modules/redux/features/navigation/actions';
 import { OverviewProps } from '../../typings/data/import';
 import { noAnimation } from '../animation';
 import { TopReveal } from '../animation/framer/components/text/TopReveal';
@@ -34,6 +33,8 @@ const Window: FC<WindowProps> = ({ windowStackData, index }) => {
   const classes = useStyles();
 
   const { pathname, push } = useRouter();
+
+  const { navigation } = layoutActions;
 
   const { dispatch }: { dispatch: Dispatch<NavigationActions> } = useHoux();
 
@@ -64,7 +65,9 @@ const Window: FC<WindowProps> = ({ windowStackData, index }) => {
                         `${pathname}?${perspective.type}=${windowStackData[index].contextLink.id}#${windowStackData[index].contextLink.id}`
                       );
                       dispatch(
-                        loadPages(`/${windowStackData[index].contextLink.id}`)
+                        navigation.loadPages(
+                          `/${windowStackData[index].contextLink.id}`
+                        )
                       );
                     }}
                   >

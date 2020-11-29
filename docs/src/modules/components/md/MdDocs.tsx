@@ -1,12 +1,11 @@
 import { useHoux } from '@app/houx';
+import { AppFrame, RootState as LayoutState } from '@app/layout';
+import { Page } from '@app/types';
 import React from 'react';
 
-import { Page } from '../../../../../src/typings/data/import';
-import { RootState } from '../../redux/reducers';
 import { AppContent } from '../AppContent';
 import { AppContentFooter } from '../AppContentFooter';
 import { AppContentHeader } from '../AppContentHeader';
-import { AppFrame } from '../AppFrame';
 import { AppTableOfContents } from '../AppTableOfContents';
 import useMarkdownDocsContents from '../useMarkdownDocsContents';
 import MdElement from './MdElement';
@@ -29,7 +28,7 @@ const MdDocs = (props: MarkdownDocsProps) => {
     state: {
       navigation: { activePage }
     }
-  }: { state: RootState } = useHoux();
+  }: { state: LayoutState } = useHoux();
 
   const { markdownLocation } = useMarkdownDocsContents({
     markdown: content,

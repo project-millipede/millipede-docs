@@ -1,11 +1,11 @@
 import { useHoux } from '@app/houx';
+import { RootState } from '@app/layout';
 import { Container } from '@material-ui/core';
 import _ from 'lodash';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-import { RootState } from '../../../../docs/src/modules/redux/reducers';
 import { OverviewProps } from '../../../typings/data/import';
 import { TopicsViewDesktop } from './TopicsViewDesktop';
 import { TopicsViewMobile } from './TopicsViewMobile';

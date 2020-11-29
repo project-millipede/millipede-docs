@@ -1,9 +1,9 @@
 import { useHoux } from '@app/houx';
+import { RootState as LayoutState } from '@app/layout';
 import { createStyles, makeStyles } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React, { FC } from 'react';
 
-import { RootState } from '../redux/reducers';
 import Breadcrumbs from './common/breadcrumbs';
 import { createBreadcrumbs } from './common/breadcrumbs/Breadcrumbs';
 import { EditPage } from './Editpage';
@@ -37,7 +37,7 @@ export const AppContentHeader: FC<MarkdownDocsProps> = ({
     state: {
       view: { isMobile }
     }
-  }: { state: RootState } = useHoux();
+  }: { state: LayoutState } = useHoux();
 
   const breadcrumbs = createBreadcrumbs(pathname);
 

@@ -1,11 +1,16 @@
+import { Link } from '@app/components';
 import { useHoux } from '@app/houx';
-import { Button, Container, createStyles, makeStyles, Theme } from '@material-ui/core';
+import { RootState as LayoutState } from '@app/layout';
+import {
+  Button,
+  Container,
+  createStyles,
+  makeStyles,
+  Theme
+} from '@material-ui/core';
 import { ChevronLeft, ChevronRight } from '@material-ui/icons';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
-
-import { RootState } from '../redux/reducers';
-import Link from './common/link/Link';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -44,7 +49,7 @@ export const AppContentFooter: FC = () => {
     state: {
       navigation: { flattenedPages, activePage }
     }
-  }: { state: RootState } = useHoux();
+  }: { state: LayoutState } = useHoux();
 
   const currentPageNumber = flattenedPages.findIndex(
     page => page.pathname === activePage.pathname
