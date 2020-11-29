@@ -5,11 +5,14 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc"
+    "compile": "tsc -b",
+    "clean": "rimraf dist tsconfig.tsbuildinfo"
   },
   "devDependencies": {
     "@types/loader-utils": "^2.0.1",
-    "loader-utils": "^2.0.0"
+    "@types/rimraf": "^3.0.0",
+    "loader-utils": "^2.0.0",
+    "rimraf": "^3.0.2"
   },
   "dependencies": {
     "@mdx-js/mdx": "^1.6.21",
