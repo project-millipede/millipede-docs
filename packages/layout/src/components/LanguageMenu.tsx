@@ -1,4 +1,4 @@
-import { Button, Menu, MenuItem, NoSsr, Tooltip } from '@material-ui/core';
+import { Button, Menu, MenuItem, Tooltip } from '@material-ui/core';
 import LanguageIcon from '@material-ui/icons/Language';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
@@ -45,28 +45,26 @@ export const LanguageMenu: FC = () => {
           <LanguageLabel label={locale} />
         </Button>
       </Tooltip>
-      <NoSsr>
-        <Menu
-          id='language-menu'
-          anchorEl={languageMenu}
-          open={!!languageMenu}
-          onClose={handleLanguageMenuClose}
-        >
-          {LANGUAGES_LABEL.map(language => (
-            <MenuItem
-              component='a'
-              data-no-link='true'
-              key={language.code}
-              selected={language.code === locale}
-              onClick={event => handleSelect(event, language.code)}
-              lang={language.code}
-              hrefLang={language.code}
-            >
-              {language.text}
-            </MenuItem>
-          ))}
-        </Menu>
-      </NoSsr>
+      <Menu
+        id='language-menu'
+        anchorEl={languageMenu}
+        open={!!languageMenu}
+        onClose={handleLanguageMenuClose}
+      >
+        {LANGUAGES_LABEL.map(language => (
+          <MenuItem
+            component='a'
+            data-no-link='true'
+            key={language.code}
+            selected={language.code === locale}
+            onClick={event => handleSelect(event, language.code)}
+            lang={language.code}
+            hrefLang={language.code}
+          >
+            {language.text}
+          </MenuItem>
+        ))}
+      </Menu>
     </>
   );
 };

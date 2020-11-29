@@ -3,10 +3,9 @@ import { createStyles, IconButton, makeStyles, Toolbar, Tooltip, Typography } fr
 import { GitHub, Menu } from '@material-ui/icons';
 import clsx from 'clsx';
 import useTranslation from 'next-translate/useTranslation';
-import React, { Dispatch, FC } from 'react';
+import React, { FC } from 'react';
 
-import { ThemeActions } from '../redux/features/actionType';
-import { RootState } from '../redux/reducers';
+import { RootState } from '../redux/features/reducers';
 import { AppSearch } from './AppSearch';
 import { LanguageMenu } from './LanguageMenu';
 
@@ -47,7 +46,7 @@ export const AppToolBar: FC<AppToolBarProps> = ({
     state: {
       navigation: { pages }
     }
-  }: { dispatch: Dispatch<ThemeActions>; state: RootState } = useHoux();
+  }: { state: RootState } = useHoux();
 
   return (
     <Toolbar>

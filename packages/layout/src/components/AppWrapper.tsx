@@ -1,9 +1,8 @@
 import { useHoux } from '@app/houx';
-import { jssPreset, StylesProvider } from '@material-ui/core';
-import { create } from 'jss';
+import { StylesProvider } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React, { Dispatch, FC, ReactNode, useEffect } from 'react';
-import ReactGA from 'react-ga';
+import { useAnalytics } from 'use-analytics';
 
 import { NavigationActions, ViewActions } from '../redux/features/actionType';
 import { loadPages } from '../redux/features/navigation/actions';
@@ -15,12 +14,10 @@ interface AppWrapperProps {
   isMobile: boolean;
 }
 
-export const jss = create({
-  plugins: [...jssPreset().plugins]
-});
-
 export const AppWrapper: FC<AppWrapperProps> = ({ children, isMobile }) => {
   const { pathname } = useRouter();
+
+  const { page } = useAnalytics();
 
   const {
     dispatch: dispatchNavigationActions
@@ -37,11 +34,11 @@ export const AppWrapper: FC<AppWrapperProps> = ({ children, isMobile }) => {
   useEffect(() => {
     dispatchViewActions(handleDevice(isMobile));
     dispatchNavigationActions(loadPages(pathname));
-    ReactGA.pageview(pathname);
+    page();
   }, [pathname]);
 
   return (
-    <StylesProvider jss={jss}>
+    <StylesProvider>
       <ThemeProvider>{children}</ThemeProvider>
     </StylesProvider>
   );

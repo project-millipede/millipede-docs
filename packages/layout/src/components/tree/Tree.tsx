@@ -1,4 +1,6 @@
 /* eslint-disable import/named */
+import { CustomIcon, Link } from '@app/components';
+import { Icon, Page } from '@app/types';
 import { Collapse, createStyles, ListItem, ListItemIcon, ListItemText, makeStyles, Theme } from '@material-ui/core';
 import { TransitionProps } from '@material-ui/core/transitions';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
@@ -7,10 +9,7 @@ import TreeView from '@material-ui/lab/TreeView';
 import useTranslation from 'next-translate/useTranslation';
 import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 
-import { Icon, Page } from '../../../../../src/typings/data/import';
 import { contains } from '../../utils/collection/array';
-import Link from '../common/link/Link';
-import CustomIcon from '../icon/CustomIcon';
 
 interface TreeLabelProps {
   labelText: string;
