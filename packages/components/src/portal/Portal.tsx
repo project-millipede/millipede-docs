@@ -10,7 +10,7 @@ import React, {
   useState,
 } from 'react';
 
-import { PortalType } from './portals.constants';
+import { PortalType } from './Portal.constants';
 
 interface IPortalContext {
   portalMap: Map<PortalType, ReactNode>;
