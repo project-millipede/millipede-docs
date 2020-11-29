@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "checkJs": true,
+
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+
+    "forceConsistentCasingInFileNames": true,
+    // "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    // "isolatedModules": true,
+    "skipLibCheck": true,
+    // "jsx": "preserve",
+
+    "strict": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+
+    // Don't emit; allow Babel to transform files.
+    // "noEmit": true
+
+    "types": []
+  },
+  "exclude": ["node_modules"]
+}
