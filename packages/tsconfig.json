@@ -1,0 +1,11 @@
+{
+  "files": [],
+  "references": [
+    { "path": "mdx-loader" },
+    { "path": "types" },
+    { "path": "houx" },
+    { "path": "components" },
+    { "path": "layout" }
+  ],
+  "exclude": ["node_modules"]
+}
