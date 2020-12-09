@@ -1,10 +1,10 @@
+import { MathUtil } from '@app/utils';
 import Chance from 'chance';
 import { Async } from 'factory.ts';
 import { v4 as uuidv4 } from 'uuid';
 
-import { generateRandomInteger } from '../../../docs/src/modules/utils/math';
-import { Comment, Content, Media, Post, Profile, Timeline, User } from '../../typings/social';
-import { generateImageURL } from './images/picsum';
+import { Comment, Content, Media, Post, Profile, Timeline, User } from '../types';
+import { generateImageURL } from './helper/images/picsum';
 
 const chance = new Chance();
 
@@ -85,7 +85,7 @@ export const postFactory = Async.makeFactory<Post>({
   id: Async.each(() => uuidv4()),
   content: Async.each(() => contentFactory.build()),
   comments: Async.each(() =>
-    commentFactory.buildList(generateRandomInteger(5))
+    commentFactory.buildList(MathUtil.generateRandomInteger(5))
   ),
   votes: []
 });
@@ -94,7 +94,7 @@ export const postFactoryRealtime = Async.makeFactory<Post>({
   id: Async.each(() => uuidv4()),
   content: Async.each(() => contentFactoryRealtime.build()),
   comments: Async.each(() =>
-    commentFactory.buildList(generateRandomInteger(5))
+    commentFactory.buildList(MathUtil.generateRandomInteger(5))
   ),
   votes: []
 });

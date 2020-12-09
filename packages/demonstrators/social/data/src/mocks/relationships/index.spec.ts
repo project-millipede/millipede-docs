@@ -1,5 +1,5 @@
 import { createFriendships } from '.';
-import { User } from '../../../typings/social';
+import { User } from '../../types';
 
 const users: Array<User> = [
   {

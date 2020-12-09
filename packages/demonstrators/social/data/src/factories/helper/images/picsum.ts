@@ -1,4 +1,4 @@
-import { MathUtil } from '../../../../docs/src/modules/utils';
+import { MathUtil } from '@app/utils';
 
 export const generateImageURL = (width = 300, height = 200) => {
   const random = MathUtil.generateRandomInteger(256);
