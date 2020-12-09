@@ -1,7 +1,6 @@
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
-import Highlight from 'react-highlight';
 
 import { generateMdElement, MdElementProps } from './MdElement.svc';
 import { useMdStyles } from './styles/MdStyles';
@@ -51,38 +50,5 @@ const MdElement = ({ content }: MdElementProps) => {
 //     </div>
 //   );
 // };
-
-export const pre = ({ children, className }) => {
-  const language = className.replace(/language-/, '');
-
-  return (
-    <Highlight
-      // {...defaultProps}
-      code={children}
-      language={language}
-    >
-      {({
-        // className,
-        style,
-        tokens,
-        getLineProps,
-        getTokenProps
-      }) => (
-        <pre
-          // className={className}
-          style={{ ...style, padding: '20px' }}
-        >
-          {tokens.map((line, i) => (
-            <div key={i} {...getLineProps({ line, key: i })}>
-              {line.map((token, key) => (
-                <span key={key} {...getTokenProps({ token, key })} />
-              ))}
-            </div>
-          ))}
-        </pre>
-      )}
-    </Highlight>
-  );
-};
 
 export default MdElement;
