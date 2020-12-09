@@ -9,7 +9,8 @@
     { "path": "components" },
     { "path": "layout" },
     { "path": "demonstrator/types" },
-    { "path": "demonstrator/components" }
+    { "path": "demonstrator/components" },
+    { "path": "demonstrator/layout" }
   ],
   "exclude": ["node_modules"]
 }

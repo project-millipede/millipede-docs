@@ -1,0 +1,12 @@
+{
+  "name": "@demonstrator/layout",
+  "version": "0.2.0",
+  "private": true,
+  "main": "src/index.ts",
+  "dependencies": {
+    "@demonstrator/types": "workspace:packages/demonstrator/types"
+  },
+  "devDependencies": {
+    "typescript": "^4.1.2"
+  }
+}

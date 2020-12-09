@@ -1,20 +1,20 @@
-import { Area, Device, Szenario } from '../../../../../../src/typings/animation';
+import { Area, Device, Szenario } from '@demonstrator/types';
+
 import { StoreAction } from '../actionType';
 import { CHANGE_AREA, CHANGE_DEVICE, CHANGE_SZENARIO } from './actionTypes';
 
-interface Props {
+export interface AnimationProps {
   device: Device;
   szenario: Szenario;
   area: Area;
 }
 
-export const initialState: Props = {
+export const initialState: AnimationProps = {
   device: Device.Desktop,
   szenario: Szenario.Default,
   area: Area.Local
 };
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const animationReducer = (state = initialState, action: StoreAction) => {
   switch (action.type) {
     case CHANGE_DEVICE:
