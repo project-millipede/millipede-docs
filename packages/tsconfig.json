@@ -7,7 +7,8 @@
     { "path": "types" },
     { "path": "houx" },
     { "path": "components" },
-    { "path": "layout" }
+    { "path": "layout" },
+    { "path": "demonstrator/types" }
   ],
   "exclude": ["node_modules"]
 }
