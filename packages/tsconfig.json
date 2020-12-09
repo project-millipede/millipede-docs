@@ -2,6 +2,7 @@
   "files": [],
   "references": [
     { "path": "mdx-loader" },
+    { "path": "utils" },
     { "path": "types" },
     { "path": "houx" },
     { "path": "components" },

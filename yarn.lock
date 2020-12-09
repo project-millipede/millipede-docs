@@ -90,12 +90,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@analytics/core@npm:^0.7.0":
-  version: 0.7.0
-  resolution: "@analytics/core@npm:0.7.0"
+"@analytics/core@npm:^0.7.1":
+  version: 0.7.1
+  resolution: "@analytics/core@npm:0.7.1"
   dependencies:
-    analytics-utils: ^0.2.2
-  checksum: 1af6447943bc5f13d1f0fd806d24d6cae298ed963fc81851462db2a3250dba72c2520df419ccc05ae055012148d136d9462374114c8b499db17f9b82b02ee035
+    analytics-utils: ^0.3.0
+  checksum: ce4c85475c152ead4761187a7e6afab1ae35b2dc35d0283550dc7224010e09132e372853295406e8d351b4e6645cf2270286dfe77d951dd09130d370f55362c5
   languageName: node
   linkType: hard
 
@@ -122,9 +122,8 @@ __metadata:
   resolution: "@app/analytics@workspace:packages/analytics"
   dependencies:
     "@analytics/google-analytics": ^0.5.2
-    "@types/rimraf": ^3.0.0
-    analytics: ^0.6.0
-    rimraf: ^3.0.2
+    analytics: ^0.6.1
+    typescript: ^4.1.2
   languageName: unknown
   linkType: soft
 
@@ -238,6 +237,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@app/types@workspace:packages/types"
   dependencies:
+    typescript: ^4.1.2
+  languageName: unknown
+  linkType: soft
+
+"@app/utils@workspace:packages/utils":
+  version: 0.0.0-use.local
+  resolution: "@app/utils@workspace:packages/utils"
+  dependencies:
+    lodash: ^4.17.20
     typescript: ^4.1.2
   languageName: unknown
   linkType: soft
@@ -3654,23 +3662,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"analytics-utils@npm:^0.2.2":
-  version: 0.2.2
-  resolution: "analytics-utils@npm:0.2.2"
+"analytics-utils@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "analytics-utils@npm:0.3.0"
   dependencies:
     "@analytics/storage-utils": ^0.2.4
     dlv: ^1.1.3
-  checksum: 7650a5d47ed00895667c9b936bae2a85401a5176c457f297ccde86634bac8d4b194f1adbb67767f6bf6a4ce3eb3cd6d61ae6b0ac33d0054e7d07fe88123327bb
+  checksum: d8ff1be6d8dda818c87b97d57339379b6d4ca4cc8a8feb670022936510984b80a40c70cd11136c848143fadda29866d49f27dbc32b0a6c5cf0de93b6a82e94f1
   languageName: node
   linkType: hard
 
-"analytics@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "analytics@npm:0.6.0"
+"analytics@npm:^0.6.1":
+  version: 0.6.1
+  resolution: "analytics@npm:0.6.1"
   dependencies:
-    "@analytics/core": ^0.7.0
+    "@analytics/core": ^0.7.1
     "@analytics/storage-utils": ^0.2.4
-  checksum: 1ffa3145dbea639cac851b9491500dd2bbb130f80ac7fe9efc94bccbc9b7ff465c83a183b093bec5f66e033a819693b5ece5831189246293aa50e8250aade5a5
+  checksum: 275ff9874c2e5f74d7d270a9afc5e67a4797999dbc5f41771e6e843dac1e30e172301a9259ade2e88d1fd256a54b2ec9a29018085f9fed7dae37054bfbbd7364
   languageName: node
   linkType: hard
 
@@ -9195,6 +9203,7 @@ __metadata:
     "@app/components": "workspace:packages/components"
     "@app/houx": "workspace:packages/houx"
     "@app/layout": "workspace:packages/layout"
+    "@app/utils": "workspace:packages/utils"
     "@app/webpack-build": "workspace:build/webpack-build"
     "@babel/core": ^7.12.9
     "@babel/preset-env": ^7.12.7
