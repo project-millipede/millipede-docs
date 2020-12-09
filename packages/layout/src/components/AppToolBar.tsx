@@ -1,11 +1,11 @@
 import { useHoux } from '@app/houx';
+import { RootState as LayoutState } from '@app/layout';
 import { createStyles, IconButton, makeStyles, Toolbar, Tooltip, Typography } from '@material-ui/core';
 import { GitHub, Menu } from '@material-ui/icons';
 import clsx from 'clsx';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
-import { RootState } from '../redux/features/reducers';
 import { AppSearch } from './AppSearch';
 import { LanguageMenu } from './LanguageMenu';
 
@@ -43,10 +43,12 @@ export const AppToolBar: FC<AppToolBarProps> = ({
   const { t } = useTranslation();
 
   const {
-    state: {
-      navigation: { pages }
-    }
-  }: { state: RootState } = useHoux();
+    state: { navigation: { pages } } = {
+      navigation: {
+        pages: []
+      }
+    } as any
+  }: { state: LayoutState } = useHoux();
 
   return (
     <Toolbar>

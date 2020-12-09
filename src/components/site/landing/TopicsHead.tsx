@@ -1,5 +1,5 @@
 import { useHoux } from '@app/houx';
-import { RootState } from '@app/layout';
+import { RootState as LayoutState } from '@app/layout';
 import { Container } from '@material-ui/core';
 import _ from 'lodash';
 import { Translate } from 'next-translate';
@@ -10,8 +10,8 @@ import { OverviewProps } from '../../../typings/data/import';
 import { TopicsViewDesktop } from './TopicsViewDesktop';
 import { TopicsViewMobile } from './TopicsViewMobile';
 
-const loadTopics = (t: Translate): Array<OverviewProps> => {
-  const topics: Array<OverviewProps> = t(
+const loadTopics = (t: Translate) => {
+  const topics = t<Array<OverviewProps>>(
     'pages/topics/index:topics',
     {},
     { returnObjects: true }
@@ -26,12 +26,12 @@ export const TopicsHead = () => {
   const { t } = useTranslation();
 
   const {
-    state: {
-      view: { isMobile }
-    }
-  }: {
-    state: RootState;
-  } = useHoux();
+    state: { view: { isMobile } } = {
+      view: {
+        isMobile: false
+      }
+    } as any
+  }: { state: LayoutState } = useHoux();
 
   const topics = loadTopics(t);
 
