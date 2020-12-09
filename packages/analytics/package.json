@@ -3,17 +3,11 @@
   "version": "0.2.0",
   "private": true,
   "main": "src/index.ts",
-  "scripts": {
-    "compile": "tsc -b",
-    "clean": "rimraf dist tsconfig.tsbuildinfo"
-  },
   "dependencies": {
     "@analytics/google-analytics": "^0.5.2",
-    "analytics": "^0.6.0"
+    "analytics": "^0.6.1"
   },
-  "module": "browser",
   "devDependencies": {
-    "@types/rimraf": "^3.0.0",
-    "rimraf": "^3.0.2"
+    "typescript": "^4.1.2"
   }
 }
