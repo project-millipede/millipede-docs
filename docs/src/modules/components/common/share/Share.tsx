@@ -1,3 +1,4 @@
+import { StringUtil } from '@app/utils';
 import { createStyles, Fade, makeStyles, Snackbar, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@material-ui/core';
 import { Close, Share as ShareIcon } from '@material-ui/icons';
 import { windowOpenPromise } from '@vangware/window-open-promise';
@@ -19,7 +20,6 @@ import {
   URIPathParamsTwitter,
   URIPathParamsWhatsApp,
 } from '../../../../../../src/typings/share';
-import { StringUtil } from '../../../utils';
 import { objectToGetParams } from '../../../utils/social/objectToGetParams';
 import { Icon } from './Icon';
 
