@@ -1,6 +1,6 @@
 import { MutableRefObject } from 'react';
 
-import { SelectHandles } from '../CustomBoxForward';
+import { SelectHandles } from '../types';
 
 export const registerRef = (
   id: string,

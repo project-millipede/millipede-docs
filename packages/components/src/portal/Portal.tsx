@@ -7,7 +7,7 @@ import React, {
   useCallback,
   useContext,
   useEffect,
-  useState,
+  useState
 } from 'react';
 
 import { PortalType } from './Portal.constants';
@@ -18,7 +18,7 @@ interface IPortalContext {
   removePortalItem: (portalType: PortalType) => void;
 }
 
-export const PortalContext = createContext<IPortalContext>(null);
+const PortalContext = createContext<IPortalContext>(null);
 
 export const PortalProvider: FC = ({ children }) => {
   const [portalMap, setPortalMap] = useState<Map<PortalType, ReactNode>>(
@@ -53,7 +53,7 @@ export const PortalProvider: FC = ({ children }) => {
   );
 };
 
-interface IProps {
+export interface IProps {
   portalType: PortalType;
   [key: string]: any;
 }

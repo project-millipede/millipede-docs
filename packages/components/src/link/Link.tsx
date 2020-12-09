@@ -9,7 +9,17 @@ type NextComposedProps = AnchorHTMLAttributes<HTMLAnchorElement> &
 
 const NextComposed = forwardRef<HTMLAnchorElement, NextComposedProps>(
   (
-    { as, href, replace, scroll, passHref, shallow, prefetch, ...other },
+    {
+      as,
+      href,
+      replace,
+      scroll,
+      passHref,
+      shallow,
+      prefetch,
+      children,
+      ...other
+    },
     ref
   ) => {
     return (
@@ -22,7 +32,9 @@ const NextComposed = forwardRef<HTMLAnchorElement, NextComposedProps>(
         shallow={shallow}
         passHref={passHref}
       >
-        <a ref={ref} {...other} />
+        <a ref={ref} {...other}>
+          {children}
+        </a>
       </NextLink>
     );
   }
@@ -47,7 +59,7 @@ const Link: FC<LinkProps> = ({
   const router = useRouter();
   const pathname = typeof href === 'string' ? href : href.pathname;
   const className = clsx(classNameProps, {
-    [activeClassName]: router.pathname === pathname && activeClassName
+    [activeClassName]: router && router.pathname === pathname && activeClassName
   });
 
   if (naked) {

@@ -1,16 +1,6 @@
-import { Component, CSSProperties, MutableRefObject, ReactElement, ReactNode, RefCallback } from 'react';
-
-import { SelectHandles } from './CustomBoxForward';
+import { CSSProperties, ReactNode } from 'react';
 
 export type AnchorPosition = 'top' | 'bottom' | 'left' | 'right' | 'middle';
-
-export interface Relation {
-  targetId: string;
-  targetAnchor: AnchorPosition;
-  sourceAnchor: AnchorPosition;
-  label?: ReactNode;
-  style?: ArrowStyle;
-}
 
 export interface ArrowStyle {
   strokeColor?: string;
@@ -73,40 +63,6 @@ export interface ArcherContainerProps {
 
   children?: ReactNode;
 }
-
-export class ArcherContainer extends Component<ArcherContainerProps> {
-  /**
-   * Use this to recompute all the arrow positions. Useful if arrows do not properly rerender
-   * after the viewport or some elements moved.
-   */
-  refreshScreen: () => void;
-}
-
-export type RenderFnSingleParameter = {
-  ref: MutableRefObject<HTMLDivElement> | RefCallback<HTMLDivElement>;
-};
-
-export type RenderSingleFn = ({ ref }: RenderFnSingleParameter) => JSX.Element;
-
-export type RenderFnParameter = {
-  ref: MutableRefObject<HTMLElement>;
-  dynamicRef: MutableRefObject<SelectHandles>;
-};
-
-export type RenderFn = ({ ref, dynamicRef }: RenderFnParameter) => JSX.Element;
-
-export interface ArcherElementProps {
-  /**
-   * The id that will identify the Archer Element. Should only contain alphanumeric characters and standard characters that you can find in HTML ids.
-   */
-  id: string;
-  relations?: Array<Relation>;
-  style?: CSSProperties;
-  children?: ReactElement;
-  render?: RenderFn;
-}
-
-// different set of types
 
 export type RelationType = {
   targetId: string;
