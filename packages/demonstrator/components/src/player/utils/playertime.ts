@@ -1,7 +1,4 @@
 import _ from 'lodash';
-import { useEffect, useRef } from 'react';
-
-import { useStepDispatch, useStepState } from './codehike/site/src/steps/StepProvider';
 
 type Step = {
   start: number;
@@ -13,45 +10,6 @@ export type AbsoluteStep = Step & {
   duration: number;
   globalStart: number;
   globalEnd: number;
-};
-
-export const useInterval = (cb: () => void, delay: number) => {
-  const callbackRef = useRef(null);
-
-  useEffect(() => {
-    callbackRef.current = cb;
-  }, [cb]);
-
-  // eslint-disable-next-line consistent-return
-  useEffect(() => {
-    const tick = () => {
-      callbackRef.current();
-    };
-    if (delay > 0) {
-      const id = setInterval(tick, delay);
-      return () => {
-        clearInterval(id);
-      };
-    }
-  }, [delay]);
-};
-
-export const useStepsProgress = (delay: number) => {
-  const { playing, target, maxStepsCount } = useStepState();
-  const stepDispatch = useStepDispatch();
-
-  useInterval(
-    () => {
-      if (target === maxStepsCount - 1) {
-        stepDispatch({ type: 'RESET' });
-        return;
-      }
-      if (playing) {
-        stepDispatch({ type: 'AUTO' });
-      }
-    },
-    playing ? delay : 0
-  );
 };
 
 export const getStepByTime = (steps: Array<AbsoluteStep>, value: number) => {

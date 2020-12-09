@@ -3,27 +3,8 @@ import { usePrevious } from 'ahooks';
 import { motion, useAnimation } from 'framer-motion';
 import React, { FC, useCallback, useEffect, useMemo, useRef } from 'react';
 
+import { measure, measureOffset } from './Cursor.svc';
 import CircleShape from './shapes/circle';
-
-const measure = (element: HTMLElement) => {
-  if (element) {
-    const rect = element.getBoundingClientRect();
-    const x = rect.left + window.pageXOffset;
-    const y = rect.top + window.pageYOffset;
-    return { x, y, width: rect.width, height: rect.height };
-  }
-};
-
-const measureOffset = (
-  rectStart: Partial<DOMRect>,
-  rectEnd: Partial<DOMRect>
-) => {
-  const offSet: Partial<DOMRect> = {
-    x: -(rectEnd.x - rectStart.x),
-    y: -(rectEnd.y - rectStart.y)
-  };
-  return offSet;
-};
 
 const cursorVariant = {
   visible: { opacity: 1, scale: 1 },
