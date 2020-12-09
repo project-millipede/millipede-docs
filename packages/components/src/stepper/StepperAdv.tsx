@@ -1,4 +1,9 @@
-import { Button, createStyles, makeStyles, MobileStepper } from '@material-ui/core';
+import {
+  Button,
+  createStyles,
+  makeStyles,
+  MobileStepper
+} from '@material-ui/core';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import React, { useCallback, useEffect, useState } from 'react';
 
@@ -10,18 +15,18 @@ const useStyles = makeStyles(() =>
   })
 );
 
-interface TranslationProps {
+export interface TranslationProps {
   labelBack: string;
   labelNext: string;
 }
 
-interface StepperProps {
+export interface StepperAdvProps {
   steps: number;
   step?: number;
   setStepCb: (step: number) => void;
 }
 
-type Props = StepperProps & TranslationProps;
+export type Props = StepperAdvProps & TranslationProps;
 
 export const StepperAdv = ({
   steps,

@@ -7,8 +7,10 @@ import React, {
   MutableRefObject,
   ReactNode,
   useImperativeHandle,
-  useState,
+  useState
 } from 'react';
+
+import { SelectHandles } from './types';
 
 export interface StyleProps {
   bgcolor: string;
@@ -30,22 +32,17 @@ const useStyles = makeStyles<Theme, StyleProps>(() => ({
   }
 }));
 
-export interface SelectHandles {
-  select: () => void;
-  unSelect: () => void;
-}
-
-interface CustomBoxProps {
+export interface CustomBoxProps {
   children: ReactNode;
   routeSegement?: string;
   bgcolor?: string;
   dynamicRef?: MutableRefObject<SelectHandles>;
 }
 
-export const CustomBox: ForwardRefRenderFunction<
-  HTMLDivElement,
-  CustomBoxProps
-> = ({ routeSegement, children, bgcolor, dynamicRef }, ref) => {
+const CustomBox: ForwardRefRenderFunction<HTMLDivElement, CustomBoxProps> = (
+  { routeSegement, children, bgcolor, dynamicRef },
+  ref
+) => {
   const classes = useStyles({ bgcolor });
 
   const { pathname, push } = useRouter();

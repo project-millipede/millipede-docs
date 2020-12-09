@@ -4,7 +4,7 @@
 import React, { ReactNode } from 'react';
 
 import { Point } from './Point';
-import { AnchorPosition } from './types';
+import { AnchorPosition } from './types-private';
 
 type Props = {
   startingPoint: Point;

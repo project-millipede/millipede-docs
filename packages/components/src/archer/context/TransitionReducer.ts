@@ -1,4 +1,4 @@
-import { SourceToTargetType } from '../types';
+import { SourceToTargetType } from '../types-private';
 
 export const registerTransitions = (
   id: string,

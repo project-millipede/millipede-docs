@@ -2,8 +2,8 @@ import { CardContent, createStyles, Grid, makeStyles, Typography } from '@materi
 import useTranslation from 'next-translate/useTranslation';
 import React, { useState } from 'react';
 
-import { Content, Stack } from '../../../../../../src/typings/data/import';
-import { Stepper } from './Stepper';
+import { StepperAdv } from './StepperAdv';
+import { Content, Stack } from './types';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -52,7 +52,7 @@ export const renderTitleAndDescription = (items: Array<Content> = []) => {
   });
 };
 
-export const StepperContent = ({ elements = [] }: Stack) => {
+export const StepperContentAdv = ({ elements = [] }: Stack) => {
   const { t } = useTranslation();
 
   const [step, setStep] = useState(0);
@@ -60,17 +60,13 @@ export const StepperContent = ({ elements = [] }: Stack) => {
   const max = getStepsLength(elements);
 
   const currentSteps = stepsFiltered(elements, step);
-  const [firstItem] = currentSteps;
 
   return (
     <Grid container>
       <Grid item xs={12}>
-        <CardContent>{firstItem.image}</CardContent>
-      </Grid>
-      <Grid item xs={12}>
-        <Stepper
+        <StepperAdv
           steps={max + 1}
-          currentStep={(currentStep: number) => {
+          setStepCb={(currentStep: number) => {
             setStep(currentStep);
           }}
           labelNext={t('common:next')}

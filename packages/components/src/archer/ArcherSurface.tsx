@@ -5,7 +5,7 @@ import { useRefState } from './context/RefProvider';
 import { useTransitionState } from './context/TransitionProvider';
 import { Point } from './Point';
 import SvgArrow from './SvgArrow';
-import { AnchorPosition, ArcherContainerProps, EntityRelationType, SourceToTargetType } from './types';
+import { AnchorPosition, ArcherContainerProps, EntityRelationType, SourceToTargetType } from './types-private';
 
 const computeCoordinatesFromAnchorPosition = (
   anchorPosition: AnchorPosition,

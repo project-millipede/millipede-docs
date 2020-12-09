@@ -1,11 +1,11 @@
 /* eslint-disable import/no-named-as-default */
+import { HocsUtils } from '@app/render-utils';
 import React, { FC } from 'react';
 
-import { withForwardRef } from '../../../../../src/components/layout/grid/animation/framer/components/with-forward-ref';
 import ArcherSurface from './ArcherSurface';
 import { RefProvider } from './context/RefProvider';
 import { TransitionProvider } from './context/TransitionProvider';
-import { ArcherContainerProps } from './types';
+import { ArcherContainerProps } from './types-private';
 
 export const ArcherContainer: FC<ArcherContainerProps> = ({
   children,
@@ -20,6 +20,6 @@ export const ArcherContainer: FC<ArcherContainerProps> = ({
   );
 };
 
-export default withForwardRef<HTMLElement, ArcherContainerProps>(
+export default HocsUtils.withForwardRef<HTMLElement, ArcherContainerProps>(
   ArcherContainer
 );

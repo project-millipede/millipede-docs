@@ -1,7 +1,9 @@
-import * as Portal from './Portal';
-import * as PortalConstants from './Portal.constants';
+import { PortalIn, PortalOut, PortalProvider } from './Portal';
+import { PortalType } from './Portal.constants';
 
 export default {
-  Portal,
-  PortalConstants
+  PortalProvider,
+  PortalIn,
+  PortalOut,
+  PortalType
 };
