@@ -4,10 +4,7 @@
   "builds": [
     {
       "src": "package.json",
-      "use": "@vercel/next",
-      "config": {
-        "installCommand": "yarn config set nodeLinker node-modules && yarn install"
-      }
+      "use": "@vercel/next"
     }
   ]
 }
