@@ -3,6 +3,7 @@
   "references": [
     { "path": "mdx-loader" },
     { "path": "utils" },
+    { "path": "render-utils" },
     { "path": "types" },
     { "path": "houx" },
     { "path": "components" },
