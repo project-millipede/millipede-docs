@@ -1,23 +1,10 @@
 import { useHoux } from '@app/houx';
+import { CollectionUtil } from '@app/utils';
+import { RootState, scrollActions, scrollStates, ScrollTypes, selectors } from '@demonstrators-social/shared';
 import { Button } from '@material-ui/core';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-
-import { postIdsState } from '../../../../../../../docs/src/modules/recoil/features/scroll/post/reducer';
-import {
-  addTopic,
-  createNodesWithRelations,
-  LAYOUT,
-  nodesWithRelationsWithEdgeState,
-  NodeWithRelationsWithEdge,
-  timelineViewState,
-} from '../../../../../../../docs/src/modules/recoil/features/scroll/timeline/reducer';
-import {
-  selectInteractionDataForPostScenario,
-} from '../../../../../../../docs/src/modules/redux/features/timeline/selector';
-import { RootState } from '../../../../../../../docs/src/modules/redux/reducers';
-import { compareDescFn } from '../../../../../../../docs/src/modules/utils/collection/array';
 
 export const publishActions = ['head', 'upload', 'download', 'tail'];
 
@@ -35,6 +22,11 @@ export const ProgressiveStepBuilder: FC<ProgressiveStepBuilderProps> = ({
   ltr
 }) => {
   const { t } = useTranslation();
+
+  const {
+    timeline: { nodesWithRelationsWithEdgeState, timelineViewState },
+    post: { postIdsState }
+  } = scrollStates;
 
   const [
     nodesWithRelationsWithEdge,
@@ -54,12 +46,14 @@ export const ProgressiveStepBuilder: FC<ProgressiveStepBuilderProps> = ({
     state: RootState;
   } = useHoux();
 
-  const [activePostId] = selectInteractionDataForPostScenario(
+  const [
+    activePostId
+  ] = selectors.timeline.selectInteractionDataForPostScenario(
     ltr ? leftTimelineId : rightTimelineId,
     ltr ? rightTimelineId : leftTimelineId,
     ltr ? postIdsRight : postIdsLeft,
     timelineView.currentViews,
-    compareDescFn('content.createdAt')
+    CollectionUtil.Array.compareDescFn('content.createdAt')
   )(state);
 
   const handleCreate = (
@@ -71,17 +65,17 @@ export const ProgressiveStepBuilder: FC<ProgressiveStepBuilderProps> = ({
       const result = [activePostId].reduce(
         (acc, activePostId) => {
           const nodeWithRelationsWithEdge = ['media'].map(usedSlice => {
-            const baseActionsExtended = addTopic(
+            const baseActionsExtended = scrollActions.timeline.addTopic(
               progressiveActions,
               'publish',
               'pages/pidp/use-case/recognition/index:'
             );
 
-            return createNodesWithRelations(
+            return scrollActions.timeline.createNodesWithRelations(
               baseActionsExtended,
               t,
               ltr,
-              LAYOUT.PROGRESSIVE
+              ScrollTypes.Timeline.LAYOUT.PROGRESSIVE
             )(
               ltr
                 ? [leftTimelineId, rightTimelineId]
@@ -102,7 +96,7 @@ export const ProgressiveStepBuilder: FC<ProgressiveStepBuilderProps> = ({
         },
         {} as {
           [key: string]: {
-            values: Array<NodeWithRelationsWithEdge>;
+            values: Array<ScrollTypes.Timeline.NodeWithRelationsWithEdge>;
             id: string;
             description: string;
           };

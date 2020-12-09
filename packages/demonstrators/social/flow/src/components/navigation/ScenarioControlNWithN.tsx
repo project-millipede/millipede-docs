@@ -1,25 +1,17 @@
 import { useHoux } from '@app/houx';
+import { CollectionUtil } from '@app/utils';
+import {
+  RootState,
+  scrollActions,
+  scrollSelectors,
+  scrollStates,
+  ScrollTypes,
+  selectors,
+} from '@demonstrators-social/shared';
 import { Button } from '@material-ui/core';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-
-import {
-  interactionOptionsSelector,
-} from '../../../../../../../docs/src/modules/recoil/features/scroll/interaction/reducer';
-import { postIdsState } from '../../../../../../../docs/src/modules/recoil/features/scroll/post/reducer';
-import {
-  addTopic,
-  createNodesWithRelations,
-  nodesWithRelationsWithEdgeState,
-  NodeWithRelationsWithEdge,
-  timelineViewState,
-} from '../../../../../../../docs/src/modules/recoil/features/scroll/timeline/reducer';
-import {
-  selectInteractionDataForPostScenario,
-} from '../../../../../../../docs/src/modules/redux/features/timeline/selector';
-import { RootState } from '../../../../../../../docs/src/modules/redux/reducers';
-import { compareDescFn } from '../../../../../../../docs/src/modules/utils/collection/array';
 
 interface ScenarioControlProps {
   ltr: boolean;
@@ -43,6 +35,15 @@ export const ScenarioControlNWithN: FC<ScenarioControlProps> = ({
     state: RootState;
   } = useHoux();
 
+  const {
+    timeline: { timelineViewState, nodesWithRelationsWithEdgeState },
+    post: { postIdsState }
+  } = scrollStates;
+
+  const {
+    interaction: { interactionOptionsSelector }
+  } = scrollSelectors;
+
   const usedSlices = useRecoilValue(interactionOptionsSelector);
   const timelineView = useRecoilValue(timelineViewState);
 
@@ -53,12 +54,12 @@ export const ScenarioControlNWithN: FC<ScenarioControlProps> = ({
     nodesWithRelationsWithEdgeState
   );
 
-  const activePostIds = selectInteractionDataForPostScenario(
+  const activePostIds = selectors.timeline.selectInteractionDataForPostScenario(
     ltr ? leftTimelineId : rightTimelineId,
     ltr ? rightTimelineId : leftTimelineId,
     ltr ? postIdsLeft : postIdsRight,
     timelineView.currentViews,
-    compareDescFn('content.createdAt')
+    CollectionUtil.Array.compareDescFn('content.createdAt')
   )(state);
 
   const handleCreate = (
@@ -67,13 +68,17 @@ export const ScenarioControlNWithN: FC<ScenarioControlProps> = ({
     const result = activePostIds.reduce(
       (acc, activePostId) => {
         const nodeWithRelationsWithEdge = usedSlices.map(usedSlice => {
-          const baseActionsExtended = addTopic(
+          const baseActionsExtended = scrollActions.timeline.addTopic(
             baseActions,
             `${activePostId}-${usedSlice}`,
             'pages/pidp/use-case/recognition/index:'
           );
 
-          return createNodesWithRelations(baseActionsExtended, t, ltr)(
+          return scrollActions.timeline.createNodesWithRelations(
+            baseActionsExtended,
+            t,
+            ltr
+          )(
             [
               ltr ? leftTimelineId : rightTimelineId,
               ltr ? rightTimelineId : leftTimelineId
@@ -94,7 +99,7 @@ export const ScenarioControlNWithN: FC<ScenarioControlProps> = ({
       },
       {} as {
         [key: string]: {
-          values: Array<NodeWithRelationsWithEdge>;
+          values: Array<ScrollTypes.Timeline.NodeWithRelationsWithEdge>;
           id: string;
           description: string;
         };

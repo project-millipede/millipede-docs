@@ -1,27 +1,30 @@
+import { ArcherTypes } from '@app/components';
+import { ScrollTypes } from '@demonstrators-social/shared';
 import { RefObject } from 'react';
-
-import { ArcherElementProps, Relation, RenderFn } from '../../../../../../../docs/src/modules/components/archer/types';
-import { NodeWithRelations } from '../../../../../../../docs/src/modules/recoil/features/scroll/timeline/reducer';
 
 export interface InteractionItemPropsRoot {
   containerScroll: Partial<DOMRect>;
   timelineId: string;
   postId: string;
-  archerData?: NodeWithRelations | Array<NodeWithRelations>;
+  archerData?:
+    | ScrollTypes.Timeline.NodeWithRelations
+    | Array<ScrollTypes.Timeline.NodeWithRelations>;
   offSet: number;
-  render?: RenderFn;
+  render?: ArcherTypes.RenderFn;
 }
 
 export interface InteractionItemProps {
   timelineId: string;
   postId: string;
-  archerData?: NodeWithRelations | Array<NodeWithRelations>;
+  archerData?:
+    | ScrollTypes.Timeline.NodeWithRelations
+    | Array<ScrollTypes.Timeline.NodeWithRelations>;
   otherTimelineId?: string;
-  render?: RenderFn;
+  render?: ArcherTypes.RenderFn;
 }
 
 export type InteractionItemArcherProps = InteractionItemProps &
-  ArcherElementProps;
+  ArcherTypes.ArcherElementProps;
 
 export interface InteractionSliceProps {
   timelineId: string;
@@ -31,9 +34,9 @@ export interface InteractionSliceProps {
   forwardedRef?: RefObject<HTMLDivElement>;
 
   id?: string;
-  relations?: Array<Relation>;
+  relations?: Array<ArcherTypes.Relation>;
   dynamicRef?: any;
 }
 
 export type InteractionSliceArcherProps = InteractionSliceProps &
-  ArcherElementProps;
+  ArcherTypes.ArcherElementProps;

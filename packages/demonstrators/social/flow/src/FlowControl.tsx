@@ -1,4 +1,5 @@
-import { useEffectRef } from '@huse/effect-ref';
+import { Archer, Stepper } from '@app/components';
+import { scrollStates } from '@demonstrators-social/shared';
 import {
   Checkbox,
   createStyles,
@@ -13,22 +14,15 @@ import {
   Typography,
 } from '@material-ui/core';
 import { usePrevious } from 'ahooks';
-import elementResizeDetectorMaker from 'element-resize-detector';
 import _ from 'lodash';
 import useTranslation from 'next-translate/useTranslation';
-import React, { ChangeEvent, CSSProperties, FC, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { ChangeEvent, CSSProperties, FC, useEffect, useMemo, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
-import { useRefState } from '../../../../../../../docs/src/modules/components/archer/context/RefProvider';
-import { StepperAdv } from '../../../../../../../docs/src/modules/components/common/stepper';
-import {
-  nodesWithRelationsWithEdgeState,
-} from '../../../../../../../docs/src/modules/recoil/features/scroll/timeline/reducer';
-import { InteractionOptions } from './InteractionOptions';
-import { ProgressiveStepBuilder } from './ProgressiveStepBuilder';
-import { ScenarioControlNWithN } from './ScenarioControlNWithN';
-
-const resizeDetector = elementResizeDetectorMaker({ strategy: 'scroll' });
+import { ProgressiveStepBuilder } from './components/navigation/ProgressiveStepBuilder';
+import { ScenarioControlNWithN } from './components/navigation/ScenarioControlNWithN';
+import { FlowControlObserver } from './components/observer/FlowControlObserver';
+import { SliceOptions } from './components/options/FlowSliceOptions';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -63,6 +57,10 @@ interface ScenarioNavigatorProps {}
 const ScenarioNavigator: FC<ScenarioNavigatorProps> = () => {
   const { t } = useTranslation();
 
+  const {
+    timeline: { nodesWithRelationsWithEdgeState }
+  } = scrollStates;
+
   const [
     { nodesWithRelations, activeId },
     setNodesWithRelationsWithEdge
@@ -76,7 +74,7 @@ const ScenarioNavigator: FC<ScenarioNavigatorProps> = () => {
   }, [nodesWithRelations, activeId]);
 
   return (
-    <StepperAdv
+    <Stepper.StepperAdv
       steps={steps}
       step={currentStep}
       setStepCb={(currentStep: number) => {
@@ -93,52 +91,16 @@ const ScenarioNavigator: FC<ScenarioNavigatorProps> = () => {
   );
 };
 
-interface InteractionFlowControlObserverProps {
-  handleControlOffset?: (value: number) => void;
-  style?: CSSProperties;
-  children: ReactNode;
-}
-
-export const InteractionFlowControlObserver: FC<InteractionFlowControlObserverProps> = ({
-  handleControlOffset,
-  style,
-  children
-}) => {
-  const observeResize = useCallback((element: HTMLElement) => {
-    const listener = () => {
-      if (handleControlOffset != null) {
-        handleControlOffset(element.offsetHeight);
-      }
-    };
-    resizeDetector.listenTo(element, listener);
-
-    return () => {
-      resizeDetector.removeListener(element, listener);
-    };
-  }, []);
-
-  const resizeControlRef = useEffectRef(observeResize);
-
-  return (
-    <div
-      style={{
-        ...style,
-        display: 'flex',
-        flexDirection: 'column'
-      }}
-      ref={resizeControlRef}
-    >
-      {children}
-    </div>
-  );
-};
-
 interface ScenarioDetailNavigatorProps {}
 
 const ScenarioDetailNavigator: FC<ScenarioDetailNavigatorProps> = () => {
   const { t } = useTranslation();
 
   const classes = useStyles();
+
+  const {
+    timeline: { nodesWithRelationsWithEdgeState }
+  } = scrollStates;
 
   const [selectedKey, setSelectedKey] = useState({
     row: '',
@@ -157,7 +119,7 @@ const ScenarioDetailNavigator: FC<ScenarioDetailNavigatorProps> = () => {
 
   const [currentStep, setCurrentStep] = useState(0);
 
-  const { refs } = useRefState();
+  const { refs } = Archer.ArcherContext.useRefState();
 
   const [id, setId] = useState('');
 
@@ -276,7 +238,7 @@ const ScenarioDetailNavigator: FC<ScenarioDetailNavigatorProps> = () => {
             {t(`pages/pidp/use-case/recognition/index:${id}`)}
           </Typography>
         </Paper>
-        <StepperAdv
+        <Stepper.StepperAdv
           steps={steps}
           step={currentStep}
           setStepCb={(newStep: number) => {
@@ -316,7 +278,7 @@ const ScenarioControl: FC<ScenarioControlProps> = (
 
   return (
     <div style={{ display: 'flex' }}>
-      <InteractionOptions />
+      <SliceOptions />
       <ScenarioControlNWithN
         ltr={state.ltr}
         leftTimelineId={leftTimelineId}
@@ -347,14 +309,14 @@ const ScenarioControl: FC<ScenarioControlProps> = (
   );
 };
 
-export const InteractionFlowControl: FC<InteractionFlowControlProps> = ({
+export const FlowControl: FC<InteractionFlowControlProps> = ({
   handleControlOffset,
   leftTimelineId,
   rightTimelineId,
   style
 }) => {
   return handleControlOffset ? (
-    <InteractionFlowControlObserver
+    <FlowControlObserver
       handleControlOffset={handleControlOffset}
       style={style}
     >
@@ -364,7 +326,7 @@ export const InteractionFlowControl: FC<InteractionFlowControlProps> = ({
       />
       <ScenarioNavigator />
       <ScenarioDetailNavigator />
-    </InteractionFlowControlObserver>
+    </FlowControlObserver>
   ) : (
     <>
       <ScenarioControl

@@ -1,15 +1,9 @@
+import { ScrollTypes } from '@demonstrators-social/shared';
 import _ from 'lodash';
-
-import {
-  LAYOUT,
-  NodesWithRelationsMap,
-  NodeWithRelations,
-  NodeWithRelationsWithEdge,
-} from '../../../../../../../docs/src/modules/recoil/features/scroll/timeline/reducer';
 
 export const getSelectedPostIds = (
   timelineId: string,
-  nodeWithRelationsWithEdgeMap: NodesWithRelationsMap,
+  nodeWithRelationsWithEdgeMap: ScrollTypes.Timeline.NodesWithRelationsMap,
   position: string
 ) => {
   const {
@@ -20,7 +14,7 @@ export const getSelectedPostIds = (
   } = nodeWithRelationsWithEdgeMap;
 
   const nodeWithRelationsWithEdge = _.get(nodesWithRelations, activeId, {
-    values: [] as Array<NodeWithRelationsWithEdge>
+    values: [] as Array<ScrollTypes.Timeline.NodeWithRelationsWithEdge>
   });
 
   const { values } = nodeWithRelationsWithEdge;
@@ -41,7 +35,7 @@ export const getSelectedPostIds = (
         return id;
       });
 
-      if (layout === LAYOUT.PROGRESSIVE) {
+      if (layout === ScrollTypes.Timeline.LAYOUT.PROGRESSIVE) {
         if (ltr) {
           if (position === 'left' && counter >= 0) {
             const relation = allNodeIds[0];
@@ -72,7 +66,7 @@ export const getSelectedPostIds = (
         }
       }
 
-      if (layout === LAYOUT.FULL) {
+      if (layout === ScrollTypes.Timeline.LAYOUT.FULL) {
         const [headRelation] = allNodeIds.slice(0, 1);
         const [tailRelation] = allNodeIds.slice(-1);
 
@@ -95,12 +89,12 @@ export const getSelectedPostIds = (
 };
 
 export const getSelectedSliceIdsBody = (
-  value: NodeWithRelationsWithEdge,
+  value: ScrollTypes.Timeline.NodeWithRelationsWithEdge,
   counter: number,
   finalSize: number
 ) => {
   const { nodeWithRelations, ltr, layout } = value;
-  if (layout === LAYOUT.PROGRESSIVE) {
+  if (layout === ScrollTypes.Timeline.LAYOUT.PROGRESSIVE) {
     if (ltr) {
       if (counter > 0) {
         if (counter < finalSize) {
@@ -126,25 +120,26 @@ export const getSelectedSliceIdsBody = (
       }
     }
   }
-  if (layout === LAYOUT.FULL) {
+  if (layout === ScrollTypes.Timeline.LAYOUT.FULL) {
     return nodeWithRelations.slice(1, nodeWithRelations.length - 1);
   }
+  return null;
 };
 
 export interface SliceMap {
   postId: string;
   sliceId: string;
-  nodeWithRelations: NodeWithRelations;
+  nodeWithRelations: ScrollTypes.Timeline.NodeWithRelations;
 }
 
 export const getSelectedSliceIds = (
   timelineId: string,
-  nodeWithRelationsWithEdgeMap: NodesWithRelationsMap
+  nodeWithRelationsWithEdgeMap: ScrollTypes.Timeline.NodesWithRelationsMap
 ) => {
   const { activeId, nodesWithRelations } = nodeWithRelationsWithEdgeMap;
 
   const nodeWithRelationsWithEdge = _.get(nodesWithRelations, activeId, {
-    values: [] as Array<NodeWithRelationsWithEdge>
+    values: [] as Array<ScrollTypes.Timeline.NodeWithRelationsWithEdge>
   });
 
   const { values } = nodeWithRelationsWithEdge;

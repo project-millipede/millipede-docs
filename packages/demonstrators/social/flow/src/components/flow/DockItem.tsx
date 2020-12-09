@@ -1,18 +1,12 @@
+import { HooksUtils } from '@app/render-utils';
+import { scrollReducers, scrollStates } from '@demonstrators-social/shared';
 import { EffectRef } from '@huse/effect-ref';
 import React, { FC, useCallback, useLayoutEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-import {
-  refPostScrollState,
-  scrollPostReducer,
-} from '../../../../../../../docs/src/modules/recoil/features/scroll/post/reducer';
-import {
-  nodesWithRelationsWithEdgeState,
-} from '../../../../../../../docs/src/modules/recoil/features/scroll/timeline/reducer';
-import { useMeasure } from '../../../../../../demo/social/components/reactUseMeasureNextNext';
-import { getSelectedSliceIds } from './Interaction.svc';
-import { InteractionSliceObserverWithArcher } from './InteractionSliceObserver';
-import { InteractionItemPropsRoot } from './types';
+import { InteractionItemPropsRoot } from '../../types';
+import { getSelectedSliceIds } from './Dock.svc';
+import { InteractionSliceObserverWithArcher } from './DockSlice';
 
 export const InteractionItem: FC<InteractionItemPropsRoot> = ({
   containerScroll,
@@ -20,9 +14,13 @@ export const InteractionItem: FC<InteractionItemPropsRoot> = ({
   postId,
   offSet
 }) => {
+  const {
+    post: { refPostScrollState }
+  } = scrollStates;
+
   const setRefPostScroll = useSetRecoilState(refPostScrollState(postId));
 
-  const [postRef, postBounds] = useMeasure({
+  const [postRef, postBounds] = HooksUtils.useMeasure({
     debounce: 0,
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     callBack: _node => {}
@@ -31,19 +29,19 @@ export const InteractionItem: FC<InteractionItemPropsRoot> = ({
   const updateObservedItem = useCallback(
     (timelineId: string, value: EffectRef<HTMLElement>) => {
       setRefPostScroll(state =>
-        scrollPostReducer.updateObservedItem(state, timelineId, value)
+        scrollReducers.post.updateObservedItem(state, timelineId, value)
       );
     },
-    [scrollPostReducer.updateObservedItem]
+    [scrollReducers.post.updateObservedItem]
   );
 
   const removeObservedItem = useCallback(
     (timelineId: string) => {
       setRefPostScroll(state =>
-        scrollPostReducer.removeObservedItem(state, timelineId)
+        scrollReducers.post.removeObservedItem(state, timelineId)
       );
     },
-    [scrollPostReducer.removeObservedItem]
+    [scrollReducers.post.removeObservedItem]
   );
 
   // 1.1 (mount, and update, deps)
@@ -57,6 +55,10 @@ export const InteractionItem: FC<InteractionItemPropsRoot> = ({
       removeObservedItem(timelineId);
     };
   }, []);
+
+  const {
+    timeline: { nodesWithRelationsWithEdgeState }
+  } = scrollStates;
 
   const nodeWithRelationsWithEdge = useRecoilValue(
     nodesWithRelationsWithEdgeState

@@ -1,11 +1,4 @@
-export interface Step {
-  start: number;
-  end: number;
-  label: string;
-  selector: string;
-  description: string;
-  timelineId?: string;
-}
+import { Step } from '@demonstrator/components/src/player/types';
 
 export const getSteps = (
   timelineId: string,

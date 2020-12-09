@@ -1,17 +1,15 @@
 /* eslint-disable import/no-named-as-default */
+import { Archer } from '@app/components';
+import { scrollStates, ScrollTypes } from '@demonstrators-social/shared';
 import { createStyles, makeStyles, Typography } from '@material-ui/core';
 import clsx from 'clsx';
 import _ from 'lodash';
 import React, { FC } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { ArcherElement } from '../../../../../../../docs/src/modules/components/archer';
-import CustomBox from '../../../../../../../docs/src/modules/components/archer/CustomBoxForward';
-import {
-  nodesWithRelationsWithEdgeState,
-  NodeWithRelationsWithEdge,
-} from '../../../../../../../docs/src/modules/recoil/features/scroll/timeline/reducer';
-import { getSelectedSliceIdsBody } from './Interaction.svc';
+import { getSelectedSliceIdsBody } from './Dock.svc';
+
+const { ArcherElement, CustomBox } = Archer;
 
 interface InteractionBodyProps {}
 
@@ -33,6 +31,10 @@ export const useStyles = makeStyles(() =>
 export const InteractionBody: FC<InteractionBodyProps> = () => {
   const classes = useStyles();
 
+  const {
+    timeline: { nodesWithRelationsWithEdgeState }
+  } = scrollStates;
+
   const nodeWithRelationsWithEdgeMap = useRecoilValue(
     nodesWithRelationsWithEdgeState
   );
@@ -45,7 +47,7 @@ export const InteractionBody: FC<InteractionBodyProps> = () => {
   } = nodeWithRelationsWithEdgeMap;
 
   const nodeWithRelationsWithEdge = _.get(nodesWithRelations, activeId, {
-    values: [] as Array<NodeWithRelationsWithEdge>
+    values: [] as Array<ScrollTypes.Timeline.NodeWithRelationsWithEdge>
   });
 
   const { values } = nodeWithRelationsWithEdge;
@@ -71,7 +73,7 @@ export const InteractionBody: FC<InteractionBodyProps> = () => {
               } = value;
               return (
                 <ArcherElement id={id} key={id} relations={relations}>
-                  <CustomBox bgcolor='success.main'>
+                  <CustomBox>
                     <Typography variant='subtitle1'>{label}</Typography>
                   </CustomBox>
                 </ArcherElement>
