@@ -1,13 +1,7 @@
 import { Link } from '@app/components';
 import { useHoux } from '@app/houx';
 import { RootState as LayoutState } from '@app/layout';
-import {
-  Button,
-  Container,
-  createStyles,
-  makeStyles,
-  Theme
-} from '@material-ui/core';
+import { Button, Container, createStyles, makeStyles, Theme } from '@material-ui/core';
 import { ChevronLeft, ChevronRight } from '@material-ui/icons';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
@@ -46,9 +40,12 @@ export const AppContentFooter: FC = () => {
   const { t } = useTranslation();
 
   const {
-    state: {
-      navigation: { flattenedPages, activePage }
-    }
+    state: { navigation: { flattenedPages, activePage } } = {
+      navigation: {
+        flattenedPages: [],
+        activePage: ''
+      }
+    } as any
   }: { state: LayoutState } = useHoux();
 
   const currentPageNumber = flattenedPages.findIndex(

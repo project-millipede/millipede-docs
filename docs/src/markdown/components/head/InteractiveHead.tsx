@@ -1,5 +1,5 @@
 import { useHoux } from '@app/houx';
-import { RootState } from '@app/layout';
+import { RootState as LayoutState } from '@app/layout';
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import LinkIcon from '@material-ui/icons/Link';
 import React, { ReactNode, useEffect } from 'react';
@@ -53,10 +53,12 @@ const InteraktiveHead = ({ id, variant, children }: InteraktiveHeadProps) => {
   };
 
   const {
-    state: {
-      view: { isMobile }
-    }
-  }: { state: RootState } = useHoux();
+    state: { view: { isMobile } } = {
+      view: {
+        isMobile: false
+      }
+    } as any
+  }: { state: LayoutState } = useHoux();
 
   const [ref, inView, entry] = useInView();
 

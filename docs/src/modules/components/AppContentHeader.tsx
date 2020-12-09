@@ -34,9 +34,11 @@ export const AppContentHeader: FC<MarkdownDocsProps> = ({
   const { pathname } = useRouter();
 
   const {
-    state: {
-      view: { isMobile }
-    }
+    state: { view: { isMobile } } = {
+      view: {
+        isMobile: false
+      }
+    } as any
   }: { state: LayoutState } = useHoux();
 
   const breadcrumbs = createBreadcrumbs(pathname);

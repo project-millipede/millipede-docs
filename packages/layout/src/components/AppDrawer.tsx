@@ -15,7 +15,7 @@ import clsx from 'clsx';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
-import { RootState } from '../redux/features/reducers';
+import { RootState as LayoutState } from '../redux/features/reducers';
 import { Tree } from './tree/Tree';
 
 const drawerWidth = 280;
@@ -86,11 +86,13 @@ export const AppDrawer: FC<AppDrawerProps> = ({
   const theme: Theme = useTheme();
 
   const {
-    state: {
-      navigation: { pages, activePage },
-      view: { isMobile }
-    }
-  }: { state: RootState } = useHoux();
+    state: { navigation: { pages, activePage }, view: { isMobile } } = {
+      navigation: { pages: [], activePage: {} },
+      view: {
+        isMobile: false
+      }
+    } as any
+  }: { state: LayoutState } = useHoux();
 
   const { t } = useTranslation();
 
