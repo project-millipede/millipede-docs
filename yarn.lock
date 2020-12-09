@@ -7136,13 +7136,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"highlight.js@npm:^9.11.0":
-  version: 9.18.5
-  resolution: "highlight.js@npm:9.18.5"
-  checksum: dea74c216cec83604e35cd3187aa9fa7a7da4876d1da6519a7bb1b635566e6525fcb3a3d8f2158a11e930499acee9506c710c5121ce30d328342af2e49fe59da
-  languageName: node
-  linkType: hard
-
 "hmac-drbg@npm:^1.0.0":
   version: 1.0.1
   resolution: "hmac-drbg@npm:1.0.1"
@@ -9183,7 +9176,6 @@ __metadata:
     react-compound-timer: ^1.2.0
     react-device-detect: ^1.14.0
     react-dom: 17.0.1
-    react-highlight: ^0.12.0
     react-hyphen: ^1.4.0
     react-intersection-observer: ^8.31.0
     react-swipeable-views: 0.13.9
@@ -10596,18 +10588,6 @@ __metadata:
   version: 2.0.4
   resolution: "react-fast-compare@npm:2.0.4"
   checksum: 4e4bfc3597414a36ee35977259012fff30c4f13a0e5dcabf958e91991bef8e9a3faee9dd666cfbdb0c2a0f0ddaf242ac2912054caa956a793c4cdff274dc5aec
-  languageName: node
-  linkType: hard
-
-"react-highlight@npm:^0.12.0":
-  version: 0.12.0
-  resolution: "react-highlight@npm:0.12.0"
-  dependencies:
-    highlight.js: ^9.11.0
-  peerDependencies:
-    react: ^15.0.0 || ^16.0.0
-    react-dom: ^15.0.0 || ^16.0.0
-  checksum: 4461af68e73b8f3ce81392b07d23ff2769ea0f7725bd0126855228056f2db0b9dcb980bc011037e684fd7ed1a8cb012c6a38b20b42ac3bbcf6bd226e422e3f9f
   languageName: node
   linkType: hard
 
