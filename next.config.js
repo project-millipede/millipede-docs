@@ -4,10 +4,20 @@ const nextTranslate = require('next-translate');
 
 const modules = [
   '@app/houx',
+  '@app/utils',
+  '@app/render-utils',
   '@app/types',
   '@app/analytics',
   '@app/components',
-  '@app/layout'
+  '@app/layout',
+  '@demonstrator/types',
+  '@demonstrator/components',
+  '@demonstrator/layout',
+  '@demonstrators-social/data',
+  '@demonstrators-social/components',
+  '@demonstrators-social/shared',
+  '@demonstrators-social/flow',
+  '@demonstrators-social/layout'
 ];
 
 const nextConfig = {
