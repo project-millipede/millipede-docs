@@ -1,22 +1,12 @@
+import { Archer } from '@app/components';
 import { useHoux } from '@app/houx';
+import { generateData, Types } from '@demonstrators-social/data';
+import { FlowControl, FlowControlObserver, FlowPlayControl, FlowSurface } from '@demonstrators-social/flow';
+import { actions, RootState, selectors, TimelineActions } from '@demonstrators-social/shared';
 import React, { Dispatch, FC, useCallback, useEffect, useState } from 'react';
 
-import { RefProvider } from '../../../../docs/src/modules/components/archer/context/RefProvider';
-import { TransitionProvider } from '../../../../docs/src/modules/components/archer/context/TransitionProvider';
-import { TimelineActions } from '../../../../docs/src/modules/redux/features/actionType';
-import { normalizeData } from '../../../../docs/src/modules/redux/features/timeline/actions';
-import { selectUserCaseState } from '../../../../docs/src/modules/redux/features/timeline/selector';
-import { RootState } from '../../../../docs/src/modules/redux/reducers';
-import { AutoPlayFlowControl } from '../../../../src/components/layout/grid/animation/framer/components/AutoPlayFlowControl';
-import { InteractionFlow } from '../../../components/layout/grid/animation/framer/components/InteractionFlow';
-import {
-  InteractionFlowControl,
-  InteractionFlowControlObserver
-} from '../../../components/layout/grid/animation/framer/components/InteractionFlowControl';
-import { generateData } from '../../../data/social/mocks';
-import { UseCase } from '../../../typings/social';
-import { Post } from './Post';
-import { Timeline } from './Timeline';
+import { Post } from './components/post/Post';
+import { Timeline } from './components/timeline/Timeline';
 
 export const SocialApp: FC = () => {
   const {
@@ -28,10 +18,10 @@ export const SocialApp: FC = () => {
   } = useHoux();
 
   const normalizePosts = useCallback(
-    (usecaseData: UseCase) => {
-      dispatch(normalizeData(usecaseData));
+    (usecaseData: Types.UseCase) => {
+      dispatch(actions.timeline.normalizeData(usecaseData));
     },
-    [dispatch, normalizeData]
+    [dispatch, actions.timeline.normalizeData]
   );
 
   const loadPosts = useCallback(async () => {
@@ -43,7 +33,11 @@ export const SocialApp: FC = () => {
     loadPosts();
   }, []);
 
-  const useCase = selectUserCaseState(state) || { id: '', timelines: [] };
+  const useCase = (state.timeline &&
+    selectors.timeline.selectUserCaseState(state)) || {
+    id: '',
+    timelines: []
+  };
 
   const { timelines = [] } = useCase;
   const [leftTimeline, rightTimeline] = timelines;
@@ -84,30 +78,26 @@ export const SocialApp: FC = () => {
           flexDirection: 'column'
         }}
       >
-        <RefProvider>
-          <TransitionProvider>
+        <Archer.ArcherContext.TransitionProvider>
+          <Archer.ArcherContext.RefProvider>
             {leftTimeline && rightTimeline ? (
-              <InteractionFlowControlObserver
+              <FlowControlObserver
                 handleControlOffset={value => {
                   setOffSet(value);
                 }}
                 style={{
                   marginTop: '0'
-
-                  // position: 'sticky',
-                  // top: '64px',
-                  // backgroundColor: 'white'
                 }}
               >
-                <AutoPlayFlowControl
+                <FlowPlayControl
                   leftTimelineId={leftTimeline.id}
                   rightTimelineId={rightTimeline.id}
                 />
-              </InteractionFlowControlObserver>
+              </FlowControlObserver>
             ) : null}
 
             {leftTimeline && rightTimeline ? (
-              <InteractionFlow
+              <FlowSurface
                 leftTimelineId={leftTimeline.id}
                 rightTimelineId={rightTimeline.id}
                 offSetControls={offSet}
@@ -115,24 +105,19 @@ export const SocialApp: FC = () => {
             ) : null}
 
             {leftTimeline && rightTimeline ? (
-              <InteractionFlowControl
+              <FlowControl
                 leftTimelineId={leftTimeline.id}
                 rightTimelineId={rightTimeline.id}
-                handleControlOffset={_value => {
-                  // setOffSet(value);
-                }}
+                // eslint-disable-next-line @typescript-eslint/no-empty-function
+                handleControlOffset={_value => {}}
                 style={{
                   marginTop: 'auto',
                   marginBottom: '0'
-
-                  // position: 'sticky',
-                  // bottom: '0',
-                  // backgroundColor: 'white'
                 }}
               />
             ) : null}
-          </TransitionProvider>
-        </RefProvider>
+          </Archer.ArcherContext.RefProvider>
+        </Archer.ArcherContext.TransitionProvider>
       </div>
       {rightTimelineComp && rightTimelineComp}
     </div>

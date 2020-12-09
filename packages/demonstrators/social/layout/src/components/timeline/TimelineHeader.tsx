@@ -1,21 +1,28 @@
+import { HeaderView } from '@demonstrators-social/components';
+import { scrollStates, ScrollTypes } from '@demonstrators-social/shared';
 import { Tab, Tabs } from '@material-ui/core';
 import _ from 'lodash';
 import React, { ChangeEvent, FC, useEffect } from 'react';
 import { isBrowser } from 'react-device-detect';
 import { useRecoilState } from 'recoil';
 
-import { timelineViewState, VIEW } from '../../../../docs/src/modules/recoil/features/scroll/timeline/reducer';
-import HeaderView from '../../../components/device/browser/views/HeaderView';
-import SimpleSearch from './SimpleSearch';
+import { SimpleSearch } from '../search/SimpleSearch';
 
 interface TimelineHeaderProps {
   timelineId: string;
 }
 
 export const TimelineHeader: FC<TimelineHeaderProps> = ({ timelineId }) => {
+  const {
+    timeline: { timelineViewState }
+  } = scrollStates;
+
   const [timelineView, setTimelineView] = useRecoilState(timelineViewState);
 
-  const handleChange = (_event: ChangeEvent, newValue: VIEW) => {
+  const handleChange = (
+    _event: ChangeEvent,
+    newValue: ScrollTypes.Timeline.VIEW
+  ) => {
     setTimelineView(state => {
       return {
         ...state,
@@ -33,7 +40,7 @@ export const TimelineHeader: FC<TimelineHeaderProps> = ({ timelineId }) => {
         ...state,
         currentViews: {
           ...state.currentViews,
-          [timelineId]: VIEW.TIMELINE
+          [timelineId]: ScrollTypes.Timeline.VIEW.TIMELINE
         }
       };
     });
@@ -54,7 +61,7 @@ export const TimelineHeader: FC<TimelineHeaderProps> = ({ timelineId }) => {
         </div>
       ) : null}
       <Tabs
-        value={currentView || VIEW.TIMELINE}
+        value={currentView || ScrollTypes.Timeline.VIEW.TIMELINE}
         onChange={handleChange}
         indicatorColor='primary'
         textColor='primary'
@@ -73,7 +80,9 @@ export const TimelineHeader: FC<TimelineHeaderProps> = ({ timelineId }) => {
       >
         <SimpleSearch
           placeholder={
-            currentView === VIEW.TIMELINE ? 'Search Timeline' : 'Search Post'
+            currentView === ScrollTypes.Timeline.VIEW.TIMELINE
+              ? 'Search Timeline'
+              : 'Search Post'
           }
         />
       </div>

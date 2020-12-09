@@ -1,3 +1,5 @@
+import { CollectionUtil } from '@app/utils';
+import { Types } from '@demonstrators-social/data';
 import {
   Avatar,
   CardActions,
@@ -7,16 +9,13 @@ import {
   IconButton,
   makeStyles,
   Theme,
-  Typography
+  Typography,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import { formatDistance } from 'date-fns';
 import { enGB } from 'date-fns/locale';
 import React, { FC, Fragment, useMemo, useState } from 'react';
-
-import { compareDescFn } from '../../../../docs/src/modules/utils/collection/array';
-import { Comment } from '../../../typings/social';
 
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,10 +35,14 @@ export const useStyles = makeStyles((theme: Theme) =>
 interface CommentsProps {
   timelineId: string;
   postId: string;
-  comments?: Array<Comment>;
+  comments?: Array<Types.Comment>;
 }
 
-const Comments: FC<CommentsProps> = ({ timelineId, postId, comments = [] }) => {
+export const Comments: FC<CommentsProps> = ({
+  timelineId,
+  postId,
+  comments = []
+}) => {
   const classes = useStyles();
 
   const [expanded, setExpanded] = useState(false);
@@ -50,21 +53,23 @@ const Comments: FC<CommentsProps> = ({ timelineId, postId, comments = [] }) => {
 
   const processedComments = useMemo(
     () =>
-      comments.sort(compareDescFn('content.createdAt')).map(comment => {
-        const {
-          content: { createdAt }
-        } = comment;
+      comments
+        .sort(CollectionUtil.Array.compareDescFn('content.createdAt'))
+        .map(comment => {
+          const {
+            content: { createdAt }
+          } = comment;
 
-        return {
-          ...comment,
-          content: {
-            ...comment.content,
-            createdAt: formatDistance(createdAt, new Date(), {
-              locale: enGB
-            })
-          }
-        };
-      }),
+          return {
+            ...comment,
+            content: {
+              ...comment.content,
+              createdAt: formatDistance(createdAt, new Date(), {
+                locale: enGB
+              })
+            }
+          };
+        }),
     [comments.length]
   );
 
@@ -127,5 +132,3 @@ const Comments: FC<CommentsProps> = ({ timelineId, postId, comments = [] }) => {
     </>
   );
 };
-
-export default Comments;

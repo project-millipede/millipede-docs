@@ -19,7 +19,7 @@ interface SimpleSearchProps {
   placeholder?: string;
 }
 
-const SimpleSearch: FC<SimpleSearchProps> = ({ placeholder = '' }) => {
+export const SimpleSearch: FC<SimpleSearchProps> = ({ placeholder = '' }) => {
   const classes = useStyles();
   return (
     <InputBase
@@ -35,5 +35,3 @@ const SimpleSearch: FC<SimpleSearchProps> = ({ placeholder = '' }) => {
     />
   );
 };
-
-export default SimpleSearch;

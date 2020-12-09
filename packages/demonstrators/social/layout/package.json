@@ -1,0 +1,22 @@
+{
+  "name": "@demonstrators-social/layout",
+  "version": "0.2.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "devDependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "typescript": "^4.1.2"
+  },
+  "dependencies": {
+    "@app/utils": "workspace:packages/utils",
+    "@demonstrators-social/components": "workspace:packages/demonstrators/social/components",
+    "@demonstrators-social/data": "workspace:packages/demonstrators/social/data",
+    "@demonstrators-social/flow": "workspace:packages/demonstrators/social/flow",
+    "@demonstrators-social/shared": "workspace:packages/demonstrators/social/shared"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*"
+  }
+}

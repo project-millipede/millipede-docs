@@ -14,17 +14,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface CommentEditorProps {
-  isComment: boolean;
-  create?: (content: string) => void;
-  timelineId?: string;
-}
-
-export interface EditorHandles {
-  setRawText: (value: string) => void;
-  handlePostComment: () => void;
-}
-
 const longText = 'Hi @all, my name is Markus.';
 
 const insertText = (text: string) => {
@@ -44,6 +33,12 @@ const insertText = (text: string) => {
 };
 
 const resizeDetector = elementResizeDetectorMaker({ strategy: 'scroll' });
+
+interface CommentEditorProps {
+  isComment: boolean;
+  create?: (content: string) => void;
+  timelineId?: string;
+}
 
 export const CommentEditor: FC<CommentEditorProps> = ({
   isComment = true,

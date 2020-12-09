@@ -1,4 +1,6 @@
 import { useHoux } from '@app/houx';
+import { CollectionUtil } from '@app/utils';
+import { RootState, scrollStates, ScrollTypes, selectors, TimelineActions } from '@demonstrators-social/shared';
 import { useMergedRef } from '@huse/merged-ref';
 import { Button, ButtonGroup, List, makeStyles, useTheme } from '@material-ui/core';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
@@ -7,23 +9,8 @@ import useTranslation from 'next-translate/useTranslation';
 import React, { Dispatch, FC, useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-import { postIdsState } from '../../../../docs/src/modules/recoil/features/scroll/post/reducer';
-import {
-  refContainerScrollFromArcherState,
-  refContainerScrollState,
-  timelineViewState,
-  VIEW,
-} from '../../../../docs/src/modules/recoil/features/scroll/timeline/reducer';
-import { TimelineActions } from '../../../../docs/src/modules/redux/features/actionType';
-import {
-  selectPostsOfFriends,
-  selectPostsOfOwner,
-  selectTimelineOwner,
-} from '../../../../docs/src/modules/redux/features/timeline/selector';
-import { RootState } from '../../../../docs/src/modules/redux/reducers';
-import { compareDescFn } from '../../../../docs/src/modules/utils/collection/array';
-import { CommentEditor } from './CommentEditor';
-import { PostProps } from './Post';
+import { CommentEditor } from '../comment/CommentEditor';
+import { PostProps } from '../post/Post';
 import { handleCreatePost } from './Timeline.svc';
 import { TimelineHeader } from './TimelineHeader';
 
@@ -51,6 +38,21 @@ export const Timeline: FC<TimelineProps> = ({
   const classes = useStyles();
   const theme = useTheme();
 
+  const {
+    selectPostsOfFriends,
+    selectPostsOfOwner,
+    selectTimelineOwner
+  } = selectors.timeline;
+
+  const {
+    timeline: {
+      timelineViewState,
+      refContainerScrollState,
+      refContainerScrollFromArcherState
+    },
+    post: { postIdsState }
+  } = scrollStates;
+
   const timelineView = useRecoilValue(timelineViewState);
 
   const { currentViews } = timelineView;
@@ -69,14 +71,14 @@ export const Timeline: FC<TimelineProps> = ({
   const setPostIds = useSetRecoilState(postIdsState(timelineId));
 
   const postIds =
-    currentView === VIEW.TIMELINE
+    currentView === ScrollTypes.Timeline.VIEW.TIMELINE
       ? selectPostsOfFriends(
           timelineId,
-          compareDescFn('content.createdAt')
+          CollectionUtil.Array.compareDescFn('content.createdAt')
         )(state)
       : selectPostsOfOwner(
           timelineId,
-          compareDescFn('content.createdAt')
+          CollectionUtil.Array.compareDescFn('content.createdAt')
         )(state);
 
   useEffect(() => {
@@ -104,7 +106,7 @@ export const Timeline: FC<TimelineProps> = ({
         key={`timeline-${timelineId}`}
         style={{ overflowY: 'auto', height: '65vh', marginTop: '8px' }}
       >
-        {currentView === VIEW.POSTS && displayEditor && (
+        {currentView === ScrollTypes.Timeline.VIEW.POSTS && displayEditor && (
           <CommentEditor
             create={text => {
               const owner = selectTimelineOwner(timelineId)(state);
@@ -117,7 +119,7 @@ export const Timeline: FC<TimelineProps> = ({
           />
         )}
 
-        {currentView === VIEW.POSTS && !displayEditor && (
+        {currentView === ScrollTypes.Timeline.VIEW.POSTS && !displayEditor && (
           <ButtonGroup variant='text' color='primary' style={{ width: '100%' }}>
             <Button
               id={`timeline-${timelineId}-content-create`}

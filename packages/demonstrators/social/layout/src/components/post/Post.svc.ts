@@ -1,32 +1,29 @@
+import { factories, Types } from '@demonstrators-social/data';
+import { actions, TimelineActions } from '@demonstrators-social/shared';
 import { Dispatch } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-
-import { TimelineActions } from '../../../../docs/src/modules/redux/features/actionType';
-import { createComment, removePost } from '../../../../docs/src/modules/redux/features/timeline/actions';
-import { factories } from '../../../data/social';
-import { Comment, Content, User } from '../../../typings/social';
 
 const { contentCommentFactory, currentTimeStampFactory } = factories;
 
 export const handleCreateComment = async (
-  owner: User,
+  owner: Types.User,
   postId: string,
   text: string,
   dispatch: Dispatch<TimelineActions>,
-  callback: (value: Comment) => void
+  callback: (value: Types.Comment) => void
 ) => {
-  const content: Content = {
+  const content: Types.Content = {
     ...(await contentCommentFactory.combine(currentTimeStampFactory).build()),
     text
   };
 
-  const comment: Comment = {
+  const comment: Types.Comment = {
     id: uuidv4(),
     commenter: owner,
     content
   };
 
-  dispatch(createComment(postId, comment));
+  dispatch(actions.timeline.createComment(postId, comment));
   callback(comment);
 };
 
@@ -35,7 +32,7 @@ export const handleDeletePost = (
   postId: string,
   dispatch: Dispatch<TimelineActions>
 ) => {
-  dispatch(removePost(timelineId, postId));
+  dispatch(actions.timeline.removePost(timelineId, postId));
 };
 
 // export const handleDeletePost = (
