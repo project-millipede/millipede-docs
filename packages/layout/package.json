@@ -3,10 +3,6 @@
   "version": "0.2.0",
   "private": true,
   "main": "src/index.ts",
-  "scripts": {
-    "compile": "tsc -b",
-    "clean": "rimraf dist tsconfig.tsbuildinfo"
-  },
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
@@ -18,7 +14,6 @@
     "@types/node": "^14.14.10",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
-    "@types/rimraf": "^3.0.0",
     "@types/styled-components": "^5.1.4",
     "clsx": "^1.1.1",
     "lodash": "^4.17.20",
@@ -26,7 +21,6 @@
     "next-translate": "1.0.0-experimental.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "rimraf": "^3.0.2",
     "styled-components": "^5.2.1",
     "typesafe-actions": "^5.1.0",
     "typescript": "^4.1.2",
@@ -36,6 +30,9 @@
     "@fortawesome/fontawesome-svg-core": "*",
     "@fortawesome/free-solid-svg-icons": "*",
     "@fortawesome/react-fontawesome": "*",
+    "@material-ui/core": "*",
+    "@material-ui/icons": "*",
+    "@material-ui/lab": "*",
     "clsx": "*",
     "lodash": "*",
     "next": "*",
@@ -49,7 +46,6 @@
   "dependencies": {
     "@app/components": "workspace:packages/components",
     "@app/houx": "workspace:packages/houx",
-    "@app/types": "workspace:packages/types",
-    "jss": "^10.5.0"
+    "@app/types": "workspace:packages/types"
   }
 }

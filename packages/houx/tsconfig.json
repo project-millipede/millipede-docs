@@ -6,5 +6,5 @@
     "outDir": "dist",
     "jsx": "preserve"
   },
-  "include": ["src/**/*"]
+  "include": ["**/*.ts", "**/*.tsx"]
 }
