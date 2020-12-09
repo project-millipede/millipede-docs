@@ -1,4 +1,5 @@
 import { useHoux } from '@app/houx';
+import { Area, Device, Szenario } from '@demonstrator/types';
 import {
   createStyles,
   IconButton,
@@ -13,10 +14,9 @@ import { DesktopWindows, SmartphoneRounded } from '@material-ui/icons';
 import { Translate } from 'next-translate';
 import React, { Dispatch, FC, MouseEvent } from 'react';
 
-import { AnimationActions } from '../../../../docs/src/modules/redux/features/actionType';
-import { changeArea, changeDevice, changeSzenario } from '../../../../docs/src/modules/redux/features/animation/actions';
-import { RootState } from '../../../../docs/src/modules/redux/reducers';
-import { Area, Device, Szenario } from '../../../typings/animation';
+import { AnimationActions } from '../../redux/features/actionType';
+import { changeArea, changeDevice, changeSzenario } from '../../redux/features/animation/actions';
+import { RootState } from '../../redux/features/reducers';
 
 interface ControlsProps {
   t?: Translate;

@@ -1,10 +1,10 @@
 import { useHoux } from '@app/houx';
+import { Device } from '@demonstrator/types';
 import { motion, useAnimation, Variants } from 'framer-motion';
 import React, { FC, ReactNode, useEffect } from 'react';
 import styled from 'styled-components';
 
-import { RootState } from '../../../../../../docs/src/modules/redux/reducers';
-import { Device } from '../../../../../typings/animation';
+import { RootState } from '../../redux/features/reducers';
 
 const AnimationRoot = styled(motion.div)`
   width: 100%;
