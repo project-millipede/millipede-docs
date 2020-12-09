@@ -1,0 +1,36 @@
+{
+  "name": "@demonstrators-social/shared",
+  "version": "0.2.0",
+  "private": true,
+  "main": "src/index.ts",
+  "devDependencies": {
+    "@huse/effect-ref": "^1.0.3",
+    "@types/lodash": "^4.14.165",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "immer": "^8.0.0",
+    "lodash": "^4.17.20",
+    "next-translate": "1.0.0-canary.9",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "recoil": "^0.1.2",
+    "reselect": "^4.0.0",
+    "typesafe-actions": "^5.1.0",
+    "typescript": "^4.1.2"
+  },
+  "peerDependencies": {
+    "@huse/effect-ref": "*",
+    "immer": "*",
+    "lodash": "*",
+    "next-translate": "*",
+    "react": "*",
+    "react-dom": "*",
+    "recoil": "*",
+    "reselect": "*",
+    "typesafe-actions": "*"
+  },
+  "dependencies": {
+    "@app/utils": "workspace:packages/utils",
+    "@demonstrators-social/data": "workspace:packages/demonstrators/social/data"
+  }
+}

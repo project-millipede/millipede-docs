@@ -12,7 +12,8 @@
     { "path": "demonstrator/components" },
     { "path": "demonstrator/layout" },
     { "path": "demonstrators/social/data" },
-    { "path": "demonstrators/social/components" }
+    { "path": "demonstrators/social/components" },
+    { "path": "demonstrators/social/shared" }
   ],
   "exclude": ["node_modules"]
 }

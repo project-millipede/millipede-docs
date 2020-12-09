@@ -1,11 +1,11 @@
 import { StateType } from 'typesafe-actions';
 
-import theme from './features/theme/reducer';
+import timeline from './timeline/reducer';
+
+export type TimelineState = StateType<typeof timeline>;
 
 export const reducers = {
-  theme
+  timeline
 };
-
-export type ThemeState = StateType<typeof theme>;
 
 export type RootState = StateType<typeof reducers>;

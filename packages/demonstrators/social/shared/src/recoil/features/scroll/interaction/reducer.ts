@@ -1,10 +1,8 @@
 import { atom, selector } from 'recoil';
 
-export interface InteractionOption {
-  activeIds: { [key: string]: boolean };
-}
+import { InteractionOption } from './types';
 
-export const interactionOptionsState = atom<InteractionOption>({
+const interactionOptionsState = atom<InteractionOption>({
   key: 'interactionOptionsState',
   default: {
     activeIds: {
@@ -17,7 +15,7 @@ export const interactionOptionsState = atom<InteractionOption>({
   }
 });
 
-export const interactionOptionsSelector = selector({
+const interactionOptionsSelector = selector({
   key: 'interactionOptionsSelector',
   get: ({ get }) => {
     const interactionOptions = get(interactionOptionsState);
@@ -34,3 +32,11 @@ export const interactionOptionsSelector = selector({
     return usedSliceIds;
   }
 });
+
+export const states = {
+  interactionOptionsState
+};
+
+export const reducers = {};
+
+export const selectors = { interactionOptionsSelector };

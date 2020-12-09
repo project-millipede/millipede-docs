@@ -1,16 +1,16 @@
+import { CollectionUtil } from '@app/utils';
+import { Entities } from '@demonstrators-social/data';
 import produce from 'immer';
 
-import { Entities } from '../../../../../../src/data/social/entities';
-import { CollectionUtil } from '../../../utils';
 import { StoreAction } from '../actionType';
 import { ADD_COMMENT, ADD_POST, DELETE_POST, NORMALIZE_DATA } from './actionTypes';
 
-interface Props {
+export interface TimelineProps {
   entities: Entities;
   result: string;
 }
 
-const initialState: Props = {
+const initialState: TimelineProps = {
   entities: {
     usecases: {},
     users: {},
