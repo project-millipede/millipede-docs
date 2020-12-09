@@ -1,16 +1,15 @@
+import { ArcherTypes } from '@app/components';
+import { HooksUtils } from '@app/render-utils';
+import { scrollStates } from '@demonstrators-social/shared';
 import { EffectRef } from '@huse/effect-ref';
 import { useMergedRef } from '@huse/merged-ref';
 import { cloneElement, FC, ReactElement, useCallback, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 
-import { useMeasure } from '../../../../../src/demo/social/components/reactUseMeasureNextNext';
-import { refContainerScrollFromArcherState } from '../../recoil/features/scroll/timeline/reducer';
-import { RenderSingleFn } from './types';
-
 interface ArcherSurfaceObserverProps {
   timelineIds: Array<string>;
   children?: ReactElement;
-  render?: RenderSingleFn;
+  render?: ArcherTypes.RenderSingleFn;
 }
 export const ArcherSurfaceObserver: FC<ArcherSurfaceObserverProps> = ({
   timelineIds,
@@ -18,6 +17,10 @@ export const ArcherSurfaceObserver: FC<ArcherSurfaceObserverProps> = ({
   render
 }) => {
   const [leftTimelineId, rightTimelineId] = timelineIds;
+
+  const {
+    timeline: { refContainerScrollFromArcherState }
+  } = scrollStates;
 
   const setContainerScrollRefLeftTimeline = useSetRecoilState(
     refContainerScrollFromArcherState(leftTimelineId)
@@ -27,8 +30,12 @@ export const ArcherSurfaceObserver: FC<ArcherSurfaceObserverProps> = ({
     refContainerScrollFromArcherState(rightTimelineId)
   );
 
-  const [containerScrollRefLeftTimeline] = useMeasure({ debounce: 0 });
-  const [containerScrollRefRightTimeline] = useMeasure({ debounce: 0 });
+  const [containerScrollRefLeftTimeline] = HooksUtils.useMeasure({
+    debounce: 0
+  });
+  const [containerScrollRefRightTimeline] = HooksUtils.useMeasure({
+    debounce: 0
+  });
 
   const updateContainerScrollRefLeftTimeline = useCallback(
     (value: EffectRef<HTMLElement>) => {

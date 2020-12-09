@@ -1,15 +1,11 @@
+import { HooksUtils } from '@app/render-utils';
+import { scrollReducers, scrollStates } from '@demonstrators-social/shared';
 import { EffectRef } from '@huse/effect-ref';
 import React, { CSSProperties, FC, useCallback, useLayoutEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-import {
-  nodesWithRelationsWithEdgeState,
-  refContainerScrollState,
-  scrollTimelineReducer,
-} from '../../../../../../../docs/src/modules/recoil/features/scroll/timeline/reducer';
-import { useMeasure } from '../../../../../../demo/social/components/reactUseMeasureNextNext';
-import { getSelectedPostIds } from './Interaction.svc';
-import { InteractionItem } from './InteractionItem';
+import { getSelectedPostIds } from './Dock.svc';
+import { InteractionItem } from './DockItem';
 
 export interface InteractionProps {
   timelineId: string;
@@ -24,6 +20,10 @@ export const Interaction: FC<InteractionProps> = ({
   styles,
   position
 }) => {
+  const {
+    timeline: { nodesWithRelationsWithEdgeState, refContainerScrollState }
+  } = scrollStates;
+
   const setRefContainerScroll = useSetRecoilState(
     refContainerScrollState(timelineId)
   );
@@ -42,19 +42,21 @@ export const Interaction: FC<InteractionProps> = ({
   const updateObservedItem = useCallback(
     (value: EffectRef<HTMLElement>) => {
       setRefContainerScroll(state =>
-        scrollTimelineReducer.updateObservedItem(state, value)
+        scrollReducers.timeline.updateObservedItem(state, value)
       );
     },
-    [scrollTimelineReducer.updateObservedItem]
+    [scrollReducers.timeline.updateObservedItem]
   );
 
   const removeObservedItem = useCallback(() => {
     setRefContainerScroll(state =>
-      scrollTimelineReducer.removeObservedItem(state)
+      scrollReducers.timeline.removeObservedItem(state)
     );
-  }, [scrollTimelineReducer.removeObservedItem]);
+  }, [scrollReducers.timeline.removeObservedItem]);
 
-  const [containerRef, containerBounds] = useMeasure({ debounce: 0 });
+  const [containerRef, containerBounds] = HooksUtils.useMeasure({
+    debounce: 0
+  });
 
   useLayoutEffect(() => {
     updateObservedItem(containerRef);

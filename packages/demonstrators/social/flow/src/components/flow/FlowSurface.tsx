@@ -1,18 +1,19 @@
-/* eslint-disable import/no-named-as-default */
+import { Archer } from '@app/components';
 import React, { FC } from 'react';
 
-import ArcherSurface from '../../../../../../../docs/src/modules/components/archer/ArcherSurface';
-import { ArcherSurfaceObserver } from '../../../../../../../docs/src/modules/components/archer/ArcherSurfaceObserver';
-import { Interaction } from './Interaction';
-import { InteractionBody } from './InteractionBody';
+import { ArcherSurfaceObserver } from '../observer/ArcherSurfaceObserver';
+import { Interaction } from './Dock';
+import { InteractionBody } from './FlowBody';
 
-interface InteractionFlowProps {
+const { ArcherSurface } = Archer;
+
+interface FlowSurfaceProps {
   leftTimelineId: string;
   rightTimelineId: string;
   offSetControls: number;
 }
 
-export const InteractionFlow: FC<InteractionFlowProps> = ({
+export const FlowSurface: FC<FlowSurfaceProps> = ({
   leftTimelineId,
   rightTimelineId,
   offSetControls

@@ -1,18 +1,13 @@
+import { HocsUtils, HooksUtils } from '@app/render-utils';
+import { scrollReducers, scrollStates } from '@demonstrators-social/shared';
 import { EffectRef } from '@huse/effect-ref';
 import _ from 'lodash';
 import React, { FC, useCallback, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 
-import {
-  refPostScrollState,
-  scrollPostReducer,
-} from '../../../../../../../docs/src/modules/recoil/features/scroll/post/reducer';
-import { useMeasure } from '../../../../../../demo/social/components/reactUseMeasureNextNext';
-import { InteractionSliceProps } from './types';
-import { withArcher } from './with-archer';
-import { withForwardRef } from './with-forward-ref';
+import { withArcher } from '../../hocs/with-archer';
+import { InteractionSliceProps } from '../../types';
 
-// import { useMergedRef } from '@huse/merged-ref';
 const RenderFn = ({ children }) => children();
 
 export const defaultSliceBackgrundColor = {
@@ -33,18 +28,26 @@ const InteractionSliceObserver: FC<InteractionSliceProps> = ({
   forwardedRef,
   dynamicRef
 }) => {
+  const {
+    post: { updateObservedSubSliceItem, removeObservedSubSliceItem }
+  } = scrollReducers;
+
   return (
     <RenderFn key={`renderFn-${timelineId}-${postId}-${sliceId}`}>
       {() => {
         const ref = useRef<HTMLElement>();
 
-        const [sliceRef, sliceBounds] = useMeasure({
+        const [sliceRef, sliceBounds] = HooksUtils.useMeasure({
           debounce: 0,
           // eslint-disable-next-line @typescript-eslint/no-empty-function
           callBack: _node => {
             ref.current = _node;
           }
         });
+
+        const {
+          post: { refPostScrollState }
+        } = scrollStates;
 
         const setRefPostScroll = useSetRecoilState(refPostScrollState(postId));
 
@@ -55,28 +58,19 @@ const InteractionSliceObserver: FC<InteractionSliceProps> = ({
             value: EffectRef<HTMLElement>
           ) => {
             setRefPostScroll(state =>
-              scrollPostReducer.updateObservedSubSliceItem(
-                state,
-                timelineId,
-                sliceId,
-                value
-              )
+              updateObservedSubSliceItem(state, timelineId, sliceId, value)
             );
           },
-          [scrollPostReducer.updateObservedSubSliceItem, setRefPostScroll]
+          [updateObservedSubSliceItem, setRefPostScroll]
         );
 
         const removeItem = useCallback(
           (timelineId: string, sliceId: string) => {
             setRefPostScroll(state =>
-              scrollPostReducer.removeObservedSubSliceItem(
-                state,
-                timelineId,
-                sliceId
-              )
+              removeObservedSubSliceItem(state, timelineId, sliceId)
             );
           },
-          [scrollPostReducer.removeObservedSubSliceItem, setRefPostScroll]
+          [removeObservedSubSliceItem, setRefPostScroll]
         );
 
         useLayoutEffect(() => {
@@ -142,7 +136,7 @@ const InteractionSliceObserver: FC<InteractionSliceProps> = ({
   );
 };
 
-const InteractionSliceObserverWithForwardRef = withForwardRef<
+const InteractionSliceObserverWithForwardRef = HocsUtils.withForwardRef<
   HTMLElement,
   InteractionSliceProps
 >(InteractionSliceObserver);
