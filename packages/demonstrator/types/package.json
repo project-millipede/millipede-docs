@@ -1,0 +1,9 @@
+{
+  "name": "@demonstrator/types",
+  "version": "0.2.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "devDependencies": {
+    "typescript": "^4.1.2"
+  }
+}
