@@ -1,0 +1,19 @@
+{
+  "name": "@demonstrators-social/components",
+  "version": "0.2.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "devDependencies": {
+    "@material-ui/core": "^5.0.0-alpha.18",
+    "@material-ui/icons": "^5.0.0-alpha.15",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "typescript": "^4.1.2"
+  },
+  "peerDependencies": {
+    "@material-ui/core": "*",
+    "@material-ui/icons": "*",
+    "react": "*",
+    "react-dom": "*"
+  }
+}

@@ -1,7 +1,7 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import React, { FC } from 'react';
 
-import { ChromeInput } from '../components/ChromeInput';
+import { ChromeInput } from '../input/ChromeInput';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

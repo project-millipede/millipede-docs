@@ -11,7 +11,8 @@
     { "path": "demonstrator/types" },
     { "path": "demonstrator/components" },
     { "path": "demonstrator/layout" },
-    { "path": "demonstrators/social/data" }
+    { "path": "demonstrators/social/data" },
+    { "path": "demonstrators/social/components" }
   ],
   "exclude": ["node_modules"]
 }
