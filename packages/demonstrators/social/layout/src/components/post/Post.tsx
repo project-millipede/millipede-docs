@@ -1,4 +1,13 @@
 import { useHoux } from '@app/houx';
+import {
+  RootState,
+  scrollActions,
+  scrollData,
+  scrollStates,
+  ScrollTypes,
+  selectors,
+  TimelineActions,
+} from '@demonstrators-social/shared';
 import { Button, ButtonGroup, Card, CardActions, createStyles, ListItem, makeStyles } from '@material-ui/core';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
@@ -10,20 +19,12 @@ import useTranslation from 'next-translate/useTranslation';
 import React, { Dispatch, FC, useMemo, useState } from 'react';
 import { selectorFamily, SerializableParam, useRecoilValue, useSetRecoilState } from 'recoil';
 
-import { RefPostScroll, refPostScrollState } from '../../../../docs/src/modules/recoil/features/scroll/post/reducer';
-import {
-  addTopic,
-  createNodesWithRelations,
-  nodesWithRelationsWithEdgeState,
-  publishActions,
-} from '../../../../docs/src/modules/recoil/features/scroll/timeline/reducer';
-import { TimelineActions } from '../../../../docs/src/modules/redux/features/actionType';
-import { selectPostById, selectTimelineOwner } from '../../../../docs/src/modules/redux/features/timeline/selector';
-import { RootState } from '../../../../docs/src/modules/redux/reducers';
-import { CommentEditor } from './CommentEditor';
-import Comments from './Comments';
+import { CommentEditor } from '../comment/CommentEditor';
+import { Comments } from '../comment/Comments';
 import { getContent, getHeader, getMedia, getObserverComp, getRef } from './Post.Render.svc';
 import { handleCreateComment, handleDeletePost } from './Post.svc';
+
+const { selectPostById, selectTimelineOwner } = selectors.timeline;
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -43,26 +44,33 @@ const useStyles = makeStyles(theme =>
   })
 );
 
-export interface PostProps {
-  timelineId: string;
-  otherTimelineId: string;
-  postId: string;
-}
-
 interface TimelinePostKeys {
   timelineId: string;
   postId: string;
   [key: string]: SerializableParam;
 }
 
-const refPostScrollSelector = selectorFamily<RefPostScroll, TimelinePostKeys>({
+const refPostScrollSelector = selectorFamily<
+  ScrollTypes.Post.RefPostScroll,
+  TimelinePostKeys
+>({
   key: 'refPostScrollSelector',
   get: ({ postId, timelineId }) => ({ get }) => {
+    const {
+      post: { refPostScrollState }
+    } = scrollStates;
+
     const posts = get(refPostScrollState(postId));
     const post = _.get(posts, timelineId);
     return post;
   }
 });
+
+export interface PostProps {
+  timelineId: string;
+  otherTimelineId: string;
+  postId: string;
+}
 
 export const Post: FC<PostProps> = ({
   timelineId,
@@ -74,6 +82,18 @@ export const Post: FC<PostProps> = ({
   const { t } = useTranslation();
 
   const [displayEditor, setDisplayEditor] = useState(false);
+
+  const {
+    timeline: { createNodesWithRelations, addTopic }
+  } = scrollActions;
+
+  const {
+    timeline: { nodesWithRelationsWithEdgeState }
+  } = scrollStates;
+
+  const {
+    timeline: { publishActions }
+  } = scrollData;
 
   const {
     dispatch,
