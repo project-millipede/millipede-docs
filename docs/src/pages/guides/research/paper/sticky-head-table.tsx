@@ -1,3 +1,4 @@
+import { CollectionUtil } from '@app/utils';
 import {
   Box,
   Collapse,
@@ -19,8 +20,6 @@ import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { isBrowser, isSafari } from 'react-device-detect';
-
-import { omitAtIndex } from '../../../../modules/utils/collection/array';
 
 interface ColumnDescriptor {
   id: string;
@@ -182,7 +181,7 @@ export const StickyHeadTable = () => {
 
   const columns = getColumns(header);
 
-  const columnsReduced = omitAtIndex(columns, 0);
+  const columnsReduced = CollectionUtil.Array.omitAtIndex(columns, 0);
 
   return (
     <TableContainer className={classes.container}>

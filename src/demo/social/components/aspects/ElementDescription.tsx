@@ -23,7 +23,7 @@ const generateTopicData = (t: Translate): Array<OverviewProps> => {
 const ElementDescription = () => {
   const { t } = useTranslation();
 
-  const categoriesRaw: CategoryDescriptor = t(
+  const categoriesRaw = t<CategoryDescriptor>(
     'pages/pidp/use-case/recognition/index:categories',
     {},
     {

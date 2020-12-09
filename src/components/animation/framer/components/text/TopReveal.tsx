@@ -1,9 +1,8 @@
+import { StringUtil } from '@app/utils';
 import { Typography } from '@material-ui/core';
 import { motion, Variants } from 'framer-motion';
 import _ from 'lodash';
 import React from 'react';
-
-import { StringUtil } from '../../../../../../docs/src/modules/utils';
 
 interface TopRevealProps {
   id: string;
