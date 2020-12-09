@@ -1,11 +1,9 @@
 /* eslint-disable import/no-named-as-default */
+import { Archer } from '@app/components';
 import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 import Hyphenated from 'react-hyphen';
-
-import { ArcherContainer, ArcherElement } from '../../../modules/components/archer';
-import CustomBox from '../../../modules/components/archer/CustomBoxForward';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -43,10 +41,10 @@ const Diagram = () => {
   const { t } = useTranslation();
 
   return (
-    <ArcherContainer noCurves strokeColor='gray'>
+    <Archer.ArcherContainer noCurves strokeColor='gray'>
       <div className='center-flex__1-of-2'>
         <div>
-          <ArcherElement
+          <Archer.ArcherElement
             id='individual'
             relations={[
               {
@@ -61,10 +59,10 @@ const Diagram = () => {
                 <Hyphenated>{t('individual')}</Hyphenated>
               </Typography>
             </Box>
-          </ArcherElement>
+          </Archer.ArcherElement>
         </div>
         <div>
-          <ArcherElement id='data'>
+          <Archer.ArcherElement id='data'>
             <Box className={classes.box}>
               <Typography variant='subtitle1' className={classes.title}>
                 <Hyphenated>
@@ -72,12 +70,12 @@ const Diagram = () => {
                 </Hyphenated>
               </Typography>
             </Box>
-          </ArcherElement>
+          </Archer.ArcherElement>
         </div>
       </div>
 
       <div className={classes.row}>
-        <ArcherElement
+        <Archer.ArcherElement
           id='general'
           relations={[
             {
@@ -94,16 +92,16 @@ const Diagram = () => {
             }
           ]}
         >
-          <CustomBox bgcolor={'#F44336'}>
+          <Archer.CustomBox bgcolor={'#F44336'}>
             <Typography variant='subtitle1' className={classes.title}>
               <Hyphenated>{`${t('pages/perspective/index:general')} ${t(
                 'pages/perspective/index:problemSolving'
               )}`}</Hyphenated>
             </Typography>
-          </CustomBox>
-        </ArcherElement>
+          </Archer.CustomBox>
+        </Archer.ArcherElement>
 
-        <ArcherElement
+        <Archer.ArcherElement
           id='realistic'
           relations={[
             {
@@ -118,16 +116,16 @@ const Diagram = () => {
             }
           ]}
         >
-          <CustomBox bgcolor='#4CAF50'>
+          <Archer.CustomBox bgcolor='#4CAF50'>
             <Typography variant='subtitle1' className={classes.title}>
               <Hyphenated>{`${t('pages/perspective/index:realistic')} ${t(
                 'pages/perspective/index:problemSolving'
               )}`}</Hyphenated>
             </Typography>
-          </CustomBox>
-        </ArcherElement>
+          </Archer.CustomBox>
+        </Archer.ArcherElement>
 
-        <ArcherElement
+        <Archer.ArcherElement
           id='specific'
           relations={[
             {
@@ -137,25 +135,25 @@ const Diagram = () => {
             }
           ]}
         >
-          <CustomBox bgcolor='#FFEB3B'>
+          <Archer.CustomBox bgcolor='#FFEB3B'>
             <Typography variant='subtitle1' className={classes.title}>
               <Hyphenated>{`${t('pages/perspective/index:specific')} ${t(
                 'pages/perspective/index:problemSolving'
               )}`}</Hyphenated>
             </Typography>
-          </CustomBox>
-        </ArcherElement>
+          </Archer.CustomBox>
+        </Archer.ArcherElement>
       </div>
       <div className={classes.singleElement}>
-        <ArcherElement id='society'>
+        <Archer.ArcherElement id='society'>
           <Box className={classes.box}>
             <Typography variant='subtitle1' className={classes.title}>
               <Hyphenated>{t('pages/perspective/index:society')}</Hyphenated>
             </Typography>
           </Box>
-        </ArcherElement>
+        </Archer.ArcherElement>
       </div>
-    </ArcherContainer>
+    </Archer.ArcherContainer>
   );
 };
 

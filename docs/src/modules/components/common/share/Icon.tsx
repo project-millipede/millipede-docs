@@ -1,28 +1,21 @@
-import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
-import Assignment from '@material-ui/icons/Assignment';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import TwitterIcon from '@material-ui/icons/Twitter';
-import WhatsAppIcon from '@material-ui/icons/WhatsApp';
+import { AlternateEmail, Assignment, Facebook, LinkedIn, Twitter, WhatsApp } from '@material-ui/icons';
 import React from 'react';
 
-const Icon = ({ id }) => {
+export const Icon = ({ id }) => {
   switch (id) {
     case 'copy-link':
       return <Assignment />;
     case 'mail':
-      return <AlternateEmailIcon />;
+      return <AlternateEmail />;
     case 'facebook':
-      return <FacebookIcon />;
+      return <Facebook />;
     case 'twitter':
-      return <TwitterIcon />;
+      return <Twitter />;
     case 'linkedin':
-      return <LinkedInIcon />;
+      return <LinkedIn />;
     case 'whatsapp':
-      return <WhatsAppIcon />;
+      return <WhatsApp />;
     default:
       return null;
   }
 };
-
-export default Icon;

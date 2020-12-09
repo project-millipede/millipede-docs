@@ -73,9 +73,7 @@ export const AppFrame: FC = ({ children }) => {
         isDrawerExpanded={isDrawerExpanded}
       />
 
-      <Portal.Portal.PortalOut
-        portalType={Portal.PortalConstants.PortalType.Cursor}
-      />
+      <Portal.PortalOut portalType={Portal.PortalType.Cursor} />
 
       {children}
     </div>

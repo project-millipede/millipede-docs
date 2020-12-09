@@ -1,13 +1,13 @@
+import { Stepper } from '@app/components';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
 import { Content } from '../../../../../../src/typings/data/import';
-import { StepperContent } from '../../../../modules/components/common/stepper';
 import { FunctionBeahvior, HookedFunctionBeahvior } from './methodHooking';
 
-const generateContent = (t: Translate): Array<Content> => {
-  const steps: Array<Content> = t(
+const generateContent = (t: Translate) => {
+  const steps = t<Array<Content>>(
     'pages/ai/index:steps',
     {},
     {
@@ -39,7 +39,7 @@ const generateContent = (t: Translate): Array<Content> => {
 
 const use = () => {
   const { t } = useTranslation();
-  return <StepperContent elements={generateContent(t)} />;
+  return <Stepper.StepperContent elements={generateContent(t)} />;
 };
 
 export default use;

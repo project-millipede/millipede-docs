@@ -1,7 +1,7 @@
+import { LogUtil } from '@app/utils';
 import { useRouter } from 'next/router';
 import React, { FC, useEffect, useState } from 'react';
 
-import { Logger } from '../../utils/logging';
 import { MdDocs } from '../md';
 
 const load = (pathSlice = '', locale = ''): any =>
@@ -10,7 +10,7 @@ const load = (pathSlice = '', locale = ''): any =>
       return result.default;
     })
     .catch(error => {
-      Logger.log(error);
+      LogUtil.Logger.log(error);
     });
 
 export interface MDContentLoaderProps {

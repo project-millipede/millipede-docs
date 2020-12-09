@@ -119,7 +119,7 @@ const ExpandableRow = ({
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
           <Collapse in={open} timeout='auto' unmountOnExit>
-            <Box margin={1}>
+            <Box sx={{ m: 1 }}>
               <Table>
                 <TableHead>
                   <TableRow>
@@ -151,8 +151,8 @@ const ExpandableRow = ({
     </>
   );
 };
-const generateContent = (t: Translate): Array<HeadAndBody> => {
-  const rows: any = t(
+const generateContent = (t: Translate) => {
+  const rows = t<Array<HeadAndBody>>(
     'pages/guides/research/paper/index:rows',
     {},
     {
@@ -172,7 +172,7 @@ export const StickyHeadTable = () => {
 
   const rows = generateContent(t);
 
-  const header: RowDescriptor = t(
+  const header = t<RowDescriptor>(
     'pages/guides/research/paper/index:header',
     {},
     {
