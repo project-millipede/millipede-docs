@@ -1,18 +1,8 @@
-import {
-  denormalize as denormalizeFn,
-  normalize as normalizeFn,
-  schema
-} from 'normalizr';
-import {
-  User,
-  Vote,
-  Post,
-  Timeline,
-  UseCase,
-  Comment
-} from '../../typings/social';
+import { denormalize as denormalizeFn, normalize as normalizeFn, schema } from 'normalizr';
 
-export const enum TimelineSchemaKeys {
+import { Comment, Post, Timeline, UseCase, User, Vote } from '../../typings/social';
+
+export enum TimelineSchemaKeys {
   usecases = 'usecases',
   timelines = 'timelines',
   posts = 'posts',
