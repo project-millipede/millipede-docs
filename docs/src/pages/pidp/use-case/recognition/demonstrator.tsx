@@ -1,14 +1,32 @@
-import React, { FC } from 'react';
+import { useHoux } from '@app/houx';
+import { CollapseExpand, Container } from '@demonstrator/layout';
+import { reducers as demonstratorSharedReducers } from '@demonstrators-social/shared';
+import dynamic from 'next/dynamic';
+import React, { FC, useEffect } from 'react';
 
-import { Container } from '../../../../../../src/components/animation/components/Container';
-import { CollapseExpand } from '../../../../../../src/components/animation/framer/components/container/CollapseExpand';
-import { SocialApp } from '../../../../../../src/demo/social/components/SocialApp';
+const DynamicSocialApp = dynamic(
+  () => import('@demonstrators-social/layout').then(module => module.SocialApp),
+  { loading: () => <p>Loading</p> }
+);
 
 export const Demonstrator: FC = () => {
+  const {
+    addReducer,
+    removeReducer
+  }: {
+    addReducer: any;
+    removeReducer: any;
+  } = useHoux();
+
+  useEffect(() => {
+    addReducer({ ...demonstratorSharedReducers });
+    return () => removeReducer('timeline');
+  }, []);
+
   return (
     <Container>
       <CollapseExpand>
-        <SocialApp />
+        <DynamicSocialApp />
       </CollapseExpand>
     </Container>
   );
