@@ -10,7 +10,8 @@
     { "path": "layout" },
     { "path": "demonstrator/types" },
     { "path": "demonstrator/components" },
-    { "path": "demonstrator/layout" }
+    { "path": "demonstrator/layout" },
+    { "path": "demonstrators/social/data" }
   ],
   "exclude": ["node_modules"]
 }

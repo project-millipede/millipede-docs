@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { User } from '../../../typings/social';
+import { User } from '../../types';
 
 export const createFriendships = (
   users: Array<User>,

@@ -1,12 +1,11 @@
+import { CollectionUtil } from '@app/utils';
 import { v4 as uuidv4 } from 'uuid';
 
-import { takeNRandom } from '../../../docs/src/modules/utils/collection/array';
-import { UseCase } from '../../typings/social';
-import { postFactory, postFactoryRealtime, timelineFactory, userFactory } from './factories_chance';
-import { createFriendships } from './struct';
+import { postFactory, postFactoryRealtime, timelineFactory, userFactory } from '../factories/factoriesChance';
+import { UseCase } from '../types';
+import { createFriendships } from './relationships';
 
-export const contains = <T>(array: Array<T>) => (val: T) =>
-  array.indexOf(val) !== -1;
+const contains = <T>(array: Array<T>) => (val: T) => array.indexOf(val) !== -1;
 
 export const generateData = async () => {
   const userListA = await userFactory.buildList(5);
@@ -54,7 +53,10 @@ export const generateData = async () => {
   const postsB = await postFactory.buildList(3);
 
   const modifiedPostsA = postsA.map(post => {
-    const [randomUser] = takeNRandom(userGroupWithOutRootsA, 1);
+    const [randomUser] = CollectionUtil.Array.takeNRandom(
+      userGroupWithOutRootsA,
+      1
+    );
     return {
       ...post,
       author: randomUser
@@ -62,7 +64,10 @@ export const generateData = async () => {
   });
 
   const modifiedPostsB = postsB.map(post => {
-    const [randomUser] = takeNRandom(userGroupWithOutRootsB, 1);
+    const [randomUser] = CollectionUtil.Array.takeNRandom(
+      userGroupWithOutRootsB,
+      1
+    );
     return {
       ...post,
       author: randomUser

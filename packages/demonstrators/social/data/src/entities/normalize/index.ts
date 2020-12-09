@@ -1,11 +1,6 @@
-import {
-  denormalize,
-  normalize,
-  NormalizedSchema,
-  schema
-} from '@rest-hooks/normalizr';
+import { denormalize, normalize, NormalizedSchema, schema } from '@rest-hooks/normalizr';
 
-import { Entities } from './entities';
+import { Entities } from '../';
 import { BaseSchema, Find, NestArray, Schema } from './types';
 
 type DictSchema<T extends { [key: string]: unknown }> = {

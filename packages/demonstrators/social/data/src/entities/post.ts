@@ -1,6 +1,6 @@
-import { Content } from '../../../typings/social';
-import { BaseEntity } from '../types';
+import { Content } from '../types';
 import { Comment, commentEntity } from './comment';
+import { BaseEntity } from './normalize/types';
 import { createEntity } from './sub';
 import { User, userEntity } from './user';
 import { Vote, voteEntity } from './vote';

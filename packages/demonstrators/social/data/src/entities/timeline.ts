@@ -1,4 +1,4 @@
-import { BaseEntity } from '../types';
+import { BaseEntity } from './normalize/types';
 import { Post, postEntity } from './post';
 import { createEntity } from './sub';
 import { User, userEntity } from './user';
