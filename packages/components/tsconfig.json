@@ -4,8 +4,8 @@
     "composite": true,
     "rootDir": "src",
     "outDir": "dist",
-    "jsx": "preserve",
+    "jsx": "react",
     "skipLibCheck": true
   },
-  "include": ["src/**/*"]
+  "include": ["**/*.ts", "**/*.tsx"]
 }
