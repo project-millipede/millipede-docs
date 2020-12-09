@@ -1,21 +1,13 @@
+import { CollectionUtil } from '@app/utils';
 import { EffectRef } from '@huse/effect-ref';
 import { atomFamily } from 'recoil';
 
-import { CollectionUtil } from '../../../../utils';
+import { RefPostScrollType } from './types';
 
 export const postIdsState = atomFamily<Array<string>, string>({
   key: 'postIds',
   default: []
 });
-
-export interface RefPostScroll {
-  refObserved: EffectRef<HTMLElement>;
-  refObservedSubSlices: { [key: string]: EffectRef<HTMLElement> };
-}
-
-export type RefPostScrollType = {
-  [value: string]: RefPostScroll;
-};
 
 export const refPostScrollState = atomFamily<RefPostScrollType, string>({
   key: 'refPostScroll',
@@ -92,9 +84,16 @@ const removeObservedSubSliceItem = (
   };
 };
 
-export const scrollPostReducer = {
+export const states = {
+  postIdsState,
+  refPostScrollState
+};
+
+export const reducers = {
   updateObservedItem,
   updateObservedSubSliceItem,
   removeObservedItem,
   removeObservedSubSliceItem
 };
+
+export const selectors = {};

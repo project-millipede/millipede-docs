@@ -1,12 +1,9 @@
+import { normalizer, postEntity, timelineEntity, useCaseEntity } from '@demonstrators-social/data';
 import _ from 'lodash';
 import { createSelector } from 'reselect';
 
-import { postEntity } from '../../../../../../src/data/social/entities/post';
-import { timelineEntity } from '../../../../../../src/data/social/entities/timeline';
-import { useCaseEntity } from '../../../../../../src/data/social/entities/usecase';
-import { denormalizer } from '../../../../../../src/data/social/normalizer';
-import { VIEW } from '../../../recoil/features/scroll/timeline/reducer';
-import { RootState } from '../../reducers';
+import { Timeline } from '../../../recoil/features/scroll/types';
+import { RootState } from '../reducers';
 
 export const selectResult = (state: RootState) => state.timeline.result;
 export const selectEntities = (state: RootState) => state.timeline.entities;
@@ -24,14 +21,14 @@ export const selectUserCaseState = createSelector(
   selectEntities,
   selectResult,
   (entities, result) => {
-    const useCase = denormalizer(result, useCaseEntity, entities);
+    const useCase = normalizer.denormalizer(result, useCaseEntity, entities);
     return useCase;
   }
 );
 
 export const selectPostById = (postId: string) => {
   return createSelector(selectEntities, entities => {
-    return denormalizer(postId, postEntity, entities);
+    return normalizer.denormalizer(postId, postEntity, entities);
   });
 };
 
@@ -41,7 +38,7 @@ export const selectPosts = () =>
     selectPostEntities,
     (entities, postEntities) => {
       const posts = Object.keys(postEntities).map(postId => {
-        return denormalizer(postId, postEntity, entities);
+        return normalizer.denormalizer(postId, postEntity, entities);
       });
       return posts;
     }
@@ -49,7 +46,11 @@ export const selectPosts = () =>
 
 export const selectTimelineOwner = (timelineId: string) => {
   return createSelector(selectEntities, entities => {
-    const timeline = denormalizer(timelineId, timelineEntity, entities);
+    const timeline = normalizer.denormalizer(
+      timelineId,
+      timelineEntity,
+      entities
+    );
     const { owner } = timeline;
     return owner;
   });
@@ -91,9 +92,9 @@ export const selectInteractionDataForPostScenario = (
   timelineId: string,
   otherTimelineId: string,
   postIds: Array<string>,
-  currentViews: { [key: string]: VIEW } = {
-    [timelineId]: VIEW.TIMELINE,
-    [otherTimelineId]: VIEW.POSTS
+  currentViews: { [key: string]: Timeline.VIEW } = {
+    [timelineId]: Timeline.VIEW.TIMELINE,
+    [otherTimelineId]: Timeline.VIEW.POSTS
   },
   sortFn: (a: any, b: any) => number
 ) => {
@@ -105,20 +106,21 @@ export const selectInteractionDataForPostScenario = (
       const otherTimelineView = currentViews[otherTimelineId];
 
       if (
-        (timelineView === VIEW.TIMELINE &&
-          otherTimelineView === VIEW.TIMELINE) ||
-        (timelineView === VIEW.POSTS && otherTimelineView === VIEW.POSTS)
+        (timelineView === Timeline.VIEW.TIMELINE &&
+          otherTimelineView === Timeline.VIEW.TIMELINE) ||
+        (timelineView === Timeline.VIEW.POSTS &&
+          otherTimelineView === Timeline.VIEW.POSTS)
       ) {
         return [];
       }
 
-      if (timelineView === VIEW.TIMELINE) {
+      if (timelineView === Timeline.VIEW.TIMELINE) {
         return postIds.filter(postId =>
           _.includes(postsOfOwnerForOtherTimelineId, postId)
         );
       }
 
-      if (timelineView === VIEW.POSTS) {
+      if (timelineView === Timeline.VIEW.POSTS) {
         return postIds.filter(postId =>
           _.includes(postsOfOwnerForTimelineId, postId)
         );
