@@ -1,3 +1,4 @@
+import { Stepper } from '@app/components';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
@@ -5,10 +6,9 @@ import React from 'react';
 import Step1 from '../../../../../../src/assets/common/dataFlow/comparison/Step1';
 import Step2 from '../../../../../../src/assets/common/dataFlow/comparison/Step2';
 import { Content } from '../../../../../../src/typings/data/import';
-import { StepperContent } from '../../../../modules/components/common/stepper';
 
-const generateContent = (t: Translate): Array<Content> => {
-  const steps: Array<Content> = t(
+const generateContent = (t: Translate) => {
+  const steps = t<Array<Content>>(
     'pages/common/dataflow/comparison/content:stepss',
     {},
     { returnObjects: true }
@@ -58,7 +58,7 @@ const generateContent = (t: Translate): Array<Content> => {
 
 const use = () => {
   const { t } = useTranslation();
-  return <StepperContent elements={generateContent(t)} />;
+  return <Stepper.StepperContent elements={generateContent(t)} />;
 };
 
 export default use;

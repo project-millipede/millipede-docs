@@ -1,8 +1,8 @@
+import { Archer } from '@app/components';
 import { Box } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 
-import { ArcherContainer, ArcherElement } from '../../../../modules/components/archer';
 import { NoteText } from './text';
 
 const useStyles = makeStyles(() =>
@@ -115,10 +115,10 @@ const contentFunctionHookResult = `public int a(){
 const Diagram = () => {
   const classes = useStyles();
   return (
-    <ArcherContainer noCurves strokeColor='gray'>
+    <Archer.ArcherContainer noCurves strokeColor='gray'>
       {/* <div className='center-flex__2-of-2'> */}
       <div className={classes.row}>
-        <ArcherElement
+        <Archer.ArcherElement
           id='a'
           relations={[
             {
@@ -131,8 +131,8 @@ const Diagram = () => {
           <Box className={classes.box}>
             <NoteText variant={'body2'}>{contentFunctionA}</NoteText>
           </Box>
-        </ArcherElement>
-        <ArcherElement
+        </Archer.ArcherElement>
+        <Archer.ArcherElement
           id='aa'
           relations={[
             {
@@ -145,10 +145,10 @@ const Diagram = () => {
           <Box className={classes.box}>
             <NoteText variant={'body2'}>{contentFunctionA}</NoteText>
           </Box>
-        </ArcherElement>
+        </Archer.ArcherElement>
       </div>
       <div className={classes.row}>
-        <ArcherElement
+        <Archer.ArcherElement
           id='b'
           relations={[
             {
@@ -161,8 +161,8 @@ const Diagram = () => {
           <Box className={classes.box}>
             <NoteText variant={'body2'}>{contentFunctionB}</NoteText>
           </Box>
-        </ArcherElement>
-        <ArcherElement
+        </Archer.ArcherElement>
+        <Archer.ArcherElement
           id='bb'
           relations={[
             {
@@ -172,11 +172,11 @@ const Diagram = () => {
             }
           ]}
         >
-          <Box className={classes.box} bgcolor='error.main'>
+          <Box className={classes.box} sx={{ bgcolor: 'error.main' }}>
             <NoteText variant={'body2'}>{contentFunctionB}</NoteText>
           </Box>
-        </ArcherElement>
-        <ArcherElement
+        </Archer.ArcherElement>
+        <Archer.ArcherElement
           id='bbb'
           relations={[
             {
@@ -191,25 +191,25 @@ const Diagram = () => {
             }
           ]}
         >
-          <Box className={classes.box} bgcolor='success.main'>
+          <Box className={classes.box} sx={{ bgcolor: 'success.main' }}>
             <NoteText variant={'body2'}>{contentFunctionHook}</NoteText>
           </Box>
-        </ArcherElement>
+        </Archer.ArcherElement>
       </div>
       {/* <div className='center-flex__2-of-2'> */}
       <div className={classes.row}>
-        <ArcherElement id='c'>
+        <Archer.ArcherElement id='c'>
           <Box className={classes.box}>
             <NoteText variant={'body2'}>{contentFunctionResult}</NoteText>
           </Box>
-        </ArcherElement>
-        <ArcherElement id='cc'>
+        </Archer.ArcherElement>
+        <Archer.ArcherElement id='cc'>
           <Box className={classes.box}>
             <NoteText variant={'body2'}>{contentFunctionHookResult}</NoteText>
           </Box>
-        </ArcherElement>
+        </Archer.ArcherElement>
       </div>
-    </ArcherContainer>
+    </Archer.ArcherContainer>
   );
 };
 
@@ -217,9 +217,9 @@ export const FunctionBeahvior = () => {
   const classes = useStyles();
 
   return (
-    <ArcherContainer noCurves strokeColor='gray'>
+    <Archer.ArcherContainer noCurves strokeColor='gray'>
       <div className={classes.rowTop}>
-        <ArcherElement
+        <Archer.ArcherElement
           id='a'
           relations={[
             {
@@ -232,10 +232,10 @@ export const FunctionBeahvior = () => {
           <Box className={classes.box}>
             <NoteText variant={'body2'}>{contentFunctionA}</NoteText>
           </Box>
-        </ArcherElement>
+        </Archer.ArcherElement>
       </div>
       <div className={classes.row}>
-        <ArcherElement
+        <Archer.ArcherElement
           id='b'
           relations={[
             {
@@ -248,16 +248,16 @@ export const FunctionBeahvior = () => {
           <Box className={classes.box}>
             <NoteText variant={'body2'}>{contentFunctionB}</NoteText>
           </Box>
-        </ArcherElement>
+        </Archer.ArcherElement>
       </div>
       <div className={classes.rowBottom}>
-        <ArcherElement id='c'>
+        <Archer.ArcherElement id='c'>
           <Box className={classes.box}>
             <NoteText variant={'body2'}>{contentFunctionResult}</NoteText>
           </Box>
-        </ArcherElement>
+        </Archer.ArcherElement>
       </div>
-    </ArcherContainer>
+    </Archer.ArcherContainer>
   );
 };
 
@@ -265,9 +265,9 @@ export const HookedFunctionBeahvior = () => {
   const classes = useStyles();
 
   return (
-    <ArcherContainer noCurves strokeColor='gray'>
+    <Archer.ArcherContainer noCurves strokeColor='gray'>
       <div className={classes.rowTop2}>
-        <ArcherElement
+        <Archer.ArcherElement
           id='aa'
           relations={[
             {
@@ -280,11 +280,11 @@ export const HookedFunctionBeahvior = () => {
           <Box className={classes.box}>
             <NoteText variant={'body2'}>{contentFunctionA}</NoteText>
           </Box>
-        </ArcherElement>
+        </Archer.ArcherElement>
       </div>
       <div className={classes.rowWithTwoColumns}>
         <div>
-          <ArcherElement
+          <Archer.ArcherElement
             id='bb'
             relations={[
               {
@@ -295,13 +295,13 @@ export const HookedFunctionBeahvior = () => {
               }
             ]}
           >
-            <Box className={classes.box} bgcolor='error.main'>
+            <Box className={classes.box} sx={{ bgcolor: 'error.main' }}>
               <NoteText variant={'body2'}>{contentFunctionB}</NoteText>
             </Box>
-          </ArcherElement>
+          </Archer.ArcherElement>
         </div>
         <div>
-          <ArcherElement
+          <Archer.ArcherElement
             id='bbb'
             relations={[
               {
@@ -317,20 +317,20 @@ export const HookedFunctionBeahvior = () => {
               }
             ]}
           >
-            <Box className={classes.box} bgcolor='success.main'>
+            <Box className={classes.box} sx={{ bgcolor: 'success.main' }}>
               <NoteText variant={'body2'}>{contentFunctionHook}</NoteText>
             </Box>
-          </ArcherElement>
+          </Archer.ArcherElement>
         </div>
       </div>
       <div className={classes.rowBottom2}>
-        <ArcherElement id='cc'>
+        <Archer.ArcherElement id='cc'>
           <Box className={classes.box}>
             <NoteText variant={'body2'}>{contentFunctionHookResult}</NoteText>
           </Box>
-        </ArcherElement>
+        </Archer.ArcherElement>
       </div>
-    </ArcherContainer>
+    </Archer.ArcherContainer>
   );
 };
 

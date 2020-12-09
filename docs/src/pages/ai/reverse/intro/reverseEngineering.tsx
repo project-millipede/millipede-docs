@@ -1,9 +1,8 @@
+import { Archer } from '@app/components';
 import { Box, Typography } from '@material-ui/core';
 import { createStyles, lighten, makeStyles } from '@material-ui/core/styles';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
-
-import { ArcherContainer, ArcherElement } from '../../../../modules/components/archer';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -69,21 +68,21 @@ const AnalyseAndImplant = () => {
   const { t } = useTranslation();
 
   return (
-    <ArcherContainer noCurves strokeColor='gray'>
+    <Archer.ArcherContainer noCurves strokeColor='gray'>
       <Box className={classes.boxWrapper2}>
         <Typography variant='subtitle1' className={classes.title}>
           {t('pages/ai/general/index:program')}
         </Typography>
 
         <div className={classes.boxInner}>
-          <ArcherElement id='function'>
+          <Archer.ArcherElement id='function'>
             <Box className={classes.box} style={{ height: '100%' }}>
               <Typography variant='subtitle1' className={classes.title}>
                 {t('pages/ai/general/index:function')}
               </Typography>
             </Box>
-          </ArcherElement>
-          <ArcherElement
+          </Archer.ArcherElement>
+          <Archer.ArcherElement
             id='instruction_1'
             relations={[
               {
@@ -103,7 +102,7 @@ const AnalyseAndImplant = () => {
                 {t('pages/ai/general/index:instrument_function')}
               </Typography>
             </Box>
-          </ArcherElement>
+          </Archer.ArcherElement>
         </div>
       </Box>
 
@@ -112,7 +111,7 @@ const AnalyseAndImplant = () => {
           {t('pages/ai/general/index:analysis')}
         </Typography>
         <div className={classes.rowRight}>
-          <ArcherElement
+          <Archer.ArcherElement
             id='agent3'
             relations={[
               {
@@ -127,7 +126,7 @@ const AnalyseAndImplant = () => {
                 {t('pages/ai/general/index:determine_behavior')}
               </Typography>
             </Box>
-          </ArcherElement>
+          </Archer.ArcherElement>
         </div>
       </Box>
 
@@ -136,7 +135,7 @@ const AnalyseAndImplant = () => {
           {t('pages/ai/general/index:exposure')}
         </Typography>
         <div className={classes.boxInner}>
-          <ArcherElement
+          <Archer.ArcherElement
             id='agent5'
             relations={[
               {
@@ -151,8 +150,8 @@ const AnalyseAndImplant = () => {
                 {t('pages/ai/general/index:apply_attack_vector')}
               </Typography>
             </Box>
-          </ArcherElement>
-          <ArcherElement
+          </Archer.ArcherElement>
+          <Archer.ArcherElement
             id='agent4'
             relations={[
               {
@@ -167,10 +166,10 @@ const AnalyseAndImplant = () => {
                 {t('pages/ai/general/index:derive_attack_vector')}
               </Typography>
             </Box>
-          </ArcherElement>
+          </Archer.ArcherElement>
         </div>
       </Box>
-    </ArcherContainer>
+    </Archer.ArcherContainer>
   );
 };
 

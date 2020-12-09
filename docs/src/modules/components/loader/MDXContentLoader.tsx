@@ -1,7 +1,7 @@
+import { LogUtil } from '@app/utils';
 import { useRouter } from 'next/router';
 import React, { FC, useEffect, useState } from 'react';
 
-import { Logger } from '../../utils/logging';
 import { MdxDocs } from '../mdx';
 
 const load = (pathSlice = '', userLanguage = ''): any =>
@@ -15,7 +15,7 @@ const load = (pathSlice = '', userLanguage = ''): any =>
       };
     })
     .catch(error => {
-      Logger.log(error);
+      LogUtil.Logger.log(error);
     });
 
 export interface MDXContentLoaderProps {

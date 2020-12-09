@@ -33,7 +33,7 @@ export const CustomBox: FC<CustomBoxProps> = ({ children, id, bgcolor }) => {
 
   return (
     <Box
-      bgcolor={bgcolor}
+      sx={{ bgcolor }}
       className={selected ? classes.boxHover : classes.box}
       onClick={_e => {
         push(`${pathname}#${id}`);

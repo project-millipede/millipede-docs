@@ -1,9 +1,8 @@
+import { Archer } from '@app/components';
 import { Box, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
-
-import { ArcherContainer, ArcherElement } from '../../../modules/components/archer';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -73,13 +72,13 @@ const Diagram = () => {
   const { t } = useTranslation();
 
   return (
-    <ArcherContainer noCurves strokeColor='gray'>
+    <Archer.ArcherContainer noCurves strokeColor='gray'>
       <div className={classes.boxWrapper}>
         <Typography variant='subtitle1' className={classes.title}>
           {t('pages/ai/general/index:target_application')}
         </Typography>
         <div className={classes.row}>
-          <ArcherElement
+          <Archer.ArcherElement
             id='communication'
             relations={[
               {
@@ -96,8 +95,8 @@ const Diagram = () => {
                 )}`}
               </Typography>
             </div>
-          </ArcherElement>
-          <ArcherElement
+          </Archer.ArcherElement>
+          <Archer.ArcherElement
             id='preparation'
             relations={[
               {
@@ -114,12 +113,12 @@ const Diagram = () => {
                 )}`}
               </Typography>
             </Box>
-          </ArcherElement>
+          </Archer.ArcherElement>
         </div>
       </div>
 
       <div className={classes.rowMiddle}>
-        <ArcherElement id='shared_render'>
+        <Archer.ArcherElement id='shared_render'>
           <Box className={classes.box}>
             <Typography variant='subtitle1' className={classes.title}>
               {`${t('pages/ai/general/index:shared_render_process')} ${t(
@@ -127,11 +126,11 @@ const Diagram = () => {
               )}`}
             </Typography>
           </Box>
-        </ArcherElement>
+        </Archer.ArcherElement>
       </div>
       <div className={classes.boxWrapper}>
         <div className={classes.row}>
-          <ArcherElement
+          <Archer.ArcherElement
             id='preparation_custom'
             relations={[
               {
@@ -148,8 +147,8 @@ const Diagram = () => {
                 )}`}
               </Typography>
             </Box>
-          </ArcherElement>
-          <ArcherElement
+          </Archer.ArcherElement>
+          <Archer.ArcherElement
             id='communication_custom'
             relations={[
               {
@@ -168,13 +167,13 @@ const Diagram = () => {
                 )}`}
               </Typography>
             </div>
-          </ArcherElement>
+          </Archer.ArcherElement>
         </div>
         <Typography variant='subtitle1' className={classes.title}>
           {t('pages/ai/general/index:project_millipede')}
         </Typography>
       </div>
-    </ArcherContainer>
+    </Archer.ArcherContainer>
   );
 };
 

@@ -1,8 +1,7 @@
+import { Archer } from '@app/components';
 import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
-
-import { ArcherContainer, ArcherElement } from '../../../modules/components/archer';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -30,9 +29,9 @@ const Diagram = () => {
   const { t } = useTranslation();
 
   return (
-    <ArcherContainer noCurves strokeColor='gray'>
+    <Archer.ArcherContainer noCurves strokeColor='gray'>
       <div className={classes.row}>
-        <ArcherElement
+        <Archer.ArcherElement
           id='communication'
           relations={[
             {
@@ -49,10 +48,10 @@ const Diagram = () => {
               )}`}
             </Typography>
           </div>
-        </ArcherElement>
+        </Archer.ArcherElement>
       </div>
       <div className={classes.row}>
-        <ArcherElement
+        <Archer.ArcherElement
           id='preparation'
           relations={[
             {
@@ -69,10 +68,10 @@ const Diagram = () => {
               )}`}
             </Typography>
           </Box>
-        </ArcherElement>
+        </Archer.ArcherElement>
       </div>
       <div className={classes.row}>
-        <ArcherElement id='render'>
+        <Archer.ArcherElement id='render'>
           <div className={classes.box}>
             <Typography variant='subtitle1' className={classes.title}>
               {`${t('pages/ai/general/index:render_process')} ${t(
@@ -80,9 +79,9 @@ const Diagram = () => {
               )}`}
             </Typography>
           </div>
-        </ArcherElement>
+        </Archer.ArcherElement>
       </div>
-    </ArcherContainer>
+    </Archer.ArcherContainer>
   );
 };
 

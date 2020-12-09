@@ -1,13 +1,5 @@
-import {
-  createStyles,
-  Fade,
-  makeStyles,
-  Snackbar,
-  SpeedDial,
-  SpeedDialAction,
-  SpeedDialIcon
-} from '@material-ui/core';
-import { Close as CloseIcon, Share as ShareIcon } from '@material-ui/icons';
+import { createStyles, Fade, makeStyles, Snackbar, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@material-ui/core';
+import { Close, Share as ShareIcon } from '@material-ui/icons';
 import { windowOpenPromise } from '@vangware/window-open-promise';
 import copy from 'copy-to-clipboard';
 import _ from 'lodash';
@@ -25,11 +17,11 @@ import {
   URIPathParamsLinkedIn,
   URIPathParamsMail,
   URIPathParamsTwitter,
-  URIPathParamsWhatsApp
+  URIPathParamsWhatsApp,
 } from '../../../../../../src/typings/share';
 import { StringUtil } from '../../../utils';
 import { objectToGetParams } from '../../../utils/social/objectToGetParams';
-import Icon from './Icon';
+import { Icon } from './Icon';
 
 const isBrowser = typeof window !== 'undefined';
 
@@ -254,7 +246,7 @@ const Share: FC<MetaProps> = props => {
     <>
       <SpeedDial
         ariaLabel={t('common:share-post')}
-        icon={<SpeedDialIcon icon={<ShareIcon />} openIcon={<CloseIcon />} />}
+        icon={<SpeedDialIcon icon={<ShareIcon />} openIcon={<Close />} />}
         onClose={handleSpeedDialClose}
         onOpen={handleSpeedDialOpen}
         open={speedDialOpen}
