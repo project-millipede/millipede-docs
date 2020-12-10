@@ -11,8 +11,8 @@
     "@app/mdx-loader": "workspace:packages/mdx-loader"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9",
-    "@babel/preset-react": "^7.12.7",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-react": "^7.12.10",
     "babel-loader": "^8.2.2",
     "enhanced-resolve": "^5.4.0",
     "pkg-dir": "^5.0.0",

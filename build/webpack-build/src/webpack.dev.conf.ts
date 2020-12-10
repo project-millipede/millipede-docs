@@ -1,15 +1,15 @@
+import fs from 'fs';
 import webpack from 'webpack';
 
 import { generateModulesPaths } from './transpile';
 
+const pkg = fs.readFileSync('./package.json', 'utf8');
+const version = JSON.parse(pkg).version || 0;
 
-// import pkg from '../package.json';
 const getFallback = isServer => {
   if (!isServer) {
     return {
-      fs: false,
-      process: require.resolve('process/'),
-      buffer: require.resolve('buffer/')
+      fs: false
     };
   }
 };
@@ -67,15 +67,11 @@ export const webpackConfig = ({ isServer, modules }) => {
       ]
     },
     plugins: [
-      new webpack.ProvidePlugin({
-        Buffer: ['buffer', 'Buffer'],
-        process: 'process'
+      new webpack.DefinePlugin({
+        'process.env': {
+          PROJECT_VERSION: JSON.stringify(version)
+        }
       })
-      // new webpack.DefinePlugin({
-      //   'process.env': {
-      //     PROJECT_VERSION: JSON.stringify(pkg.version)
-      //   }
-      // })
     ]
   };
 };

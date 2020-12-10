@@ -7,9 +7,7 @@ import { AppFrame, AppWrapper, reducers as layoutReducers } from '@app/layout';
 import { DeviceUtil } from '@app/utils';
 import { reducers as demonstratorLayoutReducers } from '@demonstrator/layout';
 import { NextComponentType } from 'next';
-import I18nProvider from 'next-translate/I18nProvider';
 import { AppContext, AppInitialProps, AppProps } from 'next/app';
-import { useRouter } from 'next/router';
 import React from 'react';
 import { RecoilRoot } from 'recoil';
 import { AnalyticsProvider } from 'use-analytics';
@@ -23,31 +21,27 @@ const MillipedeApp: NextComponentType<
   AppInitialProps,
   AppProps
 > = ({ Component, pageProps }) => {
-  const { isMobile, namespaces } = pageProps;
-
-  const { locale } = useRouter();
+  const { isMobile } = pageProps;
 
   return (
-    <I18nProvider lang={locale} namespaces={namespaces}>
-      <AnalyticsProvider instance={defaultAnalytics}>
-        <Portal.PortalProvider>
-          <RecoilRoot>
-            <HouxProvider
-              initialReducers={{
-                ...layoutReducers,
-                ...demonstratorLayoutReducers
-              }}
-            >
-              <AppWrapper isMobile={isMobile}>
-                <AppFrame>
-                  <Component {...pageProps} />
-                </AppFrame>
-              </AppWrapper>
-            </HouxProvider>
-          </RecoilRoot>
-        </Portal.PortalProvider>
-      </AnalyticsProvider>
-    </I18nProvider>
+    <AnalyticsProvider instance={defaultAnalytics}>
+      <Portal.PortalProvider>
+        <RecoilRoot>
+          <HouxProvider
+            initialReducers={{
+              ...layoutReducers,
+              ...demonstratorLayoutReducers
+            }}
+          >
+            <AppWrapper isMobile={isMobile}>
+              <AppFrame>
+                <Component {...pageProps} />
+              </AppFrame>
+            </AppWrapper>
+          </HouxProvider>
+        </RecoilRoot>
+      </Portal.PortalProvider>
+    </AnalyticsProvider>
   );
 };
 

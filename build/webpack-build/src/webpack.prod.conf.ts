@@ -1,8 +1,11 @@
+import fs from 'fs';
 import webpack from 'webpack';
 
 import { generateModulesPaths } from './transpile';
 
-// import pkg from '../package.json';
+const pkg = fs.readFileSync('./package.json', 'utf8');
+const version = JSON.parse(pkg).version || 0;
+
 const getFallback = isServer => {
   if (!isServer) {
     return {
@@ -67,11 +70,11 @@ export const webpackConfig = ({ isServer, modules }) => {
     },
 
     plugins: [
-      // new webpack.DefinePlugin({
-      //   'process.env': {
-      //     PROJECT_VERSION: JSON.stringify(pkg.version)
-      //   }
-      // }),
+      new webpack.DefinePlugin({
+        'process.env': {
+          PROJECT_VERSION: JSON.stringify(version)
+        }
+      }),
       new webpack.IgnorePlugin({
         resourceRegExp: /^encoding$/,
         contextRegExp: /node-fetch/
