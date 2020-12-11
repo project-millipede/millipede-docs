@@ -5,16 +5,16 @@ import React, { CSSProperties, FC, useCallback, useLayoutEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { getSelectedPostIds } from './Dock.svc';
-import { InteractionItem } from './DockItem';
+import { DockItem } from './DockItem';
 
-export interface InteractionProps {
+export interface DockProps {
   timelineId: string;
   offSet: number;
   styles?: CSSProperties;
   position: string;
 }
 
-export const Interaction: FC<InteractionProps> = ({
+export const Dock: FC<DockProps> = ({
   timelineId,
   offSet,
   styles,
@@ -67,15 +67,15 @@ export const Interaction: FC<InteractionProps> = ({
 
   return (
     <div
-      key={`interaction-${timelineId}`}
+      key={`dock-${timelineId}`}
       style={{
         ...styles
       }}
     >
       {selectedPostIds.map(postId => {
         return (
-          <InteractionItem
-            key={`interaction-${timelineId}-${postId}`}
+          <DockItem
+            key={`dock-${timelineId}-${postId}`}
             postId={postId}
             timelineId={timelineId}
             containerScroll={containerBounds}

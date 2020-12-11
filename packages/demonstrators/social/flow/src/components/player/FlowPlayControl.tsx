@@ -9,15 +9,13 @@ import {
   useStepDispatch,
   useStepState,
 } from '@demonstrator/components';
-import React, { CSSProperties, FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 import { getSteps } from './FlowPlayControl.cfg';
 
 interface FlowPlayControlProps {
   leftTimelineId: string;
   rightTimelineId: string;
-  handleControlOffset?: (value: number) => void;
-  style?: CSSProperties;
 }
 
 export const FlowPlayControl: FC<FlowPlayControlProps> = ({
@@ -34,7 +32,7 @@ export const FlowPlayControl: FC<FlowPlayControlProps> = ({
   );
 };
 
-export const StepsRangeWrapper: FC<FlowPlayControlProps> = ({
+const StepsRangeWrapper: FC<FlowPlayControlProps> = ({
   leftTimelineId,
   rightTimelineId
 }) => {

@@ -13,7 +13,7 @@ import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-interface ScenarioControlProps {
+interface ScenarioControlNWithN {
   ltr: boolean;
   leftTimelineId: string;
   rightTimelineId: string;
@@ -22,7 +22,7 @@ interface ScenarioControlProps {
 const baseActions = ['head', 'tail'];
 
 // N Posts, with N Slices
-export const ScenarioControlNWithN: FC<ScenarioControlProps> = ({
+export const ScenarioControlNWithN: FC<ScenarioControlNWithN> = ({
   leftTimelineId,
   rightTimelineId,
   ltr

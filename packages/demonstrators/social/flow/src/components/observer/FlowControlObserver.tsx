@@ -1,16 +1,15 @@
 import { useEffectRef } from '@huse/effect-ref';
 import elementResizeDetectorMaker from 'element-resize-detector';
-import { CSSProperties, FC, ReactNode, useCallback } from 'react';
+import { CSSProperties, FC, useCallback } from 'react';
 
-interface InteractionFlowControlObserverProps {
+interface FlowControlObserverProps {
   handleControlOffset?: (value: number) => void;
   style?: CSSProperties;
-  children: ReactNode;
 }
 
 const resizeDetector = elementResizeDetectorMaker({ strategy: 'scroll' });
 
-export const FlowControlObserver: FC<InteractionFlowControlObserverProps> = ({
+export const FlowControlObserver: FC<FlowControlObserverProps> = ({
   handleControlOffset,
   style,
   children

@@ -22,7 +22,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { ProgressiveStepBuilder } from './components/navigation/ProgressiveStepBuilder';
 import { ScenarioControlNWithN } from './components/navigation/ScenarioControlNWithN';
 import { FlowControlObserver } from './components/observer/FlowControlObserver';
-import { SliceOptions } from './components/options/FlowSliceOptions';
+import { SliceOptions } from './components/options/SliceOptions';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -252,13 +252,6 @@ const ScenarioDetailNavigator: FC<ScenarioDetailNavigatorProps> = () => {
   ) : null;
 };
 
-interface InteractionFlowControlProps {
-  leftTimelineId: string;
-  rightTimelineId: string;
-  handleControlOffset?: (value: number) => void;
-  style?: CSSProperties;
-}
-
 interface ScenarioControlProps {
   leftTimelineId?: string;
   rightTimelineId?: string;
@@ -309,7 +302,14 @@ const ScenarioControl: FC<ScenarioControlProps> = (
   );
 };
 
-export const FlowControl: FC<InteractionFlowControlProps> = ({
+interface FlowControl {
+  leftTimelineId: string;
+  rightTimelineId: string;
+  handleControlOffset?: (value: number) => void;
+  style?: CSSProperties;
+}
+
+export const FlowControl: FC<FlowControl> = ({
   handleControlOffset,
   leftTimelineId,
   rightTimelineId,

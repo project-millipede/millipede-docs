@@ -4,11 +4,11 @@ import { EffectRef } from '@huse/effect-ref';
 import React, { FC, useCallback, useLayoutEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-import { InteractionItemPropsRoot } from '../../types';
+import { DockItemPropsRoot } from '../../types';
 import { getSelectedSliceIds } from './Dock.svc';
-import { InteractionSliceObserverWithArcher } from './DockSlice';
+import { DockSliceObserverWithArcher } from './DockSlice';
 
-export const InteractionItem: FC<InteractionItemPropsRoot> = ({
+export const DockItem: FC<DockItemPropsRoot> = ({
   containerScroll,
   timelineId,
   postId,
@@ -81,12 +81,12 @@ export const InteractionItem: FC<InteractionItemPropsRoot> = ({
     } = slice || { nodeWithRelations: { node: {} } };
 
     return selectedPostId && selectedPostId === postId ? (
-      <InteractionSliceObserverWithArcher
+      <DockSliceObserverWithArcher
         timelineId={timelineId}
         postId={postId}
         sliceId={sliceId}
         postBounds={postBounds}
-        key={`interaction-item-${timelineId}-${postId}-${sliceId}`}
+        key={`dock-item-${timelineId}-${postId}-${sliceId}`}
         id={nodeId}
         relations={relations}
       />
@@ -112,11 +112,11 @@ export const InteractionItem: FC<InteractionItemPropsRoot> = ({
   );
 };
 
-// const InteractionItemWithForwardRef = withForwardRef<
+// const DockItemWithForwardRef = withForwardRef<
 //   HTMLElement,
-//   InteractionItemProps
-// >(InteractionItem);
+//   DockItemProps
+// >(DockItem);
 
-// export const InteractionItemWithArcher = withArcher(
-//   InteractionItemWithForwardRef
+// export const DockItemWithArcher = withArcher(
+//   DockItemWithForwardRef
 // );

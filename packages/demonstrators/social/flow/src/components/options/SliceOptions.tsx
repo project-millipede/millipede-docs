@@ -8,7 +8,7 @@ import { SetterOrUpdater, useRecoilState } from 'recoil';
 
 import { Icon } from './Icon';
 
-export interface InteractionMenuItem {
+export interface DockMenuItem {
   id: string;
   title: string;
 }
@@ -26,7 +26,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const getInteraction = (_t: Translate) => {
+const getSliceOptions = (_t: Translate) => {
   return [
     {
       id: 'header',
@@ -55,7 +55,7 @@ const createIcons = (
   hideSpeedDial: () => void,
   interactionOption: ScrollTypes.Interaction.InteractionOption,
   setInteractionOption: SetterOrUpdater<ScrollTypes.Interaction.InteractionOption>
-) => ({ id, title }: InteractionMenuItem) => {
+) => ({ id, title }: DockMenuItem) => {
   return {
     title,
     icon: <Icon id={id} />,
@@ -90,7 +90,7 @@ const createButtons = (
   interactionOption: ScrollTypes.Interaction.InteractionOption,
   setInteractionOption: SetterOrUpdater<ScrollTypes.Interaction.InteractionOption>
 ) => {
-  const buttonsInfo = getInteraction(t).map(
+  const buttonsInfo = getSliceOptions(t).map(
     createIcons(hideSpeedDial, interactionOption, setInteractionOption)
   );
 

@@ -1,10 +1,10 @@
 import { Archer } from '@app/components';
 import React, { ComponentType } from 'react';
 
-import { InteractionItemArcherProps, InteractionItemProps, InteractionSliceArcherProps } from '../types';
+import { DockItemArcherProps, DockItemProps, DockSliceArcherProps } from '../types';
 
-export const withArcher = (Comp: ComponentType<InteractionItemProps>) => {
-  return (props: InteractionItemArcherProps | InteractionSliceArcherProps) => {
+export const withArcher = (Comp: ComponentType<DockItemProps>) => {
+  return (props: DockItemArcherProps | DockSliceArcherProps) => {
     const { id, relations, ...rest } = props;
     return (
       <Archer.ArcherElement

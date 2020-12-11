@@ -11,8 +11,6 @@ import { getSelectedSliceIdsBody } from './Dock.svc';
 
 const { ArcherElement, CustomBox } = Archer;
 
-interface InteractionBodyProps {}
-
 export const useStyles = makeStyles(() =>
   createStyles({
     row: {
@@ -28,7 +26,7 @@ export const useStyles = makeStyles(() =>
   })
 );
 
-export const InteractionBody: FC<InteractionBodyProps> = () => {
+export const FlowBody: FC = () => {
   const classes = useStyles();
 
   const {
