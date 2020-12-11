@@ -1,20 +1,20 @@
 import { Stepper } from '@app/components';
+import { ContentTypes } from '@app/types';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
 import Step1 from '../../../../../../src/assets/pidp/approach/byExample/Step1';
 import Step2 from '../../../../../../src/assets/pidp/approach/byExample/Step2';
-import { Content } from '../../../../../../src/typings/data/import';
 
-const generateContent = (t: Translate): Array<Content> => {
-  const steps = t<Array<Content>>(
+const generateContent = (t: Translate): Array<ContentTypes.Content> => {
+  const steps = t<Array<ContentTypes.Content>>(
     'pages/pidp/approach/byExample/content:steps',
     {},
     { returnObjects: true }
   );
 
-  const template: Array<Content> = [
+  const template: Array<ContentTypes.Content> = [
     {
       step: 0,
       size: 6,

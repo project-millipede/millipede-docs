@@ -5,16 +5,16 @@
       "subTitle": ["Make untrusted", "environments trusted"],
       "contextLink": {
         "id": "pet",
-        "perspectives": [
+        "sections": [
           {
-            "type": "feature",
+            "id": "feature",
             "icon": {
               "type": "FA",
               "name": "rocket"
             }
           },
           {
-            "type": "target-group",
+            "id": "target-group",
             "icon": {
               "type": "FA",
               "name": "user-circle"
@@ -28,16 +28,16 @@
       "subTitle": ["Approach to fight", "fake news"],
       "contextLink": {
         "id": "pidp",
-        "perspectives": [
+        "sections": [
           {
-            "type": "feature",
+            "id": "feature",
             "icon": {
               "type": "FA",
               "name": "rocket"
             }
           },
           {
-            "type": "target-group",
+            "id": "target-group",
             "icon": {
               "type": "FA",
               "name": "user-circle"
@@ -55,16 +55,16 @@
       ],
       "contextLink": {
         "id": "ai",
-        "perspectives": [
+        "sections": [
           {
-            "type": "feature",
+            "id": "feature",
             "icon": {
               "type": "FA",
               "name": "rocket"
             }
           },
           {
-            "type": "target-group",
+            "id": "target-group",
             "icon": {
               "type": "FA",
               "name": "user-circle"

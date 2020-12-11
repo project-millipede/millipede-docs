@@ -1,4 +1,4 @@
-import { Page } from '@app/types';
+import { PageTypes } from '@app/types';
 
 import { loadPages } from '../../../pages';
 import { determineActivePage, flattenPages } from '../../../utils/router';
@@ -6,9 +6,9 @@ import { StoreAction } from '../actionType';
 import { LOAD_PAGES } from './actionTypes';
 
 export interface NavigationProps {
-  pages: Array<Page>;
-  flattenedPages: Array<Page>;
-  activePage: Page;
+  pages: Array<PageTypes.Page>;
+  flattenedPages: Array<PageTypes.Page>;
+  activePage: PageTypes.Page;
 }
 
 export const initialState: NavigationProps = {

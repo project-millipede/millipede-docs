@@ -1,17 +1,17 @@
+import { ContentTypes } from '@app/types';
 import React, { FC, useState } from 'react';
 
-import { OverviewProps } from '../../../typings/data/import';
 import { useTimeout } from '../../hooks';
 import FullScreenInterface from '../../interface/FullScreenInterfaceByComponent';
 
 interface TopicsViewMobileProps {
-  topics: Array<OverviewProps>;
+  topics: Array<ContentTypes.OverviewProps>;
 }
 
 export const TopicsViewMobile: FC<TopicsViewMobileProps> = ({
   topics
 }: {
-  topics: Array<OverviewProps>;
+  topics: Array<ContentTypes.OverviewProps>;
 }) => {
   const [outerIndex, setOuterIndex] = useState(0);
 

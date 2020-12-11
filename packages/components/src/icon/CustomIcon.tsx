@@ -1,11 +1,11 @@
-import { Icon, IconType } from '@app/types';
+import { PageTypes } from '@app/types';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Icon as MUIIcon } from '@material-ui/core';
 import React, { FC } from 'react';
 
 interface CustomIconProps {
-  icon: Icon;
+  icon: PageTypes.Icon;
 }
 
 const generateFAIcon = (iconName: IconName) => {
@@ -19,7 +19,7 @@ const generateMUIIcon = (iconName: string) => {
 const CustomIcon: FC<CustomIconProps> = ({ icon }) => {
   let iconPlaceholder: JSX.Element;
 
-  if (icon.type === IconType.FA) {
+  if (icon.type === PageTypes.IconType.FA) {
     iconPlaceholder = generateFAIcon(icon.name as IconName);
   } else {
     iconPlaceholder = generateMUIIcon(icon.name);

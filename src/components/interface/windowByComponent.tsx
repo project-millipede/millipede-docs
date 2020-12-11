@@ -1,13 +1,13 @@
 import { CustomIcon } from '@app/components';
 import { useHoux } from '@app/houx';
 import { actions as layoutActions, NavigationActions } from '@app/layout';
+import { ContentTypes } from '@app/types';
 import { createStyles, IconButton, makeStyles, Theme } from '@material-ui/core';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import React, { Dispatch, FC } from 'react';
 import styled from 'styled-components';
 
-import { OverviewProps } from '../../typings/data/import';
 import { noAnimation } from '../animation';
 import { TopReveal } from '../animation/framer/components/text/TopReveal';
 
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface WindowProps {
-  windowStackData?: Array<OverviewProps>;
+  windowStackData?: Array<ContentTypes.OverviewProps>;
   index: number;
 }
 
@@ -55,14 +55,14 @@ const Window: FC<WindowProps> = ({ windowStackData, index }) => {
       </div>
       <div className={classes.container}>
         {windowStackData[index].contextLink
-          ? windowStackData[index].contextLink.perspectives.map(
-              (perspective, pIndex) => {
+          ? windowStackData[index].contextLink.sections.map(
+              (section, pIndex) => {
                 return (
                   <IconButton
-                    key={`perspective-${pIndex}`}
+                    key={`section-${pIndex}`}
                     onClick={() => {
                       push(
-                        `${pathname}?${perspective.type}=${windowStackData[index].contextLink.id}#${windowStackData[index].contextLink.id}`
+                        `${pathname}?${section.id}=${windowStackData[index].contextLink.id}#${windowStackData[index].contextLink.id}`
                       );
                       dispatch(
                         navigation.loadPages(
@@ -71,7 +71,7 @@ const Window: FC<WindowProps> = ({ windowStackData, index }) => {
                       );
                     }}
                   >
-                    <CustomIcon icon={perspective.icon} />
+                    <CustomIcon icon={section.icon} />
                   </IconButton>
                 );
               }

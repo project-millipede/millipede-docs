@@ -74,7 +74,7 @@ const ScenarioNavigator: FC<ScenarioNavigatorProps> = () => {
   }, [nodesWithRelations, activeId]);
 
   return (
-    <Stepper.StepperAdv
+    <Stepper.Stepper
       steps={steps}
       step={currentStep}
       setStepCb={(currentStep: number) => {
@@ -238,7 +238,7 @@ const ScenarioDetailNavigator: FC<ScenarioDetailNavigatorProps> = () => {
             {t(`pages/pidp/use-case/recognition/index:${id}`)}
           </Typography>
         </Paper>
-        <Stepper.StepperAdv
+        <Stepper.Stepper
           steps={steps}
           step={currentStep}
           setStepCb={(newStep: number) => {

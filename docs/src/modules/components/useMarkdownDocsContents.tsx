@@ -1,11 +1,11 @@
-import { Page } from '@app/types';
+import { PageTypes } from '@app/types';
 
 import { getContents, getHeaders } from '../utils/parseMarkdown';
 
 interface MarkdownDocsContentsProps {
   markdownLocation?: string;
   markdown?: string;
-  activePage: Page;
+  activePage: PageTypes.Page;
 }
 
 const useMarkdownDocsContents = ({

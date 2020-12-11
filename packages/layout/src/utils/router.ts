@@ -1,7 +1,10 @@
-import { Page } from '@app/types';
+import { PageTypes } from '@app/types';
 import _ from 'lodash';
 
-const findActivePage = (currentPages: Array<Page>, pathname: string): Page => {
+const findActivePage = (
+  currentPages: Array<PageTypes.Page>,
+  pathname: string
+): PageTypes.Page => {
   const activePage = _.find(currentPages, (page: any) => {
     if (page.children) {
       if (pathname.indexOf(`${page.pathname}/`) === 0) {
@@ -37,12 +40,18 @@ const determineCurrenPathname = (pathname: string) => {
   return pathname;
 };
 
-const determineActivePage = (pages: Array<Page>, pathname: string) => {
+const determineActivePage = (
+  pages: Array<PageTypes.Page>,
+  pathname: string
+) => {
   const currentPathname = determineCurrenPathname(pathname);
   return findActivePage(pages, currentPathname);
 };
 
-const flattenPages = (pages: Array<Page>, current: Array<Page> = []) => {
+const flattenPages = (
+  pages: Array<PageTypes.Page>,
+  current: Array<PageTypes.Page> = []
+) => {
   return pages.reduce((acc, item) => {
     let items = [...acc];
     if (item.children && item.children.length > 1) {
