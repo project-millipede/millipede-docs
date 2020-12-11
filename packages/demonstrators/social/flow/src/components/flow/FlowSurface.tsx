@@ -2,8 +2,8 @@ import { Archer } from '@app/components';
 import React, { FC } from 'react';
 
 import { ArcherSurfaceObserver } from '../observer/ArcherSurfaceObserver';
-import { Interaction } from './Dock';
-import { InteractionBody } from './FlowBody';
+import { Dock } from './Dock';
+import { FlowBody } from './FlowBody';
 
 const { ArcherSurface } = Archer;
 
@@ -40,7 +40,7 @@ export const FlowSurface: FC<FlowSurfaceProps> = ({
                 width: '15%'
               }}
             >
-              <Interaction
+              <Dock
                 styles={{
                   display: 'flex',
                   justifyContent: 'flex-start'
@@ -58,14 +58,14 @@ export const FlowSurface: FC<FlowSurfaceProps> = ({
                 justifyContent: 'center'
               }}
             >
-              <InteractionBody />
+              <FlowBody />
             </div>
             <div
               style={{
                 width: '15%'
               }}
             >
-              <Interaction
+              <Dock
                 styles={{
                   display: 'flex',
                   justifyContent: 'flex-end'

@@ -2,7 +2,7 @@ import { ArcherTypes } from '@app/components';
 import { ScrollTypes } from '@demonstrators-social/shared';
 import { RefObject } from 'react';
 
-export interface InteractionItemPropsRoot {
+export interface DockItemPropsRoot {
   containerScroll: Partial<DOMRect>;
   timelineId: string;
   postId: string;
@@ -13,7 +13,7 @@ export interface InteractionItemPropsRoot {
   render?: ArcherTypes.RenderFn;
 }
 
-export interface InteractionItemProps {
+export interface DockItemProps {
   timelineId: string;
   postId: string;
   archerData?:
@@ -23,10 +23,10 @@ export interface InteractionItemProps {
   render?: ArcherTypes.RenderFn;
 }
 
-export type InteractionItemArcherProps = InteractionItemProps &
+export type DockItemArcherProps = DockItemProps &
   ArcherTypes.ArcherElementProps;
 
-export interface InteractionSliceProps {
+export interface DockSliceProps {
   timelineId: string;
   postId: string;
   sliceId?: string;
@@ -38,5 +38,5 @@ export interface InteractionSliceProps {
   dynamicRef?: any;
 }
 
-export type InteractionSliceArcherProps = InteractionSliceProps &
+export type DockSliceArcherProps = DockSliceProps &
   ArcherTypes.ArcherElementProps;

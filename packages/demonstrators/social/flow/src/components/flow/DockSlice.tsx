@@ -6,7 +6,7 @@ import React, { FC, useCallback, useImperativeHandle, useLayoutEffect, useRef, u
 import { useSetRecoilState } from 'recoil';
 
 import { withArcher } from '../../hocs/with-archer';
-import { InteractionSliceProps } from '../../types';
+import { DockSliceProps } from '../../types';
 
 const RenderFn = ({ children }) => children();
 
@@ -20,7 +20,7 @@ export const defaultSliceBackgrundColor = {
   comments: { color: '#ff5722' } // 'deepOrange'
 };
 
-const InteractionSliceObserver: FC<InteractionSliceProps> = ({
+const DockSlice: FC<DockSliceProps> = ({
   timelineId,
   postId,
   sliceId,
@@ -136,11 +136,11 @@ const InteractionSliceObserver: FC<InteractionSliceProps> = ({
   );
 };
 
-const InteractionSliceObserverWithForwardRef = HocsUtils.withForwardRef<
+const DockSliceObserverWithForwardRef = HocsUtils.withForwardRef<
   HTMLElement,
-  InteractionSliceProps
->(InteractionSliceObserver);
+  DockSliceProps
+>(DockSlice);
 
-export const InteractionSliceObserverWithArcher = withArcher(
-  InteractionSliceObserverWithForwardRef
+export const DockSliceObserverWithArcher = withArcher(
+  DockSliceObserverWithForwardRef
 );
