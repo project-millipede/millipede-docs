@@ -123,7 +123,7 @@ __metadata:
   dependencies:
     "@analytics/google-analytics": ^0.5.2
     analytics: ^0.6.2
-    typescript: ^4.1.2
+    typescript: ^4.1.3
   languageName: unknown
   linkType: soft
 
@@ -143,7 +143,7 @@ __metadata:
     next: ^10.0.4-canary.3
     react: ^17.0.1
     react-dom: ^17.0.1
-    typescript: ^4.1.2
+    typescript: ^4.1.3
     use-resize-observer: ^7.0.0
   peerDependencies:
     "@fortawesome/fontawesome-svg-core": "*"
@@ -162,13 +162,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@app/houx@workspace:packages/houx"
   dependencies:
-    "@types/node": ^14.14.11
+    "@types/node": ^14.14.12
     "@types/react": ^17.0.0
     "@types/react-dom": ^17.0.0
     react: ^17.0.1
     react-dom: ^17.0.1
     typesafe-actions: ^5.1.0
-    typescript: ^4.1.2
+    typescript: ^4.1.3
   peerDependencies:
     react: "*"
     react-dom: "*"
@@ -190,7 +190,7 @@ __metadata:
     "@material-ui/icons": ^5.0.0-alpha.15
     "@material-ui/lab": ^5.0.0-alpha.18
     "@types/lodash": ^4.14.165
-    "@types/node": ^14.14.11
+    "@types/node": ^14.14.12
     "@types/react": ^17.0.0
     "@types/react-dom": ^17.0.0
     "@types/styled-components": ^5.1.5
@@ -202,7 +202,7 @@ __metadata:
     react-dom: ^17.0.1
     styled-components: ^5.2.1
     typesafe-actions: ^5.1.0
-    typescript: ^4.1.2
+    typescript: ^4.1.3
     use-analytics: ^0.0.5
   peerDependencies:
     "@fortawesome/fontawesome-svg-core": "*"
@@ -233,7 +233,7 @@ __metadata:
     loader-utils: ^2.0.0
     remark-slug: ^6.0.0
     rimraf: ^3.0.2
-    typescript: ^4.1.2
+    typescript: ^4.1.3
   languageName: unknown
   linkType: soft
 
@@ -250,7 +250,7 @@ __metadata:
     lodash: ^4.17.20
     react: ^17.0.1
     react-dom: ^17.0.1
-    typescript: ^4.1.2
+    typescript: ^4.1.3
   peerDependencies:
     "@huse/effect-ref": "*"
     element-resize-detector: "*"
@@ -264,7 +264,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@app/types@workspace:packages/types"
   dependencies:
-    typescript: ^4.1.2
+    typescript: ^4.1.3
   languageName: unknown
   linkType: soft
 
@@ -273,7 +273,7 @@ __metadata:
   resolution: "@app/utils@workspace:packages/utils"
   dependencies:
     lodash: ^4.17.20
-    typescript: ^4.1.2
+    typescript: ^4.1.3
   languageName: unknown
   linkType: soft
 
@@ -289,9 +289,9 @@ __metadata:
     pkg-dir: ^5.0.0
     raw-loader: ^4.0.2
     rimraf: ^3.0.2
-    ts-loader: ^8.0.11
-    typescript: ^4.1.2
-    webpack: ^5.10.0
+    ts-loader: ^8.0.12
+    typescript: ^4.1.3
+    webpack: ^5.10.1
   languageName: unknown
   linkType: soft
 
@@ -1773,7 +1773,7 @@ __metadata:
   resolution: "@demonstrator/components@workspace:packages/demonstrator/components"
   dependencies:
     "@demonstrator/types": "workspace:packages/demonstrator/types"
-    typescript: ^4.1.2
+    typescript: ^4.1.3
   languageName: unknown
   linkType: soft
 
@@ -1782,7 +1782,7 @@ __metadata:
   resolution: "@demonstrator/layout@workspace:packages/demonstrator/layout"
   dependencies:
     "@demonstrator/types": "workspace:packages/demonstrator/types"
-    typescript: ^4.1.2
+    typescript: ^4.1.3
   languageName: unknown
   linkType: soft
 
@@ -1790,7 +1790,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@demonstrator/types@workspace:packages/demonstrator/types"
   dependencies:
-    typescript: ^4.1.2
+    typescript: ^4.1.3
   languageName: unknown
   linkType: soft
 
@@ -1802,7 +1802,7 @@ __metadata:
     "@material-ui/icons": ^5.0.0-alpha.15
     react: ^17.0.1
     react-dom: ^17.0.1
-    typescript: ^4.1.2
+    typescript: ^4.1.3
   peerDependencies:
     "@material-ui/core": "*"
     "@material-ui/icons": "*"
@@ -1815,9 +1815,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@demonstrators-social/data@workspace:packages/demonstrators/social/data"
   dependencies:
-    "@types/jest": ^26.0.18
+    "@types/jest": ^26.0.19
     chance: ^1.1.7
-    typescript: ^4.1.2
+    typescript: ^4.1.3
   languageName: unknown
   linkType: soft
 
@@ -1832,7 +1832,7 @@ __metadata:
     "@demonstrators-social/shared": "workspace:packages/demonstrators/social/shared"
     react: ^17.0.1
     react-dom: ^17.0.1
-    typescript: ^4.1.2
+    typescript: ^4.1.3
   peerDependencies:
     react: "*"
     react-dom: "*"
@@ -1850,7 +1850,7 @@ __metadata:
     "@demonstrators-social/shared": "workspace:packages/demonstrators/social/shared"
     react: ^17.0.1
     react-dom: ^17.0.1
-    typescript: ^4.1.2
+    typescript: ^4.1.3
   peerDependencies:
     react: "*"
     react-dom: "*"
@@ -1875,7 +1875,7 @@ __metadata:
     recoil: ^0.1.2
     reselect: ^4.0.0
     typesafe-actions: ^5.1.0
-    typescript: ^4.1.2
+    typescript: ^4.1.3
   peerDependencies:
     "@huse/effect-ref": "*"
     immer: "*"
@@ -3177,13 +3177,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:^26.0.18":
-  version: 26.0.18
-  resolution: "@types/jest@npm:26.0.18"
+"@types/jest@npm:^26.0.19":
+  version: 26.0.19
+  resolution: "@types/jest@npm:26.0.19"
   dependencies:
     jest-diff: ^26.0.0
     pretty-format: ^26.0.0
-  checksum: 942433a3bebfcc88f0d7e9662ef2157826e8018b0c30191f9ca56bc75703652e614c5019d8bc43950abacf304777204e35d968a6e28a35ad98d9f1bdb9442390
+  checksum: 98c8daaf89ca79823461818c1c22d337354e250a135e0314ba1a49e615620c8e2f54c5b900ba8554bf853919c97538f9a38b5af00cea83fd715ee2e6d75e04b8
   languageName: node
   linkType: hard
 
@@ -3248,10 +3248,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^14.14.11":
-  version: 14.14.11
-  resolution: "@types/node@npm:14.14.11"
-  checksum: aa09069a4914819692278da742c11f629ce61ff40682e13afbc4421d0647107bffb6bcb8929d1cf8da22821779164078ae86a382f61324c9df7e1af8eaed567b
+"@types/node@npm:^14.14.12":
+  version: 14.14.12
+  resolution: "@types/node@npm:14.14.12"
+  checksum: def4a93f6ba9ea5ccbed7b403988b5e888dcde27c9d00f3f487500a26a36e13826e294fabc6d01ce563059d3567f27ea8c458edc39b502e38659c5154667602b
   languageName: node
   linkType: hard
 
@@ -9712,9 +9712,9 @@ __metadata:
     "@types/element-resize-detector": ^1.1.2
     "@types/eslint": ^7.2.6
     "@types/faker": ^5.1.5
-    "@types/jest": ^26.0.18
+    "@types/jest": ^26.0.19
     "@types/lodash": ^4.14.165
-    "@types/node": ^14.14.11
+    "@types/node": ^14.14.12
     "@types/react": ^17.0.0
     "@types/react-dom": ^17.0.0
     "@types/styled-components": ^5.1.5
@@ -9768,9 +9768,9 @@ __metadata:
     reselect: ^4.0.0
     styled-components: ^5.2.1
     ts-jest: ^26.4.4
-    ts-loader: ^8.0.11
+    ts-loader: ^8.0.12
     typesafe-actions: ^5.1.0
-    typescript: ^4.1.2
+    typescript: ^4.1.3
     unified: ^9.2.0
     unist-util-visit: ^2.0.3
     use-analytics: ^0.0.5
@@ -9778,8 +9778,8 @@ __metadata:
     uuid: ^8.3.2
     vfile: ^4.2.1
     victory: ^35.4.3
-    webpack: ^5.10.0
-    webpack-merge: 5.4.1
+    webpack: ^5.10.1
+    webpack-merge: 5.6.1
     windups: ^1.1.2
   languageName: unknown
   linkType: soft
@@ -13375,9 +13375,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-loader@npm:^8.0.11":
-  version: 8.0.11
-  resolution: "ts-loader@npm:8.0.11"
+"ts-loader@npm:^8.0.12":
+  version: 8.0.12
+  resolution: "ts-loader@npm:8.0.12"
   dependencies:
     chalk: ^2.3.0
     enhanced-resolve: ^4.0.0
@@ -13387,7 +13387,7 @@ __metadata:
   peerDependencies:
     typescript: "*"
     webpack: "*"
-  checksum: a04e515aad50e7645f1e10b038ebbff708aa7e7027f538101b9f6f53c60e33a9e114aab8825de78cd61179de8efa273ee71a6a9920ca9cbaadc2a2ee079b3f45
+  checksum: 70da090dacb77ff51eb71ddb506a63e4617487855637441f99e8f66553933c410af1a54e71316caa0b05522fb47eaf2c9a6aaa3a0abb8b6a12ebf50b6a80f54e
   languageName: node
   linkType: hard
 
@@ -13547,23 +13547,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-typescript@^4.1.2:
-  version: 4.1.2
-  resolution: "typescript@npm:4.1.2"
+typescript@^4.1.3:
+  version: 4.1.3
+  resolution: "typescript@npm:4.1.3"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: d2ac373b469e973448c7287d0fbc732dbd34d00d07911b9506bbf81469a80db6613361fc9293d021da357cb7c7da2ee32f56d8ef76446361231374200cd6aee9
+  checksum: 4f7ab1506ea22c7a1c313ec5b4285e93ce08d709ad6086d02d3096adb399ca339972ee56d1e578213c51dd0fb7b0fad50283c2d3c39642405644458ae29774f8
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.1.2#builtin<compat/typescript>":
-  version: 4.1.2
-  resolution: "typescript@patch:typescript@npm%3A4.1.2#builtin<compat/typescript>::version=4.1.2&hash=cc6730"
+"typescript@patch:typescript@^4.1.3#builtin<compat/typescript>":
+  version: 4.1.3
+  resolution: "typescript@patch:typescript@npm%3A4.1.3#builtin<compat/typescript>::version=4.1.3&hash=cc6730"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 001ab09bb8f597aab1ec43476aedb91b5d547749219273c232bf34cf5a2209d18fa782e64475755115f0907598bb9b503f5e1c0fed06c3651cac584fc88a8172
+  checksum: 017af992148346e671d5b83b041773825888e9c94db8d2b9472cdbb6d6f0ee85927817473121524d319f8be6ffe5a6904d27ff6ef21356d2274fcadd52e17938
   languageName: node
   linkType: hard
 
@@ -14470,13 +14470,13 @@ typescript@^4.1.2:
   languageName: node
   linkType: hard
 
-"webpack-merge@npm:5.4.1":
-  version: 5.4.1
-  resolution: "webpack-merge@npm:5.4.1"
+"webpack-merge@npm:5.6.1":
+  version: 5.6.1
+  resolution: "webpack-merge@npm:5.6.1"
   dependencies:
     clone-deep: ^4.0.1
     wildcard: ^2.0.0
-  checksum: c6c11151f294617a9c3e2fed2a84328b0955e661fd020fc186e1d86aebe6de2195e811fc10632d2ac0f54b803ed59309c09edab13b5397551c5a5d7d18fff32b
+  checksum: f8f97e61cab9b278877984880e3624b1c52295ff51f62e1d5a0d3978de7233d67acf8782dcb7bcea38e89467fa758cb6bf3b18c5743ab025154d3a67c27ffafe
   languageName: node
   linkType: hard
 

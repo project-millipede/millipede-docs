@@ -13,7 +13,7 @@
     "lodash": "^4.17.20",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "typescript": "^4.1.2"
+    "typescript": "^4.1.3"
   },
   "peerDependencies": {
     "@huse/effect-ref": "*",
