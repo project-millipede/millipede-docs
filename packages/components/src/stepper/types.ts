@@ -1,5 +1,4 @@
-// borrowed from mui
-type GridSize = 'auto' | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+import { GridSize } from '@material-ui/core/Grid';
 
 interface Link {
   text: string;
@@ -43,3 +42,18 @@ export interface Stack {
   rows?: Array<Array<Content>>;
   categories?: CategoryDescriptor;
 }
+
+export interface TranslationProps {
+  labelBack: string;
+  labelNext: string;
+}
+
+export interface StepperProps {
+  steps: number;
+  step?: number;
+  setStepCb: (step: number) => void;
+}
+
+export type MergedStepperProps = TranslationProps & StepperProps;
+
+export type MergedStepperContentProps = TranslationProps & Stack;

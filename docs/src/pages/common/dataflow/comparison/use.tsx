@@ -58,7 +58,13 @@ const generateContent = (t: Translate) => {
 
 const use = () => {
   const { t } = useTranslation();
-  return <Stepper.StepperContent elements={generateContent(t)} />;
+  return (
+    <Stepper.StepperContent
+      elements={generateContent(t)}
+      labelBack={t('common:back')}
+      labelNext={t('common:next')}
+    />
+  );
 };
 
 export default use;

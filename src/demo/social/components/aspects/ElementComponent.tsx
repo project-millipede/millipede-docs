@@ -1,9 +1,9 @@
+import { Stepper } from '@app/components';
 import { createStyles, makeStyles, Slider, Typography } from '@material-ui/core';
 import { Translate } from 'next-translate';
 import React, { useState } from 'react';
 
 import { Item } from '../../../../../docs/src/modules/components/common/grid/Item';
-import Stepper from '../../../../components/common/stepper/Stepper';
 import { Category, CategoryDescriptor, Content, Stack2 } from '../../../../typings/data/import';
 
 export const useStyles = makeStyles(() =>
@@ -143,13 +143,15 @@ const ElementComponent = ({ elements, categories, t }: Props) => {
           }
         }
       >
-        <Stepper
+        <Stepper.Stepper
           steps={
             Object.values(elements).reduce((a, b) => a.concat(b), []).length + 1
           }
-          currentStep={(currentStep: number) => {
+          setStepCb={(currentStep: number) => {
             setStep(currentStep);
           }}
+          labelBack={t('common:back')}
+          labelNext={t('common:next')}
         />
       </div>
     </div>

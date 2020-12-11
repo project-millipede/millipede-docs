@@ -1,11 +1,8 @@
-import {
-  Button,
-  createStyles,
-  makeStyles,
-  MobileStepper
-} from '@material-ui/core';
+import { Button, createStyles, makeStyles, MobileStepper } from '@material-ui/core';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
+
+import { MergedStepperProps } from './types';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -15,26 +12,13 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export interface TranslationProps {
-  labelBack: string;
-  labelNext: string;
-}
-
-export interface StepperAdvProps {
-  steps: number;
-  step?: number;
-  setStepCb: (step: number) => void;
-}
-
-export type Props = StepperAdvProps & TranslationProps;
-
-export const StepperAdv = ({
+export const StepperAdv: FC<MergedStepperProps> = ({
   steps,
   step,
   setStepCb,
   labelBack,
   labelNext
-}: Props) => {
+}) => {
   const classes = useStyles();
 
   const [activeStep, setActiveStep] = useState(0);
