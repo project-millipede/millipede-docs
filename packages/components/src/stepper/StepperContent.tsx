@@ -1,8 +1,9 @@
+import { ContentTypes } from '@app/types';
 import { CardContent, createStyles, Grid, makeStyles, Typography } from '@material-ui/core';
 import React, { FC, useState } from 'react';
 
-import { Stepper } from './Stepper';
-import { Content, MergedStepperContentProps } from './types';
+import { Stepper, TranslationProps } from './Stepper';
+import { getStepsLength, selectContent } from './StepperContent.svc';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -12,22 +13,9 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const getStepsLength = (elements: Array<Content> = []): number => {
-  return elements.map(item => item.step).reduce(findMax, 0);
-};
-
-const findMax = (acc: number, value: number) => {
-  return Math.max(acc, value);
-};
-
-const stepsFiltered = (
-  array: Array<Content> = [],
-  step: number
-): Array<Content> => {
-  return array.filter(value => value.step === step).map(value => value);
-};
-
-export const renderTitleAndDescription = (items: Array<Content> = []) => {
+export const renderTitleAndDescription = (
+  items: Array<ContentTypes.Content> = []
+) => {
   const classes = useStyles();
 
   return items.map((item, index) => {
@@ -51,7 +39,10 @@ export const renderTitleAndDescription = (items: Array<Content> = []) => {
   });
 };
 
-export const StepperContent: FC<MergedStepperContentProps> = ({
+export type StepperContentWithTranslationProps = TranslationProps &
+  ContentTypes.Stack;
+
+export const StepperContent: FC<StepperContentWithTranslationProps> = ({
   elements = [],
   labelBack,
   labelNext
@@ -60,14 +51,17 @@ export const StepperContent: FC<MergedStepperContentProps> = ({
 
   const max = getStepsLength(elements);
 
-  const currentSteps = stepsFiltered(elements, step);
-  const [firstItem] = currentSteps;
+  const stepContent = selectContent(elements, step);
+
+  const [{ image }] = stepContent;
 
   return (
     <Grid container>
-      <Grid item xs={12}>
-        <CardContent>{firstItem.image}</CardContent>
-      </Grid>
+      {image ? (
+        <Grid item xs={12}>
+          <CardContent>{image}</CardContent>
+        </Grid>
+      ) : null}
       <Grid item xs={12}>
         <Stepper
           steps={max + 1}
@@ -78,7 +72,7 @@ export const StepperContent: FC<MergedStepperContentProps> = ({
           labelNext={labelNext}
         />
       </Grid>
-      {renderTitleAndDescription(currentSteps)}
+      {renderTitleAndDescription(stepContent)}
     </Grid>
   );
 };

@@ -1,8 +1,6 @@
 import { Button, createStyles, makeStyles, MobileStepper } from '@material-ui/core';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
-import React, { FC, useEffect, useState } from 'react';
-
-import { MergedStepperProps } from './types';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -12,8 +10,22 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export const Stepper: FC<MergedStepperProps> = ({
+export interface TranslationProps {
+  labelBack: string;
+  labelNext: string;
+}
+
+export interface StepperProps {
+  steps: number;
+  step?: number;
+  setStepCb: (step: number) => void;
+}
+
+export type StepperWithTranslationProps = StepperProps & TranslationProps;
+
+export const Stepper: FC<StepperWithTranslationProps> = ({
   steps,
+  step,
   setStepCb,
   labelBack,
   labelNext
@@ -22,40 +34,61 @@ export const Stepper: FC<MergedStepperProps> = ({
 
   const [activeStep, setActiveStep] = useState(0);
 
-  useEffect(() => {
-    setStepCb(activeStep);
-  });
+  const passActiveState = useCallback(
+    (value: number) => {
+      setStepCb(value);
+    },
+    [setStepCb]
+  );
 
-  const handleNext = () => {
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
-  };
+  useEffect(() => {
+    passActiveState(activeStep);
+  }, [activeStep]);
+
+  useEffect(() => {
+    setActiveStep(step);
+  }, [step]);
 
   const handleBack = () => {
-    setActiveStep(prevActiveStep => prevActiveStep - 1);
+    setActiveStep(prevState => prevState - 1);
+  };
+
+  const handleNext = () => {
+    setActiveStep(prevState => prevState + 1);
   };
 
   return (
     <MobileStepper
-      variant='dots'
       steps={steps}
-      position='static'
       activeStep={activeStep}
+      variant='dots'
+      position='static'
       className={classes.root}
-      nextButton={
-        <Button
-          size='small'
-          onClick={handleNext}
-          disabled={activeStep === steps - 1}
-        >
-          {labelNext}
-          <KeyboardArrowRight />
-        </Button>
-      }
       backButton={
-        <Button size='small' onClick={handleBack} disabled={activeStep === 0}>
-          <KeyboardArrowLeft />
-          {labelBack}
-        </Button>
+        steps > 0 ? (
+          <Button
+            size='small'
+            onClick={handleBack}
+            disabled={activeStep === 0}
+            id={'back'}
+          >
+            <KeyboardArrowLeft />
+            {labelBack}
+          </Button>
+        ) : null
+      }
+      nextButton={
+        steps > 0 ? (
+          <Button
+            size='small'
+            onClick={handleNext}
+            disabled={activeStep === steps - 1}
+            id={'next'}
+          >
+            {labelNext}
+            <KeyboardArrowRight />
+          </Button>
+        ) : null
       }
     />
   );
