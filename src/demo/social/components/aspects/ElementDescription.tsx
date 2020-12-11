@@ -36,9 +36,7 @@ const ElementDescription = () => {
   const categorySections: Category = groupArray(topics, 'category');
 
   return (
-    <>
-      <Component elements={categorySections} categories={categoriesRaw} t={t} />
-    </>
+    <Component elements={categorySections} categories={categoriesRaw} t={t} />
   );
 };
 

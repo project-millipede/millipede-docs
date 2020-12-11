@@ -85,8 +85,8 @@ const ScenarioNavigator: FC<ScenarioNavigatorProps> = () => {
           };
         });
       }}
-      labelNext={t('common:next')}
       labelBack={t('common:back')}
+      labelNext={t('common:next')}
     />
   );
 };

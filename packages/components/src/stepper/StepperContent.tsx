@@ -1,9 +1,8 @@
 import { CardContent, createStyles, Grid, makeStyles, Typography } from '@material-ui/core';
-import useTranslation from 'next-translate/useTranslation';
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 
 import { Stepper } from './Stepper';
-import { Content, Stack } from './types';
+import { Content, MergedStepperContentProps } from './types';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -52,9 +51,11 @@ export const renderTitleAndDescription = (items: Array<Content> = []) => {
   });
 };
 
-export const StepperContent = ({ elements = [] }: Stack) => {
-  const { t } = useTranslation();
-
+export const StepperContent: FC<MergedStepperContentProps> = ({
+  elements = [],
+  labelBack,
+  labelNext
+}) => {
   const [step, setStep] = useState(0);
 
   const max = getStepsLength(elements);
@@ -70,11 +71,11 @@ export const StepperContent = ({ elements = [] }: Stack) => {
       <Grid item xs={12}>
         <Stepper
           steps={max + 1}
-          currentStep={(currentStep: number) => {
+          setStepCb={(currentStep: number) => {
             setStep(currentStep);
           }}
-          labelNext={t('common:next')}
-          labelBack={t('common:back')}
+          labelBack={labelBack}
+          labelNext={labelNext}
         />
       </Grid>
       {renderTitleAndDescription(currentSteps)}
