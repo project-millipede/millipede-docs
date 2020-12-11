@@ -1,9 +1,8 @@
+import { ContentTypes } from '@app/types';
 import { Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import _ from 'lodash';
 import React from 'react';
-
-import { Stack } from '../../../../../../src/typings/data/import';
 
 export const useStyles = makeStyles(() =>
   createStyles({
@@ -37,7 +36,7 @@ export const useStyles = makeStyles(() =>
   })
 );
 
-const ByExample = ({ rows = [[]] }: Stack) => {
+const ByExample = ({ rows = [[]] }: ContentTypes.Stack) => {
   const classes = useStyles();
 
   const result = rows.map(row => {

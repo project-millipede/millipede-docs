@@ -1,6 +1,6 @@
 import { useHoux } from '@app/houx';
 import { AppFrame, RootState as LayoutState } from '@app/layout';
-import { Page } from '@app/types';
+import { PageTypes } from '@app/types';
 import React from 'react';
 
 import { AppContent } from '../AppContent';
@@ -33,7 +33,7 @@ const MdDocs = (props: MarkdownDocsProps) => {
   const { markdownLocation } = useMarkdownDocsContents({
     markdown: content,
     markdownLocation: markdownLocationProp,
-    activePage: activePage || ({ pathname: '' } as Page)
+    activePage: activePage || ({ pathname: '' } as PageTypes.Page)
   });
 
   return (

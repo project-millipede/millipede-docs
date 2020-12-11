@@ -1,10 +1,10 @@
 import { Stepper } from '@app/components';
+import { ContentTypes } from '@app/types';
 import { createStyles, makeStyles, Slider, Typography } from '@material-ui/core';
 import { Translate } from 'next-translate';
 import React, { useState } from 'react';
 
 import { Item } from '../../../../../docs/src/modules/components/common/grid/Item';
-import { Category, CategoryDescriptor, Content, Stack2 } from '../../../../typings/data/import';
 
 export const useStyles = makeStyles(() =>
   createStyles({
@@ -38,15 +38,15 @@ export const useStyles = makeStyles(() =>
 // };
 
 export const stepsFiltered = (
-  array: Array<Content> = [],
+  array: Array<ContentTypes.Content> = [],
   step: number
-): Array<Content> => {
+): Array<ContentTypes.Content> => {
   return array.map(item => item).filter(value => value.step === step);
 };
 
 export const generateGrid = (
-  elements: Category,
-  categories: CategoryDescriptor,
+  elements: ContentTypes.Category,
+  categories: ContentTypes.CategoryDescriptor,
   step: number,
   classes: Record<any, string>,
   t: Translate
@@ -94,7 +94,7 @@ interface TranslationProps {
   t: Translate;
 }
 
-type Props = Stack2 & TranslationProps;
+type Props = ContentTypes.Stack & TranslationProps;
 
 const ElementComponent = ({ elements, categories, t }: Props) => {
   const classes = useStyles();
@@ -133,7 +133,14 @@ const ElementComponent = ({ elements, categories, t }: Props) => {
           }
         }
       >
-        {generateGrid(elements as Category, categories, step, classes, t)}
+        {generateGrid(
+          // elements as ContentTypes.Category,
+          elements as any,
+          categories,
+          step,
+          classes,
+          t
+        )}
       </div>
       <div
         style={

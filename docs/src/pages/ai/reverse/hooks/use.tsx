@@ -1,13 +1,13 @@
 import { Stepper } from '@app/components';
+import { ContentTypes } from '@app/types';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-import { Content } from '../../../../../../src/typings/data/import';
 import { FunctionBeahvior, HookedFunctionBeahvior } from './methodHooking';
 
 const generateContent = (t: Translate) => {
-  const steps = t<Array<Content>>(
+  const steps = t<Array<ContentTypes.Content>>(
     'pages/ai/index:steps',
     {},
     {
@@ -15,7 +15,7 @@ const generateContent = (t: Translate) => {
     }
   );
 
-  const template: Array<Content> = [
+  const template: Array<ContentTypes.Content> = [
     {
       step: 0,
       size: 12,

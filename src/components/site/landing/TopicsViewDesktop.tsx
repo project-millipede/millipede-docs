@@ -1,15 +1,15 @@
 import { CustomIcon } from '@app/components';
 import { useHoux } from '@app/houx';
 import { actions as layoutActions, NavigationActions } from '@app/layout';
+import { ContentTypes } from '@app/types';
 import { createStyles, Grid, IconButton, makeStyles, Theme } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React, { Dispatch, FC } from 'react';
 
-import { OverviewProps } from '../../../typings/data/import';
 import { TopReveal } from '../../animation/framer/components/text/TopReveal';
 
 interface TopicsViewDesktopProps {
-  topics: Array<OverviewProps>;
+  topics: Array<ContentTypes.OverviewProps>;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -54,27 +54,25 @@ export const TopicsViewDesktop: FC<TopicsViewDesktopProps> = ({ topics }) => {
                   </div>
                   <div className={classes.container}>
                     {topic.contextLink
-                      ? topic.contextLink.perspectives.map(
-                          (perspective, index) => {
-                            return (
-                              <IconButton
-                                key={`perspective-${index}`}
-                                onClick={() => {
-                                  push(
-                                    `${pathname}?${perspective.type}=${topic.contextLink.id}#${topic.contextLink.id}`
-                                  );
-                                  dispatch(
-                                    navigation.loadPages(
-                                      `/${topic.contextLink.id}`
-                                    )
-                                  );
-                                }}
-                              >
-                                <CustomIcon icon={perspective.icon} />
-                              </IconButton>
-                            );
-                          }
-                        )
+                      ? topic.contextLink.sections.map((section, index) => {
+                          return (
+                            <IconButton
+                              key={`perspective-${index}`}
+                              onClick={() => {
+                                push(
+                                  `${pathname}?${section.id}=${topic.contextLink.id}#${topic.contextLink.id}`
+                                );
+                                dispatch(
+                                  navigation.loadPages(
+                                    `/${topic.contextLink.id}`
+                                  )
+                                );
+                              }}
+                            >
+                              <CustomIcon icon={section.icon} />
+                            </IconButton>
+                          );
+                        })
                       : null}
                   </div>
                 </div>

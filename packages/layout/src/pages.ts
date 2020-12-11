@@ -1,6 +1,9 @@
-import { Icon, IconType, Page } from '@app/types';
+import { PageTypes } from '@app/types';
 
-export const loadPages = (pathname: string, _currentPages: Array<Page>) => {
+export const loadPages = (
+  pathname: string,
+  _currentPages: Array<PageTypes.Page>
+) => {
   if (pathname === '/') {
     return [];
   }
@@ -15,17 +18,17 @@ export const loadPages = (pathname: string, _currentPages: Array<Page>) => {
   ];
 };
 
-export const defaultIcon: Icon = {
-  type: IconType.MUI,
+export const defaultIcon: PageTypes.Icon = {
+  type: PageTypes.IconType.MUI,
   name: 'star'
 };
 
-export const defaultFAIcon: Icon = {
-  type: IconType.FA,
+export const defaultFAIcon: PageTypes.Icon = {
+  type: PageTypes.IconType.FA,
   name: ''
 };
 
-export const pagesDiscoverMore: Array<Page> = [
+export const pagesDiscoverMore: Array<PageTypes.Page> = [
   {
     pathname: '/discover-more',
     icon: { ...defaultIcon, name: 'info' },
@@ -55,7 +58,7 @@ export const pagesDiscoverMore: Array<Page> = [
   }
 ];
 
-export const pagesPIDP: Array<Page> = [
+export const pagesPIDP: Array<PageTypes.Page> = [
   {
     pathname: '/pidp',
     icon: defaultIcon,
@@ -100,7 +103,7 @@ export const pagesPIDP: Array<Page> = [
   }
 ];
 
-export const pagesAI: Array<Page> = [
+export const pagesAI: Array<PageTypes.Page> = [
   {
     pathname: '/ai',
     icon: defaultIcon,
@@ -148,14 +151,14 @@ export const pagesAI: Array<Page> = [
 //   },
 // ];
 
-export const pagesPET: Array<Page> = [
+export const pagesPET: Array<PageTypes.Page> = [
   {
     pathname: '/pet',
     icon: defaultIcon
   }
 ];
 
-export const pagesRethinkSecurity: Array<Page> = [
+export const pagesRethinkSecurity: Array<PageTypes.Page> = [
   {
     pathname: '/rethink-security',
     icon: { ...defaultIcon, name: 'security' },
@@ -182,7 +185,7 @@ export const pagesRethinkSecurity: Array<Page> = [
   }
 ];
 
-export const pagesPerspective: Array<Page> = [
+export const pagesPerspective: Array<PageTypes.Page> = [
   {
     pathname: '/perspective',
     icon: { ...defaultIcon, name: 'layers' },
@@ -211,7 +214,7 @@ export const pagesPerspective: Array<Page> = [
   }
 ];
 
-export const pagesGuides: Array<Page> = [
+export const pagesGuides: Array<PageTypes.Page> = [
   {
     pathname: '/guides',
     icon: { ...defaultIcon, name: 'explore' },

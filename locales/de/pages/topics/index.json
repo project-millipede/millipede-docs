@@ -5,16 +5,16 @@
       "subTitle": ["Etablierung von Vertrauen", "in unsicheren Umgegebugen"],
       "contextLink": {
         "id": "pet",
-        "perspectives": [
+        "sections": [
           {
-            "type": "feature",
+            "id": "feature",
             "icon": {
               "type": "FA",
               "name": "rocket"
             }
           },
           {
-            "type": "target-group",
+            "id": "target-group",
             "icon": {
               "type": "FA",
               "name": "user-circle"
@@ -28,16 +28,16 @@
       "subTitle": ["Ansatz zur Eindämmung", "von Falschinformation"],
       "contextLink": {
         "id": "pidp",
-        "perspectives": [
+        "sections": [
           {
-            "type": "feature",
+            "id": "feature",
             "icon": {
               "type": "FA",
               "name": "rocket"
             }
           },
           {
-            "type": "target-group",
+            "id": "target-group",
             "icon": {
               "type": "FA",
               "name": "user-circle"
@@ -55,16 +55,16 @@
       ],
       "contextLink": {
         "id": "ai",
-        "perspectives": [
+        "sections": [
           {
-            "type": "feature",
+            "id": "feature",
             "icon": {
               "type": "FA",
               "name": "rocket"
             }
           },
           {
-            "type": "target-group",
+            "id": "target-group",
             "icon": {
               "type": "FA",
               "name": "user-circle"

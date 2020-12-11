@@ -1,7 +1,7 @@
+import { ContentTypes } from '@app/types';
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-import { OverviewProps } from '../../../typings/data/import';
 import Window from '../windowByComponent';
 
 const Container = styled('div')`
@@ -10,7 +10,7 @@ const Container = styled('div')`
 `;
 
 export interface FullScreenInterfaceProps {
-  windowStackData?: Array<OverviewProps>;
+  windowStackData?: Array<ContentTypes.OverviewProps>;
   index?: number;
 }
 

@@ -1,9 +1,8 @@
 import { Link } from '@app/components';
+import { ContentTypes } from '@app/types';
 import { Avatar, createStyles, Icon, makeStyles, Typography } from '@material-ui/core';
 import _ from 'lodash';
 import React from 'react';
-
-import { OverviewProps } from '../../../../../../src/typings/data/import';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -50,7 +49,12 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export const Item = ({ title, description, link, icon }: OverviewProps) => {
+export const Item = ({
+  title,
+  description,
+  link,
+  icon
+}: ContentTypes.OverviewProps) => {
   const classes = useStyles();
 
   let intermediateResult = [];

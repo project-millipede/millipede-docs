@@ -1,3 +1,4 @@
+import { ContentTypes } from '@app/types';
 import { Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
@@ -7,7 +8,6 @@ import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
 import { Item } from '../../../../docs/src/modules/components/common/grid/Item';
-import { OverviewProps, Scenario } from '../../../typings/data/import';
 import { translateContent } from './TranslateService';
 
 const useStyles = makeStyles(() =>
@@ -49,12 +49,16 @@ export const Topics: FC<TopicsProps> = ({ featureName, aspect }) => {
   );
   const categoriesKeys = Object.keys(categoriesRaw);
 
-  const data = translateContent<OverviewProps>(
+  const data = translateContent<ContentTypes.OverviewProps>(
     t,
     `pages/${featureName}/intro/${aspect}/index:topics`
   );
 
-  const dataGrouped: Scenario = groupArray(data, 'scenario', 'category');
+  const dataGrouped: ContentTypes.Scenario = groupArray(
+    data,
+    'scenario',
+    'category'
+  );
 
   return (
     <>

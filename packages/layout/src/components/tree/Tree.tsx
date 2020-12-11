@@ -1,6 +1,6 @@
 /* eslint-disable import/named */
 import { CustomIcon, Link } from '@app/components';
-import { Icon, Page } from '@app/types';
+import { PageTypes } from '@app/types';
 import { Collapse, createStyles, ListItem, ListItemIcon, ListItemText, makeStyles, Theme } from '@material-ui/core';
 import { TransitionProps } from '@material-ui/core/transitions';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
@@ -13,15 +13,15 @@ import { contains } from '../../utils/collection/array';
 
 interface TreeLabelProps {
   labelText: string;
-  icon: Icon;
+  icon: PageTypes.Icon;
   pathname?: string;
   hasChildren?: boolean;
   expandedNodeIds?: Array<string>;
 }
 
 interface TreeProps {
-  data: Array<Page>;
-  activePage: Page;
+  data: Array<PageTypes.Page>;
+  activePage: PageTypes.Page;
 }
 
 const useStylesTreeNode = makeStyles((theme: Theme) =>
@@ -158,7 +158,7 @@ export const Tree: FC<TreeProps> = ({ data, activePage = {} }) => {
     setSelected(generatePartialPathnames(activePage.pathname, true));
   }, [activePage.pathname]);
 
-  const createItem = ({ children, ...rest }: Page) => {
+  const createItem = ({ children, ...rest }: PageTypes.Page) => {
     const title = t(`common:pages.${rest.pathname}`);
     return (
       <StyledTreeItem
@@ -171,7 +171,7 @@ export const Tree: FC<TreeProps> = ({ data, activePage = {} }) => {
     );
   };
 
-  const buildTreeItems = (nodes: Array<Page>) => {
+  const buildTreeItems = (nodes: Array<PageTypes.Page>) => {
     if (!nodes) {
       return null;
     }
