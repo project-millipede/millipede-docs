@@ -8,7 +8,6 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@app/mdx-loader": "workspace:packages/mdx-loader",
     "escalade": "^3.1.1"
   },
   "devDependencies": {
