@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "dependencies": {
     "@analytics/google-analytics": "^0.5.2",
-    "analytics": "^0.6.2"
+    "analytics": "^0.6.4"
   },
   "devDependencies": {
     "typescript": "^4.1.3"
