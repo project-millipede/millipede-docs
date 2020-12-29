@@ -1,0 +1,28 @@
+# Reverse Engineering
+
+> Reverse engineering is the process of taking a program apart to find out how
+> it works. You can do this by examining the compiled app (static analysis),
+> observing the app during runtime (dynamic analysis), or a combination of both.
+
+## Overview
+
+<ReverseEngineering />
+
+- A program's elementary building block is a function. To gain insights about
+  the scope and the internal workings of a function it has to be wrapped within
+  an instrumentation function.
+- Ones the intermediate function is in place it hides the original function from
+  the outside. The intermediate function invokes the original function with its
+  functional parameters. The return value of the original function is in the
+  scope of the intermediate function, an observation of the functionality of the
+  method is possible.
+- Depending on the use case different subsequent steps can be specified. In
+  order to protect an application against certain attack vectors, it is
+  necessary to determine the application behavior against different attack
+  vectors.
+- An attack procedure exploiting a vulnerability is directed against the
+  application. The reaction and defensive behavior of an application are
+  observable through the second step. Conclusions of an observed problem are
+  delegated to the engineering team, which initiates an adaptation of the
+  application logic to prevent the exploitation of the identified security
+  problem.
