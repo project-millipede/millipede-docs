@@ -1,10 +1,9 @@
 import { Container, createStyles, makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
 
 interface AppContentProps {
   disableToc?: boolean;
-  children: ReactNode;
 }
 
 const useStyles = makeStyles((theme: Theme) =>

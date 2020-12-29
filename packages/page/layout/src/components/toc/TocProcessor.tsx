@@ -6,7 +6,7 @@ import unified from 'unified';
 
 import remarkMinNodes from '../../remark/minNodes';
 import remarkToc from '../../remark/toc';
-import TocLink from './TocLink';
+import { TocLink } from './TocLink';
 
 export const generateProcessor = () => {
   const processor = unified()
