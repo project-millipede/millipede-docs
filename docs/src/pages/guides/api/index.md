@@ -1,3 +1,0 @@
-# API
-
-## Grundlage der Schnittstelle
