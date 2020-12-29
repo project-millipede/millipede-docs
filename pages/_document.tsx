@@ -1,28 +1,20 @@
 import { ServerStyleSheets as MaterialServerStyleSheets } from '@material-ui/core';
+import GoogleFonts from 'next-google-fonts';
 import NextDocument, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
 import React, { Fragment } from 'react';
 import { ServerStyleSheet as StyledComponentSheets } from 'styled-components';
 
-/* eslint-disable class-methods-use-this */
 class MillipedeDocument extends NextDocument {
   render() {
     return (
-      <Html lang='en'>
-        <Head>
-          <meta charSet='utf-8' />
-          {/* Use minimum-scale=1 to enable GPU rasterization */}
-          {/* <meta
-            name='viewport'
-            content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no'
-          /> */}
-          <link
+      <Html>
+        <GoogleFonts href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap' />
+        <Head lang='en'>
+          {/* <link
             rel='stylesheet'
             href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
-          />
-          <link
-            rel='stylesheet'
-            href='https://fonts.googleapis.com/icon?family=Material+Icons'
-          />
+          /> */}
+          <link rel='shortcut icon' href='/favicon.ico' />
         </Head>
         <body>
           <Main />
