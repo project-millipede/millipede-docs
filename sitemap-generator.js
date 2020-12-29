@@ -33,7 +33,7 @@ urls.forEach(url => {
   sitemap({
     baseUrl: url.baseUrl,
     ignoreIndexFiles,
-    pagesDirectory: __dirname + '/pages',
+    pagesDirectory: __dirname + '/.next/server/pages',
     targetDirectory: url.targetDirectory,
     nextConfigPath: __dirname + '/next.config.js',
     ignoredExtensions: ['png', 'jpg'],

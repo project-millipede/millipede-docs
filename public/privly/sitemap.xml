@@ -4,204 +4,444 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
       xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
       xmlns:xhtml="http://www.w3.org/1999/xhtml">
-      <url><loc>https://privly.io/ai/general</loc>
+      <url><loc>https://privly.io/de/404</loc>
                 
                 
                 
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/ai</loc>
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/ai/general</loc>
                 
                 
                 
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/ai/objectives</loc>
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/ai/objectives</loc>
                 
                 
                 
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/ai/reverse/hooks</loc>
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/ai/reverse/hooks</loc>
                 
                 
                 
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/ai/reverse</loc>
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/ai/reverse/intro</loc>
                 
                 
                 
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/ai/reverse/intro</loc>
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/ai/reverse</loc>
                 
                 
                 
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/discover-more</loc>
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/ai</loc>
                 
                 
                 
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/discover-more/organisation</loc>
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/discover-more/organisation</loc>
                 
                 
                 
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/discover-more/support</loc>
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/discover-more/support</loc>
                 
                 
                 
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/discover-more/team</loc>
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/discover-more/team</loc>
                 
                 
                 
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/guides/disinformation/general</loc>
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/discover-more</loc>
                 
                 
                 
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/guides/disinformation</loc>
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/guides/disinformation/general</loc>
                 
                 
                 
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/guides/disinformation/objectives</loc>
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/guides/disinformation/objectives</loc>
                 
                 
                 
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/guides/engineering/applicationTypes</loc>
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/guides/disinformation</loc>
                 
                 
                 
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/guides/engineering</loc>
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/guides/engineering/applicationTypes</loc>
                 
                 
                 
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/guides</loc>
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/guides/engineering</loc>
                 
                 
                 
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/guides/research</loc>
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/guides/research/paper</loc>
                 
                 
                 
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/guides/research/paper</loc>
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/guides/research</loc>
                 
                 
                 
-                <lastmod>2020-11-11</lastmod>
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/guides</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/perspective/cause</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/perspective/competence</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/perspective/reference</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/perspective/shortsighted</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/perspective/strategy</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/perspective</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/pet/dataflow/comparison</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/pet/dataflow</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/pet</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/pidp/approach/by-example</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/pidp/approach/intro</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/pidp/approach</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/pidp/intro</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/pidp/use-case/intro</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/pidp/use-case/recognition</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/pidp/use-case/response</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/pidp/use-case</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/pidp</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/rethink-security/attack-vectors/comparison</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/rethink-security/attack-vectors/intro</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/rethink-security/attack-vectors</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/rethink-security/intro</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de/docs/rethink-security</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/de</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/docs/[...slug]</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/404</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/ai/general</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/ai/objectives</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/ai/reverse/hooks</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/ai/reverse/intro</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/ai/reverse</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/ai</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/discover-more/organisation</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/discover-more/support</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/discover-more/team</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/discover-more</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/guides/disinformation/general</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/guides/disinformation/objectives</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/guides/disinformation</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/guides/engineering/applicationTypes</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/guides/engineering</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/guides/research/paper</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/guides/research</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/guides</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/perspective/cause</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/perspective/competence</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/perspective/reference</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/perspective/shortsighted</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/perspective/strategy</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/perspective</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/pet/dataflow/comparison</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/pet/dataflow</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/pet</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/pidp/approach/by-example</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/pidp/approach/intro</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/pidp/approach</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/pidp/intro</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/pidp/use-case/intro</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/pidp/use-case/recognition</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/pidp/use-case/response</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/pidp/use-case</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/pidp</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/rethink-security/attack-vectors/comparison</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/rethink-security/attack-vectors/intro</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/rethink-security/attack-vectors</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/rethink-security/intro</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en/docs/rethink-security</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
+                </url><url><loc>https://privly.io/en</loc>
+                
+                
+                
+                <lastmod>2020-12-29</lastmod>
                 </url><url><loc>https://privly.io</loc>
                 
                 
                 
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/perspective/cause</loc>
-                
-                
-                
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/perspective/competence</loc>
-                
-                
-                
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/perspective</loc>
-                
-                
-                
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/perspective/reference</loc>
-                
-                
-                
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/perspective/shortsighted</loc>
-                
-                
-                
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/perspective/strategy</loc>
-                
-                
-                
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/pet</loc>
-                
-                
-                
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/pidp/approach/byExample</loc>
-                
-                
-                
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/pidp/approach</loc>
-                
-                
-                
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/pidp/approach/intro</loc>
-                
-                
-                
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/pidp</loc>
-                
-                
-                
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/pidp/intro</loc>
-                
-                
-                
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/pidp/use-case</loc>
-                
-                
-                
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/pidp/use-case/intro</loc>
-                
-                
-                
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/pidp/use-case/recognition</loc>
-                
-                
-                
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/pidp/use-case/response</loc>
-                
-                
-                
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/rethink-security/attackVectors/comparison</loc>
-                
-                
-                
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/rethink-security/attackVectors</loc>
-                
-                
-                
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/rethink-security/attackVectors/intro</loc>
-                
-                
-                
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/rethink-security</loc>
-                
-                
-                
-                <lastmod>2020-11-11</lastmod>
-                </url><url><loc>https://privly.io/rethink-security/intro</loc>
-                
-                
-                
-                <lastmod>2020-11-11</lastmod>
+                <lastmod>2020-12-29</lastmod>
                 </url></urlset>
