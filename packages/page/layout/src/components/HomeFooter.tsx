@@ -68,11 +68,16 @@ export const HomeFooter = () => {
               </li>
               <li>
                 <Link
+                  href={
+                    {
+                      pathname: '/docs/[...slug]',
+                      query: { slug: 'discover-more/team'.split('/') }
+                    } as any
+                  }
                   color='inherit'
                   variant='body2'
-                  href='/discover-more/team'
                 >
-                  {t('common:pages./discover-more/team')}
+                  {t('common:pages.discover-more/team')}
                 </Link>
               </li>
             </ul>
@@ -84,20 +89,30 @@ export const HomeFooter = () => {
             <ul className={classes.list}>
               <li>
                 <Link
+                  href={
+                    {
+                      pathname: '/docs/[...slug]',
+                      query: { slug: 'discover-more/organisation'.split('/') }
+                    } as any
+                  }
                   color='inherit'
                   variant='body2'
-                  href='/discover-more/organisation'
                 >
-                  {t('common:pages./discover-more/organisation')}
+                  {t('common:pages.discover-more/organisation')}
                 </Link>
               </li>
               <li>
                 <Link
+                  href={
+                    {
+                      pathname: '/docs/[...slug]',
+                      query: { slug: 'discover-more/support'.split('/') }
+                    } as any
+                  }
                   color='inherit'
                   variant='body2'
-                  href='/discover-more/support'
                 >
-                  {t('common:pages./discover-more/support')}
+                  {t('common:pages.discover-more/support')}
                 </Link>
               </li>
             </ul>

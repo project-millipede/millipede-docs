@@ -1,8 +1,9 @@
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
+import { isMobile } from 'react-device-detect';
 
-import TOCComponent from '../../markdown/components/toc/TocComponent';
+import { TocComponent } from './toc';
 
 export const WIDTH_TOC = 225;
 
@@ -32,12 +33,13 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     tocHeader: {
       height: 56,
-      padding: theme.spacing(1)
+      padding: theme.spacing(1),
+      fontSize: '1rem'
     }
   })
 );
 
-interface AppTableOfContentsProps {
+export interface AppTableOfContentsProps {
   content: string;
 }
 
@@ -48,10 +50,10 @@ export const AppTableOfContents: FC<AppTableOfContentsProps> = ({
 
   const { t } = useTranslation();
 
-  return (
+  return !isMobile ? (
     <nav className={classes.root}>
       <Typography className={classes.tocHeader}>{t('common:toc')}</Typography>
-      <TOCComponent content={content} />
+      <TocComponent content={content} />
     </nav>
-  );
+  ) : null;
 };

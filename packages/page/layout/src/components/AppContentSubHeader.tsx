@@ -1,12 +1,12 @@
+import { PageTypes } from '@app/types';
 import { Typography } from '@material-ui/core';
 import React, { FC } from 'react';
-import { IReadingTime } from 'reading-time-estimator';
 
 interface AppContentSubHeaderProps {
-  timeToRead?: IReadingTime;
+  timeToRead?: PageTypes.ReadingTime;
 }
 
-const AppContentSubHeader: FC<AppContentSubHeaderProps> = ({
+export const AppContentSubHeader: FC<AppContentSubHeaderProps> = ({
   timeToRead = {}
 }) => {
   return (
@@ -16,5 +16,3 @@ const AppContentSubHeader: FC<AppContentSubHeaderProps> = ({
     </>
   );
 };
-
-export default AppContentSubHeader;

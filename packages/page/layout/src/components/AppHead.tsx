@@ -1,17 +1,15 @@
+import { PageTypes } from '@app/types';
 import useTranslation from 'next-translate/useTranslation';
 import NextHead from 'next/head';
 import React, { FC } from 'react';
 
-import { MetaProps } from '../../../../src/typings/share';
-
 interface HeadProps {
-  meta?: MetaProps;
+  meta?: PageTypes.ContentMetaData;
 }
 
 const defaultTitle = 'headTitle';
 const defaultDescription = 'strapline';
-
-export const Head: FC<HeadProps> = ({ meta = {} }) => {
+export const AppHead: FC<HeadProps> = ({ meta = {} }) => {
   const {
     title = defaultTitle,
     description = defaultDescription,
@@ -24,7 +22,8 @@ export const Head: FC<HeadProps> = ({ meta = {} }) => {
 
   return (
     <NextHead>
-      <title>{title === defaultTitle ? t(`common:${title}`) : title}</title>
+      <meta charSet='UTF-8' />
+      <meta name='viewport' content='width=device-width, initial-scale=1.0' />
       <meta
         name='description'
         content={
@@ -36,6 +35,8 @@ export const Head: FC<HeadProps> = ({ meta = {} }) => {
       {keywords ? <meta name='keywords' content={keywords} /> : null}
       {author ? <meta name='author' content={author} /> : null}
       {date ? <meta name='date' content={date} /> : null}
+
+      <title>{title === defaultTitle ? t(`common:${title}`) : title}</title>
     </NextHead>
   );
 };
