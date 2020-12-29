@@ -1,9 +1,9 @@
-import { click } from '@plusnew/simulate-dom-events';
 import { usePrevious } from 'ahooks';
 import { motion, useAnimation } from 'framer-motion';
 import React, { FC, useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { measure, measureOffset } from './Cursor.svc';
+import { click } from './dom-events';
 import CircleShape from './shapes/circle';
 
 const cursorVariant = {
