@@ -1,13 +1,5 @@
-export type {
-  ViewActions,
-  NavigationActions,
-  StoreAction
-} from './redux/features/actionType';
-export type {
-  ViewState,
-  NavigationState,
-  RootState
-} from './redux/features/reducers';
+export type { ViewActions, StoreAction } from './redux/features/actionType';
+export type { ViewState, RootState } from './redux/features/reducers';
 
 export { reducers } from './redux/features/reducers';
 export { actions } from './redux/features/actionType';

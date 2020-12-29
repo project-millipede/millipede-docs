@@ -1,7 +1,7 @@
-import _ from 'lodash';
+import isArray from 'lodash/isArray';
 
 export const stringToArray = (text: Array<string> | string) => {
-  if (_.isArray(text)) {
+  if (isArray(text)) {
     return [...text];
   }
   if (typeof text === 'string') {

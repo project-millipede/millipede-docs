@@ -2,25 +2,29 @@ import { Button, Menu, MenuItem, Tooltip } from '@material-ui/core';
 import LanguageIcon from '@material-ui/icons/Language';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import React, { FC, SyntheticEvent, useCallback, useState } from 'react';
+import React, { FC, SyntheticEvent, useState } from 'react';
 
 import { LANGUAGES_LABEL } from '../constants';
 import { LanguageLabel } from './LanguageLabel';
 
 export const LanguageMenu: FC = () => {
-  const { t } = useTranslation();
-
   const [languageMenu, setLanguageMenu] = useState<Element & EventTarget>(null);
 
-  const { locale, route, push } = useRouter();
+  const { t } = useTranslation();
 
-  const handleSelect = useCallback(
-    (_event: SyntheticEvent, languageCode: string) => {
-      push(route, route, { locale: languageCode });
-      setLanguageMenu(null);
-    },
-    [route, locale]
-  );
+  const { push, pathname, asPath, locale, query } = useRouter();
+
+  const handleSelect = (languageCode: string) => {
+    push(
+      {
+        pathname,
+        query
+      },
+      asPath,
+      { locale: languageCode }
+    );
+    setLanguageMenu(null);
+  };
 
   const handleLanguageIconClick = (event: SyntheticEvent) => {
     setLanguageMenu(event.currentTarget);
@@ -57,7 +61,9 @@ export const LanguageMenu: FC = () => {
             data-no-link='true'
             key={language.code}
             selected={language.code === locale}
-            onClick={event => handleSelect(event, language.code)}
+            onClick={_e => {
+              handleSelect(language.code);
+            }}
             lang={language.code}
             hrefLang={language.code}
           >

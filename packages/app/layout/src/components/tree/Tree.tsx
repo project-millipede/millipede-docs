@@ -1,6 +1,6 @@
-/* eslint-disable import/named */
-import { CustomIcon, Link } from '@app/components';
+import { getIconByName, Link } from '@app/components';
 import { PageTypes } from '@app/types';
+import { CollectionUtil, RouterUtils } from '@app/utils';
 import { Collapse, createStyles, ListItem, ListItemIcon, ListItemText, makeStyles, Theme } from '@material-ui/core';
 import { TransitionProps } from '@material-ui/core/transitions';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
@@ -8,8 +8,6 @@ import TreeItem, { TreeItemProps } from '@material-ui/lab/TreeItem';
 import TreeView from '@material-ui/lab/TreeView';
 import useTranslation from 'next-translate/useTranslation';
 import React, { ChangeEvent, FC, useEffect, useState } from 'react';
-
-import { contains } from '../../utils/collection/array';
 
 interface TreeLabelProps {
   labelText: string;
@@ -20,8 +18,10 @@ interface TreeLabelProps {
 }
 
 interface TreeProps {
-  data: Array<PageTypes.Page>;
-  activePage: PageTypes.Page;
+  pages: Array<PageTypes.Page>;
+  flattenedPages: Array<PageTypes.FlattenedPage>;
+  activePage?: PageTypes.Page;
+  pathname: string;
 }
 
 const useStylesTreeNode = makeStyles((theme: Theme) =>
@@ -106,7 +106,7 @@ const TreeLabel: FC<TreeLabelProps> = ({
 }) => {
   const classes = useStylesTreeLabel();
 
-  const handleExpansion = contains([...expandedNodeIds]);
+  const handleExpansion = CollectionUtil.Array.contains([...expandedNodeIds]);
 
   let renderExpand = null;
 
@@ -120,96 +120,82 @@ const TreeLabel: FC<TreeLabelProps> = ({
 
   return (
     <ListItem button className={classes.listItemPadding}>
-      <ListItemIcon>
-        <CustomIcon icon={icon} />
-      </ListItemIcon>
+      <ListItemIcon>{getIconByName(icon.name)}</ListItemIcon>
       <ListItemText secondary={labelText} />
       {renderExpand}
     </ListItem>
   );
 };
 
-export const generatePartialPathnames = (
-  pathname: string,
-  exact: boolean
-): Array<string> =>
-  (pathname || '')
-    .split('/')
-    .filter(s => !!s)
-    .map(
-      (_name, index, arr) =>
-        `/${arr.slice(0, exact ? index + 1 : index).join('/')}`
-    );
-
-export const Tree: FC<TreeProps> = ({ data, activePage = {} }) => {
+export const Tree: FC<TreeProps> = ({
+  pages,
+  flattenedPages,
+  activePage = { pathname: '' }
+}) => {
   const { t } = useTranslation();
 
   const classes = useStylesTreeNode();
 
-  const [expanded, setExpanded] = useState<Array<string>>(
-    generatePartialPathnames(activePage.pathname, false)
-  );
-  const [selected, setSelected] = useState<Array<string>>(
-    generatePartialPathnames(activePage.pathname, true)
-  );
+  const [selected, setSelected] = useState<Array<string>>([]);
+
+  const [expanded, setExpanded] = useState<Array<string>>([]);
 
   useEffect(() => {
-    setExpanded(generatePartialPathnames(activePage.pathname, false));
-    setSelected(generatePartialPathnames(activePage.pathname, true));
+    setSelected(
+      RouterUtils.findSelectedPage(
+        flattenedPages,
+        `/docs/${activePage.pathname}`
+      )
+    );
+    setExpanded(
+      RouterUtils.findExpandedPages(
+        flattenedPages,
+        `/docs/${activePage.pathname}`
+      )
+    );
   }, [activePage.pathname]);
 
-  const createItem = ({ children, ...rest }: PageTypes.Page) => {
-    const title = t(`common:pages.${rest.pathname}`);
-    return (
-      <StyledTreeItem
-        key={rest.pathname}
-        nodeId={rest.pathname}
-        label={<TreeLabel labelText={title} icon={rest.icon} />}
-      >
-        {children && children.length > 0 ? children.map(createItem) : null}
-      </StyledTreeItem>
-    );
-  };
-
   const buildTreeItems = (nodes: Array<PageTypes.Page>) => {
-    if (!nodes) {
-      return null;
-    }
     return nodes.map(node => {
-      const title = t(`common:pages.${node.pathname}`);
+      const { pathname, icon, children: nodes } = node;
+
+      const title = t(`common:pages.${pathname}`);
       const item = (
         <StyledTreeItem
-          key={node.pathname}
-          nodeId={node.pathname}
+          key={`/docs/${pathname}`}
+          nodeId={`/docs/${pathname}`}
           label={
-            <TreeLabel
-              labelText={title}
-              icon={node.icon}
-              hasChildren={node.children && node.children.length > 0}
-              expandedNodeIds={expanded}
-              pathname={node.pathname}
-            />
+            <Link
+              key={`/docs/${pathname}`}
+              href={
+                {
+                  pathname: '/docs/[...slug]',
+                  query: { slug: pathname.split('/') }
+                } as any
+              }
+              className={classes.node}
+              naked
+              prefetch={false}
+            >
+              <TreeLabel
+                labelText={title}
+                icon={icon}
+                hasChildren={nodes && nodes.length > 0}
+                expandedNodeIds={expanded}
+                pathname={`/docs/${pathname}`}
+              />
+            </Link>
           }
         >
-          {node.children && node.children.length > 0
-            ? buildTreeItems(node.children)
-            : null}
+          {nodes && nodes.length > 0 ? buildTreeItems(nodes) : null}
         </StyledTreeItem>
       );
-
-      return node.children && node.children.length > 0 ? (
-        item
-      ) : (
-        <Link
-          key={`link-${node.pathname}`}
-          href={node.pathname}
-          className={classes.node}
-          naked
-        >
-          {item}
-        </Link>
-      );
+      return item;
     });
+  };
+
+  const handleNodeSelect = (_event: ChangeEvent, nodeIds: Array<string>) => {
+    setSelected(nodeIds);
   };
 
   const handleNodeToggle = (_event: ChangeEvent, nodeIds: Array<string>) => {
@@ -221,9 +207,10 @@ export const Tree: FC<TreeProps> = ({ data, activePage = {} }) => {
       expanded={expanded}
       selected={selected}
       onNodeToggle={handleNodeToggle}
+      onNodeSelect={handleNodeSelect}
       multiSelect={true}
     >
-      {buildTreeItems(data)}
+      {buildTreeItems(pages)}
     </TreeView>
   );
 };
