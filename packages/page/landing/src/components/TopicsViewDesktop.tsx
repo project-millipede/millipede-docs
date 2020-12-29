@@ -1,12 +1,11 @@
 import { CustomIcon } from '@app/components';
-import { useHoux } from '@app/houx';
-import { actions as layoutActions, NavigationActions } from '@app/layout';
 import { ContentTypes } from '@app/types';
 import { createStyles, Grid, IconButton, makeStyles, Theme } from '@material-ui/core';
 import { useRouter } from 'next/router';
-import React, { Dispatch, FC } from 'react';
+import React, { FC, useEffect } from 'react';
+import { StringParam, useQueryParams } from 'use-query-params';
 
-import { TopReveal } from '../../animation/framer/components/text/TopReveal';
+import { TopReveal } from '../animation/framer/components/text/TopReveal';
 
 interface TopicsViewDesktopProps {
   topics: Array<ContentTypes.OverviewProps>;
@@ -24,13 +23,39 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const TopicsViewDesktop: FC<TopicsViewDesktopProps> = ({ topics }) => {
-  const { pathname, push } = useRouter();
+  const { asPath, push, pathname, locale } = useRouter();
 
   const classes = useStyles();
 
-  const { dispatch }: { dispatch: Dispatch<NavigationActions> } = useHoux();
+  const handleSelect = (
+    topic: ContentTypes.OverviewProps,
+    section: ContentTypes.Section
+  ) => {
+    push({
+      pathname: `/`,
+      query: {
+        feature: topic.contextLink.id,
+        aspect: section.id
+      }
+      // hash: `#head-${topic.contextLink.id}-${section.id}`
+    });
+  };
 
-  const { navigation } = layoutActions;
+  const [query] = useQueryParams({
+    feature: StringParam,
+    aspect: StringParam
+  });
+
+  useEffect(() => {
+    push(
+      {
+        pathname,
+        query
+      },
+      asPath,
+      { locale }
+    );
+  }, []);
 
   return (
     <Grid container>
@@ -57,16 +82,9 @@ export const TopicsViewDesktop: FC<TopicsViewDesktopProps> = ({ topics }) => {
                       ? topic.contextLink.sections.map((section, index) => {
                           return (
                             <IconButton
-                              key={`perspective-${index}`}
-                              onClick={() => {
-                                push(
-                                  `${pathname}?${section.id}=${topic.contextLink.id}#${topic.contextLink.id}`
-                                );
-                                dispatch(
-                                  navigation.loadPages(
-                                    `/${topic.contextLink.id}`
-                                  )
-                                );
+                              key={`section--${index}`}
+                              onClick={_e => {
+                                handleSelect(topic, section);
                               }}
                             >
                               <CustomIcon icon={section.icon} />

@@ -1,12 +1,14 @@
 import { ContentTypes } from '@app/types';
 import React, { FC, useState } from 'react';
 
-import { useTimeout } from '../../hooks';
-import FullScreenInterface from '../../interface/FullScreenInterfaceByComponent';
+import { useTimeout } from '../hooks';
+import { FullScreenInterface } from '../interface/FullScreenInterfaceByComponent';
 
 interface TopicsViewMobileProps {
   topics: Array<ContentTypes.OverviewProps>;
 }
+
+const animationTimeout = 5000;
 
 export const TopicsViewMobile: FC<TopicsViewMobileProps> = ({
   topics
@@ -21,9 +23,7 @@ export const TopicsViewMobile: FC<TopicsViewMobileProps> = ({
       return;
     }
     setOuterIndex(0);
-  }, 5000);
+  }, animationTimeout);
 
-  return (
-    <FullScreenInterface windowStackData={topics || []} index={outerIndex} />
-  );
+  return <FullScreenInterface windowStackData={topics} index={outerIndex} />;
 };

@@ -14,7 +14,7 @@ export interface FullScreenInterfaceProps {
   index?: number;
 }
 
-const FullScreenInterface: FC<FullScreenInterfaceProps> = ({
+export const FullScreenInterface: FC<FullScreenInterfaceProps> = ({
   windowStackData,
   index
 }) => {
@@ -28,5 +28,3 @@ const FullScreenInterface: FC<FullScreenInterfaceProps> = ({
     </Container>
   );
 };
-
-export default FullScreenInterface;

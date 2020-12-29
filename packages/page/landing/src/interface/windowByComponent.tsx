@@ -1,11 +1,9 @@
 import { CustomIcon } from '@app/components';
-import { useHoux } from '@app/houx';
-import { actions as layoutActions, NavigationActions } from '@app/layout';
 import { ContentTypes } from '@app/types';
 import { createStyles, IconButton, makeStyles, Theme } from '@material-ui/core';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import React, { Dispatch, FC } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 import { noAnimation } from '../animation';
@@ -32,11 +30,23 @@ interface WindowProps {
 const Window: FC<WindowProps> = ({ windowStackData, index }) => {
   const classes = useStyles();
 
-  const { pathname, push } = useRouter();
+  const { push } = useRouter();
 
-  const { navigation } = layoutActions;
+  const handleSelect = (
+    topic: ContentTypes.OverviewProps,
+    section: ContentTypes.Section
+  ) => {
+    push({
+      pathname: `/`,
+      query: {
+        feature: topic.contextLink.id,
+        aspect: section.id
+      }
+      // hash: `#head-${topic.contextLink.id}-${section.id}`
+    });
+  };
 
-  const { dispatch }: { dispatch: Dispatch<NavigationActions> } = useHoux();
+  const topic = windowStackData[index];
 
   return windowStackData != null && windowStackData.length > 0 ? (
     <div className={classes.container}>
@@ -45,37 +55,25 @@ const Window: FC<WindowProps> = ({ windowStackData, index }) => {
           <TopReveal
             id={`animation-${index}`}
             key={`animation-${index}`}
-            text={[
-              ...windowStackData[index].title,
-              ...windowStackData[index].subTitle
-            ]}
+            text={[...topic.title, ...topic.subTitle]}
             outerIndex={index}
           />
         </AnimationContainer>
       </div>
       <div className={classes.container}>
-        {windowStackData[index].contextLink
-          ? windowStackData[index].contextLink.sections.map(
-              (section, pIndex) => {
-                return (
-                  <IconButton
-                    key={`section-${pIndex}`}
-                    onClick={() => {
-                      push(
-                        `${pathname}?${section.id}=${windowStackData[index].contextLink.id}#${windowStackData[index].contextLink.id}`
-                      );
-                      dispatch(
-                        navigation.loadPages(
-                          `/${windowStackData[index].contextLink.id}`
-                        )
-                      );
-                    }}
-                  >
-                    <CustomIcon icon={section.icon} />
-                  </IconButton>
-                );
-              }
-            )
+        {topic.contextLink
+          ? topic.contextLink.sections.map((section, index) => {
+              return (
+                <IconButton
+                  key={`section-${index}`}
+                  onClick={_e => {
+                    handleSelect(topic, section);
+                  }}
+                >
+                  <CustomIcon icon={section.icon} />
+                </IconButton>
+              );
+            })
           : null}
       </div>
     </div>
