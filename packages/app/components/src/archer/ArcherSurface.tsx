@@ -1,11 +1,11 @@
-import React, { forwardRef, ForwardRefRenderFunction, RefObject, useRef } from 'react';
-import useResizeObserver from 'use-resize-observer';
+import React, { forwardRef, ForwardRefRenderFunction, useRef } from 'react';
 
 import { useRefState } from './context/RefProvider';
 import { useTransitionState } from './context/TransitionProvider';
 import { Point } from './Point';
 import SvgArrow from './SvgArrow';
 import { AnchorPosition, ArcherContainerProps, EntityRelationType, SourceToTargetType } from './types-private';
+import { useResize } from './useResize';
 
 const computeCoordinatesFromAnchorPosition = (
   anchorPosition: AnchorPosition,
@@ -31,7 +31,7 @@ const rectToPoint = (rect: ClientRect) => {
   return new Point(rect.left, rect.top);
 };
 
-const getRectFromRef = (element: HTMLElement): ClientRect => {
+const getRectFromRef = (element: HTMLElement) => {
   if (!element) return null;
   return element.getBoundingClientRect();
 };
@@ -83,9 +83,9 @@ export const ArcherSurface: ForwardRefRenderFunction<
   },
   _ref
 ) => {
-  const parentRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+  const parentRef = useRef<HTMLDivElement>(null);
 
-  useResizeObserver({ ref: parentRef });
+  useResize(parentRef);
 
   const { refs } = useRefState();
   const { sourceToTargetsMap } = useTransitionState();
@@ -118,7 +118,7 @@ export const ArcherSurface: ForwardRefRenderFunction<
     const rectp = getRectFromRef(parentRef.current);
 
     if (rectp != null) {
-      return rectToPoint(rectp);
+      return rectToPoint(rectp as ClientRect);
     }
     return new Point(0, 0);
   };

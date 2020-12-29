@@ -1,4 +1,10 @@
-import { CSSProperties, MutableRefObject, ReactElement, ReactNode, RefCallback } from 'react';
+import {
+  CSSProperties,
+  MutableRefObject,
+  ReactElement,
+  ReactNode,
+  RefCallback
+} from 'react';
 
 export interface SelectHandles {
   select: () => void;
@@ -21,7 +27,7 @@ export type RenderSingleFn = ({ ref }: RenderFnSingleParameter) => JSX.Element;
 
 export type RenderFnParameter = {
   ref: MutableRefObject<HTMLElement>;
-  dynamicRef: MutableRefObject<SelectHandles>;
+  dynamicRef?: MutableRefObject<SelectHandles>;
 };
 
 export type RenderFn = ({ ref, dynamicRef }: RenderFnParameter) => JSX.Element;

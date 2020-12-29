@@ -1,12 +1,11 @@
-import { Chip, createStyles, makeStyles } from '@material-ui/core';
+import { Chip, createStyles, makeStyles, Theme } from '@material-ui/core';
 import { ClassOutlined } from '@material-ui/icons';
 import React, { FC } from 'react';
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     chip: {
-      marginTop: '16px',
-      marginBottom: '16px'
+      margin: theme.spacing(2, 0)
     }
   })
 );
@@ -16,7 +15,7 @@ interface TagProps {
   id: string;
 }
 
-const Tag: FC<TagProps> = ({ text, id }) => {
+export const Tag: FC<TagProps> = ({ text, id }) => {
   const classes = useStyles();
 
   return (
@@ -30,5 +29,3 @@ const Tag: FC<TagProps> = ({ text, id }) => {
     />
   );
 };
-
-export default Tag;

@@ -1,14 +1,14 @@
 import { Box, makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
-import { useRouter } from 'next/router';
 import React, {
   forwardRef,
   ForwardRefRenderFunction,
   MutableRefObject,
   ReactNode,
   useImperativeHandle,
-  useState
+  useState,
 } from 'react';
+import { Link } from 'react-scroll';
 
 import { SelectHandles } from './types';
 
@@ -45,7 +45,6 @@ const CustomBox: ForwardRefRenderFunction<HTMLDivElement, CustomBoxProps> = (
 ) => {
   const classes = useStyles({ bgcolor });
 
-  const { pathname, push } = useRouter();
   const [selected, setSelected] = useState(false);
 
   useImperativeHandle(
@@ -62,26 +61,41 @@ const CustomBox: ForwardRefRenderFunction<HTMLDivElement, CustomBoxProps> = (
   );
 
   return (
-    <Box
-      className={clsx({
-        [classes.boxHover]: selected,
-        [classes.box]: !selected
-      })}
-      onClick={_e => {
-        if (routeSegement) {
-          push(`${pathname}#${routeSegement}`);
-        }
-      }}
-      // onMouseEnter={_e => {
-      //   setSelected(true);
-      // }}
-      // onMouseLeave={_e => {
-      //   setSelected(false);
-      // }}
-      ref={ref}
+    <Link
+      to={decodeURI(routeSegement).replace('#', '')}
+      spy={true}
+      smooth={true}
+      offset={-96}
+      duration={500}
     >
-      {children}
-    </Box>
+      <Box
+        className={clsx({
+          [classes.boxHover]: selected,
+          [classes.box]: !selected
+        })}
+        onMouseEnter={_e => {
+          setSelected(true);
+        }}
+        onMouseLeave={_e => {
+          setSelected(false);
+        }}
+        // onClick={_e => {
+        //   const { push, asPath, pathname, query, locale } = router;
+        //   push(
+        //     {
+        //       pathname,
+        //       query: { slug: query.slug },
+        //       hash: `#${routeSegement}`
+        //     },
+        //     asPath,
+        //     { locale }
+        //   );
+        // }}
+        ref={ref}
+      >
+        {children}
+      </Box>
+    </Link>
   );
 };
 
