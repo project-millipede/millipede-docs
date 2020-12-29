@@ -38,8 +38,7 @@
     "test": "NODE_ENV=development jest --colors --watch",
     "lint": "yarn eslint './docs/src/**/*' './src/**/*' './pages/**/*' './packages/**/src/**/*'",
     "format:mdx": "prettier --parser mdx --print-width 80 --prose-wrap always --single-quote true --write \"docs/src/pages/**/*.mdx\"",
-    "format:md": "prettier --parser markdown --print-width 80 --prose-wrap always --single-quote true --write \"docs/src/pages/**/*.md\"",
-    "format:json": "prettier --parser json --print-width 80 --use-tabs --write \"locales/de/pages/rethink-security/attack-vectors/comparison/index.json\"",
+    "format:json": "prettier --parser json --print-width 80 --use-tabs --write \"locales/**/*.json\"",
     "sitemap": "node sitemap-generator"
   },
   "main": "index.js",
