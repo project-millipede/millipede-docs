@@ -1,0 +1,115 @@
+# Concept an terminology
+
+## Concept
+
+> The process of application instrumentation is executed on the user’s device
+> and is completely hidden from the operator of the application. Further, to
+> enable application instrumentation the operator’s support or allowance is from
+> a technical point of view not required.
+
+The concept of application instrumentation differentiates between the runtime
+environment the process gets applied to.
+
+<Concept1 />
+
+[ Communication Process (CP) ] – [ Preparation Process (PP) ] – [ Render Process
+(RP) ]
+
+## Terminology
+
+**Communication Process (CP)**
+
+Any data stream which gets routed towards
+
+- **the backend** (outgoing) delegating a request to remote compute resources
+  capable of handling the workload. The resources are integrated within a
+  dedicated infrastructure which executes the workload through proprietary
+  applications logic and
+- **the application** (incoming) response representing the results of a
+  completed compute operation which was executed in the backend.
+
+**Preparation Process (PP)**
+
+The results received from the communication process are mapped to an application
+state. In general, the application state gets differentiates between
+
+- the internal application state necessary to decide about the application
+  runtime behavior and
+- **the data model generated from the incoming data stream.**
+
+**Render Process (RP)**
+
+The data model objects are forwarded to the render process to generate a visual
+representation. The user interface components generated from those data objects
+provide interaction capabilities that enable the user to engage with the data
+model.
+
+## 5.3.2 Concept of version 1
+
+The following composition of application-related components summarizes the level
+at which the application instrumentation process gets applied.
+
+Target Application -> [ Communication Process ] – [ Preparation Process (PP) ] –
+-> [ Shared Render Process (SRP) ] <- – [ Custom Preparation Process (CPP) ] – [
+Custom Communication Process (CCP) ] <- Project Millipede
+
+<Concept2 />
+
+### Render engine – DOM
+
+The render engine of an arbitrary web-based application and the user interface
+component set introduced through Project Millipedes browser-extension is
+identical. Both variants utilize the same Document Object Model (DOM) available
+within the web-browser designated in the above summary through the term Shared
+Render Process (SRP). The browser-extension has access to the visualization
+instrument of any web-based application. The access to this context is crucial
+to apply measures.
+
+- to analyze any content element rendered through the target application and
+- to inject a target application-independent security context through a set of
+  custom user interface components at the appropriate position.
+
+### Reference to the use case
+
+At this point, we have to reference the use case we intend to enable through
+application instrumentation. Within a web-based application implementing a
+social-network, the chronological gap between time coordinates of public and
+private content elements represent the previously mentioned appropriate
+position.
+
+In the following sections, a short description is provided highlighting some
+internals of the analysis process to enable a reusable concept of application
+instrumentation of web-based applications. We describe the objectives at a high
+abstraction level to allow the average reader to understand the relevance.
+
+## 5.4.2 Concept of version 2
+
+The following composition of application-related components summarizes the level
+at which the application instrumentation process gets applied.
+
+Target Application -> [ Communication Process ] – [ Preparation Process (PP) ] –
+[ Render Process (RP) ] -> Observation / Reaction <- [ Low-level UI Coordination
+] -> Reaction / Observation <- [ Custom Render Process (CRP) ] – [ Custom
+Preparation Process (CPP) ] – [ Custom Communication Process ] <- Project
+Millipede
+
+<Concept3 />
+
+### 5.4.3 Rendering layer - Overview
+
+The render engine of an arbitrary native application (target application) and
+the render engine Project Millipedes introduces to visualize a custom set of
+user interface components differentiate. Depending on the application
+requirements or the preferences of the software engineer the representation
+concept distinguishes among web-, hybrid- and native-based rendering techniques.
+
+Each one of those rendering techniques exhibits a certain number of different
+implementations, those created and promoted by large operation system vendors
+and others created from smaller or independent entities.
+
+Due to the extraordinary variety of rendering implementations available
+applications are implemented with, it is not a realistic strategy to adapt or
+re-implement the user interface component set in any rendering implementation.
+
+Instead, we are introducing a new rendering layer which cooperates with an
+arbitrary render engine used in the target application.

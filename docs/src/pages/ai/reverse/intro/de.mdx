@@ -1,0 +1,30 @@
+# Reverse Engineering
+
+> Reverse Engineering ist der Prozess, bei dem ein Programm in seine
+> Bestandteile zerlegt wird, um seine Funktionsweise zu bestimmen. Dies kann
+> durch die Untersuchung der kompilierten Anwendung (statische Analyse), durch
+> die Beobachtung der Anwendung während der Laufzeit (dynamische Analyse) oder
+> durch eine Kombination aus beidem erfolgen.
+
+## Übersicht
+
+<ReverseEngineering />
+
+- Der elementare Baustein eines Programms ist eine Funktion. Um Erkenntnisse
+  über den Geltungsbereich und die interne Funktionsweise einer Funktion zu
+  gewinnen, muss diese in eine Funktion zur Instrumentierung gehüllt werden.
+- Ist die Zwischenfunktion vorhanden, verdeckt diese die ursprüngliche Funktion
+  gegenüber der Außenwelt. Die Zwischenfunktion ruft die ursprüngliche Funktion
+  mit ihren Funktionsparametern auf. Der Rückgabewert der ursprünglichen
+  Funktion liegt im Gültigkeitsbereich der zwischengeordneten Funktion, eine
+  Beobachtung der Funktionsweise der Funktion ist möglich.
+- Je nach Anwendungsfall können unterschiedliche Folgeschritte festgelegt
+  werden. Um eine Anwendung gegen bestimmte Angriffsvektoren zu schützen, ist es
+  erforderlich, das Verhalten der Anwendung gegen verschiedene Angriffsvektoren
+  zu bestimmen.
+- Ein Angriffsverfahren, das eine Schwachstelle ausnutzt, richtet sich gegen
+  eine Anwendung. Die Verhaltensweise und das Abwehrverhalten einer Anwendung
+  werden im zweiten Schritt erkennbar. Die Rückschluss auf ein beobachtetes
+  Problem wird an das Entwicklungsteam delegiert, welches eine Anpassung der
+  Anwendungslogik veranlasst, um eine Ausnutzung des identifizierten
+  Sicherheitsproblems zu verhindern.
