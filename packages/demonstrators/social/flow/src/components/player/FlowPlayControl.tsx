@@ -1,6 +1,5 @@
 import { Portal } from '@app/components';
 import {
-  Cursor,
   Player,
   PlayerHooks,
   PlayerTypes,
@@ -9,6 +8,7 @@ import {
   useStepDispatch,
   useStepState,
 } from '@demonstrator/components';
+import dynamic from 'next/dynamic';
 import React, { FC, useEffect, useState } from 'react';
 
 import { getSteps } from './FlowPlayControl.cfg';
@@ -17,6 +17,11 @@ interface FlowPlayControlProps {
   leftTimelineId: string;
   rightTimelineId: string;
 }
+
+const Cursor = dynamic(
+  () => import('@demonstrator/components').then(module => module.Cursor),
+  { ssr: false }
+);
 
 export const FlowPlayControl: FC<FlowPlayControlProps> = ({
   leftTimelineId,
