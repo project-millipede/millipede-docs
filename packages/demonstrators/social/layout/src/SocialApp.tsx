@@ -30,7 +30,9 @@ export const SocialApp: FC = () => {
   }, [generateData]);
 
   useEffect(() => {
-    loadPosts();
+    if (state.timeline == null) {
+      loadPosts();
+    }
   }, []);
 
   const useCase = (state.timeline &&

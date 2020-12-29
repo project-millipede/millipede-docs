@@ -22,16 +22,14 @@ export const useStyles = makeStyles((theme: Theme) => {
     },
     rowProgressControls: {
       display: 'flex',
-      paddingLeft: theme.spacing(3),
-      paddingRight: theme.spacing(3),
+      padding: theme.spacing(0, 3),
       alignItems: 'center',
       justifyContent: 'center',
       height: `${height}px`
     },
     rowProgressText: {
       display: 'flex',
-      paddingLeft: theme.spacing(3),
-      paddingRight: theme.spacing(3),
+      padding: theme.spacing(0, 3),
       height: `${height}px`
     }
   });
@@ -50,7 +48,7 @@ export const Player: FC<PlayerProps> = ({ steps }) => {
 
   const activeStep = steps[target];
 
-  const [text] = useWindupString(t(activeStep?.description));
+  const [text] = useWindupString(t(activeStep?.description) || '');
 
   return (
     <div className={classes.column}>
