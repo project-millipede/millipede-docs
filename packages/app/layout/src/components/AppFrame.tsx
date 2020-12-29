@@ -8,6 +8,14 @@ import React, { FC, useCallback, useState } from 'react';
 import { AppDrawer } from './AppDrawer';
 import { AppToolBar } from './AppToolBar';
 
+// Warning - dynamic imports seem to destroy css server
+
+// import dynamic from 'next/dynamic';
+// import { AppDrawerProxy } from './AppDrawerProxy';
+// const AppDrawer = dynamic(() =>
+//   import('./AppDrawer').then(module => module.AppDrawer)
+// );
+
 const useStyles = makeStyles(() =>
   createStyles({
     root: {
@@ -16,7 +24,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const drawerOpenedWidth = 280;
+export const drawerWidth = 280;
 
 const useDrawerStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,8 +36,8 @@ const useDrawerStyles = makeStyles((theme: Theme) =>
       })
     },
     appBarShift: {
-      marginLeft: drawerOpenedWidth,
-      width: `calc(100% - ${drawerOpenedWidth}px)`,
+      marginLeft: drawerWidth,
+      width: `calc(100% - ${drawerWidth}px)`,
       transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen

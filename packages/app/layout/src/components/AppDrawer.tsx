@@ -1,22 +1,25 @@
-import { useHoux } from '@app/houx';
+import { Link } from '@app/components';
 import {
   createStyles,
   Divider,
   Drawer,
   IconButton,
-  Link,
   makeStyles,
   SwipeableDrawer,
   Theme,
+  Typography,
   useTheme,
 } from '@material-ui/core';
 import { ChevronLeft, ChevronRight } from '@material-ui/icons';
 import clsx from 'clsx';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 import React, { FC } from 'react';
+import { isMobile } from 'react-device-detect';
+import { useRecoilValue } from 'recoil';
 
-import { RootState as LayoutState } from '../redux/features/reducers';
-import { Tree } from './tree/Tree';
+import { navigationState } from '../recoil/features/pages/reducer';
+import { Tree } from './tree';
 
 const drawerWidth = 280;
 
@@ -83,18 +86,25 @@ export const AppDrawer: FC<AppDrawerProps> = ({
 }) => {
   const classes = useDrawerStyles();
 
-  const theme: Theme = useTheme();
-
-  const {
-    state: { navigation: { pages, activePage }, view: { isMobile } } = {
-      navigation: { pages: [], activePage: {} },
-      view: {
-        isMobile: false
-      }
-    } as any
-  }: { state: LayoutState } = useHoux();
+  const theme = useTheme();
 
   const { t } = useTranslation();
+
+  const { asPath } = useRouter();
+
+  const navigation = useRecoilValue(navigationState);
+
+  const { pages, activePage, flattenedPages } = navigation;
+
+  const treeComp =
+    activePage != null ? (
+      <Tree
+        pages={pages}
+        flattenedPages={flattenedPages}
+        pathname={asPath}
+        activePage={activePage}
+      />
+    ) : null;
 
   const renderMobileDrawer = () => {
     return (
@@ -113,20 +123,24 @@ export const AppDrawer: FC<AppDrawerProps> = ({
       >
         <div className={classes.toolbar}>
           <Link
-            className={classes.toolbarTitle}
-            href='/'
+            href={
+              {
+                pathname: '/'
+              } as any
+            }
             onClick={handleDrawerClose}
-            variant='h6'
-            color='inherit'
           >
-            {t('common:application-title')}
+            <Typography variant='h6' className={classes.toolbarTitle}>
+              {t('common:application-title')}
+            </Typography>
           </Link>
+
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRight /> : <ChevronLeft />}
           </IconButton>
         </div>
         <Divider />
-        <Tree data={pages} activePage={activePage} />
+        {treeComp}
       </SwipeableDrawer>
     );
   };
@@ -149,20 +163,24 @@ export const AppDrawer: FC<AppDrawerProps> = ({
       >
         <div className={classes.toolbar}>
           <Link
-            className={classes.toolbarTitle}
-            href='/'
+            href={
+              {
+                pathname: '/'
+              } as any
+            }
             onClick={handleDrawerClose}
-            variant='h6'
-            color='inherit'
           >
-            {t('common:application-title')}
+            <Typography variant='h6' className={classes.toolbarTitle}>
+              {t('common:application-title')}
+            </Typography>
           </Link>
+
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRight /> : <ChevronLeft />}
           </IconButton>
         </div>
         <Divider />
-        <Tree data={pages} activePage={activePage} />
+        {treeComp}
       </Drawer>
     );
   };

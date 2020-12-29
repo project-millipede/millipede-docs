@@ -1,12 +1,9 @@
-import { useHoux } from '@app/houx';
-import { RootState as LayoutState } from '@app/layout';
 import { createStyles, IconButton, makeStyles, Toolbar, Tooltip, Typography } from '@material-ui/core';
 import { GitHub, Menu } from '@material-ui/icons';
 import clsx from 'clsx';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
-import { AppSearch } from './AppSearch';
 import { LanguageMenu } from './LanguageMenu';
 
 interface AppToolBarProps {
@@ -42,36 +39,35 @@ export const AppToolBar: FC<AppToolBarProps> = ({
 
   const { t } = useTranslation();
 
-  const {
-    state: { navigation: { pages } } = {
-      navigation: {
-        pages: []
-      }
-    } as any
-  }: { state: LayoutState } = useHoux();
+  // const {
+  //   state: { navigation: { pages } } = {
+  //     navigation: {
+  //       pages: []
+  //     }
+  //   } as any
+  // }: { state: LayoutState } = useHoux();
 
   return (
     <Toolbar>
-      {pages && pages.length > 0 ? (
-        <IconButton
-          color='inherit'
-          aria-label={t('common:openDrawer')}
-          onClick={handleDrawerOpen}
-          edge='start'
-          className={clsx(drawerClasses.menuButton, {
-            [drawerClasses.hide]: isDrawerExpanded
-          })}
-        >
-          <Menu />
-        </IconButton>
-      ) : null}
+      {/* {pages && pages.length > 0 ? ( */}
+      <IconButton
+        color='inherit'
+        aria-label={t('common:openDrawer')}
+        onClick={handleDrawerOpen}
+        edge='start'
+        className={clsx(drawerClasses.menuButton, {
+          [drawerClasses.hide]: isDrawerExpanded
+        })}
+      >
+        <Menu />
+      </IconButton>
+      {/* ) : null} */}
       <Typography variant='h6' noWrap>
         {t('common:application-title')}
       </Typography>
 
       <div className={customStyles.grow} />
 
-      <AppSearch />
       <LanguageMenu />
 
       <Tooltip title={t('common:github')} enterDelay={300}>

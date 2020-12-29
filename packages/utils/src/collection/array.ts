@@ -1,5 +1,5 @@
 import { compareDesc } from 'date-fns';
-import _ from 'lodash';
+import get from 'lodash/get';
 
 type FilterFunction<T> = (item: T) => boolean;
 
@@ -116,5 +116,5 @@ export const takeNRandom = <T>(arr: Array<T>, num: number) => {
 };
 
 export const compareDescFn = (field: string) => (a: any, b: any) => {
-  return compareDesc(_.get(a, field), _.get(b, field));
+  return compareDesc(get(a, field), get(b, field));
 };
