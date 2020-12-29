@@ -1,5 +1,5 @@
 {
-  "stepss": [
+  "steps": [
     {
       "title": "Bestimmung relevanter Inhalte",
       "description": "Der Anbieter bestimmt die für einen Nutzer relevantesten Inhalte anhand der persönlichen Interessen. Eine Empfehlungsmaschine sagt weitere Inhaltselemente aus einem globalen Inhaltskatalog voraus, der von der die Community der Anbieter. Sobald der Bestimmungsprozess abgeschlossen ist, sendet der Anbieter den die Inhalte an die Anwendung, welche auf dem Gerät des Benutzers installiert ist."

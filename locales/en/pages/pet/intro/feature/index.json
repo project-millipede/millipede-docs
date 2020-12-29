@@ -4,7 +4,7 @@
       "scenario": "general",
       "category": "publish",
       "title": "Use social media applications also for the distribution of sensitive content",
-      "link": "/pet/use-case/publish",
+      "link": "/docs/pet/use-case/publish",
       "icon": "publish",
       "description": [
         {
@@ -15,7 +15,7 @@
         {
           "listing": [
             {
-              "link": "/pet/use-case/publish#test1",
+              "link": "/docs/pet/use-case/publish#test1",
               "text": "Extending the range of functionality provided by social media applications to include privacy features - relevance of this approach."
             }
           ]
@@ -36,7 +36,7 @@
       "scenario": "general",
       "category": "publish",
       "title": "Physical access to a date is the exclusive obligation of the author",
-      "link": "/pet/use-case/access",
+      "link": "/docs/pet/use-case/access",
       "icon": "security",
       "description": [
         {
@@ -50,7 +50,7 @@
       "scenario": "general",
       "category": "analytics",
       "title": "Neutralisation of analytical methods.",
-      "link": "/pet/use-case/analytics",
+      "link": "/docs/pet/use-case/analytics",
       "icon": "timeline",
       "description": [
         {

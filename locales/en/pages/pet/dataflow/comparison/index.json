@@ -1,5 +1,5 @@
 {
-  "stepss": [
+  "steps": [
     {
       "title": "Determine relevant content",
       "description": "The provider determines the most relevant content for a user based on the individual`s interest. A recommendation engine predicts further content items from a global content catalog published from the provider`s community. Once the determination process gets concluded, the provider sends the content to the application installed on the user`s device."
