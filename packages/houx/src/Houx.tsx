@@ -49,12 +49,12 @@ const [addReducer, combinedReducer, removeReducer] = (() => {
 })();
 
 export interface HouxProviderProps {
-  initialReducers: any;
+  initialReducers?: any;
 }
 
 export const HouxProvider: FC<HouxProviderProps> = ({
   children,
-  initialReducers
+  initialReducers = {}
 }) => {
   Object.entries(initialReducers).forEach(([name, reducer]) => {
     addReducer({ [name]: reducer });
