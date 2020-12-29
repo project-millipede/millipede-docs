@@ -1,7 +1,7 @@
 import { HocsUtils, HooksUtils } from '@app/render-utils';
 import { scrollReducers, scrollStates } from '@demonstrators-social/shared';
 import { EffectRef } from '@huse/effect-ref';
-import _ from 'lodash';
+import get from 'lodash/get';
 import React, { FC, useCallback, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 
@@ -126,7 +126,7 @@ const DockSlice: FC<DockSliceProps> = ({
               width: '100%',
               position: 'absolute',
               background: !selected
-                ? _.get(defaultSliceBackgrundColor, sliceId).color
+                ? get(defaultSliceBackgrundColor, sliceId).color
                 : '#E0E0E0'
             }}
           />

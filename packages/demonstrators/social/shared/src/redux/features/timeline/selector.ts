@@ -1,5 +1,5 @@
 import { normalizer, postEntity, timelineEntity, useCaseEntity } from '@demonstrators-social/data';
-import _ from 'lodash';
+import includes from 'lodash/includes';
 import { createSelector } from 'reselect';
 
 import { Timeline } from '../../../recoil/features/scroll/types';
@@ -116,13 +116,13 @@ export const selectInteractionDataForPostScenario = (
 
       if (timelineView === Timeline.VIEW.TIMELINE) {
         return postIds.filter(postId =>
-          _.includes(postsOfOwnerForOtherTimelineId, postId)
+          includes(postsOfOwnerForOtherTimelineId, postId)
         );
       }
 
       if (timelineView === Timeline.VIEW.POSTS) {
         return postIds.filter(postId =>
-          _.includes(postsOfOwnerForTimelineId, postId)
+          includes(postsOfOwnerForTimelineId, postId)
         );
       }
 

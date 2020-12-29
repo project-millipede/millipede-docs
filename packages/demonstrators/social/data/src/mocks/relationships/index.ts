@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import includes from 'lodash/includes';
+import without from 'lodash/without';
 
 import { User } from '../../types';
 
@@ -7,10 +8,10 @@ export const createFriendships = (
   rootUsers: Array<string>
 ) => {
   const allFriendIds = users.map(u => u.id);
-  const rootFriendIds = _.without(allFriendIds, ...rootUsers);
+  const rootFriendIds = without(allFriendIds, ...rootUsers);
 
   return users.reduce<Array<User>>((acc, user) => {
-    const friends = _.includes(rootUsers, user.id) ? rootFriendIds : rootUsers;
+    const friends = includes(rootUsers, user.id) ? rootFriendIds : rootUsers;
     acc.push({ ...user, friends });
     return acc;
   }, []);

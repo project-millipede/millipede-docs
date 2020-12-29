@@ -3,7 +3,7 @@ import { Archer } from '@app/components';
 import { scrollStates, ScrollTypes } from '@demonstrators-social/shared';
 import { createStyles, makeStyles, Typography } from '@material-ui/core';
 import clsx from 'clsx';
-import _ from 'lodash';
+import get from 'lodash/get';
 import React, { FC } from 'react';
 import { useRecoilValue } from 'recoil';
 
@@ -44,7 +44,7 @@ export const FlowBody: FC = () => {
     finalSize
   } = nodeWithRelationsWithEdgeMap;
 
-  const nodeWithRelationsWithEdge = _.get(nodesWithRelations, activeId, {
+  const nodeWithRelationsWithEdge = get(nodesWithRelations, activeId, {
     values: [] as Array<ScrollTypes.Timeline.NodeWithRelationsWithEdge>
   });
 

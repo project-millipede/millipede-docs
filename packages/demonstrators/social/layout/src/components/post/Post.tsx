@@ -6,22 +6,41 @@ import {
   scrollStates,
   ScrollTypes,
   selectors,
-  TimelineActions,
+  TimelineActions
 } from '@demonstrators-social/shared';
-import { Button, ButtonGroup, Card, CardActions, createStyles, ListItem, makeStyles } from '@material-ui/core';
+import {
+  Button,
+  ButtonGroup,
+  Card,
+  CardActions,
+  createStyles,
+  ListItem,
+  makeStyles
+} from '@material-ui/core';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import { formatDistance } from 'date-fns';
 import { enGB } from 'date-fns/locale';
-import _ from 'lodash';
+import lodashGet from 'lodash/get';
 import useTranslation from 'next-translate/useTranslation';
 import React, { Dispatch, FC, useMemo, useState } from 'react';
-import { selectorFamily, SerializableParam, useRecoilValue, useSetRecoilState } from 'recoil';
+import {
+  selectorFamily,
+  SerializableParam,
+  useRecoilValue,
+  useSetRecoilState
+} from 'recoil';
 
 import { CommentEditor } from '../comment/CommentEditor';
 import { Comments } from '../comment/Comments';
-import { getContent, getHeader, getMedia, getObserverComp, getRef } from './Post.Render.svc';
+import {
+  getContent,
+  getHeader,
+  getMedia,
+  getObserverComp,
+  getRef
+} from './Post.Render.svc';
 import { handleCreateComment, handleDeletePost } from './Post.svc';
 
 const { selectPostById, selectTimelineOwner } = selectors.timeline;
@@ -29,10 +48,7 @@ const { selectPostById, selectTimelineOwner } = selectors.timeline;
 const useStyles = makeStyles(theme =>
   createStyles({
     postListItem: {
-      paddingLeft: theme.spacing(1),
-      paddingRight: theme.spacing(1),
-      paddingTop: theme.spacing(0),
-      paddingBottom: theme.spacing(0)
+      padding: theme.spacing(0, 1)
     },
     card: {
       flexGrow: 1
@@ -61,7 +77,7 @@ const refPostScrollSelector = selectorFamily<
     } = scrollStates;
 
     const posts = get(refPostScrollState(postId));
-    const post = _.get(posts, timelineId);
+    const post = lodashGet(posts, timelineId);
     return post;
   }
 });

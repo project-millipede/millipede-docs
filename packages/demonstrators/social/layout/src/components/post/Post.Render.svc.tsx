@@ -1,6 +1,6 @@
 import { EffectRef } from '@huse/effect-ref';
 import { Avatar, CardContent, CardHeader, CardMedia, Typography } from '@material-ui/core';
-import _ from 'lodash';
+import get from 'lodash/get';
 import React from 'react';
 
 export const getHeader = (
@@ -39,7 +39,7 @@ export const getContent = (text: string) => {
 export const getRef = (refs: { [key: string]: EffectRef<HTMLElement> }) => (
   id: string
 ) => {
-  return _.get(refs, id);
+  return get(refs, id);
 };
 
 export const getObserverComp = (ref: EffectRef<HTMLElement>) => (

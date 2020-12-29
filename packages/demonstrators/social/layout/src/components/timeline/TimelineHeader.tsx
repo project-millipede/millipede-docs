@@ -1,7 +1,7 @@
 import { HeaderView } from '@demonstrators-social/components';
 import { scrollStates, ScrollTypes } from '@demonstrators-social/shared';
 import { Tab, Tabs } from '@material-ui/core';
-import _ from 'lodash';
+import get from 'lodash/get';
 import React, { ChangeEvent, FC, useEffect } from 'react';
 import { isBrowser } from 'react-device-detect';
 import { useRecoilState } from 'recoil';
@@ -47,7 +47,7 @@ export const TimelineHeader: FC<TimelineHeaderProps> = ({ timelineId }) => {
   }, []);
 
   const { currentViews } = timelineView;
-  const currentView = _.get(currentViews, timelineId);
+  const currentView = get(currentViews, timelineId);
 
   return (
     <>

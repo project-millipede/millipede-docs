@@ -1,10 +1,22 @@
 import { useHoux } from '@app/houx';
 import { CollectionUtil } from '@app/utils';
-import { RootState, scrollStates, ScrollTypes, selectors, TimelineActions } from '@demonstrators-social/shared';
+import {
+  RootState,
+  scrollStates,
+  ScrollTypes,
+  selectors,
+  TimelineActions
+} from '@demonstrators-social/shared';
 import { useMergedRef } from '@huse/merged-ref';
-import { Button, ButtonGroup, List, makeStyles, useTheme } from '@material-ui/core';
+import {
+  Button,
+  ButtonGroup,
+  List,
+  makeStyles,
+  useTheme
+} from '@material-ui/core';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-import _ from 'lodash';
+import get from 'lodash/get';
 import useTranslation from 'next-translate/useTranslation';
 import React, { Dispatch, FC, useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
@@ -56,7 +68,7 @@ export const Timeline: FC<TimelineProps> = ({
   const timelineView = useRecoilValue(timelineViewState);
 
   const { currentViews } = timelineView;
-  const currentView = _.get(currentViews, timelineId);
+  const currentView = get(currentViews, timelineId);
 
   const {
     dispatch,

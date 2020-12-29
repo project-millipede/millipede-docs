@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import inRange from 'lodash/inRange';
 
 type Step = {
   start: number;
@@ -16,7 +16,7 @@ export const getStepByTime = (steps: Array<AbsoluteStep>, value: number) => {
   const stepIndices: Array<{ stepIndex: number }> = [];
 
   steps.forEach((step, index) => {
-    if (_.inRange(value, step.globalStart, step.globalEnd)) {
+    if (inRange(value, step.globalStart, step.globalEnd)) {
       stepIndices.push({
         stepIndex: index
       });
