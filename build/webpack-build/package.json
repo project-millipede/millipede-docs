@@ -8,18 +8,18 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@app/mdx-loader": "workspace:packages/mdx-loader"
+    "@app/mdx-loader": "workspace:packages/mdx-loader",
+    "escalade": "^3.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-react": "^7.12.10",
     "babel-loader": "^8.2.2",
-    "enhanced-resolve": "^5.4.0",
-    "pkg-dir": "^5.0.0",
+    "enhanced-resolve": "^5.4.1",
     "raw-loader": "^4.0.2",
     "rimraf": "^3.0.2",
     "ts-loader": "^8.0.12",
     "typescript": "^4.1.3",
-    "webpack": "^5.10.1"
+    "webpack": "^5.11.1"
   }
 }

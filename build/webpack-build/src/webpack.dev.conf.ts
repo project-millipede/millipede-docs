@@ -48,21 +48,6 @@ export const webpackConfig = ({ isServer, modules }) => {
           ],
           exclude: /node_modules/,
           include: match
-        },
-        {
-          test: /\.mdx$/,
-          use: [
-            {
-              loader: 'babel-loader',
-              options: {
-                presets: [['@babel/preset-react']],
-                plugins: []
-              }
-            },
-            {
-              loader: '@app/mdx-loader'
-            }
-          ]
         }
       ]
     },

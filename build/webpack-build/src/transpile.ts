@@ -1,5 +1,6 @@
 import enhancedResolve from 'enhanced-resolve';
-import pkgDir from 'pkg-dir';
+import escaladeSync from 'escalade/sync';
+import path from 'path';
 import process from 'process';
 
 const CWD = process.cwd();
@@ -31,14 +32,21 @@ const getPackageRootDirectory = module => {
       );
     }
 
-    try {
-      // Get the location of its package.json
-      packageRootDirectory = pkgDir.sync(packageDirectory);
-    } catch (err) {
+    // Get the location of its package.json
+    const pkgPath = escaladeSync(packageDirectory, (_dir, names) => {
+      if (names.includes('package.json')) {
+        return 'package.json';
+      }
+      return false;
+    });
+
+    if (pkgPath == null) {
       throw new Error(
-        `transpile modules - an error happened when trying to get the root directory of "${module}". Is it missing a package.json?\n${err}`
+        `transpile modules - an error happened when trying to get the root directory of "${module}". Is it missing a package.json?`
       );
     }
+
+    packageRootDirectory = path.dirname(pkgPath as string);
   } catch (err) {
     throw new Error(
       `transpile modules - an unexpected error happened when trying to resolve "${module}"\n${err}`
