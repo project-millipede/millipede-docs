@@ -1,0 +1,1 @@
+export { SpectrumOfFalseInformation } from './SpectrumOfFalseInformation';

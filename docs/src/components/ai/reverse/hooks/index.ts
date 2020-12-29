@@ -1,0 +1,1 @@
+export { MethodHooking } from './MethodHooking';
