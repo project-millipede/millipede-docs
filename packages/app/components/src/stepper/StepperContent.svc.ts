@@ -11,8 +11,8 @@ export const findMax = (acc: number, value: number) => {
 };
 
 export const selectContent = (
-  array: Array<ContentTypes.Content> = [],
-  step: number
+  steps: Array<ContentTypes.Content> = [],
+  currentStep: number
 ): Array<ContentTypes.Content> => {
-  return array.filter(value => value.step === step).map(value => value);
+  return steps.filter(value => value.step === currentStep);
 };

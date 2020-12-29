@@ -25,7 +25,7 @@ export type StepperWithTranslationProps = StepperProps & TranslationProps;
 
 export const Stepper: FC<StepperWithTranslationProps> = ({
   steps,
-  step,
+  step = 0, // initiated to 0 = no outside control
   setStepCb,
   labelBack,
   labelNext
@@ -36,7 +36,10 @@ export const Stepper: FC<StepperWithTranslationProps> = ({
 
   const passActiveState = useCallback(
     (value: number) => {
-      setStepCb(value);
+      if (value != null) {
+        console.log('setStepCb - value: ', value);
+        setStepCb(value);
+      }
     },
     [setStepCb]
   );
