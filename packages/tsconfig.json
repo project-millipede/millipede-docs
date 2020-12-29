@@ -1,7 +1,6 @@
 {
   "files": [],
   "references": [
-    { "path": "mdx-loader" },
     { "path": "utils" },
     { "path": "render-utils" },
     { "path": "types" },

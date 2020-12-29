@@ -338,7 +338,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@app/webpack-build@workspace:build/webpack-build"
   dependencies:
-    "@app/mdx-loader": "workspace:packages/mdx-loader"
     "@babel/core": ^7.12.10
     "@babel/preset-react": ^7.12.10
     babel-loader: ^8.2.2
