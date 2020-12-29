@@ -1,7 +1,7 @@
 import { StringUtil } from '@app/utils';
 import { Typography } from '@material-ui/core';
 import { motion, Variants } from 'framer-motion';
-import _ from 'lodash';
+import isArray from 'lodash/isArray';
 import React from 'react';
 
 interface TopRevealProps {
@@ -23,7 +23,7 @@ interface TopRevealProps {
 export const TopReveal = (props: TopRevealProps) => {
   const { lineGap, fontSize, fontColor, stagger, text, id, loop } = props;
 
-  const items = _.isArray(text) ? text : StringUtil.stringToArray(text);
+  const items = isArray(text) ? text : StringUtil.stringToArray(text);
 
   // Add staggering effect to the children of the container
   const containerVariants = {

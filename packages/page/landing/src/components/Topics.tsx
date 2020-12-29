@@ -1,41 +1,39 @@
 import { ContentTypes } from '@app/types';
 import { Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { Item } from '@page/components';
 import groupArray from 'group-array';
-import _ from 'lodash';
+import get from 'lodash/get';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
-import { Item } from '../../../../docs/src/modules/components/common/grid/Item';
-import { translateContent } from './TranslateService';
+import { translateObject } from './TranslateService';
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      marginTop: '24px',
-      marginBottom: '24px'
+      marginTop: theme.spacing(3),
+      marginBottom: theme.spacing(3)
     },
     header: {
       textAlign: 'left'
-    },
-    scenario: {},
-    category: {}
+    }
   })
 );
 
 interface TopicsProps {
-  featureName: string;
+  feature: string;
   aspect: string;
 }
 
-export const Topics: FC<TopicsProps> = ({ featureName, aspect }) => {
+export const Topics: FC<TopicsProps> = ({ feature, aspect }) => {
   const classes = useStyles();
 
   const { t } = useTranslation();
 
   const scenariosRaw = t(
-    `pages/${featureName}/intro/${aspect}/index:scenarios`,
+    `pages/${feature}/intro/${aspect}/index:scenarios`,
     {},
     { returnObjects: true }
   );
@@ -43,15 +41,15 @@ export const Topics: FC<TopicsProps> = ({ featureName, aspect }) => {
   const scenarioKeys = Object.keys(scenariosRaw);
 
   const categoriesRaw = t(
-    `pages/${featureName}/intro/${aspect}/index:categories`,
+    `pages/${feature}/intro/${aspect}/index:categories`,
     {},
     { returnObjects: true }
   );
   const categoriesKeys = Object.keys(categoriesRaw);
 
-  const data = translateContent<ContentTypes.OverviewProps>(
+  const data = translateObject<ContentTypes.OverviewProps>(
     t,
-    `pages/${featureName}/intro/${aspect}/index:topics`
+    `pages/${feature}/intro/${aspect}/index:topics`
   );
 
   const dataGrouped: ContentTypes.Scenario = groupArray(
@@ -67,14 +65,14 @@ export const Topics: FC<TopicsProps> = ({ featureName, aspect }) => {
         return scenarioData ? (
           <div key={`scenario-${index}`}>
             <Typography variant='h5' className={classes.header}>
-              {_.get(scenariosRaw, scenario)}
+              {get(scenariosRaw, scenario)}
             </Typography>
             {categoriesKeys.map((categoryKey, index) => {
               const categoryData = scenarioData && scenarioData[categoryKey];
               return categoryData ? (
                 <div key={`category-${index}`}>
                   <Typography variant='h6' className={classes.header}>
-                    {_.get(categoriesRaw, categoryKey)}
+                    {get(categoriesRaw, categoryKey)}
                   </Typography>
                   <Grid container className={classes.root} spacing={6}>
                     {categoryData.map((data, index) => {
