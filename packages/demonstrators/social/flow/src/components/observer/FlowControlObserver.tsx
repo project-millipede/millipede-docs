@@ -1,3 +1,4 @@
+import { RenderUtils } from '@app/render-utils';
 import { useEffectRef } from '@huse/effect-ref';
 import elementResizeDetectorMaker from 'element-resize-detector';
 import { CSSProperties, FC, useCallback } from 'react';
@@ -7,7 +8,8 @@ interface FlowControlObserverProps {
   style?: CSSProperties;
 }
 
-const resizeDetector = elementResizeDetectorMaker({ strategy: 'scroll' });
+const resizeDetector =
+  RenderUtils.isBrowser() && elementResizeDetectorMaker({ strategy: 'scroll' });
 
 export const FlowControlObserver: FC<FlowControlObserverProps> = ({
   handleControlOffset,

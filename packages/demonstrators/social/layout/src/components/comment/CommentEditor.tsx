@@ -1,3 +1,4 @@
+import { RenderUtils } from '@app/render-utils';
 import { useEffectRef } from '@huse/effect-ref';
 import { Button, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import { ContentState, Editor, EditorState } from 'draft-js';
@@ -32,7 +33,8 @@ const insertText = (text: string) => {
   return EditorState.forceSelection(editorState, selectionAtEnd);
 };
 
-const resizeDetector = elementResizeDetectorMaker({ strategy: 'scroll' });
+const resizeDetector =
+  RenderUtils.isBrowser() && elementResizeDetectorMaker({ strategy: 'scroll' });
 
 interface CommentEditorProps {
   isComment: boolean;
