@@ -1,32 +1,31 @@
+import { RenderUtils } from '@app/render-utils';
+import { PageTypes } from '@app/types';
 import { StringUtil } from '@app/utils';
 import { createStyles, Fade, makeStyles, Snackbar, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@material-ui/core';
 import { Close, Share as ShareIcon } from '@material-ui/icons';
 import { windowOpenPromise } from '@vangware/window-open-promise';
 import copy from 'copy-to-clipboard';
-import _ from 'lodash';
+import isArray from 'lodash/isArray';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import React, { FC, SyntheticEvent, useCallback, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
+import { Icon } from './Icon';
 import {
   Interaction,
   InteractionMenuItem,
-  MetaProps,
   URIPathParamsFacebook,
   URIPathParamsLinkedIn,
   URIPathParamsMail,
   URIPathParamsTwitter,
   URIPathParamsWhatsApp,
-} from '../../../../../../src/typings/share';
-import { objectToGetParams } from '../../../utils/social/objectToGetParams';
-import { Icon } from './Icon';
-
-const isBrowser = typeof window !== 'undefined';
+} from './types';
+import { objectToGetParams } from './utils';
 
 export interface ShareProps {
-  meta: MetaProps;
+  meta: PageTypes.ContentMetaData;
   url: string;
 }
 
@@ -34,11 +33,17 @@ const useStyles = makeStyles(() =>
   createStyles({
     speedDial: {
       height: '56px',
-      paddingTop: '8px',
+      paddingTop: '11px',
+      paddingBottom: '11px',
+      paddingLeft: '16px',
+      paddingRight: '16px',
       '&.MuiSpeedDial-directionDown': {
         display: 'unset',
         flexDirection: 'unset'
       }
+      // position: 'absolute',
+      // paddingTop: '11px',
+      // paddingBottom: '11px'
     }
   })
 );
@@ -51,7 +56,7 @@ const getSharing = (
   const { meta } = getShareProps();
   const { title, description, hashtags } = meta;
 
-  const hashtagCollection = _.isArray(hashtags)
+  const hashtagCollection = isArray(hashtags)
     ? hashtags
     : StringUtil.stringToArray(hashtags);
 
@@ -182,7 +187,7 @@ const createButtons = (
 ) => {
   let baseUrl = '';
 
-  if (isBrowser) {
+  if (RenderUtils.isBrowser()) {
     const url = document.URL.replace(/#.*$/, '');
     // baseUrl = typeof share === 'string' ? `${url}/#${share}` : url;
     baseUrl = url;
@@ -195,7 +200,7 @@ const createButtons = (
   return buttonsInfo.map(creataShareLink);
 };
 
-const Share: FC<MetaProps> = props => {
+export const Share: FC<PageTypes.ContentMetaData> = props => {
   const classes = useStyles();
 
   const { t } = useTranslation();
@@ -265,5 +270,3 @@ const Share: FC<MetaProps> = props => {
     </>
   );
 };
-
-export default Share;

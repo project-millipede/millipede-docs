@@ -1,7 +1,7 @@
-import { Link } from '@app/components';
+import { getIconByName, Link } from '@app/components';
 import { ContentTypes } from '@app/types';
-import { Avatar, createStyles, Icon, makeStyles, Typography } from '@material-ui/core';
-import _ from 'lodash';
+import { Avatar, createStyles, IconButton, makeStyles, Typography } from '@material-ui/core';
+import isArray from 'lodash/isArray';
 import React from 'react';
 
 const useStyles = makeStyles(() =>
@@ -59,7 +59,7 @@ export const Item = ({
 
   let intermediateResult = [];
 
-  if (_.isArray(description)) {
+  if (isArray(description)) {
     intermediateResult = description.map((d, index) => {
       const {
         subTitle = [],
@@ -91,7 +91,15 @@ export const Item = ({
               {listing.map((item, index) => {
                 return item.link ? (
                   <li key={`listing-element-${index}`}>
-                    <Link href={item.link} variant='h6' color='inherit'>
+                    <Link
+                      href={
+                        {
+                          pathname: '/docs/[...slug]',
+                          query: { slug: item.link.split('/') }
+                          // hash: (item as any).hash
+                        } as any
+                      }
+                    >
                       <Typography variant='h6'>{item.text}</Typography>
                     </Link>
                   </li>
@@ -133,9 +141,24 @@ export const Item = ({
   return (
     <div className={classes.row}>
       {link ? (
-        <Link href={link}>
+        <Link
+          href={
+            {
+              pathname: '/docs/[...slug]',
+              query: { slug: link.split('/') }
+            } as any
+          }
+        >
           <Avatar className={classes.avatar}>
-            <Icon>{icon}</Icon>
+            <IconButton
+            // key={`section--${index}`}
+            // onClick={_e => {
+            //   handleSelect(topic, section);
+            // }}
+            >
+              {getIconByName((icon as any).name)}
+              {/* <CustomIcon icon={icon as any} /> */}
+            </IconButton>
           </Avatar>
         </Link>
       ) : null}
@@ -143,7 +166,7 @@ export const Item = ({
         <Typography variant='h5' className={classes.title}>
           {title}
         </Typography>
-        {_.isArray(description) ? (
+        {isArray(description) ? (
           intermediateResult
         ) : (
           <Typography variant='h6' className={classes.description}>
@@ -154,5 +177,3 @@ export const Item = ({
     </div>
   );
 };
-
-export default Item;
