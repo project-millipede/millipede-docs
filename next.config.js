@@ -10,6 +10,10 @@ const modules = [
   '@app/analytics',
   '@app/components',
   '@app/layout',
+  '@app/illustrations',
+  '@page/components',
+  '@page/layout',
+  '@page/landing',
   '@demonstrator/types',
   '@demonstrator/components',
   '@demonstrator/layout',
@@ -31,9 +35,7 @@ const nextConfig = {
     return merge(config, webpackConfig(options));
   },
 
-  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
-
-  target: 'serverless'
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx']
 };
 
 module.exports = nextTranslate(nextConfig);

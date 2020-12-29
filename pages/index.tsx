@@ -1,12 +1,19 @@
+import { loadFAIcons } from '@app/components/src';
 import { Container, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { Components as ComponentsLanding } from '@page/landing';
+import { Components } from '@page/layout';
+import { GetStaticPropsContext } from 'next';
+import loadNamespaces from 'next-translate/loadNamespaces';
 import useTranslation from 'next-translate/useTranslation';
-import React from 'react';
+import dynamic from 'next/dynamic';
+import React, { FC } from 'react';
 
-import { Head } from '../docs/src/modules/components/Head';
-import { HomeFooter } from '../docs/src/modules/components/HomeFooter';
-import { TopicsDetail } from '../src/components/site/landing/TopicsDetail';
-import { TopicsHead } from '../src/components/site/landing/TopicsHead';
+const TopicsHead = dynamic(() =>
+  import('@page/landing').then(module => module.Components.TopicsHead)
+);
+
+loadFAIcons();
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,13 +42,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Index = () => {
+const Index: FC = () => {
   const classes = useStyles();
   const { t } = useTranslation();
 
   return (
     <div className={classes.root}>
-      <Head />
       <div className={classes.hero}>
         <Container maxWidth='md' className={classes.content}>
           <Typography variant='h2' gutterBottom className={classes.title}>
@@ -52,13 +58,22 @@ const Index = () => {
           </Typography>
 
           <TopicsHead />
-          <TopicsDetail />
+          <ComponentsLanding.TopicsDetail />
 
-          <HomeFooter />
+          <Components.HomeFooter />
         </Container>
       </div>
     </div>
   );
+};
+
+export const getStaticProps = async (context: GetStaticPropsContext) => {
+  return {
+    props: await loadNamespaces({
+      ...context,
+      pathname: '/'
+    })
+  };
 };
 
 export default Index;

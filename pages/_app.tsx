@@ -1,71 +1,51 @@
 import '../docs/css/diagram.css';
 
 import { defaultAnalytics } from '@app/analytics';
-import { Portal } from '@app/components';
+import { Portal, Query } from '@app/components';
 import { HouxProvider } from '@app/houx';
-import { AppFrame, AppWrapper, reducers as layoutReducers } from '@app/layout';
-import { DeviceUtil } from '@app/utils';
-import { reducers as demonstratorLayoutReducers } from '@demonstrator/layout';
+import { AppFrame, AppWrapper } from '@app/layout';
 import { NextComponentType } from 'next';
+import appWithI18n from 'next-translate/appWithI18n';
 import { AppContext, AppInitialProps, AppProps } from 'next/app';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { RecoilRoot } from 'recoil';
 import { AnalyticsProvider } from 'use-analytics';
 
-import { loadFAIcons } from '../docs/src/modules/components/icon/FAIconLoader';
-
-loadFAIcons();
+import i18nConfig from '../i18n';
 
 const MillipedeApp: NextComponentType<
   AppContext,
   AppInitialProps,
   AppProps
 > = ({ Component, pageProps }) => {
-  const { isMobile } = pageProps;
+  useEffect(() => {
+    // Remove the server-side injected CSS.
+    const jssStyles = document.querySelector('#jss-server-side');
+    if (jssStyles) {
+      jssStyles.parentNode.removeChild(jssStyles);
+    }
+  }, []);
 
   return (
     <AnalyticsProvider instance={defaultAnalytics}>
-      <Portal.PortalProvider>
-        <RecoilRoot>
-          <HouxProvider
-            initialReducers={{
-              ...layoutReducers,
-              ...demonstratorLayoutReducers
-            }}
-          >
-            <AppWrapper isMobile={isMobile}>
-              <AppFrame>
-                <Component {...pageProps} />
-              </AppFrame>
-            </AppWrapper>
-          </HouxProvider>
-        </RecoilRoot>
-      </Portal.PortalProvider>
+      <Query.QueryParamProvider>
+        <Portal.PortalProvider>
+          <RecoilRoot>
+            <HouxProvider>
+              <AppWrapper>
+                <AppFrame>
+                  <Component {...pageProps} />
+                </AppFrame>
+              </AppWrapper>
+            </HouxProvider>
+          </RecoilRoot>
+        </Portal.PortalProvider>
+      </Query.QueryParamProvider>
     </AnalyticsProvider>
   );
 };
 
-// Only uncomment this method if you have blocking data requirements for
-// every single page in your application. This disables the ability to
-// perform automatic static optimization, causing every page in your app to
-// be server-side rendered.
-
-// MyApp.getInitialProps = async (appContext) => {
-//   const appProps = await App.getInitialProps(appContext)
-//   return { ...appProps }
-// }
-
-MillipedeApp.getInitialProps = async ({ Component, ctx }: AppContext) => {
-  const isMobile = DeviceUtil.detectDevice(ctx.req);
-
-  const pageProps = Component.getInitialProps
-    ? {
-        ...(await Component.getInitialProps(ctx)),
-        isMobile
-      }
-    : { isMobile };
-
-  return { pageProps };
-};
-
-export default MillipedeApp;
+export default appWithI18n(MillipedeApp, {
+  ...i18nConfig,
+  skipInitialProps: true
+});
