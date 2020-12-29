@@ -4,8 +4,11 @@
       "scenario": "general",
       "category": "recognition",
       "title": "Simple recognition of critical content",
-      "link": "/pidp/use-case/recognition",
-      "icon": "visibility",
+      "link": "pidp/use-case/recognition",
+      "icon": {
+        "type": "MUI",
+        "name": "flip"
+      },
       "description": [
         {
           "subTitle": [
@@ -15,11 +18,13 @@
         {
           "listing": [
             {
-              "link": "/pidp/use-case/recognition#test1",
+              "link": "pidp/use-case/recognition",
+              "hash": "#test1",
               "text": "Indication of the degree of inconsistency (traffic signal)"
             },
             {
-              "link": "/pidp/use-case/recognition#test2",
+              "link": "pidp/use-case/recognition",
+              "hash": "#test2",
               "text": "Display of valid corrections, clarification of the motivation and intention pursued by the author"
             }
           ]
@@ -37,7 +42,8 @@
         {
           "listing": [
             {
-              "link": "/pidp/use-case/recognition#test3",
+              "link": "pidp/use-case/recognition",
+              "hash": "#test3",
               "text": "Entire hiding of particularly critical content"
             }
           ]
@@ -53,8 +59,11 @@
       "scenario": "general",
       "category": "recognition",
       "title": "Labelling of critical content",
-      "link": "/pidp/use-case/response",
-      "icon": "label",
+      "link": "pidp/use-case/response",
+      "icon": {
+        "type": "MUI",
+        "name": "create"
+      },
       "description": [
         {
           "subTitle": [
@@ -64,11 +73,13 @@
         {
           "listing": [
             {
-              "link": "/pidp/use-case/response#test1",
+              "link": "pidp/use-case/response",
+              "hash": "#test1",
               "text": "An intuitive user interface allows the capture of the web and time coordinates of a critical content in any target application."
             },
             {
-              "link": "/pidp/use-case/response#test2",
+              "link": "/pidp/use-case/response",
+              "hash": "#test2",
               "text": "Smart dialogues support the process of determining the degree of contradiction and its nature."
             }
           ]
