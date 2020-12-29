@@ -1,5 +1,5 @@
 import { ScrollTypes } from '@demonstrators-social/shared';
-import _ from 'lodash';
+import get from 'lodash/get';
 
 export const getSelectedPostIds = (
   timelineId: string,
@@ -13,7 +13,7 @@ export const getSelectedPostIds = (
     finalSize
   } = nodeWithRelationsWithEdgeMap;
 
-  const nodeWithRelationsWithEdge = _.get(nodesWithRelations, activeId, {
+  const nodeWithRelationsWithEdge = get(nodesWithRelations, activeId, {
     values: [] as Array<ScrollTypes.Timeline.NodeWithRelationsWithEdge>
   });
 
@@ -39,28 +39,28 @@ export const getSelectedPostIds = (
         if (ltr) {
           if (position === 'left' && counter >= 0) {
             const relation = allNodeIds[0];
-            if (timelineId === _.get(timelineIds, relation)) {
-              return _.get(postIds, relation);
+            if (timelineId === get(timelineIds, relation)) {
+              return get(postIds, relation);
             }
           }
           if (position === 'right' && counter === finalSize) {
             const relation = allNodeIds[finalSize - 1];
-            if (timelineId === _.get(timelineIds, relation)) {
-              return _.get(postIds, relation);
+            if (timelineId === get(timelineIds, relation)) {
+              return get(postIds, relation);
             }
           }
         }
         if (!ltr) {
           if (position === 'right' && counter >= 0) {
             const relation = allNodeIds[counter - 1];
-            if (timelineId === _.get(timelineIds, relation)) {
-              return _.get(postIds, relation);
+            if (timelineId === get(timelineIds, relation)) {
+              return get(postIds, relation);
             }
           }
           if (position === 'left' && counter === finalSize) {
             const relation = allNodeIds[0];
-            if (timelineId === _.get(timelineIds, relation)) {
-              return _.get(postIds, relation);
+            if (timelineId === get(timelineIds, relation)) {
+              return get(postIds, relation);
             }
           }
         }
@@ -70,12 +70,12 @@ export const getSelectedPostIds = (
         const [headRelation] = allNodeIds.slice(0, 1);
         const [tailRelation] = allNodeIds.slice(-1);
 
-        if (timelineId === _.get(timelineIds, headRelation)) {
-          return _.get(postIds, headRelation);
+        if (timelineId === get(timelineIds, headRelation)) {
+          return get(postIds, headRelation);
         }
 
-        if (timelineId === _.get(timelineIds, tailRelation)) {
-          return _.get(postIds, tailRelation);
+        if (timelineId === get(timelineIds, tailRelation)) {
+          return get(postIds, tailRelation);
         }
       }
 
@@ -138,7 +138,7 @@ export const getSelectedSliceIds = (
 ) => {
   const { activeId, nodesWithRelations } = nodeWithRelationsWithEdgeMap;
 
-  const nodeWithRelationsWithEdge = _.get(nodesWithRelations, activeId, {
+  const nodeWithRelationsWithEdge = get(nodesWithRelations, activeId, {
     values: [] as Array<ScrollTypes.Timeline.NodeWithRelationsWithEdge>
   });
 
@@ -160,20 +160,20 @@ export const getSelectedSliceIds = (
     const [headRelation] = allNodeIds.slice(0, 1);
     const [tailRelation] = allNodeIds.slice(-1);
 
-    if (timelineId === _.get(timelineIds, headRelation)) {
+    if (timelineId === get(timelineIds, headRelation)) {
       return {
-        postId: _.get(postIds, headRelation),
-        sliceId: _.get(sliceIds, headRelation),
+        postId: get(postIds, headRelation),
+        sliceId: get(sliceIds, headRelation),
         nodeWithRelations: nodeWithRelations.find(
           nodeWithRelation => nodeWithRelation.node.id === headRelation
         )
       };
     }
 
-    if (timelineId === _.get(timelineIds, tailRelation)) {
+    if (timelineId === get(timelineIds, tailRelation)) {
       return {
-        postId: _.get(postIds, tailRelation),
-        sliceId: _.get(sliceIds, tailRelation),
+        postId: get(postIds, tailRelation),
+        sliceId: get(sliceIds, tailRelation),
         nodeWithRelations: nodeWithRelations.find(
           nodeWithRelation => nodeWithRelation.node.id === tailRelation
         )

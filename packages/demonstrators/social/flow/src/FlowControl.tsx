@@ -14,7 +14,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import { usePrevious } from 'ahooks';
-import _ from 'lodash';
+import get from 'lodash/get';
 import useTranslation from 'next-translate/useTranslation';
 import React, { ChangeEvent, CSSProperties, FC, useEffect, useMemo, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -127,7 +127,7 @@ const ScenarioDetailNavigator: FC<ScenarioDetailNavigatorProps> = () => {
   const previousId = usePrevious(id);
 
   const currentNodesWithRelations = useMemo(() => {
-    const currentNodesWithRelations = _.get(nodesWithRelations, activeId);
+    const currentNodesWithRelations = get(nodesWithRelations, activeId);
     return currentNodesWithRelations;
   }, [nodesWithRelations, activeId]);
 
@@ -153,8 +153,8 @@ const ScenarioDetailNavigator: FC<ScenarioDetailNavigatorProps> = () => {
 
   useEffect(() => {
     if (refs != null && previousId && id) {
-      const previousRef = _.get(refs, previousId);
-      const currentRef = _.get(refs, id);
+      const previousRef = get(refs, previousId);
+      const currentRef = get(refs, id);
 
       if (
         previousRef &&

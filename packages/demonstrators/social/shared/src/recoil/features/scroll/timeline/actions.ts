@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import isArray from 'lodash/isArray';
 import { Translate } from 'next-translate';
 
 import { LAYOUT, Link, NodeWithRelationsWithEdge } from './types';
@@ -26,7 +26,7 @@ const getEdgeConnections = (
   length: number,
   ids: Array<string> | string
 ) => {
-  if (_.isArray(ids)) {
+  if (isArray(ids)) {
     // Covers scenario - e.g. the progressive scenario has only a single element at the beginning of the animmation sequence
     if (length === 1) {
       const [headId] = ids;
