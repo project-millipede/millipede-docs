@@ -7,32 +7,40 @@ import Hyphenated from 'react-hyphen';
 
 const { ArcherContainer, ArcherElement, CustomBox } = Archer;
 
-const useStyles = makeStyles(() =>
+export const useStyles = makeStyles(() =>
   createStyles({
-    singleElement: {
-      display: 'flex',
-      justifyContent: 'center'
-    },
-    row: {
-      margin: '100px 0',
-      display: 'flex',
-      justifyContent: 'space-between'
-    },
-    box: {
-      padding: '10px',
-      border: '3px solid black',
-      maxWidth: '100px'
-    },
     title: {
       textAlign: 'center',
       fontWeight: 'bold'
     },
-    boxHover: {
-      cursor: 'pointer',
-      padding: '10px',
-      border: '3px solid black',
-      maxWidth: '100px',
-      backgroundColor: '#E0E0E0'
+    grid: {
+      display: 'grid',
+      gridTemplateRows: '1fr 1fr 1fr',
+      gridTemplateColumns: '1fr 1fr 1fr',
+      gridTemplateAreas: `
+      '. individual data'
+      'general realistic specific'
+      '. society .'
+      `,
+      gridGap: '100px'
+    },
+    individual: {
+      gridArea: 'individual'
+    },
+    data: {
+      gridArea: 'data'
+    },
+    general: {
+      gridArea: 'general'
+    },
+    realistic: {
+      gridArea: 'realistic'
+    },
+    specific: {
+      gridArea: 'specific'
+    },
+    society: {
+      gridArea: 'society'
     }
   })
 );
@@ -42,49 +50,38 @@ export const DiagramInterdisciplinaryApproach: FC = () => {
 
   const { t } = useTranslation();
 
-  // const { pathname } = useRouter();
-
-  // console.log('pathname: ', pathname);
-
   return (
     <ArcherContainer noCurves strokeColor='gray'>
-      <div className='center-flex__1-of-2'>
-        <div>
-          <ArcherElement
-            id='individual'
-            relations={[
-              {
-                targetId: 'data',
-                targetAnchor: 'left',
-                sourceAnchor: 'right'
-              }
-            ]}
-          >
+      <div className={classes.grid}>
+        <ArcherElement
+          id='individual'
+          relations={[
+            {
+              targetId: 'data',
+              targetAnchor: 'left',
+              sourceAnchor: 'right'
+            }
+          ]}
+        >
+          <div className={classes.individual}>
             <CustomBox>
-              {/* <Box className={classes.box}> */}
               <Typography variant='subtitle1' className={classes.title}>
                 <Hyphenated>{t('individual')}</Hyphenated>
               </Typography>
-              {/* </Box> */}
             </CustomBox>
-          </ArcherElement>
-        </div>
-        <div>
-          <ArcherElement id='data'>
+          </div>
+        </ArcherElement>
+        <ArcherElement id='data'>
+          <div className={classes.data}>
             <CustomBox>
-              {/* <Box className={classes.box}> */}
               <Typography variant='subtitle1' className={classes.title}>
                 <Hyphenated>
                   {t('pages/perspective/index:dataCentric')}
                 </Hyphenated>
               </Typography>
-              {/* </Box> */}
             </CustomBox>
-          </ArcherElement>
-        </div>
-      </div>
-
-      <div className={classes.row}>
+          </div>
+        </ArcherElement>
         <ArcherElement
           id='general'
           relations={[
@@ -102,13 +99,15 @@ export const DiagramInterdisciplinaryApproach: FC = () => {
             }
           ]}
         >
-          <CustomBox bgcolor='#F44336' routeSegement='general'>
-            <Typography variant='subtitle1' className={classes.title}>
-              <Hyphenated>{`${t('pages/perspective/index:general')} ${t(
-                'pages/perspective/index:problemSolving'
-              )}`}</Hyphenated>
-            </Typography>
-          </CustomBox>
+          <div className={classes.general}>
+            <CustomBox bgcolor='#F44336' routeSegement='general'>
+              <Typography variant='subtitle1' className={classes.title}>
+                <Hyphenated>{`${t('pages/perspective/index:general')} ${t(
+                  'pages/perspective/index:problemSolving'
+                )}`}</Hyphenated>
+              </Typography>
+            </CustomBox>
+          </div>
         </ArcherElement>
 
         <ArcherElement
@@ -126,13 +125,15 @@ export const DiagramInterdisciplinaryApproach: FC = () => {
             }
           ]}
         >
-          <CustomBox bgcolor='#4CAF50' routeSegement='realistic'>
-            <Typography variant='subtitle1' className={classes.title}>
-              <Hyphenated>{`${t('pages/perspective/index:realistic')} ${t(
-                'pages/perspective/index:problemSolving'
-              )}`}</Hyphenated>
-            </Typography>
-          </CustomBox>
+          <div className={classes.realistic}>
+            <CustomBox bgcolor='#4CAF50' routeSegement='realistic'>
+              <Typography variant='subtitle1' className={classes.title}>
+                <Hyphenated>{`${t('pages/perspective/index:realistic')} ${t(
+                  'pages/perspective/index:problemSolving'
+                )}`}</Hyphenated>
+              </Typography>
+            </CustomBox>
+          </div>
         </ArcherElement>
 
         <ArcherElement
@@ -145,24 +146,24 @@ export const DiagramInterdisciplinaryApproach: FC = () => {
             }
           ]}
         >
-          <CustomBox bgcolor='#FFEB3B' routeSegement='specific'>
-            <Typography variant='subtitle1' className={classes.title}>
-              <Hyphenated>{`${t('pages/perspective/index:specific')} ${t(
-                'pages/perspective/index:problemSolving'
-              )}`}</Hyphenated>
-            </Typography>
-          </CustomBox>
+          <div className={classes.specific}>
+            <CustomBox bgcolor='#FFEB3B' routeSegement='specific'>
+              <Typography variant='subtitle1' className={classes.title}>
+                <Hyphenated>{`${t('pages/perspective/index:specific')} ${t(
+                  'pages/perspective/index:problemSolving'
+                )}`}</Hyphenated>
+              </Typography>
+            </CustomBox>
+          </div>
         </ArcherElement>
-      </div>
-      <div className={classes.singleElement}>
         <ArcherElement id='society'>
-          <CustomBox>
-            {/* <Box className={classes.box}> */}
-            <Typography variant='subtitle1' className={classes.title}>
-              <Hyphenated>{t('pages/perspective/index:society')}</Hyphenated>
-            </Typography>
-            {/* </Box> */}
-          </CustomBox>
+          <div className={classes.society}>
+            <CustomBox>
+              <Typography variant='subtitle1' className={classes.title}>
+                <Hyphenated>{t('pages/perspective/index:society')}</Hyphenated>
+              </Typography>
+            </CustomBox>
+          </div>
         </ArcherElement>
       </div>
     </ArcherContainer>
