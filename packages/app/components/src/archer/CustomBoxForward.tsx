@@ -20,14 +20,14 @@ const useStyles = makeStyles<Theme, StyleProps>(() => ({
   box: {
     padding: '10px',
     border: '3px solid black',
-    maxWidth: '100px',
-    backgroundColor: props => props.bgcolor
+    backgroundColor: props => props.bgcolor,
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   boxHover: {
     cursor: 'pointer',
-    padding: '10px',
-    border: '3px solid black',
-    maxWidth: '100px',
     backgroundColor: '#E0E0E0'
   }
 }));
@@ -69,9 +69,8 @@ const CustomBox: ForwardRefRenderFunction<HTMLDivElement, CustomBoxProps> = (
       duration={500}
     >
       <Box
-        className={clsx({
-          [classes.boxHover]: selected,
-          [classes.box]: !selected
+        className={clsx(classes.box, {
+          [classes.boxHover]: selected
         })}
         onMouseEnter={_e => {
           setSelected(true);

@@ -1,1 +1,0 @@
-export { DiagramInterdisciplinaryApproach } from './DiagramInterdisciplinaryApproach';

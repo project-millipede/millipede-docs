@@ -1,5 +1,3 @@
-import '../docs/css/diagram.css';
-
 import { defaultAnalytics } from '@app/analytics';
 import { Portal, Query } from '@app/components';
 import { HouxProvider } from '@app/houx';
