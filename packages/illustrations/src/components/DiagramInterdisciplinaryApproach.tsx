@@ -1,13 +1,11 @@
-/* eslint-disable import/no-named-as-default */
 import { Archer } from '@app/components';
-import { createStyles, makeStyles, Typography } from '@material-ui/core';
+import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
-import Hyphenated from 'react-hyphen';
 
 const { ArcherContainer, ArcherElement, CustomBox } = Archer;
 
-export const useStyles = makeStyles(() =>
+export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     title: {
       textAlign: 'center',
@@ -22,7 +20,10 @@ export const useStyles = makeStyles(() =>
       'general realistic specific'
       '. society .'
       `,
-      gridGap: '100px'
+      gridGap: '100px',
+      [theme.breakpoints.down('sm')]: {
+        gridGap: '25px'
+      }
     },
     individual: {
       gridArea: 'individual'
@@ -66,7 +67,7 @@ export const DiagramInterdisciplinaryApproach: FC = () => {
           <div className={classes.individual}>
             <CustomBox>
               <Typography variant='subtitle1' className={classes.title}>
-                <Hyphenated>{t('individual')}</Hyphenated>
+                {t('pages/perspective/index:individual')}
               </Typography>
             </CustomBox>
           </div>
@@ -75,9 +76,7 @@ export const DiagramInterdisciplinaryApproach: FC = () => {
           <div className={classes.data}>
             <CustomBox>
               <Typography variant='subtitle1' className={classes.title}>
-                <Hyphenated>
-                  {t('pages/perspective/index:dataCentric')}
-                </Hyphenated>
+                {t('pages/perspective/index:dataCentric')}
               </Typography>
             </CustomBox>
           </div>
@@ -102,9 +101,9 @@ export const DiagramInterdisciplinaryApproach: FC = () => {
           <div className={classes.general}>
             <CustomBox bgcolor='#F44336' routeSegement='general'>
               <Typography variant='subtitle1' className={classes.title}>
-                <Hyphenated>{`${t('pages/perspective/index:general')} ${t(
+                {`${t('pages/perspective/index:general')} ${t(
                   'pages/perspective/index:problemSolving'
-                )}`}</Hyphenated>
+                )}`}
               </Typography>
             </CustomBox>
           </div>
@@ -128,9 +127,9 @@ export const DiagramInterdisciplinaryApproach: FC = () => {
           <div className={classes.realistic}>
             <CustomBox bgcolor='#4CAF50' routeSegement='realistic'>
               <Typography variant='subtitle1' className={classes.title}>
-                <Hyphenated>{`${t('pages/perspective/index:realistic')} ${t(
+                {`${t('pages/perspective/index:realistic')} ${t(
                   'pages/perspective/index:problemSolving'
-                )}`}</Hyphenated>
+                )}`}
               </Typography>
             </CustomBox>
           </div>
@@ -149,9 +148,9 @@ export const DiagramInterdisciplinaryApproach: FC = () => {
           <div className={classes.specific}>
             <CustomBox bgcolor='#FFEB3B' routeSegement='specific'>
               <Typography variant='subtitle1' className={classes.title}>
-                <Hyphenated>{`${t('pages/perspective/index:specific')} ${t(
+                {`${t('pages/perspective/index:specific')} ${t(
                   'pages/perspective/index:problemSolving'
-                )}`}</Hyphenated>
+                )}`}
               </Typography>
             </CustomBox>
           </div>
@@ -160,7 +159,7 @@ export const DiagramInterdisciplinaryApproach: FC = () => {
           <div className={classes.society}>
             <CustomBox>
               <Typography variant='subtitle1' className={classes.title}>
-                <Hyphenated>{t('pages/perspective/index:society')}</Hyphenated>
+                {t('pages/perspective/index:society')}
               </Typography>
             </CustomBox>
           </div>

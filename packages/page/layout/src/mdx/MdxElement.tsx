@@ -26,12 +26,6 @@ export const useStyles = makeStyles(() =>
     headerRow: {
       display: 'flex',
       flexDirection: 'row'
-    },
-    headerText: {
-      hyphens: 'auto',
-      '-ms-hyphens': 'auto',
-      '-moz-hyphens': 'auto',
-      '-webkit-hyphens': 'auto'
     }
   })
 );
@@ -41,9 +35,7 @@ export const h1 = ({ disableShare, meta }: MDXRenderProps) => {
     const classes = useStyles();
     return (
       <div className={classes.headerRow}>
-        <Typography variant='h1' className={classes.headerText}>
-          {children}
-        </Typography>
+        <Typography variant='h1'>{children}</Typography>
         {!disableShare && RenderUtils.isBrowser() ? <Share {...meta} /> : null}
       </div>
     );
@@ -83,11 +75,3 @@ export const h5: FC<MDXProps> = ({ children }) => (
 export const h6: FC<MDXProps> = ({ children }) => (
   <Typography variant='h6'>{children}</Typography>
 );
-
-// export const components = {
-//   h2,
-//   h3,
-//   h4,
-//   h5,
-//   h6
-// };
