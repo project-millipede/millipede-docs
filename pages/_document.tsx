@@ -6,15 +6,20 @@ import { ServerStyleSheet as StyledComponentSheets } from 'styled-components';
 
 class MillipedeDocument extends NextDocument {
   render() {
+    const { locale, defaultLocale } = this.props.__NEXT_DATA__;
+    const lang = locale ? locale : defaultLocale;
+
     return (
-      <Html>
-        <GoogleFonts href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap' />
-        <Head lang='en'>
-          {/* <link
-            rel='stylesheet'
-            href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
-          /> */}
+      <Html lang={lang}>
+        <GoogleFonts href='https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap' />
+        <Head>
           <link rel='shortcut icon' href='/favicon.ico' />
+
+          {/* <link rel='preconnect' href='https://fonts.gstatic.com' />
+          <link
+            rel='stylesheet'
+            href='https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap'
+          /> */}
         </Head>
         <body>
           <Main />
