@@ -1,18 +1,10 @@
 {
-  "program": "Program",
-  "agent": "Agent",
-  "environment": "Environment",
-  "communication_process": "Kommunikations-Prozess",
-  "preparation_process": "Vorbereitungs-Prozess",
-  "render_process": "Darstellungs-Prozess",
-  "communication_process_abbreviation": "(KP)",
-  "preparation_process_abbreviation": "(VP)",
-  "render_process_abbreviation": "(DP)",
-  "derive_attack_vector": "Angriffsvektor ableiten",
-  "apply_attack_vector": "Angriffsvektor anwenden",
-  "exposure": "Exposition",
-  "determine_behavior": "Verhalten bestimmen",
+  "access": "Zugriff",
+  "function": "Funktion",
+  "instrument_function": "Instrumentation",
   "analysis": "Analyse",
-  "instrument_function": "Funktion des Instruments",
-  "function": "Funktion"
+  "determine_behavior": "Verhalten bestimmen",
+  "exposure": "Exposition",
+  "derive_attack_vector": "Angriffsvektor ableiten",
+  "apply_attack_vector": "Angriffsvektor anwenden"
 }

@@ -1,7 +1,4 @@
 {
-  "program": "Program",
-  "agent": "Agent",
-  "environment": "Environment",
   "target_application": "Target Application",
   "project_millipede": "Project Millipede",
   "communication_process": "Communication Process",
@@ -21,12 +18,5 @@
   "communication_process_custom_abbreviation": "(CCP)",
   "coordination": "Low-level UI Coordination",
   "observe_react": "Observation / Reaction",
-  "react_observe": "Reaction / Observation",
-  "derive_attack_vector": "Derive attack vector",
-  "apply_attack_vector": "Apply attack vector",
-  "exposure": "Exposure",
-  "determine_behavior": "Determine behavior",
-  "analysis": "Analysis",
-  "instrument_function": "Instrument function",
-  "function": "Function"
+  "react_observe": "Reaction / Observation"
 }
