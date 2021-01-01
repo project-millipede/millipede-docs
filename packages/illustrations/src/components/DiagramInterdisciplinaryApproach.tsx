@@ -9,7 +9,11 @@ export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     title: {
       textAlign: 'center',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      hyphens: 'auto',
+      '-ms-hyphens': 'auto',
+      '-moz-hyphens': 'auto',
+      '-webkit-hyphens': 'auto'
     },
     grid: {
       display: 'grid',
