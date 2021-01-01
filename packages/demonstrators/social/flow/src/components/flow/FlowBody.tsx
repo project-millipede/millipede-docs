@@ -70,7 +70,12 @@ export const FlowBody: FC = () => {
                 relations
               } = value;
               return (
-                <ArcherElement id={id} key={id} relations={relations}>
+                <ArcherElement
+                  id={id}
+                  key={id}
+                  relations={relations}
+                  isInteractive
+                >
                   <CustomBox>
                     <Typography variant='subtitle1'>{label}</Typography>
                   </CustomBox>

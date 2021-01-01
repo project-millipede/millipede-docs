@@ -89,6 +89,7 @@ export const DockItem: FC<DockItemPropsRoot> = ({
         key={`dock-item-${timelineId}-${postId}-${sliceId}`}
         id={nodeId}
         relations={relations}
+        isInteractive
       />
     ) : null;
   });
