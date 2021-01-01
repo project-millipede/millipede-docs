@@ -1,37 +1,47 @@
 import { Archer } from '@app/components';
-import { Box, createStyles, makeStyles, Typography } from '@material-ui/core';
+import { createStyles, makeStyles, Typography } from '@material-ui/core';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
-const useStyles = makeStyles(() =>
+import { useCommonStyles } from '../../../styles/CommonStyles';
+
+const { ArcherContainer, ArcherElement, CustomBox } = Archer;
+
+export const useStyles = makeStyles(() =>
   createStyles({
-    row: {
-      margin: '100px 0',
-      display: 'flex',
-      justifyContent: 'center'
+    grid: {
+      display: 'grid',
+      gridTemplateRows: '1fr 1fr 1fr',
+      gridTemplateColumns: '0.5fr 1fr 0.5fr',
+      gridTemplateAreas: `
+      '. communication .'
+      '. preparation .'
+      '. render .'
+      `,
+      gridRowGap: '100px'
     },
-    box: {
-      padding: '10px',
-      border: '3px solid black',
-      // minWidth: '100px',
-      maxWidth: '150px'
+    communication: {
+      gridArea: 'communication'
     },
-    title: {
-      textAlign: 'center',
-      fontWeight: 'bold'
+    preparation: {
+      gridArea: 'preparation'
+    },
+    render: {
+      gridArea: 'render'
     }
   })
 );
 
 export const Concept1: FC = () => {
   const classes = useStyles();
+  const commonClasses = useCommonStyles();
 
   const { t } = useTranslation();
 
   return (
-    <Archer.ArcherContainer noCurves strokeColor='gray'>
-      <div className={classes.row}>
-        <Archer.ArcherElement
+    <ArcherContainer noCurves strokeColor='gray'>
+      <div className={classes.grid}>
+        <ArcherElement
           id='communication'
           relations={[
             {
@@ -41,17 +51,17 @@ export const Concept1: FC = () => {
             }
           ]}
         >
-          <div className={classes.box}>
-            <Typography variant='subtitle1' className={classes.title}>
-              {`${t('pages/ai/general/index:communication_process')} ${t(
-                'pages/ai/general/index:communication_process_abbreviation'
-              )}`}
-            </Typography>
+          <div className={classes.communication}>
+            <CustomBox>
+              <Typography variant='subtitle1' className={commonClasses.title}>
+                {`${t('pages/ai/general/index:communication_process')} ${t(
+                  'pages/ai/general/index:communication_process_abbreviation'
+                )}`}
+              </Typography>
+            </CustomBox>
           </div>
-        </Archer.ArcherElement>
-      </div>
-      <div className={classes.row}>
-        <Archer.ArcherElement
+        </ArcherElement>
+        <ArcherElement
           id='preparation'
           relations={[
             {
@@ -61,26 +71,28 @@ export const Concept1: FC = () => {
             }
           ]}
         >
-          <Box className={classes.box}>
-            <Typography variant='subtitle1' className={classes.title}>
-              {`${t('pages/ai/general/index:preparation_process')} ${t(
-                'pages/ai/general/index:preparation_process_abbreviation'
-              )}`}
-            </Typography>
-          </Box>
-        </Archer.ArcherElement>
-      </div>
-      <div className={classes.row}>
-        <Archer.ArcherElement id='render'>
-          <div className={classes.box}>
-            <Typography variant='subtitle1' className={classes.title}>
-              {`${t('pages/ai/general/index:render_process')} ${t(
-                'pages/ai/general/index:render_process_abbreviation'
-              )}`}
-            </Typography>
+          <div className={classes.preparation}>
+            <CustomBox>
+              <Typography variant='subtitle1' className={commonClasses.title}>
+                {`${t('pages/ai/general/index:preparation_process')} ${t(
+                  'pages/ai/general/index:preparation_process_abbreviation'
+                )}`}
+              </Typography>
+            </CustomBox>
           </div>
-        </Archer.ArcherElement>
+        </ArcherElement>
+        <ArcherElement id='render'>
+          <div className={classes.render}>
+            <CustomBox>
+              <Typography variant='subtitle1' className={commonClasses.title}>
+                {`${t('pages/ai/general/index:render_process')} ${t(
+                  'pages/ai/general/index:render_process_abbreviation'
+                )}`}
+              </Typography>
+            </CustomBox>
+          </div>
+        </ArcherElement>
       </div>
-    </Archer.ArcherContainer>
+    </ArcherContainer>
   );
 };
