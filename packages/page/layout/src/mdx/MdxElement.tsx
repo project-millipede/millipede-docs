@@ -25,7 +25,8 @@ export const useStyles = makeStyles(() =>
   createStyles({
     headerRow: {
       display: 'flex',
-      flexDirection: 'row'
+      flexDirection: 'row',
+      marginTop: '56px'
     }
   })
 );

@@ -34,7 +34,6 @@ export const AppContent: FC<AppContentProps> = ({ children, disableToc }) => {
     <Container
       component='main'
       id='main-content'
-      tabIndex={-1}
       className={clsx(classes.root, {
         [classes.disableToc]: disableToc
       })}
