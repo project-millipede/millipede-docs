@@ -21,6 +21,7 @@ export interface DockItemProps {
     | Array<ScrollTypes.Timeline.NodeWithRelations>;
   otherTimelineId?: string;
   render?: ArcherTypes.RenderFn;
+  isInteractive?: boolean;
 }
 
 export type DockItemArcherProps = DockItemProps &
@@ -36,6 +37,7 @@ export interface DockSliceProps {
   id?: string;
   relations?: Array<ArcherTypes.Relation>;
   dynamicRef?: any;
+  isInteractive?: boolean;
 }
 
 export type DockSliceArcherProps = DockSliceProps &

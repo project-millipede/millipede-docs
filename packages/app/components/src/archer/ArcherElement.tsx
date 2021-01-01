@@ -31,13 +31,15 @@ export interface ArcherElementProps {
   style?: CSSProperties;
   children?: ReactElement;
   render?: RenderFn;
+  isInteractive?: boolean;
 }
 
 export const ArcherElement: FC<ArcherElementProps> = ({
   id,
   relations = [],
   children,
-  render
+  render,
+  isInteractive = false
 }) => {
   const refDispatch = useRefDispatch();
   const transitionDispatch = useTransitionDispatch();
@@ -59,10 +61,18 @@ export const ArcherElement: FC<ArcherElementProps> = ({
   }, []);
 
   if (render != null) {
-    return render({ ref, dynamicRef });
+    if (isInteractive) {
+      return render({ ref, dynamicRef });
+    }
+    return render({ ref });
+  }
+  if (isInteractive) {
+    return cloneElement(children, {
+      ref,
+      dynamicRef
+    });
   }
   return cloneElement(children, {
-    ref,
-    dynamicRef
+    ref
   });
 };
