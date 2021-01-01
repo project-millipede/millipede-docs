@@ -1,174 +1,184 @@
 import { Archer } from '@app/components';
-import { Box, Typography } from '@material-ui/core';
-import { createStyles, lighten, makeStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Typography } from '@material-ui/core';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
-const useStyles = makeStyles(() =>
+import { useCommonStyles } from '../../../../styles/CommonStyles';
+
+const { ArcherContainer, ArcherElement, CustomBox } = Archer;
+
+const margin = '8px';
+const heightHeading = '32px';
+
+export const useStyles = makeStyles(() =>
   createStyles({
-    rowRight: {
-      margin: '50px 0',
-      display: 'flex',
-      flexDirection: 'row-reverse'
+    grid: {
+      gridArea: 'target',
+      display: 'grid',
+      gridTemplateColumns: `${margin} repeat(3, 1fr) ${margin}`,
+      gridTemplateRows: `repeat(3, ${heightHeading} ${margin} 1fr ${margin})`,
+      gridTemplateAreas: `
+      '. . head_access . .'
+      '. . . . .'
+      '. function . instrument .'
+      '. . . . .'
+      '. . head_analysis . .'
+      '. . . . .'
+      '. . . behavior .'
+      '. . . . .'
+      '. . head_exposure . .'
+      '. . . . .'
+      '. apply . derive .'
+      '. . . . .'
+      `,
+      rowGap: '25px',
+      border: '3px solid black'
     },
-    row: {
-      margin: '50px 0',
-      display: 'flex',
-      justifyContent: 'space-between'
+    head_access: {
+      gridArea: 'head_access'
     },
-    box: {
-      padding: '10px',
-      border: '3px solid black',
-      width: '120px'
+    function: {
+      gridArea: 'function'
     },
-
-    boxNoBorder: {
-      padding: '10px',
-      border: '3px solid black',
-      width: '120px'
+    instrument: {
+      gridArea: 'instrument'
     },
-
-    boxWrapper: {
-      padding: '10px',
-      border: '3px solid black',
-      margin: '50px 0',
-      display: 'flex',
-      justifyContent: 'space-between'
+    head_analysis: {
+      gridArea: 'head_analysis'
     },
-
-    boxInner: {
-      margin: '50px 0',
-      display: 'flex',
-      justifyContent: 'space-between'
+    behavior: {
+      gridArea: 'behavior'
     },
-
-    boxWrapper2: {
-      padding: '10px',
-      border: '3px solid black',
-      margin: '50px 0',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-between'
+    head_exposure: {
+      gridArea: 'head_exposure'
     },
-
-    container: {
-      backgroundColor: lighten('#000000', 0.95)
+    derive: {
+      gridArea: 'derive'
     },
-
-    title: {
-      textAlign: 'center',
-      fontWeight: 'bold'
+    apply: {
+      gridArea: 'apply'
     }
   })
 );
 
 export const ReverseEngineering: FC = () => {
   const classes = useStyles();
+  const commonClasses = useCommonStyles();
 
   const { t } = useTranslation();
 
   return (
-    <Archer.ArcherContainer noCurves strokeColor='gray'>
-      <Box className={classes.boxWrapper2}>
-        <Typography variant='subtitle1' className={classes.title}>
-          {t('pages/ai/reverse/intro/index:program')}
-        </Typography>
+    <ArcherContainer noCurves strokeColor='gray'>
+      <div className={classes.grid}>
+        <div className={classes.head_access}>
+          <Typography variant='subtitle1' className={commonClasses.title}>
+            {t('pages/ai/reverse/intro/index:access')}
+          </Typography>
+        </div>
 
-        <div className={classes.boxInner}>
-          <Archer.ArcherElement id='function'>
-            <Box className={classes.box} style={{ height: '100%' }}>
-              <Typography variant='subtitle1' className={classes.title}>
+        <ArcherElement id='function'>
+          <div className={classes.function}>
+            <CustomBox>
+              <Typography variant='subtitle1' className={commonClasses.title}>
                 {t('pages/ai/reverse/intro/index:function')}
               </Typography>
-            </Box>
-          </Archer.ArcherElement>
-          <Archer.ArcherElement
-            id='instruction_1'
-            relations={[
-              {
-                targetId: 'function',
-                targetAnchor: 'right',
-                sourceAnchor: 'left'
-              },
-              {
-                targetId: 'agent3',
-                targetAnchor: 'top',
-                sourceAnchor: 'bottom'
-              }
-            ]}
-          >
-            <Box className={classes.boxNoBorder}>
-              <Typography variant='subtitle1' className={classes.title}>
+            </CustomBox>
+          </div>
+        </ArcherElement>
+
+        <ArcherElement
+          id='instrument'
+          relations={[
+            {
+              targetId: 'function',
+              targetAnchor: 'right',
+              sourceAnchor: 'left'
+            },
+            {
+              targetId: 'behavior',
+              targetAnchor: 'top',
+              sourceAnchor: 'bottom'
+            }
+          ]}
+        >
+          <div className={classes.instrument}>
+            <CustomBox>
+              <Typography variant='subtitle1' className={commonClasses.title}>
                 {t('pages/ai/reverse/intro/index:instrument_function')}
               </Typography>
-            </Box>
-          </Archer.ArcherElement>
-        </div>
-      </Box>
+            </CustomBox>
+          </div>
+        </ArcherElement>
 
-      <Box className={classes.boxWrapper2}>
-        <Typography variant='subtitle1' className={classes.title}>
-          {t('pages/ai/reverse/intro/index:analysis')}
-        </Typography>
-        <div className={classes.rowRight}>
-          <Archer.ArcherElement
-            id='agent3'
-            relations={[
-              {
-                targetId: 'agent4',
-                targetAnchor: 'top',
-                sourceAnchor: 'bottom'
-              }
-            ]}
-          >
-            <Box className={classes.box}>
-              <Typography variant='subtitle1' className={classes.title}>
+        <div className={classes.head_analysis}>
+          <Typography variant='subtitle1' className={commonClasses.title}>
+            {t('pages/ai/reverse/intro/index:analysis')}
+          </Typography>
+        </div>
+
+        <ArcherElement
+          id='behavior'
+          relations={[
+            {
+              targetId: 'derive',
+              targetAnchor: 'top',
+              sourceAnchor: 'bottom'
+            }
+          ]}
+        >
+          <div className={classes.behavior}>
+            <CustomBox>
+              <Typography variant='subtitle1' className={commonClasses.title}>
                 {t('pages/ai/reverse/intro/index:determine_behavior')}
               </Typography>
-            </Box>
-          </Archer.ArcherElement>
-        </div>
-      </Box>
+            </CustomBox>
+          </div>
+        </ArcherElement>
 
-      <Box className={classes.boxWrapper2}>
-        <Typography variant='subtitle1' className={classes.title}>
-          {t('pages/ai/reverse/intro/index:exposure')}
-        </Typography>
-        <div className={classes.boxInner}>
-          <Archer.ArcherElement
-            id='agent5'
-            relations={[
-              {
-                targetId: 'function',
-                targetAnchor: 'bottom',
-                sourceAnchor: 'top'
-              }
-            ]}
-          >
-            <Box className={classes.box}>
-              <Typography variant='subtitle1' className={classes.title}>
-                {t('pages/ai/reverse/intro/index:apply_attack_vector')}
-              </Typography>
-            </Box>
-          </Archer.ArcherElement>
-          <Archer.ArcherElement
-            id='agent4'
-            relations={[
-              {
-                targetId: 'agent5',
-                targetAnchor: 'right',
-                sourceAnchor: 'left'
-              }
-            ]}
-          >
-            <Box className={classes.box}>
-              <Typography variant='subtitle1' className={classes.title}>
+        <div className={classes.head_exposure}>
+          <Typography variant='subtitle1' className={commonClasses.title}>
+            {t('pages/ai/reverse/intro/index:exposure')}
+          </Typography>
+        </div>
+
+        <ArcherElement
+          id='derive'
+          relations={[
+            {
+              targetId: 'apply',
+              targetAnchor: 'right',
+              sourceAnchor: 'left'
+            }
+          ]}
+        >
+          <div className={classes.derive}>
+            <CustomBox>
+              <Typography variant='subtitle1' className={commonClasses.title}>
                 {t('pages/ai/reverse/intro/index:derive_attack_vector')}
               </Typography>
-            </Box>
-          </Archer.ArcherElement>
-        </div>
-      </Box>
-    </Archer.ArcherContainer>
+            </CustomBox>
+          </div>
+        </ArcherElement>
+
+        <ArcherElement
+          id='apply'
+          relations={[
+            {
+              targetId: 'function',
+              targetAnchor: 'bottom',
+              sourceAnchor: 'top'
+            }
+          ]}
+        >
+          <div className={classes.apply}>
+            <CustomBox>
+              <Typography variant='subtitle1' className={commonClasses.title}>
+                {t('pages/ai/reverse/intro/index:apply_attack_vector')}
+              </Typography>
+            </CustomBox>
+          </div>
+        </ArcherElement>
+      </div>
+    </ArcherContainer>
   );
 };
