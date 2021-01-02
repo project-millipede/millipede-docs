@@ -11,11 +11,11 @@ export const useStyles = makeStyles(() =>
     grid: {
       display: 'grid',
       gridTemplateRows: '1fr 1fr 1fr',
-      gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr',
+      gridTemplateColumns: '0.5fr 1fr 0.5fr',
       gridTemplateAreas: `
-      '. . function_a . .'
-      '. . function_b . .'
-      '. . function_result . .'
+      '. function_a .'
+      '. function_b .'
+      '. function_result .'
       `,
       gridRowGap: '100px'
     },
