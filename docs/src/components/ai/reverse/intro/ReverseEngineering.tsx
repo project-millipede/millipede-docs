@@ -72,7 +72,7 @@ export const ReverseEngineering: FC = () => {
       <div className={classes.grid}>
         <div className={classes.head_access}>
           <Typography variant='subtitle1' className={commonClasses.title}>
-            {t('pages/ai/reverse/intro/index:access')}
+            {t('pages/ai/reverse/index:access')}
           </Typography>
         </div>
 
@@ -80,7 +80,7 @@ export const ReverseEngineering: FC = () => {
           <div className={classes.function}>
             <CustomBox>
               <Typography variant='subtitle1' className={commonClasses.title}>
-                {t('pages/ai/reverse/intro/index:function')}
+                {t('pages/ai/reverse/index:function')}
               </Typography>
             </CustomBox>
           </div>
@@ -104,7 +104,7 @@ export const ReverseEngineering: FC = () => {
           <div className={classes.instrument}>
             <CustomBox>
               <Typography variant='subtitle1' className={commonClasses.title}>
-                {t('pages/ai/reverse/intro/index:instrument_function')}
+                {t('pages/ai/reverse/index:instrument_function')}
               </Typography>
             </CustomBox>
           </div>
@@ -112,7 +112,7 @@ export const ReverseEngineering: FC = () => {
 
         <div className={classes.head_analysis}>
           <Typography variant='subtitle1' className={commonClasses.title}>
-            {t('pages/ai/reverse/intro/index:analysis')}
+            {t('pages/ai/reverse/index:analysis')}
           </Typography>
         </div>
 
@@ -129,7 +129,7 @@ export const ReverseEngineering: FC = () => {
           <div className={classes.behavior}>
             <CustomBox>
               <Typography variant='subtitle1' className={commonClasses.title}>
-                {t('pages/ai/reverse/intro/index:determine_behavior')}
+                {t('pages/ai/reverse/index:determine_behavior')}
               </Typography>
             </CustomBox>
           </div>
@@ -137,7 +137,7 @@ export const ReverseEngineering: FC = () => {
 
         <div className={classes.head_exposure}>
           <Typography variant='subtitle1' className={commonClasses.title}>
-            {t('pages/ai/reverse/intro/index:exposure')}
+            {t('pages/ai/reverse/index:exposure')}
           </Typography>
         </div>
 
@@ -154,7 +154,7 @@ export const ReverseEngineering: FC = () => {
           <div className={classes.derive}>
             <CustomBox>
               <Typography variant='subtitle1' className={commonClasses.title}>
-                {t('pages/ai/reverse/intro/index:derive_attack_vector')}
+                {t('pages/ai/reverse/index:derive_attack_vector')}
               </Typography>
             </CustomBox>
           </div>
@@ -173,7 +173,7 @@ export const ReverseEngineering: FC = () => {
           <div className={classes.apply}>
             <CustomBox>
               <Typography variant='subtitle1' className={commonClasses.title}>
-                {t('pages/ai/reverse/intro/index:apply_attack_vector')}
+                {t('pages/ai/reverse/index:apply_attack_vector')}
               </Typography>
             </CustomBox>
           </div>

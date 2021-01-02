@@ -27,7 +27,7 @@ module.exports = {
     '/pidp/approach/by-example': ['pages/pidp/approach/by-example/index'],
     '/pet/dataflow/comparison': ['pages/pet/dataflow/comparison/index'],
     '/ai/general': ['pages/ai/general/index'],
-    '/ai/reverse/intro': ['pages/ai/reverse/intro/index'],
+    '/ai/reverse': ['pages/ai/reverse/index'],
     '/ai/reverse/hooks': ['pages/ai/index']
   },
   loadLocaleFrom: (locale, namespace) =>

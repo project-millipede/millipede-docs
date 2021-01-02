@@ -43,10 +43,6 @@ export const pagesAI: Array<PageTypes.Page> = [
         icon: { ...defaultIcon, name: 'find_replace' },
         children: [
           {
-            pathname: 'ai/reverse/intro',
-            icon: { ...defaultIcon, name: 'slideshow' }
-          },
-          {
             pathname: 'ai/reverse/hooks',
             icon: { ...defaultIcon, name: 'functions' }
           }
@@ -62,17 +58,9 @@ export const pagesRethinkSecurity: Array<PageTypes.Page> = [
     icon: { ...defaultIcon, name: 'security' },
     children: [
       {
-        pathname: 'rethink-security/intro',
-        icon: { ...defaultIcon, name: 'slideshow' }
-      },
-      {
         pathname: 'rethink-security/attack-vectors',
         icon: { ...defaultIcon, name: 'bug_report' },
         children: [
-          {
-            pathname: 'rethink-security/attack-vectors/intro',
-            icon: { ...defaultIcon, name: 'slideshow' }
-          },
           {
             pathname: 'rethink-security/attack-vectors/comparison',
             icon: { ...defaultIcon, name: 'compare_arrows' }
@@ -88,10 +76,6 @@ export const pagesPIDP: Array<PageTypes.Page> = [
     pathname: 'pidp',
     icon: defaultIcon,
     children: [
-      {
-        pathname: 'pidp/intro',
-        icon: { ...defaultIcon, name: 'slideshow' }
-      },
       {
         pathname: 'pidp/approach',
         icon: { ...defaultIcon, name: 'filter_center_focus' },
