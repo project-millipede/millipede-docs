@@ -6,7 +6,7 @@
   "devDependencies": {
     "@huse/effect-ref": "^1.0.3",
     "@types/element-resize-detector": "^1.1.2",
-    "@types/lodash": "^4.14.166",
+    "@types/lodash": "^4.14.167",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "element-resize-detector": "^1.2.1",

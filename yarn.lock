@@ -140,7 +140,7 @@ __metadata:
     "@types/react": ^17.0.0
     "@types/react-dom": ^17.0.0
     clsx: ^1.1.1
-    next: 10.0.5-canary.6
+    next: 10.0.5-canary.8
     react: ^17.0.1
     react-dom: ^17.0.1
     typescript: ^4.1.3
@@ -162,7 +162,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@app/houx@workspace:packages/houx"
   dependencies:
-    "@types/node": ^14.14.17
+    "@types/node": ^14.14.19
     "@types/react": ^17.0.0
     "@types/react-dom": ^17.0.0
     react: ^17.0.1
@@ -182,7 +182,7 @@ __metadata:
   dependencies:
     "@types/react": ^17.0.0
     "@types/react-dom": ^17.0.0
-    next: 10.0.5-canary.6
+    next: 10.0.5-canary.8
     react: ^17.0.1
     react-dom: ^17.0.1
     typescript: ^4.1.3
@@ -206,14 +206,14 @@ __metadata:
     "@material-ui/core": 5.0.0-alpha.18
     "@material-ui/icons": 5.0.0-alpha.15
     "@material-ui/lab": 5.0.0-alpha.18
-    "@types/lodash": ^4.14.166
-    "@types/node": ^14.14.17
+    "@types/lodash": ^4.14.167
+    "@types/node": ^14.14.19
     "@types/react": ^17.0.0
     "@types/react-dom": ^17.0.0
     "@types/styled-components": ^5.1.7
     clsx: ^1.1.1
     lodash: ^4.17.20
-    next: 10.0.5-canary.6
+    next: 10.0.5-canary.8
     next-translate: 1.0.1
     react: ^17.0.1
     react-dom: ^17.0.1
@@ -285,7 +285,7 @@ __metadata:
   dependencies:
     "@huse/effect-ref": ^1.0.3
     "@types/element-resize-detector": ^1.1.2
-    "@types/lodash": ^4.14.166
+    "@types/lodash": ^4.14.167
     "@types/react": ^17.0.0
     "@types/react-dom": ^17.0.0
     element-resize-detector: ^1.2.1
@@ -1767,7 +1767,7 @@ __metadata:
     "@app/utils": "workspace:packages/utils"
     "@demonstrators-social/data": "workspace:packages/demonstrators/social/data"
     "@huse/effect-ref": ^1.0.3
-    "@types/lodash": ^4.14.166
+    "@types/lodash": ^4.14.167
     "@types/react": ^17.0.0
     "@types/react-dom": ^17.0.0
     immer: ^8.0.0
@@ -2701,39 +2701,40 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/bundle-analyzer@npm:10.0.5-canary.6":
-  version: 10.0.5-canary.6
-  resolution: "@next/bundle-analyzer@npm:10.0.5-canary.6"
+"@next/bundle-analyzer@npm:10.0.5-canary.8":
+  version: 10.0.5-canary.8
+  resolution: "@next/bundle-analyzer@npm:10.0.5-canary.8"
   dependencies:
     webpack-bundle-analyzer: 4.3.0
-  checksum: 6bc27260559cfa8e61bcb6e952fd42745a0bbd0f58aefdc821fd539019682f5ea196c39d2a4bbec40cc88364ec82b066704088b1e4603c43b85c00563972512d
+  checksum: 53559e7e9d0883d51cedd074aeb409ebef6e118544d92f9b0a75bcb1a512b0875b4779cceebe7f3e31cd40ee38cb7d71432cbbc05898304476cc70fb49abd6b7
   languageName: node
   linkType: hard
 
-"@next/env@npm:10.0.5-canary.6":
-  version: 10.0.5-canary.6
-  resolution: "@next/env@npm:10.0.5-canary.6"
-  checksum: b2cd991f51974c939630f275311a86ae20bd42e0854ea8099a49ed7dffee05b6cef80fdddce0a4b9179420301c8e96ccf2d4e414d29982f4b6d0873a26accf22
+"@next/env@npm:10.0.5-canary.8":
+  version: 10.0.5-canary.8
+  resolution: "@next/env@npm:10.0.5-canary.8"
+  checksum: 33d29b396d5a7f1244116d6a78afc176261b9dbab3e0643dc0ed2e676e6776b719148addf03d69b623a02891bf5418aa6686d93f60127ce75321b239ed208106
   languageName: node
   linkType: hard
 
-"@next/polyfill-module@npm:10.0.5-canary.6":
-  version: 10.0.5-canary.6
-  resolution: "@next/polyfill-module@npm:10.0.5-canary.6"
-  checksum: 1aff65f64ca4643ec79717b18a1ef670331330d0978c7820750cc0ca9a0b9c2071a6040948ca90dcb358ddabff4e31e8fb272102b19dc1159f54dab6f88daca0
+"@next/polyfill-module@npm:10.0.5-canary.8":
+  version: 10.0.5-canary.8
+  resolution: "@next/polyfill-module@npm:10.0.5-canary.8"
+  checksum: d5fef723ea42546452fb74339d2b780848601f93995e5f7fae636a7df2767992e5beb9bae8dd578ed5b65918fecbec16bfefbf1cc04c5c859b9f0e3b9134f3bc
   languageName: node
   linkType: hard
 
-"@next/react-dev-overlay@npm:10.0.5-canary.6":
-  version: 10.0.5-canary.6
-  resolution: "@next/react-dev-overlay@npm:10.0.5-canary.6"
+"@next/react-dev-overlay@npm:10.0.5-canary.8":
+  version: 10.0.5-canary.8
+  resolution: "@next/react-dev-overlay@npm:10.0.5-canary.8"
   dependencies:
     "@babel/code-frame": 7.12.11
-    ally.js: 1.4.1
     anser: 1.4.9
     chalk: 4.0.0
     classnames: 2.2.6
+    css.escape: 1.5.1
     data-uri-to-buffer: 3.0.1
+    platform: 1.3.6
     shell-quote: 1.7.2
     source-map: 0.8.0-beta.0
     stacktrace-parser: 0.1.10
@@ -2742,17 +2743,17 @@ __metadata:
     react: ^16.9.0 || ^17
     react-dom: ^16.9.0 || ^17
     webpack: ^4 || ^5
-  checksum: 22cfa1e6d6368d7fe8a611ff6e39ccd4b2e92a42acdbd481bcce41eb75f34ba34dae4c0aebff823e4040af9f488c1235c3402447497acf20a0f23a976f574d0e
+  checksum: da568d9746f94cf143fde75eb812e8ab0515a46fc40da0396dbd60bb1ea504bc1da5304dae45968e51c338f4941ea2a04bcf384c38ed1117f2c300030856b679
   languageName: node
   linkType: hard
 
-"@next/react-refresh-utils@npm:10.0.5-canary.6":
-  version: 10.0.5-canary.6
-  resolution: "@next/react-refresh-utils@npm:10.0.5-canary.6"
+"@next/react-refresh-utils@npm:10.0.5-canary.8":
+  version: 10.0.5-canary.8
+  resolution: "@next/react-refresh-utils@npm:10.0.5-canary.8"
   peerDependencies:
     react-refresh: 0.8.3
     webpack: ^4 || ^5
-  checksum: 4cf2c1e553f8ec3b578fb8781530d5932f484107a9e6949c170ef011585898d569e912f190f9177f1a7dd15158af0080a027d3a5a24eaad28ce4e7c989bcd3fa
+  checksum: 5a09c9846281e5d0d2ecf0f2c737e87befba1f9208c6023ccf678b2b4cb4a3b48ae46a30b060b47e551d70f6a578c4599f7962728477c86ea590962e0b3eec54
   languageName: node
   linkType: hard
 
@@ -2816,7 +2817,6 @@ __metadata:
   resolution: "@page/layout@workspace:packages/page/layout"
   dependencies:
     "@page/components": "workspace:packages/page/components"
-    react-div-100vh: ^0.5.6
   languageName: unknown
   linkType: soft
 
@@ -3171,10 +3171,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4.14.166":
-  version: 4.14.166
-  resolution: "@types/lodash@npm:4.14.166"
-  checksum: e8ce1ef9980f494d1da0bd3ac16ba0046b5c1097ff5c9446eb1bd167871d2e8edd2e8e8344a1dbb0134a1c12c29591cf8f950e083adb7e237d5cfeac228abb7d
+"@types/lodash@npm:^4.14.167":
+  version: 4.14.167
+  resolution: "@types/lodash@npm:4.14.167"
+  checksum: 40778f83a86392625b3d52c15f59171a0f6a35436128b8fb1e37f89162f7950dc98570f27bc99ce1e2e04084e64da41cb45146d091d5181e12c6733bcf16fac6
   languageName: node
   linkType: hard
 
@@ -3187,10 +3187,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^14.14.17":
+"@types/node@npm:*":
   version: 14.14.17
   resolution: "@types/node@npm:14.14.17"
   checksum: 2bb32c683d8446128cf3240b4af6cc884c6ee006a845d1901becadc46255d1263bf265abde5ccb37a09d9a318fc3964d07afc941d52544f2d7f249dbb28d9420
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^14.14.19":
+  version: 14.14.19
+  resolution: "@types/node@npm:14.14.19"
+  checksum: 218ff4a93978cf41f4dd3d6aea7555d119873b50905889b1a3f14737f1e135a688672fa1f8e02ed856922fb828703bb064f7733f7e6998173c4714a7a3ec4c4c
   languageName: node
   linkType: hard
 
@@ -3829,16 +3836,6 @@ __metadata:
     json-schema-traverse: ^0.4.1
     uri-js: ^4.2.2
   checksum: 19a8f3b0a06001eb68e6268f4f9f04424b32baadd5df6ba8292cd473e22e5f4019ed9ab17c3e3510394178ed8bef9b42ad0bdb5c675d65f042421a774780ce1a
-  languageName: node
-  linkType: hard
-
-"ally.js@npm:1.4.1":
-  version: 1.4.1
-  resolution: "ally.js@npm:1.4.1"
-  dependencies:
-    css.escape: ^1.5.0
-    platform: 1.3.3
-  checksum: bf1cda2f029033dd683b7a84199e376d82817d8c5ce70646d652ef5bb3268ffd839d6d85c352c1a7361cfc49781a84b5ca59a8b55c741484ae9c3027c9c073bc
   languageName: node
   linkType: hard
 
@@ -5302,7 +5299,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css.escape@npm:^1.5.0":
+"css.escape@npm:1.5.1":
   version: 1.5.1
   resolution: "css.escape@npm:1.5.1"
   checksum: 44fe5e93fee46fe60dbd0cdd078b14ef75697ee93519a7157f976b655463dd66eba598b0df16c16a897ac884c97845d2a3819cb8d370cbf91bc59bb557ebe826
@@ -6358,9 +6355,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^7.16.0":
-  version: 7.16.0
-  resolution: "eslint@npm:7.16.0"
+"eslint@npm:^7.17.0":
+  version: 7.17.0
+  resolution: "eslint@npm:7.17.0"
   dependencies:
     "@babel/code-frame": ^7.0.0
     "@eslint/eslintrc": ^0.2.2
@@ -6401,7 +6398,7 @@ __metadata:
     v8-compile-cache: ^2.0.3
   bin:
     eslint: bin/eslint.js
-  checksum: facdebbce95f7812b026cae955f22863e0850584c8b4ab6daefa555f48b38a8b3d62c1857c0eeebe52218c49345853f516209b300c6747ea89d6f88ef495a56d
+  checksum: 12b09a972eb0b81fabf9c1b38b3e9ada0cc051a22ee5022e31852e7babde6fe02a0135be3027451ee02c9ff4a6f738b55205d2953f98eb16a43350ad73070b27
   languageName: node
   linkType: hard
 
@@ -9373,7 +9370,7 @@ fsevents@~2.1.2:
     "@material-ui/icons": 5.0.0-alpha.15
     "@material-ui/lab": 5.0.0-alpha.18
     "@mdx-js/react": ^1.6.22
-    "@next/bundle-analyzer": 10.0.5-canary.6
+    "@next/bundle-analyzer": 10.0.5-canary.8
     "@page/landing": "workspace:packages/page/landing"
     "@rest-hooks/normalizr": ^5.0.6
     "@types/draft-js": ^0.10.44
@@ -9381,8 +9378,8 @@ fsevents@~2.1.2:
     "@types/eslint": ^7.2.6
     "@types/faker": ^5.1.5
     "@types/jest": ^26.0.19
-    "@types/lodash": ^4.14.166
-    "@types/node": ^14.14.17
+    "@types/lodash": ^4.14.167
+    "@types/node": ^14.14.19
     "@types/react": ^17.0.0
     "@types/react-dom": ^17.0.0
     "@types/requestidlecallback": ^0.3.1
@@ -9400,7 +9397,7 @@ fsevents@~2.1.2:
     date-fns: ^2.16.1
     draft-js: ^0.11.7
     element-resize-detector: ^1.2.1
-    eslint: ^7.16.0
+    eslint: ^7.17.0
     eslint-config-prettier: ^7.1.0
     eslint-plugin-import: ^2.22.1
     eslint-plugin-mdx: ^1.8.2
@@ -9416,7 +9413,7 @@ fsevents@~2.1.2:
     jss: ^10.5.0
     lodash: ^4.17.20
     mdast-util-toc: ^5.1.0
-    next: 10.0.5-canary.6
+    next: 10.0.5-canary.8
     next-google-fonts: ^1.2.1
     next-merge-props: ^0.4.0
     next-translate: 1.0.1
@@ -9700,17 +9697,17 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"next@npm:10.0.5-canary.6":
-  version: 10.0.5-canary.6
-  resolution: "next@npm:10.0.5-canary.6"
+"next@npm:10.0.5-canary.8":
+  version: 10.0.5-canary.8
+  resolution: "next@npm:10.0.5-canary.8"
   dependencies:
     "@ampproject/toolbox-optimizer": 2.7.1-alpha.0
     "@babel/runtime": 7.12.5
     "@hapi/accept": 5.0.1
-    "@next/env": 10.0.5-canary.6
-    "@next/polyfill-module": 10.0.5-canary.6
-    "@next/react-dev-overlay": 10.0.5-canary.6
-    "@next/react-refresh-utils": 10.0.5-canary.6
+    "@next/env": 10.0.5-canary.8
+    "@next/polyfill-module": 10.0.5-canary.8
+    "@next/react-dev-overlay": 10.0.5-canary.8
+    "@next/react-refresh-utils": 10.0.5-canary.8
     "@opentelemetry/api": 0.14.0
     ast-types: 0.13.2
     babel-plugin-transform-define: 2.0.0
@@ -9759,7 +9756,7 @@ fsevents@~2.1.2:
       optional: true
   bin:
     next: dist/bin/next
-  checksum: 73b71a1fb48a38f2fd427829a7dd84ac9ed0b1a74bb5a554e3e208b199e1da8d400104ec875b05ba82332b5bdb1bbf6ea9ed0a6ab8cb83490c90e610df4fb16c
+  checksum: e197b1707dc1ca118980841930906ee9e455c6446e4c807b969d067da1b3c149f5dd47842163b93ef008cc61e3a562ac381665f2e2d15848f4ba47ea92876fbb
   languageName: node
   linkType: hard
 
@@ -10427,10 +10424,10 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"platform@npm:1.3.3":
-  version: 1.3.3
-  resolution: "platform@npm:1.3.3"
-  checksum: 5687db874734b997e7bc75a7a97ad297cc36cb3b63fe8adcaffceb542410fd1ebc144f1ede2348378f481dac73aa9e4ac7bff958c9bae3ffdd6b23c3e186e1b5
+"platform@npm:1.3.6":
+  version: 1.3.6
+  resolution: "platform@npm:1.3.6"
+  checksum: d4d10d5a55476c6d369b03e02b31df50a4e7f1c565efabe707379b8a119709fb2a66dec090ab7fe520a30b767fe3791e3c4a5aba985918e51a17df45e469189f
   languageName: node
   linkType: hard
 
@@ -10848,15 +10845,6 @@ fsevents@~2.1.2:
     react: ">= 0.14.0 < 18.0.0"
     react-dom: ">= 0.14.0 < 18.0.0"
   checksum: 1e271e21823ebe23f52e97cf5e3a2f7a55cf4b1a94f0ad7cc866a988ce8ecaa62302980b8405c22bb2c2dc40934a801bbe7688d8b53b7e80ac772a767f3d0174
-  languageName: node
-  linkType: hard
-
-"react-div-100vh@npm:^0.5.6":
-  version: 0.5.6
-  resolution: "react-div-100vh@npm:0.5.6"
-  peerDependencies:
-    react: ">=16.8.0"
-  checksum: 9b30d309de8e42edc8f16a60d7f40c127e217cdf944a67fc56c343eee525f332f7cfb073ea57a00425b5ad77a5efaec39a89fd52c6bcb5185704897ab923e813
   languageName: node
   linkType: hard
 
