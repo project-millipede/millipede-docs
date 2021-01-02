@@ -4,7 +4,8 @@ import { isArray } from 'lodash';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
-import { FunctionBeahvior, HookedFunctionBeahvior } from './Diagram';
+import { FunctionBeahvior } from './components/FunctionBeahvior';
+import { FunctionBeahviorHook } from './components/FunctionBeahviorHook';
 
 const templates: Array<ContentTypes.Content> = [
   {
@@ -15,7 +16,7 @@ const templates: Array<ContentTypes.Content> = [
   {
     step: 1,
     size: 12,
-    image: <HookedFunctionBeahvior />
+    image: <FunctionBeahviorHook />
   }
 ];
 
