@@ -2,6 +2,7 @@ import { RenderUtils } from '@app/render-utils';
 import { PageTypes } from '@app/types';
 import { createStyles, makeStyles, Typography } from '@material-ui/core';
 import { Components } from '@page/layout';
+import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import React, { FC, ReactNode } from 'react';
 import { isMobile } from 'react-device-detect';
@@ -25,7 +26,9 @@ export const useStyles = makeStyles(() =>
   createStyles({
     headerRow: {
       display: 'flex',
-      flexDirection: 'row',
+      flexDirection: 'row'
+    },
+    headerRowMobile: {
       marginTop: '56px'
     }
   })
@@ -35,7 +38,11 @@ export const h1 = ({ disableShare, meta }: MDXRenderProps) => {
   return ({ children }: MDXProps) => {
     const classes = useStyles();
     return (
-      <div className={classes.headerRow}>
+      <div
+        className={clsx(classes.headerRow, {
+          [classes.headerRowMobile]: isMobile
+        })}
+      >
         <Typography variant='h1'>{children}</Typography>
         {!disableShare && RenderUtils.isBrowser() ? <Share {...meta} /> : null}
       </div>

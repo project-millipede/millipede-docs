@@ -100,12 +100,14 @@ export const MdxDocs: FC<MarkdownDocsProps> = ({ raw, meta, children }) => {
       <AppHead meta={restMeta} />
       {!disableToc ? <AppTableOfContents content={raw} /> : null}
       <AppContent disableToc={disableToc}>
-        <div className={classes.root}>
-          <AppContentHeader />
-          {/* <AppContentSubHeader timeToRead={timeToRead} /> */}
-          {children}
-          <AppContentFooter />
-        </div>
+        {children && (
+          <div className={classes.root}>
+            <AppContentHeader />
+            {/* <AppContentSubHeader timeToRead={timeToRead} /> */}
+            {children}
+            <AppContentFooter />
+          </div>
+        )}
       </AppContent>
     </>
   );
