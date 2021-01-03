@@ -91,7 +91,6 @@ const Group: FC<GroupProps> = ({ title, description, members }) => {
                       <Grid container>
                         {github && (
                           <IconButton
-                            aria-label='github'
                             component='a'
                             href={`https://github.com/${github}`}
                             className={classes.icon}
@@ -101,7 +100,6 @@ const Group: FC<GroupProps> = ({ title, description, members }) => {
                         )}
                         {twitter && (
                           <IconButton
-                            aria-label='twitter'
                             component='a'
                             href={`https://twitter.com/${twitter}`}
                             className={classes.icon}

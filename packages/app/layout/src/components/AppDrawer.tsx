@@ -7,15 +7,14 @@ import {
   makeStyles,
   SwipeableDrawer,
   Theme,
-  Typography,
-  useTheme,
+  Typography
 } from '@material-ui/core';
-import { ChevronLeft, ChevronRight } from '@material-ui/icons';
+import { ChevronLeft } from '@material-ui/icons';
 import clsx from 'clsx';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import React, { FC } from 'react';
-import { isMobile } from 'react-device-detect';
+import { isIOS, isMobile } from 'react-device-detect';
 import { useRecoilValue } from 'recoil';
 
 import { navigationState } from '../recoil/features/pages/reducer';
@@ -49,30 +48,17 @@ const useDrawerStyles = makeStyles((theme: Theme) =>
       }
     },
     toolbar: {
+      ...theme.mixins.toolbar,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-end',
-      // at original
-      // padding: theme.spacing(0, 1),
-      padding: '0 8px',
-      ...theme.mixins.toolbar
-    },
-    toolbarTitle: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      padding: '0 8px',
-      ...theme.mixins.toolbar
+      padding: theme.spacing(0, 1)
     },
     paper: {
       width: drawerWidth
     }
   })
 );
-
-// disalbe iOS detection for now
-// const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
-
 interface AppDrawerProps {
   isDrawerExpanded: boolean;
   handleDrawerOpen: () => void;
@@ -85,8 +71,6 @@ export const AppDrawer: FC<AppDrawerProps> = ({
   handleDrawerClose
 }) => {
   const classes = useDrawerStyles();
-
-  const theme = useTheme();
 
   const { t } = useTranslation();
 
@@ -113,7 +97,7 @@ export const AppDrawer: FC<AppDrawerProps> = ({
         classes={{
           paper: classes.paper
         }}
-        // disableBackdropTransition={!iOS}
+        disableBackdropTransition={!isIOS}
         open={isDrawerExpanded}
         onClose={handleDrawerClose}
         onOpen={handleDrawerOpen}
@@ -130,13 +114,13 @@ export const AppDrawer: FC<AppDrawerProps> = ({
             }
             onClick={handleDrawerClose}
           >
-            <Typography variant='h6' className={classes.toolbarTitle}>
+            <Typography variant='h6'>
               {t('common:application-title')}
             </Typography>
           </Link>
 
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRight /> : <ChevronLeft />}
+            <ChevronLeft />
           </IconButton>
         </div>
         <Divider />
@@ -170,13 +154,13 @@ export const AppDrawer: FC<AppDrawerProps> = ({
             }
             onClick={handleDrawerClose}
           >
-            <Typography variant='h6' className={classes.toolbarTitle}>
+            <Typography variant='h6'>
               {t('common:application-title')}
             </Typography>
           </Link>
 
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRight /> : <ChevronLeft />}
+            <ChevronLeft />
           </IconButton>
         </div>
         <Divider />
