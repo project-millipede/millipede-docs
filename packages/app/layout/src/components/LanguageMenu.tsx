@@ -32,40 +32,26 @@ export const LanguageMenu: FC = () => {
   const handleLanguageMenuClose = () => {
     setLanguageMenu(null);
   };
-
   return (
     <>
       <Tooltip title={`${t('common:change-language')}`} enterDelay={300}>
-        <Button
-          color='inherit'
-          aria-owns={languageMenu ? 'language-menu' : undefined}
-          aria-haspopup='true'
-          aria-label={`${t('common:change-language')}`}
-          onClick={handleLanguageIconClick}
-          data-ga-event-category='AppBar'
-          data-ga-event-action='language'
-        >
+        <Button color='inherit' onClick={handleLanguageIconClick}>
           <LanguageIcon />
           <LanguageLabel label={locale} />
         </Button>
       </Tooltip>
       <Menu
-        id='language-menu'
         anchorEl={languageMenu}
         open={!!languageMenu}
         onClose={handleLanguageMenuClose}
       >
         {LANGUAGES_LABEL.map(language => (
           <MenuItem
-            component='a'
-            data-no-link='true'
             key={language.code}
             selected={language.code === locale}
             onClick={_e => {
               handleSelect(language.code);
             }}
-            lang={language.code}
-            hrefLang={language.code}
           >
             {language.text}
           </MenuItem>

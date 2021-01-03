@@ -34,9 +34,6 @@ export const EditPage: FC<EditPageProps> = ({ markdownLocation }) => {
       }
       target='_blank'
       rel='noopener'
-      data-ga-event-category={locale === 'de' ? undefined : 'l10n'}
-      data-ga-event-action={locale === 'de' ? undefined : 'edit-button'}
-      data-ga-event-label={locale === 'de' ? undefined : locale}
     >
       {t('common:editContent')}
     </Button>

@@ -27,10 +27,7 @@ export const Breadcrumbs: FC = () => {
   const [tailBreadcrumb] = breadcrumbs.slice(-1);
 
   return (
-    <MaterialBreadcrumbs
-      separator={<NavigateNextIcon fontSize='small' />}
-      aria-label='Breadcrumb'
-    >
+    <MaterialBreadcrumbs separator={<NavigateNextIcon fontSize='small' />}>
       {headBreadcrumbs.map((breadcrumb, index) => {
         const label = t(`common:pages.${breadcrumb.link}`);
         return (

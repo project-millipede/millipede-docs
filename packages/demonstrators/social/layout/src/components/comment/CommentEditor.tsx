@@ -1,6 +1,12 @@
 import { RenderUtils } from '@app/render-utils';
 import { useEffectRef } from '@huse/effect-ref';
-import { Button, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import {
+  Button,
+  createStyles,
+  makeStyles,
+  Theme,
+  Typography
+} from '@material-ui/core';
 import { ContentState, Editor, EditorState } from 'draft-js';
 import elementResizeDetectorMaker from 'element-resize-detector';
 import useTranslation from 'next-translate/useTranslation';
@@ -141,7 +147,6 @@ export const CommentEditor: FC<CommentEditorProps> = ({
         variant='text'
         color='primary'
         onClick={handlePostComment}
-        aria-label={postButtonTitle}
         id={`timeline-${timelineId}-content-post`}
       >
         {postButtonTitle}

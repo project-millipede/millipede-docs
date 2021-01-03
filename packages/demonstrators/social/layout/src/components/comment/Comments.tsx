@@ -9,7 +9,7 @@ import {
   IconButton,
   makeStyles,
   Theme,
-  Typography,
+  Typography
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
@@ -114,8 +114,6 @@ export const Comments: FC<CommentsProps> = ({
             [classes.expandOpen]: expanded
           })}
           onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label='show more'
         >
           <ExpandMoreIcon />
         </IconButton>

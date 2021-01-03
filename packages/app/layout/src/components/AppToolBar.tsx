@@ -1,4 +1,10 @@
-import { createStyles, IconButton, makeStyles, Toolbar, Tooltip, Typography } from '@material-ui/core';
+import {
+  createStyles,
+  IconButton,
+  makeStyles,
+  Toolbar,
+  Tooltip
+} from '@material-ui/core';
 import { GitHub, Menu } from '@material-ui/icons';
 import clsx from 'clsx';
 import useTranslation from 'next-translate/useTranslation';
@@ -39,32 +45,18 @@ export const AppToolBar: FC<AppToolBarProps> = ({
 
   const { t } = useTranslation();
 
-  // const {
-  //   state: { navigation: { pages } } = {
-  //     navigation: {
-  //       pages: []
-  //     }
-  //   } as any
-  // }: { state: LayoutState } = useHoux();
-
   return (
     <Toolbar>
-      {/* {pages && pages.length > 0 ? ( */}
       <IconButton
-        color='inherit'
-        aria-label={t('common:openDrawer')}
-        onClick={handleDrawerOpen}
         edge='start'
+        color='inherit'
+        onClick={handleDrawerOpen}
         className={clsx(drawerClasses.menuButton, {
           [drawerClasses.hide]: isDrawerExpanded
         })}
       >
         <Menu />
       </IconButton>
-      {/* ) : null} */}
-      <Typography variant='h6' noWrap>
-        {t('common:application-title')}
-      </Typography>
 
       <div className={customStyles.grow} />
 
@@ -76,9 +68,6 @@ export const AppToolBar: FC<AppToolBarProps> = ({
           component='a'
           color='inherit'
           href='https://github.com/project-millipede/millipede-docs'
-          aria-label={t('common:github')}
-          data-ga-event-category='AppBar'
-          data-ga-event-action='github'
         >
           <GitHub />
         </IconButton>
