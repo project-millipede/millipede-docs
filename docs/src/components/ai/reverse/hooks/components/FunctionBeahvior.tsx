@@ -1,13 +1,14 @@
 import { Archer } from '@app/components';
-import { createStyles, makeStyles } from '@material-ui/core';
+import { createStyles, makeStyles, Typography } from '@material-ui/core';
 import React, { FC } from 'react';
-
-import { NoteText } from '../text';
 
 const { ArcherContainer, ArcherElement, CustomBox } = Archer;
 
 export const useStyles = makeStyles(() =>
   createStyles({
+    code: {
+      whiteSpace: 'pre-wrap'
+    },
     grid: {
       display: 'grid',
       gridTemplateRows: '1fr 1fr 1fr',
@@ -31,17 +32,17 @@ export const useStyles = makeStyles(() =>
   })
 );
 
-const functionA = `public int a(){
+const functionA = `public int a() {
     int x = b();
     ...
 }`;
 
-const functionB = `public int b(){
+const functionB = `public int b() {
     ...
     return c;
 }`;
 
-const functionResult = `public int a(){
+const functionResult = `public int a() {
     int x = c;
     ...
 }`;
@@ -64,7 +65,9 @@ export const FunctionBeahvior: FC = () => {
         >
           <div className={classes.function_a}>
             <CustomBox>
-              <NoteText variant={'body2'}>{functionA}</NoteText>
+              <Typography className={classes.code} variant={'body2'}>
+                {functionA}
+              </Typography>
             </CustomBox>
           </div>
         </ArcherElement>
@@ -80,7 +83,9 @@ export const FunctionBeahvior: FC = () => {
         >
           <div className={classes.function_b}>
             <CustomBox>
-              <NoteText variant={'body2'}>{functionB}</NoteText>
+              <Typography className={classes.code} variant={'body2'}>
+                {functionB}
+              </Typography>
             </CustomBox>
           </div>
         </ArcherElement>
@@ -88,7 +93,9 @@ export const FunctionBeahvior: FC = () => {
         <ArcherElement id='function_result'>
           <div className={classes.function_result}>
             <CustomBox>
-              <NoteText variant={'body2'}>{functionResult}</NoteText>
+              <Typography className={classes.code} variant={'body2'}>
+                {functionResult}
+              </Typography>
             </CustomBox>
           </div>
         </ArcherElement>

@@ -1,13 +1,14 @@
 import { Archer } from '@app/components';
-import { createStyles, makeStyles } from '@material-ui/core';
+import { createStyles, makeStyles, Typography } from '@material-ui/core';
 import React, { FC } from 'react';
-
-import { NoteText } from '../text';
 
 const { ArcherContainer, ArcherElement, CustomBox } = Archer;
 
 export const useStyles = makeStyles(() =>
   createStyles({
+    code: {
+      whiteSpace: 'pre-wrap'
+    },
     grid: {
       display: 'grid',
       gridTemplateRows: '1fr 1fr 1fr',
@@ -34,22 +35,22 @@ export const useStyles = makeStyles(() =>
   })
 );
 
-const functionA = `public int a(){
+const functionA = `public int a() {
     int x = b();
     ...
 }`;
 
-const functionB = `public int b(){
+const functionB = `public int b() {
     ...
     return c;
 }`;
 
-const functionHook = `public int hook_b(){
+const functionHook = `public int hook_b() {
     ...
     return d;
 }`;
 
-const functionHookResult = `public int a(){
+const functionHookResult = `public int a() {
     int x = d;
     ...
 }`;
@@ -71,7 +72,9 @@ export const FunctionBeahviorHook: FC = () => {
         >
           <div className={classes.function_a}>
             <CustomBox>
-              <NoteText variant={'body2'}>{functionA}</NoteText>
+              <Typography className={classes.code} variant={'body2'}>
+                {functionA}
+              </Typography>
             </CustomBox>
           </div>
         </ArcherElement>
@@ -87,7 +90,9 @@ export const FunctionBeahviorHook: FC = () => {
         >
           <div className={classes.function_b}>
             <CustomBox bgcolor={'#F44336'}>
-              <NoteText variant={'body2'}>{functionB}</NoteText>
+              <Typography className={classes.code} variant={'body2'}>
+                {functionB}
+              </Typography>
             </CustomBox>
           </div>
         </ArcherElement>
@@ -110,7 +115,9 @@ export const FunctionBeahviorHook: FC = () => {
         >
           <div className={classes.function_hook}>
             <CustomBox bgcolor='#4CAF50'>
-              <NoteText variant={'body2'}>{functionHook}</NoteText>
+              <Typography className={classes.code} variant={'body2'}>
+                {functionHook}
+              </Typography>
             </CustomBox>
           </div>
         </ArcherElement>
@@ -118,7 +125,9 @@ export const FunctionBeahviorHook: FC = () => {
         <ArcherElement id='function_result'>
           <div className={classes.function_result}>
             <CustomBox>
-              <NoteText variant={'body2'}>{functionHookResult}</NoteText>
+              <Typography className={classes.code} variant={'body2'}>
+                {functionHookResult}
+              </Typography>
             </CustomBox>
           </div>
         </ArcherElement>
