@@ -2,14 +2,12 @@ import { RenderUtils } from '@app/render-utils';
 import { PageTypes } from '@app/types';
 import { createStyles, makeStyles, Typography } from '@material-ui/core';
 import { Components } from '@page/layout';
-import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import React, { FC, ReactNode } from 'react';
 import { isMobile } from 'react-device-detect';
 
-const Share = dynamic(
-  () => import('@page/components').then(module => module.Share),
-  { ssr: false }
+const Share = dynamic(() =>
+  import('@page/components').then(module => module.Share)
 );
 
 interface MDXProps {
@@ -27,9 +25,6 @@ export const useStyles = makeStyles(() =>
     headerRow: {
       display: 'flex',
       flexDirection: 'row'
-    },
-    headerRowMobile: {
-      marginTop: '56px'
     }
   })
 );
@@ -38,11 +33,7 @@ export const h1 = ({ disableShare, meta }: MDXRenderProps) => {
   return ({ children }: MDXProps) => {
     const classes = useStyles();
     return (
-      <div
-        className={clsx(classes.headerRow, {
-          [classes.headerRowMobile]: isMobile
-        })}
-      >
+      <div className={classes.headerRow}>
         <Typography variant='h1'>{children}</Typography>
         {!disableShare && RenderUtils.isBrowser() ? <Share {...meta} /> : null}
       </div>
