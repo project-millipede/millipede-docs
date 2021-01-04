@@ -140,7 +140,7 @@ __metadata:
     "@types/react": ^17.0.0
     "@types/react-dom": ^17.0.0
     clsx: ^1.1.1
-    next: 10.0.5-canary.8
+    next: 10.0.5-canary.9
     react: ^17.0.1
     react-dom: ^17.0.1
     typescript: ^4.1.3
@@ -182,7 +182,7 @@ __metadata:
   dependencies:
     "@types/react": ^17.0.0
     "@types/react-dom": ^17.0.0
-    next: 10.0.5-canary.8
+    next: 10.0.5-canary.9
     react: ^17.0.1
     react-dom: ^17.0.1
     typescript: ^4.1.3
@@ -213,7 +213,7 @@ __metadata:
     "@types/styled-components": ^5.1.7
     clsx: ^1.1.1
     lodash: ^4.17.20
-    next: 10.0.5-canary.8
+    next: 10.0.5-canary.9
     next-translate: 1.0.1
     react: ^17.0.1
     react-dom: ^17.0.1
@@ -2701,32 +2701,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/bundle-analyzer@npm:10.0.5-canary.8":
-  version: 10.0.5-canary.8
-  resolution: "@next/bundle-analyzer@npm:10.0.5-canary.8"
+"@next/bundle-analyzer@npm:10.0.5-canary.9":
+  version: 10.0.5-canary.9
+  resolution: "@next/bundle-analyzer@npm:10.0.5-canary.9"
   dependencies:
     webpack-bundle-analyzer: 4.3.0
-  checksum: 53559e7e9d0883d51cedd074aeb409ebef6e118544d92f9b0a75bcb1a512b0875b4779cceebe7f3e31cd40ee38cb7d71432cbbc05898304476cc70fb49abd6b7
+  checksum: 892bcac83248f7c077d76ffc1cd72c38691b5f89a1a3d6cb8d1a352ed1cde33c98b462dcb557cb3c84195ddc355d105921f3b1448dbcb9591721af4faeb4811a
   languageName: node
   linkType: hard
 
-"@next/env@npm:10.0.5-canary.8":
-  version: 10.0.5-canary.8
-  resolution: "@next/env@npm:10.0.5-canary.8"
-  checksum: 33d29b396d5a7f1244116d6a78afc176261b9dbab3e0643dc0ed2e676e6776b719148addf03d69b623a02891bf5418aa6686d93f60127ce75321b239ed208106
+"@next/env@npm:10.0.5-canary.9":
+  version: 10.0.5-canary.9
+  resolution: "@next/env@npm:10.0.5-canary.9"
+  checksum: c1d64c1055be1b962981b88905c7d8e9487610c6200773bf5631713d589b54dced516969557cd71846096d467e8e6f5395fd1ee3c57d4dfde53c581247687a09
   languageName: node
   linkType: hard
 
-"@next/polyfill-module@npm:10.0.5-canary.8":
-  version: 10.0.5-canary.8
-  resolution: "@next/polyfill-module@npm:10.0.5-canary.8"
-  checksum: d5fef723ea42546452fb74339d2b780848601f93995e5f7fae636a7df2767992e5beb9bae8dd578ed5b65918fecbec16bfefbf1cc04c5c859b9f0e3b9134f3bc
+"@next/polyfill-module@npm:10.0.5-canary.9":
+  version: 10.0.5-canary.9
+  resolution: "@next/polyfill-module@npm:10.0.5-canary.9"
+  checksum: 8adc9af1852c3b00d75621974748777028a49c08a2a306a860b596652f35dbeb007238a46108f795003b112cae16a979d2be0431c7d354e7b4f9ff4ea63522e6
   languageName: node
   linkType: hard
 
-"@next/react-dev-overlay@npm:10.0.5-canary.8":
-  version: 10.0.5-canary.8
-  resolution: "@next/react-dev-overlay@npm:10.0.5-canary.8"
+"@next/react-dev-overlay@npm:10.0.5-canary.9":
+  version: 10.0.5-canary.9
+  resolution: "@next/react-dev-overlay@npm:10.0.5-canary.9"
   dependencies:
     "@babel/code-frame": 7.12.11
     anser: 1.4.9
@@ -2743,17 +2743,17 @@ __metadata:
     react: ^16.9.0 || ^17
     react-dom: ^16.9.0 || ^17
     webpack: ^4 || ^5
-  checksum: da568d9746f94cf143fde75eb812e8ab0515a46fc40da0396dbd60bb1ea504bc1da5304dae45968e51c338f4941ea2a04bcf384c38ed1117f2c300030856b679
+  checksum: e214a39b8e91392036b08080b9bc5dee017cf6473c4cec5cdca18a75639308552b1d96ac227e8366edd3714737d7dd70b2e63f83f49a2e76fdc4b314d7967e2b
   languageName: node
   linkType: hard
 
-"@next/react-refresh-utils@npm:10.0.5-canary.8":
-  version: 10.0.5-canary.8
-  resolution: "@next/react-refresh-utils@npm:10.0.5-canary.8"
+"@next/react-refresh-utils@npm:10.0.5-canary.9":
+  version: 10.0.5-canary.9
+  resolution: "@next/react-refresh-utils@npm:10.0.5-canary.9"
   peerDependencies:
     react-refresh: 0.8.3
     webpack: ^4 || ^5
-  checksum: 5a09c9846281e5d0d2ecf0f2c737e87befba1f9208c6023ccf678b2b4cb4a3b48ae46a30b060b47e551d70f6a578c4599f7962728477c86ea590962e0b3eec54
+  checksum: 2599da41653d803e4ba8b043fe0720a2fb9025e49ddbcd2a1a7d78e8b5e9508a87989fa9cab1d6a7127e56c6bb0795131b21a9589b4f669657cd2442e097d13f
   languageName: node
   linkType: hard
 
@@ -9585,7 +9585,7 @@ fsevents@~2.1.2:
     "@material-ui/icons": 5.0.0-alpha.15
     "@material-ui/lab": 5.0.0-alpha.18
     "@mdx-js/react": ^1.6.22
-    "@next/bundle-analyzer": 10.0.5-canary.8
+    "@next/bundle-analyzer": 10.0.5-canary.9
     "@page/landing": "workspace:packages/page/landing"
     "@rest-hooks/normalizr": ^5.0.6
     "@types/draft-js": ^0.10.44
@@ -9628,7 +9628,7 @@ fsevents@~2.1.2:
     jss: ^10.5.0
     lodash: ^4.17.20
     mdast-util-toc: ^5.1.0
-    next: 10.0.5-canary.8
+    next: 10.0.5-canary.9
     next-google-fonts: ^1.2.1
     next-merge-props: ^0.4.0
     next-remote-watch: ^0.3.0
@@ -9967,17 +9967,17 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"next@npm:10.0.5-canary.8":
-  version: 10.0.5-canary.8
-  resolution: "next@npm:10.0.5-canary.8"
+"next@npm:10.0.5-canary.9":
+  version: 10.0.5-canary.9
+  resolution: "next@npm:10.0.5-canary.9"
   dependencies:
     "@ampproject/toolbox-optimizer": 2.7.1-alpha.0
     "@babel/runtime": 7.12.5
     "@hapi/accept": 5.0.1
-    "@next/env": 10.0.5-canary.8
-    "@next/polyfill-module": 10.0.5-canary.8
-    "@next/react-dev-overlay": 10.0.5-canary.8
-    "@next/react-refresh-utils": 10.0.5-canary.8
+    "@next/env": 10.0.5-canary.9
+    "@next/polyfill-module": 10.0.5-canary.9
+    "@next/react-dev-overlay": 10.0.5-canary.9
+    "@next/react-refresh-utils": 10.0.5-canary.9
     "@opentelemetry/api": 0.14.0
     ast-types: 0.13.2
     babel-plugin-transform-define: 2.0.0
@@ -10019,14 +10019,24 @@ fsevents@~2.1.2:
     webpack: 4.44.1
     webpack-sources: 1.4.3
   peerDependencies:
+    fibers: ">= 3.1.0"
+    node-sass: ^4.0.0
     react: ^16.6.0 || ^17
     react-dom: ^16.6.0 || ^17
+    sass: ^1.3.0
   dependenciesMeta:
     sharp:
       optional: true
+  peerDependenciesMeta:
+    fibers:
+      optional: true
+    node-sass:
+      optional: true
+    sass:
+      optional: true
   bin:
     next: dist/bin/next
-  checksum: e197b1707dc1ca118980841930906ee9e455c6446e4c807b969d067da1b3c149f5dd47842163b93ef008cc61e3a562ac381665f2e2d15848f4ba47ea92876fbb
+  checksum: b63c0df3d7597978a02d692893b20e2ce100e0c59b4d38b165755ec885c602dbb5739da259a48e98f184f05171601cfb32639c4800d505d2b106454b9c01a010
   languageName: node
   linkType: hard
 
