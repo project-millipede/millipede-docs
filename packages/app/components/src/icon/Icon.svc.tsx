@@ -8,6 +8,8 @@ import React, {
   CompareArrows,
   ContactSupport,
   Create,
+  Description,
+  Error,
   Explore,
   Extension,
   FilterCenterFocus,
@@ -20,6 +22,7 @@ import React, {
   Info,
   Layers,
   List,
+  ModelTraining,
   OfflineBolt,
   Security,
   Slideshow,
@@ -59,6 +62,12 @@ export const getIconByName = (name: string) => {
     }
     case 'compare_arrows': {
       return <CompareArrows />;
+    }
+    case 'description': {
+      return <Description />;
+    }
+    case 'model_training': {
+      return <ModelTraining />;
     }
     case 'waves': {
       return <Waves />;
@@ -110,6 +119,9 @@ export const getIconByName = (name: string) => {
     }
     case 'info': {
       return <Info />;
+    }
+    case 'error': {
+      return <Error />;
     }
     case 'assessment': {
       return <Assessment />;

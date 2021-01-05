@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic';
-import { createElement } from 'react';
 
 const checkForComponentUse = (tagName: string, content: string) => {
   const exp = new RegExp(`<${tagName}`);
@@ -12,56 +11,67 @@ const components = {
     import('@demonstrators-social/layout').then(module => module.Demonstrator)
   ),
   Tag: dynamic(() => import('@app/components').then(module => module.Tag)),
-  DiagramInterdisciplinaryApproach: dynamic(() =>
-    import('@app/illustrations').then(
-      module => module.Components.DiagramInterdisciplinaryApproach
+  InterdisciplinaryApproach: dynamic(() =>
+    import('@page/illustrations').then(
+      module => module.Components.Perspective.Strategy.InterdisciplinaryApproach
     )
   ),
   SpectrumOfFalseInformation: dynamic(() =>
-    import('../components/guides/disinformation/general').then(
-      module => module.SpectrumOfFalseInformation
+    import('@page/illustrations').then(
+      module =>
+        module.Components.Guides.Disinformation.SpectrumOfFalseInformation
     )
   ),
   Publications: dynamic(() =>
-    import('../components/guides/research/paper').then(
-      module => module.Publications
+    import('@page/illustrations').then(
+      module => module.Components.Guides.Research.Paper.Publications
     )
   ),
   AttackVectorsComparison: dynamic(() =>
-    import('../components/rethink-security/attack-vectors/comparison').then(
-      module => module.AttackVectorsComparison
+    import('@page/illustrations').then(
+      module =>
+        module.Components.Security.AttackVectors.Comparison
+          .AttackVectorsComparison
     )
   ),
   ByExample: dynamic(() =>
-    import('../components/pidp/approach/by-example').then(
-      module => module.ByExample
+    import('@page/illustrations').then(
+      module => module.Components.Pidp.Approach.ByExample.ByExample
     )
   ),
-  TeamBoard: dynamic(() =>
-    import('../components/discover-more/team').then(module => module.TeamBoard)
+  Board: dynamic(() =>
+    import('@page/illustrations').then(
+      module => module.Components.DiscoverMore.Team.Board
+    )
   ),
   Concept1: dynamic(() =>
-    import('../components/ai/general').then(module => module.Concept1)
+    import('@page/illustrations').then(
+      module => module.Components.Ai.General.Concept1
+    )
   ),
   Concept2: dynamic(() =>
-    import('../components/ai/general').then(module => module.Concept2)
+    import('@page/illustrations').then(
+      module => module.Components.Ai.General.Concept2
+    )
   ),
   Concept3: dynamic(() =>
-    import('../components/ai/general').then(module => module.Concept3)
+    import('@page/illustrations').then(
+      module => module.Components.Ai.General.Concept3
+    )
   ),
-  ReverseEngineering: dynamic(() =>
-    import('../components/ai/reverse/intro').then(
-      module => module.ReverseEngineering
+  ReversePrincipal: dynamic(() =>
+    import('@page/illustrations').then(
+      module => module.Components.Ai.Reverse.ReversePrincipal
     )
   ),
   MethodHooking: dynamic(() =>
-    import('../components/ai/reverse/hooks').then(
-      module => module.MethodHooking
+    import('@page/illustrations').then(
+      module => module.Components.Ai.Reverse.Hooks.MethodHooking
     )
   ),
   DataflowComparison: dynamic(() =>
-    import('../components/pet/dataflow/comparison').then(
-      module => module.DataflowComparison
+    import('@page/illustrations').then(
+      module => module.Components.Pet.Dataflow.Comparison.DataflowComparison
     )
   )
 };
@@ -82,29 +92,4 @@ const getComponents = (hydrationComponentsList = []) => {
   return componentsList;
 };
 
-const asyncComponents = {
-  Async: () =>
-    Promise.resolve(({ children }) => createElement('div', {}, children))
-};
-
-const getHydrationAsyncComponentsList = content => {
-  return Object.keys(asyncComponents).filter(compKey => {
-    return checkForComponentUse(compKey, content);
-  });
-};
-
-// Returns an object with the components required to render a blog post
-const getAsyncComponents = (hydrationComponentsList = []) => {
-  const componentsList = {};
-  hydrationComponentsList.forEach(componentName => {
-    componentsList[componentName] = components[componentName];
-  });
-  return componentsList;
-};
-
-export {
-  getComponents,
-  getAsyncComponents,
-  getHydrationComponentsList,
-  getHydrationAsyncComponentsList
-};
+export { getComponents, getHydrationComponentsList };

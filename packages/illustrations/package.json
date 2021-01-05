@@ -1,5 +1,5 @@
 {
-  "name": "@app/illustrations",
+  "name": "@page/illustrations",
   "version": "0.2.0",
   "private": true,
   "main": "src/index.ts",

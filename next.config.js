@@ -10,7 +10,7 @@ const modules = [
   '@app/analytics',
   '@app/components',
   '@app/layout',
-  '@app/illustrations',
+  '@page/illustrations',
   '@page/components',
   '@page/layout',
   '@page/landing',
