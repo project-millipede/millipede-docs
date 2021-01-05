@@ -16,12 +16,10 @@ module.exports = {
     ],
     '/ai': ['pages/perspective/index'],
     '/perspective/strategy': ['pages/perspective/index'],
-    '/guides/disinformation/general': [
-      'pages/guides/disinformation/general/index'
-    ],
+    '/guides/disinformation': ['pages/guides/disinformation/index'],
     '/guides/research/paper': ['pages/guides/research/paper/index'],
-    '/rethink-security/attack-vectors/comparison': [
-      'pages/rethink-security/attack-vectors/comparison/index'
+    '/security/attack-vectors/comparison': [
+      'pages/security/attack-vectors/comparison/index'
     ],
     '/pidp/use-case/recognition': ['pages/pidp/use-case/recognition/index'],
     '/pidp/approach/by-example': ['pages/pidp/approach/by-example/index'],

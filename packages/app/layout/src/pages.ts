@@ -6,9 +6,9 @@ export const loadPages = (
 ) => {
   return [
     ...pagesAI,
-    ...pagesRethinkSecurity,
-    ...pagesPIDP,
     ...pagesPET,
+    ...pagesPIDP,
+    ...pagesSecurity,
     ...pagesPerspective,
     ...pagesGuides,
     ...pagesDiscoverMore
@@ -28,12 +28,8 @@ export const defaultFAIcon: PageTypes.Icon = {
 export const pagesAI: Array<PageTypes.Page> = [
   {
     pathname: 'ai',
-    icon: defaultIcon,
+    icon: { ...defaultIcon, name: 'offline_bolt' },
     children: [
-      {
-        pathname: 'ai/objectives',
-        icon: { ...defaultIcon, name: 'offline_bolt' }
-      },
       {
         pathname: 'ai/general',
         icon: { ...defaultIcon, name: 'toc' }
@@ -52,17 +48,31 @@ export const pagesAI: Array<PageTypes.Page> = [
   }
 ];
 
-export const pagesRethinkSecurity: Array<PageTypes.Page> = [
+export const pagesSecurity: Array<PageTypes.Page> = [
   {
-    pathname: 'rethink-security',
+    pathname: 'security',
     icon: { ...defaultIcon, name: 'security' },
     children: [
       {
-        pathname: 'rethink-security/attack-vectors',
+        pathname: 'security/models',
+        icon: { ...defaultIcon, name: 'description' },
+        children: [
+          {
+            pathname: 'security/models/comparison',
+            icon: { ...defaultIcon, name: 'compare_arrows' }
+          },
+          {
+            pathname: 'security/models/rethink',
+            icon: { ...defaultIcon, name: 'model_training' }
+          }
+        ]
+      },
+      {
+        pathname: 'security/attack-vectors',
         icon: { ...defaultIcon, name: 'bug_report' },
         children: [
           {
-            pathname: 'rethink-security/attack-vectors/comparison',
+            pathname: 'security/attack-vectors/comparison',
             icon: { ...defaultIcon, name: 'compare_arrows' }
           }
         ]
@@ -81,10 +91,6 @@ export const pagesPIDP: Array<PageTypes.Page> = [
         icon: { ...defaultIcon, name: 'filter_center_focus' },
         children: [
           {
-            pathname: 'pidp/approach/intro',
-            icon: { ...defaultIcon, name: 'slideshow' }
-          },
-          {
             pathname: 'pidp/approach/by-example',
             icon: { ...defaultIcon, name: 'touch_app' }
           }
@@ -94,10 +100,6 @@ export const pagesPIDP: Array<PageTypes.Page> = [
         pathname: 'pidp/use-case',
         icon: { ...defaultIcon, name: 'extension' },
         children: [
-          {
-            pathname: 'pidp/use-case/intro',
-            icon: { ...defaultIcon, name: 'slideshow' }
-          },
           {
             pathname: 'pidp/use-case/recognition',
             icon: { ...defaultIcon, name: 'flip' }
@@ -196,12 +198,8 @@ export const pagesGuides: Array<PageTypes.Page> = [
       },
       {
         pathname: 'guides/disinformation',
-        icon: { ...defaultIcon, name: 'info' },
+        icon: { ...defaultIcon, name: 'error' },
         children: [
-          {
-            pathname: 'guides/disinformation/general',
-            icon: { ...defaultIcon, name: 'toc' }
-          },
           {
             pathname: 'guides/disinformation/objectives',
             icon: { ...defaultIcon, name: 'assessment' }
