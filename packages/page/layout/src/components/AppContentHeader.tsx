@@ -1,7 +1,6 @@
 import { createStyles, makeStyles } from '@material-ui/core';
 import { Breadcrumbs } from '@page/components';
 import React, { FC } from 'react';
-import { isMobile } from 'react-device-detect';
 
 import { EditPage } from './Editpage';
 
@@ -28,7 +27,7 @@ export const AppContentHeader: FC<AppContentHeaderProps> = ({
 }) => {
   const classes = useStyles();
 
-  return !isMobile ? (
+  return (
     <div className={classes.headerRow}>
       <Breadcrumbs />
       {markdownLocation ? (
@@ -38,5 +37,5 @@ export const AppContentHeader: FC<AppContentHeaderProps> = ({
         />
       ) : null}
     </div>
-  ) : null;
+  );
 };

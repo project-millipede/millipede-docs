@@ -1,7 +1,6 @@
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
-import { isMobile } from 'react-device-detect';
 
 import { TocComponent } from './toc';
 
@@ -50,10 +49,10 @@ export const AppTableOfContents: FC<AppTableOfContentsProps> = ({
 
   const { t } = useTranslation();
 
-  return !isMobile ? (
+  return (
     <nav className={classes.root}>
       <Typography className={classes.tocHeader}>{t('common:toc')}</Typography>
       <TocComponent content={content} />
     </nav>
-  ) : null;
+  );
 };

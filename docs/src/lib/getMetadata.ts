@@ -12,10 +12,13 @@ export const getMetadata = async (
 ): Promise<ContentWithMetadata> => {
   const { data: metaData, content } = matter(data);
 
+  const { disableToc } = metaData;
+
   return {
     metaData: {
       ...metaData,
-      timeToRead: readingTime(content)
+      timeToRead: readingTime(content),
+      disableToc: disableToc || false
     },
     content
   };

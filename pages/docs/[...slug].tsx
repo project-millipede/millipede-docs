@@ -4,11 +4,19 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { mergeProps } from 'next-merge-props';
 import dynamic from 'next/dynamic';
 import React, { FC } from 'react';
+import { isMobile } from 'react-device-detect';
 
 import { getComponents } from '../../docs/src/lib/getComponents';
 import { getPath } from '../../docs/src/lib/getPath';
 import { GetStaticContentProps, getStaticContentProps } from '../../docs/src/lib/getStaticContentProps';
 import { GetStaticTranslationProps, getStaticTranslationProps } from '../../docs/src/lib/getStaticTranslationProps';
+
+const MdxDocs = dynamic(() =>
+  import('@page/layout').then(module => module.Mdx.MdxDocs)
+);
+const MdxDocsMobile = dynamic(() =>
+  import('@page/layout').then(module => module.Mdx.MdxDocsMobile)
+);
 
 const h2 = dynamic(() => import('@page/layout').then(module => module.Mdx.h2));
 const h3 = dynamic(() => import('@page/layout').then(module => module.Mdx.h3));
@@ -40,11 +48,12 @@ const DynamicPage: FC<DynamicPageProps> = ({
     },
     scope
   });
-
-  return (
-    <Mdx.MdxDocs meta={restMetaData} raw={rawContent}>
+  return isMobile ? (
+    <MdxDocsMobile meta={restMetaData}>{content}</MdxDocsMobile>
+  ) : (
+    <MdxDocs meta={restMetaData} raw={rawContent}>
       {content}
-    </Mdx.MdxDocs>
+    </MdxDocs>
   );
 };
 
@@ -68,7 +77,7 @@ export const getStaticProps: GetStaticProps = mergeProps(
   }
 );
 
-export const getStaticPaths: GetStaticPaths = async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await getPath('docs');
   return {
     paths,
