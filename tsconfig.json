@@ -27,10 +27,7 @@
     "docs/**/*.ts",
     "docs/**/*.tsx",
     "pages/**/*.ts",
-    "pages/**/*.tsx",
-    "src/**/*.js",
-    "src/**/*.ts",
-    "src/**/*.tsx"
+    "pages/**/*.tsx"
   ],
-  "exclude": ["node_modules", "packages"]
+  "exclude": ["node_modules"]
 }
