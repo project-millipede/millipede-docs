@@ -1,5 +1,5 @@
 import { PageTypes } from '@app/types';
-import _, { isArray } from 'lodash';
+import isArray from 'lodash/isArray';
 
 const flattenPages = (pages: Array<PageTypes.Page>, key: string) => {
   return pages.reduce((flattenedPages, page) => {

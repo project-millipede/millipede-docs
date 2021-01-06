@@ -1,4 +1,4 @@
-import { isArray } from 'lodash';
+import isArray from 'lodash/isArray';
 import { GetStaticPropsContext } from 'next';
 import loadNamespaces from 'next-translate/loadNamespaces';
 import path from 'path';

@@ -2,7 +2,7 @@ import { render } from '@app/mdx-compile';
 import { Mdx } from '@page/layout';
 import fg from 'fast-glob';
 import fs from 'fs';
-import { isArray } from 'lodash';
+import isArray from 'lodash/isArray';
 import { GetStaticPropsContext } from 'next';
 import dynamic from 'next/dynamic';
 import path from 'path';

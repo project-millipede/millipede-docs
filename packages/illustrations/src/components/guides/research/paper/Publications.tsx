@@ -14,7 +14,7 @@ import {
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import LinkIcon from '@material-ui/icons/Link';
-import { isArray } from 'lodash';
+import isArray from 'lodash/isArray';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import React, { FC, useState } from 'react';

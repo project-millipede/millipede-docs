@@ -1,6 +1,6 @@
 import { EffectRef, useEffectRef } from '@huse/effect-ref';
 import elementResizeDetectorMaker, { Erd } from 'element-resize-detector';
-import { debounce as createDebounce } from 'lodash';
+import createDebounce from 'lodash/debounce';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 export type Options = {

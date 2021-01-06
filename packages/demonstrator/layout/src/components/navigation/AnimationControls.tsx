@@ -1,6 +1,6 @@
+import { RenderUtils } from '@app/render-utils';
 import { Grid } from '@material-ui/core';
 import React, { FC } from 'react';
-import { isBrowser } from 'react-device-detect';
 
 interface AnimationControlsProps {
   primaryControls?: JSX.Element;
@@ -13,6 +13,8 @@ const AnimationControls: FC<AnimationControlsProps> = ({
   secondaryControls,
   deviceControls
 }) => {
+  const isBrowser = RenderUtils.isBrowser();
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} md={isBrowser ? 4 : 6}>

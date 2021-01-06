@@ -1,9 +1,9 @@
+import { RenderUtils } from '@app/render-utils';
 import { HeaderView } from '@demonstrators-social/components';
 import { scrollStates, ScrollTypes } from '@demonstrators-social/shared';
 import { Tab, Tabs } from '@material-ui/core';
 import get from 'lodash/get';
 import React, { ChangeEvent, FC, useEffect } from 'react';
-import { isBrowser } from 'react-device-detect';
 import { useRecoilState } from 'recoil';
 
 import { SimpleSearch } from '../search/SimpleSearch';
@@ -51,7 +51,7 @@ export const TimelineHeader: FC<TimelineHeaderProps> = ({ timelineId }) => {
 
   return (
     <>
-      {isBrowser ? (
+      {RenderUtils.isBrowser() ? (
         <div
           style={{
             marginTop: '8px'

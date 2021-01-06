@@ -1,4 +1,4 @@
-import { loadFAIcons } from '@app/components/src';
+import { loadFAIcons } from '@app/components';
 import { Container, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Components as ComponentsLanding } from '@page/landing';
