@@ -1,5 +1,5 @@
 import { Portal } from '@app/components';
-import AppBar from '@material-ui/core/AppBar';
+import { AppBar } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -7,6 +7,7 @@ import React, { FC, useCallback, useState } from 'react';
 
 import { AppDrawer } from './AppDrawer';
 import { AppToolBar } from './AppToolBar';
+import { HideOnScroll } from './HideOnScroll';
 
 // Warning - dynamic imports seem to destroy css server
 
@@ -46,7 +47,11 @@ const useDrawerStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const AppFrame: FC = ({ children }) => {
+interface AppFrameProps {
+  isMobile: boolean;
+}
+
+export const AppFrame: FC<AppFrameProps> = ({ children, isMobile }) => {
   const classes = useStyles();
   const drawerClasses = useDrawerStyles();
 
@@ -63,17 +68,29 @@ export const AppFrame: FC = ({ children }) => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar
-        position='fixed'
-        className={clsx(drawerClasses.appBar, {
-          [drawerClasses.appBarShift]: isDrawerExpanded
-        })}
-      >
-        <AppToolBar
-          isDrawerExpanded={isDrawerExpanded}
-          handleDrawerOpen={handleDrawerOpen}
-        />
-      </AppBar>
+
+      {isMobile ? (
+        <HideOnScroll>
+          <AppBar>
+            <AppToolBar
+              isDrawerExpanded={isDrawerExpanded}
+              handleDrawerOpen={handleDrawerOpen}
+            />
+          </AppBar>
+        </HideOnScroll>
+      ) : (
+        <AppBar
+          position={'fixed'}
+          className={clsx(drawerClasses.appBar, {
+            [drawerClasses.appBarShift]: isDrawerExpanded
+          })}
+        >
+          <AppToolBar
+            isDrawerExpanded={isDrawerExpanded}
+            handleDrawerOpen={handleDrawerOpen}
+          />
+        </AppBar>
+      )}
 
       <AppDrawer
         handleDrawerOpen={handleDrawerOpen}

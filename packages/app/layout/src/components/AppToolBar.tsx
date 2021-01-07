@@ -28,7 +28,7 @@ const useDrawerStyles = makeStyles(() =>
   })
 );
 
-const useCustomStyles = makeStyles(() =>
+const useStyles = makeStyles(() =>
   createStyles({
     grow: {
       flex: '1 1 auto'
@@ -41,7 +41,7 @@ export const AppToolBar: FC<AppToolBarProps> = ({
   handleDrawerOpen
 }) => {
   const drawerClasses = useDrawerStyles();
-  const customStyles = useCustomStyles();
+  const classes = useStyles();
 
   const { t } = useTranslation();
 
@@ -58,7 +58,7 @@ export const AppToolBar: FC<AppToolBarProps> = ({
         <Menu />
       </IconButton>
 
-      <div className={customStyles.grow} />
+      <div className={classes.grow} />
 
       <LanguageMenu />
 
