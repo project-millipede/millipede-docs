@@ -140,7 +140,7 @@ __metadata:
     "@types/react": ^17.0.0
     "@types/react-dom": ^17.0.0
     clsx: ^1.1.1
-    next: 10.0.5-canary.9
+    next: 10.0.5
     react: ^17.0.1
     react-dom: ^17.0.1
     typescript: ^4.1.3
@@ -196,7 +196,7 @@ __metadata:
     "@types/styled-components": ^5.1.7
     clsx: ^1.1.1
     lodash: ^4.17.20
-    next: 10.0.5-canary.9
+    next: 10.0.5
     next-translate: 1.0.1
     react: ^17.0.1
     react-dom: ^17.0.1
@@ -1689,7 +1689,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@demonstrators-social/data@workspace:packages/demonstrators/social/data"
   dependencies:
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     chance: ^1.1.7
     typescript: ^4.1.3
   languageName: unknown
@@ -2631,12 +2631,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/bundle-analyzer@npm:10.0.5-canary.9":
-  version: 10.0.5-canary.9
-  resolution: "@next/bundle-analyzer@npm:10.0.5-canary.9"
+"@next/bundle-analyzer@npm:10.0.5":
+  version: 10.0.5
+  resolution: "@next/bundle-analyzer@npm:10.0.5"
   dependencies:
     webpack-bundle-analyzer: 4.3.0
-  checksum: 892bcac83248f7c077d76ffc1cd72c38691b5f89a1a3d6cb8d1a352ed1cde33c98b462dcb557cb3c84195ddc355d105921f3b1448dbcb9591721af4faeb4811a
+  checksum: e20c07812162e4e293d01fce7bbaa2fab1323afb5c9740d71c596692da43d4d7d232f8751346247e3e0cc9a8b4dcd0f58f0885956f5d7be2bccf17a0d902f5af
   languageName: node
   linkType: hard
 
@@ -2742,7 +2742,7 @@ __metadata:
   dependencies:
     "@types/react": ^17.0.0
     "@types/react-dom": ^17.0.0
-    next: 10.0.5-canary.9
+    next: 10.0.5
     react: ^17.0.1
     react-dom: ^17.0.1
     typescript: ^4.1.3
@@ -3080,13 +3080,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:26.x, @types/jest@npm:^26.0.19":
+"@types/jest@npm:26.x":
   version: 26.0.19
   resolution: "@types/jest@npm:26.0.19"
   dependencies:
     jest-diff: ^26.0.0
     pretty-format: ^26.0.0
   checksum: 98c8daaf89ca79823461818c1c22d337354e250a135e0314ba1a49e615620c8e2f54c5b900ba8554bf853919c97538f9a38b5af00cea83fd715ee2e6d75e04b8
+  languageName: node
+  linkType: hard
+
+"@types/jest@npm:^26.0.20":
+  version: 26.0.20
+  resolution: "@types/jest@npm:26.0.20"
+  dependencies:
+    jest-diff: ^26.0.0
+    pretty-format: ^26.0.0
+  checksum: 221e39c7c9ce8d71ae4b2ba6abeef1a5b04f1cd96419b9fbbb65534bef4c4215b650561183073dcf47584ff1888d1f4fa7d2af2a38492b7feb9a3bfdcd24c44f
   languageName: node
   linkType: hard
 
@@ -9512,7 +9522,7 @@ fsevents@~2.1.2:
     "@material-ui/core": 5.0.0-alpha.18
     "@material-ui/icons": 5.0.0-alpha.15
     "@material-ui/lab": 5.0.0-alpha.18
-    "@next/bundle-analyzer": 10.0.5-canary.9
+    "@next/bundle-analyzer": 10.0.5
     "@page/illustrations": "workspace:packages/illustrations"
     "@page/landing": "workspace:packages/page/landing"
     "@page/layout": "workspace:packages/page/layout"
@@ -9520,7 +9530,7 @@ fsevents@~2.1.2:
     "@types/draft-js": ^0.10.44
     "@types/element-resize-detector": ^1.1.2
     "@types/eslint": ^7.2.6
-    "@types/jest": ^26.0.19
+    "@types/jest": ^26.0.20
     "@types/lodash": ^4.14.167
     "@types/node": ^14.14.20
     "@types/react": ^17.0.0
@@ -9554,7 +9564,7 @@ fsevents@~2.1.2:
     jss: ^10.5.0
     lodash: ^4.17.20
     mdast-util-toc: ^5.1.0
-    next: 10.0.5-canary.9
+    next: 10.0.5
     next-google-fonts: ^1.2.1
     next-merge-props: ^0.4.0
     next-remote-watch: ^0.3.0
