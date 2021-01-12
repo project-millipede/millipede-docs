@@ -12,7 +12,7 @@ export const LanguageMenu: FC = () => {
 
   const { t } = useTranslation();
 
-  const { push, pathname, asPath, locale, query } = useRouter();
+  const { push, pathname, locale, query } = useRouter();
 
   const handleSelect = (languageCode: string) => {
     push(
@@ -20,7 +20,7 @@ export const LanguageMenu: FC = () => {
         pathname,
         query
       },
-      asPath,
+      null,
       { locale: languageCode }
     );
     setLanguageMenu(null);

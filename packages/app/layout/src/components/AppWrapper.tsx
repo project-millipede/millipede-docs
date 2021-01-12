@@ -19,7 +19,7 @@ export const jss = create({
 export const AppWrapper: FC = ({ children }) => {
   const { page } = useAnalytics();
 
-  const { asPath } = useRouter();
+  const { asPath, locale } = useRouter();
 
   const [navigation, setNavigation] = useRecoilState(navigationState);
 
@@ -30,7 +30,8 @@ export const AppWrapper: FC = ({ children }) => {
     const flattenedPages = RouterUtils.flattenPages(pages, 'children');
     const activePage = RouterUtils.findSelectedPageAsObject(
       flattenedPages,
-      asPath
+      asPath,
+      locale
     );
     setNavigation(state => {
       return {
@@ -47,7 +48,8 @@ export const AppWrapper: FC = ({ children }) => {
     if (asPath != null && flattenedPages != null && flattenedPages.length > 0) {
       const activePage = RouterUtils.findSelectedPageAsObject(
         flattenedPages,
-        asPath
+        asPath,
+        locale
       );
       setNavigation(state => {
         return {
