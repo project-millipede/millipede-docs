@@ -48,9 +48,11 @@ export const TopicsViewDesktop: FC<TopicsViewDesktopProps> = ({ topics }) => {
   });
 
   useEffect(() => {
+    const { feature = '', aspect = '' } = query;
+
     if (
-      !StringUtil.isEmptyString(query.aspect) &&
-      !StringUtil.isEmptyString(query.feature)
+      !StringUtil.isEmptyString(aspect) &&
+      !StringUtil.isEmptyString(feature)
     ) {
       push(
         {
