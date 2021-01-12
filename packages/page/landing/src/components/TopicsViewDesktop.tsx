@@ -1,5 +1,6 @@
 import { CustomIcon } from '@app/components';
 import { ContentTypes } from '@app/types';
+import { StringUtil } from '@app/utils';
 import { createStyles, Grid, IconButton, makeStyles, Theme } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React, { FC, useEffect } from 'react';
@@ -47,14 +48,19 @@ export const TopicsViewDesktop: FC<TopicsViewDesktopProps> = ({ topics }) => {
   });
 
   useEffect(() => {
-    push(
-      {
-        pathname,
-        query
-      },
-      asPath,
-      { locale }
-    );
+    if (
+      !StringUtil.isEmptyString(query.aspect) &&
+      !StringUtil.isEmptyString(query.feature)
+    ) {
+      push(
+        {
+          pathname,
+          query
+        },
+        asPath,
+        { locale }
+      );
+    }
   }, []);
 
   return (

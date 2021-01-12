@@ -51,7 +51,8 @@ const findSelectedPage = (
 
 const findSelectedPageAsObject = (
   flattenedPages: Array<PageTypes.FlattenedPage>,
-  pathname: string
+  pathname: string,
+  locale: string
 ) => {
   if (pathname.indexOf('?') > 0) {
     pathname = pathname.substring(0, pathname.indexOf('?'));
@@ -61,7 +62,7 @@ const findSelectedPageAsObject = (
     pathname = pathname.substring(0, pathname.indexOf('#'));
   }
 
-  if (pathname === '/') {
+  if (pathname === '/' || pathname === `/${locale}`) {
     return {
       pathname: '/'
     };

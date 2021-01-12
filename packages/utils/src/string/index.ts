@@ -1,3 +1,1 @@
-import { stringToArray } from './string';
-
-export { stringToArray };
+export { isEmptyString, stringToArray } from './string';

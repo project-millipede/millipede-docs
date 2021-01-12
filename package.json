@@ -70,7 +70,7 @@
     "@rest-hooks/normalizr": "^5.0.6",
     "@types/resize-observer-browser": "^0.1.5",
     "@vangware/window-open-promise": "^4.0.10",
-    "ahooks": "^2.9.3",
+    "ahooks": "^2.9.4",
     "clsx": "^1.1.1",
     "copy-to-clipboard": "^3.3.1",
     "date-fns": "^2.16.1",
@@ -78,7 +78,7 @@
     "element-resize-detector": "^1.2.1",
     "factory.ts": "^0.5.1",
     "fast-glob": "^3.2.4",
-    "framer-motion": "^3.2.0",
+    "framer-motion": "^3.2.1",
     "gray-matter": "^4.0.2",
     "group-array": "^1.0.0",
     "immer": "^8.0.0",
@@ -112,7 +112,7 @@
     "uuid": "^8.3.2",
     "vfile": "^4.2.1",
     "victory": "^35.4.6",
-    "windups": "^1.1.2"
+    "windups": "^1.1.4"
   },
   "devDependencies": {
     "@types/draft-js": "^0.10.44",
@@ -126,8 +126,8 @@
     "@types/styled-components": "^5.1.7",
     "@types/unist": "^2.0.3",
     "@types/webpack-merge": "^4.1.5",
-    "@typescript-eslint/eslint-plugin": "^4.12.0",
-    "@typescript-eslint/parser": "^4.12.0",
+    "@typescript-eslint/eslint-plugin": "^4.13.0",
+    "@typescript-eslint/parser": "^4.13.0",
     "eslint": "^7.17.0",
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-import": "^2.22.1",
@@ -144,7 +144,7 @@
     "webpack-merge": "5.7.3"
   },
   "resolutions": {
-    "webpack": "5.12.3",
+    "webpack": "5.13.0",
     "styled-components": "^5.2.1",
     "next-translate": "1.0.1",
     "next": "10.0.5",
