@@ -35,6 +35,10 @@ const nextConfig = {
     return merge(config, webpackConfig(options));
   },
 
+  future: {
+    webpack5: true
+  },
+
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx']
 };
 
