@@ -1,6 +1,7 @@
 const { merge } = require('webpack-merge');
 const { getWebpackConfig } = require('@app/webpack-build');
 const nextTranslate = require('next-translate');
+const withSvg = require('@stefanprobst/next-svg')(/* options */);
 
 const modules = [
   '@app/houx',
@@ -31,6 +32,7 @@ const nextConfig = {
       ...options,
       modules
     };
+
     const webpackConfig = getWebpackConfig();
     return merge(config, webpackConfig(options));
   },
@@ -42,4 +44,4 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx']
 };
 
-module.exports = nextTranslate(nextConfig);
+module.exports = nextTranslate(withSvg(nextConfig));
