@@ -1,5 +1,11 @@
 import { ContentTypes } from '@app/types';
-import { CardContent, createStyles, Grid, makeStyles, Typography } from '@material-ui/core';
+import {
+  CardContent,
+  createStyles,
+  Grid,
+  makeStyles,
+  Typography
+} from '@material-ui/core';
 import React, { FC, useState } from 'react';
 
 import { Stepper, TranslationProps } from './Stepper';
@@ -27,10 +33,10 @@ export const renderTitleAndDescription = (
         key={`title-description-${index}`}
       >
         <CardContent>
-          <Typography variant='subtitle1' gutterBottom>
+          <Typography variant='h6' style={{ fontWeight: 700 }} gutterBottom>
             {item.title}
           </Typography>
-          <Typography variant='subtitle2' gutterBottom>
+          <Typography variant='h6' gutterBottom>
             {item.description}
           </Typography>
         </CardContent>

@@ -11,8 +11,13 @@ class MillipedeDocument extends NextDocument {
 
     return (
       <Html lang={lang}>
-        <GoogleFonts href='https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap' />
+        <GoogleFonts href='https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap' />
         <Head>
+          {/* <link rel='preconnect' href='https://fonts.gstatic.com' />
+          <link
+            href='https://fonts.googleapis.com/css2?family=Roboto&display=swap'
+            rel='stylesheet'
+          /> */}
           <link rel='shortcut icon' href='/favicon.ico' />
         </Head>
         <body>
