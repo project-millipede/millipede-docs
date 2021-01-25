@@ -13,7 +13,8 @@
     "@demonstrators-social/components": "workspace:packages/demonstrators/social/components",
     "@demonstrators-social/data": "workspace:packages/demonstrators/social/data",
     "@demonstrators-social/flow": "workspace:packages/demonstrators/social/flow",
-    "@demonstrators-social/shared": "workspace:packages/demonstrators/social/shared"
+    "@demonstrators-social/shared": "workspace:packages/demonstrators/social/shared",
+    "windups": "1.1.2"
   },
   "peerDependencies": {
     "react": "*",
