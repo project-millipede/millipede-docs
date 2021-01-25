@@ -4,8 +4,8 @@ import isArray from 'lodash/isArray';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
-import Step1 from './assets/Step1';
-import Step2 from './assets/Step2';
+import { Svg as Step1 } from './assets/Pages-Step-1.svg';
+import { Svg as Step2 } from './assets/Pages-Step-2.svg';
 
 const templates: Array<ContentTypes.Content> = [
   {
