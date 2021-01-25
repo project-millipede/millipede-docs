@@ -8,10 +8,6 @@ const urls = [
     targetDirectory: 'public/privacy-shield'
   },
   {
-    baseUrl: 'https://privly.io',
-    targetDirectory: 'public/privly'
-  },
-  {
     baseUrl: 'https://privatesphere.org',
     targetDirectory: 'public/privatesphere'
   },
