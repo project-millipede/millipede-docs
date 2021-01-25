@@ -43,6 +43,16 @@ export const pagesAI: Array<PageTypes.Page> = [
             icon: { ...defaultIcon, name: 'functions' }
           }
         ]
+      },
+      {
+        pathname: 'ai/discover-more',
+        icon: { ...defaultIcon, name: 'info' },
+        children: [
+          {
+            pathname: 'ai/discover-more/roadmap',
+            icon: { ...defaultIcon, name: 'map' }
+          }
+        ]
       }
     ]
   }
@@ -109,6 +119,68 @@ export const pagesPIDP: Array<PageTypes.Page> = [
             icon: { ...defaultIcon, name: 'create' }
           }
         ]
+      },
+      {
+        pathname: 'pidp/discover-more',
+        icon: { ...defaultIcon, name: 'info' },
+        children: [
+          {
+            pathname: 'pidp/discover-more/roadmap',
+            icon: { ...defaultIcon, name: 'map' }
+          },
+          {
+            pathname: 'pidp/discover-more/wps',
+            icon: { ...defaultIcon, name: 'list' },
+            children: [
+              {
+                pathname: 'pidp/discover-more/wps/wp1',
+                icon: { ...defaultIcon, name: 'create' }
+              },
+              {
+                pathname: 'pidp/discover-more/wps/wp2',
+                icon: { ...defaultIcon, name: 'create' }
+              },
+              {
+                pathname: 'pidp/discover-more/wps/wp3',
+                icon: { ...defaultIcon, name: 'create' }
+              },
+              {
+                pathname: 'pidp/discover-more/wps/wp4',
+                icon: { ...defaultIcon, name: 'create' }
+              },
+              {
+                pathname: 'pidp/discover-more/wps/wp5',
+                icon: { ...defaultIcon, name: 'create' }
+              },
+              {
+                pathname: 'pidp/discover-more/wps/wp6',
+                icon: { ...defaultIcon, name: 'create' }
+              },
+              {
+                pathname: 'pidp/discover-more/wps/wp7',
+                icon: { ...defaultIcon, name: 'create' }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        pathname: 'pidp/discover-more/related-projects',
+        icon: { ...defaultIcon, name: 'list' }
+      },
+      {
+        pathname: 'pidp/discover-more/unreliable-procedures',
+        icon: { ...defaultIcon, name: 'list' },
+        children: [
+          {
+            pathname: 'pidp/discover-more/unreliable-procedures/operator',
+            icon: { ...defaultIcon, name: 'create' }
+          },
+          {
+            pathname: 'pidp/discover-more/unreliable-procedures/regulation',
+            icon: { ...defaultIcon, name: 'create' }
+          }
+        ]
       }
     ]
   }
@@ -126,6 +198,34 @@ export const pagesPET: Array<PageTypes.Page> = [
           {
             pathname: 'pet/dataflow/comparison',
             icon: { ...defaultIcon, name: 'compare_arrows' }
+          }
+        ]
+      },
+      {
+        pathname: 'pet/use-case',
+        icon: { ...defaultIcon, name: 'extension' },
+        children: [
+          {
+            pathname: 'pet/use-case/publish',
+            icon: { ...defaultIcon, name: 'cloud_upload' }
+          },
+          {
+            pathname: 'pet/use-case/access',
+            icon: { ...defaultIcon, name: 'lock' }
+          },
+          {
+            pathname: 'pet/use-case/analytics',
+            icon: { ...defaultIcon, name: 'assessment' }
+          }
+        ]
+      },
+      {
+        pathname: 'pet/discover-more',
+        icon: { ...defaultIcon, name: 'info' },
+        children: [
+          {
+            pathname: 'pet/discover-more/roadmap',
+            icon: { ...defaultIcon, name: 'map' }
           }
         ]
       }
@@ -202,7 +302,7 @@ export const pagesGuides: Array<PageTypes.Page> = [
         children: [
           {
             pathname: 'guides/disinformation/objectives',
-            icon: { ...defaultIcon, name: 'assessment' }
+            icon: { ...defaultIcon, name: 'center_focus_weak' }
           }
         ]
       }
@@ -215,6 +315,10 @@ export const pagesDiscoverMore: Array<PageTypes.Page> = [
     pathname: 'discover-more',
     icon: { ...defaultIcon, name: 'info' },
     children: [
+      {
+        pathname: 'discover-more/roadmap',
+        icon: { ...defaultIcon, name: 'map' }
+      },
       {
         pathname: 'discover-more/support',
         icon: {

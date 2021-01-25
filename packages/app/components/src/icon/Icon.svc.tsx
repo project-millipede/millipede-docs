@@ -4,6 +4,8 @@ import React, {
   BugReport,
   Business,
   CallSplit,
+  CenterFocusWeak,
+  CloudUpload,
   Code,
   CompareArrows,
   ContactSupport,
@@ -22,6 +24,8 @@ import React, {
   Info,
   Layers,
   List,
+  Lock,
+  Map,
   ModelTraining,
   OfflineBolt,
   Security,
@@ -83,6 +87,18 @@ export const getIconByName = (name: string) => {
     }
     case 'flip': {
       return <Flip />;
+    }
+    case 'map': {
+      return <Map />;
+    }
+    case 'cloud_upload': {
+      return <CloudUpload />;
+    }
+    case 'lock': {
+      return <Lock />;
+    }
+    case 'center_focus_weak': {
+      return <CenterFocusWeak />;
     }
     case 'create': {
       return <Create />;

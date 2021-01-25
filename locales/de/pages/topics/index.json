@@ -2,7 +2,7 @@
   "topics": [
     {
       "title": ["Privacy Enhancing", "Technology"],
-      "subTitle": ["Etablierung von Vertrauen", "in unsicheren Umgegebugen"],
+      "subTitle": ["Etablierung von Vertrauen", "in unsicheren Umgebungen"],
       "contextLink": {
         "id": "pet",
         "sections": [

@@ -2,15 +2,15 @@
   "steps": [
     {
       "title": "Linksseitig angeordnete Buchseite",
-      "description": "Im Anfangszustand ist die linksseitig angeordnete Buchseite nicht vorhanden und mit der Darstellung eines Platzhalters gleichzusetzen."
+      "description": "Im Ausgangszustand ist die linksseitig angeordnete Buchseite nicht vorhanden und mit der Darstellung eines Platzhalters gleichzusetzen."
     },
     {
       "title": "Rechtsseitig angeordnete Buchseite",
-      "description": "Entspricht dem Original einer Website oder mobilen Anwendung bzw. dem über einem solchen Anwendungstyp an den Nutzer kommunizierten Nachrichtenstrom."
+      "description": "Die rechtsseitig abgebildete Buchseite entspricht dem ursprünglichen Inhalte- oder Nachrichtenstrom einer digitalen Plattform, der an den Nutzer verteilt wird."
     },
     {
       "title": "Verhalten",
-      "description": "Das Verfahren erweitert das Anzeige- und Darstellungsformat einer beliebigen Anwendung zur Laufzeit am Endgerät des Nutzers; die linksseitig angeordnete Buchseite wird erzeugt. Der Nutzer nimmt während der Bedienung einer Anwendung anwendungsfremde Oberflächenkomponenten für Dialog und Interaktion war, welche von der im original vorliegenden Anwendung nicht bereit gestellt werden. Eine auf diese Art und Weise eingebettete Buchseite umfasst Inhalte, welche die ursprünglichen Inhalte auf der gegenüberliegenden Buchseite ergänzen oder korrigieren."
+      "description": "Modifikation des Ausgabe- und Darstellungsformats beliebiger, im vorliegendem Inhalte- und Nachrichtenstrom eingebundener Elemente. Ergänzende, in den Bildbereich eintretende Elemente werden mit bestehenden Elementen der gegenüberliegenden Buchseite, unter Einhaltung der zeitlichen Abfolge zur Veröffentlichung, verknüpft. Die Modifikation des Ausgabe- und Darstellungsformats wird während der Bedienung einer Zielanwendung, ausschließlich am Endgerät des Nutzers, ausgeführt."
     }
   ]
 }
