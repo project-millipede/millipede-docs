@@ -2,32 +2,26 @@ import { getIconByName, Link } from '@app/components';
 import { ContentTypes } from '@app/types';
 import { Avatar, createStyles, IconButton, makeStyles, Typography } from '@material-ui/core';
 import isArray from 'lodash/isArray';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 const useStyles = makeStyles(() =>
   createStyles({
     row: {
-      display: 'flex',
-      flexDirection: 'row',
-      flexGrow: 1
+      display: 'flex'
     },
     column: {
       display: 'flex',
-      flexDirection: 'column',
-      flexGrow: 1
+      flexDirection: 'column'
     },
     avatar: {
       margin: 12
     },
     title: {
-      textAlign: 'left',
       fontWeight: 'bold'
     },
     subTitle: {
       fontWeight: 'bold'
-    },
-    description: {
-      textAlign: 'left'
     },
     summary: {
       fontWeight: 'bold',
@@ -57,6 +51,15 @@ export const Item = ({
 }: ContentTypes.OverviewProps) => {
   const classes = useStyles();
 
+  const { push } = useRouter();
+
+  const handleSelect = (link: string) => {
+    push({
+      pathname: '/docs/[...slug]',
+      query: { slug: link.split('/') }
+    });
+  };
+
   let intermediateResult = [];
 
   if (isArray(description)) {
@@ -70,7 +73,6 @@ export const Item = ({
       } = d;
 
       return (
-        // <div key={`description-${d}-${index}`} className={classes.note}>
         <div key={`description-${index}`} className={classes.note}>
           {subTitle.map((t, index) => (
             <Typography
@@ -121,7 +123,7 @@ export const Item = ({
             </Typography>
           ))}
           {note.length > 0 ? (
-            <blockquote>
+            <>
               {note.map((item, index) => (
                 <Typography
                   key={`note-${index}`}
@@ -131,7 +133,7 @@ export const Item = ({
                   {item}
                 </Typography>
               ))}
-            </blockquote>
+            </>
           ) : null}
         </div>
       );
@@ -141,26 +143,16 @@ export const Item = ({
   return (
     <div className={classes.row}>
       {link ? (
-        <Link
-          href={
-            {
-              pathname: '/docs/[...slug]',
-              query: { slug: link.split('/') }
-            } as any
-          }
-        >
-          <Avatar className={classes.avatar}>
-            <IconButton
-            // key={`section--${index}`}
-            // onClick={_e => {
-            //   handleSelect(topic, section);
-            // }}
-            >
-              {getIconByName((icon as any).name)}
-              {/* <CustomIcon icon={icon as any} /> */}
-            </IconButton>
-          </Avatar>
-        </Link>
+        <Avatar className={classes.avatar}>
+          <IconButton
+            key={`link-${link}`}
+            onClick={_e => {
+              handleSelect(link);
+            }}
+          >
+            {getIconByName((icon as any).name)}
+          </IconButton>
+        </Avatar>
       ) : null}
       <div className={classes.column}>
         <Typography variant='h5' className={classes.title}>
@@ -169,9 +161,7 @@ export const Item = ({
         {isArray(description) ? (
           intermediateResult
         ) : (
-          <Typography variant='h6' className={classes.description}>
-            {description}
-          </Typography>
+          <Typography variant='h6'>{description}</Typography>
         )}
       </div>
     </div>
