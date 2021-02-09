@@ -1,4 +1,4 @@
-import React, {
+import {
   Assessment,
   Book,
   BugReport,
@@ -37,6 +37,7 @@ import React, {
   Warning,
   Waves,
 } from '@material-ui/icons';
+import React from 'react';
 
 export const getIconByName = (name: string) => {
   switch (name) {
