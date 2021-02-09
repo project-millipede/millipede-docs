@@ -197,7 +197,7 @@ __metadata:
     clsx: ^1.1.1
     lodash: ^4.17.20
     next: 10.0.6-canary.3
-    next-translate: 1.0.1
+    next-translate: 1.0.3-canary.1
     react: ^17.0.1
     react-dom: ^17.0.1
     styled-components: ^5.2.1
@@ -1805,10 +1805,10 @@ __metadata:
     "@types/react-dom": ^17.0.0
     immer: ^8.0.1
     lodash: ^4.17.20
-    next-translate: 1.0.1
+    next-translate: 1.0.3-canary.1
     react: ^17.0.1
     react-dom: ^17.0.1
-    recoil: "facebookexperimental/Recoil.git#nightly"
+    recoil: "https://github.com/facebookexperimental/Recoil.git#c8c2b9983229a56e008e1b48d25b9a9fe267ed31"
     reselect: ^4.0.0
     typesafe-actions: ^5.1.0
     typescript: ^4.1.3
@@ -9873,7 +9873,7 @@ fsevents@~2.1.2:
     next-google-fonts: ^1.2.1
     next-merge-props: ^0.4.0
     next-remote-watch: ^0.3.0
-    next-translate: 1.0.1
+    next-translate: 1.0.3-canary.1
     nextjs-sitemap-generator: ^1.3.0
     prettier: ^2.2.1
     query-string: ^6.13.8
@@ -9884,7 +9884,7 @@ fsevents@~2.1.2:
     react-intersection-observer: ^8.31.0
     react-scroll: ^1.8.1
     reading-time-estimator: 1.3.3
-    recoil: "facebookexperimental/Recoil.git#nightly"
+    recoil: "https://github.com/facebookexperimental/Recoil.git#c8c2b9983229a56e008e1b48d25b9a9fe267ed31"
     remark-parse: ^9.0.0
     remark-react: ^8.0.0
     remark-slug: ^6.0.0
@@ -10176,15 +10176,15 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"next-translate@npm:1.0.1":
-  version: 1.0.1
-  resolution: "next-translate@npm:1.0.1"
+"next-translate@npm:1.0.3-canary.1":
+  version: 1.0.3-canary.1
+  resolution: "next-translate@npm:1.0.3-canary.1"
   peerDependencies:
     next: ">= 10.0.0"
     react: ">= 16.8.0"
   bin:
     next-translate: cli/builder.js
-  checksum: 227cf45439af01007c5ca4d03e5c26c12a783001a6df9ba9e5210a2933bd101447462bae688bd7aafce426e01478d5fc4ab0b92073cbba4fcd5e9e8c3435176d
+  checksum: 87f8dde91d93be76b559ba4b6d33ff8d605880053b775e66e7fefe97e49f70571fad29af20d218855ae6289ae39a358e4315b666f1db256116ee5b4b63f547a7
   languageName: node
   linkType: hard
 
@@ -11643,9 +11643,9 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"recoil@facebookexperimental/Recoil.git#nightly":
+"recoil@https://github.com/facebookexperimental/Recoil.git#c8c2b9983229a56e008e1b48d25b9a9fe267ed31":
   version: 0.1.2
-  resolution: "recoil@https://github.com/facebookexperimental/Recoil.git#commit=ec79cefc3d07405d7c141aa3a9b6a6d9d78973ca"
+  resolution: "recoil@https://github.com/facebookexperimental/Recoil.git#commit=c8c2b9983229a56e008e1b48d25b9a9fe267ed31"
   dependencies:
     hamt_plus: 1.0.2
   peerDependencies:
@@ -11655,7 +11655,7 @@ fsevents@~2.1.2:
       optional: true
     react-native:
       optional: true
-  checksum: b492fc74cdfeec9eec07ca402e2c1f410be615379937c67ab57b2b159f4b857e1732ea8e4c7bb97c88da50862a1b8f695125ae9b46c6417cddedf798ab92fa3d
+  checksum: 15ef862dd3e7074e24aad3b3c141c39fed8d233639470010d461ed9377e2f135c7b6894132a3864a997764f8b50b72c90aa7135133e9f52b833e9cf3a62bb2bc
   languageName: node
   linkType: hard
 
