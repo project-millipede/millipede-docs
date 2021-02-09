@@ -1,17 +1,11 @@
 import { RenderUtils } from '@app/render-utils';
 import { useEffectRef } from '@huse/effect-ref';
-import {
-  Button,
-  createStyles,
-  makeStyles,
-  Theme,
-  Typography
-} from '@material-ui/core';
+import { Button, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { useWindupString } from '@project-millipede/windups';
 import { ContentState, Editor, EditorState } from 'draft-js';
 import elementResizeDetectorMaker from 'element-resize-detector';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
-import { useWindupString } from 'windups';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

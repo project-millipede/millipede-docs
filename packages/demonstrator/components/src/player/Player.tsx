@@ -1,7 +1,7 @@
 import { createStyles, Divider, makeStyles, Theme } from '@material-ui/core';
+import { useWindupString } from '@project-millipede/windups';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
-import { useWindupString } from 'windups';
 
 import { NavigationControl } from './components/controls/NavigationControl';
 import { ProgressControl } from './components/progress/ProgressControl';

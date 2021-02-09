@@ -4,6 +4,7 @@
   "private": true,
   "main": "./src/index.ts",
   "devDependencies": {
+    "@project-millipede/windups": "^1.1.12",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "typescript": "^4.1.3"
@@ -13,10 +14,10 @@
     "@demonstrators-social/components": "workspace:packages/demonstrators/social/components",
     "@demonstrators-social/data": "workspace:packages/demonstrators/social/data",
     "@demonstrators-social/flow": "workspace:packages/demonstrators/social/flow",
-    "@demonstrators-social/shared": "workspace:packages/demonstrators/social/shared",
-    "windups": "1.1.2"
+    "@demonstrators-social/shared": "workspace:packages/demonstrators/social/shared"
   },
   "peerDependencies": {
+    "@project-millipede/windups": "*",
     "react": "*",
     "react-dom": "*"
   }
