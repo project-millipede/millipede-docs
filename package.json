@@ -38,7 +38,7 @@
     "vercel-build": "NODE_ENV=production && yarn clean && yarn workspaces foreach -pt run clean && yarn workspace @app/webpack-build run compile && yarn workspace @app/mdx-runtime run compile && yarn workspace @app/mdx-compile run compile && yarn run app:build && yarn run next:build",
     "test": "NODE_ENV=development jest --colors --watch",
     "lint": "yarn eslint './docs/src/**/*' './src/**/*' './pages/**/*' './packages/**/src/**/*'",
-    "format:mdx": "prettier --parser mdx --print-width 80 --prose-wrap always --single-quote true --write \"docs/src/pages/pidp/discover-more/unreliable-procedures/**/*.mdx\"",
+    "format:mdx": "prettier --parser mdx --end-of-line lf --print-width 80 --prose-wrap always --single-quote true --write \"docs/src/pages/**/*.mdx\"",
     "format:json": "prettier --parser json --print-width 80 --use-tabs --write \"locales/**/*.json\"",
     "sitemap": "node sitemap-generator"
   },
