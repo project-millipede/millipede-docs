@@ -12,11 +12,15 @@ export const useStyles = makeStyles((theme: Theme) =>
     item: {
       display: 'block',
       padding: theme.spacing(1),
-      color: theme.palette.text.secondary,
-      textDecoration: 'none'
+      textDecoration: 'none',
+      borderLeft: `2px solid transparent`,
+      '&:hover': {
+        borderLeftColor: theme.palette.grey[200],
+        cursor: 'pointer'
+      }
     },
     active: {
-      borderLeft: `2px solid ${theme.palette.primary.main}`,
+      borderLeft: `2px solid ${theme.palette.grey[300]}`,
       color: theme.palette.text.primary
     }
   })
@@ -42,6 +46,8 @@ export const TocLink: FC<TocLinkProps> = ({ href, children }) => {
 
   const { scrollItems } = useRecoilValue(scrollItemsState);
   const isActive = processLink(scrollItems, href);
+
+  // const { query } = useRouter();
 
   // Use - when NextJs resolves a bug with dynamic pages and hash
   // return (

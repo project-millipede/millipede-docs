@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexShrink: 0,
       position: 'sticky',
       height: 'calc(100% - 96px)',
+      margin: theme.spacing(1),
       overflowY: 'auto',
       display: 'none',
       [theme.breakpoints.up('sm')]: {
@@ -22,18 +23,14 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       '& ul': {
         paddingLeft: 0,
-        listStyle: 'none',
-        '& li': {
-          // paddingLeft: theme.spacing(2),
-          color: theme.palette.text.primary
-        }
-      },
-      margin: theme.spacing(3)
+        listStyle: 'none'
+      }
     },
     tocHeader: {
       height: 56,
       padding: theme.spacing(1),
-      fontSize: '1rem'
+      fontSize: 16,
+      fontWeight: 'bold'
     }
   })
 );
