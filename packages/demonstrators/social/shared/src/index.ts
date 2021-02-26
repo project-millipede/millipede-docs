@@ -4,6 +4,8 @@ export { selectors as scrollSelectors } from './recoil/features/scroll/selectors
 export { actions as scrollActions } from './recoil/features/scroll/actions';
 export { data as scrollData } from './recoil/features/scroll/actions';
 
+export { states as notificationStates } from './recoil/features/notification/states';
+
 export * as ScrollTypes from './recoil/features/scroll/types';
 
 export type { TimelineActions, StoreAction } from './redux/features/actionType';

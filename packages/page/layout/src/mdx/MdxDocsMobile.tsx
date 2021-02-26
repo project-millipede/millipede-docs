@@ -1,4 +1,5 @@
 import { PageTypes } from '@app/types';
+import { Snackbar } from '@page/components';
 import React, { FC } from 'react';
 
 import { AppContent } from '../components/AppContent';
@@ -20,6 +21,7 @@ export const MdxDocsMobile: FC<MarkdownDocsProps> = ({ meta, children }) => {
         {children && (
           <div className={classes.root}>
             {children}
+            <Snackbar />
             <AppContentFooter />
           </div>
         )}
