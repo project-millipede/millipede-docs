@@ -1,7 +1,8 @@
 import { RenderUtils } from '@app/render-utils';
 import { PageTypes } from '@app/types';
 import { StringUtil } from '@app/utils';
-import { createStyles, Fade, makeStyles, Snackbar, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@material-ui/core';
+import { notificationStates } from '@demonstrators-social/shared';
+import { createStyles, makeStyles, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@material-ui/core';
 import { Close, Share as ShareIcon } from '@material-ui/icons';
 import { windowOpenPromise } from '@vangware/window-open-promise';
 import copy from 'copy-to-clipboard';
@@ -9,8 +10,9 @@ import isArray from 'lodash/isArray';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import React, { FC, SyntheticEvent, useCallback, useState } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import { isMobile } from 'react-device-detect';
+import { useSetRecoilState } from 'recoil';
 
 import { Icon } from './Icon';
 import {
@@ -209,10 +211,11 @@ export const Share: FC<PageTypes.ContentMetaData> = props => {
 
   const [speedDialOpen, setSpeedDialOpen] = useState(false);
 
-  const [feedback, setFeedback] = useState({
-    open: false,
-    message: ''
-  });
+  const {
+    notification: { snackbarState }
+  } = notificationStates;
+
+  const setSnackbar = useSetRecoilState(snackbarState);
 
   const handleSpeedDialOpen = () => {
     setSpeedDialOpen(true);
@@ -226,18 +229,14 @@ export const Share: FC<PageTypes.ContentMetaData> = props => {
     setSpeedDialOpen(false);
 
     if (type === Interaction.SHARE_LOCAL) {
-      setFeedback({
-        open: true,
-        message: t('common:link-copied')
+      setSnackbar(state => {
+        return {
+          ...state,
+          isActive: true,
+          message: t('common:link-copied')
+        };
       });
     }
-  };
-
-  const handleFeedbackClose = (_event?: SyntheticEvent, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setFeedback({ open: false, message: '' });
   };
 
   const getShareProps = useCallback(() => {
@@ -248,25 +247,16 @@ export const Share: FC<PageTypes.ContentMetaData> = props => {
   }, [pathname, props.title]);
 
   return (
-    <>
-      <SpeedDial
-        ariaLabel={t('common:share-post')}
-        icon={<SpeedDialIcon icon={<ShareIcon />} openIcon={<Close />} />}
-        onClose={handleSpeedDialClose}
-        onOpen={handleSpeedDialOpen}
-        open={speedDialOpen}
-        direction='down'
-        className={classes.speedDial}
-      >
-        {createButtons(handleSpeedDialCloseWithFeedback, getShareProps, t)}
-      </SpeedDial>
-      <Snackbar
-        open={feedback.open}
-        TransitionComponent={Fade}
-        message={feedback.message}
-        autoHideDuration={3000}
-        onClose={handleFeedbackClose}
-      />
-    </>
+    <SpeedDial
+      ariaLabel={t('common:share-post')}
+      icon={<SpeedDialIcon icon={<ShareIcon />} openIcon={<Close />} />}
+      onClose={handleSpeedDialClose}
+      onOpen={handleSpeedDialOpen}
+      open={speedDialOpen}
+      direction='down'
+      className={classes.speedDial}
+    >
+      {createButtons(handleSpeedDialCloseWithFeedback, getShareProps, t)}
+    </SpeedDial>
   );
 };
