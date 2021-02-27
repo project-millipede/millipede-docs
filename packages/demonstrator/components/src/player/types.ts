@@ -1,8 +1,8 @@
 export interface Step {
   start: number;
   end: number;
-  label: string;
-  selector: string;
+  label?: string;
+  selector: string | Function;
   description: string;
 }
 

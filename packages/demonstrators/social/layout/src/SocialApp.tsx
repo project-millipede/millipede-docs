@@ -91,13 +91,17 @@ export const SocialApp: FC = () => {
     toggle();
   };
 
-  const playlist = useMemo(() => {
-    if (state.timeline != null) {
-      const steps = getSteps(state);
-      return steps;
-    }
-    return [];
-  }, [state.timeline]);
+  // getSteps gets used in the form of a hook here
+  const playlist = getSteps(state) || [];
+
+  // following rules of hooks it is not possible to call getStep (previously no hook) in useMemo anymore
+  // const playlist = useMemo(() => {
+  //   if (state.timeline != null) {
+  //     const steps = getSteps(state);
+  //     return steps;
+  //   }
+  //   return [];
+  // }, [state.timeline]);
 
   const selectedPlaylistItemSteps = useMemo(() => {
     if (!StringUtil.isEmptyString(topic)) {

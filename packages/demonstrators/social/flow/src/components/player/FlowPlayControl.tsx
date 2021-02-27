@@ -1,6 +1,8 @@
 import { Portal } from '@app/components';
+import { StringUtil } from '@app/utils';
 import { Player, useStepDispatch, useStepState } from '@demonstrator/components';
 import { Step } from '@demonstrator/components/src/player/types';
+import isFunction from 'lodash/isFunction';
 import dynamic from 'next/dynamic';
 import React, { FC, useEffect, useMemo } from 'react';
 
@@ -29,7 +31,7 @@ const StepsRangeWrapper: FC<FlowPlayControlProps> = ({ steps, topic }) => {
     }
   }, [maxStepsCount, playing, topic]);
 
-  const activeStep = steps[target];
+  const { selector } = steps[target] || { selector: '' };
   const { stepsWithDuration } = Player.Utils.playertime.getTimeData(steps);
 
   const duration = useMemo(() => {
@@ -43,10 +45,18 @@ const StepsRangeWrapper: FC<FlowPlayControlProps> = ({ steps, topic }) => {
   // does the heavy lifting
   Player.Hooks.useStepsProgress(duration);
 
+  useEffect(() => {
+    if (isFunction(selector)) {
+      selector();
+    }
+  }, [selector]);
+
   return (
     <Portal.PortalIn portalType={Portal.PortalType.Cursor}>
-      {playing && activeStep ? (
-        <Cursor selector={`#${activeStep?.selector}`} />
+      {playing &&
+      !isFunction(selector) &&
+      !StringUtil.isEmptyString(selector) ? (
+        <Cursor selector={`#${selector}`} />
       ) : null}
     </Portal.PortalIn>
   );
