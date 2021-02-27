@@ -35,7 +35,9 @@ export const ProgressControl: FC<ProgressControlProps> = ({ steps }) => {
   const { playing } = useStepState();
 
   const { globalEnd } =
-    stepsWithDuration.length > 0 ? stepsWithDuration[target] : { globalEnd: 0 };
+    stepsWithDuration && stepsWithDuration.length > 0 && target >= 0
+      ? stepsWithDuration[target]
+      : { globalEnd: 0 };
 
   return (
     <Slider
