@@ -1,5 +1,5 @@
 import { ServerStyleSheets as MaterialServerStyleSheets } from '@material-ui/core';
-import GoogleFonts from 'next-google-fonts';
+import { GoogleFonts } from 'next-google-fonts';
 import NextDocument, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
 import React, { Fragment } from 'react';
 import { ServerStyleSheet as StyledComponentSheets } from 'styled-components';
