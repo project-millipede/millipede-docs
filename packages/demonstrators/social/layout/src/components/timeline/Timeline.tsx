@@ -1,21 +1,9 @@
 import { useHoux } from '@app/houx';
 import { CollectionUtil } from '@app/utils';
-import {
-  RootState,
-  scrollStates,
-  ScrollTypes,
-  selectors,
-  TimelineActions
-} from '@demonstrators-social/shared';
+import { RootState, scrollStates, ScrollTypes, selectors, TimelineActions } from '@demonstrators-social/shared';
 import { useMergedRef } from '@huse/merged-ref';
-import {
-  Button,
-  ButtonGroup,
-  List,
-  makeStyles,
-  useTheme
-} from '@material-ui/core';
-import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+import { Button, List, makeStyles, useTheme } from '@material-ui/core';
+import CreateIcon from '@material-ui/icons/Create';
 import get from 'lodash/get';
 import useTranslation from 'next-translate/useTranslation';
 import React, { Dispatch, FC, useEffect, useState } from 'react';
@@ -116,7 +104,11 @@ export const Timeline: FC<TimelineProps> = ({
 
       <div
         key={`timeline-${timelineId}`}
-        style={{ overflowY: 'auto', height: '65vh', marginTop: '8px' }}
+        style={{
+          overflowY: 'auto',
+          height: '65vh',
+          marginTop: '8px'
+        }}
       >
         {currentView === ScrollTypes.Timeline.VIEW.POSTS && displayEditor && (
           <CommentEditor
@@ -132,18 +124,26 @@ export const Timeline: FC<TimelineProps> = ({
         )}
 
         {currentView === ScrollTypes.Timeline.VIEW.POSTS && !displayEditor && (
-          <ButtonGroup variant='text' color='primary' style={{ width: '100%' }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
             <Button
               id={`timeline-${timelineId}-content-create`}
               variant='text'
               color='primary'
-              startIcon={<ChatBubbleOutlineIcon />}
+              startIcon={<CreateIcon />}
               onClick={() => setDisplayEditor(true)}
-              style={{ margin: 'auto' }}
+              style={{
+                textTransform: 'none'
+              }}
             >
               {t('pages/pidp/use-case/recognition/index:content_create')}
             </Button>
-          </ButtonGroup>
+          </div>
         )}
         <List
           key={`timeline-${timelineId}`}

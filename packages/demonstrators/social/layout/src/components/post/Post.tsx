@@ -6,17 +6,9 @@ import {
   scrollStates,
   ScrollTypes,
   selectors,
-  TimelineActions
+  TimelineActions,
 } from '@demonstrators-social/shared';
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  CardActions,
-  createStyles,
-  ListItem,
-  makeStyles
-} from '@material-ui/core';
+import { Button, ButtonGroup, Card, createStyles, ListItem, makeStyles } from '@material-ui/core';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
@@ -25,22 +17,11 @@ import { enGB } from 'date-fns/locale';
 import lodashGet from 'lodash/get';
 import useTranslation from 'next-translate/useTranslation';
 import React, { Dispatch, FC, useMemo, useState } from 'react';
-import {
-  selectorFamily,
-  SerializableParam,
-  useRecoilValue,
-  useSetRecoilState
-} from 'recoil';
+import { selectorFamily, SerializableParam, useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { CommentEditor } from '../comment/CommentEditor';
 import { Comments } from '../comment/Comments';
-import {
-  getContent,
-  getHeader,
-  getMedia,
-  getObserverComp,
-  getRef
-} from './Post.Render.svc';
+import { getContent, getHeader, getMedia, getObserverComp, getRef } from './Post.Render.svc';
 import { handleCreateComment, handleDeletePost } from './Post.svc';
 
 const { selectPostById, selectTimelineOwner } = selectors.timeline;
@@ -159,29 +140,31 @@ export const Post: FC<PostProps> = ({
   const contentComp = getObserverComp(getRefForId('content'))(getContent(text));
 
   const sentimentComp = getObserverComp(getRefForId('sentiment'))(
-    <CardActions disableSpacing>
-      <ButtonGroup variant='text' color='primary' style={{ margin: 'auto' }}>
-        <Button variant='text' color='primary' startIcon={<ThumbUpIcon />}>
-          {t('pages/pidp/use-case/recognition/index:like')}
-        </Button>
-        <Button
-          variant='text'
-          color='primary'
-          startIcon={<ChatBubbleOutlineIcon />}
-          onClick={() => setDisplayEditor(true)}
-        >
-          {t('pages/pidp/use-case/recognition/index:comment')}
-        </Button>
-        <Button
-          variant='text'
-          color='primary'
-          startIcon={<DeleteOutlineIcon />}
-          onClick={() => handleDeletePost(timelineId, postId, dispatch)}
-        >
-          {t('pages/pidp/use-case/recognition/index:delete')}
-        </Button>
-      </ButtonGroup>
-    </CardActions>
+    <ButtonGroup variant='text' color='primary' size='large' fullWidth>
+      <Button
+        id={`timeline-${timelineId}-post-${postId}-comment-like`}
+        aria-label={t('pages/pidp/use-case/recognition/index:like')}
+        variant='text'
+        color='primary'
+        startIcon={<ThumbUpIcon />}
+      />
+      <Button
+        id={`timeline-${timelineId}-post-${postId}-comment-create`}
+        aria-label={t('pages/pidp/use-case/recognition/index:comment')}
+        variant='text'
+        color='primary'
+        startIcon={<ChatBubbleOutlineIcon />}
+        onClick={() => setDisplayEditor(true)}
+      />
+      <Button
+        id={`timeline-${timelineId}-post-${postId}-comment-delete`}
+        aria-label={t('pages/pidp/use-case/recognition/index:delete')}
+        variant='text'
+        color='primary'
+        startIcon={<DeleteOutlineIcon />}
+        onClick={() => handleDeletePost(timelineId, postId, dispatch)}
+      />
+    </ButtonGroup>
   );
 
   const commentComp = getObserverComp(getRefForId('comments'))(
@@ -239,6 +222,7 @@ export const Post: FC<PostProps> = ({
                 setDisplayEditor(false);
               });
             }}
+            timelineId={timelineId}
             isComment
           />
         ) : null}
