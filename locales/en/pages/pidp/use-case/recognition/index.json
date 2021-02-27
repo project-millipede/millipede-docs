@@ -21,36 +21,37 @@
   "content_create": "Create content",
   "content_publish": "Publish content",
   "content_empty": "No user input detected",
-  
-  "publish-node-head": "1",
-	"publish-relation-head": "2",
-	"publish-node-upload": "3",
-	"publish-relation-upload": "4",
-	"publish-node-download": "5",
-	"publish-relation-download": "6",
-	"publish-node-tail": "7",
 
-	"publish-node-headB": "8",
-	"publish-relation-headB": "9",
-	"publish-node-uploadB": "10",
-	"publish-relation-uploadB": "11",
-	"publish-node-downloadB": "12",
-	"publish-relation-downloadB": "13",
+  "publish-node-head": "1",
+  "publish-relation-head": "2",
+  "publish-node-upload": "3",
+  "publish-relation-upload": "4",
+  "publish-node-download": "5",
+  "publish-relation-download": "6",
+  "publish-node-tail": "7",
+
+  "publish-node-headB": "8",
+  "publish-relation-headB": "9",
+  "publish-node-uploadB": "10",
+  "publish-relation-uploadB": "11",
+  "publish-node-downloadB": "12",
+  "publish-relation-downloadB": "13",
   "publish-node-tailB": "14",
-  
-	"publish-nodeId-head": "Head",
-	"publish-nodeId-upload": "Upload",
-	"publish-nodeId-download": "Download",
+
+  "publish-nodeId-head": "Head",
+  "publish-nodeId-upload": "Upload",
+  "publish-nodeId-download": "Download",
   "publish-nodeId-tail": "Tail",
 
   "timeline-tab-posts": "Let's create some content on your favorite social media platform bookface.com. To do so, we navigate to the tab 'Posts.'",
+  "timeline-tab-timeline": "Your friend perceives the following content in the timeline.",
   "timeline-content-create": "Enter the editor and type your content.",
   "timeline-content-post": "Once you have completed your post, submit it.",
   "progressiveStepBuilder-0": "You hand the content to the operator to distribute it among your social contacts, and even further, the content is leaving your range of control.",
   "progressiveStepBuilder-1": "The content gets uploaded and enters the operator's digital infrastructure.",
   "progressiveStepBuilder-2": "The operator distributes your content to all your friends and or users subscribed to your social media profile.",
   "progressiveStepBuilder-3": "On request, the content gets downloaded from the operator's digital infrastructure to the user's device. A typical social media application puts new content at the top of your news feed.",
-  
+
   "steps": [
     {
       "order": 1,
