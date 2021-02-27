@@ -34,7 +34,9 @@ export const TextProgressControl: FC<TextProgressControlProps> = ({
   const { stepsWithDuration, totalSeconds } = getTimeData(steps);
 
   const { duration } =
-    stepsWithDuration.length > 0 ? stepsWithDuration[target] : { duration: 0 };
+    stepsWithDuration && stepsWithDuration.length > 0 && target >= 0
+      ? stepsWithDuration[target]
+      : { duration: 0 };
 
   return (
     <div className={classes.row}>

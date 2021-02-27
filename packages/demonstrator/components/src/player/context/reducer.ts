@@ -43,7 +43,7 @@ export interface StepState {
 }
 
 export const initialState: StepState = {
-  target: 0,
+  target: -1,
   playing: false,
   back: false,
   maxStepsCount: 0
@@ -55,6 +55,7 @@ export const reducer = (state: StepState, action: Action) => {
     case 'INIT': {
       return {
         ...state,
+        target: 0,
         maxStepsCount: action.maxStepsCount
       };
     }

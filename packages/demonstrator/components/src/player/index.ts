@@ -1,4 +1,4 @@
-export { Player } from './Player';
-export * as PlayerTypes from './types';
-export * as PlayerUtils from './utils';
-export * as PlayerHooks from './hooks';
+export * as Types from './types';
+export * as Utils from './utils';
+export * as Hooks from './hooks';
+export * as Components from './components';
