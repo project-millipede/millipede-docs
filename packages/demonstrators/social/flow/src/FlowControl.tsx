@@ -1,4 +1,4 @@
-import { Archer, Stepper } from '@app/components';
+import { Archer, Help, Stepper } from '@app/components';
 import { scrollStates } from '@demonstrators-social/shared';
 import {
   Checkbox,
@@ -48,13 +48,19 @@ const useStyles = makeStyles((theme: Theme) =>
       height: 50,
       paddingLeft: theme.spacing(4),
       backgroundColor: theme.palette.background.default
+    },
+    heading: {
+      fontSize: 16,
+      fontWeight: 'bold',
+      fontStyle: 'italic'
+      // margin: 0
     }
   })
 );
 
 interface ScenarioNavigatorProps {}
 
-const ScenarioNavigator: FC<ScenarioNavigatorProps> = () => {
+export const ScenarioNavigator: FC<ScenarioNavigatorProps> = () => {
   const { t } = useTranslation();
 
   const {
@@ -93,7 +99,7 @@ const ScenarioNavigator: FC<ScenarioNavigatorProps> = () => {
 
 interface ScenarioDetailNavigatorProps {}
 
-const ScenarioDetailNavigator: FC<ScenarioDetailNavigatorProps> = () => {
+export const ScenarioDetailNavigator: FC<ScenarioDetailNavigatorProps> = () => {
   const { t } = useTranslation();
 
   const classes = useStyles();
@@ -257,7 +263,7 @@ interface ScenarioControlProps {
   rightTimelineId?: string;
 }
 
-const ScenarioControl: FC<ScenarioControlProps> = (
+export const ScenarioControlOrg: FC<ScenarioControlProps> = (
   // eslint-disable-next-line no-empty-pattern
   { leftTimelineId, rightTimelineId }
 ) => {
@@ -302,6 +308,41 @@ const ScenarioControl: FC<ScenarioControlProps> = (
   );
 };
 
+const ScenarioControl: FC<ScenarioControlProps> = ({
+  leftTimelineId,
+  rightTimelineId
+}) => {
+  const classes = useStyles();
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center'
+        }}
+      >
+        <Typography
+          style={{
+            margin: 0
+          }}
+          className={classes.heading}
+          gutterBottom={false}
+        >
+          Actions
+        </Typography>
+        <Help message={'Aktions used for the auto, and manual replay'} />
+      </div>
+
+      <ProgressiveStepBuilder
+        ltr
+        leftTimelineId={leftTimelineId}
+        rightTimelineId={rightTimelineId}
+      />
+    </div>
+  );
+};
+
 interface FlowControl {
   leftTimelineId: string;
   rightTimelineId: string;
@@ -324,8 +365,8 @@ export const FlowControl: FC<FlowControl> = ({
         leftTimelineId={leftTimelineId}
         rightTimelineId={rightTimelineId}
       />
-      <ScenarioNavigator />
-      <ScenarioDetailNavigator />
+      {/* <ScenarioNavigator />
+      <ScenarioDetailNavigator /> */}
     </FlowControlObserver>
   ) : (
     <>
@@ -333,8 +374,8 @@ export const FlowControl: FC<FlowControl> = ({
         leftTimelineId={leftTimelineId}
         rightTimelineId={rightTimelineId}
       />
-      <ScenarioNavigator />
-      <ScenarioDetailNavigator />
+      {/* <ScenarioNavigator />
+      <ScenarioDetailNavigator /> */}
     </>
   );
 };

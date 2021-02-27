@@ -1,4 +1,3 @@
-import { getTopics } from '@demonstrators-social/flow';
 import {
   Avatar,
   IconButton,
@@ -11,7 +10,6 @@ import {
 import { green } from '@material-ui/core/colors';
 import FolderIcon from '@material-ui/icons/Folder';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
-import get from 'lodash/get';
 import { FC } from 'react';
 
 import { PlayListItem } from '../../types';
@@ -37,7 +35,6 @@ export const Playlist: FC<PlaylistProps> = ({
   return (
     <List dense>
       {playlist.map(value => {
-        const topicDescriptor = get(getTopics(), value.id);
         return (
           <ListItem key={value.id}>
             <ListItemAvatar>
@@ -45,10 +42,7 @@ export const Playlist: FC<PlaylistProps> = ({
                 <FolderIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText
-              primary={topicDescriptor.title}
-              secondary={topicDescriptor.subTitle}
-            />
+            <ListItemText primary={value.title} secondary={value.description} />
             <ListItemSecondaryAction>
               <IconButton
                 edge='end'

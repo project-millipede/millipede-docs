@@ -1,5 +1,5 @@
 import { usePrevious } from 'ahooks';
-import { motion, useAnimation } from 'framer-motion';
+import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import React, { FC, useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { measure, measureOffset } from './Cursor.svc';
@@ -71,40 +71,42 @@ export const Cursor: FC<CursorProps> = ({ selector }) => {
   };
 
   return (
-    <motion.div
-      key={`animate-${selector}`}
-      style={{
-        position: 'absolute',
-        top: previousCoordinates ? previousCoordinates.y : 0,
-        left: previousCoordinates ? previousCoordinates.x : 0
-      }}
-      animate={{
-        x: distance.x,
-        y: distance.y
-      }}
-      transition={{ type: 'spring', damping: 20, stiffness: 150 }}
-      onAnimationStart={onStart}
-      onAnimationComplete={onComplete}
-    >
+    <AnimatePresence>
       <motion.div
+        key={`animate-${selector}`}
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: coordinates.width,
-          height: coordinates.height
+          position: 'absolute',
+          top: previousCoordinates ? previousCoordinates.y : 0,
+          left: previousCoordinates ? previousCoordinates.x : 0
         }}
-        variants={cursorVariant}
-        animate={cursorVisiblityControl}
+        animate={{
+          x: distance.x,
+          y: distance.y
+        }}
+        transition={{ type: 'spring', damping: 20, stiffness: 150 }}
+        onAnimationStart={onStart}
+        onAnimationComplete={onComplete}
       >
-        <CircleShape
-          ref={cursorRef}
-          radius={mRadius}
-          fillColor={mFillColor}
-          strokeColor={mStrokeColor}
-          strokeWidth={mStrokeWidth}
-        />
+        <motion.div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: coordinates.width,
+            height: coordinates.height
+          }}
+          variants={cursorVariant}
+          animate={cursorVisiblityControl}
+        >
+          <CircleShape
+            ref={cursorRef}
+            radius={mRadius}
+            fillColor={mFillColor}
+            strokeColor={mStrokeColor}
+            strokeWidth={mStrokeWidth}
+          />
+        </motion.div>
       </motion.div>
-    </motion.div>
+    </AnimatePresence>
   );
 };
