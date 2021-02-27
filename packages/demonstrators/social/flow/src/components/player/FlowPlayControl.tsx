@@ -55,7 +55,7 @@ const StepsRangeWrapper: FC<FlowPlayControlProps> = ({ steps, topic }) => {
     <Portal.PortalIn portalType={Portal.PortalType.Cursor}>
       {playing &&
       !isFunction(selector) &&
-      !StringUtil.isEmptyString(selector) ? (
+      !StringUtil.isEmptyString(selector as string) ? (
         <Cursor selector={`#${selector}`} />
       ) : null}
     </Portal.PortalIn>

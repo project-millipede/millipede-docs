@@ -46,10 +46,10 @@ export const ProgressControl: FC<ProgressControlProps> = ({ steps }) => {
         const { stepIndex } = getStepByTime(stepsWithDuration, value as number);
         stepDispatch({ type: 'SEEK', target: stepIndex });
       }}
-      marks={stepsWithDuration.map(s => {
+      marks={stepsWithDuration.map(step => {
         return {
-          value: s.end,
-          label: s.label
+          value: step.end,
+          label: step.label
         };
       })}
       max={totalSeconds}

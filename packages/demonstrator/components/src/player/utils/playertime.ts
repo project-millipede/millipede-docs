@@ -1,10 +1,6 @@
 import inRange from 'lodash/inRange';
 
-type Step = {
-  start: number;
-  end: number;
-  label: string;
-};
+import { Step } from '../types';
 
 export type AbsoluteStep = Step & {
   duration: number;
@@ -31,7 +27,7 @@ export const getStepByTime = (steps: Array<AbsoluteStep>, value: number) => {
 export const getTimeData = (steps: Array<Step>) => {
   let cumulativeDuration = 0;
   const stepsWithDuration =
-    steps.map(step => {
+    steps.map<AbsoluteStep>(step => {
       const duration = step.end - step.start;
       cumulativeDuration += duration;
       return {
