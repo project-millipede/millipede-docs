@@ -8,7 +8,7 @@
     "declarationMap": true,
     "sourceMap": true,
     "target": "ES6",
-    "module": "commonjs",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "lib": ["DOM", "DOM.Iterable", "ESNext.Array"]
   },
