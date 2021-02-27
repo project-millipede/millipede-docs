@@ -41,13 +41,13 @@ export const areBoundsEqual = (
 export const useMeasure = ({
   debounce = 60,
   callBack
-}: Options): [EffectRef<HTMLElement>, Partial<DOMRect>] => {
+}: Options): [EffectRef<HTMLElement>, Partial<DOMRect>, Partial<DOMRect>] => {
   const [bounds, setBounds] = useState<Partial<DOMRect>>({
     top: 0,
     height: 0
   });
 
-  const [, setSize] = useState({
+  const [size, setSize] = useState({
     width: 0,
     height: 0
   });
@@ -160,5 +160,5 @@ export const useMeasure = ({
 
   useEffect(() => removeListeners, []);
 
-  return [ref, bounds];
+  return [ref, bounds, size];
 };

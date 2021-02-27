@@ -4,5 +4,11 @@ export interface Step {
   label: string;
   selector: string;
   description: string;
-  timelineId?: string;
+}
+
+export interface PlayListItem {
+  id: string;
+  title: string;
+  description: string;
+  steps: Array<Step>;
 }
