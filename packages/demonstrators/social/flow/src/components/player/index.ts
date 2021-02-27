@@ -1,2 +1,2 @@
 export { FlowPlayControl } from './FlowPlayControl';
-export { getSteps, getTopics } from './FlowPlayControl.cfg';
+export { getSteps } from './FlowPlayControl.cfg';

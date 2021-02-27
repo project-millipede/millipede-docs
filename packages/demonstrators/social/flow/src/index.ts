@@ -4,8 +4,7 @@ export {
   ArcherSurfaceObserver,
   FlowControlObserver,
   FlowPlayControl,
-  getSteps,
-  getTopics
+  getSteps
 } from './components';
 export { FlowControl } from './FlowControl';
 export * as Components from './components';
