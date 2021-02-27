@@ -1,5 +1,4 @@
 import { getTopics } from '@demonstrators-social/flow';
-import { PlayListItem } from '@demonstrators-social/shared/src/recoil/features/player/playlist/reducer';
 import {
   Avatar,
   IconButton,
@@ -14,6 +13,8 @@ import FolderIcon from '@material-ui/icons/Folder';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import get from 'lodash/get';
 import { FC } from 'react';
+
+import { PlayListItem } from '../../types';
 
 interface PlaylistProps {
   playlist: Array<PlayListItem>;
