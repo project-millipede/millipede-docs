@@ -1,6 +1,7 @@
 import { RenderUtils } from '@app/render-utils';
 import { useEffectRef } from '@huse/effect-ref';
 import { Button, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import SendIcon from '@material-ui/icons/Send';
 import { useWindupString } from '@project-millipede/windups';
 import { ContentState, Editor, EditorState } from 'draft-js';
 import elementResizeDetectorMaker from 'element-resize-detector';
@@ -60,8 +61,6 @@ export const CommentEditor: FC<CommentEditorProps> = ({
     }`
   );
   const contentEmpty = t('pages/pidp/use-case/recognition/index:content_empty');
-
-  // const contentInput = t('pages/pidp/use-case/recognition/index:content_input');
 
   const [commentState, setCommentState] = useState(() =>
     EditorState.createEmpty()
@@ -137,14 +136,27 @@ export const CommentEditor: FC<CommentEditorProps> = ({
           {contentEmpty}
         </Typography>
       )}
-      <Button
-        variant='text'
-        color='primary'
-        onClick={handlePostComment}
-        id={`timeline-${timelineId}-content-post`}
+
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
       >
-        {postButtonTitle}
-      </Button>
+        <Button
+          id={`timeline-${timelineId}-content-post`}
+          variant='text'
+          color='primary'
+          startIcon={<SendIcon />}
+          onClick={handlePostComment}
+          style={{
+            textTransform: 'none'
+          }}
+        >
+          {postButtonTitle}
+        </Button>
+      </div>
     </div>
   );
 };
