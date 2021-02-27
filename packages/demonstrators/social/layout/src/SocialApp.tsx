@@ -4,7 +4,7 @@ import { HooksUtils } from '@app/render-utils';
 import { StringUtil } from '@app/utils';
 import { Player, StepProvider } from '@demonstrator/components';
 import { generateData, Types } from '@demonstrators-social/data';
-import { FlowControl, FlowControlObserver, FlowPlayControl, FlowSurface, getStepsX } from '@demonstrators-social/flow';
+import { FlowControl, FlowControlObserver, FlowPlayControl, FlowSurface, getSteps } from '@demonstrators-social/flow';
 import { actions, RootState, selectors, TimelineActions } from '@demonstrators-social/shared';
 import { IconButton } from '@material-ui/core';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
@@ -93,7 +93,7 @@ export const SocialApp: FC = () => {
 
   const playlist = useMemo(() => {
     if (state.timeline != null) {
-      const steps = getStepsX(state);
+      const steps = getSteps(state);
       return steps;
     }
     return [];
