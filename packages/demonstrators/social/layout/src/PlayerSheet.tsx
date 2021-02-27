@@ -110,7 +110,7 @@ export const PlayerSheet: FC<PlayerSheetProps> = ({
               >
                 Actions
               </Typography>
-              <Help message={'hello world'} />
+              <Help message={'Aktions used for the auto, and manual replay'} />
             </div>
 
             <FlowComponents.Navigation.ProgressiveStepBuilder
