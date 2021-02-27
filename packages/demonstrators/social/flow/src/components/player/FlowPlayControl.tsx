@@ -1,21 +1,12 @@
 import { Portal } from '@app/components';
-import {
-  Player,
-  PlayerHooks,
-  PlayerTypes,
-  PlayerUtils,
-  StepProvider,
-  useStepDispatch,
-  useStepState,
-} from '@demonstrator/components';
+import { Player, useStepDispatch, useStepState } from '@demonstrator/components';
+import { Step } from '@demonstrator/components/src/player/types';
 import dynamic from 'next/dynamic';
-import React, { FC, useEffect, useState } from 'react';
-
-import { getSteps } from './FlowPlayControl.cfg';
+import React, { FC, useEffect, useMemo } from 'react';
 
 interface FlowPlayControlProps {
-  leftTimelineId: string;
-  rightTimelineId: string;
+  steps: Array<Step>;
+  topic: string;
 }
 
 const Cursor = dynamic(
@@ -23,57 +14,40 @@ const Cursor = dynamic(
   { ssr: false }
 );
 
-export const FlowPlayControl: FC<FlowPlayControlProps> = ({
-  leftTimelineId,
-  rightTimelineId
-}) => {
-  return (
-    <StepProvider>
-      <StepsRangeWrapper
-        leftTimelineId={leftTimelineId}
-        rightTimelineId={rightTimelineId}
-      />
-    </StepProvider>
-  );
+export const FlowPlayControl: FC<FlowPlayControlProps> = ({ steps, topic }) => {
+  return <StepsRangeWrapper topic={topic} steps={steps} />;
 };
 
-const StepsRangeWrapper: FC<FlowPlayControlProps> = ({
-  leftTimelineId,
-  rightTimelineId
-}) => {
+const StepsRangeWrapper: FC<FlowPlayControlProps> = ({ steps, topic }) => {
   const { target, playing, maxStepsCount } = useStepState();
 
   const stepDispatch = useStepDispatch();
 
-  const [steps, setSteps] = useState<Array<PlayerTypes.Step>>([]);
-
   useEffect(() => {
     if (maxStepsCount === 0 && playing) {
-      const steps = getSteps(leftTimelineId, rightTimelineId).standard;
       stepDispatch({ type: 'INIT', maxStepsCount: steps.length });
-      setSteps(steps);
     }
-  }, [leftTimelineId, rightTimelineId, maxStepsCount, playing]);
+  }, [maxStepsCount, playing, topic]);
 
   const activeStep = steps[target];
+  const { stepsWithDuration } = Player.Utils.playertime.getTimeData(steps);
 
-  const { stepsWithDuration } = PlayerUtils.playertime.getTimeData(steps);
-
-  const { duration } =
-    stepsWithDuration.length > 0 ? stepsWithDuration[target] : { duration: 0 };
+  const duration = useMemo(() => {
+    const { duration } =
+      stepsWithDuration && stepsWithDuration.length > 0 && target >= 0
+        ? stepsWithDuration[target]
+        : { duration: 0 };
+    return duration;
+  }, [target]);
 
   // does the heavy lifting
-  PlayerHooks.useStepsProgress(duration);
+  Player.Hooks.useStepsProgress(duration);
 
   return (
-    <>
-      <Player steps={steps} />
-
-      <Portal.PortalIn portalType={Portal.PortalType.Cursor}>
-        {playing && activeStep ? (
-          <Cursor selector={`#${activeStep?.selector}`} />
-        ) : null}
-      </Portal.PortalIn>
-    </>
+    <Portal.PortalIn portalType={Portal.PortalType.Cursor}>
+      {playing && activeStep ? (
+        <Cursor selector={`#${activeStep?.selector}`} />
+      ) : null}
+    </Portal.PortalIn>
   );
 };

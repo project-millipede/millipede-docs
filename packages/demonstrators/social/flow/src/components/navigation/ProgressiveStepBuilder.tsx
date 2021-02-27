@@ -1,7 +1,9 @@
 import { useHoux } from '@app/houx';
 import { CollectionUtil } from '@app/utils';
 import { RootState, scrollActions, scrollStates, ScrollTypes, selectors } from '@demonstrators-social/shared';
-import { Button } from '@material-ui/core';
+import { Button, ButtonGroup } from '@material-ui/core';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import SettingsBackupRestoreIcon from '@material-ui/icons/SettingsBackupRestore';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -32,6 +34,10 @@ export const ProgressiveStepBuilder: FC<ProgressiveStepBuilderProps> = ({
     nodesWithRelationsWithEdge,
     setNodesWithRelationsWithEdge
   ] = useRecoilState(nodesWithRelationsWithEdgeState);
+
+  // const resetNodesWithRelationsWithEdgeState = useResetRecoilState(
+  //   nodesWithRelationsWithEdgeState
+  // );
 
   const { counter } = nodesWithRelationsWithEdge;
 
@@ -118,13 +124,39 @@ export const ProgressiveStepBuilder: FC<ProgressiveStepBuilderProps> = ({
     }
   };
 
+  const handleReset = (
+    _event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    // resetNodesWithRelationsWithEdgeState();
+    setNodesWithRelationsWithEdge(state => {
+      return {
+        ...state,
+        counter: 0
+      };
+    });
+  };
+
   return (
-    <Button
-      id={`progressiveStepBuilder-${counter}`}
-      onClick={handleCreate}
-      disabled={counter === publishActions.length}
-    >
-      add {publishActions[counter]}
-    </Button>
+    <ButtonGroup variant='text' color='primary' size='large' fullWidth>
+      <Button
+        id={`progressiveStepBuilder-reset`}
+        onClick={handleReset}
+        variant='text'
+        color='primary'
+        startIcon={<SettingsBackupRestoreIcon />}
+      >
+        Reset
+      </Button>
+      <Button
+        id={`progressiveStepBuilder-${counter}`}
+        onClick={handleCreate}
+        // disabled={counter === publishActions.length}
+        variant='text'
+        color='primary'
+        startIcon={<AddCircleOutlineIcon />}
+      >
+        add {publishActions[counter]}
+      </Button>
+    </ButtonGroup>
   );
 };
