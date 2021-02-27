@@ -77,7 +77,8 @@ export const Cursor: FC<CursorProps> = ({ selector }) => {
         style={{
           position: 'absolute',
           top: previousCoordinates ? previousCoordinates.y : 0,
-          left: previousCoordinates ? previousCoordinates.x : 0
+          left: previousCoordinates ? previousCoordinates.x : 0,
+          zIndex: 100
         }}
         animate={{
           x: distance.x,

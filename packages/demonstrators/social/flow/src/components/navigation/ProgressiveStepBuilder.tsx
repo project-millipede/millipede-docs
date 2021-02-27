@@ -16,8 +16,6 @@ interface ProgressiveStepBuilderProps {
   ltr: boolean;
 }
 
-export const ns = 'pages/pidp/use-case/recognition/index';
-
 export const ProgressiveStepBuilder: FC<ProgressiveStepBuilderProps> = ({
   leftTimelineId,
   rightTimelineId,
