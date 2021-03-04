@@ -8,9 +8,8 @@ const checkForComponentUse = (tagName: string, content: string) => {
 // Contains the list of components that can be embed in MDX files
 const components = {
   Tag: dynamic(() => import('@app/components').then(module => module.Tag)),
-  PDF: dynamic(
-    () => import('@app/components').then(module => module.Pdf.StepperContent),
-    { ssr: false }
+  PDF: dynamic(() =>
+    import('@app/components').then(module => module.Pdf.StepperContent)
   ),
   Demonstrator: dynamic(() =>
     import('@demonstrators-social/layout').then(module => module.Demonstrator)

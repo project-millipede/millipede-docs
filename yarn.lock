@@ -3411,7 +3411,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/pdfjs-dist@npm:*":
+"@types/pdfjs-dist@npm:*, @types/pdfjs-dist@npm:^2.1.7":
   version: 2.1.7
   resolution: "@types/pdfjs-dist@npm:2.1.7"
   checksum: ea39ddd1d03de49d525b413da03a38414d1c3f78bd6b201ca92ce748f36296c7f149aa453dfd1dc2df28405e0629bda9c79529b3c7d84c9f84f631dbe2a33e8a
@@ -9596,6 +9596,7 @@ __metadata:
     "@types/jest": ^26.0.20
     "@types/lodash": ^4.14.168
     "@types/node": ^14.14.31
+    "@types/pdfjs-dist": ^2.1.7
     "@types/react": ^17.0.2
     "@types/react-dom": ^17.0.1
     "@types/react-pdf": ^5.0.1
