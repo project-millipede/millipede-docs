@@ -6,6 +6,13 @@ import { SizeMe } from 'react-sizeme';
 
 import { Stepper, TranslationProps } from '../stepper/Stepper';
 
+const PDFWorker = dynamic(
+  () => import('./PDFWorker').then(module => module.PDFWorker),
+  {
+    ssr: false
+  }
+);
+
 const Document = dynamic<DocumentProps>(
   () => import('react-pdf').then(module => module.Document),
   { ssr: false }
@@ -17,10 +24,6 @@ const Page = dynamic<PageProps>(
     ssr: false
   }
 );
-
-import('react-pdf').then(({ pdfjs }) => {
-  pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-});
 
 export type StepperContentWithTranslationProps = TranslationProps & {
   url: string;
@@ -58,12 +61,14 @@ export const StepperContent: FC<StepperContentWithTranslationProps> = ({
                 margin: '24px'
               }}
             >
-              <Document file={url} onLoadSuccess={onDocumentLoadSuccess}>
-                <Page
-                  pageNumber={step + 1}
-                  width={size.width ? size.width : 1}
-                />
-              </Document>
+              <PDFWorker>
+                <Document file={url} onLoadSuccess={onDocumentLoadSuccess}>
+                  <Page
+                    pageNumber={step + 1}
+                    width={size.width ? size.width : 1}
+                  />
+                </Document>
+              </PDFWorker>
             </div>
           )}
         </SizeMe>
