@@ -6,7 +6,7 @@ import AnimationControls from './AnimationControls';
 import AnimationHead from './AnimationHead';
 import { DeviceControls, PrimaryAnimationControls, SecondaryAnimationControls } from './PrimaryAnimationControls';
 
-const Root = styled('div')``;
+const Root = styled.div``;
 
 export const Container: FC = props => {
   const { t } = useTranslation();
