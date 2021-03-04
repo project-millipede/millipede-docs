@@ -69,6 +69,7 @@
     "@project-millipede/windups": "^1.1.12",
     "@rest-hooks/normalizr": "^5.0.6",
     "@stefanprobst/next-svg": "^1.0.4",
+    "@types/pdfjs-dist": "^2.1.7",
     "@types/resize-observer-browser": "^0.1.5",
     "@vangware/window-open-promise": "^4.0.10",
     "ahooks": "^2.9.6",

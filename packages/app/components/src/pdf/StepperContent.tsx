@@ -1,11 +1,26 @@
 import { Button, Grid } from '@material-ui/core';
+import dynamic from 'next/dynamic';
 import React, { FC, useState } from 'react';
-import { Document, Page, pdfjs } from 'react-pdf';
+import { DocumentProps, PageProps } from 'react-pdf';
 import { SizeMe } from 'react-sizeme';
 
 import { Stepper, TranslationProps } from '../stepper/Stepper';
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+const Document = dynamic<DocumentProps>(
+  () => import('react-pdf').then(module => module.Document),
+  { ssr: false }
+);
+
+const Page = dynamic<PageProps>(
+  () => import('react-pdf').then(module => module.Page),
+  {
+    ssr: false
+  }
+);
+
+import('react-pdf').then(({ pdfjs }) => {
+  pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+});
 
 export type StepperContentWithTranslationProps = TranslationProps & {
   url: string;
