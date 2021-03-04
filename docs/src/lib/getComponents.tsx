@@ -7,10 +7,14 @@ const checkForComponentUse = (tagName: string, content: string) => {
 
 // Contains the list of components that can be embed in MDX files
 const components = {
+  Tag: dynamic(() => import('@app/components').then(module => module.Tag)),
+  PDF: dynamic(
+    () => import('@app/components').then(module => module.Pdf.StepperContent),
+    { ssr: false }
+  ),
   Demonstrator: dynamic(() =>
     import('@demonstrators-social/layout').then(module => module.Demonstrator)
   ),
-  Tag: dynamic(() => import('@app/components').then(module => module.Tag)),
   InterdisciplinaryApproach: dynamic(() =>
     import('@page/illustrations').then(
       module => module.Components.Perspective.Strategy.InterdisciplinaryApproach
@@ -39,10 +43,12 @@ const components = {
       module => module.Components.Pidp.Approach.ByExample.ByExample
     )
   ),
-  Board: dynamic(() =>
-    import('@page/illustrations').then(
-      module => module.Components.DiscoverMore.Team.Board
-    )
+  Board: dynamic(
+    () =>
+      import('@page/illustrations').then(
+        module => module.Components.DiscoverMore.Team.Board
+      ),
+    { ssr: false }
   ),
   Concept1: dynamic(() =>
     import('@page/illustrations').then(

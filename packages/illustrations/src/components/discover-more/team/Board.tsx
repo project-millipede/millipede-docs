@@ -3,8 +3,10 @@ import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { GitHub, LinkedIn } from '@material-ui/icons';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 import React, { FC } from 'react';
 
 export const getActiveCoreMembers = (t: Translate) => [
@@ -44,6 +46,15 @@ interface GroupProps {
 
 const Group: FC<GroupProps> = ({ title, members }) => {
   const classes = useStyles();
+
+  const { push } = useRouter();
+
+  const handleSelect = (link: string) => {
+    push({
+      pathname: '/docs/[...slug]',
+      query: { slug: link.split('/') }
+    });
+  };
 
   return (
     <div>
@@ -88,6 +99,14 @@ const Group: FC<GroupProps> = ({ title, members }) => {
                         <LinkedIn />
                       </IconButton>
                     )}
+                    <IconButton
+                      key={`discover-more/team/cv`}
+                      onClick={_e => {
+                        handleSelect('discover-more/team/cv');
+                      }}
+                    >
+                      <AssignmentIcon />
+                    </IconButton>
                   </div>
                 </div>
               </div>
