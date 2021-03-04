@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode } from 'react';
+import { CSSProperties, ReactNode, SVGProps } from 'react';
 
 export type AnchorPosition = 'top' | 'bottom' | 'left' | 'right' | 'middle';
 
@@ -50,7 +50,7 @@ export interface ArcherContainerProps {
   /**
    * Style of the SVG container element. Useful if you want to add a z-index to your SVG container to draw the arrows under your elements, for example.
    */
-  svgContainerStyle?: CSSProperties;
+  svgElementProps?: SVGProps<SVGSVGElement>;
 
   className?: string;
 

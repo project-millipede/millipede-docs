@@ -1,4 +1,4 @@
-import React, { forwardRef, ForwardRefRenderFunction, useRef } from 'react';
+import React, { CSSProperties, forwardRef, ForwardRefRenderFunction, SVGProps, useRef } from 'react';
 
 import { useRefState } from './context/RefProvider';
 import { useTransitionState } from './context/TransitionProvider';
@@ -46,7 +46,7 @@ const getSourceToTargets = (sourceToTargetsMap: {
   return flattened;
 };
 
-const defaultSvgContainerStyle = {
+const defaultSvgContainerStyle: CSSProperties = {
   position: 'absolute',
   width: '100%',
   height: '100%',
@@ -75,7 +75,7 @@ export const ArcherSurface: ForwardRefRenderFunction<
     strokeDasharray,
     noCurves,
     style,
-    svgContainerStyle = {},
+    svgElementProps,
     className,
     offset,
     children,
@@ -123,9 +123,11 @@ export const ArcherSurface: ForwardRefRenderFunction<
     return new Point(0, 0);
   };
 
-  const getSvgContainerStyle = () => ({
-    ...defaultSvgContainerStyle,
-    ...svgContainerStyle
+  const getSvgContainerStyle = (): SVGProps<SVGSVGElement> => ({
+    style: {
+      ...defaultSvgContainerStyle
+    },
+    ...svgElementProps
   });
 
   const computeArrows = () => {
@@ -232,7 +234,7 @@ export const ArcherSurface: ForwardRefRenderFunction<
         {children}
       </div>
 
-      <svg style={getSvgContainerStyle() as any}>
+      <svg {...getSvgContainerStyle()}>
         <defs>{generateAllArrowMarkers()}</defs>
         {computeArrows()}
       </svg>

@@ -70,7 +70,7 @@ export interface OverviewProps {
   link?: string;
   scenario?: string;
   category?: string;
-  icon?: string;
+  icon?: Icon;
   order?: number;
   userFocus?: number;
   contextLink?: ContextLink;

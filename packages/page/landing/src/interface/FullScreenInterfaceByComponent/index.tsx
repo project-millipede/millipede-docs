@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Window from '../windowByComponent';
 
-const Container = styled('div')`
+const Container = styled.div`
   height: 100%;
   width: 100%;
 `;

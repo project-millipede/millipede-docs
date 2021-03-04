@@ -150,7 +150,7 @@ export const Item = ({
               handleSelect(link);
             }}
           >
-            {getIconByName((icon as any).name)}
+            {getIconByName(icon.name)}
           </IconButton>
         </Avatar>
       ) : null}
