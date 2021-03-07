@@ -67,24 +67,21 @@ export const TopicsViewDesktop: FC<TopicsViewDesktopProps> = ({ topics }) => {
 
   return (
     <Grid container>
-      {topics.length > 0
+      {topics && topics.length > 0
         ? topics.map((topic, index) => {
             return (
               <Grid
-                key={`topic-${index}`}
                 item
+                key={`topic-${index}`}
                 xs={12}
                 md={index <= 1 ? 6 : 12}
               >
                 <div className={classes.container}>
-                  <div className={classes.container}>
-                    <TopReveal
-                      id={`animation-${index}`}
-                      text={[...topic.title, ...topic.subTitle]}
-                      outerIndex={0}
-                      loop={false}
-                    />
-                  </div>
+                  <TopReveal
+                    id={`animation-${index}`}
+                    text={[...topic.title, ...topic.subTitle]}
+                    loop={false}
+                  />
                   <div className={classes.container}>
                     {topic.contextLink
                       ? topic.contextLink.sections.map((section, index) => {

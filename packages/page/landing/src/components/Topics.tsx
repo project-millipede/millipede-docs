@@ -78,7 +78,7 @@ export const Topics: FC<TopicsProps> = ({ feature, aspect }) => {
                     {categoryData.map((data, index) => {
                       const { title, description, link, icon } = data;
                       return (
-                        <Grid key={index} item xs={12} md={6}>
+                        <Grid item key={index} xs={12} md={6}>
                           <Item
                             title={title}
                             description={description}

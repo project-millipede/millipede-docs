@@ -6,7 +6,13 @@ import { Components } from '@page/layout';
 import { GetStaticPropsContext } from 'next';
 import loadNamespaces from 'next-translate/loadNamespaces';
 import useTranslation from 'next-translate/useTranslation';
+import dynamic from 'next/dynamic';
 import React, { FC } from 'react';
+
+const TopicsHead = dynamic(
+  () => import('@page/landing').then(module => module.Components.TopicsHead),
+  { ssr: false }
+);
 
 loadFAIcons();
 
@@ -51,7 +57,8 @@ const Index: FC = () => {
           <Typography variant='h4' gutterBottom className={classes.subtitle}>
             {t('common:application-subtitle')}
           </Typography>
-          <ComponentsLanding.TopicsHead />
+
+          <TopicsHead />
           <ComponentsLanding.TopicsDetail />
 
           <Components.HomeFooter />
