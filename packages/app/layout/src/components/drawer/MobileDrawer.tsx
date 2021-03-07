@@ -1,5 +1,6 @@
 import { Link } from '@app/components';
-import { createStyles, Divider, IconButton, makeStyles, SwipeableDrawer, Theme, Typography } from '@material-ui/core';
+import { MAX_DRAWER_WIDTH, TOOLBAR_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
+import { createStyles, Divider, IconButton, makeStyles, SwipeableDrawer, Typography } from '@material-ui/core';
 import { ChevronLeft } from '@material-ui/icons';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
@@ -9,42 +10,16 @@ import { useRecoilValue } from 'recoil';
 import { navigationState } from '../../recoil/features/pages/reducer';
 import { Tree } from '../tree';
 
-const drawerWidth = 280;
-
-const useDrawerStyles = makeStyles((theme: Theme) =>
+const useDrawerStyles = makeStyles(() =>
   createStyles({
-    drawer: {
-      [theme.breakpoints.up('lg')]: {
-        flexShrink: 0,
-        width: `${drawerWidth}px`
-      },
-      whiteSpace: 'nowrap'
-    },
-
-    // drawer: {
-    //   width: drawerWidth,
-    //   flexShrink: 0,
-    //   whiteSpace: 'nowrap'
-    // },
-
     toolbar: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-end',
-      // at original
-      // padding: theme.spacing(0, 1),
-      padding: '0 8px'
-      //   ...theme.mixins.toolbar
+      minHeight: TOOLBAR_HEIGHT
     },
-    toolbarTitle: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      padding: '0 8px'
-      //   ...theme.mixins.toolbar
-    },
-    paper: {
-      width: drawerWidth
+    paperMobile: {
+      width: MAX_DRAWER_WIDTH
     }
   })
 );
@@ -70,11 +45,21 @@ export const MobileDrawer: FC<MobileDrawerProps> = ({
 
   const { pages, activePage, flattenedPages } = navigation;
 
+  const treeComp =
+    activePage != null ? (
+      <Tree
+        pages={pages}
+        flattenedPages={flattenedPages}
+        pathname={asPath}
+        activePage={activePage}
+      />
+    ) : null;
+
   return pages && pages.length > 0 ? (
     <SwipeableDrawer
       variant='temporary'
       classes={{
-        paper: classes.paper
+        paper: classes.paperMobile
       }}
       open={isDrawerExpanded}
       onClose={handleDrawerClose}
@@ -92,22 +77,16 @@ export const MobileDrawer: FC<MobileDrawerProps> = ({
           }
           onClick={handleDrawerClose}
         >
-          <Typography variant='h6' className={classes.toolbarTitle}>
-            {t('common:application-title')}
-          </Typography>
+          <Typography variant='h6'>{t('common:application-title')}</Typography>
         </Link>
 
         <IconButton onClick={handleDrawerClose}>
           <ChevronLeft />
         </IconButton>
       </div>
+
       <Divider />
-      <Tree
-        pages={pages}
-        flattenedPages={flattenedPages}
-        pathname={asPath}
-        activePage={activePage}
-      />
+      {treeComp}
     </SwipeableDrawer>
   ) : null;
 };

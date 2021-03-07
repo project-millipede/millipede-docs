@@ -1,24 +1,23 @@
+import { TOC_TOP, TOC_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
 import { TocComponent } from './toc';
 
-export const WIDTH_TOC = 225;
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: WIDTH_TOC,
-      top: 96,
+      width: TOC_WIDTH,
+      top: TOC_TOP,
       order: 2,
       flexShrink: 0,
       position: 'sticky',
-      height: 'calc(100% - 96px)',
+      height: `calc(100% - ${TOC_TOP}px)`,
       margin: theme.spacing(1),
       overflowY: 'auto',
       display: 'none',
-      [theme.breakpoints.up('sm')]: {
+      [theme.breakpoints.up('md')]: {
         display: 'block'
       },
       '& ul': {

@@ -1,20 +1,22 @@
 import { Portal } from '@app/components';
+import { layoutState, MAX_DRAWER_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
 import { AppBar } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback } from 'react';
+import { useRecoilState } from 'recoil';
 
 import { AppDrawer } from './AppDrawer';
 import { AppToolBar } from './AppToolBar';
 import { HideOnScroll } from './HideOnScroll';
 
+// import dynamic from 'next/dynamic';
 // Warning - dynamic imports seem to destroy css server
 
-// import dynamic from 'next/dynamic';
 // import { AppDrawerProxy } from './AppDrawerProxy';
 // const AppDrawer = dynamic(() =>
-//   import('./AppDrawer').then(module => module.AppDrawer)
+//   import('./AppDrawerProxy').then(module => module.AppDrawerProxy)
 // );
 
 const useStyles = makeStyles(() =>
@@ -24,8 +26,6 @@ const useStyles = makeStyles(() =>
     }
   })
 );
-
-export const drawerWidth = 280;
 
 const useDrawerStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,8 +37,7 @@ const useDrawerStyles = makeStyles((theme: Theme) =>
       })
     },
     appBarShift: {
-      marginLeft: drawerWidth,
-      width: `calc(100% - ${drawerWidth}px)`,
+      width: `calc(100% - ${MAX_DRAWER_WIDTH}px)`,
       transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen
@@ -55,14 +54,24 @@ export const AppFrame: FC<AppFrameProps> = ({ children, isMobile }) => {
   const classes = useStyles();
   const drawerClasses = useDrawerStyles();
 
-  const [isDrawerExpanded, setIsDrawerExpanded] = useState(false);
+  const [{ isDrawerExpanded }, setLayout] = useRecoilState(layoutState);
 
   const handleDrawerOpen = useCallback(() => {
-    setIsDrawerExpanded(true);
+    setLayout(state => {
+      return {
+        ...state,
+        isDrawerExpanded: true
+      };
+    });
   }, []);
 
   const handleDrawerClose = useCallback(() => {
-    setIsDrawerExpanded(false);
+    setLayout(state => {
+      return {
+        ...state,
+        isDrawerExpanded: false
+      };
+    });
   }, []);
 
   return (
