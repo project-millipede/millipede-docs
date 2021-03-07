@@ -2,8 +2,8 @@ import { PageTypes } from '@app/types';
 import { Snackbar } from '@page/components';
 import React, { FC } from 'react';
 
-import { AppContent } from '../components/AppContent';
 import { AppContentFooter } from '../components/AppContentFooter';
+import { AppContentMobile } from '../components/AppContentMobile';
 import { AppHead } from '../components/AppHead';
 import { useMdxStyles } from './MDXStyles';
 
@@ -17,7 +17,7 @@ export const MdxDocsMobile: FC<MarkdownDocsProps> = ({ meta, children }) => {
   return (
     <>
       <AppHead meta={meta} />
-      <AppContent disableToc>
+      <AppContentMobile>
         {children && (
           <div className={classes.root}>
             {children}
@@ -25,7 +25,7 @@ export const MdxDocsMobile: FC<MarkdownDocsProps> = ({ meta, children }) => {
             <AppContentFooter />
           </div>
         )}
-      </AppContent>
+      </AppContentMobile>
     </>
   );
 };

@@ -1,15 +1,10 @@
-import {
-  createStyles,
-  IconButton,
-  makeStyles,
-  Toolbar,
-  Tooltip
-} from '@material-ui/core';
+import { createStyles, IconButton, makeStyles, Theme, Toolbar, Tooltip } from '@material-ui/core';
 import { GitHub, Menu } from '@material-ui/icons';
 import clsx from 'clsx';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
+import { TOOLBAR_HEIGHT } from '../recoil/features/layout/reducer';
 import { LanguageMenu } from './LanguageMenu';
 
 interface AppToolBarProps {
@@ -17,21 +12,17 @@ interface AppToolBarProps {
   handleDrawerOpen: () => void;
 }
 
-const useDrawerStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    menuButton: {
-      marginRight: 36
+    toolbar: {
+      minHeight: TOOLBAR_HEIGHT,
+      padding: theme.spacing(0, 3)
+    },
+    grow: {
+      flex: '1 1 auto'
     },
     hide: {
       display: 'none'
-    }
-  })
-);
-
-const useStyles = makeStyles(() =>
-  createStyles({
-    grow: {
-      flex: '1 1 auto'
     }
   })
 );
@@ -40,19 +31,18 @@ export const AppToolBar: FC<AppToolBarProps> = ({
   isDrawerExpanded,
   handleDrawerOpen
 }) => {
-  const drawerClasses = useDrawerStyles();
   const classes = useStyles();
 
   const { t } = useTranslation();
 
   return (
-    <Toolbar>
+    <Toolbar className={classes.toolbar}>
       <IconButton
         edge='start'
         color='inherit'
         onClick={handleDrawerOpen}
-        className={clsx(drawerClasses.menuButton, {
-          [drawerClasses.hide]: isDrawerExpanded
+        className={clsx({
+          [classes.hide]: isDrawerExpanded
         })}
       >
         <Menu />

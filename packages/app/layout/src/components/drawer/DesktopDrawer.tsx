@@ -1,4 +1,5 @@
 import { Link } from '@app/components';
+import { MAX_DRAWER_WIDTH, MIN_DRAWER_WIDTH, TOOLBAR_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
 import { createStyles, Divider, Drawer, IconButton, makeStyles, Theme, Typography } from '@material-ui/core';
 import { ChevronLeft } from '@material-ui/icons';
 import clsx from 'clsx';
@@ -10,57 +11,33 @@ import { useRecoilValue } from 'recoil';
 import { navigationState } from '../../recoil/features/pages/reducer';
 import { Tree } from '../tree';
 
-const drawerWidth = 280;
-
 const useDrawerStyles = makeStyles((theme: Theme) =>
   createStyles({
     drawer: {
-      width: drawerWidth,
-      flexShrink: 0,
+      width: MAX_DRAWER_WIDTH,
       whiteSpace: 'nowrap'
     },
-
-    // drawer: {
-    //   [theme.breakpoints.up('lg')]: {
-    //     flexShrink: 0,
-    //     width: `${drawerWidth}px`
-    //   },
-    //   whiteSpace: 'nowrap'
-    // },
-
     drawerOpen: {
-      width: drawerWidth,
+      overflowX: 'hidden',
+      width: MAX_DRAWER_WIDTH,
       transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen
       })
     },
     drawerClose: {
+      overflowX: 'hidden',
+      width: MIN_DRAWER_WIDTH,
       transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen
-      }),
-      overflowX: 'hidden',
-      width: theme.spacing(7),
-      [theme.breakpoints.up('sm')]: {
-        width: theme.spacing(9)
-      }
+      })
     },
     toolbar: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-end',
-      // at original
-      // padding: theme.spacing(0, 1),
-      padding: '0 8px',
-      ...theme.mixins.toolbar
-    },
-    toolbarTitle: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      padding: '0 8px',
-      ...theme.mixins.toolbar
+      minHeight: TOOLBAR_HEIGHT
     }
   })
 );
@@ -84,6 +61,16 @@ export const DesktopDrawer: FC<DesktopDrawerProps> = ({
 
   const { pages, activePage, flattenedPages } = navigation;
 
+  const treeComp =
+    activePage != null ? (
+      <Tree
+        pages={pages}
+        flattenedPages={flattenedPages}
+        pathname={asPath}
+        activePage={activePage}
+      />
+    ) : null;
+
   return pages && pages.length > 0 ? (
     <Drawer
       variant='permanent'
@@ -92,10 +79,7 @@ export const DesktopDrawer: FC<DesktopDrawerProps> = ({
         [classes.drawerClose]: !isDrawerExpanded
       })}
       classes={{
-        paper: clsx({
-          [classes.drawerOpen]: isDrawerExpanded,
-          [classes.drawerClose]: !isDrawerExpanded
-        })
+        paper: isDrawerExpanded ? classes.drawerOpen : classes.drawerClose
       }}
       open={isDrawerExpanded}
     >
@@ -108,9 +92,7 @@ export const DesktopDrawer: FC<DesktopDrawerProps> = ({
           }
           onClick={handleDrawerClose}
         >
-          <Typography variant='h6' className={classes.toolbarTitle}>
-            {t('common:application-title')}
-          </Typography>
+          <Typography variant='h6'>{t('common:application-title')}</Typography>
         </Link>
 
         <IconButton onClick={handleDrawerClose}>
@@ -118,12 +100,7 @@ export const DesktopDrawer: FC<DesktopDrawerProps> = ({
         </IconButton>
       </div>
       <Divider />
-      <Tree
-        pages={pages}
-        flattenedPages={flattenedPages}
-        pathname={asPath}
-        activePage={activePage}
-      />
+      {treeComp}
     </Drawer>
   ) : null;
 };

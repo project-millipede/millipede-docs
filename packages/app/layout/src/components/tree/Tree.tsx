@@ -84,15 +84,9 @@ const StyledTreeItem: FC<TreeItemProps> = props => {
 
 const useStylesTreeLabel = makeStyles((theme: Theme) =>
   createStyles({
-    listItemPadding: {
-      [theme.breakpoints.down('xs')]: {
-        paddingLeft: '16px',
-        paddingRight: '16px'
-      },
-      [theme.breakpoints.up('sm')]: {
-        paddingLeft: '24px',
-        paddingRight: '24px'
-      }
+    listItem: {
+      paddingLeft: theme.spacing(3),
+      paddingRight: theme.spacing(3)
     }
   })
 );
@@ -119,7 +113,7 @@ const TreeLabel: FC<TreeLabelProps> = ({
   }
 
   return (
-    <ListItem button className={classes.listItemPadding}>
+    <ListItem button className={classes.listItem}>
       <ListItemIcon>{getIconByName(icon.name)}</ListItemIcon>
       <ListItemText secondary={labelText} />
       {renderExpand}

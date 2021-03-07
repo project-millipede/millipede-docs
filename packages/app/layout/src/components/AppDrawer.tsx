@@ -1,4 +1,5 @@
 import { Link } from '@app/components';
+import { MAX_DRAWER_WIDTH, MIN_DRAWER_WIDTH, TOOLBAR_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
 import {
   createStyles,
   Divider,
@@ -7,7 +8,7 @@ import {
   makeStyles,
   SwipeableDrawer,
   Theme,
-  Typography
+  Typography,
 } from '@material-ui/core';
 import { ChevronLeft } from '@material-ui/icons';
 import clsx from 'clsx';
@@ -20,42 +21,36 @@ import { useRecoilValue } from 'recoil';
 import { navigationState } from '../recoil/features/pages/reducer';
 import { Tree } from './tree';
 
-const drawerWidth = 280;
-
 const useDrawerStyles = makeStyles((theme: Theme) =>
   createStyles({
     drawer: {
-      width: drawerWidth,
-      flexShrink: 0,
+      width: MAX_DRAWER_WIDTH,
       whiteSpace: 'nowrap'
     },
     drawerOpen: {
-      width: drawerWidth,
+      overflowX: 'hidden',
+      width: MAX_DRAWER_WIDTH,
       transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen
       })
     },
     drawerClose: {
+      overflowX: 'hidden',
+      width: MIN_DRAWER_WIDTH,
       transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen
-      }),
-      overflowX: 'hidden',
-      width: theme.spacing(7),
-      [theme.breakpoints.up('sm')]: {
-        width: theme.spacing(9)
-      }
+      })
     },
     toolbar: {
-      ...theme.mixins.toolbar,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-end',
-      padding: theme.spacing(0, 1)
+      minHeight: TOOLBAR_HEIGHT
     },
-    paper: {
-      width: drawerWidth
+    paperMobile: {
+      width: MAX_DRAWER_WIDTH
     }
   })
 );
@@ -95,7 +90,7 @@ export const AppDrawer: FC<AppDrawerProps> = ({
       <SwipeableDrawer
         variant='temporary'
         classes={{
-          paper: classes.paper
+          paper: classes.paperMobile
         }}
         disableBackdropTransition={!isIOS}
         open={isDrawerExpanded}
@@ -138,10 +133,7 @@ export const AppDrawer: FC<AppDrawerProps> = ({
           [classes.drawerClose]: !isDrawerExpanded
         })}
         classes={{
-          paper: clsx({
-            [classes.drawerOpen]: isDrawerExpanded,
-            [classes.drawerClose]: !isDrawerExpanded
-          })
+          paper: isDrawerExpanded ? classes.drawerOpen : classes.drawerClose
         }}
         open={isDrawerExpanded}
       >
