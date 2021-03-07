@@ -1,27 +1,31 @@
 import { StringUtil } from '@app/utils';
 import { Typography } from '@material-ui/core';
-import { motion, Variants } from 'framer-motion';
+import { AnimatePresence, motion, Variants } from 'framer-motion';
 import isArray from 'lodash/isArray';
 import React from 'react';
 
 interface TopRevealProps {
   id: string;
   text: Array<string> | string;
-
-  fontColor?: string;
-
   // input parameters for height calculation
   lineGap?: number;
   fontSize?: number;
-
+  fontColor?: string;
   // animation property
   stagger?: number;
   loop?: boolean;
-  outerIndex: number;
 }
 
 export const TopReveal = (props: TopRevealProps) => {
-  const { lineGap, fontSize, fontColor, stagger, text, id, loop } = props;
+  const {
+    id,
+    text,
+    lineGap = 0,
+    fontSize = 24,
+    fontColor = '#000000',
+    stagger = 0.3,
+    loop = true
+  } = props;
 
   const items = isArray(text) ? text : StringUtil.stringToArray(text);
 
@@ -33,8 +37,8 @@ export const TopReveal = (props: TopRevealProps) => {
 
   // Add staggering effect to the children of the line container
   const lineContainerVariants = {
-    before: {},
-    after: { transition: { delayChildren: stagger * items.length } }
+    before: { transition: { delayChildren: stagger } },
+    after: {}
   };
 
   // Variants for animating the text
@@ -80,86 +84,71 @@ export const TopReveal = (props: TopRevealProps) => {
   };
 
   return (
-    <motion.div
-      key={id}
-      style={{
-        size: '100%',
-        background: '',
-        position: 'relative'
-      }}
-    >
+    <AnimatePresence>
       <motion.div
+        key={id}
         style={{
-          width: '100%',
-          height: (fontSize * 1.5 + lineGap) * items.length * 2 + 24
+          position: 'relative'
         }}
-        initial={'before'}
-        animate={'after'}
-        variants={containerVariants}
       >
-        {items.map((item, i) => {
-          return (
-            <motion.div
-              key={i}
-              style={{
-                width: '100%',
-                height: fontSize * 1.5,
-                y: (fontSize * 1.5 + lineGap) * i,
-                overflow: 'hidden'
-              }}
-            >
-              <motion.div
-                style={{
-                  size: '100%',
-                  fontSize,
-                  color: fontColor
-                }}
-                variants={textVariants}
-              >
-                <Typography variant='h3' style={{ fontSize: '24px' }}>
-                  {item}
-                </Typography>
-              </motion.div>
-            </motion.div>
-          );
-        })}
         <motion.div
           style={{
-            size: '100%'
+            width: '100%',
+            height: (fontSize * 1.5 + lineGap) * items.length * 2 + 24
           }}
-          variants={lineContainerVariants}
+          initial={'before'}
+          animate={'after'}
+          variants={containerVariants}
         >
-          <motion.div
-            style={{
-              position: 'absolute',
-              height: '10px',
-              y: (fontSize * 1.5 + lineGap) * items.length + 10,
-              left: '50%',
-              backgroundColor: 'grey'
-            }}
-            variants={lineVariants}
-          />
-          <motion.div
-            style={{
-              position: 'absolute',
-              height: '10px',
-              y: (fontSize * 1.5 + lineGap) * items.length + 10,
-              right: '50%',
-              backgroundColor: 'grey'
-            }}
-            variants={lineVariants}
-          />
+          {items.map((item, i) => {
+            return (
+              <motion.div
+                key={i}
+                style={{
+                  width: '100%',
+                  height: fontSize * 1.5,
+                  y: (fontSize * 1.5 + lineGap) * i,
+                  overflow: 'hidden'
+                }}
+              >
+                <motion.div
+                  style={{
+                    fontSize,
+                    color: fontColor
+                  }}
+                  variants={textVariants}
+                >
+                  <Typography variant='h3' style={{ fontSize: '24px' }}>
+                    {item}
+                  </Typography>
+                </motion.div>
+              </motion.div>
+            );
+          })}
+          <motion.div variants={lineContainerVariants}>
+            <motion.div
+              style={{
+                position: 'absolute',
+                height: '10px',
+                y: (fontSize * 1.5 + lineGap) * items.length + 10,
+                left: '50%',
+                backgroundColor: 'grey'
+              }}
+              variants={lineVariants}
+            />
+            <motion.div
+              style={{
+                position: 'absolute',
+                height: '10px',
+                y: (fontSize * 1.5 + lineGap) * items.length + 10,
+                right: '50%',
+                backgroundColor: 'grey'
+              }}
+              variants={lineVariants}
+            />
+          </motion.div>
         </motion.div>
       </motion.div>
-    </motion.div>
+    </AnimatePresence>
   );
-};
-
-TopReveal.defaultProps = {
-  width: 200,
-  lineGap: 0,
-  fontSize: 24,
-  fontColor: '#000000',
-  stagger: 0.3,
-  loop: true
 };
