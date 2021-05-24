@@ -3,48 +3,44 @@ import { Portal, Query } from '@app/components';
 import { HouxProvider } from '@app/houx';
 import { AppFrame, AppWrapper } from '@app/layout';
 import { NextComponentType } from 'next';
-import appWithI18n from 'next-translate/appWithI18n';
+import I18nProvider from 'next-translate/I18nProvider';
 import { AppContext, AppInitialProps, AppProps } from 'next/app';
 import React, { useEffect } from 'react';
-import { isMobile } from 'react-device-detect';
 import { RecoilRoot } from 'recoil';
 import { AnalyticsProvider } from 'use-analytics';
 
-import i18nConfig from '../i18n';
+const MillipedeApp: NextComponentType<AppContext, AppInitialProps, AppProps> =
+  ({ Component, pageProps }) => {
+    useEffect(() => {
+      // Remove the server-side injected CSS.
+      const jssStyles = document.querySelector('#jss-server-side');
+      if (jssStyles) {
+        jssStyles.parentNode.removeChild(jssStyles);
+      }
+    }, []);
 
-const MillipedeApp: NextComponentType<
-  AppContext,
-  AppInitialProps,
-  AppProps
-> = ({ Component, pageProps }) => {
-  useEffect(() => {
-    // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector('#jss-server-side');
-    if (jssStyles) {
-      jssStyles.parentNode.removeChild(jssStyles);
-    }
-  }, []);
+    return (
+      <AnalyticsProvider instance={defaultAnalytics}>
+        <Query.QueryParamProvider>
+          <Portal.PortalProvider>
+            <RecoilRoot>
+              <HouxProvider>
+                <I18nProvider
+                  lang={pageProps && pageProps.__lang}
+                  namespaces={pageProps && pageProps.__namespaces}
+                >
+                  <AppWrapper>
+                    <AppFrame>
+                      <Component {...pageProps} />
+                    </AppFrame>
+                  </AppWrapper>
+                </I18nProvider>
+              </HouxProvider>
+            </RecoilRoot>
+          </Portal.PortalProvider>
+        </Query.QueryParamProvider>
+      </AnalyticsProvider>
+    );
+  };
 
-  return (
-    <AnalyticsProvider instance={defaultAnalytics}>
-      <Query.QueryParamProvider>
-        <Portal.PortalProvider>
-          <RecoilRoot>
-            <HouxProvider>
-              <AppWrapper>
-                <AppFrame isMobile={isMobile}>
-                  <Component {...pageProps} />
-                </AppFrame>
-              </AppWrapper>
-            </HouxProvider>
-          </RecoilRoot>
-        </Portal.PortalProvider>
-      </Query.QueryParamProvider>
-    </AnalyticsProvider>
-  );
-};
-
-export default appWithI18n(MillipedeApp, {
-  ...i18nConfig,
-  skipInitialProps: true
-});
+export default MillipedeApp;
