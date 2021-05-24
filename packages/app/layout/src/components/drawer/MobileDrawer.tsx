@@ -3,12 +3,9 @@ import { MAX_DRAWER_WIDTH, TOOLBAR_HEIGHT } from '@app/layout/src/recoil/feature
 import { createStyles, Divider, IconButton, makeStyles, SwipeableDrawer, Typography } from '@material-ui/core';
 import { ChevronLeft } from '@material-ui/icons';
 import useTranslation from 'next-translate/useTranslation';
-import { useRouter } from 'next/router';
 import React, { FC } from 'react';
-import { useRecoilValue } from 'recoil';
 
-import { navigationState } from '../../recoil/features/pages/reducer';
-import { Tree } from '../tree';
+import { DrawerProps } from '.';
 
 const useDrawerStyles = makeStyles(() =>
   createStyles({
@@ -24,46 +21,25 @@ const useDrawerStyles = makeStyles(() =>
   })
 );
 
-interface MobileDrawerProps {
-  isDrawerExpanded: boolean;
-  handleDrawerOpen: () => void;
-  handleDrawerClose: () => void;
-}
-
-export const MobileDrawer: FC<MobileDrawerProps> = ({
+export const MobileDrawer: FC<DrawerProps> = ({
   isDrawerExpanded,
   handleDrawerOpen,
-  handleDrawerClose
+  handleDrawerClose,
+  children
 }) => {
   const classes = useDrawerStyles();
 
   const { t } = useTranslation();
 
-  const { asPath } = useRouter();
-
-  const navigation = useRecoilValue(navigationState);
-
-  const { pages, activePage, flattenedPages } = navigation;
-
-  const treeComp =
-    activePage != null ? (
-      <Tree
-        pages={pages}
-        flattenedPages={flattenedPages}
-        pathname={asPath}
-        activePage={activePage}
-      />
-    ) : null;
-
-  return pages && pages.length > 0 ? (
+  return (
     <SwipeableDrawer
       variant='temporary'
       classes={{
         paper: classes.paperMobile
       }}
       open={isDrawerExpanded}
-      onClose={handleDrawerClose}
       onOpen={handleDrawerOpen}
+      onClose={handleDrawerClose}
       ModalProps={{
         keepMounted: true
       }}
@@ -86,7 +62,8 @@ export const MobileDrawer: FC<MobileDrawerProps> = ({
       </div>
 
       <Divider />
-      {treeComp}
+
+      {children}
     </SwipeableDrawer>
-  ) : null;
+  );
 };

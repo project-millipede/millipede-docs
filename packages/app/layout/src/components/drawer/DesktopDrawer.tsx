@@ -4,12 +4,9 @@ import { createStyles, Divider, Drawer, IconButton, makeStyles, Theme, Typograph
 import { ChevronLeft } from '@material-ui/icons';
 import clsx from 'clsx';
 import useTranslation from 'next-translate/useTranslation';
-import { useRouter } from 'next/router';
 import React, { FC } from 'react';
-import { useRecoilValue } from 'recoil';
 
-import { navigationState } from '../../recoil/features/pages/reducer';
-import { Tree } from '../tree';
+import { DrawerProps } from '.';
 
 const useDrawerStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,36 +39,16 @@ const useDrawerStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface DesktopDrawerProps {
-  isDrawerExpanded: boolean;
-  handleDrawerClose: () => void;
-}
-
-export const DesktopDrawer: FC<DesktopDrawerProps> = ({
+export const DesktopDrawer: FC<DrawerProps> = ({
   isDrawerExpanded,
-  handleDrawerClose
+  handleDrawerClose,
+  children
 }) => {
   const classes = useDrawerStyles();
 
   const { t } = useTranslation();
 
-  const { asPath } = useRouter();
-
-  const navigation = useRecoilValue(navigationState);
-
-  const { pages, activePage, flattenedPages } = navigation;
-
-  const treeComp =
-    activePage != null ? (
-      <Tree
-        pages={pages}
-        flattenedPages={flattenedPages}
-        pathname={asPath}
-        activePage={activePage}
-      />
-    ) : null;
-
-  return pages && pages.length > 0 ? (
+  return (
     <Drawer
       variant='permanent'
       className={clsx(classes.drawer, {
@@ -100,7 +77,7 @@ export const DesktopDrawer: FC<DesktopDrawerProps> = ({
         </IconButton>
       </div>
       <Divider />
-      {treeComp}
+      {children}
     </Drawer>
-  ) : null;
+  );
 };

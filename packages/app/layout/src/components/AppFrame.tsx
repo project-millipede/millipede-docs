@@ -1,23 +1,26 @@
 import { Portal } from '@app/components';
-import { layoutState, MAX_DRAWER_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
-import { AppBar } from '@material-ui/core';
+import { layoutState } from '@app/layout/src/recoil/features/layout/reducer';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import clsx from 'clsx';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import dynamic from 'next/dynamic';
 import React, { FC, useCallback } from 'react';
+import { isMobile } from 'react-device-detect';
 import { useRecoilState } from 'recoil';
 
-import { AppDrawer } from './AppDrawer';
-import { AppToolBar } from './AppToolBar';
-import { HideOnScroll } from './HideOnScroll';
+const SwitchDrawer = dynamic(
+  () => import('./drawer').then(module => module.SwitchDrawer),
+  { ssr: false }
+);
 
-// import dynamic from 'next/dynamic';
-// Warning - dynamic imports seem to destroy css server
+const AppToolBar = dynamic(
+  () => import('./AppToolBar').then(module => module.AppToolBar),
+  { ssr: false }
+);
 
-// import { AppDrawerProxy } from './AppDrawerProxy';
-// const AppDrawer = dynamic(() =>
-//   import('./AppDrawerProxy').then(module => module.AppDrawerProxy)
-// );
+const AppToolBarMobile = dynamic(
+  () => import('./AppToolBarMobile').then(module => module.AppToolBarMobile),
+  { ssr: false }
+);
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -27,32 +30,8 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const useDrawerStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    appBar: {
-      zIndex: theme.zIndex.drawer + 1,
-      transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen
-      })
-    },
-    appBarShift: {
-      width: `calc(100% - ${MAX_DRAWER_WIDTH}px)`,
-      transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen
-      })
-    }
-  })
-);
-
-interface AppFrameProps {
-  isMobile: boolean;
-}
-
-export const AppFrame: FC<AppFrameProps> = ({ children, isMobile }) => {
+export const AppFrame: FC = ({ children }) => {
   const classes = useStyles();
-  const drawerClasses = useDrawerStyles();
 
   const [{ isDrawerExpanded }, setLayout] = useRecoilState(layoutState);
 
@@ -79,29 +58,18 @@ export const AppFrame: FC<AppFrameProps> = ({ children, isMobile }) => {
       <CssBaseline />
 
       {isMobile ? (
-        <HideOnScroll>
-          <AppBar>
-            <AppToolBar
-              isDrawerExpanded={isDrawerExpanded}
-              handleDrawerOpen={handleDrawerOpen}
-            />
-          </AppBar>
-        </HideOnScroll>
+        <AppToolBarMobile
+          isDrawerExpanded={isDrawerExpanded}
+          handleDrawerOpen={handleDrawerOpen}
+        />
       ) : (
-        <AppBar
-          position={'fixed'}
-          className={clsx(drawerClasses.appBar, {
-            [drawerClasses.appBarShift]: isDrawerExpanded
-          })}
-        >
-          <AppToolBar
-            isDrawerExpanded={isDrawerExpanded}
-            handleDrawerOpen={handleDrawerOpen}
-          />
-        </AppBar>
+        <AppToolBar
+          isDrawerExpanded={isDrawerExpanded}
+          handleDrawerOpen={handleDrawerOpen}
+        />
       )}
 
-      <AppDrawer
+      <SwitchDrawer
         handleDrawerOpen={handleDrawerOpen}
         handleDrawerClose={handleDrawerClose}
         isDrawerExpanded={isDrawerExpanded}
