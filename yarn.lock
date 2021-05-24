@@ -1586,7 +1586,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.12.1, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.4.4, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.0, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.8.3, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.12.1, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.4.4, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.0, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.8.3, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7":
   version: 7.14.0
   resolution: "@babel/runtime@npm:7.14.0"
   dependencies:
@@ -1819,7 +1819,6 @@ __metadata:
     "@project-millipede/windups": ^1.1.12
     react: ^17.0.2
     react-dom: ^17.0.2
-    react-reparenting: ^0.6.1
     typescript: ^4.1.5
   peerDependencies:
     "@project-millipede/windups": "*"
@@ -11216,17 +11215,6 @@ __metadata:
   version: 0.8.3
   resolution: "react-refresh@npm:0.8.3"
   checksum: 38f06df8e0a20701b96e5d680838a3528d66cfb53db79843d30cb9517df3262ec596607147439975267bf0634bee77101db37298ea79b5742cc28664632f3c76
-  languageName: node
-  linkType: hard
-
-"react-reparenting@npm:^0.6.1":
-  version: 0.6.1
-  resolution: "react-reparenting@npm:0.6.1"
-  dependencies:
-    "@babel/runtime": ^7.12.13
-  peerDependencies:
-    react: ^16.8.5 || ^17.0.1
-  checksum: c2af08f885a5fb5004d01aae3a7ed1f6c415830773f0f5358a3b438e5e494d6557fcc7f65e621c83a9bb196b688600293c3bb246b2678bbb843394995da4242f
   languageName: node
   linkType: hard
 
