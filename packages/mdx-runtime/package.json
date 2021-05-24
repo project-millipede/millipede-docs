@@ -17,7 +17,7 @@
     "typescript": "^4.1.5"
   },
   "dependencies": {
-    "@istok/mdx": "^0.1.1",
+    "@istok/mdx": "^0.2.0",
     "@mdx-js/react": "^1.6.22",
     "react-timing-hooks": "^2.0.0"
   },

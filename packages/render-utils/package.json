@@ -4,9 +4,9 @@
   "private": true,
   "main": "src/index.ts",
   "devDependencies": {
-    "@huse/effect-ref": "^1.0.3",
+    "@huse/effect-ref": "^1.1.0",
     "@types/element-resize-detector": "^1.1.2",
-    "@types/lodash": "^4.14.168",
+    "@types/lodash": "^4.14.170",
     "@types/react": "^17.0.6",
     "@types/react-dom": "^17.0.5",
     "element-resize-detector": "^1.2.2",
