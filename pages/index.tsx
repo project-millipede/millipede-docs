@@ -9,6 +9,8 @@ import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import React, { FC } from 'react';
 
+import i18nConfig from '../i18n';
+
 const TopicsHead = dynamic(
   () => import('@page/landing').then(module => module.Components.TopicsHead),
   { ssr: false }
@@ -68,11 +70,14 @@ const Index: FC = () => {
   );
 };
 
-export const getStaticProps = async (context: GetStaticPropsContext) => {
+export const getStaticProps = async (ctx: GetStaticPropsContext) => {
+  const { locale } = ctx;
+
   return {
     props: await loadNamespaces({
-      ...context,
-      pathname: '/'
+      ...i18nConfig,
+      pathname: '/',
+      locale: locale
     })
   };
 };
