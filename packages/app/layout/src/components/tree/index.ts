@@ -1,1 +1,2 @@
-export { Tree } from './Tree';
+export { default as Tree } from './Tree';
+// export { Tree } from './TreeEmotion';

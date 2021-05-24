@@ -7,7 +7,7 @@ import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import TreeItem, { TreeItemProps } from '@material-ui/lab/TreeItem';
 import TreeView from '@material-ui/lab/TreeView';
 import useTranslation from 'next-translate/useTranslation';
-import React, { ChangeEvent, FC, useEffect, useState } from 'react';
+import React, { ChangeEvent, FC, memo, useEffect, useState } from 'react';
 
 interface TreeLabelProps {
   labelText: string;
@@ -20,8 +20,7 @@ interface TreeLabelProps {
 interface TreeProps {
   pages: Array<PageTypes.Page>;
   flattenedPages: Array<PageTypes.FlattenedPage>;
-  activePage?: PageTypes.Page;
-  pathname: string;
+  activePage: PageTypes.Page;
 }
 
 const useStylesTreeNode = makeStyles((theme: Theme) =>
@@ -121,6 +120,12 @@ const TreeLabel: FC<TreeLabelProps> = ({
   );
 };
 
+/*
+Export tree with memoizing, default export currently used in the drawer;
+Reason: Chrome on iOS does not animate the drawer open/close transitions correctly.
+Investigation: Differentiate individual sections of the tree that need 
+memoizing from those need changing.
+*/
 export const Tree: FC<TreeProps> = ({
   pages,
   flattenedPages,
@@ -156,11 +161,11 @@ export const Tree: FC<TreeProps> = ({
       const title = t(`common:pages.${pathname}`);
       const item = (
         <StyledTreeItem
-          key={`/docs/${pathname}`}
+          key={`item-/docs/${pathname}`}
           nodeId={`/docs/${pathname}`}
           label={
             <Link
-              key={`/docs/${pathname}`}
+              key={`link-/docs/${pathname}`}
               href={
                 {
                   pathname: '/docs/[...slug]',
@@ -208,3 +213,5 @@ export const Tree: FC<TreeProps> = ({
     </TreeView>
   );
 };
+
+export default memo(Tree);
