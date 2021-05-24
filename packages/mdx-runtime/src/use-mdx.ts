@@ -26,7 +26,9 @@ export function useMdx<S extends MDXScope>(
     async compiledSource => {
       const components = {
         ...(params.components ?? {}),
-        ...(await loadComponents(params.asyncComponents))
+        ...(params.asyncComponents
+          ? await loadComponents(params.asyncComponents)
+          : {})
       };
 
       // wrapping the content with MDXProvider will allow us to customize the standard

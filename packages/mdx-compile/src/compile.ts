@@ -40,6 +40,7 @@ export const compile = async (
   const [serverCode, browserCode] = await Promise.all([
     transformAsync(compiledES6CodeFromMdx, {
       presets: [presetReact, presetEnv],
+      plugins: [],
       configFile: false
     }),
     transformAsync(compiledES6CodeFromMdx, {

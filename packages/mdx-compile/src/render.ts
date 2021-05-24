@@ -36,7 +36,9 @@ export const render = async <S extends MDXScope>(
     compileOptions
   );
 
-  const loadedAsyncComponents = await loadComponents(asyncComponents);
+  const loadedAsyncComponents = asyncComponents
+    ? await loadComponents(asyncComponents)
+    : {};
   const components = {
     ...(options.components ?? {}),
     ...loadedAsyncComponents
