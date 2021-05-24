@@ -20,7 +20,11 @@ export const AppContentMobile: FC = ({ children }) => {
   const classes = useStyles();
 
   return (
-    <Container component='main' id='main-content' className={classes.root}>
+    <Container
+      component='main'
+      id='main-mobile-content'
+      className={classes.root}
+    >
       {children}
     </Container>
   );

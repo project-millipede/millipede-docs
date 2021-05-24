@@ -11,18 +11,14 @@ import { getPath } from '../../docs/src/lib/getPath';
 import { GetStaticContentProps, getStaticContentProps } from '../../docs/src/lib/getStaticContentProps';
 import { GetStaticTranslationProps, getStaticTranslationProps } from '../../docs/src/lib/getStaticTranslationProps';
 
-const MdxDocs = dynamic(() =>
-  import('@page/layout').then(module => module.Mdx.MdxDocs)
+const MdxDocs = dynamic(
+  () => import('@page/layout').then(module => module.Mdx.MdxDocs),
+  { ssr: false }
 );
-const MdxDocsMobile = dynamic(() =>
-  import('@page/layout').then(module => module.Mdx.MdxDocsMobile)
+const MdxDocsMobile = dynamic(
+  () => import('@page/layout').then(module => module.Mdx.MdxDocsMobile),
+  { ssr: false }
 );
-
-const h2 = dynamic(() => import('@page/layout').then(module => module.Mdx.h2));
-const h3 = dynamic(() => import('@page/layout').then(module => module.Mdx.h3));
-const h4 = dynamic(() => import('@page/layout').then(module => module.Mdx.h4));
-const h5 = dynamic(() => import('@page/layout').then(module => module.Mdx.h5));
-const h6 = dynamic(() => import('@page/layout').then(module => module.Mdx.h6));
 
 type DynamicPageProps = GetStaticTranslationProps & GetStaticContentProps;
 
@@ -40,11 +36,11 @@ const DynamicPage: FC<DynamicPageProps> = ({
     components: {
       ...getComponents(hydrationComponentsList),
       h1: Mdx.h1({ disableShare, meta: restMetaData }),
-      h2,
-      h3,
-      h4,
-      h5,
-      h6
+      h2: Mdx.h2({ isMobile: isMobile }),
+      h3: Mdx.h3({ isMobile: isMobile }),
+      h4: Mdx.h4({ isMobile: isMobile }),
+      h5: Mdx.h5,
+      h6: Mdx.h6
     },
     scope
   });
