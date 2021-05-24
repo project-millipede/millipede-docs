@@ -6,7 +6,6 @@ import { NextComponentType } from 'next';
 import I18nProvider from 'next-translate/I18nProvider';
 import { AppContext, AppInitialProps, AppProps } from 'next/app';
 import React, { useEffect } from 'react';
-import { isMobile } from 'react-device-detect';
 import { RecoilRoot } from 'recoil';
 import { AnalyticsProvider } from 'use-analytics';
 
@@ -31,7 +30,7 @@ const MillipedeApp: NextComponentType<AppContext, AppInitialProps, AppProps> =
                   namespaces={pageProps && pageProps.__namespaces}
                 >
                   <AppWrapper>
-                    <AppFrame isMobile={isMobile}>
+                    <AppFrame>
                       <Component {...pageProps} />
                     </AppFrame>
                   </AppWrapper>
