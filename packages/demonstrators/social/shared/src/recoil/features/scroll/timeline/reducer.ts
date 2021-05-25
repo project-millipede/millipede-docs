@@ -2,29 +2,28 @@ import { CollectionUtil } from '@app/utils';
 import { EffectRef } from '@huse/effect-ref';
 import { atom, atomFamily } from 'recoil';
 
-import { NodesWithRelationsMap, RefContainerScroll, Views } from './types';
+import { NodesWithRelationsMap, RefContainerScroll, Tab, View } from './types';
 
-export const timelineViewState = atom<Views>({
-  key: 'timelineView',
+export const timelineViewState = atomFamily<Tab, string>({
+  key: 'timeline-view',
   default: {
-    currentViews: {}
+    activeTab: View.TIMELINE
   }
 });
 
 export const nodesWithRelationsWithEdgeState = atom<NodesWithRelationsMap>({
-  key: 'nodesWithRelationsWithEdge',
+  key: 'nodes-with-relations-with-edge',
   default: {
     nodesWithRelations: {},
-    activeId: '',
-    counter: 0,
+    activeId: '', // describes which element in object nodesWithRelations (map) is active (key)
     finalSize: 0
   }
 });
 
 export const refContainerScrollState = atomFamily<RefContainerScroll, string>({
-  key: 'refContainerScroll',
+  key: 'ref-container-scroll',
   default: {
-    refObserved: null
+    refObserved: undefined
   }
 });
 
@@ -32,9 +31,9 @@ export const refContainerScrollFromArcherState = atomFamily<
   RefContainerScroll,
   string
 >({
-  key: 'refContainerScrollFromArcher',
+  key: 'ref-container-scroll-from-archer',
   default: {
-    refObserved: null
+    refObserved: undefined
   }
 });
 
@@ -69,5 +68,3 @@ export const reducers = {
   updateObservedItem,
   removeObservedItem
 };
-
-export const selectors = {};
