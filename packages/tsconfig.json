@@ -14,6 +14,7 @@
     { "path": "demonstrator/types" },
     { "path": "demonstrator/components" },
     { "path": "demonstrator/layout" },
+    { "path": "demonstrator/navigation" },
     { "path": "demonstrators/social/data" },
     { "path": "demonstrators/social/components" },
     { "path": "demonstrators/social/shared" },

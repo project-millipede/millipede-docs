@@ -1,2 +1,3 @@
-export { SocialApp } from './SocialApp';
 export { Demonstrator } from './Demonstrator';
+
+export * as Components from './components';
