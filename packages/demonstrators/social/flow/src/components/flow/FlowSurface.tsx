@@ -3,7 +3,8 @@ import React, { FC } from 'react';
 
 import { ArcherSurfaceObserver } from '../observer/ArcherSurfaceObserver';
 import { Dock } from './Dock';
-import { FlowBody } from './FlowBody';
+import { DockPosition } from './Dock.svc';
+import FlowBody from './FlowBody';
 
 const { ArcherSurface } = Archer;
 
@@ -47,7 +48,7 @@ export const FlowSurface: FC<FlowSurfaceProps> = ({
                 }}
                 timelineId={leftTimelineId}
                 offSet={offSetControls}
-                position='left'
+                position={DockPosition.left}
               />
             </div>
             <div
@@ -72,7 +73,7 @@ export const FlowSurface: FC<FlowSurfaceProps> = ({
                 }}
                 timelineId={rightTimelineId}
                 offSet={offSetControls}
-                position='right'
+                position={DockPosition.right}
               />
             </div>
           </ArcherSurface>

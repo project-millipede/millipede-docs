@@ -38,11 +38,11 @@ const DockSlice: FC<DockSliceProps> = ({
         const ref = useRef<HTMLElement>();
 
         const [sliceRef, sliceBounds] = HooksUtils.useMeasure({
-          debounce: 0,
+          debounce: 0
           // eslint-disable-next-line @typescript-eslint/no-empty-function
-          callBack: _node => {
-            ref.current = _node;
-          }
+          // callBack: _node => {
+          //   ref.current = _node;
+          // }
         });
 
         const {
@@ -118,7 +118,6 @@ const DockSlice: FC<DockSliceProps> = ({
 
         return (
           <div
-            // ref={combinedRef}
             ref={forwardedRef}
             style={{
               top: sliceBounds.top - postBounds.top,
