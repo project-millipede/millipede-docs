@@ -1,8 +1,8 @@
 import { useHoux } from '@app/houx';
 import { reducers as demonstratorSharedReducers } from '@demonstrators-social/shared';
-import { FC, useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 
-import { SocialApp } from './SocialApp';
+import { App } from './App';
 
 export const Demonstrator: FC = () => {
   const {
@@ -31,11 +31,5 @@ export const Demonstrator: FC = () => {
     };
   }, []);
 
-  return (
-    // <Container>
-    //   <CollapseExpand>
-    <SocialApp />
-    //   </CollapseExpand>
-    // </Container>
-  );
+  return <App />;
 };

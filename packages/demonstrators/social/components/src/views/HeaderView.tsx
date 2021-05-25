@@ -1,5 +1,7 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import { CSSProperties } from '@material-ui/styles';
 import React, { FC } from 'react';
+import { FullScreenHandle } from 'react-full-screen';
 
 import { ChromeInput } from '../input/ChromeInput';
 
@@ -23,21 +25,27 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const HeaderView: FC = () => {
+interface HeaderViewProps {
+  fullScreenHandle: FullScreenHandle;
+  style?: CSSProperties;
+}
+
+export const HeaderView: FC<HeaderViewProps> = ({
+  fullScreenHandle,
+  style
+}) => {
   const classes = useStyles();
 
   const { browserBar, circleContainer, circle } = classes;
 
   return (
-    <div className={browserBar}>
+    <div className={browserBar} style={{ ...style }}>
       <div className={circleContainer}>
         <div className={circle} />
         <div className={circle} />
         <div className={circle} />
       </div>
-      <ChromeInput />
+      <ChromeInput fullScreenHandle={fullScreenHandle} />
     </div>
   );
 };
-
-export default HeaderView;

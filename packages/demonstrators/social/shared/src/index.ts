@@ -4,6 +4,9 @@ export { selectors as scrollSelectors } from './recoil/features/scroll/selectors
 export { actions as scrollActions } from './recoil/features/scroll/actions';
 export { data as scrollData } from './recoil/features/scroll/actions';
 
+export { reducers as viewportReducers } from './recoil/features/viewport/reducers';
+export { selectors as viewportSelectors } from './recoil/features/viewport/selectors';
+
 export { states as notificationStates } from './recoil/features/notification/states';
 
 export * as ScrollTypes from './recoil/features/scroll/types';
