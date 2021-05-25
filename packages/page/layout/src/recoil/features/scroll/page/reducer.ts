@@ -9,7 +9,7 @@ export const initialState: State = {
 };
 
 export const scrollItemsState = atom({
-  key: 'scrollItems',
+  key: 'scroll-items',
   default: initialState
 });
 
@@ -24,10 +24,8 @@ const addItem = (state: State, newItem: string): State => {
 };
 
 const removeItem = (state: State, itemToRemove: string): State => {
-  const {
-    [itemToRemove]: deletedItem,
-    ...objectWithoutDeletedProp
-  } = state.scrollItems;
+  const { [itemToRemove]: deletedItem, ...objectWithoutDeletedProp } =
+    state.scrollItems;
   return {
     ...state,
     scrollItems: {
