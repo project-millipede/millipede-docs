@@ -6,7 +6,7 @@ export interface ISnackbarProps {
 }
 
 export const snackbarState = atom<ISnackbarProps>({
-  key: 'snackbarState',
+  key: 'snackbar',
   default: {
     isActive: false,
     message: null

@@ -1,3 +1,4 @@
+import { isEmptyString } from '@app/utils/src/string';
 import { normalizer, postEntity, timelineEntity, useCaseEntity } from '@demonstrators-social/data';
 import includes from 'lodash/includes';
 import { createSelector } from 'reselect';
@@ -5,16 +6,27 @@ import { createSelector } from 'reselect';
 import { Timeline } from '../../../recoil/features/scroll/types';
 import { RootState } from '../reducers';
 
-export const selectResult = (state: RootState) => state.timeline.result;
-export const selectEntities = (state: RootState) => state.timeline.entities;
+export const selectResult = (state: RootState) =>
+  state && state.timeline && state.timeline.result;
+export const selectEntities = (state: RootState) =>
+  state && state.timeline && state.timeline.entities;
 
 export const selectTimelineEntities = (state: RootState) =>
+  state &&
+  state.timeline &&
+  state.timeline.entities &&
   state.timeline.entities.timelines;
 
 export const selectPostEntities = (state: RootState) =>
+  state &&
+  state.timeline &&
+  state.timeline.entities &&
   state.timeline.entities.posts;
 
 export const selectUserEntities = (state: RootState) =>
+  state &&
+  state.timeline &&
+  state.timeline.entities &&
   state.timeline.entities.users;
 
 export const selectUserCaseState = createSelector(
@@ -37,6 +49,7 @@ export const selectPosts = () =>
     selectEntities,
     selectPostEntities,
     (entities, postEntities) => {
+      if (postEntities == null) return [];
       const posts = Object.keys(postEntities).map(postId => {
         return normalizer.denormalizer(postId, postEntity, entities);
       });
@@ -45,12 +58,23 @@ export const selectPosts = () =>
   );
 
 export const selectTimelineOwner = (timelineId: string) => {
+  console.log('selectTimelineOwner - timelineId: ', timelineId);
+
   return createSelector(selectEntities, entities => {
+    if (
+      // timelineId == null ||
+      // timelineId == undefined ||
+      isEmptyString(timelineId)
+    )
+      return null;
     const timeline = normalizer.denormalizer(
       timelineId,
       timelineEntity,
       entities
     );
+
+    // debugger;
+
     const { owner } = timeline;
     return owner;
   });
@@ -92,35 +116,40 @@ export const selectInteractionDataForPostScenario = (
   timelineId: string,
   otherTimelineId: string,
   postIds: Array<string>,
-  currentViews: { [key: string]: Timeline.VIEW } = {
-    [timelineId]: Timeline.VIEW.TIMELINE,
-    [otherTimelineId]: Timeline.VIEW.POSTS
-  },
+  // currentViews: { [key: string]: Timeline.TView } = {
+  //   [timelineId]: Timeline.View.TIMELINE,
+  //   [otherTimelineId]: Timeline.View.POSTS
+  // },
+  timelineView: Timeline.TView = Timeline.View.TIMELINE,
+  otherTimelineView: Timeline.TView = Timeline.View.POSTS,
   sortFn: (a: any, b: any) => number
 ) => {
   return createSelector(
     selectPostsOfOwner(otherTimelineId, sortFn),
     selectPostsOfOwner(timelineId, sortFn),
     (postsOfOwnerForOtherTimelineId, postsOfOwnerForTimelineId) => {
-      const timelineView = currentViews[timelineId];
-      const otherTimelineView = currentViews[otherTimelineId];
+      // const timelineView = currentViews[timelineId];
+      // const otherTimelineView = currentViews[otherTimelineId];
+
+      console.log('timelineView: ', timelineView);
+      console.log('otherTimelineView: ', otherTimelineView);
 
       if (
-        (timelineView === Timeline.VIEW.TIMELINE &&
-          otherTimelineView === Timeline.VIEW.TIMELINE) ||
-        (timelineView === Timeline.VIEW.POSTS &&
-          otherTimelineView === Timeline.VIEW.POSTS)
+        (timelineView === Timeline.View.TIMELINE &&
+          otherTimelineView === Timeline.View.TIMELINE) ||
+        (timelineView === Timeline.View.POSTS &&
+          otherTimelineView === Timeline.View.POSTS)
       ) {
         return [];
       }
 
-      if (timelineView === Timeline.VIEW.TIMELINE) {
+      if (timelineView === Timeline.View.TIMELINE) {
         return postIds.filter(postId =>
           includes(postsOfOwnerForOtherTimelineId, postId)
         );
       }
 
-      if (timelineView === Timeline.VIEW.POSTS) {
+      if (timelineView === Timeline.View.POSTS) {
         return postIds.filter(postId =>
           includes(postsOfOwnerForTimelineId, postId)
         );
