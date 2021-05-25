@@ -1,9 +1,119 @@
-import React, { FC } from 'react';
+import { scrollStates, ScrollTypes } from '@demonstrators-social/shared';
+import { createStyles, makeStyles, Tab, Tabs, Theme } from '@material-ui/core';
+import { DynamicFeed, GroupWork } from '@material-ui/icons';
+import React, { ChangeEvent, forwardRef, ForwardRefRenderFunction, useMemo } from 'react';
+import { isMobileOnly } from 'react-device-detect';
+import { useRecoilState } from 'recoil';
+
+import { SimpleSearch } from '../search';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    labelIcon: {
+      minHeight: '48px'
+    },
+    iconLabelWrapper: {
+      flexDirection: 'row'
+    },
+    tabIcon: {
+      marginRight: theme.spacing(1),
+      marginBottom: '0px'
+    }
+  })
+);
 
 interface TimelineHeaderProps {
-  timelineId: string;
+  timelineId?: string;
 }
 
-export const TimelineHeader: FC<TimelineHeaderProps> = () => {
-  return <div />;
+const TimelineHeader: ForwardRefRenderFunction<
+  HTMLDivElement,
+  TimelineHeaderProps
+> = ({ timelineId }, ref) => {
+  const classes = useStyles();
+
+  const {
+    timeline: { timelineViewState }
+  } = scrollStates;
+
+  const [timelineView, setTimelineView] = useRecoilState(
+    timelineViewState(timelineId)
+  );
+
+  const handleTabChange = (_event: ChangeEvent, newValue: number) => {
+    let value: ScrollTypes.Timeline.TView = ScrollTypes.Timeline.View.TIMELINE;
+
+    if (newValue === 0) value = ScrollTypes.Timeline.View.TIMELINE;
+    if (newValue === 1) value = ScrollTypes.Timeline.View.POSTS;
+
+    setTimelineView(state => {
+      return {
+        ...state,
+        activeTab: value
+      };
+    });
+  };
+
+  const currentValue = useMemo(() => {
+    if (timelineView.activeTab === ScrollTypes.Timeline.View.TIMELINE) return 0;
+    if (timelineView.activeTab === ScrollTypes.Timeline.View.POSTS) return 1;
+  }, [timelineView]);
+
+  // TODO: Convert to Stack
+
+  return (
+    <div
+      key={`header-${timelineId}`}
+      ref={ref}
+      style={{
+        display: 'flex',
+        flexDirection: 'column'
+      }}
+    >
+      <Tabs
+        value={currentValue}
+        onChange={handleTabChange}
+        variant='fullWidth'
+        indicatorColor='primary'
+        textColor='primary'
+        style={{
+          margin: '8px'
+        }}
+      >
+        <Tab
+          label='Timeline'
+          icon={<DynamicFeed className={classes.tabIcon} />}
+          key={`timeline-${timelineId}-tab-timeline`}
+          id={`timeline-${timelineId}-tab-timeline`}
+          classes={{
+            wrapper: classes.iconLabelWrapper,
+            labelIcon: classes.labelIcon
+          }}
+        />
+        <Tab
+          label='Posts'
+          icon={<GroupWork className={classes.tabIcon} />}
+          key={`timeline-${timelineId}-tab-posts`}
+          id={`timeline-${timelineId}-tab-posts`}
+          classes={{
+            wrapper: classes.iconLabelWrapper,
+            labelIcon: classes.labelIcon
+          }}
+        />
+      </Tabs>
+
+      {!isMobileOnly ? (
+        <SimpleSearch
+          style={{ margin: '8px' }}
+          placeholder={
+            timelineView.activeTab === ScrollTypes.Timeline.View.TIMELINE
+              ? 'Search Timeline'
+              : 'Search Post'
+          }
+        />
+      ) : null}
+    </div>
+  );
 };
+
+export default forwardRef(TimelineHeader);
