@@ -1,17 +1,16 @@
 import { HooksUtils } from '@app/render-utils';
-import { scrollReducers, scrollStates } from '@demonstrators-social/shared';
-import { EffectRef } from '@huse/effect-ref';
-import React, { CSSProperties, FC, useCallback, useLayoutEffect } from 'react';
+import { scrollSelectors } from '@demonstrators-social/shared';
+import React, { CSSProperties, FC, memo, useLayoutEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-import { getSelectedPostIds } from './Dock.svc';
+import { TDockPosition } from './Dock.svc';
 import { DockItem } from './DockItem';
 
 export interface DockProps {
   timelineId: string;
-  offSet: number;
+  offSet?: number;
   styles?: CSSProperties;
-  position: string;
+  position: TDockPosition;
 }
 
 export const Dock: FC<DockProps> = ({
@@ -21,49 +20,28 @@ export const Dock: FC<DockProps> = ({
   position
 }) => {
   const {
-    timeline: { nodesWithRelationsWithEdgeState, refContainerScrollState }
-  } = scrollStates;
+    timeline: { refContainerScrollSelector, postIdsSelector }
+  } = scrollSelectors;
 
   const setRefContainerScroll = useSetRecoilState(
-    refContainerScrollState(timelineId)
+    refContainerScrollSelector(timelineId)
   );
 
-  const nodeWithRelationsWithEdge = useRecoilValue(
-    nodesWithRelationsWithEdgeState
+  const selectedPostIds = useRecoilValue(
+    postIdsSelector({ timelineId: timelineId, position: position })
   );
 
-  // TODO: Memoize postIds currently selected
-  const selectedPostIds = getSelectedPostIds(
-    timelineId,
-    nodeWithRelationsWithEdge,
-    position
-  );
-
-  const updateObservedItem = useCallback(
-    (value: EffectRef<HTMLElement>) => {
-      setRefContainerScroll(state =>
-        scrollReducers.timeline.updateObservedItem(state, value)
-      );
-    },
-    [scrollReducers.timeline.updateObservedItem]
-  );
-
-  const removeObservedItem = useCallback(() => {
-    setRefContainerScroll(state =>
-      scrollReducers.timeline.removeObservedItem(state)
-    );
-  }, [scrollReducers.timeline.removeObservedItem]);
-
-  const [containerRef, containerBounds] = HooksUtils.useMeasure({
-    debounce: 0
+  const [containerRef, containerBounds] = HooksUtils.useMeasureMinWithCapture({
+    // relaxing a more heavy weight scroll with capture setting debounce rate to 300ms
+    debounce: 300
   });
 
   useLayoutEffect(() => {
-    updateObservedItem(containerRef);
+    setRefContainerScroll(_ => containerRef);
     return () => {
-      removeObservedItem();
+      setRefContainerScroll(_ => undefined);
     };
-  }, []);
+  }, [selectedPostIds.length]);
 
   return (
     <div
@@ -86,3 +64,5 @@ export const Dock: FC<DockProps> = ({
     </div>
   );
 };
+
+export default memo(Dock);

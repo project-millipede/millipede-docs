@@ -1,13 +1,10 @@
 /* eslint-disable import/no-named-as-default */
 import { Archer } from '@app/components';
-import { scrollStates, ScrollTypes } from '@demonstrators-social/shared';
+import { scrollSelectors } from '@demonstrators-social/shared';
 import { createStyles, makeStyles, Typography } from '@material-ui/core';
 import clsx from 'clsx';
-import get from 'lodash/get';
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { useRecoilValue } from 'recoil';
-
-import { getSelectedSliceIdsBody } from './Dock.svc';
 
 const { ArcherElement, CustomBox } = Archer;
 
@@ -30,32 +27,14 @@ export const FlowBody: FC = () => {
   const classes = useStyles();
 
   const {
-    timeline: { nodesWithRelationsWithEdgeState }
-  } = scrollStates;
+    timeline: { sliceIdsBodySelector }
+  } = scrollSelectors;
 
-  const nodeWithRelationsWithEdgeMap = useRecoilValue(
-    nodesWithRelationsWithEdgeState
-  );
-
-  const {
-    activeId,
-    nodesWithRelations,
-    counter,
-    finalSize
-  } = nodeWithRelationsWithEdgeMap;
-
-  const nodeWithRelationsWithEdge = get(nodesWithRelations, activeId, {
-    values: [] as Array<ScrollTypes.Timeline.NodeWithRelationsWithEdge>
-  });
-
-  const { values } = nodeWithRelationsWithEdge;
+  const selectedBodySlices = useRecoilValue(sliceIdsBodySelector);
 
   return (
     <>
-      {values.map((value, row) => {
-        const nodeWithRelations =
-          getSelectedSliceIdsBody(value, counter, finalSize) || [];
-
+      {selectedBodySlices.map((nodeWithRelations, row) => {
         return (
           <div
             key={`row-${row}`}
@@ -88,3 +67,5 @@ export const FlowBody: FC = () => {
     </>
   );
 };
+
+export default memo(FlowBody);

@@ -1,11 +1,10 @@
 import { HooksUtils } from '@app/render-utils';
-import { scrollReducers, scrollStates } from '@demonstrators-social/shared';
+import { scrollReducers, scrollSelectors, scrollStates } from '@demonstrators-social/shared';
 import { EffectRef } from '@huse/effect-ref';
-import React, { FC, useCallback, useLayoutEffect } from 'react';
+import React, { FC, memo, useCallback, useLayoutEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { DockItemPropsRoot } from '../../types';
-import { getSelectedSliceIds } from './Dock.svc';
 import { DockSliceObserverWithArcher } from './DockSlice';
 
 export const DockItem: FC<DockItemPropsRoot> = ({
@@ -21,9 +20,7 @@ export const DockItem: FC<DockItemPropsRoot> = ({
   const setRefPostScroll = useSetRecoilState(refPostScrollState(postId));
 
   const [postRef, postBounds] = HooksUtils.useMeasure({
-    debounce: 0,
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    callBack: _node => {}
+    debounce: 0
   });
 
   const updateObservedItem = useCallback(
@@ -57,22 +54,14 @@ export const DockItem: FC<DockItemPropsRoot> = ({
   }, []);
 
   const {
-    timeline: { nodesWithRelationsWithEdgeState }
-  } = scrollStates;
+    timeline: { sliceIdsSelector }
+  } = scrollSelectors;
 
-  const nodeWithRelationsWithEdge = useRecoilValue(
-    nodesWithRelationsWithEdgeState
-  );
-
-  // TODO: Memoize sliceIds currently selected
-  const selectedSliceIds = getSelectedSliceIds(
-    timelineId,
-    nodeWithRelationsWithEdge
-  );
+  const selectedSliceIds = useRecoilValue(sliceIdsSelector(timelineId));
 
   const sliceRectangles = selectedSliceIds.map(slice => {
     const {
-      postId: selectedPostId,
+      // postId: selectedPostId,
       sliceId,
       nodeWithRelations: {
         relations,
@@ -80,7 +69,9 @@ export const DockItem: FC<DockItemPropsRoot> = ({
       }
     } = slice || { nodeWithRelations: { node: {} } };
 
-    return selectedPostId && selectedPostId === postId ? (
+    // TODO: Validate
+    // return selectedPostId === postId ? (
+    return (
       <DockSliceObserverWithArcher
         timelineId={timelineId}
         postId={postId}
@@ -91,7 +82,8 @@ export const DockItem: FC<DockItemPropsRoot> = ({
         relations={relations}
         isInteractive
       />
-    ) : null;
+    );
+    // : null;
   });
 
   return (
@@ -121,3 +113,5 @@ export const DockItem: FC<DockItemPropsRoot> = ({
 // export const DockItemWithArcher = withArcher(
 //   DockItemWithForwardRef
 // );
+
+export default memo(DockItem);
