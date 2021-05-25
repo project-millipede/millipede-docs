@@ -1,16 +1,33 @@
 import { CollectionUtil } from '@app/utils';
+import { isEmptyString } from '@app/utils/src/string';
 import { EffectRef } from '@huse/effect-ref';
-import { atomFamily } from 'recoil';
+import { atomFamily, selectorFamily } from 'recoil';
 
 import { RefPostScrollType } from './types';
 
-export const postIdsState = atomFamily<Array<string>, string>({
-  key: 'postIds',
+const postIdsState = atomFamily<Array<string>, string>({
+  key: 'post-ids',
   default: []
 });
 
+const postIdsSelector = selectorFamily<Array<string>, string>({
+  key: 'post-ids-selector',
+  get:
+    timelineId =>
+    ({ get }) => {
+      if (isEmptyString(timelineId)) return [];
+      const postIds = get(postIdsState(timelineId));
+      return postIds;
+    },
+  set:
+    timeline =>
+    ({ set }, newPostIds) => {
+      set(postIdsState(timeline), newPostIds);
+    }
+});
+
 export const refPostScrollState = atomFamily<RefPostScrollType, string>({
-  key: 'refPostScroll',
+  key: 'ref-post-scroll',
   default: {}
 });
 
@@ -70,10 +87,11 @@ const removeObservedSubSliceItem = (
 ): RefPostScrollType => {
   const { refObservedSubSlices } = state[timelineId];
 
-  const refObservedSubSlicesUpdated = CollectionUtil.Object.removePropertyFromObject(
-    refObservedSubSlices,
-    sliceId
-  );
+  const refObservedSubSlicesUpdated =
+    CollectionUtil.Object.removePropertyFromObject(
+      refObservedSubSlices,
+      sliceId
+    );
 
   return {
     ...state,
@@ -96,4 +114,6 @@ export const reducers = {
   removeObservedSubSliceItem
 };
 
-export const selectors = {};
+export const selectors = {
+  postIdsSelector
+};

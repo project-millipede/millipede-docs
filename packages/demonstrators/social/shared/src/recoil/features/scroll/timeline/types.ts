@@ -1,13 +1,14 @@
 import { ArcherTypes } from '@app/components';
 import { EffectRef } from '@huse/effect-ref';
 
-export enum VIEW {
-  TIMELINE = 0,
-  POSTS = 1
-}
+export const View = {
+  TIMELINE: 'TIMELINE',
+  POSTS: 'POSTS'
+} as const;
 
-export interface Views {
-  currentViews: { [key: string]: VIEW };
+export type TView = typeof View[keyof typeof View];
+export interface Tab {
+  activeTab: TView;
 }
 
 export interface RefContainerScroll {
@@ -57,6 +58,5 @@ export interface NodesWithRelationsMap {
     };
   };
   activeId: string;
-  counter: number;
   finalSize: number;
 }
