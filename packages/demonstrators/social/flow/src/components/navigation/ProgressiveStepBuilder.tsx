@@ -1,48 +1,62 @@
 import { useHoux } from '@app/houx';
 import { CollectionUtil } from '@app/utils';
-import { RootState, scrollActions, scrollStates, ScrollTypes, selectors } from '@demonstrators-social/shared';
+import {
+  RootState,
+  scrollActions,
+  scrollSelectors,
+  scrollStates,
+  ScrollTypes,
+  selectors,
+} from '@demonstrators-social/shared';
 import { Button, ButtonGroup } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import SettingsBackupRestoreIcon from '@material-ui/icons/SettingsBackupRestore';
+import get from 'lodash/get';
 import useTranslation from 'next-translate/useTranslation';
-import React, { FC } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import React, { FC, useMemo } from 'react';
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 
 export const publishActions = ['head', 'upload', 'download', 'tail'];
 
 interface ProgressiveStepBuilderProps {
-  leftTimelineId: string;
-  rightTimelineId: string;
   ltr: boolean;
 }
 
 export const ProgressiveStepBuilder: FC<ProgressiveStepBuilderProps> = ({
-  leftTimelineId,
-  rightTimelineId,
   ltr
 }) => {
   const { t } = useTranslation();
 
   const {
-    timeline: { nodesWithRelationsWithEdgeState, timelineViewState },
-    post: { postIdsState }
+    timeline: { nodesWithRelationsWithEdgeState, timelineViewState }
   } = scrollStates;
 
-  const [
-    nodesWithRelationsWithEdge,
-    setNodesWithRelationsWithEdge
-  ] = useRecoilState(nodesWithRelationsWithEdgeState);
+  const {
+    post: { postIdsSelector }
+  } = scrollSelectors;
 
-  // const resetNodesWithRelationsWithEdgeState = useResetRecoilState(
-  //   nodesWithRelationsWithEdgeState
-  // );
+  const [nodesWithRelationsWithEdge, setNodesWithRelationsWithEdge] =
+    useRecoilState(nodesWithRelationsWithEdgeState);
 
-  const { counter } = nodesWithRelationsWithEdge;
+  const resetNodesWithRelationsWithEdgeState = useResetRecoilState(
+    nodesWithRelationsWithEdgeState
+  );
 
-  const timelineView = useRecoilValue(timelineViewState);
+  const { nodesWithRelations, activeId } = nodesWithRelationsWithEdge;
 
-  const postIdsLeft = useRecoilValue(postIdsState(leftTimelineId));
-  const postIdsRight = useRecoilValue(postIdsState(rightTimelineId));
+  const counter = useMemo(() => {
+    const nodeWithRelationsWithEdge = get(nodesWithRelations, activeId, {
+      values: [] as Array<ScrollTypes.Timeline.NodeWithRelationsWithEdge>
+    });
+
+    const { values } = nodeWithRelationsWithEdge;
+
+    // Todo: fix access to first element, handle multiple elements
+    const result =
+      (values && values.length > 0 && values[0].nodeWithRelations.length) || 0;
+
+    return result;
+  }, [nodesWithRelations, activeId]);
 
   const {
     state
@@ -50,15 +64,34 @@ export const ProgressiveStepBuilder: FC<ProgressiveStepBuilderProps> = ({
     state: RootState;
   } = useHoux();
 
-  const [
-    activePostId
-  ] = selectors.timeline.selectInteractionDataForPostScenario(
-    ltr ? leftTimelineId : rightTimelineId,
-    ltr ? rightTimelineId : leftTimelineId,
-    ltr ? postIdsRight : postIdsLeft,
-    timelineView.currentViews,
-    CollectionUtil.Array.compareDescFn('content.createdAt')
-  )(state);
+  const useCase = (state.timeline &&
+    selectors.timeline.selectUserCaseState(state)) || {
+    id: '',
+    timelines: []
+  };
+
+  const { timelines = [] } = useCase;
+
+  const [leftTimeline, rightTimeline] = timelines;
+
+  const { id: leftTimelineId } = leftTimeline || { id: '' };
+  const { id: rightTimelineId } = rightTimeline || { id: '' };
+
+  const postIdsLeft = useRecoilValue(postIdsSelector(leftTimelineId));
+  const postIdsRight = useRecoilValue(postIdsSelector(rightTimelineId));
+
+  const timelineViewLeft = useRecoilValue(timelineViewState(leftTimelineId));
+  const timelineViewRight = useRecoilValue(timelineViewState(rightTimelineId));
+
+  const [activePostId] =
+    selectors.timeline.selectInteractionDataForPostScenario(
+      ltr ? leftTimelineId : rightTimelineId,
+      ltr ? rightTimelineId : leftTimelineId,
+      ltr ? postIdsRight : postIdsLeft,
+      timelineViewLeft.activeTab,
+      timelineViewRight.activeTab,
+      CollectionUtil.Array.compareDescFn('content.createdAt')
+    )(state);
 
   const handleCreate = (
     _event: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -82,8 +115,8 @@ export const ProgressiveStepBuilder: FC<ProgressiveStepBuilderProps> = ({
               ScrollTypes.Timeline.LAYOUT.PROGRESSIVE
             )(
               ltr
-                ? [leftTimelineId, rightTimelineId]
-                : [rightTimelineId, leftTimelineId],
+                ? [leftTimeline.id, rightTimeline.id]
+                : [rightTimeline.id, leftTimeline.id],
               activePostId,
               usedSlice
             );
@@ -115,8 +148,7 @@ export const ProgressiveStepBuilder: FC<ProgressiveStepBuilderProps> = ({
             ...result
           },
           activeId: activePostId,
-          finalSize: publishActions.length,
-          counter: counter + 1
+          finalSize: publishActions.length
         };
       });
     }
@@ -125,13 +157,7 @@ export const ProgressiveStepBuilder: FC<ProgressiveStepBuilderProps> = ({
   const handleReset = (
     _event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    // resetNodesWithRelationsWithEdgeState();
-    setNodesWithRelationsWithEdge(state => {
-      return {
-        ...state,
-        counter: 0
-      };
-    });
+    resetNodesWithRelationsWithEdgeState();
   };
 
   return (

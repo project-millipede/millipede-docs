@@ -15,18 +15,12 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 interface ScenarioControlNWithN {
   ltr: boolean;
-  leftTimelineId: string;
-  rightTimelineId: string;
 }
 
 const baseActions = ['head', 'tail'];
 
 // N Posts, with N Slices
-export const ScenarioControlNWithN: FC<ScenarioControlNWithN> = ({
-  leftTimelineId,
-  rightTimelineId,
-  ltr
-}) => {
+export const ScenarioControlNWithN: FC<ScenarioControlNWithN> = ({ ltr }) => {
   const { t } = useTranslation();
 
   const {
@@ -35,20 +29,38 @@ export const ScenarioControlNWithN: FC<ScenarioControlNWithN> = ({
     state: RootState;
   } = useHoux();
 
+  const useCase = (state.timeline &&
+    selectors.timeline.selectUserCaseState(state)) || {
+    id: '',
+    timelines: []
+  };
+
+  const { timelines = [] } = useCase;
+
+  const [leftTimeline, rightTimeline] = timelines;
+
+  const { id: leftTimelineId } = leftTimeline || { id: '' };
+  const { id: rightTimelineId } = rightTimeline || { id: '' };
+
   const {
-    timeline: { timelineViewState, nodesWithRelationsWithEdgeState },
-    post: { postIdsState }
+    timeline: { timelineViewState, nodesWithRelationsWithEdgeState }
   } = scrollStates;
+
+  const {
+    post: { postIdsSelector }
+  } = scrollSelectors;
 
   const {
     interaction: { interactionOptionsSelector }
   } = scrollSelectors;
 
   const usedSlices = useRecoilValue(interactionOptionsSelector);
-  const timelineView = useRecoilValue(timelineViewState);
 
-  const postIdsLeft = useRecoilValue(postIdsState(leftTimelineId));
-  const postIdsRight = useRecoilValue(postIdsState(rightTimelineId));
+  const postIdsLeft = useRecoilValue(postIdsSelector(leftTimelineId));
+  const postIdsRight = useRecoilValue(postIdsSelector(rightTimelineId));
+
+  const timelineViewLeft = useRecoilValue(timelineViewState(leftTimelineId));
+  const timelineViewRight = useRecoilValue(timelineViewState(rightTimelineId));
 
   const setNodesWithRelationsWithEdge = useSetRecoilState(
     nodesWithRelationsWithEdgeState
@@ -58,7 +70,8 @@ export const ScenarioControlNWithN: FC<ScenarioControlNWithN> = ({
     ltr ? leftTimelineId : rightTimelineId,
     ltr ? rightTimelineId : leftTimelineId,
     ltr ? postIdsLeft : postIdsRight,
-    timelineView.currentViews,
+    timelineViewLeft.activeTab,
+    timelineViewRight.activeTab,
     CollectionUtil.Array.compareDescFn('content.createdAt')
   )(state);
 
