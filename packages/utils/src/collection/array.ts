@@ -118,3 +118,15 @@ export const takeNRandom = <T>(arr: Array<T>, num: number) => {
 export const compareDescFn = (field: string) => (a: any, b: any) => {
   return compareDesc(get(a, field), get(b, field));
 };
+
+export const reverse = <T>(array: Array<T>) => {
+  // Spread, reverse
+  return [...array].reverse();
+
+  // alternative
+  // return array.slice().reverse();
+};
+
+export const findCommonIds = (a: Array<string>, b: Array<string>) => {
+  return a.some(item => b.includes(item));
+};
