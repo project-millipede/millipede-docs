@@ -67,10 +67,8 @@ export const ScenarioNavigator: FC<ScenarioNavigatorProps> = () => {
     timeline: { nodesWithRelationsWithEdgeState }
   } = scrollStates;
 
-  const [
-    { nodesWithRelations, activeId },
-    setNodesWithRelationsWithEdge
-  ] = useRecoilState(nodesWithRelationsWithEdgeState);
+  const [{ nodesWithRelations, activeId }, setNodesWithRelationsWithEdge] =
+    useRecoilState(nodesWithRelationsWithEdgeState);
 
   const [steps, currentStep] = useMemo(() => {
     return [
@@ -137,25 +135,22 @@ export const ScenarioDetailNavigator: FC<ScenarioDetailNavigatorProps> = () => {
     return currentNodesWithRelations;
   }, [nodesWithRelations, activeId]);
 
-  const [
-    selectedNodeWithRelationsValue,
-    nodeWithRelations,
-    steps
-  ] = useMemo(() => {
-    const selectedNodeWithRelationsValue =
-      currentNodesWithRelations &&
-      currentNodesWithRelations.values &&
-      currentNodesWithRelations.values[selectedKey.column];
+  const [selectedNodeWithRelationsValue, nodeWithRelations, steps] =
+    useMemo(() => {
+      const selectedNodeWithRelationsValue =
+        currentNodesWithRelations &&
+        currentNodesWithRelations.values &&
+        currentNodesWithRelations.values[selectedKey.column];
 
-    const nodeWithRelations =
-      (selectedNodeWithRelationsValue &&
-        selectedNodeWithRelationsValue.nodeWithRelations) ||
-      [];
+      const nodeWithRelations =
+        (selectedNodeWithRelationsValue &&
+          selectedNodeWithRelationsValue.nodeWithRelations) ||
+        [];
 
-    const steps = (nodeWithRelations && nodeWithRelations.length) || 0;
+      const steps = (nodeWithRelations && nodeWithRelations.length) || 0;
 
-    return [selectedNodeWithRelationsValue, nodeWithRelations, steps];
-  }, [currentNodesWithRelations, selectedKey.column]);
+      return [selectedNodeWithRelationsValue, nodeWithRelations, steps];
+    }, [currentNodesWithRelations, selectedKey.column]);
 
   useEffect(() => {
     if (refs != null && previousId && id) {
@@ -263,55 +258,45 @@ interface ScenarioControlProps {
   rightTimelineId?: string;
 }
 
-export const ScenarioControlOrg: FC<ScenarioControlProps> = (
+export const ScenarioControlOrg: FC<ScenarioControlProps> = () =>
   // eslint-disable-next-line no-empty-pattern
-  { leftTimelineId, rightTimelineId }
-) => {
-  const [state, setState] = useState({
-    ltr: false
-  });
+  {
+    const [state, setState] = useState({
+      ltr: false
+    });
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+      setState({ ...state, [event.target.name]: event.target.checked });
+    };
+
+    return (
+      <div style={{ display: 'flex' }}>
+        <SliceOptions />
+
+        <ScenarioControlNWithN ltr={state.ltr} />
+        {/* <ProgressiveStepBuilder
+          ltr={state.ltr}
+          // ltr
+        /> */}
+
+        <FormGroup row>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={state.ltr}
+                onChange={handleChange}
+                name='ltr'
+                color='primary'
+              />
+            }
+            label='LTR'
+          />
+        </FormGroup>
+      </div>
+    );
   };
 
-  return (
-    <div style={{ display: 'flex' }}>
-      <SliceOptions />
-      <ScenarioControlNWithN
-        ltr={state.ltr}
-        leftTimelineId={leftTimelineId}
-        rightTimelineId={rightTimelineId}
-      />
-
-      <ProgressiveStepBuilder
-        // ltr={state.ltr}
-        ltr
-        leftTimelineId={leftTimelineId}
-        rightTimelineId={rightTimelineId}
-      />
-
-      <FormGroup row>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={state.ltr}
-              onChange={handleChange}
-              name='ltr'
-              color='primary'
-            />
-          }
-          label='LTR'
-        />
-      </FormGroup>
-    </div>
-  );
-};
-
-const ScenarioControl: FC<ScenarioControlProps> = ({
-  leftTimelineId,
-  rightTimelineId
-}) => {
+export const ScenarioControl: FC<ScenarioControlProps> = () => {
   const classes = useStyles();
 
   return (
@@ -331,29 +316,21 @@ const ScenarioControl: FC<ScenarioControlProps> = ({
         >
           Actions
         </Typography>
-        <Help message={'Aktions used for the auto, and manual replay'} />
+        <Help message={'Actions used for the auto, and manual replay'} />
       </div>
 
-      <ProgressiveStepBuilder
-        ltr
-        leftTimelineId={leftTimelineId}
-        rightTimelineId={rightTimelineId}
-      />
+      <ProgressiveStepBuilder ltr />
     </div>
   );
 };
 
-interface FlowControl {
-  leftTimelineId: string;
-  rightTimelineId: string;
+interface FlowControlProps {
   handleControlOffset?: (value: number) => void;
   style?: CSSProperties;
 }
 
-export const FlowControl: FC<FlowControl> = ({
+export const FlowControl: FC<FlowControlProps> = ({
   handleControlOffset,
-  leftTimelineId,
-  rightTimelineId,
   style
 }) => {
   return handleControlOffset ? (
@@ -361,19 +338,13 @@ export const FlowControl: FC<FlowControl> = ({
       handleControlOffset={handleControlOffset}
       style={style}
     >
-      <ScenarioControl
-        leftTimelineId={leftTimelineId}
-        rightTimelineId={rightTimelineId}
-      />
+      <ScenarioControlOrg />
       {/* <ScenarioNavigator />
       <ScenarioDetailNavigator /> */}
     </FlowControlObserver>
   ) : (
     <>
-      <ScenarioControl
-        leftTimelineId={leftTimelineId}
-        rightTimelineId={rightTimelineId}
-      />
+      <ScenarioControlOrg />
       {/* <ScenarioNavigator />
       <ScenarioDetailNavigator /> */}
     </>
