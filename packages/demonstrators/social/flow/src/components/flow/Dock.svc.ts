@@ -1,17 +1,25 @@
+import { CollectionUtil } from '@app/utils';
 import { ScrollTypes } from '@demonstrators-social/shared';
 import get from 'lodash/get';
+
+export const DockPosition = {
+  left: 'left',
+  right: 'right'
+} as const;
+
+export type TDockPosition = typeof DockPosition[keyof typeof DockPosition];
+
+const removeEmptyElementsFn = (element: any) => {
+  return ![null, undefined].includes(element);
+};
 
 export const getSelectedPostIds = (
   timelineId: string,
   nodeWithRelationsWithEdgeMap: ScrollTypes.Timeline.NodesWithRelationsMap,
-  position: string
+  position: TDockPosition
 ) => {
-  const {
-    activeId,
-    nodesWithRelations,
-    counter,
-    finalSize
-  } = nodeWithRelationsWithEdgeMap;
+  const { activeId, nodesWithRelations, finalSize } =
+    nodeWithRelationsWithEdgeMap;
 
   const nodeWithRelationsWithEdge = get(nodesWithRelations, activeId, {
     values: [] as Array<ScrollTypes.Timeline.NodeWithRelationsWithEdge>
@@ -35,95 +43,100 @@ export const getSelectedPostIds = (
         return id;
       });
 
+      const [headRelation] = allNodeIds;
+      const [tailRelation] = CollectionUtil.Array.reverse(allNodeIds);
+
       if (layout === ScrollTypes.Timeline.LAYOUT.PROGRESSIVE) {
         if (ltr) {
-          if (position === 'left' && counter >= 0) {
-            const relation = allNodeIds[0];
-            if (timelineId === get(timelineIds, relation)) {
-              return get(postIds, relation);
+          if (position === DockPosition.left && allNodeIds.length >= 0) {
+            if (timelineId === get(timelineIds, headRelation)) {
+              return get(postIds, headRelation);
             }
           }
-          if (position === 'right' && counter === finalSize) {
-            const relation = allNodeIds[finalSize - 1];
-            if (timelineId === get(timelineIds, relation)) {
-              return get(postIds, relation);
+          if (
+            position === DockPosition.right &&
+            allNodeIds.length === finalSize
+          ) {
+            if (timelineId === get(timelineIds, tailRelation)) {
+              return get(postIds, tailRelation);
             }
           }
         }
         if (!ltr) {
-          if (position === 'right' && counter >= 0) {
-            const relation = allNodeIds[counter - 1];
-            if (timelineId === get(timelineIds, relation)) {
-              return get(postIds, relation);
+          if (position === DockPosition.right && allNodeIds.length >= 0) {
+            if (timelineId === get(timelineIds, tailRelation)) {
+              return get(postIds, tailRelation);
             }
           }
-          if (position === 'left' && counter === finalSize) {
-            const relation = allNodeIds[0];
-            if (timelineId === get(timelineIds, relation)) {
-              return get(postIds, relation);
+          if (
+            position === DockPosition.left &&
+            allNodeIds.length === finalSize
+          ) {
+            if (timelineId === get(timelineIds, headRelation)) {
+              return get(postIds, headRelation);
             }
           }
         }
       }
 
       if (layout === ScrollTypes.Timeline.LAYOUT.FULL) {
-        const [headRelation] = allNodeIds.slice(0, 1);
-        const [tailRelation] = allNodeIds.slice(-1);
-
         if (timelineId === get(timelineIds, headRelation)) {
           return get(postIds, headRelation);
         }
-
         if (timelineId === get(timelineIds, tailRelation)) {
           return get(postIds, tailRelation);
         }
       }
-
-      return null;
     })
-    .filter((item, index, list) => {
-      return list.indexOf(item) === index;
-    });
+    .filter(removeEmptyElementsFn);
 
   return result;
 };
 
-export const getSelectedSliceIdsBody = (
-  value: ScrollTypes.Timeline.NodeWithRelationsWithEdge,
-  counter: number,
+export const getRange = (
+  nodeWithRelations: ScrollTypes.Timeline.NodeWithRelations[],
   finalSize: number
 ) => {
-  const { nodeWithRelations, ltr, layout } = value;
-  if (layout === ScrollTypes.Timeline.LAYOUT.PROGRESSIVE) {
-    if (ltr) {
-      if (counter > 0) {
-        if (counter < finalSize) {
-          return nodeWithRelations.slice(1, counter);
+  return nodeWithRelations.slice(
+    1,
+    nodeWithRelations.length === finalSize
+      ? nodeWithRelations.length - 1
+      : nodeWithRelations.length
+  );
+};
+
+export const getSelectedSliceIdsBody = (
+  nodeWithRelationsWithEdgeMap: ScrollTypes.Timeline.NodesWithRelationsMap
+) => {
+  const { activeId, nodesWithRelations, finalSize } =
+    nodeWithRelationsWithEdgeMap;
+
+  const nodeWithRelationsWithEdge = get(nodesWithRelations, activeId, {
+    values: [] as Array<ScrollTypes.Timeline.NodeWithRelationsWithEdge>
+  });
+
+  const { values } = nodeWithRelationsWithEdge;
+
+  const result = values
+    .map(value => {
+      const { nodeWithRelations, ltr, layout } = value;
+      if (layout === ScrollTypes.Timeline.LAYOUT.PROGRESSIVE) {
+        if (ltr) {
+          return getRange(nodeWithRelations, finalSize);
         }
-        if (counter === finalSize) {
-          return nodeWithRelations.slice(1, finalSize - 1);
+        if (!ltr) {
+          const nodeWithRelationsReversed =
+            CollectionUtil.Array.reverse(nodeWithRelations);
+          return getRange(nodeWithRelationsReversed, finalSize);
         }
       }
-    }
-    if (!ltr) {
-      if (counter > 0) {
-        if (counter < finalSize) {
-          return nodeWithRelations
-            .slice()
-            .reverse()
-            .slice(1, counter)
-            .reverse();
-        }
-        if (counter === finalSize) {
-          return nodeWithRelations.slice(1, finalSize - 1);
-        }
+      if (layout === ScrollTypes.Timeline.LAYOUT.FULL) {
+        return nodeWithRelations.slice(1, nodeWithRelations.length - 1);
       }
-    }
-  }
-  if (layout === ScrollTypes.Timeline.LAYOUT.FULL) {
-    return nodeWithRelations.slice(1, nodeWithRelations.length - 1);
-  }
-  return null;
+    })
+    .filter(removeEmptyElementsFn);
+
+  return result;
 };
 
 export interface SliceMap {
@@ -144,44 +157,44 @@ export const getSelectedSliceIds = (
 
   const { values } = nodeWithRelationsWithEdge;
 
-  const result = values.map<SliceMap>(nodeWithRelationsWithEdge => {
-    const {
-      nodeWithRelations,
-      edgeConnections: { timelineIds, postIds, sliceIds }
-    } = nodeWithRelationsWithEdge;
-
-    const allNodeIds = nodeWithRelations.map(nodeWithRelation => {
+  const result = values
+    .map<SliceMap>(nodeWithRelationsWithEdge => {
       const {
-        node: { id }
-      } = nodeWithRelation;
-      return id;
-    });
+        nodeWithRelations,
+        edgeConnections: { timelineIds, postIds, sliceIds }
+      } = nodeWithRelationsWithEdge;
 
-    const [headRelation] = allNodeIds.slice(0, 1);
-    const [tailRelation] = allNodeIds.slice(-1);
+      const allNodeIds = nodeWithRelations.map(nodeWithRelation => {
+        const {
+          node: { id }
+        } = nodeWithRelation;
+        return id;
+      });
 
-    if (timelineId === get(timelineIds, headRelation)) {
-      return {
-        postId: get(postIds, headRelation),
-        sliceId: get(sliceIds, headRelation),
-        nodeWithRelations: nodeWithRelations.find(
-          nodeWithRelation => nodeWithRelation.node.id === headRelation
-        )
-      };
-    }
+      const [headRelation] = allNodeIds;
+      const [tailRelation] = CollectionUtil.Array.reverse(allNodeIds);
 
-    if (timelineId === get(timelineIds, tailRelation)) {
-      return {
-        postId: get(postIds, tailRelation),
-        sliceId: get(sliceIds, tailRelation),
-        nodeWithRelations: nodeWithRelations.find(
-          nodeWithRelation => nodeWithRelation.node.id === tailRelation
-        )
-      };
-    }
+      if (timelineId === get(timelineIds, headRelation)) {
+        return {
+          postId: get(postIds, headRelation),
+          sliceId: get(sliceIds, headRelation),
+          nodeWithRelations: nodeWithRelations.find(
+            nodeWithRelation => nodeWithRelation.node.id === headRelation
+          )
+        };
+      }
 
-    return null;
-  });
+      if (timelineId === get(timelineIds, tailRelation)) {
+        return {
+          postId: get(postIds, tailRelation),
+          sliceId: get(sliceIds, tailRelation),
+          nodeWithRelations: nodeWithRelations.find(
+            nodeWithRelation => nodeWithRelation.node.id === tailRelation
+          )
+        };
+      }
+    })
+    .filter(removeEmptyElementsFn);
 
   return result;
 };
