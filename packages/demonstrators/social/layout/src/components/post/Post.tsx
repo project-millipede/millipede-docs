@@ -7,7 +7,10 @@ import {
   ScrollTypes,
   selectors,
   TimelineActions,
+  viewportReducers,
+  viewportSelectors,
 } from '@demonstrators-social/shared';
+import { useMergedRef } from '@huse/merged-ref';
 import { Button, ButtonGroup, Card, createStyles, ListItem, makeStyles } from '@material-ui/core';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
@@ -16,7 +19,8 @@ import { formatDistance } from 'date-fns';
 import { enGB } from 'date-fns/locale';
 import lodashGet from 'lodash/get';
 import useTranslation from 'next-translate/useTranslation';
-import React, { Dispatch, FC, useMemo, useState } from 'react';
+import React, { Dispatch, FC, memo, useEffect, useMemo, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 import { selectorFamily, SerializableParam, useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { CommentEditor } from '../comment/CommentEditor';
@@ -51,16 +55,19 @@ const refPostScrollSelector = selectorFamily<
   ScrollTypes.Post.RefPostScroll,
   TimelinePostKeys
 >({
-  key: 'refPostScrollSelector',
-  get: ({ postId, timelineId }) => ({ get }) => {
-    const {
-      post: { refPostScrollState }
-    } = scrollStates;
+  key: 'ref-post-scroll-selector',
+  get:
+    ({ postId, timelineId }) =>
+    ({ get }) => {
+      const {
+        post: { refPostScrollState }
+      } = scrollStates;
 
-    const posts = get(refPostScrollState(postId));
-    const post = lodashGet(posts, timelineId);
-    return post;
-  }
+      const posts = get(refPostScrollState(postId));
+
+      const post = lodashGet(posts, timelineId);
+      return post;
+    }
 });
 
 export interface PostProps {
@@ -74,6 +81,18 @@ export const Post: FC<PostProps> = ({
   otherTimelineId,
   postId
 }) => {
+  // Logs the component lifecycle.
+  // console.log('-- rendering post');
+
+  useEffect(() => {
+    // The component is mounted only one time.
+    console.log('---- mounting post');
+    return () => {
+      // The component is never unmounted during reparenting.
+      console.log('------ unmounting post');
+    };
+  }, []);
+
   const classes = useStyles();
 
   const { t } = useTranslation();
@@ -127,19 +146,39 @@ export const Post: FC<PostProps> = ({
   const { media } = classes;
   const { refObserved, refObservedSubSlices } = elementRef || {};
 
-  const getRefForId = getRef(refObservedSubSlices);
+  const refForComponent = useMemo(() => {
+    if (refObservedSubSlices != null) {
+      const getRefForComponent = getRef(refObservedSubSlices);
+      return {
+        header: getRefForComponent('header'),
+        media: getRefForComponent('media'),
+        content: getRefForComponent('content'),
+        sentiment: getRefForComponent('sentiment'),
+        comments: getRefForComponent('comments')
+      };
+    }
+    return {
+      header: null,
+      media: null,
+      content: null,
+      sentiment: null,
+      comments: null
+    };
+  }, [refObservedSubSlices]);
 
-  const headerComp = getObserverComp(getRefForId('header'))(
+  const headerComp = getObserverComp(refForComponent.header)(
     getHeader(firstName, lastName, avatar, date)
   );
 
-  const mediaComp = getObserverComp(getRefForId('media'))(
+  const mediaComp = getObserverComp(refForComponent.media)(
     getMedia(imageHref, imageTitle, media)
   );
 
-  const contentComp = getObserverComp(getRefForId('content'))(getContent(text));
+  const contentComp = getObserverComp(refForComponent.content)(
+    getContent(text)
+  );
 
-  const sentimentComp = getObserverComp(getRefForId('sentiment'))(
+  const sentimentComp = getObserverComp(refForComponent.sentiment)(
     <ButtonGroup variant='text' color='primary' size='large' fullWidth>
       <Button
         id={`timeline-${timelineId}-post-${postId}-comment-like`}
@@ -167,7 +206,7 @@ export const Post: FC<PostProps> = ({
     </ButtonGroup>
   );
 
-  const commentComp = getObserverComp(getRefForId('comments'))(
+  const commentComp = getObserverComp(refForComponent.comments)(
     <Comments comments={comments} timelineId={timelineId} postId={postId} />
   );
 
@@ -175,11 +214,48 @@ export const Post: FC<PostProps> = ({
     nodesWithRelationsWithEdgeState
   );
 
+  const {
+    post: { addItem, removeItem }
+  } = viewportReducers;
+
+  const {
+    post: { viewportItemSelector }
+  } = viewportSelectors;
+
+  const setViewportItemState = useSetRecoilState(
+    viewportItemSelector(timelineId)
+  );
+
+  const [intersectionObserverRef, inView, entry] = useInView({
+    threshold: [0.1, 0.3, 0.6, 0.8],
+    delay: 500
+  });
+
+  useEffect(() => {
+    if (entry && entry.target) {
+      const target = entry.target as HTMLElement;
+      const { id: inViewElementId, offsetTop } = target;
+      if (inView) {
+        setViewportItemState(state => {
+          return {
+            ...addItem(state, { id: inViewElementId, offsetTop }),
+            offsetTop: offsetTop
+          };
+        });
+      }
+      if (!inView) {
+        setViewportItemState(state => removeItem(state, inViewElementId));
+      }
+    }
+  }, [inView]);
+
+  const combinedRef = useMergedRef([refObserved, intersectionObserverRef]);
+
   return (
     <ListItem
-      id={`timeline-${timelineId}-post-${postId}`}
-      ref={refObserved != null ? refObserved : null}
+      ref={combinedRef}
       className={classes.postListItem}
+      id={`timeline-${timelineId}-post-${postId}`}
     >
       <Card className={classes.card}>
         {headerComp}
@@ -231,3 +307,5 @@ export const Post: FC<PostProps> = ({
     </ListItem>
   );
 };
+
+export default memo(Post);
