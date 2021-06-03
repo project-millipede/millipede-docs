@@ -53,7 +53,8 @@ export const TopReveal = (props: TopRevealProps) => {
       transition: loop
         ? {
             ease: 'easeOut',
-            yoyo: Infinity,
+            repeat: Infinity,
+            repeatType: 'reverse',
             repeatDelay: 3
           }
         : {
@@ -63,7 +64,7 @@ export const TopReveal = (props: TopRevealProps) => {
   };
 
   // Variants for animating the lines
-  const lineVariants = {
+  const lineVariants: Variants = {
     before: {
       opacity: 0,
       width: 0
@@ -74,7 +75,8 @@ export const TopReveal = (props: TopRevealProps) => {
       transition: loop
         ? {
             ease: 'easeIn',
-            yoyo: Infinity,
+            repeat: Infinity,
+            repeatType: 'reverse',
             repeatDelay: 3
           }
         : {

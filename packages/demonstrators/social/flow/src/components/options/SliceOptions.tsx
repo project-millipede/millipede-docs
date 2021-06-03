@@ -51,28 +51,30 @@ const getSliceOptions = (_t: Translate) => {
   ];
 };
 
-const createIcons = (
-  hideSpeedDial: () => void,
-  interactionOption: ScrollTypes.Interaction.InteractionOption,
-  setInteractionOption: SetterOrUpdater<ScrollTypes.Interaction.InteractionOption>
-) => ({ id, title }: DockMenuItem) => {
-  return {
-    title,
-    icon: <Icon id={id} />,
-    action: () => {
-      const { activeIds } = interactionOption;
-      const selectedInteractionOption = activeIds[id];
-      setInteractionOption({
-        ...interactionOption,
-        activeIds: {
-          ...interactionOption.activeIds,
-          [id]: !selectedInteractionOption
-        }
-      });
-      hideSpeedDial();
-    }
+const createIcons =
+  (
+    hideSpeedDial: () => void,
+    interactionOption: ScrollTypes.Interaction.InteractionOption,
+    setInteractionOption: SetterOrUpdater<ScrollTypes.Interaction.InteractionOption>
+  ) =>
+  ({ id, title }: DockMenuItem) => {
+    return {
+      title,
+      icon: <Icon id={id} />,
+      action: () => {
+        const { activeIds } = interactionOption;
+        const selectedInteractionOption = activeIds[id];
+        setInteractionOption({
+          ...interactionOption,
+          activeIds: {
+            ...interactionOption.activeIds,
+            [id]: !selectedInteractionOption
+          }
+        });
+        hideSpeedDial();
+      }
+    };
   };
-};
 
 const createButton = ({ title, icon, action }) => (
   <SpeedDialAction

@@ -149,28 +149,27 @@ const createNewTab = async (
   newWindow.focus();
 };
 
-const createObjects = (
-  baseUrl: string,
-  hideSpeedDial: (type: Interaction) => void
-) => ({ id, type, title, url, params }: InteractionMenuItem) => {
-  if (type === Interaction.SHARE_LOCAL) {
+const createObjects =
+  (baseUrl: string, hideSpeedDial: (type: Interaction) => void) =>
+  ({ id, type, title, url, params }: InteractionMenuItem) => {
+    if (type === Interaction.SHARE_LOCAL) {
+      return {
+        title,
+        icon: <Icon id={id} />,
+        action: () => {
+          copy(baseUrl);
+          hideSpeedDial(Interaction.SHARE_LOCAL);
+        }
+      };
+    }
     return {
       title,
       icon: <Icon id={id} />,
       action: () => {
-        copy(baseUrl);
-        hideSpeedDial(Interaction.SHARE_LOCAL);
+        createNewTab(`${url}${objectToGetParams(params)}`, hideSpeedDial);
       }
     };
-  }
-  return {
-    title,
-    icon: <Icon id={id} />,
-    action: () => {
-      createNewTab(`${url}${objectToGetParams(params)}`, hideSpeedDial);
-    }
   };
-};
 
 const creataShareLink = ({ title, icon, action }) => (
   <SpeedDialAction
