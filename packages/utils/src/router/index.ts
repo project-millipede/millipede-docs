@@ -2,24 +2,27 @@ import { PageTypes } from '@app/types';
 import isArray from 'lodash/isArray';
 
 const flattenPages = (pages: Array<PageTypes.Page>, key: string) => {
-  return pages.reduce((flattenedPages, page) => {
-    if (page[key]) {
-      flattenedPages.push({
-        ...page,
-        isParent: true
-      });
-    } else {
-      flattenedPages.push({
-        ...page,
-        isParent: false
-      });
-    }
+  return pages.reduce<Array<PageTypes.FlattenedPage>>(
+    (flattenedPages, page) => {
+      if (page[key]) {
+        flattenedPages.push({
+          ...page,
+          isParent: true
+        });
+      } else {
+        flattenedPages.push({
+          ...page,
+          isParent: false
+        });
+      }
 
-    if (isArray(page[key])) {
-      flattenedPages = flattenedPages.concat(flattenPages(page[key], key));
-    }
-    return flattenedPages;
-  }, [] as Array<PageTypes.FlattenedPage>);
+      if (isArray(page[key])) {
+        flattenedPages = flattenedPages.concat(flattenPages(page[key], key));
+      }
+      return flattenedPages;
+    },
+    []
+  );
 };
 
 const findExpandedPages = (
