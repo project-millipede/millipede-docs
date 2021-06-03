@@ -1,67 +1,68 @@
-import { Divider } from '@material-ui/core';
-import React, { FC, ReactNode } from 'react';
+import { IconButton } from '@material-ui/core';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import React, { FC, useCallback } from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
-import { Step } from '../types';
+import { playerLayoutState } from '../context/reducer';
 import { NavigationControl } from './controls';
-import { ProgressControl, TextProgressControl } from './progress';
-
-interface PlayerProps {
-  steps: Array<Step>;
-  isPlayerOpen: boolean;
-  expander: ReactNode;
-}
 
 const height = 48;
 const borderRadius = height / 2;
 
-export const Player: FC<PlayerProps> = ({ steps, expander, isPlayerOpen }) => {
+export const Player: FC = () => {
+  const [{ isPlayerExpanded }, setPlayerLayoutState] =
+    useRecoilState(playerLayoutState);
+
+  const toggle = useCallback(
+    () =>
+      setPlayerLayoutState(state => {
+        return {
+          ...state,
+          isPlayerExpanded: !state.isPlayerExpanded
+        };
+      }),
+    [isPlayerExpanded, setPlayerLayoutState]
+  );
+
+  const handleBottomSheet = (
+    _event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    toggle();
+  };
+
+  const expander = (
+    <IconButton size={'small'} onClick={handleBottomSheet}>
+      {isPlayerExpanded ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
+    </IconButton>
+  );
+
   return (
-    <ColumnProgress borderRadius={borderRadius}>
-      {isPlayerOpen ? (
-        <>
-          <Divider variant={'middle'} />
-          <RowProgressNarrow height={height}>
-            <ProgressControl steps={steps} />
-            <TextProgressControl steps={steps} />
-          </RowProgressNarrow>
-        </>
-      ) : null}
-      <RowProgress height={height}>
+    <Column style={{ borderRadius: borderRadius }}>
+      <RowWide style={{ height: height }}>
         <NavigationControl />
         {expander && expander}
-      </RowProgress>
-    </ColumnProgress>
+      </RowWide>
+    </Column>
   );
 };
 
-interface ColumnProgressProps {
-  borderRadius: number;
-}
-
-const ColumnProgress = styled.div<ColumnProgressProps>`
+export const Column = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: '#f1f3f4';
-  border-radius: ${({ borderRadius }) => `${borderRadius}px`};
 `;
 
-interface RowProgressProps {
-  height?: number | string;
-}
-
-const RowProgressNarrow = styled.div<RowProgressProps>`
+export const RowNarrow = styled.div`
   display: flex;
   padding: 0px 24px;
   align-items: center;
   justify-content: center;
-  height: ${({ height }) => `${height}px`};
 `;
 
-const RowProgress = styled.div<RowProgressProps>`
+export const RowWide = styled.div`
   display: flex;
   padding: 0px 24px;
   align-items: center;
   justify-content: space-between;
-  height: ${({ height }) => `${height}px`};
 `;
