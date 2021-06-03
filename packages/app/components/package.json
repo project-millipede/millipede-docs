@@ -11,22 +11,20 @@
     "clsx": "*",
     "next": "*",
     "react": "*",
-    "react-dom": "*",
-    "use-resize-observer": "*"
+    "react-dom": "*"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@material-ui/core": "5.0.0-alpha.18",
     "@material-ui/icons": "5.0.0-alpha.15",
-    "@types/react": "^17.0.6",
-    "@types/react-dom": "^17.0.5",
+    "@types/react": "^17.0.9",
+    "@types/react-dom": "^17.0.6",
     "clsx": "^1.1.1",
-    "next": "10.2.2",
+    "next": "10.2.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "typescript": "^4.1.5",
-    "use-resize-observer": "^7.0.0"
+    "typescript": "^4.1.5"
   },
   "dependencies": {
     "@app/render-utils": "workspace:packages/render-utils",
