@@ -57,7 +57,7 @@ __metadata:
   dependencies:
     "@analytics/google-analytics": ^0.5.3
     analytics: ^0.7.5
-    typescript: ^4.1.5
+    typescript: ^4.3.2
   languageName: unknown
   linkType: soft
 
@@ -77,7 +77,7 @@ __metadata:
     next: 10.2.3
     react: ^17.0.2
     react-dom: ^17.0.2
-    typescript: ^4.1.5
+    typescript: ^4.3.2
   peerDependencies:
     "@fortawesome/fontawesome-svg-core": "*"
     "@fortawesome/react-fontawesome": "*"
@@ -100,7 +100,7 @@ __metadata:
     react: ^17.0.2
     react-dom: ^17.0.2
     typesafe-actions: ^5.1.0
-    typescript: ^4.1.5
+    typescript: ^4.3.2
   peerDependencies:
     react: "*"
     react-dom: "*"
@@ -134,7 +134,7 @@ __metadata:
     react-dom: ^17.0.2
     styled-components: ^5.3.0
     typesafe-actions: ^5.1.0
-    typescript: ^4.1.5
+    typescript: ^4.3.2
     use-analytics: ^0.0.5
   peerDependencies:
     "@fortawesome/fontawesome-svg-core": "*"
@@ -168,7 +168,7 @@ __metadata:
     react: ^17.0.2
     react-dom: ^17.0.2
     rimraf: ^3.0.2
-    typescript: ^4.1.5
+    typescript: ^4.3.2
   peerDependencies:
     react: "*"
     react-dom: "*"
@@ -188,7 +188,7 @@ __metadata:
     react-dom: ^17.0.2
     react-timing-hooks: ^2.0.0
     rimraf: ^3.0.2
-    typescript: ^4.1.5
+    typescript: ^4.3.2
   peerDependencies:
     react: "*"
     react-dom: "*"
@@ -208,7 +208,7 @@ __metadata:
     lodash: ^4.17.21
     react: ^17.0.2
     react-dom: ^17.0.2
-    typescript: ^4.1.5
+    typescript: ^4.3.2
   peerDependencies:
     "@huse/effect-ref": "*"
     element-resize-detector: "*"
@@ -222,7 +222,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@app/types@workspace:packages/types"
   dependencies:
-    typescript: ^4.1.5
+    typescript: ^4.3.2
   languageName: unknown
   linkType: soft
 
@@ -231,7 +231,7 @@ __metadata:
   resolution: "@app/utils@workspace:packages/utils"
   dependencies:
     lodash: ^4.17.21
-    typescript: ^4.1.5
+    typescript: ^4.3.2
   languageName: unknown
   linkType: soft
 
@@ -243,7 +243,7 @@ __metadata:
     escalade: ^3.1.1
     rimraf: ^3.0.2
     ts-loader: ^9.2.2
-    typescript: ^4.1.5
+    typescript: ^4.3.2
     webpack: ^5.38.1
   languageName: unknown
   linkType: soft
@@ -1728,7 +1728,7 @@ __metadata:
   dependencies:
     "@demonstrator/types": "workspace:packages/demonstrator/types"
     "@project-millipede/windups": ^1.1.12
-    typescript: ^4.1.5
+    typescript: ^4.3.2
   peerDependencies:
     "@project-millipede/windups": "*"
   languageName: unknown
@@ -1739,7 +1739,7 @@ __metadata:
   resolution: "@demonstrator/layout@workspace:packages/demonstrator/layout"
   dependencies:
     "@demonstrator/types": "workspace:packages/demonstrator/types"
-    typescript: ^4.1.5
+    typescript: ^4.3.2
   languageName: unknown
   linkType: soft
 
@@ -1749,7 +1749,7 @@ __metadata:
   dependencies:
     "@types/react-reconciler": ^0.26.1
     react-reparenting: ^0.6.1
-    typescript: ^4.1.5
+    typescript: ^4.3.2
   languageName: unknown
   linkType: soft
 
@@ -1757,7 +1757,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@demonstrator/types@workspace:packages/demonstrator/types"
   dependencies:
-    typescript: ^4.1.5
+    typescript: ^4.3.2
   languageName: unknown
   linkType: soft
 
@@ -1769,7 +1769,7 @@ __metadata:
     "@material-ui/icons": 5.0.0-alpha.15
     react: ^17.0.2
     react-dom: ^17.0.2
-    typescript: ^4.1.5
+    typescript: ^4.3.2
   peerDependencies:
     "@material-ui/core": "*"
     "@material-ui/icons": "*"
@@ -1784,7 +1784,7 @@ __metadata:
   dependencies:
     "@types/jest": ^26.0.23
     chance: ^1.1.7
-    typescript: ^4.1.5
+    typescript: ^4.3.2
   languageName: unknown
   linkType: soft
 
@@ -1799,7 +1799,7 @@ __metadata:
     "@demonstrators-social/shared": "workspace:packages/demonstrators/social/shared"
     react: ^17.0.2
     react-dom: ^17.0.2
-    typescript: ^4.1.5
+    typescript: ^4.3.2
   peerDependencies:
     react: "*"
     react-dom: "*"
@@ -1818,7 +1818,7 @@ __metadata:
     "@project-millipede/windups": ^1.1.12
     react: ^17.0.2
     react-dom: ^17.0.2
-    typescript: ^4.1.5
+    typescript: ^4.3.2
   peerDependencies:
     "@project-millipede/windups": "*"
     react: "*"
@@ -1844,7 +1844,7 @@ __metadata:
     recoil: ^0.3.1
     reselect: ^4.0.0
     typesafe-actions: ^5.1.0
-    typescript: ^4.1.5
+    typescript: ^4.3.2
   peerDependencies:
     "@huse/effect-ref": "*"
     immer: "*"
@@ -2767,7 +2767,7 @@ __metadata:
     next: 10.2.3
     react: ^17.0.2
     react-dom: ^17.0.2
-    typescript: ^4.1.5
+    typescript: ^4.3.2
   peerDependencies:
     next: "*"
     react: "*"
@@ -9240,7 +9240,7 @@ __metadata:
     styled-components: ^5.3.0
     ts-jest: ^27.0.2
     typesafe-actions: ^5.1.0
-    typescript: ^4.1.5
+    typescript: ^4.3.2
     unified: ^9.2.1
     unist-util-visit: ^2.0.3
     use-analytics: ^0.0.5
