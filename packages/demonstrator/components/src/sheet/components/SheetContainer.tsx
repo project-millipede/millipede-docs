@@ -3,24 +3,24 @@ import React, { FC } from 'react';
 
 import { useSheetContext } from '../context/SheetContext';
 
-type SheetContainerProps = {
-  size: Partial<DOMRect>;
-  bottomSize: Partial<DOMRect>;
-};
+interface SheetContainerProps {
+  appContainerSize: Partial<DOMRect>;
+  bottomContainerSize: Partial<DOMRect>;
+}
 
-const SheetContainer: FC<SheetContainerProps> = ({
-  children,
-  size,
-  bottomSize
+export const SheetContainer: FC<SheetContainerProps> = ({
+  appContainerSize,
+  bottomContainerSize,
+  children
 }) => {
   const {
     snapPoints,
     initialSnapPointIndex = 0,
     sheetRef,
-    y
+    fromY
   } = useSheetContext();
 
-  const [maxSnapPoint] = snapPoints && snapPoints.length > 0 ? snapPoints : [0];
+  const [maxSnapPoint] = snapPoints ? snapPoints : [0];
 
   const initialSnapPoint =
     snapPoints && snapPoints.length >= initialSnapPointIndex
@@ -28,29 +28,26 @@ const SheetContainer: FC<SheetContainerProps> = ({
       : 0;
 
   const sheetHeight = maxSnapPoint
-    ? Math.min(maxSnapPoint, size.height)
-    : size.height;
+    ? Math.min(maxSnapPoint, appContainerSize.height)
+    : appContainerSize.height;
 
-  const initialY = size.height - (bottomSize.height + initialSnapPoint);
+  const initialY =
+    appContainerSize.height - bottomContainerSize.height - initialSnapPoint;
 
   return (
     <motion.div
       ref={sheetRef}
       style={{
         height: sheetHeight,
-        display: 'flex',
-        flexDirection: 'column',
-        backgroundColor: '#fff',
-        zIndex: 2,
-        y
+        pointerEvents: 'auto', // Important to access elements inside the bottom sheet container
+        backgroundColor: '#FFFFFF',
+        y: fromY // seems this is used for snaps, only
       }}
-      initial={{ y: size.height }}
+      initial={{ y: appContainerSize.height - bottomContainerSize.height }}
       animate={{ y: initialY }}
-      exit={{ y: size.height }}
+      exit={{ y: appContainerSize.height - bottomContainerSize.height }}
     >
       {children}
     </motion.div>
   );
 };
-
-export default SheetContainer;
