@@ -37,7 +37,6 @@ export const Stepper: FC<StepperWithTranslationProps> = ({
   const passActiveState = useCallback(
     (value: number) => {
       if (value != null) {
-        console.log('setStepCb - value: ', value);
         setStepCb(value);
       }
     },
