@@ -1,12 +1,11 @@
 import { MotionValue } from 'framer-motion';
-import { createContext, useContext, MutableRefObject } from 'react';
+import { createContext, MutableRefObject, useContext } from 'react';
 
 export type SheetContextProps = {
   sheetRef: MutableRefObject<HTMLDivElement>;
-  isOpen: boolean;
   snapPoints: Array<number>;
   initialSnapPointIndex: number;
-  y: MotionValue<number>;
+  fromY: MotionValue<number>;
 };
 
 export const SheetContext = createContext<SheetContextProps>(null);
