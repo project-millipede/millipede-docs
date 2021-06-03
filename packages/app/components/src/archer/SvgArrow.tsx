@@ -21,8 +21,8 @@ type Props = {
   offset?: number;
 };
 
-function computeEndingArrowDirectionVector(endingAnchorOrientation) {
-  switch (endingAnchorOrientation) {
+const computeArrowDirectionVector = (anchorOrientation: AnchorPosition) => {
+  switch (anchorOrientation) {
     case 'left':
       return { arrowX: -1, arrowY: 0 };
     case 'right':
@@ -34,18 +34,16 @@ function computeEndingArrowDirectionVector(endingAnchorOrientation) {
     default:
       return { arrowX: 0, arrowY: 0 };
   }
-}
+};
 
-export function computeEndingPointAccordingToArrowHead(
+export const computeEndingPointAccordingToArrowHead = (
   xArrowHeadEnd: number,
   yArrowHeadEnd: number,
   arrowLength: number,
   strokeWidth: number,
   endingAnchorOrientation: AnchorPosition
-) {
-  const endingVector = computeEndingArrowDirectionVector(
-    endingAnchorOrientation
-  );
+) => {
+  const endingVector = computeArrowDirectionVector(endingAnchorOrientation);
 
   const { arrowX, arrowY } = endingVector;
 
@@ -53,15 +51,15 @@ export function computeEndingPointAccordingToArrowHead(
   const yEnd = yArrowHeadEnd + (arrowY * arrowLength * strokeWidth) / 2;
 
   return { xEnd, yEnd };
-}
+};
 
-export function computeStartingAnchorPosition(
+export const computeStartingAnchorPosition = (
   xStart: number,
   yStart: number,
   xEnd: number,
   yEnd: number,
   startingAnchorOrientation: AnchorPosition
-): { xAnchor1: number; yAnchor1: number } {
+): { xAnchor1: number; yAnchor1: number } => {
   if (
     startingAnchorOrientation === 'top' ||
     startingAnchorOrientation === 'bottom'
@@ -82,15 +80,15 @@ export function computeStartingAnchorPosition(
   }
 
   return { xAnchor1: xStart, yAnchor1: yStart };
-}
+};
 
-export function computeEndingAnchorPosition(
+export const computeEndingAnchorPosition = (
   xStart: number,
   yStart: number,
   xEnd: number,
   yEnd: number,
   endingAnchorOrientation: AnchorPosition
-): { xAnchor2: number; yAnchor2: number } {
+): { xAnchor2: number; yAnchor2: number } => {
   if (
     endingAnchorOrientation === 'top' ||
     endingAnchorOrientation === 'bottom'
@@ -111,14 +109,19 @@ export function computeEndingAnchorPosition(
   }
 
   return { xAnchor2: xEnd, yAnchor2: yEnd };
-}
+};
 
-export function computeLabelDimensions(
+export const computeLabelDimensions = (
   xStart: number,
   yStart: number,
   xEnd: number,
   yEnd: number
-): { xLabel: number; yLabel: number; labelWidth: number; labelHeight: number } {
+): {
+  xLabel: number;
+  yLabel: number;
+  labelWidth: number;
+  labelHeight: number;
+} => {
   const labelWidth = Math.max(Math.abs(xEnd - xStart), 1);
   const labelHeight = Math.max(Math.abs(yEnd - yStart), 1);
 
@@ -131,9 +134,9 @@ export function computeLabelDimensions(
     labelWidth,
     labelHeight
   };
-}
+};
 
-function computePathString({
+export const computePathString = ({
   xStart,
   yStart,
   xAnchor1,
@@ -155,7 +158,7 @@ function computePathString({
   yEnd: number;
   noCurves: boolean;
   offset?: number;
-}): string {
+}): string => {
   const curveMarker = noCurves ? '' : 'C';
 
   if (offset && offset > 0) {
@@ -176,7 +179,7 @@ function computePathString({
     `${curveMarker}${xAnchor1},${yAnchor1} ${xAnchor2},${yAnchor2} ` +
     `${xEnd},${yEnd}`
   );
-}
+};
 
 const SvgArrow = ({
   startingPoint,

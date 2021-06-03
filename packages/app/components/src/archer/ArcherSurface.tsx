@@ -1,11 +1,12 @@
-import React, { CSSProperties, forwardRef, ForwardRefRenderFunction, SVGProps, useRef } from 'react';
+import { HooksUtils } from '@app/render-utils';
+import { useMergedRef } from '@huse/merged-ref';
+import React, { CSSProperties, forwardRef, ForwardRefRenderFunction, SVGProps, useRef, useState } from 'react';
 
 import { useRefState } from './context/RefProvider';
 import { useTransitionState } from './context/TransitionProvider';
 import { Point } from './Point';
 import SvgArrow from './SvgArrow';
 import { AnchorPosition, ArcherContainerProps, EntityRelationType, SourceToTargetType } from './types-private';
-import { useResize } from './useResize';
 
 const computeCoordinatesFromAnchorPosition = (
   anchorPosition: AnchorPosition,
@@ -83,15 +84,17 @@ export const ArcherSurface: ForwardRefRenderFunction<
   },
   _ref
 ) => {
-  const parentRef = useRef<HTMLDivElement>(null);
-
-  useResize(parentRef);
-
   const { refs } = useRefState();
   const { sourceToTargetsMap } = useTransitionState();
 
-  const arrowMarkerRandomNumber = Math.random().toString().slice(2);
-  const arrowMarkerUniquePrefix = `arrow${arrowMarkerRandomNumber}`;
+  const parentRef = useRef<HTMLDivElement>(null);
+  const [parentObserverRef] = HooksUtils.useResize();
+
+  const combinedRef = useMergedRef([parentRef, parentObserverRef]);
+
+  const [arrowMarkerUniquePrefix] = useState(
+    () => `arrow${Math.random().toString().slice(2)}`
+  );
 
   const getCoordinatesFromAnchorPosition = (
     position: AnchorPosition,
@@ -131,9 +134,9 @@ export const ArcherSurface: ForwardRefRenderFunction<
   });
 
   const computeArrows = () => {
+    const parentCoordinates = getParentCoordinates();
     return getSourceToTargets(sourceToTargetsMap).map(
       ({ source, target, label, style = {} }: SourceToTargetType) => {
-        const parentCoordinates = getParentCoordinates();
         // Actual arrowLength value might be 0, which can't work with a simple 'actualValue || defaultValue'
         let arrowLengthDetermined = arrowLength;
         if (style.arrowLength || style.arrowLength === 0) {
@@ -229,7 +232,7 @@ export const ArcherSurface: ForwardRefRenderFunction<
           ...elementStyle,
           height: '100%'
         }}
-        ref={parentRef}
+        ref={combinedRef}
       >
         {children}
       </div>
