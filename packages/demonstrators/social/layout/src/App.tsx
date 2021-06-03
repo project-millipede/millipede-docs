@@ -1,6 +1,6 @@
 import { Archer } from '@app/components';
 import { useHoux } from '@app/houx';
-import { StepProvider } from '@demonstrator/components';
+import { Player, StepProvider } from '@demonstrator/components';
 import { BottomNavigationControl, Navigation, TopNavigationControl, TViewElement } from '@demonstrator/navigation';
 import { appCompositionState, appLayoutState } from '@demonstrator/navigation/src/recoil/features/app/reducers';
 import { HeaderView } from '@demonstrators-social/components';
@@ -13,11 +13,11 @@ import { useRecoilValue } from 'recoil';
 import { createGlobalStyle } from 'styled-components';
 import useAsyncEffect from 'use-async-effect';
 
+import { StoryPlayer } from './StoryPlayer';
 import LeftViewElement from './views/LeftViewElement';
 import RightViewElement from './views/RightViewElement';
 import ViewElement from './views/ViewElement';
 
-// import { StoryPlayer } from './StoryPlayer';
 const GlobalStyle = createGlobalStyle`
   .fullscreen-enabled {
     background: #F0F0F0;
@@ -102,15 +102,16 @@ export const App: FC = () => {
         </Archer.ArcherContext.TransitionProvider>
 
         <StepProvider>
-          {/* <StoryPlayer /> */}
-
+          <StoryPlayer />
           <div
             ref={bottomContainer}
             style={{
-              marginTop: 'auto'
+              marginTop: 'auto',
+              zIndex: 10,
+              backgroundColor: '#FFFFFF'
             }}
           >
-            {/* <Player.Components.Player /> */}
+            <Player.Components.Player />
             {isMobileManual ? <BottomNavigationControl /> : null}
           </div>
         </StepProvider>
