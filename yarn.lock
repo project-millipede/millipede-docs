@@ -6652,9 +6652,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:4.1.18-rc.8":
-  version: 4.1.18-rc.8
-  resolution: "framer-motion@npm:4.1.18-rc.8"
+"framer-motion@npm:4.1.17":
+  version: 4.1.17
+  resolution: "framer-motion@npm:4.1.17"
   dependencies:
     "@emotion/is-prop-valid": ^0.8.2
     framesync: 5.3.0
@@ -6668,7 +6668,7 @@ __metadata:
   dependenciesMeta:
     "@emotion/is-prop-valid":
       optional: true
-  checksum: c26b6a7b6e42c3b5da263406fca6db489f635ff3906ed31a42e1576636666c1505fe3d4d15ed18e45aec75ed8772a8f29f812856a1eb398efd6632cf57d8a8ef
+  checksum: 4baaa9ef6c9b516452ca2d892b2b16b5cc6f06ce04729f9e3aecb7822073d59a54ff45831c0234a43a9d505bb44b6643d080c1296b9a9d308408cea6b72b91bd
   languageName: node
   linkType: hard
 
@@ -9205,7 +9205,7 @@ __metadata:
     eslint-plugin-react-hooks: ^4.2.0
     factory.ts: ^0.5.2
     fast-glob: ^3.2.5
-    framer-motion: 4.1.18-rc.8
+    framer-motion: 4.1.17
     gray-matter: ^4.0.3
     group-array: ^1.0.0
     immer: ^9.0.2
