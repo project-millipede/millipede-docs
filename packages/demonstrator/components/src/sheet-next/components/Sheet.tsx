@@ -13,10 +13,12 @@ interface SheetProps {
 export const BottomSheetRoot = styled.div`
   position: absolute;
   overflow: hidden;
+  pointer-events: none; // Important to access elements outside / behind the bottom sheet container
 `;
 
 export const BottomSheetContainer = styled(motion.div)`
   background: #ffffff;
+  pointer-events: auto; // Important to access elements inside the bottom sheet container
 `;
 
 export const BottomSheetHeader = styled.div`
