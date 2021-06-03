@@ -80,7 +80,7 @@
     "element-resize-detector": "^1.2.2",
     "factory.ts": "^0.5.2",
     "fast-glob": "^3.2.5",
-    "framer-motion": "4.1.18-rc.8",
+    "framer-motion": "4.1.17",
     "gray-matter": "^4.0.3",
     "group-array": "^1.0.0",
     "immer": "^9.0.2",
