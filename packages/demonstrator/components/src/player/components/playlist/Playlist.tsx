@@ -11,25 +11,27 @@ import { green } from '@material-ui/core/colors';
 import FolderIcon from '@material-ui/icons/Folder';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import { FC } from 'react';
+import { useRecoilState } from 'recoil';
 
+import { playerLayoutState } from '../../context/reducer';
 import { PlayListItem } from '../../types';
 
 interface PlaylistProps {
   playlist: Array<PlayListItem>;
-  topic: string;
-  onTopicChange: (topic: string) => void;
 }
 
-export const Playlist: FC<PlaylistProps> = ({
-  playlist,
-  topic,
-  onTopicChange
-}) => {
+export const Playlist: FC<PlaylistProps> = ({ playlist }) => {
+  const [{ topic }, setPlayerLayoutState] = useRecoilState(playerLayoutState);
+
   const handlePlay = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    const topic = event.currentTarget.value;
-    onTopicChange(topic);
+    setPlayerLayoutState(state => {
+      return {
+        ...state,
+        topic: event.currentTarget.value
+      };
+    });
   };
 
   return (

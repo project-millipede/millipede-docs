@@ -1,3 +1,7 @@
+import { atom } from 'recoil';
+
+import { PlayListItem } from '../types';
+
 export const init = (maxStepsCount: number) => {
   return <const>{ type: 'INIT', maxStepsCount };
 };
@@ -106,3 +110,20 @@ export const reducer = (state: StepState, action: Action) => {
       return state;
   }
 };
+
+export interface Layout {
+  isPlayerExpanded: boolean;
+  topic: string;
+  playlist: Array<PlayListItem>;
+}
+
+export const playerLayoutInitialState: Layout = {
+  isPlayerExpanded: false,
+  topic: '',
+  playlist: []
+};
+
+export const playerLayoutState = atom({
+  key: 'player-layout',
+  default: playerLayoutInitialState
+});

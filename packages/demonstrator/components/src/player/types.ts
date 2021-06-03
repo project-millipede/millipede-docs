@@ -2,8 +2,9 @@ export interface Step {
   start: number;
   end: number;
   label?: string;
-  selector: string | Function;
+  selector?: string | Function;
   description: string;
+  viewSelector?: string;
 }
 
 export interface PlayListItem {
