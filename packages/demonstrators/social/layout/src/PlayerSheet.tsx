@@ -1,147 +1,163 @@
-import { Help } from '@app/components';
-import { CursorSvc, Player, Sheet, useStepState } from '@demonstrator/components';
+import { HooksUtils } from '@app/render-utils';
+import { Player, SheetNext, useStepState } from '@demonstrator/components';
+import { RowNarrow } from '@demonstrator/components/src/player/components/Player';
+import { ProgressControl, TextProgressControl } from '@demonstrator/components/src/player/components/progress';
+import { playerLayoutState } from '@demonstrator/components/src/player/context/reducer';
 import { PlayListItem, Step } from '@demonstrator/components/src/player/types';
+import { appLayoutState } from '@demonstrator/navigation/src/recoil/features/app/reducers';
 import { Components as FlowComponents } from '@demonstrators-social/flow';
-import { Button, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
-import React, { FC, useEffect, useRef } from 'react';
-import styled from 'styled-components';
+import { createStyles, makeStyles, Tab, Tabs as TabsComponent, Theme } from '@material-ui/core';
+import { DonutLarge, Subscriptions } from '@material-ui/icons';
+import React, { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-export const Controls = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
+import { AnimateHeight, HeightVariants } from './AnimateHeight';
+
+export const PlayerSheetTabs = {
+  Playlist: 'Playlist',
+  Actions: 'Actions'
+} as const;
+
+export type TPlayerSheetTabs =
+  typeof PlayerSheetTabs[keyof typeof PlayerSheetTabs];
 
 interface PlayerSheetProps {
-  leftTimelineId: string;
-  rightTimelineId: string;
   steps: Array<Step>;
   playlist: Array<PlayListItem>;
-  size: Partial<DOMRect>;
-  bottomSize: Partial<DOMRect>;
-  isOpen: boolean;
-
-  topic: string;
-  onTopicChange: (topic: string) => void;
 }
 
-const baseSnapPoints = [800, 300, 100];
-
-const useStyles = makeStyles((_theme: Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    heading: {
-      fontSize: 16,
-      fontWeight: 'bold',
-      fontStyle: 'italic'
-      // margin: 0
+    tabs: {
+      '& .MuiTabs-flexContainer': {
+        flexWrap: 'wrap'
+      },
+      '& .MuiTab-root': {
+        '&.MuiTab-labelIcon': {
+          minHeight: theme.spacing(6),
+          '& .MuiTab-wrapper > *:first-child': {
+            marginBottom: 0
+          }
+        },
+        '& .MuiTab-wrapper': {
+          flexDirection: 'row',
+          '& > *:first-child': {
+            marginRight: theme.spacing(1)
+          }
+        }
+      }
     }
   })
 );
 
-export const PlayerSheet: FC<PlayerSheetProps> = ({
-  leftTimelineId,
-  rightTimelineId,
-  steps,
-  playlist,
-  size,
-  bottomSize,
-  isOpen,
-
-  topic,
-  onTopicChange
-}) => {
+export const PlayerSheet: FC<PlayerSheetProps> = ({ steps, playlist }) => {
   const classes = useStyles();
-  const { target } = useStepState();
 
-  const activeStep = steps[target];
+  const [appContainerMeasureRef] = HooksUtils.useResize();
+  const [bottomContainerMeasureRef] = HooksUtils.useResize();
 
-  const sheetHandleRef = useRef<Sheet.Types.SheetHandleProps>(null);
+  // Note:
+  // Required when integrating the component / storyplayer
+  // with absolute positioning in the app.
+  // - Use component SheetNext.SheetWithAbsolutePosition,
+  // - Provide bottomContainerSize
 
-  const { snapTo, snapToPx } = Sheet.Hooks.useBottomSheetActions(
-    sheetHandleRef
-  );
+  // const [appContainerMeasureRef] = HooksUtils.useResizeWithElement();
+  // const [bottomContainerMeasureRef, bottomContainerSize] =
+  //   HooksUtils.useResizeWithElement();
 
-  const resizeControlRef = useRef<HTMLDivElement>(null);
+  const { isPlayerExpanded } = useRecoilValue(playerLayoutState);
+
+  const setAppLayoutState = useSetRecoilState(appLayoutState);
 
   useEffect(() => {
-    if (resizeControlRef && resizeControlRef.current != null) {
-      const coordinatesText = CursorSvc.measure(resizeControlRef.current);
-      const offsetTop = resizeControlRef.current.offsetTop;
-      snapToPx(coordinatesText.height, offsetTop);
-    }
-  }, [target]);
+    setAppLayoutState(state => {
+      return {
+        ...state,
+        appContainer: appContainerMeasureRef,
+        bottomContainer: bottomContainerMeasureRef
+      };
+    });
+  }, [appContainerMeasureRef, bottomContainerMeasureRef]);
+
+  const { target } = useStepState();
+  const activeStep = steps[target];
+
+  const [activeTab, setActiveTab] = useState<TPlayerSheetTabs>(
+    PlayerSheetTabs.Playlist
+  );
+
+  const handleTabChange = (_event: ChangeEvent, newValue: number) => {
+    let value: TPlayerSheetTabs = PlayerSheetTabs.Playlist;
+
+    if (newValue === 0) value = PlayerSheetTabs.Playlist;
+    if (newValue === 1) value = PlayerSheetTabs.Actions;
+
+    setActiveTab(value);
+  };
+
+  const currentValue = useMemo(() => {
+    if (activeTab === PlayerSheetTabs.Playlist) return 0;
+    if (activeTab === PlayerSheetTabs.Actions) return 1;
+  }, [activeTab]);
 
   return (
-    <Sheet.Sheet
-      ref={sheetHandleRef}
-      isOpen={isOpen}
-      onClose={() => {}}
-      snapPoints={baseSnapPoints}
-      initialSnapPointIndex={
-        baseSnapPoints && baseSnapPoints.length > 0
-          ? baseSnapPoints.length - 1
-          : 0
+    <SheetNext.Sheet
+      isOpen={isPlayerExpanded}
+      // bottomContainerSize={bottomContainerSize}
+      header={
+        <TabsComponent
+          value={currentValue}
+          onChange={handleTabChange}
+          variant='fullWidth'
+          indicatorColor='primary'
+          textColor='primary'
+          className={classes.tabs}
+        >
+          <Tab
+            label='Playlist'
+            icon={<Subscriptions />}
+            id={`playersheet-tabset-tab-playlist`}
+          />
+          <Tab
+            label='Actions'
+            icon={<DonutLarge />}
+            id={`playersheet-tabset-tab-actions`}
+          />
+        </TabsComponent>
       }
-      size={size}
-      bottomSize={bottomSize}
-    >
-      <Sheet.SheetContainer size={size} bottomSize={bottomSize}>
-        <Sheet.SheetHeader />
-        <Sheet.SheetContent>
-          <Controls>
-            <Button onClick={() => snapTo(0)}>500</Button>
-            <Button onClick={() => snapTo(1)}>300</Button>
-            <Button onClick={() => snapTo(2)}>100</Button>
-          </Controls>
+      content={
+        <>
+          <AnimateHeight isVisible={activeTab === PlayerSheetTabs.Playlist}>
+            <Player.Components.Playlist playlist={playlist} />
+          </AnimateHeight>
 
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <div
+          <AnimateHeight isVisible={activeTab === PlayerSheetTabs.Actions}>
+            <FlowComponents.Navigation.ProgressiveStepBuilder ltr />
+          </AnimateHeight>
+
+          <AnimateHeight
+            isVisible={
+              activeTab === PlayerSheetTabs.Actions && activeStep != null
+            }
+            variantsType={HeightVariants.Dynamic}
+          >
+            <Player.Components.Playtext activeStep={activeStep} />
+          </AnimateHeight>
+
+          <AnimateHeight isVisible={activeTab === PlayerSheetTabs.Actions}>
+            <RowNarrow
               style={{
-                display: 'flex',
-                alignItems: 'center'
+                height: `${48}px`,
+                flex: '1 1 auto'
               }}
             >
-              <Typography
-                style={{
-                  margin: 0
-                }}
-                className={classes.heading}
-                gutterBottom={false}
-              >
-                Actions
-              </Typography>
-              <Help message={'Aktions used for the auto, and manual replay'} />
-            </div>
-
-            <FlowComponents.Navigation.ProgressiveStepBuilder
-              // ltr={state.ltr}
-              ltr
-              leftTimelineId={leftTimelineId}
-              rightTimelineId={rightTimelineId}
-            />
-          </div>
-
-          {activeStep && activeStep.description ? (
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <Typography className={classes.heading}>Description</Typography>
-              <Player.Components.Playtext
-                activeStep={activeStep}
-                ref={resizeControlRef}
-              />
-            </div>
-          ) : null}
-
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <Typography className={classes.heading}>Playlist</Typography>
-
-            <Player.Components.Playlist
-              playlist={playlist}
-              topic={topic}
-              onTopicChange={onTopicChange}
-            />
-          </div>
-        </Sheet.SheetContent>
-      </Sheet.SheetContainer>
-    </Sheet.Sheet>
+              <ProgressControl steps={steps} />
+              <TextProgressControl steps={steps} />
+            </RowNarrow>
+          </AnimateHeight>
+        </>
+      }
+    />
   );
 };
