@@ -128,7 +128,8 @@ export const CommentEditor: FC<CommentEditorProps> = ({
           setCommentError(false);
           setCommentState(data);
         }}
-        placeholder='Write something!'
+        // Introduces a content shift of the entire app
+        // placeholder='Write something!'
       />
 
       {commentError && (

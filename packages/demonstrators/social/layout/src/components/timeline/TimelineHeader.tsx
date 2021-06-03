@@ -9,15 +9,24 @@ import { SimpleSearch } from '../search';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    labelIcon: {
-      minHeight: '48px'
-    },
-    iconLabelWrapper: {
-      flexDirection: 'row'
-    },
-    tabIcon: {
-      marginRight: theme.spacing(1),
-      marginBottom: '0px'
+    tabs: {
+      '& .MuiTabs-flexContainer': {
+        flexWrap: 'wrap'
+      },
+      '& .MuiTab-root': {
+        '&.MuiTab-labelIcon': {
+          minHeight: theme.spacing(6),
+          '& .MuiTab-wrapper > *:first-child': {
+            marginBottom: 0
+          }
+        },
+        '& .MuiTab-wrapper': {
+          flexDirection: 'row',
+          '& > *:first-child': {
+            marginRight: theme.spacing(1)
+          }
+        }
+      }
     }
   })
 );
@@ -79,26 +88,19 @@ const TimelineHeader: ForwardRefRenderFunction<
         style={{
           margin: '8px'
         }}
+        className={classes.tabs}
       >
         <Tab
           label='Timeline'
-          icon={<DynamicFeed className={classes.tabIcon} />}
+          icon={<DynamicFeed />}
           key={`timeline-${timelineId}-tab-timeline`}
           id={`timeline-${timelineId}-tab-timeline`}
-          classes={{
-            wrapper: classes.iconLabelWrapper,
-            labelIcon: classes.labelIcon
-          }}
         />
         <Tab
           label='Posts'
-          icon={<GroupWork className={classes.tabIcon} />}
+          icon={<GroupWork />}
           key={`timeline-${timelineId}-tab-posts`}
           id={`timeline-${timelineId}-tab-posts`}
-          classes={{
-            wrapper: classes.iconLabelWrapper,
-            labelIcon: classes.labelIcon
-          }}
         />
       </Tabs>
 

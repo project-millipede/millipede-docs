@@ -6,8 +6,6 @@ import { useSetRecoilState } from 'recoil';
 
 import { scrollItemsReducer, scrollItemsState } from '../../recoil/features/scroll/page/reducer';
 
-// import { isMobile } from 'react-device-detect';
-
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     element: {
@@ -15,23 +13,6 @@ export const useStyles = makeStyles((theme: Theme) =>
       marginTop: '-96px'
     },
     heading: {
-      '& h2, & h3, & h4': {
-        '& a': {
-          display: 'none',
-          padding: `0 ${theme.spacing(1)}px`
-        },
-        '&:hover a': {
-          display: 'inline-block',
-          color: theme.palette.text.secondary,
-          '&:hover': {
-            color: theme.palette.text.primary
-          }
-        }
-      }
-    },
-    headerRow: {
-      display: 'flex',
-      flexDirection: 'row',
       '& h2, & h3, & h4': {
         '& a': {
           display: 'none',

@@ -1,20 +1,15 @@
 import { ContentTypes } from '@app/types';
-import {
-  CardContent,
-  createStyles,
-  Grid,
-  makeStyles,
-  Typography
-} from '@material-ui/core';
+import { CardContent, createStyles, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import React, { FC, useState } from 'react';
 
 import { Stepper, TranslationProps } from './Stepper';
 import { getStepsLength, selectContent } from './StepperContent.svc';
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     row: {
-      justifyContent: 'center'
+      justifyContent: 'center',
+      padding: theme.spacing(2)
     }
   })
 );
@@ -32,14 +27,12 @@ export const renderTitleAndDescription = (
         className={classes.row}
         key={`title-description-${index}`}
       >
-        <CardContent>
-          <Typography variant='h6' style={{ fontWeight: 700 }} gutterBottom>
-            {item.title}
-          </Typography>
-          <Typography variant='h6' gutterBottom>
-            {item.description}
-          </Typography>
-        </CardContent>
+        <Typography variant='h6' style={{ fontWeight: 700 }} gutterBottom>
+          {item.title}
+        </Typography>
+        <Typography variant='h6' gutterBottom>
+          {item.description}
+        </Typography>
       </Grid>
     );
   });

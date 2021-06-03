@@ -43,7 +43,7 @@ export const userFactory = Async.makeFactory<User>({
 
 const mediaFactory = Async.makeFactory<Media>({
   id: Async.each(() => uuidv4()),
-  imageHref: Async.each(() => generateImageURL(300, 200)),
+  imageHref: Async.each(() => generateImageURL(800, 600)),
   imageTitle: Async.each(() => chance.paragraph({ sentences: 3 }))
 });
 

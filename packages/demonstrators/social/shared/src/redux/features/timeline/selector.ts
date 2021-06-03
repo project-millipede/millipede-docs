@@ -58,8 +58,6 @@ export const selectPosts = () =>
   );
 
 export const selectTimelineOwner = (timelineId: string) => {
-  console.log('selectTimelineOwner - timelineId: ', timelineId);
-
   return createSelector(selectEntities, entities => {
     if (
       // timelineId == null ||
@@ -130,9 +128,6 @@ export const selectInteractionDataForPostScenario = (
     (postsOfOwnerForOtherTimelineId, postsOfOwnerForTimelineId) => {
       // const timelineView = currentViews[timelineId];
       // const otherTimelineView = currentViews[otherTimelineId];
-
-      console.log('timelineView: ', timelineView);
-      console.log('otherTimelineView: ', otherTimelineView);
 
       if (
         (timelineView === Timeline.View.TIMELINE &&
