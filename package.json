@@ -28,7 +28,7 @@
     "next:build": "next build",
     "next:start": "next start",
     "app:build": "tsc",
-    "setup:yarn:base": "yarn set version berry && yarn plugin import workspace-tools",
+    "setup:yarn:base": "yarn set version 3.0.0-rc.5 && yarn plugin import workspace-tools",
     "setup:yarn:ide": "yarn dlx @yarnpkg/pnpify --sdk vscode",
     "setup:yarn": "yarn setup:yarn:base && yarn setup:yarn:ide",
     "switch:yarn:linker:prod": "yarn config set nodeLinker node-modules && yarn",
