@@ -31,7 +31,7 @@ export const Dock: FC<DockProps> = ({
     postIdsSelector({ timelineId: timelineId, position: position })
   );
 
-  const [containerRef, containerBounds] = HooksUtils.useMeasureMinWithCapture({
+  const [containerRef, containerBounds] = HooksUtils.useScroll({
     // relaxing a more heavy weight scroll with capture setting debounce rate to 300ms
     debounce: 300
   });

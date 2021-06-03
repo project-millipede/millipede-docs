@@ -2,13 +2,13 @@ import { useHoux } from '@app/houx';
 import { HooksUtils } from '@app/render-utils';
 import { CollectionUtil } from '@app/utils';
 import {
-  RootState,
-  scrollSelectors,
-  scrollStates,
-  ScrollTypes,
-  selectors,
-  TimelineActions,
-  viewportSelectors,
+    RootState,
+    scrollSelectors,
+    scrollStates,
+    ScrollTypes,
+    selectors,
+    TimelineActions,
+    viewportSelectors,
 } from '@demonstrators-social/shared';
 import { useMergedRef } from '@huse/merged-ref';
 import { Button, List, useTheme } from '@material-ui/core';
@@ -120,9 +120,7 @@ const Timeline: ForwardRefRenderFunction<HTMLDivElement, TimelineProps> = (
 
   // useScrollRestoration(currentViewIndex, timelineId);
 
-  const [timelineHeaderMeasureRef, timelineHeaderSize] = HooksUtils.useResize({
-    debounce: 0
-  });
+  const [timelineHeaderMeasureRef, timelineHeaderSize] = HooksUtils.useResize();
 
   return (
     <div
