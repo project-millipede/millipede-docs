@@ -19,8 +19,9 @@ export const DockItem: FC<DockItemPropsRoot> = ({
 
   const setRefPostScroll = useSetRecoilState(refPostScrollState(postId));
 
-  const [postRef, postBounds] = HooksUtils.useMeasure({
-    debounce: 0
+  const [postRef, postBounds] = HooksUtils.useScroll({
+    debounce: 0,
+    withCapture: false
   });
 
   const updateObservedItem = useCallback(

@@ -29,7 +29,7 @@ export const FlowSurface: FC<FlowSurfaceProps> = ({
             strokeColor='gray'
             style={{
               height: '100%',
-              overflow: 'hidden'
+              overflow: 'hidden' // TODO: Evaluate if this can be leveraged for scroll observation
             }}
             elementStyle={{
               display: 'flex'

@@ -37,12 +37,12 @@ const DockSlice: FC<DockSliceProps> = ({
       {() => {
         const ref = useRef<HTMLElement>();
 
-        const [sliceRef, sliceBounds] = HooksUtils.useMeasure({
-          debounce: 0
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          // callBack: _node => {
-          //   ref.current = _node;
-          // }
+        const [sliceRef, sliceBounds] = HooksUtils.useScroll({
+          debounce: 0,
+          withCapture: false,
+          callBack: _node => {
+            ref.current = _node;
+          }
         });
 
         const {
@@ -135,10 +135,8 @@ const DockSlice: FC<DockSliceProps> = ({
   );
 };
 
-const DockSliceObserverWithForwardRef = HocsUtils.withForwardRef<
-  HTMLElement,
-  DockSliceProps
->(DockSlice);
+const DockSliceObserverWithForwardRef =
+  HocsUtils.withForwardRef<HTMLElement, DockSliceProps>(DockSlice);
 
 export const DockSliceObserverWithArcher = withArcher(
   DockSliceObserverWithForwardRef

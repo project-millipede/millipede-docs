@@ -30,11 +30,13 @@ export const ArcherSurfaceObserver: FC<ArcherSurfaceObserverProps> = ({
     refContainerScrollFromArcherState(rightTimelineId)
   );
 
-  const [containerScrollRefLeftTimeline] = HooksUtils.useMeasure({
-    debounce: 0
+  const [containerScrollRefLeftTimeline] = HooksUtils.useScroll({
+    debounce: 0,
+    withOverflow: false
   });
-  const [containerScrollRefRightTimeline] = HooksUtils.useMeasure({
-    debounce: 0
+  const [containerScrollRefRightTimeline] = HooksUtils.useScroll({
+    debounce: 0,
+    withOverflow: false
   });
 
   const updateContainerScrollRefLeftTimeline = useCallback(
@@ -72,7 +74,9 @@ export const ArcherSurfaceObserver: FC<ArcherSurfaceObserverProps> = ({
   ]);
 
   if (render != null) {
-    return render({ ref: combinedRefs });
+    return render({
+      ref: combinedRefs
+    });
   }
 
   return cloneElement(children, {
