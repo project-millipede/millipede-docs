@@ -7,6 +7,6 @@
     "@demonstrator/types": "workspace:packages/demonstrator/types"
   },
   "devDependencies": {
-    "typescript": "^4.1.5"
+    "typescript": "^4.3.2"
   }
 }

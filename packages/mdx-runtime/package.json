@@ -14,7 +14,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rimraf": "^3.0.2",
-    "typescript": "^4.1.5"
+    "typescript": "^4.3.2"
   },
   "dependencies": {
     "@istok/mdx": "^0.2.0",
