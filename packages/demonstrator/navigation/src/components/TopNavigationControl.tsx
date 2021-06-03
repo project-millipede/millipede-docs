@@ -53,7 +53,6 @@ export const TopNavigationControl: FC<TopNavigationControlProps> = ({
     <div
       style={{
         ...style,
-        // width: '100%',
         height: '48px',
         display: 'flex',
         alignItems: 'center',
@@ -80,15 +79,15 @@ export const TopNavigationControl: FC<TopNavigationControlProps> = ({
     <div
       style={{
         ...style,
-        // width: '100%',
-        height: '48px',
         display: 'grid',
         gridTemplateColumns: `repeat(${viewLabels.length}, 1fr)`
       }}
     >
       {viewLabels.map(viewLabel => (
         <div
+          key={viewLabel}
           style={{
+            height: '48px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center'
