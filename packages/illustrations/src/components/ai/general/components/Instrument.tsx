@@ -49,14 +49,14 @@ export const Instrument: FC<Connect> = ({ relations }) => {
   return (
     <div className={classes.instrument}>
       <div className={classes.head_instrument}>
-        <Typography variant='subtitle1' className={commonClasses.title}>
+        <Typography className={commonClasses.title}>
           {t('pages/ai/general/index:project_millipede')}
         </Typography>
       </div>
       <ArcherElement id='preparation_custom' relations={relations}>
         <div className={classes.preparation_custom}>
           <CustomBox>
-            <Typography variant='subtitle1' className={commonClasses.title}>
+            <Typography className={commonClasses.title}>
               {`${t('pages/ai/general/index:preparation_process_custom')} ${t(
                 'pages/ai/general/index:preparation_process_custom_abbreviation'
               )}`}
@@ -76,7 +76,7 @@ export const Instrument: FC<Connect> = ({ relations }) => {
       >
         <div className={classes.communication_custom}>
           <CustomBox>
-            <Typography variant='subtitle1' className={commonClasses.title}>
+            <Typography className={commonClasses.title}>
               {`${t('pages/ai/general/index:communication_process_custom')} ${t(
                 'pages/ai/general/index:communication_process_custom_abbreviation'
               )}`}

@@ -8,12 +8,12 @@ import { TocComponent } from './toc';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
+      position: 'sticky',
       width: TOC_WIDTH,
+      height: `calc(100% - ${TOC_TOP}px)`,
       top: TOC_TOP,
       order: 2,
       flexShrink: 0,
-      position: 'sticky',
-      height: `calc(100% - ${TOC_TOP}px)`,
       margin: theme.spacing(1),
       overflowY: 'auto',
       display: 'none',
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: 56,
       padding: theme.spacing(1),
       fontSize: 16,
-      fontWeight: 'bold'
+      fontWeight: theme.typography.fontWeightMedium
     }
   })
 );

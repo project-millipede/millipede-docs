@@ -9214,7 +9214,6 @@ __metadata:
     lodash: ^4.17.21
     mdast-util-toc: ^5.1.0
     next: 10.2.3
-    next-google-fonts: 2.2.0
     next-merge-props: ^0.5.0
     next-remote-watch: ^1.0.0
     next-translate: 1.0.7
@@ -9482,17 +9481,6 @@ __metadata:
   version: 2.6.2
   resolution: "neo-async@npm:2.6.2"
   checksum: deac9f8d00eda7b2e5cd1b2549e26e10a0faa70adaa6fdadca701cc55f49ee9018e427f424bac0c790b7c7e2d3068db97f3093f1093975f2acb8f8818b936ed9
-  languageName: node
-  linkType: hard
-
-"next-google-fonts@npm:2.2.0":
-  version: 2.2.0
-  resolution: "next-google-fonts@npm:2.2.0"
-  peerDependencies:
-    next: ">= 10.0.7"
-    react: ">= 17.0.1"
-    react-dom: ">= 17.0.1"
-  checksum: 7cd54d183d41c6eba54eb269f72fe38926cbd7a06257bb720d66a1606761f913dc58bc7d0f80164306c7e166509d3a27cf07a70073985358740565bb636b78a3
   languageName: node
   linkType: hard
 

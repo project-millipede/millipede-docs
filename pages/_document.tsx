@@ -1,5 +1,4 @@
 import { ServerStyleSheets as MaterialServerStyleSheets } from '@material-ui/core';
-import { GoogleFonts } from 'next-google-fonts';
 import NextDocument, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
 import React, { Fragment } from 'react';
 import { ServerStyleSheet as StyledComponentSheets } from 'styled-components';
@@ -11,13 +10,12 @@ class MillipedeDocument extends NextDocument {
 
     return (
       <Html lang={lang}>
-        <GoogleFonts href='https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap' />
         <Head>
-          {/* <link rel='preconnect' href='https://fonts.gstatic.com' />
+          <link rel='preconnect' href='https://fonts.gstatic.com' />
           <link
-            href='https://fonts.googleapis.com/css2?family=Roboto&display=swap'
+            href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap'
             rel='stylesheet'
-          /> */}
+          />
           <link rel='shortcut icon' href='/favicon.ico' />
         </Head>
         <body>

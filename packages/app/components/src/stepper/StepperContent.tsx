@@ -27,10 +27,10 @@ export const renderTitleAndDescription = (
         className={classes.row}
         key={`title-description-${index}`}
       >
-        <Typography variant='h6' style={{ fontWeight: 700 }} gutterBottom>
+        <Typography variant='h6' gutterBottom>
           {item.title}
         </Typography>
-        <Typography variant='h6' gutterBottom>
+        <Typography variant='body1' gutterBottom>
           {item.description}
         </Typography>
       </Grid>

@@ -51,9 +51,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     heading: {
       fontSize: 16,
-      fontWeight: 'bold',
-      fontStyle: 'italic'
-      // margin: 0
+      fontWeight: theme.typography.fontWeightMedium
     }
   })
 );

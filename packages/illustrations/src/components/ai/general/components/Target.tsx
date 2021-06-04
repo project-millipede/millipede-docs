@@ -49,7 +49,7 @@ export const Target: FC<Connect> = ({ relations }) => {
   return (
     <div className={classes.target}>
       <div className={classes.head_target}>
-        <Typography variant='subtitle1' className={commonClasses.title}>
+        <Typography className={commonClasses.title}>
           {t('pages/ai/general/index:target_application')}
         </Typography>
       </div>
@@ -65,7 +65,7 @@ export const Target: FC<Connect> = ({ relations }) => {
       >
         <div className={classes.communication}>
           <CustomBox>
-            <Typography variant='subtitle1' className={commonClasses.title}>
+            <Typography className={commonClasses.title}>
               {`${t('pages/ai/general/index:communication_process')} ${t(
                 'pages/ai/general/index:communication_process_abbreviation'
               )}`}
@@ -76,7 +76,7 @@ export const Target: FC<Connect> = ({ relations }) => {
       <ArcherElement id='preparation' relations={relations}>
         <div className={classes.preparation}>
           <CustomBox>
-            <Typography variant='subtitle1' className={commonClasses.title}>
+            <Typography className={commonClasses.title}>
               {`${t('pages/ai/general/index:preparation_process')} ${t(
                 'pages/ai/general/index:preparation_process_abbreviation'
               )}`}

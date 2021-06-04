@@ -66,7 +66,7 @@ export const Concept2: FC = () => {
         <div className={classes.render}>
           <ArcherElement id='shared_render'>
             <CustomBox>
-              <Typography variant='subtitle1' className={commonClasses.title}>
+              <Typography className={commonClasses.title}>
                 {`${t('pages/ai/general/index:shared_render_process')} ${t(
                   'pages/ai/general/index:shared_render_process_abbreviation'
                 )}`}

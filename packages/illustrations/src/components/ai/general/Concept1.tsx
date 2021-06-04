@@ -53,7 +53,7 @@ export const Concept1: FC = () => {
         >
           <div className={classes.communication}>
             <CustomBox>
-              <Typography variant='subtitle1' className={commonClasses.title}>
+              <Typography className={commonClasses.title}>
                 {`${t('pages/ai/general/index:communication_process')} ${t(
                   'pages/ai/general/index:communication_process_abbreviation'
                 )}`}
@@ -73,7 +73,7 @@ export const Concept1: FC = () => {
         >
           <div className={classes.preparation}>
             <CustomBox>
-              <Typography variant='subtitle1' className={commonClasses.title}>
+              <Typography className={commonClasses.title}>
                 {`${t('pages/ai/general/index:preparation_process')} ${t(
                   'pages/ai/general/index:preparation_process_abbreviation'
                 )}`}
@@ -84,7 +84,7 @@ export const Concept1: FC = () => {
         <ArcherElement id='render'>
           <div className={classes.render}>
             <CustomBox>
-              <Typography variant='subtitle1' className={commonClasses.title}>
+              <Typography className={commonClasses.title}>
                 {`${t('pages/ai/general/index:render_process')} ${t(
                   'pages/ai/general/index:render_process_abbreviation'
                 )}`}
