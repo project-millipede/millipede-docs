@@ -1,11 +1,11 @@
 import { getIconByName, Link } from '@app/components';
 import { ContentTypes } from '@app/types';
-import { Avatar, createStyles, IconButton, makeStyles, Typography } from '@material-ui/core';
+import { Avatar, createStyles, IconButton, makeStyles, Theme, Typography } from '@material-ui/core';
 import isArray from 'lodash/isArray';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     row: {
       display: 'flex'
@@ -18,17 +18,17 @@ const useStyles = makeStyles(() =>
       margin: 12
     },
     title: {
-      fontWeight: 'bold'
+      fontWeight: theme.typography.fontWeightMedium
     },
     subTitle: {
-      fontWeight: 'bold'
+      fontWeight: theme.typography.fontWeightRegular
     },
     summary: {
-      fontWeight: 'bold',
+      fontWeight: theme.typography.fontWeightMedium,
       fontStyle: 'italic'
     },
     note: {
-      fontWeight: 'bold',
+      fontWeight: theme.typography.fontWeightMedium,
       fontStyle: 'italic',
       '& blockquote': {
         borderLeft: '5px solid #ffe564',

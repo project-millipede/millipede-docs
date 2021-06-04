@@ -71,7 +71,7 @@ export const ReversePrincipal: FC = () => {
     <ArcherContainer noCurves strokeColor='gray'>
       <div className={classes.grid}>
         <div className={classes.head_access}>
-          <Typography variant='subtitle1' className={commonClasses.title}>
+          <Typography className={commonClasses.title}>
             {t('pages/ai/reverse/index:access')}
           </Typography>
         </div>
@@ -79,7 +79,7 @@ export const ReversePrincipal: FC = () => {
         <ArcherElement id='function'>
           <div className={classes.function}>
             <CustomBox>
-              <Typography variant='subtitle1' className={commonClasses.title}>
+              <Typography className={commonClasses.title}>
                 {t('pages/ai/reverse/index:function')}
               </Typography>
             </CustomBox>
@@ -103,7 +103,7 @@ export const ReversePrincipal: FC = () => {
         >
           <div className={classes.instrument}>
             <CustomBox>
-              <Typography variant='subtitle1' className={commonClasses.title}>
+              <Typography className={commonClasses.title}>
                 {t('pages/ai/reverse/index:instrument_function')}
               </Typography>
             </CustomBox>
@@ -111,7 +111,7 @@ export const ReversePrincipal: FC = () => {
         </ArcherElement>
 
         <div className={classes.head_analysis}>
-          <Typography variant='subtitle1' className={commonClasses.title}>
+          <Typography className={commonClasses.title}>
             {t('pages/ai/reverse/index:analysis')}
           </Typography>
         </div>
@@ -128,7 +128,7 @@ export const ReversePrincipal: FC = () => {
         >
           <div className={classes.behavior}>
             <CustomBox>
-              <Typography variant='subtitle1' className={commonClasses.title}>
+              <Typography className={commonClasses.title}>
                 {t('pages/ai/reverse/index:determine_behavior')}
               </Typography>
             </CustomBox>
@@ -136,7 +136,7 @@ export const ReversePrincipal: FC = () => {
         </ArcherElement>
 
         <div className={classes.head_exposure}>
-          <Typography variant='subtitle1' className={commonClasses.title}>
+          <Typography className={commonClasses.title}>
             {t('pages/ai/reverse/index:exposure')}
           </Typography>
         </div>
@@ -153,7 +153,7 @@ export const ReversePrincipal: FC = () => {
         >
           <div className={classes.derive}>
             <CustomBox>
-              <Typography variant='subtitle1' className={commonClasses.title}>
+              <Typography className={commonClasses.title}>
                 {t('pages/ai/reverse/index:derive_attack_vector')}
               </Typography>
             </CustomBox>
@@ -172,7 +172,7 @@ export const ReversePrincipal: FC = () => {
         >
           <div className={classes.apply}>
             <CustomBox>
-              <Typography variant='subtitle1' className={commonClasses.title}>
+              <Typography className={commonClasses.title}>
                 {t('pages/ai/reverse/index:apply_attack_vector')}
               </Typography>
             </CustomBox>

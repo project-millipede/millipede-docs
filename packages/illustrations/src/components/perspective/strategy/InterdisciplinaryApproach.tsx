@@ -3,18 +3,12 @@ import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
+import { useCommonStyles } from '../../../styles/CommonStyles';
+
 const { ArcherContainer, ArcherElement, CustomBox } = Archer;
 
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    title: {
-      textAlign: 'center',
-      fontWeight: 'bold',
-      hyphens: 'auto',
-      '-ms-hyphens': 'auto',
-      '-moz-hyphens': 'auto',
-      '-webkit-hyphens': 'auto'
-    },
     grid: {
       display: 'grid',
       gridTemplateRows: '1fr 1fr 1fr',
@@ -52,6 +46,7 @@ export const useStyles = makeStyles((theme: Theme) =>
 
 export const InterdisciplinaryApproach: FC = () => {
   const classes = useStyles();
+  const commonClasses = useCommonStyles();
 
   const { t } = useTranslation();
 
@@ -70,7 +65,7 @@ export const InterdisciplinaryApproach: FC = () => {
         >
           <div className={classes.individual}>
             <CustomBox>
-              <Typography variant='subtitle1' className={classes.title}>
+              <Typography className={commonClasses.title}>
                 {t('pages/perspective/index:individual')}
               </Typography>
             </CustomBox>
@@ -79,7 +74,7 @@ export const InterdisciplinaryApproach: FC = () => {
         <ArcherElement id='data'>
           <div className={classes.data}>
             <CustomBox>
-              <Typography variant='subtitle1' className={classes.title}>
+              <Typography className={commonClasses.title}>
                 {t('pages/perspective/index:dataCentric')}
               </Typography>
             </CustomBox>
@@ -104,7 +99,7 @@ export const InterdisciplinaryApproach: FC = () => {
         >
           <div className={classes.general}>
             <CustomBox bgcolor='#F44336' routeSegement='general'>
-              <Typography variant='subtitle1' className={classes.title}>
+              <Typography className={commonClasses.title}>
                 {`${t('pages/perspective/index:general')} ${t(
                   'pages/perspective/index:problemSolving'
                 )}`}
@@ -130,7 +125,7 @@ export const InterdisciplinaryApproach: FC = () => {
         >
           <div className={classes.realistic}>
             <CustomBox bgcolor='#4CAF50' routeSegement='realistic'>
-              <Typography variant='subtitle1' className={classes.title}>
+              <Typography className={commonClasses.title}>
                 {`${t('pages/perspective/index:realistic')} ${t(
                   'pages/perspective/index:problemSolving'
                 )}`}
@@ -151,7 +146,7 @@ export const InterdisciplinaryApproach: FC = () => {
         >
           <div className={classes.specific}>
             <CustomBox bgcolor='#FFEB3B' routeSegement='specific'>
-              <Typography variant='subtitle1' className={classes.title}>
+              <Typography className={commonClasses.title}>
                 {`${t('pages/perspective/index:specific')} ${t(
                   'pages/perspective/index:problemSolving'
                 )}`}
@@ -162,7 +157,7 @@ export const InterdisciplinaryApproach: FC = () => {
         <ArcherElement id='society'>
           <div className={classes.society}>
             <CustomBox>
-              <Typography variant='subtitle1' className={classes.title}>
+              <Typography className={commonClasses.title}>
                 {t('pages/perspective/index:society')}
               </Typography>
             </CustomBox>

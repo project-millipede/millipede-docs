@@ -88,7 +88,6 @@
     "lodash": "^4.17.21",
     "mdast-util-toc": "^5.1.0",
     "next": "10.2.3",
-    "next-google-fonts": "2.2.0",
     "next-merge-props": "^0.5.0",
     "next-translate": "1.0.7",
     "query-string": "^7.0.0",

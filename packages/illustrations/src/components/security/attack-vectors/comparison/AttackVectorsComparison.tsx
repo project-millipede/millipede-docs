@@ -1,27 +1,27 @@
 import { ContentTypes } from '@app/types';
 import { Grid, Typography } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import isArray from 'lodash/isArray';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
-export const useStyles = makeStyles(() =>
+export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     title: {
-      fontWeight: 'bold',
+      fontWeight: theme.typography.fontWeightMedium,
       textDecoration: 'underline'
     },
     subTitle: {
-      fontWeight: 'bold'
+      fontWeight: theme.typography.fontWeightRegular
+    },
+    rowTitle: {
+      fontWeight: theme.typography.fontWeightMedium
     },
     summary: {
-      fontWeight: 'bold',
       fontStyle: 'italic'
     }
   })
 );
-
-//rows: ContentTypes.Stack
 
 export const AttackVectorsComparison: FC = () => {
   const { t } = useTranslation();
@@ -40,61 +40,58 @@ export const AttackVectorsComparison: FC = () => {
     isArray(rows) && rows.length > 0
       ? rows.map((row, rowIndex) => {
           return (
-            <Grid container spacing={8} key={`row-${rowIndex}`}>
+            <Grid container spacing={4} key={`row-${rowIndex}`}>
               {row.map((column, columnIndex) => {
                 let intermediateResult = [];
 
                 if (isArray(column.description)) {
                   intermediateResult = column.description.map(description => {
+                    const { subTitle, text, listing, summary, note } =
+                      description;
+
                     return (
                       <>
-                        {description.subTitle && description.subTitle.length > 0
-                          ? description.subTitle.map(t => (
-                              <Typography
-                                variant='subtitle1'
-                                className={classes.subTitle}
-                              >
-                                {t}
-                              </Typography>
-                            ))
-                          : null}
-                        {description.text && description.text.length > 0
-                          ? description.text.map(t => (
-                              <Typography variant='subtitle1'>{t}</Typography>
-                            ))
-                          : null}
-                        {description.listing &&
-                        description.listing.length > 0 ? (
+                        {subTitle &&
+                          subTitle.length > 0 &&
+                          subTitle.map(t => (
+                            <Typography
+                              variant='body1'
+                              className={classes.rowTitle}
+                            >
+                              {t}
+                            </Typography>
+                          ))}
+                        {text &&
+                          text.length > 0 &&
+                          text.map(t => (
+                            <Typography variant='body1'>{t}</Typography>
+                          ))}
+                        {listing && listing.length > 0 && (
                           <ul>
-                            {description.listing.map(t => (
+                            {listing.map(t => (
                               <li>
-                                <Typography variant='subtitle1'>{t}</Typography>
+                                <Typography variant='body1'>{t}</Typography>
                               </li>
                             ))}
                           </ul>
-                        ) : null}
-                        {description.summary && description.summary.length > 0
-                          ? description.summary.map(t => (
-                              <Typography
-                                variant='subtitle1'
-                                className={classes.summary}
-                              >
-                                {t}
-                              </Typography>
-                            ))
-                          : null}
-                        {description.note && description.note.length > 0 ? (
+                        )}
+                        {summary &&
+                          summary.length > 0 &&
+                          summary.map(t => (
+                            <Typography
+                              variant='body1'
+                              className={classes.summary}
+                            >
+                              {t}
+                            </Typography>
+                          ))}
+                        {note && note.length > 0 && (
                           <blockquote>
-                            {description.note.map(t => (
-                              <Typography
-                                variant='subtitle1'
-                                className={classes.summary}
-                              >
-                                {t}
-                              </Typography>
+                            {note.map(t => (
+                              <Typography variant='body1'>{t}</Typography>
                             ))}
                           </blockquote>
-                        ) : null}
+                        )}
                       </>
                     );
                   });
@@ -103,18 +100,12 @@ export const AttackVectorsComparison: FC = () => {
                   <Grid item xs={12} md={4} key={`column-${columnIndex}`}>
                     <>
                       {column.title ? (
-                        <Typography
-                          variant='subtitle1'
-                          className={classes.title}
-                        >
+                        <Typography className={classes.title}>
                           {column.title}
                         </Typography>
                       ) : null}
                       {column.subTitle ? (
-                        <Typography
-                          variant='subtitle1'
-                          className={classes.subTitle}
-                        >
+                        <Typography className={classes.subTitle}>
                           {column.subTitle}
                         </Typography>
                       ) : null}

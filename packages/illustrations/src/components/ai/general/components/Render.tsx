@@ -59,7 +59,7 @@ export const Render: FC = () => {
   return (
     <div className={classes.render}>
       <div className={classes.head_render}>
-        <Typography variant='subtitle1' className={commonClasses.title}>
+        <Typography className={commonClasses.title}>
           {t('pages/ai/general/index:dedicated_render_process')}
         </Typography>
       </div>
@@ -75,7 +75,7 @@ export const Render: FC = () => {
       >
         <div className={classes.react_observe}>
           <CustomBox>
-            <Typography variant='subtitle1' className={commonClasses.title}>
+            <Typography className={commonClasses.title}>
               {`${t('pages/ai/general/index:react_observe')}`}
             </Typography>
           </CustomBox>
@@ -94,7 +94,7 @@ export const Render: FC = () => {
       >
         <div className={classes.renderX}>
           <CustomBox>
-            <Typography variant='subtitle1' className={commonClasses.title}>
+            <Typography className={commonClasses.title}>
               {`${t('pages/ai/general/index:render_process')} ${t(
                 'pages/ai/general/index:render_process_abbreviation'
               )}`}
@@ -106,7 +106,7 @@ export const Render: FC = () => {
       <ArcherElement id='coordination'>
         <div className={classes.coordination}>
           <CustomBox>
-            <Typography variant='subtitle1' className={commonClasses.title}>
+            <Typography className={commonClasses.title}>
               {`${t('pages/ai/general/index:coordination')}`}
             </Typography>
           </CustomBox>
@@ -125,7 +125,7 @@ export const Render: FC = () => {
       >
         <div className={classes.custom_render}>
           <CustomBox>
-            <Typography variant='subtitle1' className={commonClasses.title}>
+            <Typography className={commonClasses.title}>
               {`${t('pages/ai/general/index:custom_render_process')} ${t(
                 'pages/ai/general/index:custom_render_process_abbreviation'
               )}`}
@@ -146,7 +146,7 @@ export const Render: FC = () => {
       >
         <div className={classes.observe_react}>
           <CustomBox>
-            <Typography variant='subtitle1' className={commonClasses.title}>
+            <Typography className={commonClasses.title}>
               {`${t('pages/ai/general/index:observe_react')}`}
             </Typography>
           </CustomBox>
