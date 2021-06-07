@@ -1,6 +1,7 @@
 import { useHoux } from '@app/houx';
 import { reducers as demonstratorSharedReducers } from '@demonstrators-social/shared';
 import React, { FC, useEffect } from 'react';
+import { RecoilRoot } from 'recoil';
 
 import { App } from './App';
 
@@ -31,5 +32,9 @@ export const Demonstrator: FC = () => {
     };
   }, []);
 
-  return <App />;
+  return (
+    <RecoilRoot>
+      <App />
+    </RecoilRoot>
+  );
 };

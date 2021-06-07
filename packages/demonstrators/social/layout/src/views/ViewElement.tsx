@@ -41,7 +41,7 @@ export const ViewElement: FC<ViewElementProps> = ({ layoutId, layout }) => {
       layout={layout}
       layoutId={layoutId}
       style={{
-        // position: 'relative',
+        position: 'relative',
         width: '100%',
         height: '100%'
       }}

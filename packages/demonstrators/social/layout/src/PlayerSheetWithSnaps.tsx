@@ -1,12 +1,11 @@
 import { HooksUtils } from '@app/render-utils';
 import { CursorSvc, Player, Sheet, useStepState } from '@demonstrator/components';
-import { RowNarrow } from '@demonstrator/components/src/player/components/Player';
 import { ProgressControl, TextProgressControl } from '@demonstrator/components/src/player/components/progress';
 import { playerLayoutState } from '@demonstrator/components/src/player/context/reducer';
 import { PlayListItem, Step } from '@demonstrator/components/src/player/types';
 import { appLayoutState } from '@demonstrator/navigation/src/recoil/features/app/reducers';
 import { Components as FlowComponents } from '@demonstrators-social/flow';
-import { Button, createStyles, makeStyles, Tab, Tabs as TabsComponent, Theme, Typography } from '@material-ui/core';
+import { Button, createStyles, Divider, makeStyles, Tab, Tabs as TabsComponent, Theme, Typography } from '@material-ui/core';
 import { DonutLarge, Subscriptions } from '@material-ui/icons';
 import React, { ChangeEvent, FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
@@ -32,8 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     heading: {
       fontSize: 16,
-      fontWeight: 'bold',
-      fontStyle: 'italic'
+      fontWeight: theme.typography.fontWeightMedium
     },
     tabs: {
       '& .MuiTabs-flexContainer': {
@@ -214,15 +212,18 @@ export const PlayerSheet: FC<PlayerSheetProps> = ({ steps, playlist }) => {
           )}
 
           {activeTab === PlayerSheetTabs.Actions && (
-            <RowNarrow
+            <div
               style={{
-                height: `${48}px`,
-                flex: '1 1 auto'
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '8px'
               }}
             >
               <ProgressControl steps={steps} />
+              <Divider orientation='vertical' variant='middle' flexItem />
               <TextProgressControl steps={steps} />
-            </RowNarrow>
+            </div>
           )}
 
           {activeTab === PlayerSheetTabs.Actions && activeStep != null && (
@@ -234,35 +235,6 @@ export const PlayerSheet: FC<PlayerSheetProps> = ({ steps, playlist }) => {
               />
             </div>
           )}
-
-          {/* <AnimateHeight isVisible={activeTab === PlayerSheetTabs.Playlist}>
-            <Player.Components.Playlist playlist={playlist} />
-          </AnimateHeight>
-
-          <AnimateHeight isVisible={activeTab === PlayerSheetTabs.Actions}>
-            <FlowComponents.Navigation.ProgressiveStepBuilder ltr />
-          </AnimateHeight>
-
-          <AnimateHeight
-            isVisible={
-              activeTab === PlayerSheetTabs.Actions && activeStep != null
-            }
-            variantsType={HeightVariants.Dynamic}
-          >
-            <Player.Components.Playtext activeStep={activeStep} />
-          </AnimateHeight>
-
-          <AnimateHeight isVisible={activeTab === PlayerSheetTabs.Actions}>
-            <RowNarrow
-              style={{
-                height: `${48}px`,
-                flex: '1 1 auto'
-              }}
-            >
-              <ProgressControl steps={steps} />
-              <TextProgressControl steps={steps} />
-            </RowNarrow>
-          </AnimateHeight> */}
         </Sheet.SheetContent>
       </Sheet.SheetContainer>
     </Sheet.Sheet>

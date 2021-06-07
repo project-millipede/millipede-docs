@@ -1,9 +1,11 @@
 import { CollectionUtil } from '@app/utils';
 import { PlayListItem } from '@demonstrator/components/src/player/types';
-import { scrollStates, selectors } from '@demonstrators-social/shared';
+import { RootState, scrollStates, selectors } from '@demonstrators-social/shared';
 import { useResetRecoilState } from 'recoil';
 
-export const getSteps = (state): Array<PlayListItem> => {
+// currently a hook with false name
+
+export const getSteps = (state: RootState): Array<PlayListItem> => {
   // use selectors to get relevant data for steps
   const useCase = (state.timeline &&
     selectors.timeline.selectUserCaseState(state)) || {
@@ -66,21 +68,22 @@ export const getSteps = (state): Array<PlayListItem> => {
               // },
               {
                 start: 100,
-                end: 2500,
+                end: 5000,
                 label: '1',
                 selector: `timeline-${leftTimeline.id}-tab-posts`,
                 description:
                   'pages/pidp/use-case/recognition/index:timeline-tab-posts'
+                // viewSelector: 'LeftViewElement'
               },
               // optional
-              {
-                start: 2500,
-                end: 5000,
-                label: '1',
-                selector: `timeline-${rightTimeline.id}-tab-timeline`,
-                description:
-                  'pages/pidp/use-case/recognition/index:timeline-tab-timeline'
-              },
+              // {
+              //   start: 2500,
+              //   end: 5000,
+              //   label: '1',
+              //   selector: `timeline-${rightTimeline.id}-tab-timeline`,
+              //   description:
+              //     'pages/pidp/use-case/recognition/index:timeline-tab-timeline'
+              // },
               {
                 start: 5000,
                 end: 10000,
@@ -95,33 +98,68 @@ export const getSteps = (state): Array<PlayListItem> => {
                 selector: `timeline-${leftTimeline.id}-content-post`,
                 description: `pages/pidp/use-case/recognition/index:timeline-content-post`
               },
+
+              // // new
+              // {
+              //   start: 15250,
+              //   end: 16000,
+              //   label: '0',
+              //   description:
+              //     'pages/pidp/use-case/recognition/index:timeline-tab-posts',
+              //   viewSelector: 'ViewElement'
+              // },
+              // {
+              //   start: 15750,
+              //   end: 20000,
+              //   label: '4',
+              //   selector: `progressiveStepBuilder-${0}`,
+              //   description: `pages/pidp/use-case/recognition/index:progressiveStepBuilder-0`
+              //   // viewSelector: 'ViewElement'
+              // },
+
+              // new
               {
                 start: 15000,
-                end: 20000,
+                end: 19000,
                 label: '4',
                 selector: `progressiveStepBuilder-${0}`,
-                description: `pages/pidp/use-case/recognition/index:progressiveStepBuilder-0`
+                description:
+                  'pages/pidp/use-case/recognition/index:timeline-tab-posts'
+              },
+              {
+                start: 19000,
+                end: 20000,
+                label: '5',
+                description: `pages/pidp/use-case/recognition/index:progressiveStepBuilder-0`,
+                viewSelector: 'ViewElement'
               },
               {
                 start: 20000,
                 end: 25000,
-                label: '5',
+                label: '6',
                 selector: `progressiveStepBuilder-${1}`,
                 description: `pages/pidp/use-case/recognition/index:progressiveStepBuilder-1`
               },
               {
                 start: 25000,
                 end: 30000,
-                label: '6',
+                label: '7',
                 selector: `progressiveStepBuilder-${2}`,
                 description: `pages/pidp/use-case/recognition/index:progressiveStepBuilder-2`
               },
               {
                 start: 30000,
                 end: 35000,
-                label: '7',
+                label: '8',
                 selector: `progressiveStepBuilder-${3}`,
                 description: `pages/pidp/use-case/recognition/index:progressiveStepBuilder-3`
+              },
+              {
+                start: 35000,
+                end: 36000,
+                label: '9',
+                description: `pages/pidp/use-case/recognition/index:progressiveStepBuilder-3`,
+                viewSelector: 'RightViewElement'
               }
             ]
           },
@@ -139,22 +177,42 @@ export const getSteps = (state): Array<PlayListItem> => {
                 description:
                   'pages/pidp/use-case/recognition/index:timeline-tab-timeline'
               },
+              // {
+              //   start: 100,
+              //   end: 2500,
+              //   label: '1',
+              //   selector: `timeline-${rightTimeline.id}-tab-timeline`,
+              //   description:
+              //     'pages/pidp/use-case/recognition/index:timeline-tab-timeline'
+              // },
+              // // optional
+              // {
+              //   start: 2500,
+              //   end: 5000,
+              //   label: '1',
+              //   selector: `timeline-${leftTimeline.id}-tab-posts`,
+              //   description:
+              //     'pages/pidp/use-case/recognition/index:timeline-tab-posts'
+              // },
+
               {
                 start: 100,
                 end: 2500,
                 label: '1',
-                selector: `timeline-${rightTimeline.id}-tab-timeline`,
+                selector: `timeline-${leftTimeline.id}-tab-posts`,
                 description:
-                  'pages/pidp/use-case/recognition/index:timeline-tab-timeline'
+                  'pages/pidp/use-case/recognition/index:timeline-tab-posts',
+                viewSelector: 'LeftViewElement'
               },
               // optional
               {
                 start: 2500,
                 end: 5000,
                 label: '1',
-                selector: `timeline-${leftTimeline.id}-tab-posts`,
+                selector: `timeline-${rightTimeline.id}-tab-timeline`,
                 description:
-                  'pages/pidp/use-case/recognition/index:timeline-tab-posts'
+                  'pages/pidp/use-case/recognition/index:timeline-tab-timeline',
+                viewSelector: 'RightViewElement'
               },
               {
                 start: 5000,

@@ -1,12 +1,11 @@
 import { HooksUtils } from '@app/render-utils';
 import { Player, SheetNext, useStepState } from '@demonstrator/components';
-import { RowNarrow } from '@demonstrator/components/src/player/components/Player';
 import { ProgressControl, TextProgressControl } from '@demonstrator/components/src/player/components/progress';
 import { playerLayoutState } from '@demonstrator/components/src/player/context/reducer';
 import { PlayListItem, Step } from '@demonstrator/components/src/player/types';
 import { appLayoutState } from '@demonstrator/navigation/src/recoil/features/app/reducers';
 import { Components as FlowComponents } from '@demonstrators-social/flow';
-import { createStyles, makeStyles, Tab, Tabs as TabsComponent, Theme } from '@material-ui/core';
+import { createStyles, Divider, makeStyles, Tab, Tabs as TabsComponent, Theme } from '@material-ui/core';
 import { DonutLarge, Subscriptions } from '@material-ui/icons';
 import React, { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
@@ -145,16 +144,18 @@ export const PlayerSheet: FC<PlayerSheetProps> = ({ steps, playlist }) => {
             <Player.Components.Playtext activeStep={activeStep} />
           </AnimateHeight>
 
-          <AnimateHeight isVisible={activeTab === PlayerSheetTabs.Actions}>
-            <RowNarrow
-              style={{
-                height: `${48}px`,
-                flex: '1 1 auto'
-              }}
-            >
-              <ProgressControl steps={steps} />
-              <TextProgressControl steps={steps} />
-            </RowNarrow>
+          <AnimateHeight
+            isVisible={activeTab === PlayerSheetTabs.Actions}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '8px'
+            }}
+          >
+            <ProgressControl steps={steps} />
+            <Divider orientation='vertical' variant='middle' flexItem />
+            <TextProgressControl steps={steps} />
           </AnimateHeight>
         </>
       }

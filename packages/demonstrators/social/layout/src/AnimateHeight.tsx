@@ -1,4 +1,5 @@
 import { HooksUtils } from '@app/render-utils';
+import { CSSProperties } from '@material-ui/styles';
 import { motion, Variants } from 'framer-motion';
 import { FC, useMemo } from 'react';
 import React from 'react';
@@ -21,6 +22,7 @@ interface AnimateHeightProps {
   duration?: number;
   ease?: string;
   variantsType?: THeightVariants;
+  style?: CSSProperties;
 }
 
 export const dynamicHeightVariants: Variants = {
@@ -46,6 +48,7 @@ export const AnimateHeight: FC<AnimateHeightProps> = ({
   duration,
   ease = 'easeOut',
   variantsType = HeightVariants.Auto,
+  style,
   children
 }) => {
   const [ref, bounds] = HooksUtils.useResize();
@@ -71,7 +74,9 @@ export const AnimateHeight: FC<AnimateHeightProps> = ({
       }}
       custom={bounds.height}
     >
-      <div ref={ref}>{children}</div>
+      <div ref={ref} style={style}>
+        {children}
+      </div>
     </Container>
   );
 };

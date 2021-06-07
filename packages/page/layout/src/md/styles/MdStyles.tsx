@@ -66,14 +66,6 @@ export const useMdStyles = (theme: Theme) =>
         ...theme.typography.subtitle2,
         margin: '32px 0 16px'
       },
-      '& p, & ul, & ol': {
-        lineHeight: 1.6,
-        marginTop: 0,
-        marginBottom: '16px'
-      },
-      '& ul': {
-        paddingLeft: 30
-      },
       '& blockquote': {
         borderLeft: '5px solid #ffe564',
         backgroundColor: 'rgba(255,229,100,0.2)',

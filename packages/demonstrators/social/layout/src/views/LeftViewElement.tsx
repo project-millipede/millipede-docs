@@ -9,8 +9,6 @@ import { useRecoilCallback } from 'recoil';
 import { Post } from '../components/post';
 import { Timeline } from '../components/timeline';
 
-const MotionTimeline = motion(Timeline);
-
 export const LeftViewElement: FC<ViewElementProps> = ({ layoutId, layout }) => {
   const {
     state
@@ -45,7 +43,7 @@ export const LeftViewElement: FC<ViewElementProps> = ({ layoutId, layout }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const timelineComponent = timeline && (
-    <MotionTimeline
+    <Timeline
       key={`timeline-motion-${timeline.id}`}
       timelineId={timeline.id}
       otherTimelineId={otherTimeline.id}
