@@ -32,13 +32,6 @@ export const useMdxStyles = makeStyles((theme: Theme) => {
         ...theme.typography.subtitle2,
         margin: '32px 0 16px'
       },
-      '& p, & ul, & ol': {
-        marginTop: 0,
-        marginBottom: 16
-      },
-      '& ul': {
-        paddingLeft: 30
-      },
       '& blockquote': {
         borderLeft: '5px solid #ffe564',
         backgroundColor: 'rgba(255,229,100,0.2)',

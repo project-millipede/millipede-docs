@@ -1,4 +1,4 @@
-import { FC, useLayoutEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { useTimer } from 'react-compound-timer';
 
 interface CountUpProps {
@@ -16,7 +16,7 @@ export const CountUp: FC<CountUpProps> = ({ playing, startTime }) => {
     lastUnit: 's'
   });
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (playing) {
       setTime(startTime);
     }

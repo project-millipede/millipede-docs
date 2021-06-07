@@ -40,10 +40,10 @@ export const Player: FC = () => {
 
   return (
     <Column style={{ borderRadius: borderRadius }}>
-      <RowWide style={{ height: height }}>
+      <Row style={{ height: height }}>
         <NavigationControl />
         {expander && expander}
-      </RowWide>
+      </Row>
     </Column>
   );
 };
@@ -53,16 +53,9 @@ export const Column = styled.div`
   flex-direction: column;
 `;
 
-export const RowNarrow = styled.div`
+export const Row = styled.div`
   display: flex;
-  padding: 0px 24px;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const RowWide = styled.div`
-  display: flex;
-  padding: 0px 24px;
+  padding: 0px 8px;
   align-items: center;
   justify-content: space-between;
 `;
