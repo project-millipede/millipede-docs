@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import { useRouter } from 'next/router';
 import React, { AnchorHTMLAttributes, FC, forwardRef, Ref } from 'react';
+import { UrlObject } from 'url';
 
 type NextComposedProps = AnchorHTMLAttributes<HTMLAnchorElement> &
   NextLinkProps;
@@ -57,7 +58,9 @@ const Link: FC<LinkProps> = ({
   ...other
 }) => {
   const router = useRouter();
-  const pathname = typeof href === 'string' ? href : href.pathname;
+  const pathname =
+    typeof href === 'string' ? href : (href as UrlObject).pathname;
+
   const className = clsx(classNameProps, {
     [activeClassName]: router && router.pathname === pathname && activeClassName
   });
