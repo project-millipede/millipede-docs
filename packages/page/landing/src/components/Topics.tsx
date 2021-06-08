@@ -74,7 +74,7 @@ export const Topics: FC<TopicsProps> = ({ feature, aspect }) => {
                   <Typography variant='h6' className={classes.header}>
                     {get(categoriesRaw, categoryKey)}
                   </Typography>
-                  <Grid container className={classes.root} spacing={6}>
+                  <Grid container className={classes.root}>
                     {categoryData.map((data, index) => {
                       const { title, description, link, icon } = data;
                       return (
