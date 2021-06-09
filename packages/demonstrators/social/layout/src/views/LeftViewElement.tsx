@@ -3,7 +3,7 @@ import { ViewElementProps } from '@demonstrator/navigation';
 import { RootState, selectors, viewportSelectors } from '@demonstrators-social/shared';
 import { State } from '@demonstrators-social/shared/src/recoil/features/viewport/post/reducer';
 import { motion } from 'framer-motion';
-import React, { FC, memo, useEffect, useRef } from 'react';
+import React, { FC, memo, useRef } from 'react';
 import { useRecoilCallback } from 'recoil';
 
 import { Post } from '../components/post';
@@ -51,15 +51,6 @@ export const LeftViewElement: FC<ViewElementProps> = ({ layoutId, layout }) => {
       Comp={Post as any}
     />
   );
-
-  console.log('- Left viewElement rendering');
-
-  useEffect(() => {
-    console.log('-- Left viewElement mounted');
-    return () => {
-      console.log('--- Left viewElement unmounted');
-    };
-  }, []);
 
   return (
     <motion.div
