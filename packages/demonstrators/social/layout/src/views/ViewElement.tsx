@@ -3,18 +3,9 @@ import { ViewElementProps } from '@demonstrator/navigation';
 import { FlowSurface } from '@demonstrators-social/flow';
 import { RootState, selectors } from '@demonstrators-social/shared';
 import { motion } from 'framer-motion';
-import React, { FC, memo, useEffect, useState } from 'react';
+import React, { FC, memo, useState } from 'react';
 
 export const ViewElement: FC<ViewElementProps> = ({ layoutId, layout }) => {
-  console.log('- ViewElement rendering');
-
-  useEffect(() => {
-    console.log('-- ViewElement mounted');
-    return () => {
-      console.log('--- ViewElement unmounted');
-    };
-  }, []);
-
   const {
     state
   }: {
