@@ -1,1 +1,0 @@
-export const HANDLE_DEVICE = 'HANDLE_DEVICE';
