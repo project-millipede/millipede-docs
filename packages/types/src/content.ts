@@ -58,12 +58,8 @@ export interface Section {
   icon: Icon;
 }
 
-export interface ContextLink {
-  id: string;
-  sections: Array<Section>;
-}
-
 export interface OverviewProps {
+  id?: string;
   title?: Array<string> | string;
   subTitle?: Array<string> | string;
   description?: Array<Description>;
@@ -73,9 +69,8 @@ export interface OverviewProps {
   icon?: Icon;
   order?: number;
   userFocus?: number;
-  contextLink?: ContextLink;
+  sections?: Array<Section>;
 }
-
 export interface Category {
   [category: string]: Array<OverviewProps>;
 }

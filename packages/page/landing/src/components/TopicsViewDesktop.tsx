@@ -35,10 +35,10 @@ export const TopicsViewDesktop: FC<TopicsViewDesktopProps> = ({ topics }) => {
     push({
       pathname: `/`,
       query: {
-        feature: topic.contextLink.id,
+        feature: topic.id,
         aspect: section.id
       }
-      // hash: `#head-${topic.contextLink.id}-${section.id}`
+      // hash: `#head-${topic.id}-${section.id}`
     });
   };
 
@@ -69,34 +69,35 @@ export const TopicsViewDesktop: FC<TopicsViewDesktopProps> = ({ topics }) => {
     <Grid container>
       {topics && topics.length > 0
         ? topics.map((topic, index) => {
+            const { id: topicId } = topic;
             return (
               <Grid
                 item
-                key={`topic-${index}`}
+                key={`topic-${topicId}`}
                 xs={12}
                 md={index <= 1 ? 6 : 12}
               >
                 <div className={classes.container}>
                   <TopReveal
-                    id={`animation-${index}`}
+                    id={`topic-${topicId}-animation`}
                     text={[...topic.title, ...topic.subTitle]}
                     loop={false}
                   />
                   <div className={classes.container}>
-                    {topic.contextLink
-                      ? topic.contextLink.sections.map((section, index) => {
-                          return (
-                            <IconButton
-                              key={`section--${index}`}
-                              onClick={_e => {
-                                handleSelect(topic, section);
-                              }}
-                            >
-                              <CustomIcon icon={section.icon} />
-                            </IconButton>
-                          );
-                        })
-                      : null}
+                    {topic.sections &&
+                      topic.sections.map(section => {
+                        const { id: sectionId } = section;
+                        return (
+                          <IconButton
+                            key={`topic-${topicId}-section-${sectionId}`}
+                            onClick={_e => {
+                              handleSelect(topic, section);
+                            }}
+                          >
+                            <CustomIcon icon={section.icon} />
+                          </IconButton>
+                        );
+                      })}
                   </div>
                 </div>
               </Grid>

@@ -1,77 +1,71 @@
 {
   "topics": [
     {
+      "id": "pet",
       "title": ["Privacy Enhancing", "Technology"],
       "subTitle": ["Etablierung von Vertrauen", "in unsicheren Umgebungen"],
-      "contextLink": {
-        "id": "pet",
-        "sections": [
-          {
-            "id": "feature",
-            "icon": {
-              "type": "FA",
-              "name": "rocket"
-            }
-          },
-          {
-            "id": "target-group",
-            "icon": {
-              "type": "FA",
-              "name": "user-circle"
-            }
+      "sections": [
+        {
+          "id": "feature",
+          "icon": {
+            "type": "FA",
+            "name": "rocket"
           }
-        ]
-      }
+        },
+        {
+          "id": "target-group",
+          "icon": {
+            "type": "FA",
+            "name": "user-circle"
+          }
+        }
+      ]
     },
     {
+      "id": "pidp",
       "title": ["Personal Intrusion", "Detection / Prevention"],
       "subTitle": ["Ansatz zur Eindämmung", "von Falschinformation"],
-      "contextLink": {
-        "id": "pidp",
-        "sections": [
-          {
-            "id": "feature",
-            "icon": {
-              "type": "FA",
-              "name": "rocket"
-            }
-          },
-          {
-            "id": "target-group",
-            "icon": {
-              "type": "FA",
-              "name": "user-circle"
-            }
+      "sections": [
+        {
+          "id": "feature",
+          "icon": {
+            "type": "FA",
+            "name": "rocket"
           }
-        ]
-      }
+        },
+        {
+          "id": "target-group",
+          "icon": {
+            "type": "FA",
+            "name": "user-circle"
+          }
+        }
+      ]
     },
     {
+      "id": "ai",
       "title": ["Ermöglicht durch", "App Instrumentation"],
       "subTitle": [
         "Integration eines",
         "zusätzlichen UI in",
         "bestehende Anwendungen"
       ],
-      "contextLink": {
-        "id": "ai",
-        "sections": [
-          {
-            "id": "feature",
-            "icon": {
-              "type": "FA",
-              "name": "rocket"
-            }
-          },
-          {
-            "id": "target-group",
-            "icon": {
-              "type": "FA",
-              "name": "user-circle"
-            }
+      "sections": [
+        {
+          "id": "feature",
+          "icon": {
+            "type": "FA",
+            "name": "rocket"
           }
-        ]
-      }
+        },
+        {
+          "id": "target-group",
+          "icon": {
+            "type": "FA",
+            "name": "user-circle"
+          }
+        }
+      ]
     }
   ]
 }
