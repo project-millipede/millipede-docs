@@ -34,30 +34,33 @@ const Window: FC<WindowProps> = ({ windowStackData, index }) => {
     push({
       pathname: `/`,
       query: {
-        feature: topic.contextLink.id,
+        feature: topic.id,
         aspect: section.id
       }
-      // hash: `#head-${topic.contextLink.id}-${section.id}`
+      // hash: `#head-${topic.id}-${section.id}`
     });
   };
 
   const topic =
-    windowStackData && windowStackData.length >= index
-      ? windowStackData[index]
-      : {};
+    windowStackData &&
+    windowStackData.length >= index &&
+    windowStackData[index];
+
+  const { id: topicId } = topic;
 
   return topic != null ? (
     <div className={classes.container}>
       <TopReveal
-        id={`animation-${index}`}
+        id={`topic-${topic.category}-animation`}
         text={[...topic.title, ...topic.subTitle]}
       />
       <div className={classes.container}>
-        {topic.contextLink &&
-          topic.contextLink.sections.map((section, index) => {
+        {topic.sections &&
+          topic.sections.map(section => {
+            const { id: sectionId } = section;
             return (
               <IconButton
-                key={`section-${index}`}
+                key={`topic-${topicId}-section-${sectionId}`}
                 onClick={_e => {
                   handleSelect(topic, section);
                 }}

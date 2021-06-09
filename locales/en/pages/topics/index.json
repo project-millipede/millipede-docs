@@ -1,77 +1,71 @@
 {
   "topics": [
     {
+      "id": "pet",
       "title": ["Privacy Enhancing", "Technology"],
       "subTitle": ["Make untrusted", "environments trusted"],
-      "contextLink": {
-        "id": "pet",
-        "sections": [
-          {
-            "id": "feature",
-            "icon": {
-              "type": "FA",
-              "name": "rocket"
-            }
-          },
-          {
-            "id": "target-group",
-            "icon": {
-              "type": "FA",
-              "name": "user-circle"
-            }
+      "sections": [
+        {
+          "id": "feature",
+          "icon": {
+            "type": "FA",
+            "name": "rocket"
           }
-        ]
-      }
+        },
+        {
+          "id": "target-group",
+          "icon": {
+            "type": "FA",
+            "name": "user-circle"
+          }
+        }
+      ]
     },
     {
+      "id": "pidp",
       "title": ["Personal Intrusion", "Detection / Prevention"],
       "subTitle": ["Approach to fight", "fake news"],
-      "contextLink": {
-        "id": "pidp",
-        "sections": [
-          {
-            "id": "feature",
-            "icon": {
-              "type": "FA",
-              "name": "rocket"
-            }
-          },
-          {
-            "id": "target-group",
-            "icon": {
-              "type": "FA",
-              "name": "user-circle"
-            }
+      "sections": [
+        {
+          "id": "feature",
+          "icon": {
+            "type": "FA",
+            "name": "rocket"
           }
-        ]
-      }
+        },
+        {
+          "id": "target-group",
+          "icon": {
+            "type": "FA",
+            "name": "user-circle"
+          }
+        }
+      ]
     },
     {
+      "id": "ai",
       "title": ["Enabled through", "App Instrumentation"],
       "subTitle": [
         "Integration of an",
         "external UI into",
         "existing applications"
       ],
-      "contextLink": {
-        "id": "ai",
-        "sections": [
-          {
-            "id": "feature",
-            "icon": {
-              "type": "FA",
-              "name": "rocket"
-            }
-          },
-          {
-            "id": "target-group",
-            "icon": {
-              "type": "FA",
-              "name": "user-circle"
-            }
+      "sections": [
+        {
+          "id": "feature",
+          "icon": {
+            "type": "FA",
+            "name": "rocket"
           }
-        ]
-      }
+        },
+        {
+          "id": "target-group",
+          "icon": {
+            "type": "FA",
+            "name": "user-circle"
+          }
+        }
+      ]
     }
   ]
 }
