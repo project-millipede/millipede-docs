@@ -1,6 +1,6 @@
 import { Link } from '@app/components';
 import { navigationState } from '@app/layout/src/recoil/features/pages/reducer';
-import { Button, Container, createStyles, makeStyles, Theme } from '@material-ui/core';
+import { Button, createStyles, makeStyles, Theme } from '@material-ui/core';
 import { ChevronLeft, ChevronRight } from '@material-ui/icons';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC, useMemo } from 'react';
@@ -9,10 +9,7 @@ import { useRecoilValue } from 'recoil';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     footer: {
-      padding: theme.spacing(4, 0),
-      [theme.breakpoints.up('sm')]: {
-        padding: theme.spacing(8, 0)
-      }
+      padding: theme.spacing(4, 0)
     },
     pagination: {
       display: 'flex',
@@ -54,45 +51,43 @@ export const AppContentFooter: FC = () => {
   }, [activePage.pathname]);
 
   return (
-    <Container maxWidth='md'>
-      <footer className={classes.footer}>
-        <div className={classes.pagination}>
-          {prevPage ? (
-            <Link
-              href={
-                {
-                  pathname: '/docs/[...slug]',
-                  query: { slug: prevPage.pathname.split('/') }
-                } as any
-              }
-            >
-              <Button className={classes.pageLinkButton}>
-                <ChevronLeft className={classes.chevronLeftIcon} />
-                {t(`common:pages.${prevPage.pathname}`)}
-              </Button>
-            </Link>
-          ) : (
-            <div />
-          )}
-          {nextPage ? (
-            <Link
-              href={
-                {
-                  pathname: '/docs/[...slug]',
-                  query: { slug: nextPage.pathname.split('/') }
-                } as any
-              }
-            >
-              <Button className={classes.pageLinkButton}>
-                {t(`common:pages.${nextPage.pathname}`)}
-                <ChevronRight className={classes.chevronRightIcon} />
-              </Button>
-            </Link>
-          ) : (
-            <div />
-          )}
-        </div>
-      </footer>
-    </Container>
+    <footer className={classes.footer}>
+      <div className={classes.pagination}>
+        {prevPage ? (
+          <Link
+            href={
+              {
+                pathname: '/docs/[...slug]',
+                query: { slug: prevPage.pathname.split('/') }
+              } as any
+            }
+          >
+            <Button className={classes.pageLinkButton}>
+              <ChevronLeft className={classes.chevronLeftIcon} />
+              {t(`common:pages.${prevPage.pathname}`)}
+            </Button>
+          </Link>
+        ) : (
+          <div />
+        )}
+        {nextPage ? (
+          <Link
+            href={
+              {
+                pathname: '/docs/[...slug]',
+                query: { slug: nextPage.pathname.split('/') }
+              } as any
+            }
+          >
+            <Button className={classes.pageLinkButton}>
+              {t(`common:pages.${nextPage.pathname}`)}
+              <ChevronRight className={classes.chevronRightIcon} />
+            </Button>
+          </Link>
+        ) : (
+          <div />
+        )}
+      </div>
+    </footer>
   );
 };
