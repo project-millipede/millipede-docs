@@ -1,4 +1,4 @@
-import { createStyles, makeStyles, Slider, Theme } from '@material-ui/core';
+import { makeStyles, Slider, Theme } from '@material-ui/core';
 import React, { FC } from 'react';
 
 import { useStepDispatch, useStepState } from '../../context/StepProvider';
@@ -25,7 +25,7 @@ export const getValue = (
 export const useStyles = makeStyles((theme: Theme) => {
   const height = 24;
   const borderRadius = height / 2;
-  return createStyles({
+  return {
     row: {
       height: '60px',
       width: '100%',
@@ -35,7 +35,7 @@ export const useStyles = makeStyles((theme: Theme) => {
       display: 'flex',
       alignItems: 'center'
     }
-  });
+  };
 });
 
 export interface ProgressControlProps {

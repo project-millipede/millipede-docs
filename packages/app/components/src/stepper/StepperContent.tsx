@@ -1,18 +1,16 @@
 import { ContentTypes } from '@app/types';
-import { CardContent, createStyles, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
+import { CardContent, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import React, { FC, useState } from 'react';
 
 import { Stepper, TranslationProps } from './Stepper';
 import { getStepsLength, selectContent } from './StepperContent.svc';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    row: {
-      justifyContent: 'center',
-      padding: theme.spacing(2)
-    }
-  })
-);
+const useStyles = makeStyles((theme: Theme) => ({
+  row: {
+    justifyContent: 'center',
+    padding: theme.spacing(2)
+  }
+}));
 
 export const renderTitleAndDescription = (
   items: Array<ContentTypes.Content> = []

@@ -1,6 +1,6 @@
 import { Archer, ArcherTypes } from '@app/components';
 import { Typography } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
@@ -10,24 +10,22 @@ import { Target } from './components/Target';
 
 const { ArcherContainer, CustomBox, ArcherElement } = Archer;
 
-export const useStyles = makeStyles(() =>
-  createStyles({
-    grid: {
-      display: 'grid',
-      gridTemplateRows: '1fr 0.5fr 1fr',
-      gridTemplateColumns: 'repeat(3, 1fr)',
-      gridTemplateAreas: `
+export const useStyles = makeStyles(() => ({
+  grid: {
+    display: 'grid',
+    gridTemplateRows: '1fr 0.5fr 1fr',
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    gridTemplateAreas: `
       'target target target'
       '. render .'
       'instrument instrument instrument'
       `,
-      rowGap: '50px'
-    },
-    render: {
-      gridArea: 'render'
-    }
-  })
-);
+    rowGap: '50px'
+  },
+  render: {
+    gridArea: 'render'
+  }
+}));
 
 export interface Connect {
   relations: Array<ArcherTypes.Relation>;

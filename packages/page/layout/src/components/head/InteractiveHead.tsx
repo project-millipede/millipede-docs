@@ -1,4 +1,4 @@
-import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { makeStyles, Theme, Typography } from '@material-ui/core';
 import LinkIcon from '@material-ui/icons/Link';
 import React, { FC, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -6,35 +6,33 @@ import { useSetRecoilState } from 'recoil';
 
 import { scrollItemsReducer, scrollItemsState } from '../../recoil/features/scroll/page/reducer';
 
-export const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    element: {
-      position: 'absolute',
-      marginTop: '-96px'
-    },
-    heading: {
-      '& h2, & h3, & h4': {
-        '& a': {
-          display: 'none',
-          padding: `0 ${theme.spacing(1)}px`
-        },
-        '&:hover a': {
-          display: 'inline-block',
-          color: theme.palette.text.secondary,
-          '&:hover': {
-            color: theme.palette.text.primary
-          }
+export const useStyles = makeStyles((theme: Theme) => ({
+  element: {
+    position: 'absolute',
+    marginTop: '-96px'
+  },
+  heading: {
+    '& h2, & h3, & h4': {
+      '& a': {
+        display: 'none',
+        padding: `0 ${theme.spacing(1)}px`
+      },
+      '&:hover a': {
+        display: 'inline-block',
+        color: theme.palette.text.secondary,
+        '&:hover': {
+          color: theme.palette.text.primary
         }
       }
-    },
-    headerText: {
-      hyphens: 'auto',
-      '-ms-hyphens': 'auto',
-      '-moz-hyphens': 'auto',
-      '-webkit-hyphens': 'auto'
     }
-  })
-);
+  },
+  headerText: {
+    hyphens: 'auto',
+    '-ms-hyphens': 'auto',
+    '-moz-hyphens': 'auto',
+    '-webkit-hyphens': 'auto'
+  }
+}));
 
 interface InteractiveHeadProps {
   // id generated through slug

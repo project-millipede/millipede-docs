@@ -1,19 +1,17 @@
-import { createStyles, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import { Breadcrumbs } from '@page/components';
 import React, { FC } from 'react';
 
 import { EditPage } from './Editpage';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    headerRow: {
-      display: 'flex',
-      flexDirection: 'row',
-      flexGrow: 1,
-      height: '56px'
-    }
-  })
-);
+const useStyles = makeStyles(() => ({
+  headerRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexGrow: 1,
+    height: '56px'
+  }
+}));
 
 interface AppContentHeaderProps {
   markdownLocation?: string;

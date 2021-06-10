@@ -1,5 +1,5 @@
 import { Archer } from '@app/components';
-import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { makeStyles, Theme, Typography } from '@material-ui/core';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
@@ -7,42 +7,40 @@ import { useCommonStyles } from '../../../styles/CommonStyles';
 
 const { ArcherContainer, ArcherElement, CustomBox } = Archer;
 
-export const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    grid: {
-      display: 'grid',
-      gridTemplateRows: '1fr 1fr 1fr',
-      gridTemplateColumns: '1fr 1fr 1fr',
-      gridTemplateAreas: `
+export const useStyles = makeStyles((theme: Theme) => ({
+  grid: {
+    display: 'grid',
+    gridTemplateRows: '1fr 1fr 1fr',
+    gridTemplateColumns: '1fr 1fr 1fr',
+    gridTemplateAreas: `
       '. individual data'
       'general realistic specific'
       '. society .'
       `,
-      gridGap: '100px',
-      [theme.breakpoints.down('sm')]: {
-        gridGap: '25px'
-      }
-    },
-    individual: {
-      gridArea: 'individual'
-    },
-    data: {
-      gridArea: 'data'
-    },
-    general: {
-      gridArea: 'general'
-    },
-    realistic: {
-      gridArea: 'realistic'
-    },
-    specific: {
-      gridArea: 'specific'
-    },
-    society: {
-      gridArea: 'society'
+    gridGap: '100px',
+    [theme.breakpoints.down('sm')]: {
+      gridGap: '25px'
     }
-  })
-);
+  },
+  individual: {
+    gridArea: 'individual'
+  },
+  data: {
+    gridArea: 'data'
+  },
+  general: {
+    gridArea: 'general'
+  },
+  realistic: {
+    gridArea: 'realistic'
+  },
+  specific: {
+    gridArea: 'specific'
+  },
+  society: {
+    gridArea: 'society'
+  }
+}));
 
 export const InterdisciplinaryApproach: FC = () => {
   const classes = useStyles();

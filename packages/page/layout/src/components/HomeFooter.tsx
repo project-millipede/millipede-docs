@@ -1,34 +1,32 @@
 import { Link } from '@app/components';
-import { createStyles, Grid, Link as MuiLink, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Grid, Link as MuiLink, makeStyles, Theme, Typography } from '@material-ui/core';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    footer: {
-      padding: theme.spacing(4, 0)
-    },
-    listItem: {
-      [theme.breakpoints.down('md')]: {
-        display: 'none'
-      }
-    },
-    list: {
-      marginBottom: theme.spacing(4),
-      '& ul': {
-        paddingLeft: 0,
-        listStyle: 'none'
-      },
-      '& li': {
-        padding: theme.spacing(1, 0),
-        color: theme.palette.text.secondary
-      }
-    },
-    head: {
-      fontWeight: theme.typography.fontWeightMedium
+const useStyles = makeStyles((theme: Theme) => ({
+  footer: {
+    padding: theme.spacing(4, 0)
+  },
+  listItem: {
+    [theme.breakpoints.down('md')]: {
+      display: 'none'
     }
-  })
-);
+  },
+  list: {
+    marginBottom: theme.spacing(4),
+    '& ul': {
+      paddingLeft: 0,
+      listStyle: 'none'
+    },
+    '& li': {
+      padding: theme.spacing(1, 0),
+      color: theme.palette.text.secondary
+    }
+  },
+  head: {
+    fontWeight: theme.typography.fontWeightMedium
+  }
+}));
 
 export const HomeFooter = () => {
   const classes = useStyles();

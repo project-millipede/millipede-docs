@@ -1,7 +1,7 @@
 import { CustomIcon } from '@app/components';
 import { ContentTypes } from '@app/types';
 import { StringUtil } from '@app/utils';
-import { createStyles, Grid, IconButton, makeStyles, Theme } from '@material-ui/core';
+import { Grid, IconButton, makeStyles, Theme } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React, { FC, useEffect } from 'react';
 import { StringParam, useQueryParams } from 'use-query-params';
@@ -12,16 +12,14 @@ interface TopicsViewDesktopProps {
   topics: Array<ContentTypes.OverviewProps>;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    container: {
-      padding: theme.spacing(2, 0),
-      [theme.breakpoints.up('sm')]: {
-        padding: theme.spacing(4, 0)
-      }
+const useStyles = makeStyles((theme: Theme) => ({
+  container: {
+    padding: theme.spacing(2, 0),
+    [theme.breakpoints.up('sm')]: {
+      padding: theme.spacing(4, 0)
     }
-  })
-);
+  }
+}));
 
 export const TopicsViewDesktop: FC<TopicsViewDesktopProps> = ({ topics }) => {
   const { asPath, push, pathname, locale } = useRouter();

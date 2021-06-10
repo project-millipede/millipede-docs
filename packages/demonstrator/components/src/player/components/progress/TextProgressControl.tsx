@@ -1,4 +1,4 @@
-import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { makeStyles, Theme, Typography } from '@material-ui/core';
 import React, { FC } from 'react';
 
 import { useStepState } from '../../context/StepProvider';
@@ -10,7 +10,7 @@ import { CountUp } from '../counter/CountUp';
 export const useStyles = makeStyles((theme: Theme) => {
   const height = 24;
   const borderRadius = height / 2;
-  return createStyles({
+  return {
     row: {
       borderRadius: borderRadius,
       backgroundColor: '#DDDDDD',
@@ -41,7 +41,7 @@ export const useStyles = makeStyles((theme: Theme) => {
       padding: theme.spacing(0, 1),
       margin: theme.spacing(0, 1)
     }
-  });
+  };
 });
 
 interface TextProgressControlProps {

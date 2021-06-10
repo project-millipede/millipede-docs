@@ -2,7 +2,6 @@ import { Archer, Help, Stepper } from '@app/components';
 import { scrollStates } from '@demonstrators-social/shared';
 import {
   Checkbox,
-  createStyles,
   FormControlLabel,
   FormGroup,
   List,
@@ -24,37 +23,35 @@ import { ScenarioControlNWithN } from './components/navigation/ScenarioControlNW
 import { FlowControlObserver } from './components/observer/FlowControlObserver';
 import { SliceOptions } from './components/options/SliceOptions';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      width: '100%',
-      backgroundColor: theme.palette.background.paper,
-      position: 'relative',
-      overflow: 'auto'
-    },
-    listSection: {
-      backgroundColor: 'inherit'
-    },
-    ul: {
-      backgroundColor: 'inherit',
-      padding: 0
-    },
-    root2: {
-      flexGrow: 1
-    },
-    header: {
-      display: 'flex',
-      alignItems: 'center',
-      height: 50,
-      paddingLeft: theme.spacing(4),
-      backgroundColor: theme.palette.background.default
-    },
-    heading: {
-      fontSize: 16,
-      fontWeight: theme.typography.fontWeightMedium
-    }
-  })
-);
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    width: '100%',
+    backgroundColor: theme.palette.background.paper,
+    position: 'relative',
+    overflow: 'auto'
+  },
+  listSection: {
+    backgroundColor: 'inherit'
+  },
+  ul: {
+    backgroundColor: 'inherit',
+    padding: 0
+  },
+  root2: {
+    flexGrow: 1
+  },
+  header: {
+    display: 'flex',
+    alignItems: 'center',
+    height: 50,
+    paddingLeft: theme.spacing(4),
+    backgroundColor: theme.palette.background.default
+  },
+  heading: {
+    fontSize: 16,
+    fontWeight: theme.typography.fontWeightMedium
+  }
+}));
 
 interface ScenarioNavigatorProps {}
 

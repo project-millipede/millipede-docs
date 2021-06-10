@@ -1,25 +1,23 @@
 import { Link } from '@app/components';
 import { MAX_DRAWER_WIDTH, TOOLBAR_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
-import { createStyles, Divider, IconButton, makeStyles, SwipeableDrawer, Typography } from '@material-ui/core';
+import { Divider, IconButton, makeStyles, SwipeableDrawer, Typography } from '@material-ui/core';
 import { ChevronLeft } from '@material-ui/icons';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
 import { DrawerProps } from '.';
 
-const useDrawerStyles = makeStyles(() =>
-  createStyles({
-    toolbar: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-end',
-      minHeight: TOOLBAR_HEIGHT
-    },
-    paperMobile: {
-      width: MAX_DRAWER_WIDTH
-    }
-  })
-);
+const useDrawerStyles = makeStyles(() => ({
+  toolbar: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    minHeight: TOOLBAR_HEIGHT
+  },
+  paperMobile: {
+    width: MAX_DRAWER_WIDTH
+  }
+}));
 
 export const MobileDrawer: FC<DrawerProps> = ({
   isDrawerExpanded,

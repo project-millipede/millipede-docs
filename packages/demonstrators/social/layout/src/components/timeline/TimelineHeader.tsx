@@ -1,6 +1,6 @@
 import { Components } from '@app/render-utils';
 import { scrollStates, ScrollTypes } from '@demonstrators-social/shared';
-import { createStyles, makeStyles, Tab, Tabs, Theme } from '@material-ui/core';
+import { makeStyles, Tab, Tabs, Theme } from '@material-ui/core';
 import { DynamicFeed, GroupWork } from '@material-ui/icons';
 import React, { ChangeEvent, forwardRef, ForwardRefRenderFunction, useMemo } from 'react';
 import { useRecoilState } from 'recoil';
@@ -11,29 +11,27 @@ const {
   Responsive: { isMobile }
 } = Components;
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    tabs: {
-      '& .MuiTabs-flexContainer': {
-        flexWrap: 'wrap'
+const useStyles = makeStyles((theme: Theme) => ({
+  tabs: {
+    '& .MuiTabs-flexContainer': {
+      flexWrap: 'wrap'
+    },
+    '& .MuiTab-root': {
+      '&.MuiTab-labelIcon': {
+        minHeight: theme.spacing(6),
+        '& .MuiTab-wrapper > *:first-child': {
+          marginBottom: 0
+        }
       },
-      '& .MuiTab-root': {
-        '&.MuiTab-labelIcon': {
-          minHeight: theme.spacing(6),
-          '& .MuiTab-wrapper > *:first-child': {
-            marginBottom: 0
-          }
-        },
-        '& .MuiTab-wrapper': {
-          flexDirection: 'row',
-          '& > *:first-child': {
-            marginRight: theme.spacing(1)
-          }
+      '& .MuiTab-wrapper': {
+        flexDirection: 'row',
+        '& > *:first-child': {
+          marginRight: theme.spacing(1)
         }
       }
     }
-  })
-);
+  }
+}));
 
 interface TimelineHeaderProps {
   timelineId?: string;

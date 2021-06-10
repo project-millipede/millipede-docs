@@ -1,36 +1,24 @@
 import { CollectionUtil } from '@app/utils';
 import { Types } from '@demonstrators-social/data';
-import {
-  Avatar,
-  CardActions,
-  CardContent,
-  CardHeader,
-  createStyles,
-  IconButton,
-  makeStyles,
-  Theme,
-  Typography
-} from '@material-ui/core';
+import { Avatar, CardActions, CardContent, CardHeader, IconButton, makeStyles, Theme, Typography } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import { formatDistance } from 'date-fns';
 import { enGB } from 'date-fns/locale';
 import React, { FC, Fragment, useMemo, useState } from 'react';
 
-export const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    expand: {
-      transform: 'rotate(0deg)',
-      marginLeft: 'auto',
-      transition: theme.transitions.create('transform', {
-        duration: theme.transitions.duration.shortest
-      })
-    },
-    expandOpen: {
-      transform: 'rotate(180deg)'
-    }
-  })
-);
+export const useStyles = makeStyles((theme: Theme) => ({
+  expand: {
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest
+    })
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)'
+  }
+}));
 
 interface CommentsProps {
   timelineId: string;

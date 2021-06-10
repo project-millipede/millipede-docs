@@ -1,47 +1,45 @@
 import { getIconByName, Link } from '@app/components';
 import { ContentTypes } from '@app/types';
-import { Avatar, createStyles, IconButton, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Avatar, IconButton, makeStyles, Theme, Typography } from '@material-ui/core';
 import isArray from 'lodash/isArray';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    row: {
-      display: 'flex'
-    },
-    column: {
-      display: 'flex',
-      flexDirection: 'column'
-    },
-    avatar: {
-      margin: 12
-    },
-    title: {
-      fontWeight: theme.typography.fontWeightMedium
-    },
-    subTitle: {
-      fontWeight: theme.typography.fontWeightRegular
-    },
-    summary: {
-      fontWeight: theme.typography.fontWeightMedium,
-      fontStyle: 'italic'
-    },
-    note: {
-      fontWeight: theme.typography.fontWeightMedium,
-      fontStyle: 'italic',
-      '& blockquote': {
-        borderLeft: '5px solid #ffe564',
-        backgroundColor: 'rgba(255,229,100,0.2)',
-        padding: '4px 24px',
-        margin: '24px 0',
-        '& p': {
-          marginTop: '16px'
-        }
+const useStyles = makeStyles((theme: Theme) => ({
+  row: {
+    display: 'flex'
+  },
+  column: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  avatar: {
+    margin: 12
+  },
+  title: {
+    fontWeight: theme.typography.fontWeightMedium
+  },
+  subTitle: {
+    fontWeight: theme.typography.fontWeightRegular
+  },
+  summary: {
+    fontWeight: theme.typography.fontWeightMedium,
+    fontStyle: 'italic'
+  },
+  note: {
+    fontWeight: theme.typography.fontWeightMedium,
+    fontStyle: 'italic',
+    '& blockquote': {
+      borderLeft: '5px solid #ffe564',
+      backgroundColor: 'rgba(255,229,100,0.2)',
+      padding: '4px 24px',
+      margin: '24px 0',
+      '& p': {
+        marginTop: '16px'
       }
     }
-  })
-);
+  }
+}));
 
 export const Item = ({
   title,

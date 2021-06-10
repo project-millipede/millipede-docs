@@ -1,15 +1,6 @@
 import { useHoux } from '@app/houx';
 import { Area, Device, Szenario } from '@demonstrator/types';
-import {
-  createStyles,
-  IconButton,
-  makeStyles,
-  Paper,
-  Theme,
-  ToggleButton,
-  ToggleButtonGroup,
-  Typography,
-} from '@material-ui/core';
+import { IconButton, makeStyles, Paper, Theme, ToggleButton, ToggleButtonGroup, Typography } from '@material-ui/core';
 import { DesktopWindows, SmartphoneRounded } from '@material-ui/icons';
 import { Translate } from 'next-translate';
 import React, { Dispatch, FC, MouseEvent } from 'react';
@@ -22,29 +13,27 @@ interface ControlsProps {
   t?: Translate;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    column: {
-      display: 'flex',
-      flexDirection: 'column',
-      margin: theme.spacing(2),
-      padding: theme.spacing(2)
-    },
-    text: {
-      marginLeft: 'auto',
-      marginRight: 'auto',
-      marginTop: theme.spacing(2),
-      marginBottom: theme.spacing(2)
-    },
-    group: {
-      marginLeft: 'auto',
-      marginRight: 'auto'
-    },
-    icon: {
-      margin: 'auto'
-    }
-  })
-);
+const useStyles = makeStyles((theme: Theme) => ({
+  column: {
+    display: 'flex',
+    flexDirection: 'column',
+    margin: theme.spacing(2),
+    padding: theme.spacing(2)
+  },
+  text: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2)
+  },
+  group: {
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  },
+  icon: {
+    margin: 'auto'
+  }
+}));
 
 export const PrimaryAnimationControls: FC<ControlsProps> = ({ t }) => {
   const classes = useStyles();

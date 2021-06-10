@@ -1,4 +1,4 @@
-import { Avatar, createStyles, makeStyles, Theme } from '@material-ui/core';
+import { Avatar, makeStyles, Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
@@ -19,25 +19,23 @@ export const getActiveCoreMembers = (t: Translate) => [
   }
 ];
 
-export const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    row: {
-      display: 'flex',
-      flexDirection: 'row'
-    },
-    column: {
-      display: 'flex',
-      flexDirection: 'column'
-    },
-    avatar: {
-      margin: theme.spacing(2)
-    },
-    title: {
-      fontSize: theme.spacing(3),
-      margin: `${theme.spacing(2)} 0`
-    }
-  })
-);
+export const useStyles = makeStyles((theme: Theme) => ({
+  row: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  column: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  avatar: {
+    margin: theme.spacing(2)
+  },
+  title: {
+    fontSize: theme.spacing(3),
+    margin: `${theme.spacing(2)} 0`
+  }
+}));
 
 interface GroupProps {
   title: string;

@@ -1,5 +1,5 @@
 import { scrollStates, ScrollTypes } from '@demonstrators-social/shared';
-import { createStyles, makeStyles, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@material-ui/core';
+import { makeStyles, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@material-ui/core';
 import { Close, Share } from '@material-ui/icons';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
@@ -13,18 +13,16 @@ export interface DockMenuItem {
   title: string;
 }
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    speedDial: {
-      height: '56px',
-      paddingTop: '8px',
-      '&.MuiSpeedDial-directionDown': {
-        display: 'unset',
-        flexDirection: 'unset'
-      }
+const useStyles = makeStyles(() => ({
+  speedDial: {
+    height: '56px',
+    paddingTop: '8px',
+    '&.MuiSpeedDial-directionDown': {
+      display: 'unset',
+      flexDirection: 'unset'
     }
-  })
-);
+  }
+}));
 
 const getSliceOptions = (_t: Translate) => {
   return [
