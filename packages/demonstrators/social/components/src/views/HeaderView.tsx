@@ -1,29 +1,27 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 import { CSSProperties } from '@material-ui/styles';
 import React, { FC } from 'react';
 import { FullScreenHandle } from 'react-full-screen';
 
 import { ChromeInput } from '../input/ChromeInput';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    browserBar: {
-      display: 'flex',
-      flexDirection: 'column'
-    },
-    circleContainer: {
-      display: 'flex',
-      padding: theme.spacing(1)
-    },
-    circle: {
-      backgroundColor: '#b6c1cd',
-      width: '12px',
-      height: '12px',
-      borderRadius: '6px',
-      marginLeft: '6px'
-    }
-  })
-);
+const useStyles = makeStyles((theme: Theme) => ({
+  browserBar: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  circleContainer: {
+    display: 'flex',
+    padding: theme.spacing(1)
+  },
+  circle: {
+    backgroundColor: '#b6c1cd',
+    width: '12px',
+    height: '12px',
+    borderRadius: '6px',
+    marginLeft: '6px'
+  }
+}));
 
 interface HeaderViewProps {
   fullScreenHandle: FullScreenHandle;

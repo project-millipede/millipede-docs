@@ -1,6 +1,6 @@
 import { Archer } from '@app/components';
 import { Typography } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
@@ -11,14 +11,13 @@ const { CustomBox, ArcherElement } = Archer;
 const margin = '8px';
 const heightHeading = '32px';
 
-export const useRenderStyles = makeStyles(() =>
-  createStyles({
-    render: {
-      gridArea: 'render',
-      display: 'grid',
-      gridTemplateColumns: `${margin} repeat(3, 1fr) ${margin}`,
-      gridTemplateRows: `${heightHeading} ${margin} repeat(3, 1fr) ${margin}`,
-      gridTemplateAreas: `
+export const useRenderStyles = makeStyles(() => ({
+  render: {
+    gridArea: 'render',
+    display: 'grid',
+    gridTemplateColumns: `${margin} repeat(3, 1fr) ${margin}`,
+    gridTemplateRows: `${heightHeading} ${margin} repeat(3, 1fr) ${margin}`,
+    gridTemplateAreas: `
       '. head_render head_render head_render .'
       '. . . . .'
       '. react_observe . renderX .'
@@ -26,29 +25,28 @@ export const useRenderStyles = makeStyles(() =>
       '. custom_render . observe_react .'
       '. . . . .'
       `,
-      rowGap: '25px',
-      border: '3px solid black'
-    },
-    head_render: {
-      gridArea: 'head_render'
-    },
-    react_observe: {
-      gridArea: 'react_observe'
-    },
-    renderX: {
-      gridArea: 'renderX'
-    },
-    coordination: {
-      gridArea: 'coordination'
-    },
-    custom_render: {
-      gridArea: 'custom_render'
-    },
-    observe_react: {
-      gridArea: 'observe_react'
-    }
-  })
-);
+    rowGap: '25px',
+    border: '3px solid black'
+  },
+  head_render: {
+    gridArea: 'head_render'
+  },
+  react_observe: {
+    gridArea: 'react_observe'
+  },
+  renderX: {
+    gridArea: 'renderX'
+  },
+  coordination: {
+    gridArea: 'coordination'
+  },
+  custom_render: {
+    gridArea: 'custom_render'
+  },
+  observe_react: {
+    gridArea: 'observe_react'
+  }
+}));
 
 export const Render: FC = () => {
   const classes = useRenderStyles();

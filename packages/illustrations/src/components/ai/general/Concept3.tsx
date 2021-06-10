@@ -1,5 +1,5 @@
 import { Archer } from '@app/components';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import React, { FC } from 'react';
 
 import { Instrument } from './components/Instrument';
@@ -9,20 +9,18 @@ import { Connect } from './Concept2';
 
 const { ArcherContainer } = Archer;
 
-export const useGridStyles = makeStyles(() =>
-  createStyles({
-    grid: {
-      display: 'grid',
-      gridTemplateColumns: '1fr',
-      gridTemplateAreas: `
+export const useGridStyles = makeStyles(() => ({
+  grid: {
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+    gridTemplateAreas: `
       'target'
       'render'
       'instrument'
       `,
-      rowGap: '50px'
-    }
-  })
-);
+    rowGap: '50px'
+  }
+}));
 
 const targetConnect: Connect = {
   relations: [

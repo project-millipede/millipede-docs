@@ -1,5 +1,5 @@
 import { Archer } from '@app/components';
-import { createStyles, makeStyles, Typography } from '@material-ui/core';
+import { makeStyles, Typography } from '@material-ui/core';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
@@ -10,14 +10,13 @@ const { ArcherContainer, ArcherElement, CustomBox } = Archer;
 const margin = '8px';
 const heightHeading = '32px';
 
-export const useStyles = makeStyles(() =>
-  createStyles({
-    grid: {
-      gridArea: 'target',
-      display: 'grid',
-      gridTemplateColumns: `${margin} repeat(3, 1fr) ${margin}`,
-      gridTemplateRows: `repeat(3, ${heightHeading} ${margin} 1fr ${margin})`,
-      gridTemplateAreas: `
+export const useStyles = makeStyles(() => ({
+  grid: {
+    gridArea: 'target',
+    display: 'grid',
+    gridTemplateColumns: `${margin} repeat(3, 1fr) ${margin}`,
+    gridTemplateRows: `repeat(3, ${heightHeading} ${margin} 1fr ${margin})`,
+    gridTemplateAreas: `
       '. . head_access . .'
       '. . . . .'
       '. function . instrument .'
@@ -31,35 +30,34 @@ export const useStyles = makeStyles(() =>
       '. apply . derive .'
       '. . . . .'
       `,
-      rowGap: '25px',
-      border: '3px solid black'
-    },
-    head_access: {
-      gridArea: 'head_access'
-    },
-    function: {
-      gridArea: 'function'
-    },
-    instrument: {
-      gridArea: 'instrument'
-    },
-    head_analysis: {
-      gridArea: 'head_analysis'
-    },
-    behavior: {
-      gridArea: 'behavior'
-    },
-    head_exposure: {
-      gridArea: 'head_exposure'
-    },
-    derive: {
-      gridArea: 'derive'
-    },
-    apply: {
-      gridArea: 'apply'
-    }
-  })
-);
+    rowGap: '25px',
+    border: '3px solid black'
+  },
+  head_access: {
+    gridArea: 'head_access'
+  },
+  function: {
+    gridArea: 'function'
+  },
+  instrument: {
+    gridArea: 'instrument'
+  },
+  head_analysis: {
+    gridArea: 'head_analysis'
+  },
+  behavior: {
+    gridArea: 'behavior'
+  },
+  head_exposure: {
+    gridArea: 'head_exposure'
+  },
+  derive: {
+    gridArea: 'derive'
+  },
+  apply: {
+    gridArea: 'apply'
+  }
+}));
 
 export const ReversePrincipal: FC = () => {
   const classes = useStyles();

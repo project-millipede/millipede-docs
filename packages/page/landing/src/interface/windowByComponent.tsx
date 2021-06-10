@@ -1,21 +1,19 @@
 import { CustomIcon } from '@app/components';
 import { ContentTypes } from '@app/types';
-import { createStyles, IconButton, makeStyles, Theme } from '@material-ui/core';
+import { IconButton, makeStyles, Theme } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React, { FC } from 'react';
 
 import { TopReveal } from '../animation/framer/components/text/TopReveal';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    container: {
-      padding: theme.spacing(2, 0),
-      [theme.breakpoints.up('sm')]: {
-        padding: theme.spacing(4, 0)
-      }
+const useStyles = makeStyles((theme: Theme) => ({
+  container: {
+    padding: theme.spacing(2, 0),
+    [theme.breakpoints.up('sm')]: {
+      padding: theme.spacing(4, 0)
     }
-  })
-);
+  }
+}));
 
 interface WindowProps {
   windowStackData?: Array<ContentTypes.OverviewProps>;

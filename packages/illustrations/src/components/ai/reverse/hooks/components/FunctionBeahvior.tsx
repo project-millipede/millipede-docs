@@ -1,36 +1,34 @@
 import { Archer } from '@app/components';
-import { createStyles, makeStyles, Typography } from '@material-ui/core';
+import { makeStyles, Typography } from '@material-ui/core';
 import React, { FC } from 'react';
 
 const { ArcherContainer, ArcherElement, CustomBox } = Archer;
 
-export const useStyles = makeStyles(() =>
-  createStyles({
-    code: {
-      whiteSpace: 'pre-wrap'
-    },
-    grid: {
-      display: 'grid',
-      gridTemplateRows: '1fr 1fr 1fr',
-      gridTemplateColumns: '0.5fr 1fr 0.5fr',
-      gridTemplateAreas: `
+export const useStyles = makeStyles(() => ({
+  code: {
+    whiteSpace: 'pre-wrap'
+  },
+  grid: {
+    display: 'grid',
+    gridTemplateRows: '1fr 1fr 1fr',
+    gridTemplateColumns: '0.5fr 1fr 0.5fr',
+    gridTemplateAreas: `
       '. function_a .'
       '. function_b .'
       '. function_result .'
       `,
-      gridRowGap: '100px'
-    },
-    function_a: {
-      gridArea: 'function_a'
-    },
-    function_b: {
-      gridArea: 'function_b'
-    },
-    function_result: {
-      gridArea: 'function_result'
-    }
-  })
-);
+    gridRowGap: '100px'
+  },
+  function_a: {
+    gridArea: 'function_a'
+  },
+  function_b: {
+    gridArea: 'function_b'
+  },
+  function_result: {
+    gridArea: 'function_result'
+  }
+}));
 
 const functionA = `public int a() {
     int x = b();

@@ -1,14 +1,12 @@
-import { Chip, createStyles, makeStyles, Theme } from '@material-ui/core';
+import { Chip, makeStyles, Theme } from '@material-ui/core';
 import { ClassOutlined } from '@material-ui/icons';
 import React, { FC } from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    chip: {
-      margin: theme.spacing(2, 0)
-    }
-  })
-);
+const useStyles = makeStyles((theme: Theme) => ({
+  chip: {
+    margin: theme.spacing(2, 0)
+  }
+}));
 
 interface TagProps {
   text: string;

@@ -1,35 +1,33 @@
 import { Link } from '@app/components';
 import { navigationState } from '@app/layout/src/recoil/features/pages/reducer';
-import { Button, createStyles, makeStyles, Theme } from '@material-ui/core';
+import { Button, makeStyles, Theme } from '@material-ui/core';
 import { ChevronLeft, ChevronRight } from '@material-ui/icons';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC, useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    footer: {
-      padding: theme.spacing(4, 0)
-    },
-    pagination: {
-      display: 'flex',
-      justifyContent: 'space-between'
-    },
-    pageLinkButton: {
-      size: 'large',
-      textTransform: 'none',
-      fontWeight: theme.typography.fontWeightRegular
-    },
-    chevronLeftIcon: {
-      marginRight: theme.spacing(1),
-      fontSize: 'large'
-    },
-    chevronRightIcon: {
-      marginLeft: theme.spacing(1),
-      fontSize: 'large'
-    }
-  })
-);
+const useStyles = makeStyles((theme: Theme) => ({
+  footer: {
+    padding: theme.spacing(4, 0)
+  },
+  pagination: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  pageLinkButton: {
+    size: 'large',
+    textTransform: 'none',
+    fontWeight: theme.typography.fontWeightRegular
+  },
+  chevronLeftIcon: {
+    marginRight: theme.spacing(1),
+    fontSize: 'large'
+  },
+  chevronRightIcon: {
+    marginLeft: theme.spacing(1),
+    fontSize: 'large'
+  }
+}));
 
 export const AppContentFooter: FC = () => {
   const classes = useStyles();

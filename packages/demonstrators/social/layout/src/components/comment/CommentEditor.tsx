@@ -1,6 +1,6 @@
 import { RenderUtils } from '@app/render-utils';
 import { useEffectRef } from '@huse/effect-ref';
-import { Button, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Button, makeStyles, Theme, Typography } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import { useWindupString } from '@project-millipede/windups';
 import { ContentState, Editor, EditorState } from 'draft-js';
@@ -8,13 +8,11 @@ import elementResizeDetectorMaker from 'element-resize-detector';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    formHelperText: {
-      color: theme.palette.error.main
-    }
-  })
-);
+const useStyles = makeStyles((theme: Theme) => ({
+  formHelperText: {
+    color: theme.palette.error.main
+  }
+}));
 
 const longText = 'Hi @all, my name is Markus.';
 

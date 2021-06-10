@@ -1,5 +1,5 @@
 // import { Link } from '@app/components';
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 import React, { FC } from 'react';
 import { Link } from 'react-scroll';
@@ -7,24 +7,22 @@ import { useRecoilValue } from 'recoil';
 
 import { scrollItemsState } from '../../recoil/features/scroll/page/reducer';
 
-export const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    item: {
-      display: 'block',
-      padding: theme.spacing(1),
-      textDecoration: 'none',
-      borderLeft: `2px solid transparent`,
-      '&:hover': {
-        borderLeftColor: theme.palette.grey[200],
-        cursor: 'pointer'
-      }
-    },
-    active: {
-      borderLeft: `2px solid ${theme.palette.grey[300]}`,
-      color: theme.palette.text.primary
+export const useStyles = makeStyles((theme: Theme) => ({
+  item: {
+    display: 'block',
+    padding: theme.spacing(1),
+    textDecoration: 'none',
+    borderLeft: `2px solid transparent`,
+    '&:hover': {
+      borderLeftColor: theme.palette.grey[200],
+      cursor: 'pointer'
     }
-  })
-);
+  },
+  active: {
+    borderLeft: `2px solid ${theme.palette.grey[300]}`,
+    color: theme.palette.text.primary
+  }
+}));
 
 interface TocLinkProps {
   href: string;

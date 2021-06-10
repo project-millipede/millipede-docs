@@ -1,14 +1,12 @@
-import { Button, createStyles, makeStyles, MobileStepper } from '@material-ui/core';
+import { Button, makeStyles, MobileStepper } from '@material-ui/core';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import React, { FC, useCallback, useEffect, useState } from 'react';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      flexGrow: 1
-    }
-  })
-);
+const useStyles = makeStyles(() => ({
+  root: {
+    flexGrow: 1
+  }
+}));
 
 export interface TranslationProps {
   labelBack: string;

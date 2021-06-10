@@ -11,7 +11,7 @@ import {
   viewportSelectors,
 } from '@demonstrators-social/shared';
 import { useMergedRef } from '@huse/merged-ref';
-import { Button, ButtonGroup, Card, createStyles, ListItem, makeStyles, Theme } from '@material-ui/core';
+import { Button, ButtonGroup, Card, ListItem, makeStyles, Theme } from '@material-ui/core';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
@@ -30,20 +30,18 @@ import { handleCreateComment, handleDeletePost } from './Post.svc';
 
 const { selectPostById, selectTimelineOwner } = selectors.timeline;
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    postListItem: {
-      padding: theme.spacing(0, 1)
-    },
-    card: {
-      flexGrow: 1
-    },
-    media: {
-      height: 0,
-      paddingTop: '56.25%' // perfect 16:9 ratio
-    }
-  })
-);
+const useStyles = makeStyles((theme: Theme) => ({
+  postListItem: {
+    padding: theme.spacing(0, 1)
+  },
+  card: {
+    flexGrow: 1
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%' // perfect 16:9 ratio
+  }
+}));
 
 interface TimelinePostKeys {
   timelineId: string;

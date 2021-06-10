@@ -1,4 +1,4 @@
-import { createStyles, IconButton, InputAdornment, InputBase, makeStyles, Theme } from '@material-ui/core';
+import { IconButton, InputAdornment, InputBase, makeStyles, Theme } from '@material-ui/core';
 import Search from '@material-ui/icons/Search';
 import { CSSProperties } from '@material-ui/styles';
 import React, { FC } from 'react';
@@ -6,14 +6,14 @@ import React, { FC } from 'react';
 export const useStyles = makeStyles((_theme: Theme) => {
   const height = 48;
   const borderRadius = height / 2;
-  return createStyles({
+  return {
     input: {
       // width: '100%',
       height: `${height}px`,
       backgroundColor: '#f1f3f4',
       borderRadius: `${borderRadius}px`
     }
-  });
+  };
 });
 
 interface SimpleSearchProps {

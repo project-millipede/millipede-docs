@@ -2,7 +2,7 @@ import { RenderUtils } from '@app/render-utils';
 import { PageTypes } from '@app/types';
 import { StringUtil } from '@app/utils';
 import { notificationStates } from '@demonstrators-social/shared';
-import { createStyles, makeStyles, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@material-ui/core';
+import { makeStyles, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@material-ui/core';
 import { Close, Share as ShareIcon } from '@material-ui/icons';
 import { windowOpenPromise } from '@vangware/window-open-promise';
 import copy from 'copy-to-clipboard';
@@ -31,24 +31,22 @@ export interface ShareProps {
   url: string;
 }
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    speedDial: {
-      height: '56px',
-      paddingTop: '11px',
-      paddingBottom: '11px',
-      paddingLeft: '16px',
-      paddingRight: '16px',
-      '&.MuiSpeedDial-directionDown': {
-        display: 'unset',
-        flexDirection: 'unset'
-      }
-      // position: 'absolute',
-      // paddingTop: '11px',
-      // paddingBottom: '11px'
+const useStyles = makeStyles(() => ({
+  speedDial: {
+    height: '56px',
+    paddingTop: '11px',
+    paddingBottom: '11px',
+    paddingLeft: '16px',
+    paddingRight: '16px',
+    '&.MuiSpeedDial-directionDown': {
+      display: 'unset',
+      flexDirection: 'unset'
     }
-  })
-);
+    // position: 'absolute',
+    // paddingTop: '11px',
+    // paddingBottom: '11px'
+  }
+}));
 
 const getSharing = (
   getShareProps: () => ShareProps,

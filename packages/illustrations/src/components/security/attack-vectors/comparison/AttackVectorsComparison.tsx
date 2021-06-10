@@ -1,27 +1,25 @@
 import { ContentTypes } from '@app/types';
 import { Grid, Typography } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import isArray from 'lodash/isArray';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
-export const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    title: {
-      fontWeight: theme.typography.fontWeightMedium,
-      textDecoration: 'underline'
-    },
-    subTitle: {
-      fontWeight: theme.typography.fontWeightRegular
-    },
-    rowTitle: {
-      fontWeight: theme.typography.fontWeightMedium
-    },
-    summary: {
-      fontStyle: 'italic'
-    }
-  })
-);
+export const useStyles = makeStyles((theme: Theme) => ({
+  title: {
+    fontWeight: theme.typography.fontWeightMedium,
+    textDecoration: 'underline'
+  },
+  subTitle: {
+    fontWeight: theme.typography.fontWeightRegular
+  },
+  rowTitle: {
+    fontWeight: theme.typography.fontWeightMedium
+  },
+  summary: {
+    fontStyle: 'italic'
+  }
+}));
 
 export const AttackVectorsComparison: FC = () => {
   const { t } = useTranslation();

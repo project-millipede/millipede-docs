@@ -1,6 +1,6 @@
 import { RenderUtils } from '@app/render-utils';
 import { PageTypes } from '@app/types';
-import { createStyles, makeStyles, Typography } from '@material-ui/core';
+import { makeStyles, Typography } from '@material-ui/core';
 import { Components } from '@page/layout';
 import dynamic from 'next/dynamic';
 import React, { FC, ReactNode } from 'react';
@@ -20,14 +20,12 @@ interface MDXRenderProps {
   isMobile?: boolean;
 }
 
-export const useStyles = makeStyles(() =>
-  createStyles({
-    headerRow: {
-      display: 'flex',
-      flexDirection: 'row'
-    }
-  })
-);
+export const useStyles = makeStyles(() => ({
+  headerRow: {
+    display: 'flex',
+    flexDirection: 'row'
+  }
+}));
 
 export const h1 = ({ disableShare, meta }: MDXRenderProps) => {
   return ({ children }: MDXProps) => {

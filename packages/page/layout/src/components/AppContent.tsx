@@ -1,5 +1,5 @@
 import { layoutState, MAX_DRAWER_WIDTH, MIN_DRAWER_WIDTH, TOC_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
-import { Container, createStyles, makeStyles, Theme } from '@material-ui/core';
+import { Container, makeStyles, Theme } from '@material-ui/core';
 import React, { FC } from 'react';
 import { useRecoilValue } from 'recoil';
 
@@ -12,25 +12,23 @@ interface AppContentStyleProps {
   tocWidth: number;
 }
 
-const useStyles = makeStyles<Theme, AppContentStyleProps>((theme: Theme) =>
-  createStyles({
-    root: {
-      paddingTop: theme.spacing(12),
+const useStyles = makeStyles<Theme, AppContentStyleProps>((theme: Theme) => ({
+  root: {
+    paddingTop: theme.spacing(12),
 
-      // Hyphen
-      msHyphens: 'auto',
-      WebkitHyphens: 'auto',
-      MozHyphens: 'auto',
-      hyphens: 'auto',
+    // Hyphen
+    msHyphens: 'auto',
+    WebkitHyphens: 'auto',
+    MozHyphens: 'auto',
+    hyphens: 'auto',
 
-      width: '100%',
-      [theme.breakpoints.up('md')]: {
-        width: props =>
-          `calc(100% - ${props.drawerWidth}px - ${props.tocWidth}px )`
-      }
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: props =>
+        `calc(100% - ${props.drawerWidth}px - ${props.tocWidth}px )`
     }
-  })
-);
+  }
+}));
 export const AppContent: FC<AppContentProps> = ({ disableToc, children }) => {
   const { isDrawerExpanded } = useRecoilValue(layoutState);
 

@@ -1,7 +1,7 @@
 import { loadFAIcons } from '@app/components';
 import { layoutState, MAX_DRAWER_WIDTH, MIN_DRAWER_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
 import { Container, Typography } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Components as ComponentsLanding } from '@page/landing';
 import { Components } from '@page/layout';
 import { GetStaticPropsContext } from 'next';
@@ -24,27 +24,25 @@ interface IndexStyleProps {
   drawerWidth: number;
 }
 
-const useStyles = makeStyles<Theme, IndexStyleProps>((theme: Theme) =>
-  createStyles({
-    root: {
-      paddingTop: theme.spacing(12),
-      textAlign: 'center',
-      color: theme.palette.primary.main,
-      width: '100%',
-      [theme.breakpoints.up('md')]: {
-        width: props => `calc(100% - ${props.drawerWidth}px)`
-      }
-    },
-    title: {
-      fontWeight: theme.typography.fontWeightMedium,
-      textAlign: 'center'
-    },
-    subtitle: {
-      fontWeight: theme.typography.fontWeightRegular,
-      textAlign: 'center'
+const useStyles = makeStyles<Theme, IndexStyleProps>((theme: Theme) => ({
+  root: {
+    paddingTop: theme.spacing(12),
+    textAlign: 'center',
+    color: theme.palette.primary.main,
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: props => `calc(100% - ${props.drawerWidth}px)`
     }
-  })
-);
+  },
+  title: {
+    fontWeight: theme.typography.fontWeightMedium,
+    textAlign: 'center'
+  },
+  subtitle: {
+    fontWeight: theme.typography.fontWeightRegular,
+    textAlign: 'center'
+  }
+}));
 
 const Index: FC = () => {
   const { isDrawerExpanded } = useRecoilValue(layoutState);

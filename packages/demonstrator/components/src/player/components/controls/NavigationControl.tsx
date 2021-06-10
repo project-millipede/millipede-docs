@@ -1,4 +1,4 @@
-import { createStyles, IconButton, makeStyles, Theme } from '@material-ui/core';
+import { IconButton, makeStyles, Theme } from '@material-ui/core';
 import { ArrowLeft, ArrowRight, Pause, PlayArrow } from '@material-ui/icons';
 import React, { FC } from 'react';
 
@@ -7,14 +7,14 @@ import { useStepDispatch, useStepState } from '../../context/StepProvider';
 export const useStyles = makeStyles((_theme: Theme) => {
   const height = 48;
 
-  return createStyles({
+  return {
     row: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-start',
       height: `${height}px`
     }
-  });
+  };
 });
 
 export const NavigationControl: FC = () => {

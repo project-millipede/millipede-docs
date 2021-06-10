@@ -1,7 +1,7 @@
 import { ContentTypes } from '@app/types';
 import { Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Item } from '@page/components';
 import groupArray from 'group-array';
 import get from 'lodash/get';
@@ -10,17 +10,15 @@ import React, { FC } from 'react';
 
 import { translateObject } from './TranslateService';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      marginTop: theme.spacing(3),
-      marginBottom: theme.spacing(3)
-    },
-    header: {
-      textAlign: 'left'
-    }
-  })
-);
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3)
+  },
+  header: {
+    textAlign: 'left'
+  }
+}));
 
 interface TopicsProps {
   feature: string;

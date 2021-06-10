@@ -1,15 +1,13 @@
-import { createStyles, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import React, { FC } from 'react';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    content: {
-      display: 'flex',
-      flexDirection: 'column',
-      margin: '24px'
-    }
-  })
-);
+const useStyles = makeStyles(() => ({
+  content: {
+    display: 'flex',
+    flexDirection: 'column',
+    margin: '24px'
+  }
+}));
 
 export const SheetContent: FC = ({ children }) => {
   const classes = useStyles();

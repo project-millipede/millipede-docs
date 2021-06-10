@@ -1,20 +1,18 @@
 import { Portal } from '@app/components';
 import { layoutState } from '@app/layout/src/recoil/features/layout/reducer';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import React, { FC, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { SwitchDrawer } from './drawer';
 import { SwitchAppToolBar } from './toolbar';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      display: 'flex'
-    }
-  })
-);
+const useStyles = makeStyles(() => ({
+  root: {
+    display: 'flex'
+  }
+}));
 
 export const AppFrame: FC = ({ children }) => {
   const classes = useStyles();

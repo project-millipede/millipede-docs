@@ -1,27 +1,25 @@
 /* eslint-disable import/no-named-as-default */
 import { Archer } from '@app/components';
 import { scrollSelectors } from '@demonstrators-social/shared';
-import { createStyles, makeStyles, Typography } from '@material-ui/core';
+import { makeStyles, Typography } from '@material-ui/core';
 import clsx from 'clsx';
 import React, { FC, memo } from 'react';
 import { useRecoilValue } from 'recoil';
 
 const { ArcherElement, CustomBox } = Archer;
 
-export const useStyles = makeStyles(() =>
-  createStyles({
-    row: {
-      margin: '100px 0',
-      display: 'flex',
-      justifyContent: 'space-between'
-    },
-    rowSingleElement: {
-      margin: '100px 0',
-      display: 'flex',
-      justifyContent: 'center'
-    }
-  })
-);
+export const useStyles = makeStyles(() => ({
+  row: {
+    margin: '100px 0',
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  rowSingleElement: {
+    margin: '100px 0',
+    display: 'flex',
+    justifyContent: 'center'
+  }
+}));
 
 export const FlowBody: FC = () => {
   const classes = useStyles();
