@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import React, { FC, SyntheticEvent, useState } from 'react';
 
-import { LANGUAGES_LABEL } from '../constants';
+import { LANGUAGES_LABEL } from '../../constants';
 import { LanguageLabel } from './LanguageLabel';
 
 export const LanguageMenu: FC = () => {

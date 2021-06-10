@@ -4,14 +4,10 @@ import clsx from 'clsx';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
-import { TOOLBAR_HEIGHT } from '../recoil/features/layout/reducer';
+import { AppToolBarProps } from '.';
+import { TOOLBAR_HEIGHT } from '../../recoil/features/layout/reducer';
 import { HideOnScroll } from './HideOnScroll';
 import { LanguageMenu } from './LanguageMenu';
-
-interface AppToolBarProps {
-  isDrawerExpanded: boolean;
-  handleDrawerOpen: () => void;
-}
 
 const useStyles = makeStyles((theme: Theme) => ({
   toolbar: {
