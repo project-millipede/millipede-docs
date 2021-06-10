@@ -1,4 +1,3 @@
-import { RenderUtils } from '@app/render-utils';
 import { PageTypes } from '@app/types';
 import { createStyles, makeStyles, Typography } from '@material-ui/core';
 import { Components } from '@page/layout';
@@ -35,7 +34,7 @@ export const h1 = ({ disableShare, meta }: MDXRenderProps) => {
     return (
       <div className={classes.headerRow}>
         <Typography variant='h1'>{children}</Typography>
-        {!disableShare && RenderUtils.isBrowser() ? <Share {...meta} /> : null}
+        {!disableShare && <Share {...meta} />}
       </div>
     );
   };

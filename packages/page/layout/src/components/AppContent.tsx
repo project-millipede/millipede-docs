@@ -7,26 +7,24 @@ interface AppContentProps {
   disableToc: boolean;
 }
 
-interface StyleProps {
+interface AppContentStyleProps {
   drawerWidth: number;
   tocWidth: number;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) =>
+const useStyles = makeStyles<Theme, AppContentStyleProps>((theme: Theme) =>
   createStyles({
     root: {
       paddingTop: theme.spacing(12),
 
-      // hyphen
+      // Hyphen
       msHyphens: 'auto',
       WebkitHyphens: 'auto',
       MozHyphens: 'auto',
       hyphens: 'auto',
 
-      [theme.breakpoints.down('md')]: {
-        width: props => `calc(100% - ${props.drawerWidth}px`
-      },
-      [theme.breakpoints.up('lg')]: {
+      width: '100%',
+      [theme.breakpoints.up('md')]: {
         width: props =>
           `calc(100% - ${props.drawerWidth}px - ${props.tocWidth}px )`
       }

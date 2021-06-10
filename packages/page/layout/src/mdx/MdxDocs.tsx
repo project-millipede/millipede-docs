@@ -12,9 +12,15 @@ import { useMdxStyles } from './MDXStyles';
 interface MarkdownDocsProps {
   raw: string;
   meta: PageTypes.MetaData;
+  isMobile: boolean;
 }
 
-export const MdxDocs: FC<MarkdownDocsProps> = ({ raw, meta, children }) => {
+export const MdxDocs: FC<MarkdownDocsProps> = ({
+  raw,
+  meta,
+  isMobile,
+  children
+}) => {
   const classes = useMdxStyles();
 
   const { disableToc, ...restMeta } = meta;
@@ -26,7 +32,7 @@ export const MdxDocs: FC<MarkdownDocsProps> = ({ raw, meta, children }) => {
       <AppContent disableToc={disableToc}>
         {children && (
           <div className={classes.root}>
-            <AppContentHeader />
+            {!isMobile && <AppContentHeader />}
             {children}
             <Snackbar />
             <AppContentFooter />
