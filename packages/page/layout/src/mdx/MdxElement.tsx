@@ -1,3 +1,4 @@
+import { RenderUtils } from '@app/render-utils';
 import { PageTypes } from '@app/types';
 import { createStyles, makeStyles, Typography } from '@material-ui/core';
 import { Components } from '@page/layout';
@@ -34,13 +35,13 @@ export const h1 = ({ disableShare, meta }: MDXRenderProps) => {
     return (
       <div className={classes.headerRow}>
         <Typography variant='h1'>{children}</Typography>
-        {!disableShare && <Share {...meta} />}
+        {!disableShare && RenderUtils.isBrowser() ? <Share {...meta} /> : null}
       </div>
     );
   };
 };
 
-export const h2 = ({ isMobile }: MDXRenderProps) => {
+export const h2 = ({ isMobile = false }: MDXRenderProps) => {
   return ({ children, id }: MDXProps) => {
     return isMobile ? (
       <Typography variant='h2'>{children}</Typography>
@@ -52,7 +53,7 @@ export const h2 = ({ isMobile }: MDXRenderProps) => {
   };
 };
 
-export const h3 = ({ isMobile }: MDXRenderProps) => {
+export const h3 = ({ isMobile = false }: MDXRenderProps) => {
   return ({ children, id }: MDXProps) => {
     return isMobile ? (
       <Typography variant='h3'>{children}</Typography>
