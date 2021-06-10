@@ -5,7 +5,6 @@ import fs from 'fs';
 import isArray from 'lodash/isArray';
 import { GetStaticPropsContext } from 'next';
 import path from 'path';
-import { isMobile } from 'react-device-detect';
 import remarkSlug from 'remark-slug';
 
 import { getComponents, getHydrationComponentsList } from './getComponents';
@@ -41,17 +40,17 @@ export const getContent = async (
 
   const { metaData, content } = await getMetadata(fileContents);
 
-  const { disableShare, ...restMetaData } = metaData;
-
   const hydrationComponentsList = getHydrationComponentsList(content);
+
+  const { disableShare, ...restMetaData } = metaData;
 
   const mdxSource = await render(content, {
     components: {
       ...getComponents(hydrationComponentsList),
       h1: Mdx.h1({ disableShare, meta: restMetaData }),
-      h2: Mdx.h2({ isMobile: isMobile }),
-      h3: Mdx.h3({ isMobile: isMobile }),
-      h4: Mdx.h4({ isMobile: isMobile }),
+      h2: Mdx.h2({ isMobile: false }),
+      h3: Mdx.h3({ isMobile: false }),
+      h4: Mdx.h4({ isMobile: false }),
       h5: Mdx.h5,
       h6: Mdx.h6
     },
