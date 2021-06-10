@@ -1,11 +1,15 @@
+import { Components } from '@app/render-utils';
 import { scrollStates, ScrollTypes } from '@demonstrators-social/shared';
 import { createStyles, makeStyles, Tab, Tabs, Theme } from '@material-ui/core';
 import { DynamicFeed, GroupWork } from '@material-ui/icons';
 import React, { ChangeEvent, forwardRef, ForwardRefRenderFunction, useMemo } from 'react';
-import { isMobileOnly } from 'react-device-detect';
 import { useRecoilState } from 'recoil';
 
 import { SimpleSearch } from '../search';
+
+const {
+  Responsive: { isMobile }
+} = Components;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -104,7 +108,7 @@ const TimelineHeader: ForwardRefRenderFunction<
         />
       </Tabs>
 
-      {!isMobileOnly ? (
+      {!isMobile() ? (
         <SimpleSearch
           style={{ margin: '8px' }}
           placeholder={

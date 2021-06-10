@@ -1,12 +1,15 @@
+import { Components } from '@app/render-utils';
 import { ContentTypes } from '@app/types';
-import { Container } from '@material-ui/core';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
-import { isMobile } from 'react-device-detect';
 
 import { TopicsViewDesktop } from './TopicsViewDesktop';
 import { TopicsViewMobile } from './TopicsViewMobile';
 import { translateObject } from './TranslateService';
+
+const {
+  Responsive: { Mobile, Desktop }
+} = Components;
 
 export const TopicsHead = () => {
   const { t } = useTranslation();
@@ -17,12 +20,13 @@ export const TopicsHead = () => {
   );
 
   return (
-    <Container maxWidth='md'>
-      {isMobile ? (
+    <>
+      <Mobile>
         <TopicsViewMobile topics={topics} />
-      ) : (
+      </Mobile>
+      <Desktop>
         <TopicsViewDesktop topics={topics} />
-      )}
-    </Container>
+      </Desktop>
+    </>
   );
 };
