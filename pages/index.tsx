@@ -1,4 +1,5 @@
 import { loadFAIcons } from '@app/components';
+import { layoutState, MAX_DRAWER_WIDTH, MIN_DRAWER_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
 import { Container, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Components as ComponentsLanding } from '@page/landing';
@@ -8,6 +9,7 @@ import loadNamespaces from 'next-translate/loadNamespaces';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import React, { FC } from 'react';
+import { useRecoilValue } from 'recoil';
 
 import i18nConfig from '../i18n';
 
@@ -18,21 +20,20 @@ const TopicsHead = dynamic(
 
 loadFAIcons();
 
-const useStyles = makeStyles((theme: Theme) =>
+interface IndexStyleProps {
+  drawerWidth: number;
+}
+
+const useStyles = makeStyles<Theme, IndexStyleProps>((theme: Theme) =>
   createStyles({
     root: {
-      flex: '1 1 100%'
-    },
-    hero: {
-      paddingTop: theme.spacing(8),
-      color: theme.palette.primary.main
-    },
-    content: {
-      display: 'flex',
-      flexDirection: 'column',
+      paddingTop: theme.spacing(12),
       textAlign: 'center',
-      paddingTop: theme.spacing(4),
-      paddingBottom: theme.spacing(4)
+      color: theme.palette.primary.main,
+      width: '100%',
+      [theme.breakpoints.up('md')]: {
+        width: props => `calc(100% - ${props.drawerWidth}px)`
+      }
     },
     title: {
       fontWeight: theme.typography.fontWeightMedium,
@@ -46,27 +47,30 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const Index: FC = () => {
-  const classes = useStyles();
+  const { isDrawerExpanded } = useRecoilValue(layoutState);
+
+  const classes = useStyles({
+    drawerWidth: isDrawerExpanded ? MAX_DRAWER_WIDTH : MIN_DRAWER_WIDTH
+  });
+
   const { t } = useTranslation();
 
   return (
-    <div className={classes.root}>
-      <div className={classes.hero}>
-        <Container maxWidth='md' className={classes.content}>
-          <Typography variant='h2' gutterBottom className={classes.title}>
-            {t('common:application-title')}
-          </Typography>
-          <Typography variant='h4' gutterBottom className={classes.subtitle}>
-            {t('common:application-subtitle')}
-          </Typography>
-
-          <TopicsHead />
-          <ComponentsLanding.TopicsDetail />
-
-          <Components.HomeFooter />
-        </Container>
-      </div>
-    </div>
+    <Container
+      component='main'
+      id='main-content-landing'
+      className={classes.root}
+    >
+      <Typography variant='h2' gutterBottom className={classes.title}>
+        {t('common:application-title')}
+      </Typography>
+      <Typography variant='h4' gutterBottom className={classes.subtitle}>
+        {t('common:application-subtitle')}
+      </Typography>
+      <TopicsHead />
+      <ComponentsLanding.TopicsDetail />
+      <Components.HomeFooter />
+    </Container>
   );
 };
 
