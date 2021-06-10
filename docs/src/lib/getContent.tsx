@@ -1,13 +1,12 @@
-import { render } from '@app/mdx-compile';
-import { Mdx } from '@page/layout';
 import fg from 'fast-glob';
 import fs from 'fs';
 import isArray from 'lodash/isArray';
 import { GetStaticPropsContext } from 'next';
+import { serialize } from 'next-mdx-remote/serialize';
 import path from 'path';
 import remarkSlug from 'remark-slug';
 
-import { getComponents, getHydrationComponentsList } from './getComponents';
+import { getHydrationComponentsList } from './getComponents';
 import { getMetadata } from './getMetadata';
 import { getPageDirectory } from './pages';
 
@@ -42,26 +41,8 @@ export const getContent = async (
 
   const hydrationComponentsList = getHydrationComponentsList(content);
 
-  const { disableShare, ...restMetaData } = metaData;
-
-  const mdxSource = await render(content, {
-    components: {
-      ...getComponents(hydrationComponentsList),
-      h1: Mdx.h1({ disableShare, meta: restMetaData }),
-      h2: Mdx.h2({ isMobile: false }),
-      h3: Mdx.h3({ isMobile: false }),
-      h4: Mdx.h4({ isMobile: false }),
-      h5: Mdx.h5,
-      h6: Mdx.h6
-    },
-    compileOptions: {
-      remarkPlugins: [remarkSlug],
-      rehypePlugins: [],
-      compilers: [],
-      resourceToURL(s) {
-        return s;
-      }
-    }
+  const mdxSource = await serialize(content, {
+    mdxOptions: { remarkPlugins: [remarkSlug] }
   });
 
   return {

@@ -1,7 +1,7 @@
-import { useMdx } from '@app/mdx-runtime';
 import { Components } from '@app/render-utils';
 import { Mdx } from '@page/layout';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import { MDXRemote } from 'next-mdx-remote';
 import { mergeProps } from 'next-merge-props';
 import React, { FC } from 'react';
 
@@ -25,20 +25,21 @@ const DynamicPage: FC<DynamicPageProps> = ({
   const renderMobile = isMobile();
   const { disableShare, ...restMetaData } = metaData;
 
-  const { compiledSource, scope } = mdxSource;
-
-  const content = useMdx(compiledSource, {
-    components: {
-      ...getComponents(hydrationComponentsList),
-      h1: Mdx.h1({ disableShare, meta: restMetaData }),
-      h2: Mdx.h2({ isMobile: renderMobile }),
-      h3: Mdx.h3({ isMobile: renderMobile }),
-      h4: Mdx.h4({ isMobile: renderMobile }),
-      h5: Mdx.h5,
-      h6: Mdx.h6
-    },
-    scope
-  });
+  const content = (
+    <MDXRemote
+      {...mdxSource}
+      components={{
+        ...getComponents(hydrationComponentsList),
+        h1: Mdx.h1({ disableShare, meta: restMetaData }),
+        h2: Mdx.h2({ isMobile: renderMobile }),
+        h3: Mdx.h3({ isMobile: renderMobile }),
+        h4: Mdx.h4({ isMobile: renderMobile }),
+        h5: Mdx.h5,
+        h6: Mdx.h6
+      }}
+      // scope={scope}
+    />
+  );
 
   return (
     <Mdx.MdxDocs meta={restMetaData} raw={rawContent} isMobile={renderMobile}>
