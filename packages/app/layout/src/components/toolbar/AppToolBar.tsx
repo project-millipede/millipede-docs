@@ -4,13 +4,9 @@ import clsx from 'clsx';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
-import { MAX_DRAWER_WIDTH, TOOLBAR_HEIGHT } from '../recoil/features/layout/reducer';
+import { AppToolBarProps } from '.';
+import { MAX_DRAWER_WIDTH, TOOLBAR_HEIGHT } from '../../recoil/features/layout/reducer';
 import { LanguageMenu } from './LanguageMenu';
-
-interface AppToolBarProps {
-  isDrawerExpanded: boolean;
-  handleDrawerOpen: () => void;
-}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
