@@ -1,4 +1,5 @@
-import { makeStyles, Theme } from '@material-ui/core';
+import { Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 export const useMdxStyles = makeStyles((theme: Theme) => {
   return {
@@ -7,30 +8,33 @@ export const useMdxStyles = makeStyles((theme: Theme) => {
       fontSize: 16,
       color: theme.palette.text.primary,
       '& h1': {
-        ...theme.typography.h3,
-        fontSize: 40,
-        margin: '16px 0'
-      },
-      '& .description': {
-        ...theme.typography.h5,
-        margin: '0 0 40px'
+        fontSize: 48,
+        margin: 'auto 0'
       },
       '& h2': {
-        ...theme.typography.h4,
-        fontSize: 30,
-        margin: '40px 0 16px'
+        fontSize: 40,
+        fontWeight: theme.typography.fontWeightLight,
+        margin: '32px 0 16px'
       },
       '& h3': {
-        ...theme.typography.h5,
-        margin: '40px 0 16px'
+        fontSize: 32,
+        fontWeight: theme.typography.fontWeightLight,
+        margin: '24px 0 16px'
       },
       '& h4': {
-        ...theme.typography.h6,
-        margin: '32px 0 16px'
+        fontSize: 28,
+        fontWeight: theme.typography.fontWeightLight,
+        margin: '24px 0 16px'
       },
       '& h5': {
-        ...theme.typography.subtitle2,
-        margin: '32px 0 16px'
+        fontSize: 24,
+        fontWeight: theme.typography.fontWeightLight,
+        margin: '24px 0 16px'
+      },
+      '& h6': {
+        fontSize: 20,
+        fontWeight: theme.typography.fontWeightLight,
+        margin: '16px 0 16px'
       },
       '& blockquote': {
         borderLeft: '5px solid #ffe564',
