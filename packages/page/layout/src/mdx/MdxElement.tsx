@@ -1,6 +1,7 @@
 import { RenderUtils } from '@app/render-utils';
 import { PageTypes } from '@app/types';
-import { makeStyles, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import { Components } from '@page/layout';
 import dynamic from 'next/dynamic';
 import React, { FC, ReactNode } from 'react';
@@ -63,7 +64,7 @@ export const h3 = ({ isMobile = false }: MDXRenderProps) => {
   };
 };
 
-export const h4 = ({ isMobile }: MDXRenderProps) => {
+export const h4 = ({ isMobile = false }: MDXRenderProps) => {
   return ({ children, id }: MDXProps) => {
     return isMobile ? (
       <Typography variant='h4'>{children}</Typography>

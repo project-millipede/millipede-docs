@@ -1,18 +1,18 @@
+import { INPUT_BORDER_RADIUS, INPUT_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
 import { appCompositionState } from '@demonstrator/navigation/src/recoil/features/app/reducers';
-import { Box, IconButton, InputAdornment, InputBase, makeStyles, Theme } from '@material-ui/core';
+import { Box, IconButton, InputAdornment, InputBase, Theme } from '@material-ui/core';
 import { Fullscreen, FullscreenExit, InfoOutlined, ViewCarousel, ViewColumn } from '@material-ui/icons';
+import { makeStyles } from '@material-ui/styles';
 import React, { FC } from 'react';
 import { FullScreenHandle } from 'react-full-screen';
 import { useRecoilState } from 'recoil';
 
 export const useStyles = makeStyles((_theme: Theme) => {
-  const height = 48;
-  const borderRadius = height / 2;
   return {
     input: {
-      height: `${height}px`,
-      backgroundColor: '#f1f3f4',
-      borderRadius: `${borderRadius}px`
+      height: INPUT_HEIGHT,
+      borderRadius: INPUT_BORDER_RADIUS,
+      backgroundColor: '#F1F1F1'
     }
   };
 });

@@ -1,29 +1,22 @@
 import { ContentTypes } from '@app/types';
-import { CardContent, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
+import { CardContent, Grid, Typography, useTheme } from '@material-ui/core';
 import React, { FC, useState } from 'react';
 
 import { Stepper, TranslationProps } from './Stepper';
 import { getStepsLength, selectContent } from './StepperContent.svc';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  row: {
-    justifyContent: 'center',
-    padding: theme.spacing(2)
-  }
-}));
-
 export const renderTitleAndDescription = (
   items: Array<ContentTypes.Content> = []
 ) => {
-  const classes = useStyles();
+  const theme = useTheme();
 
   return items.map((item, index) => {
     return (
       <Grid
         item
         xs={item.size}
-        className={classes.row}
         key={`title-description-${index}`}
+        sx={{ p: theme.spacing(1) }}
       >
         <Typography variant='h6' gutterBottom>
           {item.title}

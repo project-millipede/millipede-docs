@@ -1,4 +1,5 @@
-import { makeStyles } from '@material-ui/core';
+import { APP_CONTENT_HEADER_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
+import { makeStyles } from '@material-ui/styles';
 import { Breadcrumbs } from '@page/components';
 import React, { FC } from 'react';
 
@@ -7,9 +8,8 @@ import { EditPage } from './Editpage';
 const useStyles = makeStyles(() => ({
   headerRow: {
     display: 'flex',
-    flexDirection: 'row',
     flexGrow: 1,
-    height: '56px'
+    height: APP_CONTENT_HEADER_HEIGHT
   }
 }));
 
