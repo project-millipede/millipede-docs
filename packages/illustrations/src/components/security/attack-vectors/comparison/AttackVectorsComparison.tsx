@@ -1,6 +1,7 @@
 import { ContentTypes } from '@app/types';
 import { Grid, Typography } from '@material-ui/core';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 import isArray from 'lodash/isArray';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';

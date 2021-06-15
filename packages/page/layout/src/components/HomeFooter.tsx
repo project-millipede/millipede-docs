@@ -1,5 +1,6 @@
 import { Link } from '@app/components';
-import { Grid, Link as MuiLink, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Grid, Link as MuiLink, Theme, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 

@@ -1,6 +1,6 @@
 import { Archer, ArcherTypes } from '@app/components';
 import { Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 

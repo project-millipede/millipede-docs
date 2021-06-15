@@ -1,6 +1,7 @@
 import { CustomIcon } from '@app/components';
 import { ContentTypes } from '@app/types';
-import { IconButton, makeStyles, Theme } from '@material-ui/core';
+import { IconButton, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import { useRouter } from 'next/router';
 import React, { FC } from 'react';
 

@@ -1,7 +1,8 @@
 import { Link } from '@app/components';
 import { MAX_DRAWER_WIDTH, MIN_DRAWER_WIDTH, TOOLBAR_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
-import { Divider, Drawer, IconButton, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Divider, Drawer, IconButton, Theme, Typography } from '@material-ui/core';
 import { ChevronLeft } from '@material-ui/icons';
+import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';

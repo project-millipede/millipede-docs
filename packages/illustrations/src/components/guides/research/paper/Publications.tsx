@@ -3,7 +3,6 @@ import {
   Box,
   Collapse,
   IconButton,
-  makeStyles,
   Table,
   TableBody,
   TableCell,
@@ -14,6 +13,7 @@ import {
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import LinkIcon from '@material-ui/icons/Link';
+import { makeStyles } from '@material-ui/styles';
 import isArray from 'lodash/isArray';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';

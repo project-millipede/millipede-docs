@@ -1,7 +1,7 @@
 import { loadFAIcons } from '@app/components';
 import { layoutState, MAX_DRAWER_WIDTH, MIN_DRAWER_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
-import { Container, Typography } from '@material-ui/core';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { Container, Theme, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import { Components as ComponentsLanding } from '@page/landing';
 import { Components } from '@page/layout';
 import { GetStaticPropsContext } from 'next';

@@ -1,7 +1,8 @@
 import { Link } from '@app/components';
 import { navigationState } from '@app/layout/src/recoil/features/pages/reducer';
-import { Button, makeStyles, Theme } from '@material-ui/core';
+import { Button, Theme } from '@material-ui/core';
 import { ChevronLeft, ChevronRight } from '@material-ui/icons';
+import { makeStyles } from '@material-ui/styles';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC, useMemo } from 'react';
 import { useRecoilValue } from 'recoil';

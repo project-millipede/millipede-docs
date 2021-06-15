@@ -1,11 +1,12 @@
 import { getIconByName, Link } from '@app/components';
 import { PageTypes } from '@app/types';
 import { CollectionUtil, RouterUtils } from '@app/utils';
-import { Collapse, ListItem, ListItemIcon, ListItemText, makeStyles, Theme } from '@material-ui/core';
+import { Collapse, ListItem, ListItemIcon, ListItemText, Theme } from '@material-ui/core';
 import { TransitionProps } from '@material-ui/core/transitions';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import TreeItem, { TreeItemProps } from '@material-ui/lab/TreeItem';
 import TreeView from '@material-ui/lab/TreeView';
+import { makeStyles } from '@material-ui/styles';
 import useTranslation from 'next-translate/useTranslation';
 import React, { ChangeEvent, FC, memo, useEffect, useState } from 'react';
 
