@@ -1,7 +1,8 @@
 import { CollectionUtil } from '@app/utils';
 import { Types } from '@demonstrators-social/data';
-import { Avatar, CardActions, CardContent, CardHeader, IconButton, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Avatar, CardActions, CardContent, CardHeader, IconButton, Theme, Typography } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import { formatDistance } from 'date-fns';
 import { enGB } from 'date-fns/locale';

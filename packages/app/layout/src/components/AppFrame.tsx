@@ -1,7 +1,7 @@
 import { Portal } from '@app/components';
 import { layoutState } from '@app/layout/src/recoil/features/layout/reducer';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 import React, { FC, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 

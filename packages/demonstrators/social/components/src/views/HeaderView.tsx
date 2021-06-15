@@ -1,5 +1,5 @@
-import { makeStyles, Theme } from '@material-ui/core';
-import { CSSProperties } from '@material-ui/styles';
+import { Theme } from '@material-ui/core';
+import { CSSProperties, makeStyles } from '@material-ui/styles';
 import React, { FC } from 'react';
 import { FullScreenHandle } from 'react-full-screen';
 

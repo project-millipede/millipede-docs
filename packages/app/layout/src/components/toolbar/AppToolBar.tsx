@@ -1,4 +1,5 @@
-import { AppBar, makeStyles, Theme } from '@material-ui/core';
+import { AppBar, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import React, { FC } from 'react';
 

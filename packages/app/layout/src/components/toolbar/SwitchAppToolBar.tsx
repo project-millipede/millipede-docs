@@ -1,6 +1,7 @@
 import { Components } from '@app/render-utils';
-import { IconButton, makeStyles, Theme, Toolbar, Tooltip } from '@material-ui/core';
+import { IconButton, Theme, Toolbar, Tooltip } from '@material-ui/core';
 import { GitHub, Menu } from '@material-ui/icons';
+import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';

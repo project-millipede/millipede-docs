@@ -1,5 +1,6 @@
 import { layoutState, MAX_DRAWER_WIDTH, MIN_DRAWER_WIDTH, TOC_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
-import { Container, makeStyles, Theme } from '@material-ui/core';
+import { Container, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import React, { FC } from 'react';
 import { useRecoilValue } from 'recoil';
 

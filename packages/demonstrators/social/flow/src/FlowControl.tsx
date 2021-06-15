@@ -7,11 +7,11 @@ import {
   List,
   ListItem,
   ListSubheader,
-  makeStyles,
   Paper,
   Theme,
   Typography,
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import { usePrevious } from 'ahooks';
 import get from 'lodash/get';
 import useTranslation from 'next-translate/useTranslation';

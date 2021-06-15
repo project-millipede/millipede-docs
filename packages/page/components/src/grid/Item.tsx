@@ -1,6 +1,7 @@
 import { getIconByName, Link } from '@app/components';
 import { ContentTypes } from '@app/types';
-import { Avatar, IconButton, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Avatar, IconButton, Theme, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import isArray from 'lodash/isArray';
 import { useRouter } from 'next/router';
 import React from 'react';

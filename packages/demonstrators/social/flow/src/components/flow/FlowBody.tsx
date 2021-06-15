@@ -1,7 +1,8 @@
 /* eslint-disable import/no-named-as-default */
 import { Archer } from '@app/components';
 import { scrollSelectors } from '@demonstrators-social/shared';
-import { makeStyles, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import React, { FC, memo } from 'react';
 import { useRecoilValue } from 'recoil';
