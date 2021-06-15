@@ -1,25 +1,9 @@
-import { AppBar, IconButton, makeStyles, Theme, Toolbar, Tooltip } from '@material-ui/core';
-import { GitHub, Menu } from '@material-ui/icons';
+import { AppBar, makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
-import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
 import { AppToolBarProps } from '.';
-import { MAX_DRAWER_WIDTH, TOOLBAR_HEIGHT } from '../../recoil/features/layout/reducer';
-import { LanguageMenu } from './LanguageMenu';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  toolbar: {
-    minHeight: TOOLBAR_HEIGHT,
-    padding: theme.spacing(0, 3)
-  },
-  grow: {
-    flex: '1 1 auto'
-  },
-  hide: {
-    display: 'none'
-  }
-}));
+import { MAX_DRAWER_WIDTH } from '../../recoil/features/layout/reducer';
 
 const useDrawerStyles = makeStyles((theme: Theme) => ({
   appBar: {
@@ -40,13 +24,9 @@ const useDrawerStyles = makeStyles((theme: Theme) => ({
 
 export const AppToolBar: FC<AppToolBarProps> = ({
   isDrawerExpanded,
-  handleDrawerOpen
+  children
 }) => {
-  const classes = useStyles();
-
   const drawerClasses = useDrawerStyles();
-
-  const { t } = useTranslation();
 
   return (
     <AppBar
@@ -55,33 +35,7 @@ export const AppToolBar: FC<AppToolBarProps> = ({
         [drawerClasses.appBarShift]: isDrawerExpanded
       })}
     >
-      <Toolbar className={classes.toolbar}>
-        <IconButton
-          edge='start'
-          color='inherit'
-          onClick={handleDrawerOpen}
-          className={clsx({
-            [classes.hide]: isDrawerExpanded
-          })}
-        >
-          <Menu />
-        </IconButton>
-
-        <div className={classes.grow} />
-
-        <LanguageMenu />
-
-        <Tooltip title={t('common:github')} enterDelay={300}>
-          <IconButton
-            edge='end'
-            component='a'
-            color='inherit'
-            href='https://github.com/project-millipede/millipede-docs'
-          >
-            <GitHub />
-          </IconButton>
-        </Tooltip>
-      </Toolbar>
+      {children}
     </AppBar>
   );
 };

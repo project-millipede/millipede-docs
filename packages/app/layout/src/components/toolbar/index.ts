@@ -1,6 +1,6 @@
 export { SwitchAppToolBar } from './SwitchAppToolBar';
 
 export interface AppToolBarProps {
-  isDrawerExpanded: boolean;
+  isDrawerExpanded?: boolean;
   handleDrawerOpen?: () => void;
 }
