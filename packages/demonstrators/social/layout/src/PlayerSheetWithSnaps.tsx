@@ -1,3 +1,4 @@
+import { Tabs } from '@app/components';
 import { HooksUtils } from '@app/render-utils';
 import { CursorSvc, Player, Sheet, useStepState } from '@demonstrator/components';
 import { ProgressControl, TextProgressControl } from '@demonstrator/components/src/player/components/progress';
@@ -5,8 +6,9 @@ import { playerLayoutState } from '@demonstrator/components/src/player/context/r
 import { PlayListItem, Step } from '@demonstrator/components/src/player/types';
 import { appLayoutState } from '@demonstrator/navigation/src/recoil/features/app/reducers';
 import { Components as FlowComponents } from '@demonstrators-social/flow';
-import { Button, Divider, makeStyles, Tab, Tabs as TabsComponent, Theme, Typography } from '@material-ui/core';
+import { Button, Divider, Tab, Theme, Typography } from '@material-ui/core';
 import { DonutLarge, Subscriptions } from '@material-ui/icons';
+import { makeStyles } from '@material-ui/styles';
 import React, { ChangeEvent, FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
@@ -31,25 +33,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   heading: {
     fontSize: 16,
     fontWeight: theme.typography.fontWeightMedium
-  },
-  tabs: {
-    '& .MuiTabs-flexContainer': {
-      flexWrap: 'wrap'
-    },
-    '& .MuiTab-root': {
-      '&.MuiTab-labelIcon': {
-        minHeight: theme.spacing(6),
-        '& .MuiTab-wrapper > *:first-child': {
-          marginBottom: 0
-        }
-      },
-      '& .MuiTab-wrapper': {
-        flexDirection: 'row',
-        '& > *:first-child': {
-          marginRight: theme.spacing(1)
-        }
-      }
-    }
   }
 }));
 
@@ -156,13 +139,12 @@ export const PlayerSheet: FC<PlayerSheetProps> = ({ steps, playlist }) => {
           </SheetControls>
         </Sheet.SheetHeader>
         <Sheet.SheetContent>
-          <TabsComponent
+          <Tabs.StyledTabs
             value={currentValue}
             onChange={handleTabChange}
             variant='fullWidth'
             indicatorColor='primary'
             textColor='primary'
-            className={classes.tabs}
           >
             <Tab
               label='Playlist'
@@ -174,7 +156,7 @@ export const PlayerSheet: FC<PlayerSheetProps> = ({ steps, playlist }) => {
               icon={<DonutLarge />}
               id={`playersheet-tabset-tab-actions`}
             />
-          </TabsComponent>
+          </Tabs.StyledTabs>
 
           {activeTab === PlayerSheetTabs.Playlist && (
             <div style={{ display: 'flex', flexDirection: 'column' }}>

@@ -1,6 +1,7 @@
+import { Tabs } from '@app/components';
 import { Components } from '@app/render-utils';
 import { scrollStates, ScrollTypes } from '@demonstrators-social/shared';
-import { makeStyles, Tab, Tabs, Theme } from '@material-ui/core';
+import { Tab } from '@material-ui/core';
 import { DynamicFeed, GroupWork } from '@material-ui/icons';
 import React, { ChangeEvent, forwardRef, ForwardRefRenderFunction, useMemo } from 'react';
 import { useRecoilState } from 'recoil';
@@ -11,28 +12,6 @@ const {
   Responsive: { isMobile }
 } = Components;
 
-const useStyles = makeStyles((theme: Theme) => ({
-  tabs: {
-    '& .MuiTabs-flexContainer': {
-      flexWrap: 'wrap'
-    },
-    '& .MuiTab-root': {
-      '&.MuiTab-labelIcon': {
-        minHeight: theme.spacing(6),
-        '& .MuiTab-wrapper > *:first-child': {
-          marginBottom: 0
-        }
-      },
-      '& .MuiTab-wrapper': {
-        flexDirection: 'row',
-        '& > *:first-child': {
-          marginRight: theme.spacing(1)
-        }
-      }
-    }
-  }
-}));
-
 interface TimelineHeaderProps {
   timelineId?: string;
 }
@@ -41,8 +20,6 @@ const TimelineHeader: ForwardRefRenderFunction<
   HTMLDivElement,
   TimelineHeaderProps
 > = ({ timelineId }, ref) => {
-  const classes = useStyles();
-
   const {
     timeline: { timelineViewState }
   } = scrollStates;
@@ -81,16 +58,15 @@ const TimelineHeader: ForwardRefRenderFunction<
         flexDirection: 'column'
       }}
     >
-      <Tabs
+      <Tabs.StyledTabs
         value={currentValue}
         onChange={handleTabChange}
         variant='fullWidth'
         indicatorColor='primary'
         textColor='primary'
-        style={{
+        sx={{
           margin: '8px'
         }}
-        className={classes.tabs}
       >
         <Tab
           label='Timeline'
@@ -104,8 +80,7 @@ const TimelineHeader: ForwardRefRenderFunction<
           key={`timeline-${timelineId}-tab-posts`}
           id={`timeline-${timelineId}-tab-posts`}
         />
-      </Tabs>
-
+      </Tabs.StyledTabs>
       {!isMobile() ? (
         <SimpleSearch
           style={{ margin: '8px' }}
