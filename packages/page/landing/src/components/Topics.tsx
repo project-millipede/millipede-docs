@@ -1,7 +1,8 @@
 import { ContentTypes } from '@app/types';
 import { Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 import { Item } from '@page/components';
 import groupArray from 'group-array';
 import get from 'lodash/get';
@@ -12,11 +13,7 @@ import { translateObject } from './TranslateService';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3)
-  },
-  header: {
-    textAlign: 'left'
+    margin: theme.spacing(3, 0)
   }
 }));
 
@@ -62,14 +59,12 @@ export const Topics: FC<TopicsProps> = ({ feature, aspect }) => {
         const scenarioData = dataGrouped && dataGrouped[scenario];
         return scenarioData ? (
           <div key={`scenario-${index}`}>
-            <Typography variant='h5' className={classes.header}>
-              {get(scenariosRaw, scenario)}
-            </Typography>
+            <Typography variant='h5'>{get(scenariosRaw, scenario)}</Typography>
             {categoriesKeys.map((categoryKey, index) => {
               const categoryData = scenarioData && scenarioData[categoryKey];
               return categoryData ? (
                 <div key={`category-${index}`}>
-                  <Typography variant='h6' className={classes.header}>
+                  <Typography variant='h6'>
                     {get(categoriesRaw, categoryKey)}
                   </Typography>
                   <Grid container className={classes.root}>

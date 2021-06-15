@@ -1,12 +1,6 @@
-import { Button, makeStyles, MobileStepper } from '@material-ui/core';
+import { Button, MobileStepper } from '@material-ui/core';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import React, { FC, useCallback, useEffect, useState } from 'react';
-
-const useStyles = makeStyles(() => ({
-  root: {
-    flexGrow: 1
-  }
-}));
 
 export interface TranslationProps {
   labelBack: string;
@@ -28,8 +22,6 @@ export const Stepper: FC<StepperWithTranslationProps> = ({
   labelBack,
   labelNext
 }) => {
-  const classes = useStyles();
-
   const [activeStep, setActiveStep] = useState(0);
 
   const passActiveState = useCallback(
@@ -63,7 +55,6 @@ export const Stepper: FC<StepperWithTranslationProps> = ({
       activeStep={activeStep}
       variant='dots'
       position='static'
-      className={classes.root}
       backButton={
         steps > 0 ? (
           <Button

@@ -1,9 +1,10 @@
-import { Avatar, makeStyles, Theme } from '@material-ui/core';
+import { Avatar, Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { GitHub, LinkedIn } from '@material-ui/icons';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import { makeStyles } from '@material-ui/styles';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
@@ -33,7 +34,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
   },
   title: {
     fontSize: theme.spacing(3),
-    margin: `${theme.spacing(2)} 0`
+    margin: theme.spacing(2, 0)
   }
 }));
 
@@ -62,7 +63,7 @@ const Group: FC<GroupProps> = ({ title, members }) => {
           const { name, flag, city, github, linkedIn } = member;
 
           return (
-            <Grid key={name} item xs={12} md={6}>
+            <Grid item key={name} xs={12} md={6}>
               <div className={classes.row}>
                 <div className={classes.column}>
                   <Avatar

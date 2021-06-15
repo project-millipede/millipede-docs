@@ -1,4 +1,6 @@
-import { makeStyles, Slider, Theme } from '@material-ui/core';
+import { LABEL_BORDER_RADIUS } from '@app/layout/src/recoil/features/layout/reducer';
+import { Slider, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import React, { FC } from 'react';
 
 import { useStepDispatch, useStepState } from '../../context/StepProvider';
@@ -23,14 +25,12 @@ export const getValue = (
 };
 
 export const useStyles = makeStyles((theme: Theme) => {
-  const height = 24;
-  const borderRadius = height / 2;
   return {
     row: {
       height: '60px',
       width: '100%',
       backgroundColor: '#DDDDDD',
-      borderRadius: `${borderRadius}px`,
+      borderRadius: LABEL_BORDER_RADIUS,
       padding: theme.spacing(0, 2),
       display: 'flex',
       alignItems: 'center'

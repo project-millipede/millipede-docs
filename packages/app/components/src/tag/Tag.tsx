@@ -1,12 +1,6 @@
-import { Chip, makeStyles, Theme } from '@material-ui/core';
+import { Chip, useTheme } from '@material-ui/core';
 import { ClassOutlined } from '@material-ui/icons';
 import React, { FC } from 'react';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  chip: {
-    margin: theme.spacing(2, 0)
-  }
-}));
 
 interface TagProps {
   text: string;
@@ -14,8 +8,7 @@ interface TagProps {
 }
 
 export const Tag: FC<TagProps> = ({ text, id }) => {
-  const classes = useStyles();
-
+  const theme = useTheme();
   return (
     <Chip
       id={id}
@@ -23,7 +16,7 @@ export const Tag: FC<TagProps> = ({ text, id }) => {
       color='primary'
       icon={<ClassOutlined />}
       label={text}
-      className={classes.chip}
+      sx={{ m: theme.spacing(2, 0) }}
     />
   );
 };
