@@ -1,4 +1,7 @@
-import { makeStyles, Theme, Typography } from '@material-ui/core';
+import { LABEL_BORDER_RADIUS, LABEL_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
+import { Components } from '@app/render-utils';
+import { Theme, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import React, { FC } from 'react';
 
 import { useStepState } from '../../context/StepProvider';
@@ -8,11 +11,9 @@ import { CountDown } from '../counter/CountDown';
 import { CountUp } from '../counter/CountUp';
 
 export const useStyles = makeStyles((theme: Theme) => {
-  const height = 24;
-  const borderRadius = height / 2;
   return {
     row: {
-      borderRadius: borderRadius,
+      borderRadius: LABEL_BORDER_RADIUS,
       backgroundColor: '#DDDDDD',
       display: 'flex',
       alignItems: 'center'
@@ -35,14 +36,18 @@ export const useStyles = makeStyles((theme: Theme) => {
       justifyContent: 'flex-end'
     },
     label: {
-      height: height,
-      borderRadius: borderRadius,
+      height: LABEL_HEIGHT,
+      borderRadius: LABEL_BORDER_RADIUS,
       backgroundColor: '#F1F1F1',
       padding: theme.spacing(0, 1),
       margin: theme.spacing(0, 1)
     }
   };
 });
+
+const {
+  Responsive: { isMobile }
+} = Components;
 
 interface TextProgressControlProps {
   steps: Array<Step>;
@@ -63,7 +68,7 @@ export const TextProgressControl: FC<TextProgressControlProps> = ({
       : { duration: 0 };
 
   return (
-    <div className={classes.row}>
+    <div className={classes.row} style={{ width: isMobile() && '100%' }}>
       <div className={classes.column}>
         <div className={classes.item}>
           <Typography className={classes.label}>
