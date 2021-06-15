@@ -1,0 +1,1 @@
+export { StyledTabs } from './StyledTabs';

@@ -21,9 +21,11 @@ export const getHeader = (
 export const getMedia = (
   imageHref: string,
   imageTitle: string,
-  media: string
+  className: string
 ) => {
-  return <CardMedia className={media} image={imageHref} title={imageTitle} />;
+  return (
+    <CardMedia className={className} image={imageHref} title={imageTitle} />
+  );
 };
 
 export const getContent = (text: string) => {
@@ -36,17 +38,15 @@ export const getContent = (text: string) => {
   );
 };
 
-export const getRef = (refs: { [key: string]: EffectRef<HTMLElement> }) => (
-  id: string
-) => {
-  return get(refs, id);
-};
+export const getRef =
+  (refs: { [key: string]: EffectRef<HTMLElement> }) => (id: string) => {
+    return get(refs, id);
+  };
 
-export const getObserverComp = (ref: EffectRef<HTMLElement>) => (
-  children: JSX.Element
-) => {
-  if (ref != null) {
-    return <div ref={ref}>{children}</div>;
-  }
-  return <>{children}</>;
-};
+export const getObserverComp =
+  (ref: EffectRef<HTMLElement>) => (children: JSX.Element) => {
+    if (ref != null) {
+      return <div ref={ref}>{children}</div>;
+    }
+    return <>{children}</>;
+  };
