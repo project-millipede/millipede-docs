@@ -1,5 +1,6 @@
 // import { Link } from '@app/components';
-import { makeStyles, Theme } from '@material-ui/core';
+import { Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import React, { FC } from 'react';
 import { Link } from 'react-scroll';
@@ -16,7 +17,8 @@ export const useStyles = makeStyles((theme: Theme) => ({
     '&:hover': {
       borderLeftColor: theme.palette.grey[200],
       cursor: 'pointer'
-    }
+    },
+    fontSize: '0.875rem'
   },
   active: {
     borderLeft: `2px solid ${theme.palette.grey[300]}`,
