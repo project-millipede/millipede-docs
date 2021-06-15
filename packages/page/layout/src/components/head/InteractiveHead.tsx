@@ -1,24 +1,23 @@
-import { makeStyles, Theme, Typography } from '@material-ui/core';
+import { SvgIcon, Theme, Typography } from '@material-ui/core';
 import LinkIcon from '@material-ui/icons/Link';
+import { makeStyles } from '@material-ui/styles';
 import React, { FC, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useSetRecoilState } from 'recoil';
 
 import { scrollItemsReducer, scrollItemsState } from '../../recoil/features/scroll/page/reducer';
+import { Anchor, CLASS_HEADER } from './InteractiveHead.svc';
 
 export const useStyles = makeStyles((theme: Theme) => ({
-  element: {
-    position: 'absolute',
-    marginTop: '-96px'
-  },
   heading: {
     '& h2, & h3, & h4': {
       '& a': {
-        display: 'none',
-        padding: `0 ${theme.spacing(1)}px`
+        visibility: 'hidden',
+        display: 'inline-block',
+        padding: theme.spacing(0, 1)
       },
       '&:hover a': {
-        display: 'inline-block',
+        visibility: 'visible',
         color: theme.palette.text.secondary,
         '&:hover': {
           color: theme.palette.text.primary
@@ -71,16 +70,48 @@ export const InteractiveHead: FC<InteractiveHeadProps> = ({
         removeItem(inViewElementId);
       }
     }
-  }, [inView, id]);
+  }, [inView]);
 
   return (
     <div className={classes.heading}>
-      <Typography id={id} ref={ref} component='a' className={classes.element} />
-      <Typography variant={variant} className={classes.headerText}>
-        {children}
-        <Typography component='a' href={`#${id}`}>
-          <LinkIcon />
-        </Typography>
+      <Anchor id={id} ref={ref} />
+
+      <Typography
+        variant={variant}
+        className={CLASS_HEADER}
+        style={{
+          display: 'inline-block'
+        }}
+      >
+        <span
+          style={{
+            display: 'inline-block'
+          }}
+        >
+          {children}
+          {/* <HeaderLink href={'#' + id}>
+            <SvgIcon
+              component={LinkIcon}
+              fontSize={
+                variant === 'h2' || variant === 'h3' ? 'medium' : 'small'
+              }
+            />
+          </HeaderLink> */}
+          <a
+            href={'#' + id}
+            style={{
+              display: 'inline-block',
+              textDecoration: 'none'
+            }}
+          >
+            <SvgIcon
+              component={LinkIcon}
+              fontSize={
+                variant === 'h2' || variant === 'h3' ? 'medium' : 'small'
+              }
+            />
+          </a>
+        </span>
       </Typography>
     </div>
   );
