@@ -1,8 +1,9 @@
+import { APP_CONTENT_SHARE_DIMENSION } from '@app/layout/src/recoil/features/layout/reducer';
 import { RenderUtils } from '@app/render-utils';
 import { PageTypes } from '@app/types';
 import { StringUtil } from '@app/utils';
 import { notificationStates } from '@demonstrators-social/shared';
-import { makeStyles, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@material-ui/core';
+import { SpeedDial, SpeedDialAction, SpeedDialIcon, useTheme } from '@material-ui/core';
 import { Close, Share as ShareIcon } from '@material-ui/icons';
 import { windowOpenPromise } from '@vangware/window-open-promise';
 import copy from 'copy-to-clipboard';
@@ -30,23 +31,6 @@ export interface ShareProps {
   meta: PageTypes.ContentMetaData;
   url: string;
 }
-
-const useStyles = makeStyles(() => ({
-  speedDial: {
-    height: '56px',
-    paddingTop: '11px',
-    paddingBottom: '11px',
-    paddingLeft: '16px',
-    paddingRight: '16px',
-    '&.MuiSpeedDial-directionDown': {
-      display: 'unset',
-      flexDirection: 'unset'
-    }
-    // position: 'absolute',
-    // paddingTop: '11px',
-    // paddingBottom: '11px'
-  }
-}));
 
 const getSharing = (
   getShareProps: () => ShareProps,
@@ -200,8 +184,6 @@ const createButtons = (
 };
 
 export const Share: FC<PageTypes.ContentMetaData> = props => {
-  const classes = useStyles();
-
   const { t } = useTranslation();
 
   const { pathname } = useRouter();
@@ -243,17 +225,26 @@ export const Share: FC<PageTypes.ContentMetaData> = props => {
     };
   }, [pathname, props.title]);
 
+  const theme = useTheme();
+
   return (
-    <SpeedDial
-      ariaLabel={t('common:share-post')}
-      icon={<SpeedDialIcon icon={<ShareIcon />} openIcon={<Close />} />}
-      onClose={handleSpeedDialClose}
-      onOpen={handleSpeedDialOpen}
-      open={speedDialOpen}
-      direction='down'
-      className={classes.speedDial}
+    <div
+      style={{
+        width: APP_CONTENT_SHARE_DIMENSION,
+        height: APP_CONTENT_SHARE_DIMENSION,
+        margin: theme.spacing(0, 2)
+      }}
     >
-      {createButtons(handleSpeedDialCloseWithFeedback, getShareProps, t)}
-    </SpeedDial>
+      <SpeedDial
+        ariaLabel={t('common:share-post')}
+        icon={<SpeedDialIcon icon={<ShareIcon />} openIcon={<Close />} />}
+        onClose={handleSpeedDialClose}
+        onOpen={handleSpeedDialOpen}
+        open={speedDialOpen}
+        direction='down'
+      >
+        {createButtons(handleSpeedDialCloseWithFeedback, getShareProps, t)}
+      </SpeedDial>
+    </div>
   );
 };
