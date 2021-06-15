@@ -69,8 +69,8 @@ __metadata:
     "@app/types": "workspace:packages/types"
     "@fortawesome/fontawesome-svg-core": ^1.2.35
     "@fortawesome/react-fontawesome": ^0.1.14
-    "@material-ui/core": 5.0.0-alpha.36
-    "@material-ui/icons": 5.0.0-alpha.35
+    "@material-ui/core": 5.0.0-alpha.37
+    "@material-ui/icons": 5.0.0-alpha.37
     "@types/react": ^17.0.11
     "@types/react-dom": ^17.0.7
     clsx: ^1.1.1
@@ -118,9 +118,9 @@ __metadata:
     "@fortawesome/fontawesome-svg-core": ^1.2.35
     "@fortawesome/free-solid-svg-icons": ^5.15.3
     "@fortawesome/react-fontawesome": ^0.1.14
-    "@material-ui/core": 5.0.0-alpha.36
-    "@material-ui/icons": 5.0.0-alpha.35
-    "@material-ui/lab": 5.0.0-alpha.36
+    "@material-ui/core": 5.0.0-alpha.37
+    "@material-ui/icons": 5.0.0-alpha.37
+    "@material-ui/lab": 5.0.0-alpha.37
     "@types/lodash": ^4.14.170
     "@types/node": ^15.12.2
     "@types/react": ^17.0.11
@@ -1770,8 +1770,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@demonstrators-social/components@workspace:packages/demonstrators/social/components"
   dependencies:
-    "@material-ui/core": 5.0.0-alpha.36
-    "@material-ui/icons": 5.0.0-alpha.35
+    "@material-ui/core": 5.0.0-alpha.37
+    "@material-ui/icons": 5.0.0-alpha.37
     react: ^17.0.2
     react-dom: ^17.0.2
     typescript: ^4.3.2
@@ -2404,16 +2404,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@material-ui/core@npm:5.0.0-alpha.36":
-  version: 5.0.0-alpha.36
-  resolution: "@material-ui/core@npm:5.0.0-alpha.36"
+"@material-ui/core@npm:5.0.0-alpha.37":
+  version: 5.0.0-alpha.37
+  resolution: "@material-ui/core@npm:5.0.0-alpha.37"
   dependencies:
     "@babel/runtime": ^7.4.4
     "@material-ui/private-theming": 5.0.0-alpha.35
     "@material-ui/styled-engine": 5.0.0-alpha.34
-    "@material-ui/system": 5.0.0-alpha.36
+    "@material-ui/system": 5.0.0-alpha.37
     "@material-ui/types": 6.0.1
-    "@material-ui/unstyled": 5.0.0-alpha.35
+    "@material-ui/unstyled": 5.0.0-alpha.37
     "@material-ui/utils": 5.0.0-alpha.35
     "@popperjs/core": ^2.4.4
     "@types/react-transition-group": ^4.2.0
@@ -2436,36 +2436,36 @@ __metadata:
       optional: true
     "@types/react":
       optional: true
-  checksum: c5f2305df86fccacc7d031569c5806b563aadeb77066ebcf3c6707bdc5c9001091eb38b9c17fd9beaf8018a2e1f28b8f31f4d29f958829433031fd5b83ba4c26
+  checksum: 12b849f36bfc2d8e94b22d5dd5a8a740360a63eb31f357b592e6b9e251ac1d3aa7bfcae28d8c105cb633dd606368356e8c7814baadf2160e174459f003f09b3a
   languageName: node
   linkType: hard
 
-"@material-ui/icons@npm:5.0.0-alpha.35":
-  version: 5.0.0-alpha.35
-  resolution: "@material-ui/icons@npm:5.0.0-alpha.35"
+"@material-ui/icons@npm:5.0.0-alpha.37":
+  version: 5.0.0-alpha.37
+  resolution: "@material-ui/icons@npm:5.0.0-alpha.37"
   dependencies:
     "@babel/runtime": ^7.4.4
   peerDependencies:
-    "@material-ui/core": ^5.0.0-alpha.15
+    "@material-ui/core": ^5.0.0-alpha.36
     "@types/react": ^16.8.6 || ^17.0.0
     react: ^17.0.0
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: a292465f2c7be9464ff25fe72dd47603bbffa46a024e66a381d9d26b2d61e06b2ea95ff289149b44bf783adb37bb7dcb3a525929955e54052bce8cf0c2e2388b
+  checksum: 9b5ccf4c5f548ca196196bc338b2742b53181b60ce8e341779778827234f6a7edab9dcf9b5febba10f10f1adaf567e96aadbd1aeece91759eabd01005ca5916b
   languageName: node
   linkType: hard
 
-"@material-ui/lab@npm:5.0.0-alpha.36":
-  version: 5.0.0-alpha.36
-  resolution: "@material-ui/lab@npm:5.0.0-alpha.36"
+"@material-ui/lab@npm:5.0.0-alpha.37":
+  version: 5.0.0-alpha.37
+  resolution: "@material-ui/lab@npm:5.0.0-alpha.37"
   dependencies:
     "@babel/runtime": ^7.4.4
     "@date-io/date-fns": ^2.10.6
     "@date-io/dayjs": ^2.10.6
     "@date-io/luxon": ^2.10.6
     "@date-io/moment": ^2.10.6
-    "@material-ui/system": 5.0.0-alpha.36
+    "@material-ui/system": 5.0.0-alpha.37
     "@material-ui/utils": 5.0.0-alpha.35
     clsx: ^1.0.4
     prop-types: ^15.7.2
@@ -2492,7 +2492,7 @@ __metadata:
       optional: true
     moment:
       optional: true
-  checksum: 43ff38176cf6b940b26eeaae95ec623c73979fbcea74610fa5550837e61c00524b5475adc7eeb20899bbea6c350a452f928b6d9585400cd65c43c7273cca35e2
+  checksum: fbd5aba94c17e63e80b2eef3a459951b5b1522b29ea5aa9752b108a3203d062eac8e36573d0522cccab5811ae7c2d2d90f6d7d43bf42c934d0557d0dd5fd3435
   languageName: node
   linkType: hard
 
@@ -2564,11 +2564,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@material-ui/system@npm:5.0.0-alpha.36":
-  version: 5.0.0-alpha.36
-  resolution: "@material-ui/system@npm:5.0.0-alpha.36"
+"@material-ui/system@npm:5.0.0-alpha.37":
+  version: 5.0.0-alpha.37
+  resolution: "@material-ui/system@npm:5.0.0-alpha.37"
   dependencies:
     "@babel/runtime": ^7.4.4
+    "@material-ui/private-theming": 5.0.0-alpha.35
     "@material-ui/styled-engine": 5.0.0-alpha.34
     "@material-ui/types": 6.0.1
     "@material-ui/utils": 5.0.0-alpha.35
@@ -2587,7 +2588,7 @@ __metadata:
       optional: true
     "@types/react":
       optional: true
-  checksum: e9e9fcb3043993fbb56019ca3991a66a0c407e3653d9b15ab6b9daf3c2b00dd724717b1899032aab0e8c3befe9fbcb665f5caebb92dc63c483ed28fb54d627d1
+  checksum: 79ecd00cb14e106813a852fd04d5fe3c8a52e9112933bdb1770492c8aacc77e0bc0c2a281c9c5df3f3d7b5cb57197ef17826edeb32a839b8e9a053278e3196f6
   languageName: node
   linkType: hard
 
@@ -2603,9 +2604,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@material-ui/unstyled@npm:5.0.0-alpha.35":
-  version: 5.0.0-alpha.35
-  resolution: "@material-ui/unstyled@npm:5.0.0-alpha.35"
+"@material-ui/unstyled@npm:5.0.0-alpha.37":
+  version: 5.0.0-alpha.37
+  resolution: "@material-ui/unstyled@npm:5.0.0-alpha.37"
   dependencies:
     "@babel/runtime": ^7.4.4
     "@material-ui/utils": 5.0.0-alpha.35
@@ -2619,7 +2620,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 859c526b09a7281dd391451148f8f8ea33d121d855c1448e643d63763606ad1ed0131f56b9a533e478bb0474f8fc7378420514f6752cb595112c937904e3e751
+  checksum: 17a37b011693a896eb80c85d6fbe8330626e63cfd2643325948e31cab65e93abd1e5d72e07fd080f1db1ffb0e3db26ef82fc8ab13560b1001a4bf9bfc1143e38
   languageName: node
   linkType: hard
 
@@ -9235,9 +9236,9 @@ __metadata:
     "@fortawesome/react-fontawesome": ^0.1.14
     "@huse/effect-ref": ^1.1.0
     "@huse/merged-ref": ^1.2.0
-    "@material-ui/core": 5.0.0-alpha.36
-    "@material-ui/icons": 5.0.0-alpha.35
-    "@material-ui/lab": 5.0.0-alpha.36
+    "@material-ui/core": 5.0.0-alpha.37
+    "@material-ui/icons": 5.0.0-alpha.37
+    "@material-ui/lab": 5.0.0-alpha.37
     "@material-ui/styles": 5.0.0-alpha.35
     "@page/illustrations": "workspace:packages/illustrations"
     "@page/landing": "workspace:packages/page/landing"
