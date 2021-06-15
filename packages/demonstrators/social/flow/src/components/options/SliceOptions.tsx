@@ -1,5 +1,6 @@
+import { APP_CONTENT_SHARE_DIMENSION } from '@app/layout/src/recoil/features/layout/reducer';
 import { scrollStates, ScrollTypes } from '@demonstrators-social/shared';
-import { makeStyles, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@material-ui/core';
+import { SpeedDial, SpeedDialAction, SpeedDialIcon, useTheme } from '@material-ui/core';
 import { Close, Share } from '@material-ui/icons';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
@@ -12,17 +13,6 @@ export interface DockMenuItem {
   id: string;
   title: string;
 }
-
-const useStyles = makeStyles(() => ({
-  speedDial: {
-    height: '56px',
-    paddingTop: '8px',
-    '&.MuiSpeedDial-directionDown': {
-      display: 'unset',
-      flexDirection: 'unset'
-    }
-  }
-}));
 
 const getSliceOptions = (_t: Translate) => {
   return [
@@ -98,8 +88,6 @@ const createButtons = (
 };
 
 export const SliceOptions: FC = () => {
-  const classes = useStyles();
-
   const { t } = useTranslation();
 
   const [speedDialOpen, setSpeedDialOpen] = useState(false);
@@ -124,22 +112,31 @@ export const SliceOptions: FC = () => {
     setSpeedDialOpen(false);
   };
 
+  const theme = useTheme();
+
   return (
-    <SpeedDial
-      ariaLabel={'select-interaction'}
-      icon={<SpeedDialIcon icon={<Share />} openIcon={<Close />} />}
-      onClose={handleSpeedDialClose}
-      onOpen={handleSpeedDialOpen}
-      open={speedDialOpen}
-      direction='down'
-      className={classes.speedDial}
+    <div
+      style={{
+        width: APP_CONTENT_SHARE_DIMENSION,
+        height: APP_CONTENT_SHARE_DIMENSION,
+        margin: theme.spacing(0, 2)
+      }}
     >
-      {createButtons(
-        handleSpeedDialCloseWithFeedback,
-        t,
-        interactionOption,
-        setInteractionOption
-      )}
-    </SpeedDial>
+      <SpeedDial
+        ariaLabel={'select-interaction'}
+        icon={<SpeedDialIcon icon={<Share />} openIcon={<Close />} />}
+        onClose={handleSpeedDialClose}
+        onOpen={handleSpeedDialOpen}
+        open={speedDialOpen}
+        direction='down'
+      >
+        {createButtons(
+          handleSpeedDialCloseWithFeedback,
+          t,
+          interactionOption,
+          setInteractionOption
+        )}
+      </SpeedDial>
+    </div>
   );
 };
