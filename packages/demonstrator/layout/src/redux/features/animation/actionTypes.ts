@@ -1,3 +1,0 @@
-export const CHANGE_DEVICE = 'CHANGE_DEVICE';
-export const CHANGE_SZENARIO = 'CHANGE_SZENARIO';
-export const CHANGE_AREA = 'CHANGE_AREA';
