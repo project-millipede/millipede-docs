@@ -1,5 +1,6 @@
 import { TOC_TOP, TOC_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
-import { makeStyles, Theme, Typography } from '@material-ui/core';
+import { Theme, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
@@ -16,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: theme.spacing(1),
     overflowY: 'auto',
     display: 'none',
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('sm')]: {
       display: 'block'
     },
     '& ul': {
