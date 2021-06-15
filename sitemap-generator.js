@@ -12,12 +12,13 @@ const urls = [
     targetDirectory: 'public/privatesphere'
   },
   {
-    baseUrl: 'https://privatheit.org',
-    targetDirectory: 'public/privatheit'
-  },
-  {
     baseUrl: 'https://encrypt.org',
     targetDirectory: 'public/encrypt'
+  },
+  // international domain
+  {
+    baseUrl: 'https://xn--privatsphre-t8a.de',
+    targetDirectory: 'public/privatsphaere'
   }
 ];
 
