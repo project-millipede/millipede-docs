@@ -37,7 +37,6 @@ const DynamicPage: FC<DynamicPageProps> = ({
         h5: Mdx.h5,
         h6: Mdx.h6
       }}
-      // scope={scope}
     />
   );
 

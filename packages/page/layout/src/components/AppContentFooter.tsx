@@ -8,25 +8,17 @@ import React, { FC, useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  footer: {
-    padding: theme.spacing(4, 0)
+  root: {
+    marginTop: theme.spacing(8)
   },
   pagination: {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    margin: theme.spacing(4, 0)
   },
   pageLinkButton: {
-    size: 'large',
     textTransform: 'none',
     fontWeight: theme.typography.fontWeightRegular
-  },
-  chevronLeftIcon: {
-    marginRight: theme.spacing(1),
-    fontSize: 'large'
-  },
-  chevronRightIcon: {
-    marginLeft: theme.spacing(1),
-    fontSize: 'large'
   }
 }));
 
@@ -50,7 +42,7 @@ export const AppContentFooter: FC = () => {
   }, [activePage.pathname]);
 
   return (
-    <footer className={classes.footer}>
+    <footer className={classes.root}>
       <div className={classes.pagination}>
         {prevPage ? (
           <Link
@@ -61,8 +53,11 @@ export const AppContentFooter: FC = () => {
               } as any
             }
           >
-            <Button className={classes.pageLinkButton}>
-              <ChevronLeft className={classes.chevronLeftIcon} />
+            <Button
+              className={classes.pageLinkButton}
+              size='medium'
+              startIcon={<ChevronLeft />}
+            >
               {t(`common:pages.${prevPage.pathname}`)}
             </Button>
           </Link>
@@ -78,9 +73,12 @@ export const AppContentFooter: FC = () => {
               } as any
             }
           >
-            <Button className={classes.pageLinkButton}>
+            <Button
+              className={classes.pageLinkButton}
+              size='medium'
+              endIcon={<ChevronRight />}
+            >
               {t(`common:pages.${nextPage.pathname}`)}
-              <ChevronRight className={classes.chevronRightIcon} />
             </Button>
           </Link>
         ) : (

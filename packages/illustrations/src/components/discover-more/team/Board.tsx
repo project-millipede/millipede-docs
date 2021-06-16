@@ -22,8 +22,7 @@ export const getActiveCoreMembers = (t: Translate) => [
 
 export const useStyles = makeStyles((theme: Theme) => ({
   row: {
-    display: 'flex',
-    flexDirection: 'row'
+    display: 'flex'
   },
   column: {
     display: 'flex',

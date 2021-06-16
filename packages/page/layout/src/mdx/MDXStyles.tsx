@@ -9,6 +9,7 @@ export const useMdxStyles = makeStyles((theme: Theme) => {
       color: theme.palette.text.primary,
       '& h1': {
         fontSize: 48,
+        fontWeight: theme.typography.fontWeightLight,
         margin: 'auto 0'
       },
       '& h2': {
