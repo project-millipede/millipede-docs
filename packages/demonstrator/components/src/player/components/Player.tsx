@@ -1,13 +1,12 @@
-import { INPUT_BORDER_RADIUS, INPUT_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
 import { IconButton } from '@material-ui/core';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import React, { FC, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
-import styled from 'styled-components';
 
 import { playerLayoutState } from '../context/reducer';
-import { NavigationControl } from './controls';
+
+// import { NavigationControl } from './controls';
 
 export const Player: FC = () => {
   const [{ isPlayerExpanded }, setPlayerLayoutState] =
@@ -36,24 +35,36 @@ export const Player: FC = () => {
     </IconButton>
   );
 
+  // return (
+  //   <div
+  //     style={{
+  //       display: 'flex',
+  //       flexDirection: 'column'
+  //     }}
+  //   >
+  //     <div
+  //       style={{
+  //         display: 'flex',
+  //         alignItems: 'center',
+  //         justifyContent: 'space-between',
+  //         padding: '0 8px'
+  //       }}
+  //     >
+  //       <NavigationControl />
+  //       {expander && expander}
+  //     </div>
+  //   </div>
+  // );
   return (
-    <Column style={{ borderRadius: INPUT_BORDER_RADIUS }}>
-      <Row style={{ height: INPUT_HEIGHT }}>
-        <NavigationControl />
-        {expander && expander}
-      </Row>
-    </Column>
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        padding: '8px 8px'
+      }}
+    >
+      {expander && expander}
+    </div>
   );
 };
-
-export const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const Row = styled.div`
-  display: flex;
-  padding: 0px 8px;
-  align-items: center;
-  justify-content: space-between;
-`;
