@@ -1,7 +1,8 @@
 import { getIconByName, Link } from '@app/components';
 import { PageTypes } from '@app/types';
 import { CollectionUtil, RouterUtils } from '@app/utils';
-import { Collapse, ListItem, ListItemIcon, ListItemText, Theme } from '@material-ui/core';
+import { Collapse, ListItem, ListItemText } from '@material-ui/core';
+import { experimentalStyled as styled, Theme } from '@material-ui/core/styles';
 import { TransitionProps } from '@material-ui/core/transitions';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import TreeItem, { TreeItemProps } from '@material-ui/lab/TreeItem';
@@ -12,10 +13,9 @@ import React, { ChangeEvent, FC, memo, useEffect, useState } from 'react';
 
 interface TreeLabelProps {
   labelText: string;
-  icon: PageTypes.Icon;
-  pathname?: string;
-  hasChildren?: boolean;
-  expandedNodeIds?: Array<string>;
+  pathname: string;
+  hasChildren: boolean;
+  expandedNodeIds: Array<string>;
 }
 
 interface TreeProps {
@@ -36,64 +36,56 @@ export const TransitionComponent: FC<TransitionProps> = props => {
   return <Collapse {...props} />;
 };
 
-export const useTreeItemStyles = makeStyles((theme: Theme) => ({
-  root: {},
-  expanded: {
-    borderRight: `2px solid ${theme.palette.primary.main}`
-  },
-  selected: {
-    borderRight: `2px solid ${theme.palette.primary.main}`
-  },
-  group: {
+const StyledTreeItem = styled(TreeItem)<TreeItemProps>(({ theme }) => ({
+  '& .MuiTreeItem-group': {
     margin: 0
   },
-  content: {
-    padding: 0
-  },
-  iconContainer: {
-    width: 0,
-    marginRight: 0
-  },
-  label: {
-    paddingLeft: 0
+  '& .MuiTreeItem-content': {
+    padding: 0,
+    '&.Mui-selected': {
+      borderRight: `2px solid ${theme.palette.primary.main}`
+    },
+    '&.Mui-expanded': {
+      borderRight: `2px solid ${theme.palette.primary.main}`
+    },
+    '& .MuiTreeItem-iconContainer': {
+      width: '24px',
+      marginLeft: '24px',
+      marginRight: '24px',
+      '& svg': {
+        fontSize: '24px'
+      }
+    }
   }
-}));
 
-const StyledTreeItem: FC<TreeItemProps> = props => {
-  const classes = useTreeItemStyles();
-  return (
-    <TreeItem
-      classes={{
-        root: classes.root,
-        expanded: classes.expanded,
-        selected: classes.selected,
-        group: classes.group,
-        content: classes.content,
-        iconContainer: classes.iconContainer,
-        label: classes.label
-      }}
-      {...props}
-      TransitionComponent={TransitionComponent}
-    />
-  );
-};
-
-const useStylesTreeLabel = makeStyles((theme: Theme) => ({
-  listItem: {
-    paddingLeft: theme.spacing(3),
-    paddingRight: theme.spacing(3)
-  }
+  // flat
+  // '& .MuiTreeItem-content': {
+  //   padding: 0
+  // },
+  // most important - without separator -content(.)Mui-
+  // '& .MuiTreeItem-content.Mui-selected': {
+  //   borderRight: `2px solid ${theme.palette.primary.main}`
+  // },
+  // '& .MuiTreeItem-content.Mui-expanded': {
+  //   borderRight: `2px solid ${theme.palette.primary.main}`
+  // },
+  // most important - with separator -content( .)Mui-
+  // '& .MuiTreeItem-content .MuiTreeItem-iconContainer': {
+  //   width: '24px',
+  //   marginLeft: '24px',
+  //   marginRight: '24px'
+  // },
+  // '& .MuiTreeItem-content .MuiTreeItem-iconContainer svg': {
+  //   fontSize: '24px'
+  // }
 }));
 
 const TreeLabel: FC<TreeLabelProps> = ({
   labelText,
-  icon,
   pathname,
   hasChildren,
   expandedNodeIds
 }) => {
-  const classes = useStylesTreeLabel();
-
   const handleExpansion = CollectionUtil.Array.contains([...expandedNodeIds]);
 
   let renderExpand = null;
@@ -107,8 +99,7 @@ const TreeLabel: FC<TreeLabelProps> = ({
   }
 
   return (
-    <ListItem button className={classes.listItem}>
-      <ListItemIcon>{getIconByName(icon.name)}</ListItemIcon>
+    <ListItem button>
       <ListItemText secondary={labelText} />
       {renderExpand}
     </ListItem>
@@ -156,11 +147,12 @@ export const Tree: FC<TreeProps> = ({
       const title = t(`common:pages.${pathname}`);
       const item = (
         <StyledTreeItem
-          key={`item-/docs/${pathname}`}
+          key={`/docs/${pathname}`}
           nodeId={`/docs/${pathname}`}
+          icon={getIconByName(icon.name)}
           label={
             <Link
-              key={`link-/docs/${pathname}`}
+              key={`/docs/${pathname}`}
               href={
                 {
                   pathname: '/docs/[...slug]',
@@ -173,13 +165,13 @@ export const Tree: FC<TreeProps> = ({
             >
               <TreeLabel
                 labelText={title}
-                icon={icon}
                 hasChildren={nodes && nodes.length > 0}
                 expandedNodeIds={expanded}
                 pathname={`/docs/${pathname}`}
               />
             </Link>
           }
+          TransitionComponent={TransitionComponent}
         >
           {nodes && nodes.length > 0 ? buildTreeItems(nodes) : null}
         </StyledTreeItem>
