@@ -1,6 +1,7 @@
 import { Tabs } from '@app/components';
-import { HooksUtils } from '@app/render-utils';
+import { Components, HooksUtils } from '@app/render-utils';
 import { Player, SheetNext, useStepState } from '@demonstrator/components';
+import { NavigationControl } from '@demonstrator/components/src/player/components/controls';
 import { ProgressControl, TextProgressControl } from '@demonstrator/components/src/player/components/progress';
 import { playerLayoutState } from '@demonstrator/components/src/player/context/reducer';
 import { PlayListItem, Step } from '@demonstrator/components/src/player/types';
@@ -12,6 +13,10 @@ import React, { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { AnimateHeight, HeightVariants } from './AnimateHeight';
+
+const {
+  Responsive: { isMobile }
+} = Components;
 
 export const PlayerSheetTabs = {
   Playlist: 'Playlist',
@@ -75,6 +80,9 @@ export const PlayerSheet: FC<PlayerSheetProps> = ({ steps, playlist }) => {
     if (activeTab === PlayerSheetTabs.Actions) return 1;
   }, [activeTab]);
 
+  const orientation = isMobile() ? 'horizontal' : 'vertical';
+  const direction = isMobile() ? 'column' : 'row';
+
   return (
     <SheetNext.Sheet
       isOpen={isPlayerExpanded}
@@ -122,14 +130,30 @@ export const PlayerSheet: FC<PlayerSheetProps> = ({ steps, playlist }) => {
             isVisible={activeTab === PlayerSheetTabs.Actions}
             style={{
               display: 'flex',
+              flexDirection: direction,
               alignItems: 'center',
               justifyContent: 'center',
               margin: '8px'
             }}
           >
             <ProgressControl steps={steps} />
-            <Divider orientation='vertical' variant='middle' flexItem />
-            <TextProgressControl steps={steps} />
+            <Divider
+              orientation={orientation}
+              variant='middle'
+              flexItem
+              sx={{ m: 1 }}
+            />
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                width: '100%'
+              }}
+            >
+              <NavigationControl />
+              <TextProgressControl steps={steps} />
+            </div>
           </AnimateHeight>
         </>
       }
