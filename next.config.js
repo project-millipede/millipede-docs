@@ -35,8 +35,8 @@ const nextConfig = {
     return merge(config, webpackConfig(options));
   },
 
-  future: {
-    webpack5: true
+  images: {
+    disableStaticImages: true
   },
 
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx']
