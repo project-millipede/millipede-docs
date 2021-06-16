@@ -1,3 +1,4 @@
+import { INPUT_BORDER_RADIUS, INPUT_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
 import { IconButton } from '@material-ui/core';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
@@ -7,9 +8,6 @@ import styled from 'styled-components';
 
 import { playerLayoutState } from '../context/reducer';
 import { NavigationControl } from './controls';
-
-const height = 48;
-const borderRadius = height / 2;
 
 export const Player: FC = () => {
   const [{ isPlayerExpanded }, setPlayerLayoutState] =
@@ -39,8 +37,8 @@ export const Player: FC = () => {
   );
 
   return (
-    <Column style={{ borderRadius: borderRadius }}>
-      <Row style={{ height: height }}>
+    <Column style={{ borderRadius: INPUT_BORDER_RADIUS }}>
+      <Row style={{ height: INPUT_HEIGHT }}>
         <NavigationControl />
         {expander && expander}
       </Row>
