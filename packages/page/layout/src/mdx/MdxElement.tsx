@@ -1,7 +1,6 @@
 import { RenderUtils } from '@app/render-utils';
 import { PageTypes } from '@app/types';
 import { Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
 import { Components } from '@page/layout';
 import dynamic from 'next/dynamic';
 import React, { FC, ReactNode } from 'react';
@@ -21,18 +20,10 @@ interface MDXRenderProps {
   isMobile?: boolean;
 }
 
-export const useStyles = makeStyles(() => ({
-  headerRow: {
-    display: 'flex',
-    flexDirection: 'row'
-  }
-}));
-
 export const h1 = ({ disableShare, meta }: MDXRenderProps) => {
   return ({ children }: MDXProps) => {
-    const classes = useStyles();
     return (
-      <div className={classes.headerRow}>
+      <div style={{ display: 'flex' }}>
         <Typography variant='h1'>{children}</Typography>
         {!disableShare && RenderUtils.isBrowser() ? <Share {...meta} /> : null}
       </div>
@@ -40,7 +31,7 @@ export const h1 = ({ disableShare, meta }: MDXRenderProps) => {
   };
 };
 
-export const h2 = ({ isMobile = false }: MDXRenderProps) => {
+export const h2 = ({ isMobile = true }: MDXRenderProps) => {
   return ({ children, id }: MDXProps) => {
     return isMobile ? (
       <Typography variant='h2'>{children}</Typography>
@@ -52,7 +43,7 @@ export const h2 = ({ isMobile = false }: MDXRenderProps) => {
   };
 };
 
-export const h3 = ({ isMobile = false }: MDXRenderProps) => {
+export const h3 = ({ isMobile = true }: MDXRenderProps) => {
   return ({ children, id }: MDXProps) => {
     return isMobile ? (
       <Typography variant='h3'>{children}</Typography>
@@ -64,7 +55,7 @@ export const h3 = ({ isMobile = false }: MDXRenderProps) => {
   };
 };
 
-export const h4 = ({ isMobile = false }: MDXRenderProps) => {
+export const h4 = ({ isMobile = true }: MDXRenderProps) => {
   return ({ children, id }: MDXProps) => {
     return isMobile ? (
       <Typography variant='h4'>{children}</Typography>
