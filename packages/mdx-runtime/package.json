@@ -9,12 +9,12 @@
   },
   "devDependencies": {
     "@types/react": "^17.0.11",
-    "@types/react-dom": "^17.0.7",
+    "@types/react-dom": "^17.0.8",
     "@types/requestidlecallback": "^0.3.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rimraf": "^3.0.2",
-    "typescript": "^4.3.2"
+    "typescript": "^4.3.4"
   },
   "dependencies": {
     "@istok/mdx": "^0.2.0",
