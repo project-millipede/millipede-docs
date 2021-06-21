@@ -1,57 +1,33 @@
 import { Archer } from '@app/components';
-import { Theme, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { styled } from '@material-ui/core/styles';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
-import { useCommonStyles } from '../../../styles/CommonStyles';
+import { Title } from '../../common';
 
 const { ArcherContainer, ArcherElement, CustomBox } = Archer;
 
-export const useStyles = makeStyles((theme: Theme) => ({
-  grid: {
-    display: 'grid',
-    gridTemplateRows: '1fr 1fr 1fr',
-    gridTemplateColumns: '1fr 1fr 1fr',
-    gridTemplateAreas: `
-      '. individual data'
-      'general realistic specific'
-      '. society .'
-      `,
-    gridGap: '100px',
-    [theme.breakpoints.down('sm')]: {
-      gridGap: '25px'
-    }
-  },
-  individual: {
-    gridArea: 'individual'
-  },
-  data: {
-    gridArea: 'data'
-  },
-  general: {
-    gridArea: 'general'
-  },
-  realistic: {
-    gridArea: 'realistic'
-  },
-  specific: {
-    gridArea: 'specific'
-  },
-  society: {
-    gridArea: 'society'
+export const GridWrapper = styled('div')(({ theme }) => ({
+  display: 'grid',
+  gridTemplateRows: '1fr 1fr 1fr',
+  gridTemplateColumns: '1fr 1fr 1fr',
+  gridTemplateAreas: `
+    '. individual data'
+    'general realistic specific'
+    '. society .'
+    `,
+  gridGap: theme.spacing(12),
+  [theme.breakpoints.down('sm')]: {
+    gridGap: theme.spacing(3)
   }
 }));
 
 export const InterdisciplinaryApproach: FC = () => {
-  const classes = useStyles();
-  const commonClasses = useCommonStyles();
-
   const { t } = useTranslation();
 
   return (
     <ArcherContainer noCurves strokeColor='gray'>
-      <div className={classes.grid}>
+      <GridWrapper>
         <ArcherElement
           id='individual'
           relations={[
@@ -62,22 +38,14 @@ export const InterdisciplinaryApproach: FC = () => {
             }
           ]}
         >
-          <div className={classes.individual}>
-            <CustomBox>
-              <Typography className={commonClasses.title}>
-                {t('pages/perspective/index:individual')}
-              </Typography>
-            </CustomBox>
-          </div>
+          <CustomBox sx={{ gridArea: 'individual' }}>
+            <Title>{t('pages/perspective/index:individual')}</Title>
+          </CustomBox>
         </ArcherElement>
         <ArcherElement id='data'>
-          <div className={classes.data}>
-            <CustomBox>
-              <Typography className={commonClasses.title}>
-                {t('pages/perspective/index:dataCentric')}
-              </Typography>
-            </CustomBox>
-          </div>
+          <CustomBox sx={{ gridArea: 'data' }}>
+            <Title>{t('pages/perspective/index:dataCentric')}</Title>
+          </CustomBox>
         </ArcherElement>
         <ArcherElement
           id='general'
@@ -96,15 +64,16 @@ export const InterdisciplinaryApproach: FC = () => {
             }
           ]}
         >
-          <div className={classes.general}>
-            <CustomBox bgcolor='#F44336' routeSegement='general'>
-              <Typography className={commonClasses.title}>
-                {`${t('pages/perspective/index:general')} ${t(
-                  'pages/perspective/index:problemSolving'
-                )}`}
-              </Typography>
-            </CustomBox>
-          </div>
+          <CustomBox
+            sx={{ gridArea: 'general', bgcolor: '#F44336' }}
+            routeSegement='general'
+          >
+            <Title>
+              {`${t('pages/perspective/index:general')} ${t(
+                'pages/perspective/index:problemSolving'
+              )}`}
+            </Title>
+          </CustomBox>
         </ArcherElement>
 
         <ArcherElement
@@ -122,15 +91,16 @@ export const InterdisciplinaryApproach: FC = () => {
             }
           ]}
         >
-          <div className={classes.realistic}>
-            <CustomBox bgcolor='#4CAF50' routeSegement='realistic'>
-              <Typography className={commonClasses.title}>
-                {`${t('pages/perspective/index:realistic')} ${t(
-                  'pages/perspective/index:problemSolving'
-                )}`}
-              </Typography>
-            </CustomBox>
-          </div>
+          <CustomBox
+            sx={{ gridArea: 'realistic', bgcolor: '#4CAF50' }}
+            routeSegement='realistic'
+          >
+            <Title>
+              {`${t('pages/perspective/index:realistic')} ${t(
+                'pages/perspective/index:problemSolving'
+              )}`}
+            </Title>
+          </CustomBox>
         </ArcherElement>
 
         <ArcherElement
@@ -143,26 +113,23 @@ export const InterdisciplinaryApproach: FC = () => {
             }
           ]}
         >
-          <div className={classes.specific}>
-            <CustomBox bgcolor='#FFEB3B' routeSegement='specific'>
-              <Typography className={commonClasses.title}>
-                {`${t('pages/perspective/index:specific')} ${t(
-                  'pages/perspective/index:problemSolving'
-                )}`}
-              </Typography>
-            </CustomBox>
-          </div>
+          <CustomBox
+            sx={{ gridArea: 'specific', bgcolor: '#FFEB3B' }}
+            routeSegement='specific'
+          >
+            <Title>
+              {`${t('pages/perspective/index:specific')} ${t(
+                'pages/perspective/index:problemSolving'
+              )}`}
+            </Title>
+          </CustomBox>
         </ArcherElement>
         <ArcherElement id='society'>
-          <div className={classes.society}>
-            <CustomBox>
-              <Typography className={commonClasses.title}>
-                {t('pages/perspective/index:society')}
-              </Typography>
-            </CustomBox>
-          </div>
+          <CustomBox sx={{ gridArea: 'society' }}>
+            <Title>{t('pages/perspective/index:society')}</Title>
+          </CustomBox>
         </ArcherElement>
-      </div>
+      </GridWrapper>
     </ArcherContainer>
   );
 };
