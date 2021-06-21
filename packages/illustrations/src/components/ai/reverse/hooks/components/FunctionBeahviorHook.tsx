@@ -1,37 +1,21 @@
 import { Archer } from '@app/components';
-import { Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { styled } from '@material-ui/core/styles';
 import React, { FC } from 'react';
+
+import { TitleUnstyled } from '../../../../common';
 
 const { ArcherContainer, ArcherElement, CustomBox } = Archer;
 
-export const useStyles = makeStyles(() => ({
-  code: {
-    whiteSpace: 'pre-wrap'
-  },
-  grid: {
-    display: 'grid',
-    gridTemplateRows: '1fr 1fr 1fr',
-    gridTemplateColumns: '1fr 0.5fr 1fr',
-    gridTemplateAreas: `
-      'function_a . .'
-      'function_b . function_hook'
-      'function_result . .'
-      `,
-    gridRowGap: '100px'
-  },
-  function_a: {
-    gridArea: 'function_a'
-  },
-  function_b: {
-    gridArea: 'function_b'
-  },
-  function_hook: {
-    gridArea: 'function_hook'
-  },
-  function_result: {
-    gridArea: 'function_result'
-  }
+export const GridWrapper = styled('div')(({ theme }) => ({
+  display: 'grid',
+  gridTemplateRows: '1fr 1fr 1fr',
+  gridTemplateColumns: '1fr 0.5fr 1fr',
+  gridTemplateAreas: `
+    'function_a . .'
+    'function_b . function_hook'
+    'function_result . .'
+    `,
+  gridRowGap: theme.spacing(12)
 }));
 
 const functionA = `public int a() {
@@ -55,10 +39,9 @@ const functionHookResult = `public int a() {
 }`;
 
 export const FunctionBeahviorHook: FC = () => {
-  const classes = useStyles();
   return (
     <ArcherContainer noCurves strokeColor='gray'>
-      <div className={classes.grid}>
+      <GridWrapper>
         <ArcherElement
           id='function_a'
           relations={[
@@ -69,13 +52,11 @@ export const FunctionBeahviorHook: FC = () => {
             }
           ]}
         >
-          <div className={classes.function_a}>
-            <CustomBox>
-              <Typography className={classes.code} variant={'body2'}>
-                {functionA}
-              </Typography>
-            </CustomBox>
-          </div>
+          <CustomBox sx={{ gridArea: 'function_a' }}>
+            <TitleUnstyled variant={'body2'} sx={{ whiteSpace: 'pre-wrap' }}>
+              {functionA}
+            </TitleUnstyled>
+          </CustomBox>
         </ArcherElement>
         <ArcherElement
           id='function_b'
@@ -87,13 +68,11 @@ export const FunctionBeahviorHook: FC = () => {
             }
           ]}
         >
-          <div className={classes.function_b}>
-            <CustomBox bgcolor={'#F44336'}>
-              <Typography className={classes.code} variant={'body2'}>
-                {functionB}
-              </Typography>
-            </CustomBox>
-          </div>
+          <CustomBox sx={{ gridArea: 'function_b', bgcolor: '#F44336' }}>
+            <TitleUnstyled variant={'body2'} sx={{ whiteSpace: 'pre-wrap' }}>
+              {functionB}
+            </TitleUnstyled>
+          </CustomBox>
         </ArcherElement>
 
         <ArcherElement
@@ -112,25 +91,21 @@ export const FunctionBeahviorHook: FC = () => {
             }
           ]}
         >
-          <div className={classes.function_hook}>
-            <CustomBox bgcolor='#4CAF50'>
-              <Typography className={classes.code} variant={'body2'}>
-                {functionHook}
-              </Typography>
-            </CustomBox>
-          </div>
+          <CustomBox sx={{ gridArea: 'function_hook', bgcolor: '#4CAF50' }}>
+            <TitleUnstyled variant={'body2'} sx={{ whiteSpace: 'pre-wrap' }}>
+              {functionHook}
+            </TitleUnstyled>
+          </CustomBox>
         </ArcherElement>
 
         <ArcherElement id='function_result'>
-          <div className={classes.function_result}>
-            <CustomBox>
-              <Typography className={classes.code} variant={'body2'}>
-                {functionHookResult}
-              </Typography>
-            </CustomBox>
-          </div>
+          <CustomBox sx={{ gridArea: 'function_result' }}>
+            <TitleUnstyled variant={'body2'} sx={{ whiteSpace: 'pre-wrap' }}>
+              {functionHookResult}
+            </TitleUnstyled>
+          </CustomBox>
         </ArcherElement>
-      </div>
+      </GridWrapper>
     </ArcherContainer>
   );
 };

@@ -1,5 +1,5 @@
 import { Archer } from '@app/components';
-import { makeStyles } from '@material-ui/styles';
+import { styled } from '@material-ui/core/styles';
 import React, { FC } from 'react';
 
 import { Instrument } from './components/Instrument';
@@ -9,17 +9,15 @@ import { Connect } from './Concept2';
 
 const { ArcherContainer } = Archer;
 
-export const useGridStyles = makeStyles(() => ({
-  grid: {
-    display: 'grid',
-    gridTemplateColumns: '1fr',
-    gridTemplateAreas: `
+export const GridWrapper = styled('div')(({ theme }) => ({
+  display: 'grid',
+  gridTemplateColumns: '1fr',
+  gridTemplateAreas: `
       'target'
       'render'
       'instrument'
       `,
-    rowGap: '50px'
-  }
+  rowGap: theme.spacing(6)
 }));
 
 const targetConnect: Connect = {
@@ -43,15 +41,13 @@ const instrumentConnect: Connect = {
 };
 
 export const Concept3: FC = () => {
-  const classes = useGridStyles();
-
   return (
     <ArcherContainer noCurves strokeColor='gray'>
-      <div className={classes.grid}>
+      <GridWrapper>
         <Target relations={targetConnect.relations} />
         <Render />
         <Instrument relations={instrumentConnect.relations} />
-      </div>
+      </GridWrapper>
     </ArcherContainer>
   );
 };

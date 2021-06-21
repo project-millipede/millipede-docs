@@ -1,34 +1,20 @@
 import { Archer } from '@app/components';
-import { Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { styled } from '@material-ui/core/styles';
 import React, { FC } from 'react';
 
-const { ArcherContainer, ArcherElement, CustomBox } = Archer;
+import { TitleUnstyled } from '../../../../common';
 
-export const useStyles = makeStyles(() => ({
-  code: {
-    whiteSpace: 'pre-wrap'
-  },
-  grid: {
-    display: 'grid',
-    gridTemplateRows: '1fr 1fr 1fr',
-    gridTemplateColumns: '0.5fr 1fr 0.5fr',
-    gridTemplateAreas: `
-      '. function_a .'
-      '. function_b .'
-      '. function_result .'
-      `,
-    gridRowGap: '100px'
-  },
-  function_a: {
-    gridArea: 'function_a'
-  },
-  function_b: {
-    gridArea: 'function_b'
-  },
-  function_result: {
-    gridArea: 'function_result'
-  }
+const { ArcherContainer, ArcherElement, CustomBox } = Archer;
+export const GridWrapper = styled('div')(({ theme }) => ({
+  display: 'grid',
+  gridTemplateRows: '1fr 1fr 1fr',
+  gridTemplateColumns: '0.5fr 1fr 0.5fr',
+  gridTemplateAreas: `
+    '. function_a .'
+    '. function_b .'
+    '. function_result .'
+    `,
+  gridRowGap: theme.spacing(12)
 }));
 
 const functionA = `public int a() {
@@ -47,11 +33,9 @@ const functionResult = `public int a() {
 }`;
 
 export const FunctionBeahvior: FC = () => {
-  const classes = useStyles();
-
   return (
     <ArcherContainer noCurves strokeColor='gray'>
-      <div className={classes.grid}>
+      <GridWrapper>
         <ArcherElement
           id='function_a'
           relations={[
@@ -62,13 +46,11 @@ export const FunctionBeahvior: FC = () => {
             }
           ]}
         >
-          <div className={classes.function_a}>
-            <CustomBox>
-              <Typography className={classes.code} variant={'body2'}>
-                {functionA}
-              </Typography>
-            </CustomBox>
-          </div>
+          <CustomBox sx={{ gridArea: 'function_a' }}>
+            <TitleUnstyled variant={'body2'} sx={{ whiteSpace: 'pre-wrap' }}>
+              {functionA}
+            </TitleUnstyled>
+          </CustomBox>
         </ArcherElement>
         <ArcherElement
           id='function_b'
@@ -80,25 +62,21 @@ export const FunctionBeahvior: FC = () => {
             }
           ]}
         >
-          <div className={classes.function_b}>
-            <CustomBox>
-              <Typography className={classes.code} variant={'body2'}>
-                {functionB}
-              </Typography>
-            </CustomBox>
-          </div>
+          <CustomBox sx={{ gridArea: 'function_b' }}>
+            <TitleUnstyled variant={'body2'} sx={{ whiteSpace: 'pre-wrap' }}>
+              {functionB}
+            </TitleUnstyled>
+          </CustomBox>
         </ArcherElement>
 
         <ArcherElement id='function_result'>
-          <div className={classes.function_result}>
-            <CustomBox>
-              <Typography className={classes.code} variant={'body2'}>
-                {functionResult}
-              </Typography>
-            </CustomBox>
-          </div>
+          <CustomBox sx={{ gridArea: 'function_result' }}>
+            <TitleUnstyled variant={'body2'} sx={{ whiteSpace: 'pre-wrap' }}>
+              {functionResult}
+            </TitleUnstyled>
+          </CustomBox>
         </ArcherElement>
-      </div>
+      </GridWrapper>
     </ArcherContainer>
   );
 };

@@ -1,20 +1,19 @@
 import { Archer } from '@app/components';
-import { Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { styled } from '@material-ui/core/styles';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
-import { useCommonStyles } from '../../../styles/CommonStyles';
+import { Title } from '../../common';
 
 const { ArcherContainer, ArcherElement, CustomBox } = Archer;
 
-const margin = '8px';
-const heightHeading = '32px';
+export const GridWrapper = styled('div')(({ theme }) => {
+  const margin = theme.spacing(1);
+  const heightHeading = theme.spacing(4);
 
-export const useStyles = makeStyles(() => ({
-  grid: {
-    gridArea: 'target',
+  return {
     display: 'grid',
+    gridArea: 'target',
     gridTemplateColumns: `${margin} repeat(3, 1fr) ${margin}`,
     gridTemplateRows: `repeat(3, ${heightHeading} ${margin} 1fr ${margin})`,
     gridTemplateAreas: `
@@ -31,58 +30,25 @@ export const useStyles = makeStyles(() => ({
       '. apply . derive .'
       '. . . . .'
       `,
-    rowGap: '25px',
+    rowGap: theme.spacing(3),
     border: '3px solid black'
-  },
-  head_access: {
-    gridArea: 'head_access'
-  },
-  function: {
-    gridArea: 'function'
-  },
-  instrument: {
-    gridArea: 'instrument'
-  },
-  head_analysis: {
-    gridArea: 'head_analysis'
-  },
-  behavior: {
-    gridArea: 'behavior'
-  },
-  head_exposure: {
-    gridArea: 'head_exposure'
-  },
-  derive: {
-    gridArea: 'derive'
-  },
-  apply: {
-    gridArea: 'apply'
-  }
-}));
+  };
+});
 
 export const ReversePrincipal: FC = () => {
-  const classes = useStyles();
-  const commonClasses = useCommonStyles();
-
   const { t } = useTranslation();
 
   return (
     <ArcherContainer noCurves strokeColor='gray'>
-      <div className={classes.grid}>
-        <div className={classes.head_access}>
-          <Typography className={commonClasses.title}>
-            {t('pages/ai/reverse/index:access')}
-          </Typography>
+      <GridWrapper>
+        <div style={{ gridArea: 'head_access' }}>
+          <Title>{t('pages/ai/reverse/index:access')}</Title>
         </div>
 
         <ArcherElement id='function'>
-          <div className={classes.function}>
-            <CustomBox>
-              <Typography className={commonClasses.title}>
-                {t('pages/ai/reverse/index:function')}
-              </Typography>
-            </CustomBox>
-          </div>
+          <CustomBox sx={{ gridArea: 'function' }}>
+            <Title>{t('pages/ai/reverse/index:function')}</Title>
+          </CustomBox>
         </ArcherElement>
 
         <ArcherElement
@@ -100,19 +66,13 @@ export const ReversePrincipal: FC = () => {
             }
           ]}
         >
-          <div className={classes.instrument}>
-            <CustomBox>
-              <Typography className={commonClasses.title}>
-                {t('pages/ai/reverse/index:instrument_function')}
-              </Typography>
-            </CustomBox>
-          </div>
+          <CustomBox sx={{ gridArea: 'instrument' }}>
+            <Title>{t('pages/ai/reverse/index:instrument_function')}</Title>
+          </CustomBox>
         </ArcherElement>
 
-        <div className={classes.head_analysis}>
-          <Typography className={commonClasses.title}>
-            {t('pages/ai/reverse/index:analysis')}
-          </Typography>
+        <div style={{ gridArea: 'head_analysis' }}>
+          <Title>{t('pages/ai/reverse/index:analysis')}</Title>
         </div>
 
         <ArcherElement
@@ -125,19 +85,13 @@ export const ReversePrincipal: FC = () => {
             }
           ]}
         >
-          <div className={classes.behavior}>
-            <CustomBox>
-              <Typography className={commonClasses.title}>
-                {t('pages/ai/reverse/index:determine_behavior')}
-              </Typography>
-            </CustomBox>
-          </div>
+          <CustomBox sx={{ gridArea: 'behavior' }}>
+            <Title>{t('pages/ai/reverse/index:determine_behavior')}</Title>
+          </CustomBox>
         </ArcherElement>
 
-        <div className={classes.head_exposure}>
-          <Typography className={commonClasses.title}>
-            {t('pages/ai/reverse/index:exposure')}
-          </Typography>
+        <div style={{ gridArea: 'head_exposure' }}>
+          <Title>{t('pages/ai/reverse/index:exposure')}</Title>
         </div>
 
         <ArcherElement
@@ -150,13 +104,9 @@ export const ReversePrincipal: FC = () => {
             }
           ]}
         >
-          <div className={classes.derive}>
-            <CustomBox>
-              <Typography className={commonClasses.title}>
-                {t('pages/ai/reverse/index:derive_attack_vector')}
-              </Typography>
-            </CustomBox>
-          </div>
+          <CustomBox sx={{ gridArea: 'derive' }}>
+            <Title>{t('pages/ai/reverse/index:derive_attack_vector')}</Title>
+          </CustomBox>
         </ArcherElement>
 
         <ArcherElement
@@ -169,15 +119,11 @@ export const ReversePrincipal: FC = () => {
             }
           ]}
         >
-          <div className={classes.apply}>
-            <CustomBox>
-              <Typography className={commonClasses.title}>
-                {t('pages/ai/reverse/index:apply_attack_vector')}
-              </Typography>
-            </CustomBox>
-          </div>
+          <CustomBox sx={{ gridArea: 'apply' }}>
+            <Title>{t('pages/ai/reverse/index:apply_attack_vector')}</Title>
+          </CustomBox>
         </ArcherElement>
-      </div>
+      </GridWrapper>
     </ArcherContainer>
   );
 };
