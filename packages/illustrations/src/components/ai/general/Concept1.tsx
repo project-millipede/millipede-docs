@@ -1,45 +1,30 @@
 import { Archer } from '@app/components';
-import { Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { styled } from '@material-ui/core/styles';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
-import { useCommonStyles } from '../../../styles/CommonStyles';
+import { Title } from '../../common';
 
 const { ArcherContainer, ArcherElement, CustomBox } = Archer;
 
-export const useStyles = makeStyles(() => ({
-  grid: {
-    display: 'grid',
-    gridTemplateRows: '1fr 1fr 1fr',
-    gridTemplateColumns: '0.5fr 1fr 0.5fr',
-    gridTemplateAreas: `
+export const GridWrapper = styled('div')(({ theme }) => ({
+  display: 'grid',
+  gridTemplateRows: '1fr 1fr 1fr',
+  gridTemplateColumns: '0.5fr 1fr 0.5fr',
+  gridTemplateAreas: `
       '. communication .'
       '. preparation .'
       '. render .'
       `,
-    gridRowGap: '100px'
-  },
-  communication: {
-    gridArea: 'communication'
-  },
-  preparation: {
-    gridArea: 'preparation'
-  },
-  render: {
-    gridArea: 'render'
-  }
+  rowGap: theme.spacing(12)
 }));
 
 export const Concept1: FC = () => {
-  const classes = useStyles();
-  const commonClasses = useCommonStyles();
-
   const { t } = useTranslation();
 
   return (
     <ArcherContainer noCurves strokeColor='gray'>
-      <div className={classes.grid}>
+      <GridWrapper>
         <ArcherElement
           id='communication'
           relations={[
@@ -50,15 +35,13 @@ export const Concept1: FC = () => {
             }
           ]}
         >
-          <div className={classes.communication}>
-            <CustomBox>
-              <Typography className={commonClasses.title}>
-                {`${t('pages/ai/general/index:communication_process')} ${t(
-                  'pages/ai/general/index:communication_process_abbreviation'
-                )}`}
-              </Typography>
-            </CustomBox>
-          </div>
+          <CustomBox sx={{ gridArea: 'communication' }}>
+            <Title>
+              {`${t('pages/ai/general/index:communication_process')} ${t(
+                'pages/ai/general/index:communication_process_abbreviation'
+              )}`}
+            </Title>
+          </CustomBox>
         </ArcherElement>
         <ArcherElement
           id='preparation'
@@ -70,28 +53,24 @@ export const Concept1: FC = () => {
             }
           ]}
         >
-          <div className={classes.preparation}>
-            <CustomBox>
-              <Typography className={commonClasses.title}>
-                {`${t('pages/ai/general/index:preparation_process')} ${t(
-                  'pages/ai/general/index:preparation_process_abbreviation'
-                )}`}
-              </Typography>
-            </CustomBox>
-          </div>
+          <CustomBox sx={{ gridArea: 'preparation' }}>
+            <Title>
+              {`${t('pages/ai/general/index:preparation_process')} ${t(
+                'pages/ai/general/index:preparation_process_abbreviation'
+              )}`}
+            </Title>
+          </CustomBox>
         </ArcherElement>
         <ArcherElement id='render'>
-          <div className={classes.render}>
-            <CustomBox>
-              <Typography className={commonClasses.title}>
-                {`${t('pages/ai/general/index:render_process')} ${t(
-                  'pages/ai/general/index:render_process_abbreviation'
-                )}`}
-              </Typography>
-            </CustomBox>
-          </div>
+          <CustomBox sx={{ gridArea: 'render' }}>
+            <Title>
+              {`${t('pages/ai/general/index:render_process')} ${t(
+                'pages/ai/general/index:render_process_abbreviation'
+              )}`}
+            </Title>
+          </CustomBox>
         </ArcherElement>
-      </div>
+      </GridWrapper>
     </ArcherContainer>
   );
 };

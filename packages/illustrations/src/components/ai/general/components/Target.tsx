@@ -1,21 +1,20 @@
 import { Archer } from '@app/components';
-import { Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { styled } from '@material-ui/core/styles';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
-import { useCommonStyles } from '../../../../styles/CommonStyles';
+import { Title } from '../../../common';
 import { Connect } from '../Concept2';
 
 const { CustomBox, ArcherElement } = Archer;
 
-const margin = '8px';
-const heightHeading = '32px';
+export const GridWrapper = styled('div')(({ theme }) => {
+  const margin = theme.spacing(1);
+  const heightHeading = theme.spacing(4);
 
-export const useTargetStyles = makeStyles(() => ({
-  target: {
-    gridArea: 'target',
+  return {
     display: 'grid',
+    gridArea: 'target',
     gridTemplateColumns: `${margin} repeat(3, 1fr) ${margin}`,
     gridTemplateRows: `${heightHeading} ${margin} 1fr ${margin}`,
     gridTemplateAreas: `
@@ -24,32 +23,18 @@ export const useTargetStyles = makeStyles(() => ({
       '. communication . preparation .'
       '. . . . .'
       `,
-    rowGap: '25px',
+    rowGap: theme.spacing(3),
     border: '3px solid black'
-  },
-  head_target: {
-    gridArea: 'head_target'
-  },
-  communication: {
-    gridArea: 'communication'
-  },
-  preparation: {
-    gridArea: 'preparation'
-  }
-}));
+  };
+});
 
 export const Target: FC<Connect> = ({ relations }) => {
-  const classes = useTargetStyles();
-  const commonClasses = useCommonStyles();
-
   const { t } = useTranslation();
 
   return (
-    <div className={classes.target}>
-      <div className={classes.head_target}>
-        <Typography className={commonClasses.title}>
-          {t('pages/ai/general/index:target_application')}
-        </Typography>
+    <GridWrapper>
+      <div style={{ gridArea: 'head_target' }}>
+        <Title>{t('pages/ai/general/index:target_application')}</Title>
       </div>
       <ArcherElement
         id='communication'
@@ -61,27 +46,23 @@ export const Target: FC<Connect> = ({ relations }) => {
           }
         ]}
       >
-        <div className={classes.communication}>
-          <CustomBox>
-            <Typography className={commonClasses.title}>
-              {`${t('pages/ai/general/index:communication_process')} ${t(
-                'pages/ai/general/index:communication_process_abbreviation'
-              )}`}
-            </Typography>
-          </CustomBox>
-        </div>
+        <CustomBox sx={{ gridArea: 'communication' }}>
+          <Title>
+            {`${t('pages/ai/general/index:communication_process')} ${t(
+              'pages/ai/general/index:communication_process_abbreviation'
+            )}`}
+          </Title>
+        </CustomBox>
       </ArcherElement>
       <ArcherElement id='preparation' relations={relations}>
-        <div className={classes.preparation}>
-          <CustomBox>
-            <Typography className={commonClasses.title}>
-              {`${t('pages/ai/general/index:preparation_process')} ${t(
-                'pages/ai/general/index:preparation_process_abbreviation'
-              )}`}
-            </Typography>
-          </CustomBox>
-        </div>
+        <CustomBox sx={{ gridArea: 'preparation' }}>
+          <Title>
+            {`${t('pages/ai/general/index:preparation_process')} ${t(
+              'pages/ai/general/index:preparation_process_abbreviation'
+            )}`}
+          </Title>
+        </CustomBox>
       </ArcherElement>
-    </div>
+    </GridWrapper>
   );
 };

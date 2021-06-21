@@ -1,65 +1,41 @@
 import { Archer } from '@app/components';
-import { Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { styled } from '@material-ui/core/styles';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
-import { useCommonStyles } from '../../../../styles/CommonStyles';
+import { Title } from '../../../common';
 
 const { CustomBox, ArcherElement } = Archer;
 
-const margin = '8px';
-const heightHeading = '32px';
+export const GridWrapper = styled('div')(({ theme }) => {
+  const margin = theme.spacing(1);
+  const heightHeading = theme.spacing(4);
 
-export const useRenderStyles = makeStyles(() => ({
-  render: {
-    gridArea: 'render',
+  return {
     display: 'grid',
+    gridArea: 'render',
     gridTemplateColumns: `${margin} repeat(3, 1fr) ${margin}`,
     gridTemplateRows: `${heightHeading} ${margin} repeat(3, 1fr) ${margin}`,
     gridTemplateAreas: `
-      '. head_render head_render head_render .'
-      '. . . . .'
-      '. react_observe . renderX .'
-      '. . coordination . .'
-      '. custom_render . observe_react .'
-      '. . . . .'
-      `,
-    rowGap: '25px',
+    '. head_render head_render head_render .'
+    '. . . . .'
+    '. react_observe . renderX .'
+    '. . coordination . .'
+    '. custom_render . observe_react .'
+    '. . . . .'
+    `,
+    rowGap: theme.spacing(3),
     border: '3px solid black'
-  },
-  head_render: {
-    gridArea: 'head_render'
-  },
-  react_observe: {
-    gridArea: 'react_observe'
-  },
-  renderX: {
-    gridArea: 'renderX'
-  },
-  coordination: {
-    gridArea: 'coordination'
-  },
-  custom_render: {
-    gridArea: 'custom_render'
-  },
-  observe_react: {
-    gridArea: 'observe_react'
-  }
-}));
+  };
+});
 
 export const Render: FC = () => {
-  const classes = useRenderStyles();
-  const commonClasses = useCommonStyles();
-
   const { t } = useTranslation();
 
   return (
-    <div className={classes.render}>
-      <div className={classes.head_render}>
-        <Typography className={commonClasses.title}>
-          {t('pages/ai/general/index:dedicated_render_process')}
-        </Typography>
+    <GridWrapper>
+      <div style={{ gridArea: 'head_render' }}>
+        <Title>{t('pages/ai/general/index:dedicated_render_process')}</Title>
       </div>
       <ArcherElement
         id='react_observe'
@@ -71,13 +47,9 @@ export const Render: FC = () => {
           }
         ]}
       >
-        <div className={classes.react_observe}>
-          <CustomBox>
-            <Typography className={commonClasses.title}>
-              {`${t('pages/ai/general/index:react_observe')}`}
-            </Typography>
-          </CustomBox>
-        </div>
+        <CustomBox sx={{ gridArea: 'react_observe' }}>
+          <Title>{`${t('pages/ai/general/index:react_observe')}`}</Title>
+        </CustomBox>
       </ArcherElement>
 
       <ArcherElement
@@ -90,25 +62,17 @@ export const Render: FC = () => {
           }
         ]}
       >
-        <div className={classes.renderX}>
-          <CustomBox>
-            <Typography className={commonClasses.title}>
-              {`${t('pages/ai/general/index:render_process')} ${t(
-                'pages/ai/general/index:render_process_abbreviation'
-              )}`}
-            </Typography>
-          </CustomBox>
-        </div>
+        <CustomBox sx={{ gridArea: 'renderX' }}>
+          <Title>{`${t('pages/ai/general/index:render_process')} ${t(
+            'pages/ai/general/index:render_process_abbreviation'
+          )}`}</Title>
+        </CustomBox>
       </ArcherElement>
 
       <ArcherElement id='coordination'>
-        <div className={classes.coordination}>
-          <CustomBox>
-            <Typography className={commonClasses.title}>
-              {`${t('pages/ai/general/index:coordination')}`}
-            </Typography>
-          </CustomBox>
-        </div>
+        <CustomBox sx={{ gridArea: 'coordination' }}>
+          <Title>{`${t('pages/ai/general/index:coordination')}`}</Title>
+        </CustomBox>
       </ArcherElement>
 
       <ArcherElement
@@ -121,15 +85,13 @@ export const Render: FC = () => {
           }
         ]}
       >
-        <div className={classes.custom_render}>
-          <CustomBox>
-            <Typography className={commonClasses.title}>
-              {`${t('pages/ai/general/index:custom_render_process')} ${t(
-                'pages/ai/general/index:custom_render_process_abbreviation'
-              )}`}
-            </Typography>
-          </CustomBox>
-        </div>
+        <CustomBox sx={{ gridArea: 'custom_render' }}>
+          <Title>
+            {`${t('pages/ai/general/index:custom_render_process')} ${t(
+              'pages/ai/general/index:custom_render_process_abbreviation'
+            )}`}
+          </Title>
+        </CustomBox>
       </ArcherElement>
 
       <ArcherElement
@@ -142,14 +104,10 @@ export const Render: FC = () => {
           }
         ]}
       >
-        <div className={classes.observe_react}>
-          <CustomBox>
-            <Typography className={commonClasses.title}>
-              {`${t('pages/ai/general/index:observe_react')}`}
-            </Typography>
-          </CustomBox>
-        </div>
+        <CustomBox sx={{ gridArea: 'observe_react' }}>
+          <Title>{`${t('pages/ai/general/index:observe_react')}`}</Title>
+        </CustomBox>
       </ArcherElement>
-    </div>
+    </GridWrapper>
   );
 };
