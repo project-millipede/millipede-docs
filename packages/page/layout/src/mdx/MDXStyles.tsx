@@ -4,8 +4,8 @@ import { makeStyles } from '@material-ui/styles';
 export const useMdxStyles = makeStyles((theme: Theme) => {
   return {
     root: {
-      fontFamily: theme.typography.fontFamily,
       fontSize: 16,
+      fontFamily: theme.typography.fontFamily,
       color: theme.palette.text.primary,
       '& h1': {
         fontSize: 48,

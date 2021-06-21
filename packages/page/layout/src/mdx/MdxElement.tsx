@@ -1,13 +1,13 @@
-import { RenderUtils } from '@app/render-utils';
+import { Components as ComponentUtils } from '@app/render-utils';
 import { PageTypes } from '@app/types';
 import { Typography } from '@material-ui/core';
+import { Share } from '@page/components';
 import { Components } from '@page/layout';
-import dynamic from 'next/dynamic';
 import React, { FC, ReactNode } from 'react';
 
-const Share = dynamic(() =>
-  import('@page/components').then(module => module.Share)
-);
+const {
+  Media: { Media }
+} = ComponentUtils;
 
 interface MDXProps {
   id: string;
@@ -25,46 +25,53 @@ export const h1 = ({ disableShare, meta }: MDXRenderProps) => {
     return (
       <div style={{ display: 'flex' }}>
         <Typography variant='h1'>{children}</Typography>
-        {!disableShare && RenderUtils.isBrowser() ? <Share {...meta} /> : null}
+        {!disableShare && <Share {...meta} />}
       </div>
     );
   };
 };
 
-export const h2 = ({ isMobile = true }: MDXRenderProps) => {
-  return ({ children, id }: MDXProps) => {
-    return isMobile ? (
-      <Typography variant='h2'>{children}</Typography>
-    ) : (
-      <Components.Head.InteractiveHead variant='h2' id={id}>
-        {children}
-      </Components.Head.InteractiveHead>
-    );
-  };
+export const h2 = ({ children, id }: MDXProps) => {
+  return (
+    <>
+      <Media lessThan='sm'>
+        <Typography variant='h2'>{children}</Typography>
+      </Media>
+      <Media greaterThanOrEqual='sm'>
+        <Components.Head.InteractiveHead variant='h2' id={id}>
+          {children}
+        </Components.Head.InteractiveHead>
+      </Media>
+    </>
+  );
 };
-
-export const h3 = ({ isMobile = true }: MDXRenderProps) => {
-  return ({ children, id }: MDXProps) => {
-    return isMobile ? (
-      <Typography variant='h3'>{children}</Typography>
-    ) : (
-      <Components.Head.InteractiveHead variant='h3' id={id}>
-        {children}
-      </Components.Head.InteractiveHead>
-    );
-  };
+export const h3 = ({ children, id }: MDXProps) => {
+  return (
+    <>
+      <Media lessThan='sm'>
+        <Typography variant='h3'>{children}</Typography>
+      </Media>
+      <Media greaterThanOrEqual='sm'>
+        <Components.Head.InteractiveHead variant='h3' id={id}>
+          {children}
+        </Components.Head.InteractiveHead>
+      </Media>
+    </>
+  );
 };
-
-export const h4 = ({ isMobile = true }: MDXRenderProps) => {
-  return ({ children, id }: MDXProps) => {
-    return isMobile ? (
-      <Typography variant='h4'>{children}</Typography>
-    ) : (
-      <Components.Head.InteractiveHead variant='h4' id={id}>
-        {children}
-      </Components.Head.InteractiveHead>
-    );
-  };
+export const h4 = ({ children, id }: MDXProps) => {
+  return (
+    <>
+      <Media lessThan='sm'>
+        <Typography variant='h4'>{children}</Typography>
+      </Media>
+      <Media greaterThanOrEqual='sm'>
+        <Components.Head.InteractiveHead variant='h4' id={id}>
+          {children}
+        </Components.Head.InteractiveHead>
+      </Media>
+    </>
+  );
 };
 
 export const h5: FC<MDXProps> = ({ children }) => (

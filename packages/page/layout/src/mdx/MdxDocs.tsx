@@ -1,28 +1,25 @@
+import { Components as ComponentUtils } from '@app/render-utils';
 import { PageTypes } from '@app/types';
-import { Snackbar } from '@page/components';
+import { Breadcrumbs, Snackbar } from '@page/components';
 import React, { FC } from 'react';
 
 import { AppContent } from '../components/AppContent';
 import { AppContentFooter } from '../components/AppContentFooter';
-import { AppContentHeader } from '../components/AppContentHeader';
 import { AppHead } from '../components/AppHead';
 import { AppTableOfContents } from '../components/AppTableOfContents';
 import { useMdxStyles } from './MDXStyles';
 
+const {
+  Media: { Media }
+} = ComponentUtils;
+
 interface MarkdownDocsProps {
   raw: string;
   meta: PageTypes.MetaData;
-  isMobile: boolean;
 }
 
-export const MdxDocs: FC<MarkdownDocsProps> = ({
-  raw,
-  meta,
-  isMobile,
-  children
-}) => {
+export const MdxDocs: FC<MarkdownDocsProps> = ({ raw, meta, children }) => {
   const classes = useMdxStyles();
-
   const { disableToc, ...restMeta } = meta;
 
   return (
@@ -32,7 +29,9 @@ export const MdxDocs: FC<MarkdownDocsProps> = ({
       <AppContent disableToc={disableToc}>
         {children && (
           <div className={classes.root}>
-            {!isMobile && <AppContentHeader />}
+            <Media greaterThanOrEqual='md'>
+              <Breadcrumbs />
+            </Media>
             {children}
             <Snackbar />
             <AppContentFooter />
