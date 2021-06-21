@@ -2,11 +2,19 @@ import MuiLink, { LinkProps as MuiLinkProps } from '@material-ui/core/Link';
 import clsx from 'clsx';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import { useRouter } from 'next/router';
-import React, { AnchorHTMLAttributes, FC, forwardRef, Ref } from 'react';
+import { AnchorHTMLAttributes, Ref } from 'react';
+import React, { FC, forwardRef } from 'react';
 import { UrlObject } from 'url';
 
-type NextComposedProps = AnchorHTMLAttributes<HTMLAnchorElement> &
+export type NextComposedProps = AnchorHTMLAttributes<HTMLAnchorElement> &
   NextLinkProps;
+
+export type LinkProps = NextComposedProps &
+  Omit<MuiLinkProps, 'ref'> & {
+    activeClassName?: string;
+    innerRef?: Ref<HTMLAnchorElement>;
+    naked?: boolean;
+  };
 
 const NextComposed = forwardRef<HTMLAnchorElement, NextComposedProps>(
   (
@@ -40,14 +48,6 @@ const NextComposed = forwardRef<HTMLAnchorElement, NextComposedProps>(
     );
   }
 );
-
-interface LinkPropsBase {
-  activeClassName?: string;
-  innerRef?: Ref<HTMLAnchorElement>;
-  naked?: boolean;
-}
-
-type LinkProps = LinkPropsBase & NextComposedProps & Omit<MuiLinkProps, 'ref'>;
 
 const Link: FC<LinkProps> = ({
   activeClassName = 'active',

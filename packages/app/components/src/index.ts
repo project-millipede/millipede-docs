@@ -1,5 +1,5 @@
 export { default as CustomIcon, getIconByName, loadFAIcons } from './icon';
-export { default as Link } from './link';
+export * from './link';
 export { Tag } from './tag';
 export * as Tabs from './tabs';
 export { default as Portal } from './portal';

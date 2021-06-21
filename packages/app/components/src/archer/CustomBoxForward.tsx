@@ -1,6 +1,7 @@
-import { Box, Theme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
-import clsx from 'clsx';
+import { Link, LinkProps } from '@app/components';
+import { Box, BoxProps } from '@material-ui/core';
+import { styled } from '@material-ui/core/styles';
+import { useRouter } from 'next/router';
 import React, {
   forwardRef,
   ForwardRefRenderFunction,
@@ -9,43 +10,45 @@ import React, {
   useImperativeHandle,
   useState,
 } from 'react';
-import { Link } from 'react-scroll';
 
 import { SelectHandles } from './types';
 
-export interface StyleProps {
-  bgcolor: string;
-}
+export type BoxEnhancedProps = BoxProps &
+  LinkProps & {
+    selected: boolean;
+  };
 
-const useStyles = makeStyles<Theme, StyleProps>(() => ({
-  box: {
-    padding: '10px',
-    border: '3px solid black',
-    backgroundColor: props => props.bgcolor,
-    height: '100%',
+export const StyledBox = styled(Box)<BoxEnhancedProps>(
+  ({ selected, theme }) => ({
     display: 'flex',
+    alignItems: 'center',
     justifyContent: 'center',
-    alignItems: 'center'
-  },
-  boxHover: {
-    cursor: 'pointer',
-    backgroundColor: '#E0E0E0'
-  }
-}));
+    border: '3px solid black',
+    padding: theme.spacing(1),
+    color: theme.palette.text.primary,
+    '&:hover': {
+      cursor: 'pointer',
+      backgroundColor: '#E0E0E0',
+      textDecoration: 'none'
+    },
+    ...(selected && {
+      cursor: 'pointer',
+      backgroundColor: '#E0E0E0',
+      textDecoration: 'none'
+    })
+  })
+);
 
-export interface CustomBoxProps {
-  children: ReactNode;
+export type CustomBoxProps = BoxProps & {
   routeSegement?: string;
-  bgcolor?: string;
   dynamicRef?: MutableRefObject<SelectHandles>;
-}
+  children: ReactNode;
+};
 
 const CustomBox: ForwardRefRenderFunction<HTMLDivElement, CustomBoxProps> = (
-  { routeSegement, children, bgcolor, dynamicRef },
+  { routeSegement, bgcolor, sx, dynamicRef, children },
   ref
 ) => {
-  const classes = useStyles({ bgcolor });
-
   const [selected, setSelected] = useState(false);
 
   useImperativeHandle(
@@ -61,41 +64,38 @@ const CustomBox: ForwardRefRenderFunction<HTMLDivElement, CustomBoxProps> = (
     []
   );
 
+  const { pathname, query } = useRouter();
+
   return (
-    <Link
-      to={decodeURI(routeSegement).replace('#', '')}
-      spy={true}
-      smooth={true}
-      offset={-96}
-      duration={500}
+    <StyledBox
+      component={routeSegement && Link}
+      selected={selected}
+      // onClick={_e => {
+      //   if (routeSegement != null) {
+      //     push(
+      //       {
+      //         pathname,
+      //         query,
+      //         hash: routeSegement
+      //       },
+      //       null,
+      //       { locale }
+      //     );
+      //   }
+      // }}
+      ref={ref}
+      href={
+        {
+          pathname,
+          query,
+          hash: routeSegement
+        } as any
+      }
+      sx={sx}
+      bgcolor={bgcolor}
     >
-      <Box
-        className={clsx(classes.box, {
-          [classes.boxHover]: selected
-        })}
-        onMouseEnter={_e => {
-          setSelected(true);
-        }}
-        onMouseLeave={_e => {
-          setSelected(false);
-        }}
-        // onClick={_e => {
-        //   const { push, asPath, pathname, query, locale } = router;
-        //   push(
-        //     {
-        //       pathname,
-        //       query: { slug: query.slug },
-        //       hash: `#${routeSegement}`
-        //     },
-        //     asPath,
-        //     { locale }
-        //   );
-        // }}
-        ref={ref}
-      >
-        {children}
-      </Box>
-    </Link>
+      {children}
+    </StyledBox>
   );
 };
 
