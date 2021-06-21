@@ -1,4 +1,3 @@
-import { Components } from '@app/render-utils';
 import { Mdx } from '@page/layout';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
@@ -7,12 +6,14 @@ import React, { FC } from 'react';
 
 import { getComponents } from '../../docs/src/lib/getComponents';
 import { getPath } from '../../docs/src/lib/getPath';
-import { GetStaticContentProps, getStaticContentProps } from '../../docs/src/lib/getStaticContentProps';
-import { GetStaticTranslationProps, getStaticTranslationProps } from '../../docs/src/lib/getStaticTranslationProps';
-
-const {
-  Responsive: { isMobile }
-} = Components;
+import {
+  GetStaticContentProps,
+  getStaticContentProps
+} from '../../docs/src/lib/getStaticContentProps';
+import {
+  GetStaticTranslationProps,
+  getStaticTranslationProps
+} from '../../docs/src/lib/getStaticTranslationProps';
 
 type DynamicPageProps = GetStaticTranslationProps & GetStaticContentProps;
 
@@ -22,7 +23,6 @@ const DynamicPage: FC<DynamicPageProps> = ({
   hydrationComponentsList,
   rawContent
 }) => {
-  const renderMobile = isMobile();
   const { disableShare, ...restMetaData } = metaData;
 
   const content = (
@@ -31,9 +31,9 @@ const DynamicPage: FC<DynamicPageProps> = ({
       components={{
         ...getComponents(hydrationComponentsList),
         h1: Mdx.h1({ disableShare, meta: restMetaData }),
-        h2: Mdx.h2({ isMobile: renderMobile }),
-        h3: Mdx.h3({ isMobile: renderMobile }),
-        h4: Mdx.h4({ isMobile: renderMobile }),
+        h2: Mdx.h2,
+        h3: Mdx.h3,
+        h4: Mdx.h4,
         h5: Mdx.h5,
         h6: Mdx.h6
       }}
@@ -41,7 +41,7 @@ const DynamicPage: FC<DynamicPageProps> = ({
   );
 
   return (
-    <Mdx.MdxDocs meta={restMetaData} raw={rawContent} isMobile={renderMobile}>
+    <Mdx.MdxDocs meta={restMetaData} raw={rawContent}>
       {content}
     </Mdx.MdxDocs>
   );

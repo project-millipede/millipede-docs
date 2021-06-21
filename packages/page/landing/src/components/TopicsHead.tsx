@@ -8,7 +8,7 @@ import { TopicsViewMobile } from './TopicsViewMobile';
 import { translateObject } from './TranslateService';
 
 const {
-  Responsive: { Mobile, Desktop }
+  Media: { Media }
 } = Components;
 
 export const TopicsHead = () => {
@@ -21,12 +21,12 @@ export const TopicsHead = () => {
 
   return (
     <>
-      <Mobile>
+      <Media lessThan='md'>
         <TopicsViewMobile topics={topics} />
-      </Mobile>
-      <Desktop>
+      </Media>
+      <Media greaterThanOrEqual='md'>
         <TopicsViewDesktop topics={topics} />
-      </Desktop>
+      </Media>
     </>
   );
 };
