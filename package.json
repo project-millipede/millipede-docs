@@ -51,6 +51,7 @@
     "@app/mdx-runtime": "workspace:packages/mdx-runtime",
     "@app/types": "workspace:packages/types",
     "@app/utils": "workspace:packages/utils",
+    "@artsy/fresnel": "^1.7.0",
     "@demonstrators-social/layout": "workspace:packages/demonstrators/social/layout",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
