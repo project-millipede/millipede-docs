@@ -1,5 +1,7 @@
 import { Components } from '@app/render-utils';
-import { ServerStyleSheets as MaterialServerStyleSheets } from '@material-ui/styles';
+import createCache from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
+import createEmotionServer from '@emotion/server/create-instance';
 import NextDocument, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
 import React, { Children } from 'react';
 import { ServerStyleSheet as StyledComponentSheets } from 'styled-components';
@@ -8,6 +10,11 @@ const {
   Media: { mediaStyles }
 } = Components;
 
+const getCache = () => {
+  const cache = createCache({ key: 'css', prepend: true });
+  cache.compat = true;
+  return cache;
+};
 class MillipedeDocument extends NextDocument {
   render() {
     const { locale, defaultLocale } = this.props.__NEXT_DATA__;
@@ -42,26 +49,45 @@ MillipedeDocument.getInitialProps = async (
   ctx: DocumentContext
 ): Promise<InitialProps> => {
   const styledComponentSheet = new StyledComponentSheets();
-  const materialSheets = new MaterialServerStyleSheets();
+
   const originalRenderPage = ctx.renderPage;
+
+  const cache = getCache();
+  const { extractCriticalToChunks } = createEmotionServer(cache);
 
   try {
     ctx.renderPage = () =>
       originalRenderPage({
         enhanceApp: App => props =>
-          styledComponentSheet.collectStyles(
-            materialSheets.collect(<App {...props} />)
+          styledComponentSheet.collectStyles(<App {...props} />),
+        // Take precedence over the CacheProvider in our custom _app.js
+        enhanceComponent: Component => props =>
+          (
+            <CacheProvider value={cache}>
+              <Component {...props} />
+            </CacheProvider>
           )
       });
 
     const initialProps = await NextDocument.getInitialProps(ctx);
 
+    const emotionStyles = extractCriticalToChunks(initialProps.html);
+    const emotionStyleTags = emotionStyles.styles.map(style => (
+      <style
+        data-emotion={`${style.key} ${style.ids.join(' ')}`}
+        key={style.key}
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: style.css }}
+      />
+    ));
+
     return {
       ...initialProps,
       // Styles fragment is rendered after the app and page rendering finish.
       styles: [
+        ...Children.toArray(initialProps.styles),
         styledComponentSheet.getStyleElement(),
-        ...Children.toArray(initialProps.styles)
+        ...emotionStyleTags
       ]
     };
   } finally {
