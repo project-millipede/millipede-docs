@@ -1,67 +1,41 @@
-import { Link } from '@app/components';
-import { MAX_DRAWER_WIDTH, TOOLBAR_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
-import { Divider, IconButton, SwipeableDrawer, Typography } from '@material-ui/core';
-import { ChevronLeft } from '@material-ui/icons';
-import { makeStyles } from '@material-ui/styles';
-import useTranslation from 'next-translate/useTranslation';
+import { MAX_DRAWER_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
+import { SwipeableDrawer as MuiSwipeableDrawer } from '@material-ui/core';
+import { styled } from '@material-ui/core/styles';
 import React, { FC } from 'react';
 
 import { DrawerProps } from '.';
 
-const useDrawerStyles = makeStyles(() => ({
-  toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    minHeight: TOOLBAR_HEIGHT
-  },
-  paperMobile: {
-    width: MAX_DRAWER_WIDTH
-  }
+const SwipeableDrawer = styled(MuiSwipeableDrawer)(({ open }) => ({
+  ...(open && {
+    '& .MuiDrawer-paper': {
+      width: MAX_DRAWER_WIDTH,
+      // Important:
+      // Correct the layout shift among supported drawers switching
+      // from the mobile to the desktop variant and vice versa.
+      borderRight: `1px solid #000000`
+      // The palette divider theme corresponds to the border-right
+      // style applied in the desktop drawer variant
+      // borderRight: `1px solid ${theme.palette.divider}`,
+    }
+  })
 }));
 
 export const MobileDrawer: FC<DrawerProps> = ({
   isDrawerExpanded,
-  handleDrawerOpen,
   handleDrawerClose,
   children
 }) => {
-  const classes = useDrawerStyles();
-
-  const { t } = useTranslation();
-
   return (
     <SwipeableDrawer
       variant='temporary'
-      classes={{
-        paper: classes.paperMobile
-      }}
       open={isDrawerExpanded}
-      onOpen={handleDrawerOpen}
-      onClose={handleDrawerClose}
+      onOpen={() => {}}
+      onClose={() => {}}
+      onBackdropClick={handleDrawerClose}
       ModalProps={{
         keepMounted: true
       }}
     >
-      <div className={classes.toolbar}>
-        <Link
-          href={
-            {
-              pathname: '/'
-            } as any
-          }
-          onClick={handleDrawerClose}
-        >
-          <Typography variant='h6'>{t('common:application-title')}</Typography>
-        </Link>
-
-        <IconButton onClick={handleDrawerClose}>
-          <ChevronLeft />
-        </IconButton>
-      </div>
-
-      <Divider />
-
       {children}
     </SwipeableDrawer>
   );
