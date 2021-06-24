@@ -1,37 +1,10 @@
 import { TOC_TOP, TOC_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
-import { Theme, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { Container, Typography } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
 import { TocComponent } from './toc';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    position: 'sticky',
-    width: TOC_WIDTH,
-    height: `calc(100% - ${TOC_TOP}px)`,
-    top: TOC_TOP,
-    order: 2,
-    flexShrink: 0,
-    margin: theme.spacing(1),
-    overflowY: 'auto',
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block'
-    },
-    '& ul': {
-      paddingLeft: 0,
-      listStyle: 'none'
-    }
-  },
-  tocHeader: {
-    height: 56,
-    padding: theme.spacing(1),
-    fontSize: 16,
-    fontWeight: theme.typography.fontWeightMedium
-  }
-}));
 
 export interface AppTableOfContentsProps {
   content: string;
@@ -40,14 +13,42 @@ export interface AppTableOfContentsProps {
 export const AppTableOfContents: FC<AppTableOfContentsProps> = ({
   content
 }) => {
-  const classes = useStyles();
-
   const { t } = useTranslation();
+  const theme = useTheme();
 
   return (
-    <nav className={classes.root}>
-      <Typography className={classes.tocHeader}>{t('common:toc')}</Typography>
+    <Container
+      component='nav'
+      sx={{
+        position: 'sticky',
+        width: TOC_WIDTH,
+        height: `calc(100% - ${TOC_TOP}px)`,
+        top: TOC_TOP,
+        order: 2,
+        flexShrink: 0,
+        margin: theme.spacing(1),
+        overflowY: 'auto',
+        display: 'none',
+        [theme.breakpoints.up('sm')]: {
+          display: 'block'
+        },
+        '& ul': {
+          paddingLeft: 0,
+          listStyle: 'none'
+        }
+      }}
+    >
+      <Typography
+        sx={{
+          height: 56,
+          padding: theme.spacing(1),
+          fontSize: 16,
+          fontWeight: theme.typography.fontWeightMedium
+        }}
+      >
+        {t('common:toc')}
+      </Typography>
       <TocComponent content={content} />
-    </nav>
+    </Container>
   );
 };
