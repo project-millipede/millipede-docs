@@ -10,14 +10,11 @@ import {
   TableHead,
   TableRow,
 } from '@material-ui/core';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import LinkIcon from '@material-ui/icons/Link';
-import { makeStyles } from '@material-ui/styles';
-import isArray from 'lodash/isArray';
+import { styled } from '@material-ui/core/styles';
+import { KeyboardArrowDown, KeyboardArrowUp, Link as LinkIcon } from '@material-ui/icons';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
-import React, { FC, useState } from 'react';
+import React, { FC, Fragment, useState } from 'react';
 import { isBrowser, isSafari } from 'react-device-detect';
 
 interface ColumnDescriptor {
@@ -58,19 +55,13 @@ export const getColumns = (row: RowDescriptor): Array<ColumnDescriptor> => {
   ];
 };
 
-const useStyles = makeStyles({
-  container: {
-    maxHeight: 440
-  }
-});
-
-const useRowStyles = makeStyles({
-  root: {
-    '& > *': {
-      borderBottom: 'unset'
+const StyledTable = styled(Table)(() => ({
+  '& .MuiTableCell-root': {
+    '&:nth-of-type(1)': {
+      border: 0
     }
   }
-});
+}));
 
 export const ExpandableRow = ({
   rowData,
@@ -82,14 +73,13 @@ export const ExpandableRow = ({
   header: RowDescriptor;
 }) => {
   const [open, setOpen] = useState(false);
-  const { root } = useRowStyles();
 
   return (
     <>
-      <TableRow className={root}>
+      <TableRow>
         <TableCell>
           <IconButton size='small' onClick={() => setOpen(!open)}>
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
           </IconButton>
         </TableCell>
         {columns.map(column => {
@@ -149,8 +139,6 @@ export const ExpandableRow = ({
 export const Publications: FC = () => {
   const { t } = useTranslation();
 
-  const classes = useStyles();
-
   const header = t<RowDescriptor>(
     'pages/guides/research/paper/index:header',
     {},
@@ -171,12 +159,15 @@ export const Publications: FC = () => {
   const columnsReduced = CollectionUtil.Array.omitAtIndex(columns, 0);
 
   return (
-    <TableContainer className={classes.container}>
-      <Table stickyHeader>
+    <TableContainer sx={{ maxHeight: '440px' }}>
+      <StyledTable stickyHeader>
         <TableHead>
           <TableRow>
             {columns.map(column => (
-              <TableCell key={column.id} style={{ minWidth: column.minWidth }}>
+              <TableCell
+                key={`header-${column.id}`}
+                style={{ minWidth: column.minWidth }}
+              >
                 {column.label}
               </TableCell>
             ))}
@@ -184,38 +175,36 @@ export const Publications: FC = () => {
         </TableHead>
 
         <TableBody>
-          {isArray(rows) && rows.length > 0
-            ? rows.map(row => {
-                const { head, body } = row;
-                return (
-                  <>
-                    <TableRow>
-                      <TableCell
-                        variant={'head'}
-                        style={{
-                          top: isBrowser && !isSafari ? 57 : 0
-                        }}
-                        colSpan={4}
-                      >
-                        {head}
-                      </TableCell>
-                    </TableRow>
-                    {body.map(row => {
-                      return (
-                        <ExpandableRow
-                          key={row.title}
-                          rowData={row}
-                          columns={columnsReduced}
-                          header={header}
-                        />
-                      );
-                    })}
-                  </>
-                );
-              })
-            : null}
+          {rows.map((row, index) => {
+            const { head, body } = row;
+            return (
+              <Fragment key={`head-row-${head}-${index}`}>
+                <TableRow>
+                  <TableCell
+                    variant={'head'}
+                    style={{
+                      top: isBrowser && !isSafari ? 57 : 0
+                    }}
+                    colSpan={4}
+                  >
+                    {head}
+                  </TableCell>
+                </TableRow>
+                {body.map(row => {
+                  return (
+                    <ExpandableRow
+                      key={row.title}
+                      rowData={row}
+                      columns={columnsReduced}
+                      header={header}
+                    />
+                  );
+                })}
+              </Fragment>
+            );
+          })}
         </TableBody>
-      </Table>
+      </StyledTable>
     </TableContainer>
   );
 };
