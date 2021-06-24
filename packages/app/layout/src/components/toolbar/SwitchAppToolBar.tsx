@@ -1,56 +1,47 @@
 import { Components } from '@app/render-utils';
-import { IconButton, Theme, Toolbar, Tooltip } from '@material-ui/core';
+import { Box, IconButton, Toolbar, Tooltip } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
 import { GitHub, Menu } from '@material-ui/icons';
-import { makeStyles } from '@material-ui/styles';
-import clsx from 'clsx';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
-import { AppToolBarProps } from '.';
+import { AppBarProps } from '.';
 import { TOOLBAR_HEIGHT } from '../../recoil/features/layout/reducer';
 import { AppToolBar } from './AppToolBar';
 import { AppToolBarMobile } from './AppToolBarMobile';
 import { LanguageMenu } from './LanguageMenu';
 
 const {
-  Responsive: { Mobile, Desktop }
+  Media: { Media }
 } = Components;
 
-export const useStyles = makeStyles((theme: Theme) => ({
-  toolbar: {
-    minHeight: TOOLBAR_HEIGHT,
-    padding: theme.spacing(0, 3)
-  },
-  grow: {
-    flex: '1 1 auto'
-  },
-  hide: {
-    display: 'none'
-  }
-}));
-
-export const SwitchAppToolBar: FC<AppToolBarProps> = ({
+export const SwitchAppToolBar: FC<AppBarProps> = ({
   isDrawerExpanded,
   handleDrawerOpen
 }) => {
-  const classes = useStyles();
-
   const { t } = useTranslation();
+  const theme = useTheme();
 
   const toolBar = (
-    <Toolbar className={classes.toolbar}>
+    <Toolbar
+      sx={{
+        minHeight: TOOLBAR_HEIGHT,
+        padding: theme.spacing(0, 3)
+      }}
+    >
       <IconButton
         edge='start'
         color='inherit'
         onClick={handleDrawerOpen}
-        className={clsx({
-          [classes.hide]: isDrawerExpanded
-        })}
+        sx={{
+          display: isDrawerExpanded && 'none',
+          padding: theme.spacing(1.5)
+        }}
       >
         <Menu />
       </IconButton>
 
-      <div className={classes.grow} />
+      <Box sx={{ flexGrow: 1 }} />
 
       <LanguageMenu />
 
@@ -60,6 +51,9 @@ export const SwitchAppToolBar: FC<AppToolBarProps> = ({
           component='a'
           color='inherit'
           href='https://github.com/project-millipede/millipede-docs'
+          sx={{
+            padding: theme.spacing(1.5)
+          }}
         >
           <GitHub />
         </IconButton>
@@ -68,12 +62,12 @@ export const SwitchAppToolBar: FC<AppToolBarProps> = ({
   );
   return (
     <>
-      <Mobile>
+      <Media lessThan='md'>
         <AppToolBarMobile>{toolBar}</AppToolBarMobile>
-      </Mobile>
-      <Desktop>
+      </Media>
+      <Media greaterThanOrEqual='md'>
         <AppToolBar isDrawerExpanded={isDrawerExpanded}>{toolBar}</AppToolBar>
-      </Desktop>
+      </Media>
     </>
   );
 };
