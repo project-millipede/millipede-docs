@@ -11,8 +11,12 @@ const components = {
   PDF: dynamic(() =>
     import('@app/components').then(module => module.Pdf.StepperContent)
   ),
-  Demonstrator: dynamic(() =>
-    import('@demonstrators-social/layout').then(module => module.Demonstrator)
+  Demonstrator: dynamic(
+    () =>
+      import('@demonstrators-social/layout').then(
+        module => module.Demonstrator
+      ),
+    { ssr: false }
   ),
   InterdisciplinaryApproach: dynamic(() =>
     import('@page/illustrations').then(
@@ -42,12 +46,10 @@ const components = {
       module => module.Components.Pidp.Approach.ByExample.ByExample
     )
   ),
-  Board: dynamic(
-    () =>
-      import('@page/illustrations').then(
-        module => module.Components.DiscoverMore.Team.Board
-      ),
-    { ssr: false }
+  Board: dynamic(() =>
+    import('@page/illustrations').then(
+      module => module.Components.DiscoverMore.Team.Board
+    )
   ),
   Concept1: dynamic(() =>
     import('@page/illustrations').then(
