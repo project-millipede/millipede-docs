@@ -1,30 +1,11 @@
-// import { Link } from '@app/components';
-import { Theme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
-import clsx from 'clsx';
+import { Link } from '@app/components';
+import { Typography } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
+import { useRouter } from 'next/router';
 import React, { FC } from 'react';
-import { Link } from 'react-scroll';
 import { useRecoilValue } from 'recoil';
 
 import { scrollItemsState } from '../../recoil/features/scroll/page/reducer';
-
-export const useStyles = makeStyles((theme: Theme) => ({
-  item: {
-    display: 'block',
-    padding: theme.spacing(1),
-    textDecoration: 'none',
-    borderLeft: `2px solid transparent`,
-    '&:hover': {
-      borderLeftColor: theme.palette.grey[200],
-      cursor: 'pointer'
-    },
-    fontSize: '0.875rem'
-  },
-  active: {
-    borderLeft: `2px solid ${theme.palette.grey[300]}`,
-    color: theme.palette.text.primary
-  }
-}));
 
 interface TocLinkProps {
   href: string;
@@ -42,40 +23,43 @@ export const processLink = (
 };
 
 export const TocLink: FC<TocLinkProps> = ({ href, children }) => {
-  const classes = useStyles();
-
   const { scrollItems } = useRecoilValue(scrollItemsState);
   const isActive = processLink(scrollItems, href);
 
-  // const { query } = useRouter();
+  const { query, pathname } = useRouter();
 
-  // Use - when NextJs resolves a bug with dynamic pages and hash
-  // return (
-  //   <Link
-  //     href={
-  //       {
-  //         pathname: '/docs/[...slug]',
-  //         query: { slug: [...query.slug] },
-  //         hash: href
-  //       } as any
-  //     }
-  //     className={clsx(classes.item, isActive ? classes.active : undefined)}
-  //     naked
-  //   >
-  //     {children}
-  //   </Link>
-  // );
+  const theme = useTheme();
 
   return (
-    <Link
-      className={clsx(classes.item, isActive ? classes.active : undefined)}
-      to={decodeURI(href).replace('#', '')}
-      spy={true}
-      smooth={true}
-      offset={-96}
-      duration={500}
+    <Typography
+      component={Link}
+      sx={{
+        display: 'block',
+        fontSize: '0.875rem',
+        padding: theme.spacing(1),
+        color: theme.palette.text.primary,
+
+        // TODO: do it in link
+        textDecoration: 'none',
+
+        borderLeft: isActive
+          ? `2px solid ${theme.palette.grey[300]}`
+          : `2px solid transparent`,
+        '&:hover': {
+          borderLeftColor: theme.palette.grey[200],
+          // TODO: do it in link
+          textDecoration: 'none'
+        }
+      }}
+      href={
+        {
+          pathname,
+          query,
+          hash: href
+        } as any
+      }
     >
       {children}
-    </Link>
+    </Typography>
   );
 };
