@@ -21,18 +21,18 @@ const closeAnimation = (theme: Theme): CSSObject => ({
   })
 });
 
-const AppBar = styled(MuiAppBar)<AppBarProps>(
-  ({ theme, isDrawerExpanded }) => ({
-    zIndex: theme.zIndex.drawer + 1,
-    ...(isDrawerExpanded && openAnimation(theme)),
-    ...(!isDrawerExpanded && closeAnimation(theme))
-  })
-);
+const StyledAppBar = styled(MuiAppBar, {
+  shouldForwardProp: prop => prop !== 'isDrawerExpanded'
+})<AppBarProps>(({ theme, isDrawerExpanded }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  ...(isDrawerExpanded && openAnimation(theme)),
+  ...(!isDrawerExpanded && closeAnimation(theme))
+}));
 
 export const AppToolBar: FC<AppBarProps> = ({ isDrawerExpanded, children }) => {
   return (
-    <AppBar position={'fixed'} isDrawerExpanded={isDrawerExpanded}>
+    <StyledAppBar position={'fixed'} isDrawerExpanded={isDrawerExpanded}>
       {children}
-    </AppBar>
+    </StyledAppBar>
   );
 };
