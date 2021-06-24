@@ -1,22 +1,13 @@
 import { Portal } from '@app/components';
 import { layoutState } from '@app/layout/src/recoil/features/layout/reducer';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { makeStyles } from '@material-ui/styles';
 import React, { FC, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { SwitchDrawer } from './drawer';
 import { SwitchAppToolBar } from './toolbar';
 
-const useStyles = makeStyles(() => ({
-  root: {
-    display: 'flex'
-  }
-}));
-
 export const AppFrame: FC = ({ children }) => {
-  const classes = useStyles();
-
   const [{ isDrawerExpanded }, setLayout] = useRecoilState(layoutState);
 
   const handleDrawerOpen = useCallback(() => {
@@ -38,7 +29,7 @@ export const AppFrame: FC = ({ children }) => {
   }, []);
 
   return (
-    <div className={classes.root}>
+    <div style={{ display: 'flex' }}>
       <CssBaseline />
 
       <SwitchAppToolBar

@@ -1,8 +1,7 @@
 import { ContentTypes } from '@app/types';
 import { Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import { Theme } from '@material-ui/core/styles';
-import { makeStyles } from '@material-ui/styles';
+import { useTheme } from '@material-ui/core/styles';
 import { Item } from '@page/components';
 import groupArray from 'group-array';
 import get from 'lodash/get';
@@ -11,19 +10,13 @@ import React, { FC } from 'react';
 
 import { translateObject } from './TranslateService';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    margin: theme.spacing(3, 0)
-  }
-}));
-
 interface TopicsProps {
   feature: string;
   aspect: string;
 }
 
 export const Topics: FC<TopicsProps> = ({ feature, aspect }) => {
-  const classes = useStyles();
+  const theme = useTheme();
 
   const { t } = useTranslation();
 
@@ -67,7 +60,7 @@ export const Topics: FC<TopicsProps> = ({ feature, aspect }) => {
                   <Typography variant='h6'>
                     {get(categoriesRaw, categoryKey)}
                   </Typography>
-                  <Grid container className={classes.root}>
+                  <Grid container sx={{ margin: theme.spacing(3, 0) }}>
                     {categoryData.map((data, index) => {
                       const { title, description, link, icon } = data;
                       return (

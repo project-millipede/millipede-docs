@@ -1,20 +1,10 @@
 import { CustomIcon } from '@app/components';
 import { ContentTypes } from '@app/types';
-import { IconButton, Theme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { Box, IconButton } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React, { FC } from 'react';
 
 import { TopReveal } from '../animation/framer/components/text/TopReveal';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    padding: theme.spacing(2, 0),
-    [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(4, 0)
-    }
-  }
-}));
 
 interface WindowProps {
   windowStackData?: Array<ContentTypes.OverviewProps>;
@@ -22,8 +12,6 @@ interface WindowProps {
 }
 
 const Window: FC<WindowProps> = ({ windowStackData, index }) => {
-  const classes = useStyles();
-
   const { push } = useRouter();
 
   const handleSelect = (
@@ -48,12 +36,12 @@ const Window: FC<WindowProps> = ({ windowStackData, index }) => {
   const { id: topicId } = topic;
 
   return topic != null ? (
-    <div className={classes.container}>
+    <Box>
       <TopReveal
         id={`topic-${topic.category}-animation`}
         text={[...topic.title, ...topic.subTitle]}
       />
-      <div className={classes.container}>
+      <Box>
         {topic.sections &&
           topic.sections.map(section => {
             const { id: sectionId } = section;
@@ -68,8 +56,8 @@ const Window: FC<WindowProps> = ({ windowStackData, index }) => {
               </IconButton>
             );
           })}
-      </div>
-    </div>
+      </Box>
+    </Box>
   ) : null;
 };
 

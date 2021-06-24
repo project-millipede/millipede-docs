@@ -1,8 +1,7 @@
 import { CustomIcon } from '@app/components';
 import { ContentTypes } from '@app/types';
 import { StringUtil } from '@app/utils';
-import { Grid, IconButton, Theme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { Box, Grid, IconButton } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React, { FC, useEffect } from 'react';
 import { StringParam, useQueryParams } from 'use-query-params';
@@ -13,19 +12,8 @@ interface TopicsViewDesktopProps {
   topics: Array<ContentTypes.OverviewProps>;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    padding: theme.spacing(2, 0),
-    [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(4, 0)
-    }
-  }
-}));
-
 export const TopicsViewDesktop: FC<TopicsViewDesktopProps> = ({ topics }) => {
   const { asPath, push, pathname, locale } = useRouter();
-
-  const classes = useStyles();
 
   const handleSelect = (
     topic: ContentTypes.OverviewProps,
@@ -76,13 +64,13 @@ export const TopicsViewDesktop: FC<TopicsViewDesktopProps> = ({ topics }) => {
                 xs={12}
                 md={index <= 1 ? 6 : 12}
               >
-                <div className={classes.container}>
+                <Box>
                   <TopReveal
                     id={`topic-${topicId}-animation`}
                     text={[...topic.title, ...topic.subTitle]}
                     loop={false}
                   />
-                  <div className={classes.container}>
+                  <Box>
                     {topic.sections &&
                       topic.sections.map(section => {
                         const { id: sectionId } = section;
@@ -97,8 +85,8 @@ export const TopicsViewDesktop: FC<TopicsViewDesktopProps> = ({ topics }) => {
                           </IconButton>
                         );
                       })}
-                  </div>
-                </div>
+                  </Box>
+                </Box>
               </Grid>
             );
           })
