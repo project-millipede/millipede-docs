@@ -1,41 +1,37 @@
-import { AppBar, Theme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
-import clsx from 'clsx';
+import MuiAppBar from '@material-ui/core/AppBar';
+import { CSSObject, styled, Theme } from '@material-ui/core/styles';
 import React, { FC } from 'react';
 
-import { AppToolBarProps } from '.';
+import { AppBarProps } from '.';
 import { MAX_DRAWER_WIDTH } from '../../recoil/features/layout/reducer';
 
-const useDrawerStyles = makeStyles((theme: Theme) => ({
-  appBar: {
+const openAnimation = (theme: Theme): CSSObject => ({
+  width: `calc(100% - ${MAX_DRAWER_WIDTH}px)`,
+  transition: theme.transitions.create(['width'], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen
+  })
+});
+
+const closeAnimation = (theme: Theme): CSSObject => ({
+  width: '100%',
+  transition: theme.transitions.create(['width'], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen
+  })
+});
+
+const AppBar = styled(MuiAppBar)<AppBarProps>(
+  ({ theme, isDrawerExpanded }) => ({
     zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
-  },
-  appBarShift: {
-    width: `calc(100% - ${MAX_DRAWER_WIDTH}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  }
-}));
+    ...(isDrawerExpanded && openAnimation(theme)),
+    ...(!isDrawerExpanded && closeAnimation(theme))
+  })
+);
 
-export const AppToolBar: FC<AppToolBarProps> = ({
-  isDrawerExpanded,
-  children
-}) => {
-  const drawerClasses = useDrawerStyles();
-
+export const AppToolBar: FC<AppBarProps> = ({ isDrawerExpanded, children }) => {
   return (
-    <AppBar
-      position={'fixed'}
-      className={clsx(drawerClasses.appBar, {
-        [drawerClasses.appBarShift]: isDrawerExpanded
-      })}
-    >
+    <AppBar position={'fixed'} isDrawerExpanded={isDrawerExpanded}>
       {children}
     </AppBar>
   );

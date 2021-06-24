@@ -1,22 +1,26 @@
-import { Theme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { Typography } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
 import React, { FC } from 'react';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  language: {
-    margin: theme.spacing(0, 1.5, 0, 1.5),
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'block'
-    }
-  }
-}));
 
 interface LanguageLabelProps {
   label: string;
 }
 
 export const LanguageLabel: FC<LanguageLabelProps> = ({ label }) => {
-  const classes = useStyles();
-  return <span className={classes.language}>{label?.toUpperCase()}</span>;
+  const theme = useTheme();
+
+  return (
+    <Typography
+      component='span'
+      sx={{
+        margin: theme.spacing(0, 1.5, 0, 1.5),
+        display: 'none',
+        [theme.breakpoints.up('md')]: {
+          display: 'block'
+        }
+      }}
+    >
+      {label?.toUpperCase()}
+    </Typography>
+  );
 };
