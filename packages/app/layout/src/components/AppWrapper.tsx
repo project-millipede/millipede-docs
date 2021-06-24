@@ -1,7 +1,5 @@
 import { RouterUtils } from '@app/utils';
 import { StyledEngineProvider } from '@material-ui/core/styles';
-import { jssPreset, StylesProvider } from '@material-ui/styles';
-import { create } from 'jss';
 import { useRouter } from 'next/router';
 import React, { FC, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
@@ -10,10 +8,6 @@ import { useAnalytics } from 'use-analytics';
 import { loadPages } from '../pages';
 import { navigationState } from '../recoil/features/pages/reducer';
 import { ThemeProvider } from './ThemeProvider';
-
-export const jss = create({
-  plugins: [...jssPreset().plugins]
-});
 
 export const AppWrapper: FC = ({ children }) => {
   const { page } = useAnalytics();
@@ -85,10 +79,8 @@ export const AppWrapper: FC = ({ children }) => {
   }, [asPath]);
 
   return (
-    <StyledEngineProvider injectFirst>
-      <StylesProvider jss={jss}>
-        <ThemeProvider>{children}</ThemeProvider>
-      </StylesProvider>
+    <StyledEngineProvider>
+      <ThemeProvider>{children}</ThemeProvider>
     </StyledEngineProvider>
   );
 };
