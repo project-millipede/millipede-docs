@@ -1,7 +1,12 @@
+import { Components } from '@app/render-utils';
 import { ServerStyleSheets as MaterialServerStyleSheets } from '@material-ui/styles';
 import NextDocument, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
-import React, { Fragment } from 'react';
+import React, { Children } from 'react';
 import { ServerStyleSheet as StyledComponentSheets } from 'styled-components';
+
+const {
+  Media: { mediaStyles }
+} = Components;
 
 class MillipedeDocument extends NextDocument {
   render() {
@@ -17,6 +22,10 @@ class MillipedeDocument extends NextDocument {
             rel='stylesheet'
           />
           <link rel='shortcut icon' href='/favicon.ico' />
+          <style
+            type='text/css'
+            dangerouslySetInnerHTML={{ __html: mediaStyles }}
+          />
         </Head>
         <body>
           <Main />
@@ -37,28 +46,23 @@ MillipedeDocument.getInitialProps = async (
   const originalRenderPage = ctx.renderPage;
 
   try {
-    const newCtx = {
-      ...ctx,
-      renderPage: () =>
-        originalRenderPage({
-          enhanceApp: App => props =>
-            styledComponentSheet.collectStyles(
-              materialSheets.collect(<App {...props} />)
-            )
-        })
-    };
+    ctx.renderPage = () =>
+      originalRenderPage({
+        enhanceApp: App => props =>
+          styledComponentSheet.collectStyles(
+            materialSheets.collect(<App {...props} />)
+          )
+      });
 
-    const initialProps = await NextDocument.getInitialProps(newCtx);
+    const initialProps = await NextDocument.getInitialProps(ctx);
 
     return {
       ...initialProps,
-      styles: (
-        <Fragment key='styles'>
-          {initialProps.styles}
-          {materialSheets.getStyleElement()}
-          {styledComponentSheet.getStyleElement()}
-        </Fragment>
-      )
+      // Styles fragment is rendered after the app and page rendering finish.
+      styles: [
+        styledComponentSheet.getStyleElement(),
+        ...Children.toArray(initialProps.styles)
+      ]
     };
   } finally {
     styledComponentSheet.seal();
