@@ -61,9 +61,12 @@ export const SwitchDrawer: FC<DrawerProps> = ({
           <FirstPage />
         </IconButton>
       </Link>
-      <IconButton onClick={handleDrawerClose}>
-        <ChevronLeft />
-      </IconButton>
+
+      {isDrawerExpanded && (
+        <IconButton onClick={handleDrawerClose}>
+          <ChevronLeft />
+        </IconButton>
+      )}
     </DrawerHeader>
   );
 
