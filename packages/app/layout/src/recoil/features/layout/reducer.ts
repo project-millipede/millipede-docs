@@ -9,7 +9,7 @@ export const TOC_WIDTH = 225;
 
 // DRAWER
 export const MIN_DRAWER_WIDTH = 72;
-export const MAX_DRAWER_WIDTH = 280;
+export const MAX_DRAWER_WIDTH = 320;
 
 // INPUT
 export const INPUT_HEIGHT = 48;
@@ -21,6 +21,8 @@ export const LABEL_BORDER_RADIUS = LABEL_HEIGHT / 2;
 
 export const APP_CONTENT_HEADER_HEIGHT = 56;
 export const APP_CONTENT_SHARE_DIMENSION = 56;
+
+export const ACTIVE_INDICATOR_WIDTH = 2;
 
 export interface Layout {
   isDrawerExpanded: boolean;

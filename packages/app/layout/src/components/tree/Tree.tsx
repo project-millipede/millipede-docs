@@ -1,15 +1,17 @@
 import { getIconByName, Link } from '@app/components';
+import { ACTIVE_INDICATOR_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
+import { NavigationState, navigationState } from '@app/layout/src/recoil/features/pages/reducer';
 import { PageTypes } from '@app/types';
-import { CollectionUtil, RouterUtils } from '@app/utils';
+import { CollectionUtil } from '@app/utils';
 import { Collapse, ListItem, ListItemText } from '@material-ui/core';
-import { experimentalStyled as styled, Theme } from '@material-ui/core/styles';
+import { styled, useTheme } from '@material-ui/core/styles';
 import { TransitionProps } from '@material-ui/core/transitions';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import TreeItem, { TreeItemProps } from '@material-ui/lab/TreeItem';
 import TreeView from '@material-ui/lab/TreeView';
-import { makeStyles } from '@material-ui/styles';
 import useTranslation from 'next-translate/useTranslation';
-import React, { ChangeEvent, FC, memo, useEffect, useState } from 'react';
+import React, { ChangeEvent, FC } from 'react';
+import { SetterOrUpdater, useRecoilState } from 'recoil';
 
 interface TreeLabelProps {
   labelText: string;
@@ -20,17 +22,10 @@ interface TreeLabelProps {
 
 interface TreeProps {
   pages: Array<PageTypes.Page>;
-  flattenedPages: Array<PageTypes.FlattenedPage>;
-  activePage: PageTypes.Page;
+  selectedPage: Array<string>;
+  expandedPages: Array<string>;
+  setNavigation?: SetterOrUpdater<NavigationState>;
 }
-
-const useStylesTreeNode = makeStyles((theme: Theme) => ({
-  node: {
-    display: 'block',
-    color: theme.palette.text.secondary,
-    textDecoration: 'none'
-  }
-}));
 
 export const TransitionComponent: FC<TransitionProps> = props => {
   return <Collapse {...props} />;
@@ -42,6 +37,7 @@ const StyledTreeItem = styled(TreeItem)<TreeItemProps>(({ theme }) => ({
   },
   '& .MuiTreeItem-content': {
     padding: 0,
+    // borderRight: `2px solid transparent`,
     '&.Mui-selected': {
       borderRight: `2px solid ${theme.palette.primary.main}`
     },
@@ -54,6 +50,13 @@ const StyledTreeItem = styled(TreeItem)<TreeItemProps>(({ theme }) => ({
       marginRight: '24px',
       '& svg': {
         fontSize: '24px'
+      }
+    },
+    '& .MuiTreeItem-label': {
+      padding: 0,
+      '& a': {
+        textDecoration: 'none',
+        color: theme.palette.text.secondary
       }
     }
   }
@@ -90,11 +93,31 @@ const TreeLabel: FC<TreeLabelProps> = ({
 
   let renderExpand = null;
 
+  const theme = useTheme();
+
   if (hasChildren) {
     if (handleExpansion(pathname)) {
-      renderExpand = <ExpandLess />;
+      renderExpand = (
+        <ExpandLess
+          sx={{
+            margin: theme.spacing(0, 1)
+          }}
+        />
+      );
     } else {
-      renderExpand = <ExpandMore />;
+      renderExpand = (
+        <ExpandMore
+          sx={{
+            // Important:
+            // Correct layout shift caused by the border-right style applied to navigation
+            // indicator located in the tree component
+            marginLeft: theme.spacing(1),
+            marginRight: `calc(${theme.spacing(
+              1
+            )} + ${ACTIVE_INDICATOR_WIDTH}px)`
+          }}
+        />
+      );
     }
   }
 
@@ -112,33 +135,17 @@ Reason: Chrome on iOS does not animate the drawer open/close transitions correct
 Investigation: Differentiate individual sections of the tree that need 
 memoizing from those need changing.
 */
-export const Tree: FC<TreeProps> = ({
-  pages,
-  flattenedPages,
-  activePage = { pathname: '' }
-}) => {
+export const Tree: FC<TreeProps> = (
+  {
+    // pages,
+    // selectedPage,
+    // expandedPages
+  }
+) => {
   const { t } = useTranslation();
 
-  const classes = useStylesTreeNode();
-
-  const [selected, setSelected] = useState<Array<string>>([]);
-
-  const [expanded, setExpanded] = useState<Array<string>>([]);
-
-  useEffect(() => {
-    setSelected(
-      RouterUtils.findSelectedPage(
-        flattenedPages,
-        `/docs/${activePage.pathname}`
-      )
-    );
-    setExpanded(
-      RouterUtils.findExpandedPages(
-        flattenedPages,
-        `/docs/${activePage.pathname}`
-      )
-    );
-  }, [activePage.pathname]);
+  const [{ pages, selectedPage, expandedPages }, setNavigation] =
+    useRecoilState(navigationState);
 
   const buildTreeItems = (nodes: Array<PageTypes.Page>) => {
     return nodes.map(node => {
@@ -159,14 +166,13 @@ export const Tree: FC<TreeProps> = ({
                   query: { slug: pathname.split('/') }
                 } as any
               }
-              className={classes.node}
               naked
               prefetch={false}
             >
               <TreeLabel
                 labelText={title}
                 hasChildren={nodes && nodes.length > 0}
-                expandedNodeIds={expanded}
+                expandedNodeIds={expandedPages}
                 pathname={`/docs/${pathname}`}
               />
             </Link>
@@ -181,24 +187,35 @@ export const Tree: FC<TreeProps> = ({
   };
 
   const handleNodeSelect = (_event: ChangeEvent, nodeIds: Array<string>) => {
-    setSelected(nodeIds);
+    setNavigation(state => {
+      return {
+        ...state,
+        selectedPage: nodeIds
+      };
+    });
   };
 
   const handleNodeToggle = (_event: ChangeEvent, nodeIds: Array<string>) => {
-    setExpanded(nodeIds);
+    setNavigation(state => {
+      return {
+        ...state,
+        expandedPages: nodeIds
+      };
+    });
   };
 
   return (
     <TreeView
-      expanded={expanded}
-      selected={selected}
+      expanded={expandedPages}
+      selected={selectedPage}
       onNodeToggle={handleNodeToggle}
       onNodeSelect={handleNodeSelect}
       multiSelect={true}
+      sx={{ overflowX: 'hidden', overflowY: 'auto' }}
     >
       {buildTreeItems(pages)}
     </TreeView>
   );
 };
 
-export default memo(Tree);
+export default Tree;
