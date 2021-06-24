@@ -1,43 +1,54 @@
 import { getIconByName, Link } from '@app/components';
 import { ContentTypes } from '@app/types';
-import { Avatar, IconButton, Theme, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { Avatar, IconButton, Typography } from '@material-ui/core';
+import { styled, useTheme } from '@material-ui/core/styles';
 import isArray from 'lodash/isArray';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  row: {
-    display: 'flex'
-  },
-  column: {
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  avatar: {
-    margin: 12
-  },
-  title: {
-    fontWeight: theme.typography.fontWeightMedium
-  },
-  subTitle: {
-    fontWeight: theme.typography.fontWeightRegular
-  },
-  summary: {
-    fontWeight: theme.typography.fontWeightMedium,
-    fontStyle: 'italic'
-  },
-  note: {
-    fontWeight: theme.typography.fontWeightMedium,
-    fontStyle: 'italic',
-    '& blockquote': {
-      borderLeft: '5px solid #ffe564',
-      backgroundColor: 'rgba(255,229,100,0.2)',
-      padding: '4px 24px',
-      margin: '24px 0',
-      '& p': {
-        marginTop: '16px'
-      }
+// const useStyles = makeStyles((theme: Theme) => ({
+//   ==> unresolved
+//   note: {
+//     fontWeight: theme.typography.fontWeightMedium,
+//     fontStyle: 'italic',
+//     '& blockquote': {
+//       borderLeft: '5px solid #ffe564',
+//       backgroundColor: 'rgba(255,229,100,0.2)',
+//       padding: '4px 24px',
+//       margin: '24px 0',
+//       '& p': {
+//         marginTop: '16px'
+//       }
+//     }
+//   }
+// }));
+
+// TODO: Simplify
+export const NoteDiv = styled('div')(({ theme }) => ({
+  fontWeight: theme.typography.fontWeightMedium,
+  fontStyle: 'italic',
+  '& blockquote': {
+    borderLeft: '5px solid #ffe564',
+    backgroundColor: 'rgba(255,229,100,0.2)',
+    padding: '4px 24px',
+    margin: '24px 0',
+    '& p': {
+      marginTop: '16px'
+    }
+  }
+}));
+
+// TODO: Simplify
+export const Note = styled(Typography)(({ theme }) => ({
+  fontWeight: theme.typography.fontWeightMedium,
+  fontStyle: 'italic',
+  '& blockquote': {
+    borderLeft: '5px solid #ffe564',
+    backgroundColor: 'rgba(255,229,100,0.2)',
+    padding: '4px 24px',
+    margin: '24px 0',
+    '& p': {
+      marginTop: '16px'
     }
   }
 }));
@@ -48,7 +59,7 @@ export const Item = ({
   link,
   icon
 }: ContentTypes.OverviewProps) => {
-  const classes = useStyles();
+  const theme = useTheme();
 
   const { push } = useRouter();
 
@@ -72,12 +83,14 @@ export const Item = ({
       } = d;
 
       return (
-        <div key={`description-${index}`} className={classes.note}>
+        <NoteDiv key={`description-${index}`}>
           {subTitle.map((t, index) => (
             <Typography
               key={`subTitle-${index}`}
               variant='subtitle1'
-              className={classes.subTitle}
+              sx={{
+                fontWeight: theme.typography.fontWeightRegular
+              }}
             >
               {t}
             </Typography>
@@ -116,7 +129,10 @@ export const Item = ({
             <Typography
               key={`summary-${index}`}
               variant='subtitle1'
-              className={classes.summary}
+              sx={{
+                fontWeight: theme.typography.fontWeightMedium,
+                fontStyle: 'italic'
+              }}
             >
               {t}
             </Typography>
@@ -124,25 +140,21 @@ export const Item = ({
           {note.length > 0 ? (
             <>
               {note.map((item, index) => (
-                <Typography
-                  key={`note-${index}`}
-                  variant='subtitle1'
-                  className={classes.note}
-                >
+                <Note key={`note-${index}`} variant='subtitle1'>
                   {item}
-                </Typography>
+                </Note>
               ))}
             </>
           ) : null}
-        </div>
+        </NoteDiv>
       );
     });
   }
 
   return (
-    <div className={classes.row}>
+    <div style={{ display: 'flex' }}>
       {link ? (
-        <Avatar className={classes.avatar}>
+        <Avatar sx={{ margin: theme.spacing(0, 1) }}>
           <IconButton
             key={`link-${link}`}
             onClick={_e => {
@@ -153,8 +165,11 @@ export const Item = ({
           </IconButton>
         </Avatar>
       ) : null}
-      <div className={classes.column}>
-        <Typography variant='h5' className={classes.title}>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <Typography
+          variant='h5'
+          sx={{ fontWeight: theme.typography.fontWeightMedium }}
+        >
           {title}
         </Typography>
         {isArray(description) ? (
