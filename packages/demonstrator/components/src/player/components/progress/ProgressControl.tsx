@@ -59,6 +59,7 @@ export const ProgressControl: FC<ProgressControlProps> = ({ steps }) => {
   return (
     <div className={classes.row}>
       <Slider
+        size='small'
         value={getValue(playing, globalEnd, target)}
         onChange={(_e, value) => {
           const { stepIndex } = getStepByTime(

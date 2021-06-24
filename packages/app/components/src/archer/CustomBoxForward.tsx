@@ -8,7 +8,7 @@ import React, {
   MutableRefObject,
   ReactNode,
   useImperativeHandle,
-  useState,
+  useState
 } from 'react';
 
 import { SelectHandles } from './types';
@@ -24,17 +24,16 @@ export const StyledBox = styled(Box)<BoxEnhancedProps>(
     alignItems: 'center',
     justifyContent: 'center',
     border: '3px solid black',
+    textDecoration: 'none',
     padding: theme.spacing(1),
     color: theme.palette.text.primary,
     '&:hover': {
       cursor: 'pointer',
-      backgroundColor: '#E0E0E0',
-      textDecoration: 'none'
+      backgroundColor: '#E0E0E0'
     },
     ...(selected && {
       cursor: 'pointer',
-      backgroundColor: '#E0E0E0',
-      textDecoration: 'none'
+      backgroundColor: '#E0E0E0'
     })
   })
 );
