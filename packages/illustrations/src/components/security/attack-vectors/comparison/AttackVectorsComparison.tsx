@@ -1,28 +1,13 @@
 import { ContentTypes } from '@app/types';
 import { Grid, Typography } from '@material-ui/core';
-import { Theme } from '@material-ui/core/styles';
-import { makeStyles } from '@material-ui/styles';
+import { useTheme } from '@material-ui/core/styles';
 import isArray from 'lodash/isArray';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
-export const useStyles = makeStyles((theme: Theme) => ({
-  title: {
-    fontWeight: theme.typography.fontWeightMedium,
-    textDecoration: 'underline'
-  },
-  subTitle: {
-    fontWeight: theme.typography.fontWeightRegular
-  },
-  rowTitle: {
-    fontWeight: theme.typography.fontWeightMedium
-  },
-  summary: {
-    fontStyle: 'italic'
-  }
-}));
-
 export const AttackVectorsComparison: FC = () => {
+  const theme = useTheme();
+
   const { t } = useTranslation();
 
   const rows = t<Array<Array<ContentTypes.Content>>>(
@@ -32,8 +17,6 @@ export const AttackVectorsComparison: FC = () => {
       returnObjects: true
     }
   ) || [[]];
-
-  const classes = useStyles();
 
   const result =
     isArray(rows) && rows.length > 0
@@ -55,7 +38,9 @@ export const AttackVectorsComparison: FC = () => {
                           subTitle.map(t => (
                             <Typography
                               variant='body1'
-                              className={classes.rowTitle}
+                              sx={{
+                                fontWeight: theme.typography.fontWeightMedium
+                              }}
                             >
                               {t}
                             </Typography>
@@ -79,7 +64,7 @@ export const AttackVectorsComparison: FC = () => {
                           summary.map(t => (
                             <Typography
                               variant='body1'
-                              className={classes.summary}
+                              sx={{ fontStyle: 'italic' }}
                             >
                               {t}
                             </Typography>
@@ -99,12 +84,21 @@ export const AttackVectorsComparison: FC = () => {
                   <Grid item xs={12} md={4} key={`column-${columnIndex}`}>
                     <>
                       {column.title ? (
-                        <Typography className={classes.title}>
+                        <Typography
+                          sx={{
+                            fontWeight: theme.typography.fontWeightMedium,
+                            textDecoration: 'underline'
+                          }}
+                        >
                           {column.title}
                         </Typography>
                       ) : null}
                       {column.subTitle ? (
-                        <Typography className={classes.subTitle}>
+                        <Typography
+                          sx={{
+                            fontWeight: theme.typography.fontWeightRegular
+                          }}
+                        >
                           {column.subTitle}
                         </Typography>
                       ) : null}
