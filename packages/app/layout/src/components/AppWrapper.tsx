@@ -32,12 +32,24 @@ export const AppWrapper: FC = ({ children }) => {
       asPath,
       locale
     );
+
+    const selectedPage = RouterUtils.findSelectedPage(
+      flattenedPages,
+      `/docs/${activePage.pathname}`
+    );
+    const expandedPages = RouterUtils.findExpandedPages(
+      flattenedPages,
+      `/docs/${activePage.pathname}`
+    );
+
     setNavigation(state => {
       return {
         ...state,
         pages,
         flattenedPages,
-        activePage
+        activePage,
+        selectedPage,
+        expandedPages
       };
     });
     page();
@@ -50,10 +62,22 @@ export const AppWrapper: FC = ({ children }) => {
         asPath,
         locale
       );
+
+      const selectedPage = RouterUtils.findSelectedPage(
+        flattenedPages,
+        `/docs/${activePage.pathname}`
+      );
+      const expandedPages = RouterUtils.findExpandedPages(
+        flattenedPages,
+        `/docs/${activePage.pathname}`
+      );
+
       setNavigation(state => {
         return {
           ...state,
-          activePage
+          activePage,
+          selectedPage,
+          expandedPages
         };
       });
       page();

@@ -6,6 +6,8 @@ export interface NavigationState {
   flattenedPages: Array<PageTypes.FlattenedPage>;
   // activePage: PageTypes.Page;
   activePage: PageTypes.FlattenedPage;
+  selectedPage: Array<string>;
+  expandedPages: Array<string>;
 }
 
 export const initialState: NavigationState = {
@@ -13,7 +15,9 @@ export const initialState: NavigationState = {
   flattenedPages: [],
   activePage: {
     pathname: ''
-  }
+  },
+  selectedPage: [],
+  expandedPages: []
 };
 
 export const navigationState = atom({
