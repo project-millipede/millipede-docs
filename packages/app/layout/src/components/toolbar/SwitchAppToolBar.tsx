@@ -25,7 +25,7 @@ export const SwitchAppToolBar: FC<AppBarProps> = ({
   const toolBar = (
     <Toolbar
       sx={{
-        minHeight: TOOLBAR_HEIGHT,
+        minHeight: theme.spacing(TOOLBAR_HEIGHT),
         padding: theme.spacing(0, 3)
       }}
     >

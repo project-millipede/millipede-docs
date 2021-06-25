@@ -21,9 +21,9 @@ export const AppTableOfContents: FC<AppTableOfContentsProps> = ({
       component='nav'
       sx={{
         position: 'sticky',
-        width: TOC_WIDTH,
-        height: `calc(100% - ${TOC_TOP}px)`,
-        top: TOC_TOP,
+        width: `${theme.spacing(TOC_WIDTH)}`,
+        height: `calc(100% - ${theme.spacing(TOC_TOP)})`,
+        top: `${theme.spacing(TOC_TOP)}`,
         order: 2,
         flexShrink: 0,
         margin: theme.spacing(1),

@@ -15,7 +15,7 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  minHeight: TOOLBAR_HEIGHT,
+  minHeight: theme.spacing(TOOLBAR_HEIGHT),
   // TODO:
   // Investigate why a direct height specification causes the component to itch
   // when tree elements are opened or closed.
