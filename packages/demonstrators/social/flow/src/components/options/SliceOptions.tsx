@@ -1,6 +1,7 @@
 import { APP_CONTENT_SHARE_DIMENSION } from '@app/layout/src/recoil/features/layout/reducer';
 import { scrollStates, ScrollTypes } from '@demonstrators-social/shared';
-import { SpeedDial, SpeedDialAction, SpeedDialIcon, useTheme } from '@material-ui/core';
+import { SpeedDial, SpeedDialAction, SpeedDialIcon } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
 import { Close, Share } from '@material-ui/icons';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
@@ -117,8 +118,8 @@ export const SliceOptions: FC = () => {
   return (
     <div
       style={{
-        width: APP_CONTENT_SHARE_DIMENSION,
-        height: APP_CONTENT_SHARE_DIMENSION,
+        width: theme.spacing(APP_CONTENT_SHARE_DIMENSION),
+        height: theme.spacing(APP_CONTENT_SHARE_DIMENSION),
         margin: theme.spacing(0, 2)
       }}
     >

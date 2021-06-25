@@ -1,4 +1,5 @@
-import { Chip, useTheme } from '@material-ui/core';
+import { Chip } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
 import { ClassOutlined } from '@material-ui/icons';
 import React, { FC } from 'react';
 

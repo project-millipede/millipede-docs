@@ -28,7 +28,7 @@ export const Help: FC<HelpProps> = ({ message }) => {
   };
 
   return (
-    <IconButton size={'small'} onClick={handleClick}>
+    <IconButton size='small' onClick={handleClick}>
       <HelpIcon />
     </IconButton>
   );

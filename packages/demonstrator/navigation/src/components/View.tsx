@@ -11,10 +11,10 @@ import { TPosition } from '../types';
 import { invariant } from '../utils/invariant';
 import { warning } from '../utils/warning';
 
-type OuterViewProps = {
+type OuterViewProps = MotionProps & {
   backgroundColor?: string;
   gridArea: string;
-} & MotionProps;
+};
 
 export const OuterView = styled(motion.div)<OuterViewProps>`
   grid-area: ${({ gridArea }) => gridArea};

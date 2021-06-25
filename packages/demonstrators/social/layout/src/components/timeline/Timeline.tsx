@@ -2,16 +2,17 @@ import { useHoux } from '@app/houx';
 import { HooksUtils } from '@app/render-utils';
 import { CollectionUtil } from '@app/utils';
 import {
-    RootState,
-    scrollSelectors,
-    scrollStates,
-    ScrollTypes,
-    selectors,
-    TimelineActions,
-    viewportSelectors,
+  RootState,
+  scrollSelectors,
+  scrollStates,
+  ScrollTypes,
+  selectors,
+  TimelineActions,
+  viewportSelectors,
 } from '@demonstrators-social/shared';
 import { useMergedRef } from '@huse/merged-ref';
-import { Button, List, useTheme } from '@material-ui/core';
+import { Button, List } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
 import CreateIcon from '@material-ui/icons/Create';
 import useTranslation from 'next-translate/useTranslation';
 import React, { Dispatch, FC, forwardRef, ForwardRefRenderFunction, useEffect, useState } from 'react';
