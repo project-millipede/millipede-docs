@@ -30,7 +30,7 @@ export const Player: FC = () => {
   };
 
   const expander = (
-    <IconButton size={'small'} onClick={handleBottomSheet}>
+    <IconButton size='small' onClick={handleBottomSheet}>
       {isPlayerExpanded ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
     </IconButton>
   );

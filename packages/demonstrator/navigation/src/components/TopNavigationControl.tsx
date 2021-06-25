@@ -1,7 +1,6 @@
 import { IconButton, Typography } from '@material-ui/core';
 import { ChevronLeft, ChevronRight } from '@material-ui/icons';
-import { CSSProperties } from '@material-ui/styles';
-import React, { FC, useCallback } from 'react';
+import React, { CSSProperties, FC, useCallback } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { useNavigation } from '../hooks/useNavigation';
