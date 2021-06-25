@@ -6,7 +6,7 @@ import { DrawerProps } from '.';
 import { MAX_DRAWER_WIDTH, MIN_DRAWER_WIDTH } from '../../recoil/features/layout/reducer';
 
 const openAnimation = (theme: Theme): CSSObject => ({
-  width: MAX_DRAWER_WIDTH,
+  width: theme.spacing(MAX_DRAWER_WIDTH),
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen
@@ -14,7 +14,7 @@ const openAnimation = (theme: Theme): CSSObject => ({
 });
 
 const closeAnimation = (theme: Theme): CSSObject => ({
-  width: MIN_DRAWER_WIDTH,
+  width: theme.spacing(MIN_DRAWER_WIDTH),
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen
@@ -22,7 +22,7 @@ const closeAnimation = (theme: Theme): CSSObject => ({
 });
 
 const StyledDrawer = styled(MuiDrawer)(({ theme, open }) => ({
-  width: MAX_DRAWER_WIDTH,
+  width: theme.spacing(MAX_DRAWER_WIDTH),
   overflowY: 'hidden',
   whiteSpace: 'nowrap',
   ...(open && {

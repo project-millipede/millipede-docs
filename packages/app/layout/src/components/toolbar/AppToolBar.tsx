@@ -6,7 +6,7 @@ import { AppBarProps } from '.';
 import { MAX_DRAWER_WIDTH } from '../../recoil/features/layout/reducer';
 
 const openAnimation = (theme: Theme): CSSObject => ({
-  width: `calc(100% - ${MAX_DRAWER_WIDTH}px)`,
+  width: `calc(100% - ${MAX_DRAWER_WIDTH})`,
   transition: theme.transitions.create(['width'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen

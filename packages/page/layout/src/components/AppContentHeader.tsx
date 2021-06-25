@@ -1,4 +1,4 @@
-import { APP_CONTENT_HEADER_HEIGHT_UNITS } from '@app/layout/src/recoil/features/layout/reducer';
+import { APP_CONTENT_HEADER_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
 import { Container } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import { Breadcrumbs } from '@page/components';
@@ -24,7 +24,7 @@ export const AppContentHeader: FC<AppContentHeaderProps> = ({
       sx={{
         display: 'flex',
         flexGrow: 1,
-        height: theme.spacing(APP_CONTENT_HEADER_HEIGHT_UNITS)
+        height: theme.spacing(APP_CONTENT_HEADER_HEIGHT)
       }}
     >
       <Breadcrumbs />

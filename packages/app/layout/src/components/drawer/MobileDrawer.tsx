@@ -5,10 +5,10 @@ import React, { FC } from 'react';
 
 import { DrawerProps } from '.';
 
-const SwipeableDrawer = styled(MuiSwipeableDrawer)(({ open }) => ({
+const SwipeableDrawer = styled(MuiSwipeableDrawer)(({ theme, open }) => ({
   ...(open && {
     '& .MuiDrawer-paper': {
-      width: MAX_DRAWER_WIDTH,
+      width: theme.spacing(MAX_DRAWER_WIDTH),
       // Important:
       // Correct the layout shift among supported drawers switching
       // from the mobile to the desktop variant and vice versa.

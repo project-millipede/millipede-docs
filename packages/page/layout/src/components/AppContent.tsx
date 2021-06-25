@@ -34,8 +34,10 @@ export const AppContent: FC<AppContentProps> = ({ disableToc, children }) => {
         width: '100%',
         [theme.breakpoints.up('md')]: {
           width: `calc(100% - ${
-            isDrawerExpanded ? MAX_DRAWER_WIDTH : MIN_DRAWER_WIDTH
-          }px - ${!disableToc ? TOC_WIDTH : 0}px)`
+            isDrawerExpanded
+              ? theme.spacing(MAX_DRAWER_WIDTH)
+              : theme.spacing(MIN_DRAWER_WIDTH)
+          } - ${!disableToc ? theme.spacing(TOC_WIDTH) : '0px'})`
         }
       }}
     >

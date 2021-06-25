@@ -231,8 +231,8 @@ export const Share: FC<PageTypes.ContentMetaData> = props => {
   return (
     <div
       style={{
-        width: APP_CONTENT_SHARE_DIMENSION,
-        height: APP_CONTENT_SHARE_DIMENSION,
+        width: theme.spacing(APP_CONTENT_SHARE_DIMENSION),
+        height: theme.spacing(APP_CONTENT_SHARE_DIMENSION),
         margin: theme.spacing(0, 2)
       }}
     >
