@@ -1,11 +1,12 @@
 import { Components as ComponentUtils } from '@app/render-utils';
 import { PageTypes } from '@app/types';
 import { styled } from '@material-ui/core/styles';
-import { Breadcrumbs, Snackbar } from '@page/components';
+import { Snackbar } from '@page/components';
 import React, { FC } from 'react';
 
 import { AppContent } from '../components/AppContent';
 import { AppContentFooter } from '../components/AppContentFooter';
+import { AppContentHeader } from '../components/AppContentHeader';
 import { AppHead } from '../components/AppHead';
 import { AppTableOfContents } from '../components/AppTableOfContents';
 
@@ -76,7 +77,7 @@ export const MdxDocs: FC<MarkdownDocsProps> = ({ raw, meta, children }) => {
       <AppContent disableToc={disableToc}>
         <ContentWrapper>
           <Media greaterThanOrEqual='md'>
-            <Breadcrumbs />
+            <AppContentHeader />
           </Media>
           {children}
           <Snackbar />

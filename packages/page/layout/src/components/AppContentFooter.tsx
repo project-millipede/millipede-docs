@@ -37,44 +37,52 @@ export const AppContentFooter: FC = () => {
     >
       {prevPage ? (
         <Button
-          LinkComponent={Link}
           size='medium'
           startIcon={<ChevronLeft />}
           sx={{
             textTransform: 'none',
-            textDecoration: 'none',
-            fontWeight: theme.typography.fontWeightRegular
+            fontWeight: theme.typography.fontWeightRegular,
+            '& .MuiLink-root': {
+              textDecoration: 'none'
+            }
           }}
-          href={
-            {
-              pathname: '/docs/[...slug]',
-              query: { slug: prevPage.pathname.split('/') }
-            } as any
-          }
         >
-          {t(`common:pages.${prevPage.pathname}`)}
+          <Link
+            href={
+              {
+                pathname: '/docs/[...slug]',
+                query: { slug: prevPage.pathname.split('/') }
+              } as any
+            }
+          >
+            {t(`common:pages.${prevPage.pathname}`)}
+          </Link>
         </Button>
       ) : (
         <div />
       )}
       {nextPage ? (
         <Button
-          LinkComponent={Link}
           size='medium'
           endIcon={<ChevronRight />}
           sx={{
             textTransform: 'none',
-            textDecoration: 'none',
-            fontWeight: theme.typography.fontWeightRegular
+            fontWeight: theme.typography.fontWeightRegular,
+            '& .MuiLink-root': {
+              textDecoration: 'none'
+            }
           }}
-          href={
-            {
-              pathname: '/docs/[...slug]',
-              query: { slug: nextPage.pathname.split('/') }
-            } as any
-          }
         >
-          {t(`common:pages.${nextPage.pathname}`)}
+          <Link
+            href={
+              {
+                pathname: '/docs/[...slug]',
+                query: { slug: nextPage.pathname.split('/') }
+              } as any
+            }
+          >
+            {t(`common:pages.${nextPage.pathname}`)}
+          </Link>
         </Button>
       ) : (
         <div />

@@ -1,5 +1,6 @@
 import { Link } from '@app/components';
-import { Breadcrumbs as MaterialBreadcrumbs, Button } from '@material-ui/core';
+import { Breadcrumbs as MuiBreadcrumbs, Button } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
@@ -26,27 +27,47 @@ export const Breadcrumbs: FC = () => {
   const headBreadcrumbs = breadcrumbs.slice(0, breadcrumbs.length - 1);
   const [tailBreadcrumb] = breadcrumbs.slice(-1);
 
+  const theme = useTheme();
+
   return (
-    <MaterialBreadcrumbs separator={<NavigateNextIcon fontSize='small' />}>
+    <MuiBreadcrumbs separator={<NavigateNextIcon fontSize='small' />}>
       {headBreadcrumbs.map((breadcrumb, index) => {
         const label = t(`common:pages.${breadcrumb.link}`);
         return (
-          <Link
+          <Button
             key={`breadcrumb-${index}`}
-            href={
-              {
-                pathname: '/docs/[...slug]',
-                query: { slug: breadcrumb.link.split('/') }
-              } as any
-            }
+            size='medium'
+            sx={{
+              textTransform: 'none',
+              fontWeight: theme.typography.fontWeightRegular,
+              '& .MuiLink-root': {
+                textDecoration: 'none'
+              }
+            }}
           >
-            <Button>{label}</Button>
-          </Link>
+            <Link
+              href={
+                {
+                  pathname: '/docs/[...slug]',
+                  query: { slug: breadcrumb.link.split('/') }
+                } as any
+              }
+            >
+              {label}
+            </Link>
+          </Button>
         );
       })}
-      <Button key={`breadcrumb-tail`} disabled>
+      <Button
+        key={`breadcrumb-tail`}
+        disabled
+        sx={{
+          textTransform: 'none',
+          fontWeight: theme.typography.fontWeightRegular
+        }}
+      >
         {t(`common:pages.${tailBreadcrumb.link}`)}
       </Button>
-    </MaterialBreadcrumbs>
+    </MuiBreadcrumbs>
   );
 };
