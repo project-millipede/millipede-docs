@@ -11,12 +11,8 @@ const components = {
   PDF: dynamic(() =>
     import('@app/components').then(module => module.Pdf.StepperContent)
   ),
-  Demonstrator: dynamic(
-    () =>
-      import('@demonstrators-social/layout').then(
-        module => module.Demonstrator
-      ),
-    { ssr: false }
+  Demonstrator: dynamic(() =>
+    import('@demonstrators-social/layout').then(module => module.Demonstrator)
   ),
   InterdisciplinaryApproach: dynamic(() =>
     import('@page/illustrations').then(
