@@ -1,6 +1,6 @@
 import { LABEL_BORDER_RADIUS } from '@app/layout/src/recoil/features/layout/reducer';
-import { Slider, Theme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { Slider } from '@material-ui/core';
+import { styled } from '@material-ui/core/styles';
 import React, { FC } from 'react';
 
 import { useStepDispatch, useStepState } from '../../context/StepProvider';
@@ -24,27 +24,21 @@ export const getValue = (
   return 0;
 };
 
-export const useStyles = makeStyles((theme: Theme) => {
-  return {
-    row: {
-      height: '60px',
-      width: '100%',
-      backgroundColor: '#DDDDDD',
-      borderRadius: LABEL_BORDER_RADIUS,
-      padding: theme.spacing(0, 2),
-      display: 'flex',
-      alignItems: 'center'
-    }
-  };
-});
+const Row = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  height: theme.spacing(8),
+  width: '100%',
+  backgroundColor: '#DDDDDD',
+  borderRadius: theme.spacing(LABEL_BORDER_RADIUS),
+  padding: theme.spacing(0, 2)
+}));
 
 export interface ProgressControlProps {
   steps: Array<Step>;
 }
 
 export const ProgressControl: FC<ProgressControlProps> = ({ steps }) => {
-  const classes = useStyles();
-
   const { target } = useStepState();
   const { stepsWithDuration, totalSeconds } = getTimeData(steps);
 
@@ -57,7 +51,7 @@ export const ProgressControl: FC<ProgressControlProps> = ({ steps }) => {
       : { globalEnd: 0 };
 
   return (
-    <div className={classes.row}>
+    <Row>
       <Slider
         size='small'
         value={getValue(playing, globalEnd, target)}
@@ -77,6 +71,6 @@ export const ProgressControl: FC<ProgressControlProps> = ({ steps }) => {
         max={totalSeconds}
         min={0}
       />
-    </div>
+    </Row>
   );
 };
