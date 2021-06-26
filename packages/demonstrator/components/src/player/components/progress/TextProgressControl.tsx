@@ -1,6 +1,6 @@
 import { LABEL_BORDER_RADIUS, LABEL_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
-import { Theme, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { Typography } from '@material-ui/core';
+import { styled } from '@material-ui/core/styles';
 import React, { FC } from 'react';
 
 import { useStepState } from '../../context/StepProvider';
@@ -9,40 +9,49 @@ import { getTimeData } from '../../utils/playertime';
 import { CountDown } from '../counter/CountDown';
 import { CountUp } from '../counter/CountUp';
 
-export const useStyles = makeStyles((theme: Theme) => {
-  return {
-    row: {
-      borderRadius: LABEL_BORDER_RADIUS,
-      backgroundColor: '#DDDDDD',
-      display: 'flex',
-      alignItems: 'center'
-    },
-    column: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-evenly',
-      height: '60px',
-      width: 'max-content'
-    },
-    item: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    },
-    itemEnd: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-end'
-    },
-    label: {
-      height: LABEL_HEIGHT,
-      borderRadius: LABEL_BORDER_RADIUS,
-      backgroundColor: '#F1F1F1',
-      padding: theme.spacing(0, 1),
-      margin: theme.spacing(0, 1)
-    }
-  };
+// export const useStyles = makeStyles((theme: Theme) => {
+//   return {
+//     item: {
+//       display: 'flex',
+//       alignItems: 'center',
+//       justifyContent: 'center'
+//     },
+//     itemEnd: {
+//       display: 'flex',
+//       alignItems: 'center',
+//       justifyContent: 'flex-end'
+//     },
+//   };
+// });
+
+const Row = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  backgroundColor: '#DDDDDD',
+  borderRadius: theme.spacing(LABEL_BORDER_RADIUS)
+}));
+
+const Column = styled('div')(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-evenly',
+  height: theme.spacing(8),
+  width: 'max-content'
+}));
+
+const Item = styled('div')({
+  display: 'flex',
+  alignItems: 'center'
 });
+
+const Label = styled(Typography)(({ theme }) => ({
+  backgroundColor: '#F1F1F1',
+  height: theme.spacing(LABEL_HEIGHT),
+  borderRadius: theme.spacing(LABEL_BORDER_RADIUS),
+  padding: theme.spacing(0, 1),
+  margin: theme.spacing(0, 1)
+}));
+
 interface TextProgressControlProps {
   steps: Array<Step>;
 }
@@ -50,7 +59,7 @@ interface TextProgressControlProps {
 export const TextProgressControl: FC<TextProgressControlProps> = ({
   steps
 }) => {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   const { playing, target, maxStepsCount } = useStepState();
 
@@ -62,28 +71,26 @@ export const TextProgressControl: FC<TextProgressControlProps> = ({
       : { duration: 0 };
 
   return (
-    <div className={classes.row}>
-      <div className={classes.column}>
-        <div className={classes.item}>
-          <Typography className={classes.label}>
-            {`${target} of ${maxStepsCount} steps`}
-          </Typography>
-        </div>
-      </div>
-      <div className={classes.column}>
-        <div className={classes.itemEnd}>
-          <Typography className={classes.label}>
+    <Row>
+      <Column>
+        <Item sx={{ justifyContent: 'center' }}>
+          <Label>{`${target} of ${maxStepsCount} steps`}</Label>
+        </Item>
+      </Column>
+      <Column>
+        <Item sx={{ justifyContent: 'center' }}>
+          <Label>
             <CountDown startTime={duration} playing={playing} step={target} />
             {` of ${duration / 1000} sec.`}
-          </Typography>
-        </div>
-        <div className={classes.item}>
-          <Typography className={classes.label}>
+          </Label>
+        </Item>
+        <Item sx={{ justifyContent: 'center' }}>
+          <Label>
             <CountUp startTime={0} playing={playing} />
             {` of ${totalSeconds / 1000} sec.`}
-          </Typography>
-        </div>
-      </div>
-    </div>
+          </Label>
+        </Item>
+      </Column>
+    </Row>
   );
 };
