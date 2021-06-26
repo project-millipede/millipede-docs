@@ -1,34 +1,27 @@
 import { INPUT_BORDER_RADIUS, INPUT_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
 import { appCompositionState } from '@demonstrator/navigation/src/recoil/features/app/reducers';
-import { Box, IconButton, InputAdornment, InputBase, Theme } from '@material-ui/core';
+import { Box, IconButton, InputAdornment, InputBase } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
 import { Fullscreen, FullscreenExit, InfoOutlined, ViewCarousel, ViewColumn } from '@material-ui/icons';
-import { makeStyles } from '@material-ui/styles';
 import React, { FC } from 'react';
 import { FullScreenHandle } from 'react-full-screen';
 import { useRecoilState } from 'recoil';
 
-export const useStyles = makeStyles((_theme: Theme) => {
-  return {
-    input: {
-      height: INPUT_HEIGHT,
-      borderRadius: INPUT_BORDER_RADIUS,
-      backgroundColor: '#F1F1F1'
-    }
-  };
-});
-
 interface ChromInputProps {
   fullScreenHandle: FullScreenHandle;
 }
-
 export const ChromeInput: FC<ChromInputProps> = ({ fullScreenHandle }) => {
-  const classes = useStyles();
+  const theme = useTheme();
 
   const [{ isMobile }, setAppComposition] = useRecoilState(appCompositionState);
 
   return (
     <InputBase
-      className={classes.input}
+      sx={{
+        backgroundColor: '#F1F1F1',
+        height: theme.spacing(INPUT_HEIGHT),
+        borderRadius: theme.spacing(INPUT_BORDER_RADIUS)
+      }}
       startAdornment={
         <InputAdornment position='start'>
           <IconButton>
@@ -40,7 +33,7 @@ export const ChromeInput: FC<ChromInputProps> = ({ fullScreenHandle }) => {
         <InputAdornment position='end' style={{ marginRight: '8px' }}>
           <Box>
             <IconButton
-              size={'small'}
+              size='small'
               onClick={() => {
                 setAppComposition(state => {
                   return {
@@ -53,7 +46,7 @@ export const ChromeInput: FC<ChromInputProps> = ({ fullScreenHandle }) => {
               {isMobile ? <ViewCarousel /> : <ViewColumn />}
             </IconButton>
             <IconButton
-              size={'small'}
+              size='small'
               onClick={() => {
                 fullScreenHandle.active
                   ? fullScreenHandle.exit()

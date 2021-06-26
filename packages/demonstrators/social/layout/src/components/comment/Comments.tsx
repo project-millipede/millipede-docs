@@ -1,25 +1,28 @@
 import { CollectionUtil } from '@app/utils';
 import { Types } from '@demonstrators-social/data';
-import { Avatar, CardActions, CardContent, CardHeader, IconButton, Theme, Typography } from '@material-ui/core';
+import { Avatar, CardActions, CardContent, CardHeader, IconButton, IconButtonProps, Typography } from '@material-ui/core';
+import { styled } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { makeStyles } from '@material-ui/styles';
-import clsx from 'clsx';
 import { formatDistance } from 'date-fns';
 import { enGB } from 'date-fns/locale';
 import React, { FC, Fragment, useMemo, useState } from 'react';
 
-export const useStyles = makeStyles((theme: Theme) => ({
-  expand: {
-    transform: 'rotate(0deg)',
+type StyledIconButtonProps = IconButtonProps & {
+  open: boolean;
+};
+
+const StyledIconButton = styled(IconButton)<StyledIconButtonProps>(
+  ({ theme, open }) => ({
     marginLeft: 'auto',
+    transform: 'rotate(0deg)',
     transition: theme.transitions.create('transform', {
       duration: theme.transitions.duration.shortest
+    }),
+    ...(open && {
+      transform: 'rotate(180deg)'
     })
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)'
-  }
-}));
+  })
+);
 
 interface CommentsProps {
   timelineId: string;
@@ -32,8 +35,6 @@ export const Comments: FC<CommentsProps> = ({
   postId,
   comments = []
 }) => {
-  const classes = useStyles();
-
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
@@ -98,14 +99,9 @@ export const Comments: FC<CommentsProps> = ({
         disableSpacing
         key={`timeline-${timelineId}-post-${postId}-comment-actions`}
       >
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded
-          })}
-          onClick={handleExpandClick}
-        >
+        <StyledIconButton open={expanded} onClick={handleExpandClick}>
           <ExpandMoreIcon />
-        </IconButton>
+        </StyledIconButton>
       </CardActions>
     ) : null;
 
