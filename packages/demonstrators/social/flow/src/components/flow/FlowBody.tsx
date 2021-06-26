@@ -2,29 +2,18 @@
 import { Archer } from '@app/components';
 import { scrollSelectors } from '@demonstrators-social/shared';
 import { Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
-import clsx from 'clsx';
+import { styled } from '@material-ui/core/styles';
 import React, { FC, memo } from 'react';
 import { useRecoilValue } from 'recoil';
 
 const { ArcherElement, CustomBox } = Archer;
 
-export const useStyles = makeStyles(() => ({
-  row: {
-    margin: '100px 0',
-    display: 'flex',
-    justifyContent: 'space-between'
-  },
-  rowSingleElement: {
-    margin: '100px 0',
-    display: 'flex',
-    justifyContent: 'center'
-  }
-}));
+const Row = styled('div')({
+  display: 'flex',
+  margin: '100px 0'
+});
 
 export const FlowBody: FC = () => {
-  const classes = useStyles();
-
   const {
     timeline: { sliceIdsBodySelector }
   } = scrollSelectors;
@@ -35,12 +24,12 @@ export const FlowBody: FC = () => {
     <>
       {selectedBodySlices.map((nodeWithRelations, row) => {
         return (
-          <div
+          <Row
             key={`row-${row}`}
-            className={clsx({
-              [classes.rowSingleElement]: nodeWithRelations.length === 1,
-              [classes.row]: nodeWithRelations.length >= 2
-            })}
+            sx={{
+              justifyContent:
+                nodeWithRelations.length === 1 ? 'center' : 'space-between'
+            }}
           >
             {nodeWithRelations.map(value => {
               const {
@@ -60,7 +49,7 @@ export const FlowBody: FC = () => {
                 </ArcherElement>
               );
             })}
-          </div>
+          </Row>
         );
       })}
     </>

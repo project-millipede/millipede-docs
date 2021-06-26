@@ -1,57 +1,34 @@
-import { Archer, Help, Stepper } from '@app/components';
+import { Archer, Stepper } from '@app/components';
 import { scrollStates } from '@demonstrators-social/shared';
-import {
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  List,
-  ListItem,
-  ListSubheader,
-  Paper,
-  Theme,
-  Typography,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { Checkbox, FormControlLabel, FormGroup, List, ListItem, ListSubheader, Paper, Typography } from '@material-ui/core';
 import { usePrevious } from 'ahooks';
 import get from 'lodash/get';
 import useTranslation from 'next-translate/useTranslation';
 import React, { ChangeEvent, CSSProperties, FC, useEffect, useMemo, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
-import { ProgressiveStepBuilder } from './components/navigation/ProgressiveStepBuilder';
 import { ScenarioControlNWithN } from './components/navigation/ScenarioControlNWithN';
 import { FlowControlObserver } from './components/observer/FlowControlObserver';
 import { SliceOptions } from './components/options/SliceOptions';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    width: '100%',
-    backgroundColor: theme.palette.background.paper,
-    position: 'relative',
-    overflow: 'auto'
-  },
-  listSection: {
-    backgroundColor: 'inherit'
-  },
-  ul: {
-    backgroundColor: 'inherit',
-    padding: 0
-  },
-  root2: {
-    flexGrow: 1
-  },
-  header: {
-    display: 'flex',
-    alignItems: 'center',
-    height: 50,
-    paddingLeft: theme.spacing(4),
-    backgroundColor: theme.palette.background.default
-  },
-  heading: {
-    fontSize: 16,
-    fontWeight: theme.typography.fontWeightMedium
-  }
-}));
+// const useStyles = makeStyles((theme: Theme) => ({
+//   root: {
+//     width: '100%',
+//     backgroundColor: theme.palette.background.paper,
+//     position: 'relative',
+//     overflow: 'auto'
+//   },
+//   root2: {
+//     flexGrow: 1
+//   },
+//   header: {
+//     display: 'flex',
+//     alignItems: 'center',
+//     height: 50,
+//     paddingLeft: theme.spacing(4),
+//     backgroundColor: theme.palette.background.default
+//   },
+// }));
 
 interface ScenarioNavigatorProps {}
 
@@ -95,7 +72,7 @@ interface ScenarioDetailNavigatorProps {}
 export const ScenarioDetailNavigator: FC<ScenarioDetailNavigatorProps> = () => {
   const { t } = useTranslation();
 
-  const classes = useStyles();
+  // const classes = useStyles();
 
   const {
     timeline: { nodesWithRelationsWithEdgeState }
@@ -202,7 +179,7 @@ export const ScenarioDetailNavigator: FC<ScenarioDetailNavigatorProps> = () => {
     <>
       <List
         dense
-        className={classes.root}
+        // className={classes.root}
         subheader={
           <ListSubheader component='div' id='nested-list-subheader'>
             {`I'm sticky ${currentNodesWithRelations.id}`}
@@ -228,8 +205,14 @@ export const ScenarioDetailNavigator: FC<ScenarioDetailNavigatorProps> = () => {
         })}
       </List>
 
-      <div className={classes.root2}>
-        <Paper square elevation={0} className={classes.header}>
+      <div
+      // className={classes.root2}
+      >
+        <Paper
+          square
+          elevation={0}
+          // className={classes.header}
+        >
           <Typography>
             {t(`pages/pidp/use-case/recognition/index:${id}`)}
           </Typography>
@@ -290,34 +273,6 @@ export const ScenarioControlOrg: FC<ScenarioControlProps> = () =>
       </div>
     );
   };
-
-export const ScenarioControl: FC<ScenarioControlProps> = () => {
-  const classes = useStyles();
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center'
-        }}
-      >
-        <Typography
-          style={{
-            margin: 0
-          }}
-          className={classes.heading}
-          gutterBottom={false}
-        >
-          Actions
-        </Typography>
-        <Help message={'Actions used for the auto, and manual replay'} />
-      </div>
-
-      <ProgressiveStepBuilder ltr />
-    </div>
-  );
-};
 
 interface FlowControlProps {
   handleControlOffset?: (value: number) => void;
