@@ -11,11 +11,11 @@ import {
   viewportSelectors,
 } from '@demonstrators-social/shared';
 import { useMergedRef } from '@huse/merged-ref';
-import { Button, ButtonGroup, Card, ListItem, Theme } from '@material-ui/core';
+import { Button, ButtonGroup, Card, ListItem } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
-import { makeStyles } from '@material-ui/styles';
 import { formatDistance } from 'date-fns';
 import { enGB } from 'date-fns/locale';
 import lodashGet from 'lodash/get';
@@ -30,19 +30,6 @@ import { getContent, getHeader, getMedia, getObserverComp, getRef } from './Post
 import { handleCreateComment, handleDeletePost } from './Post.svc';
 
 const { selectPostById, selectTimelineOwner } = selectors.timeline;
-
-const useStyles = makeStyles((theme: Theme) => ({
-  postListItem: {
-    padding: theme.spacing(0, 1)
-  },
-  card: {
-    flexGrow: 1
-  },
-  media: {
-    height: 0,
-    paddingTop: '56.25%' // perfect 16:9 ratio
-  }
-}));
 
 interface TimelinePostKeys {
   timelineId: string;
@@ -92,7 +79,7 @@ export const Post: FC<PostProps> = ({
     };
   }, []);
 
-  const classes = useStyles();
+  const theme = useTheme();
 
   const { t } = useTranslation();
 
@@ -142,7 +129,6 @@ export const Post: FC<PostProps> = ({
     [createdAt]
   );
 
-  const { media } = classes;
   const { refObserved, refObservedSubSlices } = elementRef || {};
 
   const refForComponent = useMemo(() => {
@@ -170,7 +156,7 @@ export const Post: FC<PostProps> = ({
   );
 
   const mediaComp = getObserverComp(refForComponent.media)(
-    getMedia(imageHref, imageTitle, media)
+    getMedia(imageHref, imageTitle)
   );
 
   const contentComp = getObserverComp(refForComponent.content)(
@@ -253,10 +239,16 @@ export const Post: FC<PostProps> = ({
   return (
     <ListItem
       ref={combinedRef}
-      className={classes.postListItem}
+      // className={classes.postListItem}
+      sx={{
+        padding: theme.spacing(0, 1)
+      }}
       id={`timeline-${timelineId}-post-${postId}`}
     >
-      <Card className={classes.card}>
+      <Card
+        // className={classes.card}
+        sx={{ flexGrow: 1 }}
+      >
         {headerComp}
         {mediaComp}
         {contentComp}

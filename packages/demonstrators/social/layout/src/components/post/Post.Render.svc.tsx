@@ -18,13 +18,16 @@ export const getHeader = (
   );
 };
 
-export const getMedia = (
-  imageHref: string,
-  imageTitle: string,
-  className: string
-) => {
+export const getMedia = (imageHref: string, imageTitle: string) => {
   return (
-    <CardMedia className={className} image={imageHref} title={imageTitle} />
+    <CardMedia
+      image={imageHref}
+      title={imageTitle}
+      sx={{
+        height: 0,
+        paddingTop: '56.25%' // perfect 16:9 ratio
+      }}
+    />
   );
 };
 

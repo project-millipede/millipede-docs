@@ -1,19 +1,12 @@
 import { RenderUtils } from '@app/render-utils';
 import { useEffectRef } from '@huse/effect-ref';
-import { Button, Theme, Typography } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
-import { makeStyles } from '@material-ui/styles';
 import { useWindupString } from '@project-millipede/windups';
 import { ContentState, Editor, EditorState } from 'draft-js';
 import elementResizeDetectorMaker from 'element-resize-detector';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  formHelperText: {
-    color: theme.palette.error.main
-  }
-}));
 
 const longText = 'Hi @all, my name is Markus.';
 
@@ -66,8 +59,6 @@ export const CommentEditor: FC<CommentEditorProps> = ({
   );
 
   const [commentError, setCommentError] = useState(false);
-
-  const classes = useStyles();
 
   const [text] = useWindupString(longText);
 
@@ -131,11 +122,7 @@ export const CommentEditor: FC<CommentEditorProps> = ({
         // placeholder='Write something!'
       />
 
-      {commentError && (
-        <Typography className={classes.formHelperText}>
-          {contentEmpty}
-        </Typography>
-      )}
+      {commentError && <Typography>{contentEmpty}</Typography>}
 
       <div
         style={{
