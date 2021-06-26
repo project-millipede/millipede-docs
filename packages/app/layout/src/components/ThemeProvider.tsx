@@ -1,4 +1,4 @@
-import { createTheme, ThemeProvider as MaterialThemeProvider } from '@material-ui/core/styles';
+import { createTheme, responsiveFontSizes, ThemeProvider as MaterialThemeProvider } from '@material-ui/core/styles';
 import React, { FC, useMemo } from 'react';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
@@ -11,10 +11,13 @@ export const ThemeProvider: FC = ({ children }) => {
 
   const theme = useMemo(() => {
     const nextTheme = createTheme({
-      spacing
+      spacing,
+      typography: {
+        fontFamily: 'Roboto'
+      }
     });
 
-    return nextTheme;
+    return responsiveFontSizes(nextTheme);
   }, [spacing]);
 
   return (
