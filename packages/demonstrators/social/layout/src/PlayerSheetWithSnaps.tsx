@@ -6,12 +6,10 @@ import { playerLayoutState } from '@demonstrator/components/src/player/context/r
 import { PlayListItem, Step } from '@demonstrator/components/src/player/types';
 import { appLayoutState } from '@demonstrator/navigation/src/recoil/features/app/reducers';
 import { Components as FlowComponents } from '@demonstrators-social/flow';
-import { Button, Divider, Tab, Theme, Typography } from '@material-ui/core';
+import { Button, Divider, Tab } from '@material-ui/core';
 import { DonutLarge, Subscriptions } from '@material-ui/icons';
-import { makeStyles } from '@material-ui/styles';
 import React, { ChangeEvent, FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import styled from 'styled-components';
 
 export const PlayerSheetTabs = {
   Playlist: 'Playlist',
@@ -21,29 +19,13 @@ export const PlayerSheetTabs = {
 export type TPlayerSheetTabs =
   typeof PlayerSheetTabs[keyof typeof PlayerSheetTabs];
 
-export const SheetControls = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
 const baseSnapPoints = [800, 300, 100];
-
-const useStyles = makeStyles((theme: Theme) => ({
-  heading: {
-    fontSize: 16,
-    fontWeight: theme.typography.fontWeightMedium
-  }
-}));
 
 interface PlayerSheetProps {
   steps: Array<Step>;
   playlist: Array<PlayListItem>;
 }
-
 export const PlayerSheet: FC<PlayerSheetProps> = ({ steps, playlist }) => {
-  const classes = useStyles();
-
   const [appContainerMeasureRef, appContainerSize] = HooksUtils.useResize();
   const [bottomContainerMeasureRef, bottomContainerSize] =
     HooksUtils.useResize();
@@ -132,11 +114,9 @@ export const PlayerSheet: FC<PlayerSheetProps> = ({ steps, playlist }) => {
         bottomContainerSize={bottomContainerSize}
       >
         <Sheet.SheetHeader>
-          <SheetControls>
-            <Button onClick={() => snapTo(0)}>500</Button>
-            <Button onClick={() => snapTo(1)}>300</Button>
-            <Button onClick={() => snapTo(2)}>100</Button>
-          </SheetControls>
+          <Button onClick={() => snapTo(0)}>500</Button>
+          <Button onClick={() => snapTo(1)}>300</Button>
+          <Button onClick={() => snapTo(2)}>100</Button>
         </Sheet.SheetHeader>
         <Sheet.SheetContent>
           <Tabs.StyledTabs
@@ -160,33 +140,12 @@ export const PlayerSheet: FC<PlayerSheetProps> = ({ steps, playlist }) => {
 
           {activeTab === PlayerSheetTabs.Playlist && (
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <Typography className={classes.heading}>Playlist</Typography>
               <Player.Components.Playlist playlist={playlist} />
             </div>
           )}
 
           {activeTab === PlayerSheetTabs.Actions && (
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center'
-                }}
-              >
-                <Typography
-                  style={{
-                    margin: 0
-                  }}
-                  className={classes.heading}
-                  gutterBottom={false}
-                >
-                  Actions
-                </Typography>
-                {/* <Help
-                  message={'Actions used for the auto, and manual replay'}
-                /> */}
-              </div>
-
               <FlowComponents.Navigation.ProgressiveStepBuilder ltr />
             </div>
           )}
@@ -208,7 +167,6 @@ export const PlayerSheet: FC<PlayerSheetProps> = ({ steps, playlist }) => {
 
           {activeTab === PlayerSheetTabs.Actions && activeStep != null && (
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <Typography className={classes.heading}>Description</Typography>
               <Player.Components.Playtext
                 activeStep={activeStep}
                 ref={resizeControlRef}
