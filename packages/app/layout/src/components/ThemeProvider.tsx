@@ -1,4 +1,6 @@
-import { createTheme, responsiveFontSizes, ThemeProvider as MaterialThemeProvider } from '@material-ui/core/styles';
+import { blue } from '@material-ui/core/colors';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { createTheme, responsiveFontSizes, ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import React, { FC, useMemo } from 'react';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
@@ -14,6 +16,14 @@ export const ThemeProvider: FC = ({ children }) => {
       spacing,
       typography: {
         fontFamily: 'Roboto'
+      },
+      palette: {
+        primary: {
+          main: blue[700]
+        },
+        secondary: {
+          main: blue[500]
+        }
       }
     });
 
@@ -22,7 +32,10 @@ export const ThemeProvider: FC = ({ children }) => {
 
   return (
     <StyledThemeProvider theme={theme}>
-      <MaterialThemeProvider theme={theme}>{children}</MaterialThemeProvider>
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </MuiThemeProvider>
     </StyledThemeProvider>
   );
 };
