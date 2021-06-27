@@ -1,5 +1,7 @@
+import '@fortawesome/fontawesome-svg-core/styles.css';
+
 import { defaultAnalytics } from '@app/analytics';
-import { Portal, Query } from '@app/components';
+import { loadFAIcons, Portal, Query } from '@app/components';
 import { HouxProvider } from '@app/houx';
 import { AppFrame, AppWrapper } from '@app/layout';
 import { Components } from '@app/render-utils';
@@ -12,6 +14,8 @@ import { RecoilRoot } from 'recoil';
 import { AnalyticsProvider } from 'use-analytics';
 
 import { cache } from '../docs/src/lib/emotion';
+
+loadFAIcons();
 
 const {
   Media: { MediaContextProvider }
