@@ -39,10 +39,14 @@ const StyledTreeItem = styled(TreeItem)<TreeItemProps>(({ theme }) => ({
     padding: 0,
     // borderRight: `2px solid transparent`,
     '&.Mui-selected': {
-      borderRight: `2px solid ${theme.palette.primary.main}`
+      borderRight: `${theme.spacing(0.25)} solid ${
+        theme.palette.secondary.main
+      }`
     },
     '&.Mui-expanded': {
-      borderRight: `2px solid ${theme.palette.primary.main}`
+      borderRight: `${theme.spacing(0.25)}  solid ${
+        theme.palette.secondary.main
+      }`
     },
     '& .MuiTreeItem-iconContainer': {
       width: '24px',
