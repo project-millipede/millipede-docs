@@ -3,7 +3,6 @@ import { Portal, Query } from '@app/components';
 import { HouxProvider } from '@app/houx';
 import { AppFrame, AppWrapper } from '@app/layout';
 import { Components } from '@app/render-utils';
-import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import { NextComponentType } from 'next';
 import I18nProvider from 'next-translate/I18nProvider';
@@ -12,8 +11,7 @@ import React from 'react';
 import { RecoilRoot } from 'recoil';
 import { AnalyticsProvider } from 'use-analytics';
 
-const cache = createCache({ key: 'css' });
-cache.compat = true;
+import { cache } from '../docs/src/lib/emotion';
 
 const {
   Media: { MediaContextProvider }
@@ -31,15 +29,15 @@ const MillipedeApp: NextComponentType<AppContext, AppInitialProps, AppProps> =
                   lang={pageProps && pageProps.__lang}
                   namespaces={pageProps && pageProps.__namespaces}
                 >
-                  <CacheProvider value={cache}>
-                    <AppWrapper>
-                      <MediaContextProvider>
+                  <AppWrapper>
+                    <MediaContextProvider>
+                      <CacheProvider value={cache}>
                         <AppFrame>
                           <Component {...pageProps} />
                         </AppFrame>
-                      </MediaContextProvider>
-                    </AppWrapper>
-                  </CacheProvider>
+                      </CacheProvider>
+                    </MediaContextProvider>
+                  </AppWrapper>
                 </I18nProvider>
               </HouxProvider>
             </RecoilRoot>
