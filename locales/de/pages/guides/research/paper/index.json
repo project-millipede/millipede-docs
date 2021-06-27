@@ -1,10 +1,10 @@
 {
   "header": {
-    "label": "Title",
-    "meta": "Language | Status | Scope",
-    "reference": "Reference",
-    "description": "Description",
-    "structure": "Structure and Composition"
+    "title": "Titel",
+    "meta": "Sprache, Status, Umfang",
+    "reference": "Referenz",
+    "description": "Beschreibung",
+    "structure": "Aufbau und Zusammensetzung"
   },
   "rows": [
     {

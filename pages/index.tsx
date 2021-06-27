@@ -42,17 +42,17 @@ const Index: FC = () => {
         variant='h2'
         gutterBottom
         sx={{
-          fontWeight: theme.typography.fontWeightMedium,
+          fontWeight: theme.typography.fontWeightRegular,
           textAlign: 'center'
         }}
       >
         {t('common:application-title')}
       </Typography>
       <Typography
-        variant='h4'
+        variant='h3'
         gutterBottom
         sx={{
-          fontWeight: theme.typography.fontWeightRegular,
+          fontWeight: theme.typography.fontWeightLight,
           textAlign: 'center'
         }}
       >
