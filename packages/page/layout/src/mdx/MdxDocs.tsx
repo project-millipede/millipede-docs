@@ -11,7 +11,8 @@ import { AppTableOfContents } from '../components/AppTableOfContents';
 import { MdxContent } from './MdxContent';
 
 const {
-  Media: { Media }
+  Media: { Media },
+  SmoothScroll
 } = ComponentUtils;
 
 interface MarkdownDocsProps {
@@ -30,7 +31,9 @@ export const MdxDocs: FC<MarkdownDocsProps> = ({ raw, meta, children }) => {
         <Media greaterThanOrEqual='md'>
           <AppContentHeader />
         </Media>
-        <MdxContent>{children}</MdxContent>
+        <MdxContent>
+          <SmoothScroll>{children}</SmoothScroll>
+        </MdxContent>
         <Snackbar />
         <AppContentFooter />
       </AppContent>
