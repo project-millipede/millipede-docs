@@ -1,4 +1,3 @@
-import { loadFAIcons } from '@app/components';
 import { layoutState, MAX_DRAWER_WIDTH, MIN_DRAWER_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
 import { Container, Typography } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
@@ -11,8 +10,6 @@ import React, { FC } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import i18nConfig from '../i18n';
-
-loadFAIcons();
 
 const Index: FC = () => {
   const { isDrawerExpanded } = useRecoilValue(layoutState);
