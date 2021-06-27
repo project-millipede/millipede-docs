@@ -8,7 +8,7 @@ import { transform } from './transform';
 // };
 
 const attacher = (_options?: TOCOptions): Transformer => {
-  return transform({ maxDepth: 3, tight: false });
+  return transform({ maxDepth: 4, tight: false });
 };
 
 export default attacher;
