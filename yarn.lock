@@ -1668,6 +1668,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@corex/deepmerge@npm:^2.6.20":
+  version: 2.6.20
+  resolution: "@corex/deepmerge@npm:2.6.20"
+  checksum: 40f33a87a460f0a04b82d40fd33a9d73105d510bec781b024cdc90d180389a8c628ce57db650e72c0a5215c1c949adb34426b13a838c34647c6ca1d392e805c0
+  languageName: node
+  linkType: hard
+
 "@date-io/core@npm:^2.10.11":
   version: 2.10.11
   resolution: "@date-io/core@npm:2.10.11"
@@ -8881,6 +8888,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"matcher@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "matcher@npm:4.0.0"
+  dependencies:
+    escape-string-regexp: ^4.0.0
+  checksum: d338aff31d8dfd3626873e43777f46b123579734d53bb8d18d64b08a822ba5e8d39f5fe2e23403258e6143aa0cbe20a15662720d825cd0d3af961d5a44230328
+  languageName: node
+  linkType: hard
+
 "md5.js@npm:^1.3.4":
   version: 1.3.5
   resolution: "md5.js@npm:1.3.5"
@@ -9169,6 +9185,7 @@ __metadata:
     next-mdx-remote: ^3.0.2
     next-merge-props: ^0.5.0
     next-remote-watch: ^1.0.0
+    next-sitemap: ^1.6.124
     next-translate: 1.0.7
     nextjs-sitemap-generator: ^1.3.1
     prettier: ^2.3.1
@@ -9483,6 +9500,21 @@ __metadata:
   bin:
     next-remote-watch: bin/next-remote-watch
   checksum: a67b15c2556e380c7dfbe8651d8a89fe34f42f439fa910ece5585e988a7c23116f3e432eef93984bb3bba9683798f2f757642652883288550bf613357cc67ea3
+  languageName: node
+  linkType: hard
+
+"next-sitemap@npm:^1.6.124":
+  version: 1.6.124
+  resolution: "next-sitemap@npm:1.6.124"
+  dependencies:
+    "@corex/deepmerge": ^2.6.20
+    matcher: ^4.0.0
+    minimist: ^1.2.5
+  peerDependencies:
+    next: "*"
+  bin:
+    next-sitemap: bin/next-sitemap
+  checksum: 088741aa51796abbe9c9d86960e513fca75cd5777be101fd763f0de518af1b4a23385e819a9acb928f8ae83390eb9ce7e17d40f94f5ff01065a6804644f5fd45
   languageName: node
   linkType: hard
 
@@ -12181,15 +12213,15 @@ resolve@^2.0.0-next.3:
   linkType: hard
 
 "terser@npm:^5.7.0":
-  version: 5.7.0
-  resolution: "terser@npm:5.7.0"
+  version: 5.7.1
+  resolution: "terser@npm:5.7.1"
   dependencies:
     commander: ^2.20.0
     source-map: ~0.7.2
     source-map-support: ~0.5.19
   bin:
     terser: bin/terser
-  checksum: 3abeb551865079b27e2890dbec866054967d1963fc80a81e5e14e414c43db88ff53a5e88844c145df11bed01b28040aa96afd82113c6d1a6ad28409b6cae4fde
+  checksum: 9354af5c22ade95004c103893606968cbd5390824c9d89df540f9e578c6e6559a5e9c56a1bf23ed055cdb61c60defdbc2c29e773514f9f2fbc7fd7ed335f1f58
   languageName: node
   linkType: hard
 
