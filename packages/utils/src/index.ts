@@ -5,3 +5,4 @@ export * as MathUtil from './math';
 export * as StringUtil from './string';
 export * as RouterUtils from './router';
 export * as TypeUtil from './type';
+export * as UrlUtil from './url';
