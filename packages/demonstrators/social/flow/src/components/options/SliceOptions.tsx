@@ -72,6 +72,9 @@ const createButton = ({ title, icon, action }) => (
     tooltipTitle={title}
     onClick={action}
     tooltipPlacement={'left'}
+    sx={{
+      pointerEvents: 'auto'
+    }}
   />
 );
 
