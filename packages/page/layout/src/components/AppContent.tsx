@@ -26,10 +26,10 @@ export const AppContent: FC<AppContentProps> = ({ disableToc, children }) => {
         paddingTop: theme.spacing(12),
 
         // Hyphen
-        msHyphens: 'auto',
-        WebkitHyphens: 'auto',
-        MozHyphens: 'auto',
         hyphens: 'auto',
+        msHyphens: 'auto',
+        MozHyphens: 'auto',
+        WebkitHyphens: 'auto',
 
         width: '100%',
         [theme.breakpoints.up('md')]: {
