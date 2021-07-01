@@ -8,9 +8,7 @@ export const StyledTabs = styled(TabsComponent)<TabsProps>(({ theme }) => ({
   '& .MuiTab-root': {
     '&.MuiTab-labelIcon': {
       minHeight: theme.spacing(6),
-      '& .MuiTab-wrapper': {
-        flexDirection: 'row'
-      },
+      flexDirection: 'row',
       '& svg': {
         marginBottom: 0,
         marginRight: theme.spacing(1)
