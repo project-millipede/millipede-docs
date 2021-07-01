@@ -72,9 +72,6 @@ const createButton = ({ title, icon, action }) => (
     tooltipTitle={title}
     onClick={action}
     tooltipPlacement={'left'}
-    sx={{
-      pointerEvents: 'auto'
-    }}
   />
 );
 
@@ -123,7 +120,8 @@ export const SliceOptions: FC = () => {
       style={{
         width: theme.spacing(APP_CONTENT_SHARE_DIMENSION),
         height: theme.spacing(APP_CONTENT_SHARE_DIMENSION),
-        margin: theme.spacing(0, 2)
+        margin: theme.spacing(0, 2),
+        zIndex: 1050
       }}
     >
       <SpeedDial
