@@ -8,13 +8,13 @@
     "clean": "rimraf dist"
   },
   "devDependencies": {
-    "@types/react": "^17.0.11",
+    "@types/react": "^17.0.13",
     "@types/react-dom": "^17.0.8",
-    "@types/requestidlecallback": "^0.3.1",
+    "@types/requestidlecallback": "^0.3.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rimraf": "^3.0.2",
-    "typescript": "^4.3.4"
+    "typescript": "^4.3.5"
   },
   "dependencies": {
     "@istok/mdx": "^0.2.0",
