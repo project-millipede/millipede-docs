@@ -74,7 +74,7 @@ MillipedeDocument.getInitialProps = async (
 
   const mediaQueryStyles = (
     <style
-      type='text/css'
+      key={'mediaStyles'}
       // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{ __html: mediaStyles }}
     />
