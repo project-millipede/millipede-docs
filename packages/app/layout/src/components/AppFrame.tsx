@@ -1,6 +1,5 @@
 import { Portal } from '@app/components';
 import { layoutState } from '@app/layout/src/recoil/features/layout/reducer';
-import { Container } from '@material-ui/core';
 import React, { FC, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 
@@ -29,7 +28,7 @@ export const AppFrame: FC = ({ children }) => {
   }, []);
 
   return (
-    <Container sx={{ display: 'flex' }}>
+    <div style={{ display: 'flex' }}>
       <SwitchAppToolBar
         isDrawerExpanded={isDrawerExpanded}
         handleDrawerOpen={handleDrawerOpen}
@@ -44,6 +43,6 @@ export const AppFrame: FC = ({ children }) => {
       <Portal.PortalOut portalType={Portal.PortalType.Cursor} />
 
       {children}
-    </Container>
+    </div>
   );
 };
