@@ -39,7 +39,7 @@
     "test": "NODE_ENV=development jest --colors --watch",
     "lint": "yarn eslint './docs/src/**/*' './src/**/*' './pages/**/*' './packages/**/src/**/*'",
     "format:mdx": "prettier --parser mdx --end-of-line lf --print-width 80 --prose-wrap always --single-quote true --write \"docs/src/pages/**/*.mdx\"",
-    "format:json": "prettier --parser json --print-width 80 --use-tabs --write \"locales/**/*.json\"",
+    "format:json": "prettier --parser json -print-width 80 --tab-width 2 --write \"locales/**/*.json\"",
     "sitemap": "node sitemap-generator"
   },
   "dependencies": {
@@ -62,9 +62,9 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@huse/effect-ref": "^1.1.0",
     "@huse/merged-ref": "^1.2.0",
-    "@material-ui/core": "5.0.0-alpha.38",
-    "@material-ui/icons": "5.0.0-alpha.37",
-    "@material-ui/lab": "5.0.0-alpha.38",
+    "@material-ui/core": "5.0.0-beta.0",
+    "@material-ui/icons": "5.0.0-beta.0",
+    "@material-ui/lab": "5.0.0-alpha.39",
     "@page/illustrations": "workspace:packages/illustrations",
     "@page/landing": "workspace:packages/page/landing",
     "@page/layout": "workspace:packages/page/layout",
@@ -153,9 +153,9 @@
     "webpack": "5.40.0",
     "next-translate": "1.0.7",
     "next": "11.0.1",
-    "@material-ui/icons": "5.0.0-alpha.37",
-    "@material-ui/core": "5.0.0-alpha.38",
-    "@material-ui/lab": "5.0.0-alpha.38"
+    "@material-ui/icons": "5.0.0-beta.0",
+    "@material-ui/core": "5.0.0-beta.0",
+    "@material-ui/lab": "5.0.0-alpha.39"
   },
   "engines": {
     "node": "12.x"
