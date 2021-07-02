@@ -94,7 +94,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@app/houx@workspace:packages/houx"
   dependencies:
-    "@types/node": ^15.12.5
+    "@types/node": ^15.14.0
     "@types/react": ^17.0.13
     "@types/react-dom": ^17.0.8
     react: ^17.0.2
@@ -122,7 +122,7 @@ __metadata:
     "@material-ui/icons": 5.0.0-beta.0
     "@material-ui/lab": 5.0.0-alpha.39
     "@types/lodash": ^4.14.170
-    "@types/node": ^15.12.5
+    "@types/node": ^15.14.0
     "@types/react": ^17.0.13
     "@types/react-dom": ^17.0.8
     "@types/styled-components": ^5.1.10
@@ -244,7 +244,7 @@ __metadata:
     rimraf: ^3.0.2
     ts-loader: ^9.2.3
     typescript: ^4.3.5
-    webpack: ^5.40.0
+    webpack: ^5.42.0
   languageName: unknown
   linkType: soft
 
@@ -2098,11 +2098,11 @@ __metadata:
   linkType: hard
 
 "@hapi/boom@npm:9.x.x":
-  version: 9.1.2
-  resolution: "@hapi/boom@npm:9.1.2"
+  version: 9.1.3
+  resolution: "@hapi/boom@npm:9.1.3"
   dependencies:
     "@hapi/hoek": 9.x.x
-  checksum: 168bb08ab76ec3ae398608abea3a41d6a9ab9f4d9c3eefef9a989b7da2be8d1f9905df629ea01568da9a408641c423d4d326845b0a76344f32aacae3e0c9fc89
+  checksum: b7f54fa3fd4e9ea60c33a4be93ae9cd67cf1b4f000d9feb0393e9f617c5f49a753de66d7ca0048c90c9ca71e722cf1d0ce62e436d8076e69a6943cbf26f2c2f7
   languageName: node
   linkType: hard
 
@@ -3071,16 +3071,16 @@ __metadata:
   linkType: hard
 
 "@types/estree@npm:*":
-  version: 0.0.48
-  resolution: "@types/estree@npm:0.0.48"
-  checksum: 5062c9a65d3b4020df54741ec7e697ad516bb446a1f8823bd7990544cf6221ab6facf8dd7ad1c79753a5dde5ecb6a9bc4ffcaa1123dba1119566887732cc39fb
+  version: 0.0.49
+  resolution: "@types/estree@npm:0.0.49"
+  checksum: a01577ca7bdb30a668ac92d07122afcca8b1eb44d95ae1efe6dfefbc0b54953a137d7c2ebcab034568f1c04f2a42e85bf6bb97af47cdfaf9d5f01e58ac27ecf5
   languageName: node
   linkType: hard
 
-"@types/estree@npm:^0.0.47":
-  version: 0.0.47
-  resolution: "@types/estree@npm:0.0.47"
-  checksum: aed5c940436250c25c5e140aa19e7199ba3452e72e1aecc515621507df9e5ed5076ddba84a1684c36d62be841ff3e2bafce8793f16fe6f69d10884449d4461e7
+"@types/estree@npm:^0.0.48":
+  version: 0.0.48
+  resolution: "@types/estree@npm:0.0.48"
+  checksum: 5062c9a65d3b4020df54741ec7e697ad516bb446a1f8823bd7990544cf6221ab6facf8dd7ad1c79753a5dde5ecb6a9bc4ffcaa1123dba1119566887732cc39fb
   languageName: node
   linkType: hard
 
@@ -3184,10 +3184,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^15.12.5":
-  version: 15.12.5
-  resolution: "@types/node@npm:15.12.5"
-  checksum: 4550941a5db67f21bf1c54b2f76ef6fb56ced08583b6049fceef5972ef73791225c41b9a30ce36f496fded284dd736973b5e2107f4bd036d41f35550e3af3450
+"@types/node@npm:*, @types/node@npm:^15.14.0":
+  version: 15.14.0
+  resolution: "@types/node@npm:15.14.0"
+  checksum: 94bdbf5e92b915b439478c421b1a9554e3411a6770cb01af2703356c1ea46c202e10fb486264a19fbddf028a6b0e260f21cd970b719e6e8b81dd7c64cc9f69c8
   languageName: node
   linkType: hard
 
@@ -3213,9 +3213,9 @@ __metadata:
   linkType: hard
 
 "@types/prettier@npm:^2.1.5":
-  version: 2.3.0
-  resolution: "@types/prettier@npm:2.3.0"
-  checksum: 8dd9b5263fd91001d72ca4e2ff89fb0d1ba23a450bd723b4478eb651755a2f1151af14ab90c4f7dadba607142757b340c1d7271ae56806563c76719d3321ec20
+  version: 2.3.1
+  resolution: "@types/prettier@npm:2.3.1"
+  checksum: 545891e0ecbb60345263e4f142d406b3d4ff97bb24605f247844af55f6523e974d3c7b0b7a83f59467e078e193c879b9491ec24c652c536f1905a4966b3e5784
   languageName: node
   linkType: hard
 
@@ -3709,7 +3709,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.2.1, acorn@npm:^8.2.4":
+"acorn@npm:^8.2.4, acorn@npm:^8.4.1":
   version: 8.4.1
   resolution: "acorn@npm:8.4.1"
   bin:
@@ -5770,9 +5770,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.3.723":
-  version: 1.3.763
-  resolution: "electron-to-chromium@npm:1.3.763"
-  checksum: a9e8ce410dfa7de6122f2106dd1ef64623640889c9f80a07a0395d6772ad18d220a316dc1c8aa89b04062deb4be269eced3e087ebf9c0b4e36ffc9e6bf2eb509
+  version: 1.3.765
+  resolution: "electron-to-chromium@npm:1.3.765"
+  checksum: c34d54bafefd2c1b107833fa71cbfee76ae74f6ab9eb40ef2509e28148cbb85f87dd472fd4315271af31e66aa7dea9a17855c9630fbe577bc2a2d486898f77ba
   languageName: node
   linkType: hard
 
@@ -6623,9 +6623,9 @@ __metadata:
   linkType: hard
 
 "flatted@npm:^3.1.0":
-  version: 3.1.1
-  resolution: "flatted@npm:3.1.1"
-  checksum: 508935e3366d95444131f0aaa801a4301f24ea5bcb900d12764e7335b46b910730cc1b5bcfcfb8eccb7c8db261ba0671c6a7ca30d10870ff7a7756dc7e731a7a
+  version: 3.2.0
+  resolution: "flatted@npm:3.2.0"
+  checksum: 31ceaf91e9f79acb4855789d243a583100d2d116eb6ea20e51ba1bf6c4675d865e65a44b4e03451764388d6fc6e2a92822873a5c7afa623d9dc46077b9bd78d5
   languageName: node
   linkType: hard
 
@@ -6688,9 +6688,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:4.1.18-rc.25":
-  version: 4.1.18-rc.25
-  resolution: "framer-motion@npm:4.1.18-rc.25"
+"framer-motion@npm:4.1.18-rc.26":
+  version: 4.1.18-rc.26
+  resolution: "framer-motion@npm:4.1.18-rc.26"
   dependencies:
     "@emotion/is-prop-valid": ^0.8.2
     framesync: 5.3.0
@@ -6704,7 +6704,7 @@ __metadata:
   dependenciesMeta:
     "@emotion/is-prop-valid":
       optional: true
-  checksum: b4d36cf387746d6ded01b33142515043af33c08b31c8bf915b5ff2473c62e092420b8a072e803e1d2eadf41e8acb4529b313ffaeeaf8df751f772e4bc6adf4b2
+  checksum: b1ddc1b49301fd4ca2fe3bf7e35b39195a1eaef8de09b17b57a6a76994be37912c3232aa77f4b5e2ac28d26cc53558bc07567a9dde89307b747cca346fa84d13
   languageName: node
   linkType: hard
 
@@ -9133,7 +9133,7 @@ __metadata:
     "@types/eslint": ^7.2.13
     "@types/jest": ^26.0.23
     "@types/lodash": ^4.14.170
-    "@types/node": ^15.12.5
+    "@types/node": ^15.14.0
     "@types/pdfjs-dist": ^2.7.3
     "@types/react": ^17.0.13
     "@types/react-dom": ^17.0.8
@@ -9159,7 +9159,7 @@ __metadata:
     eslint-plugin-react-hooks: ^4.2.0
     factory.ts: ^0.5.2
     fast-glob: ^3.2.6
-    framer-motion: 4.1.18-rc.25
+    framer-motion: 4.1.18-rc.26
     gray-matter: ^4.0.3
     group-array: ^1.0.0
     immer: ^9.0.3
@@ -9194,7 +9194,7 @@ __metadata:
     ts-jest: ^27.0.3
     typesafe-actions: ^5.1.0
     typescript: ^4.3.5
-    unified: ^9.2.1
+    unified: ^9.2.2
     unist-util-visit: ^2.0.3
     use-analytics: ^0.0.5
     use-async-effect: ^2.2.3
@@ -12651,9 +12651,9 @@ typescript@^4.3.5:
   languageName: node
   linkType: hard
 
-"unified@npm:^9.2.1":
-  version: 9.2.1
-  resolution: "unified@npm:9.2.1"
+"unified@npm:^9.2.1, unified@npm:^9.2.2":
+  version: 9.2.2
+  resolution: "unified@npm:9.2.2"
   dependencies:
     bail: ^1.0.0
     extend: ^3.0.0
@@ -12661,7 +12661,7 @@ typescript@^4.3.5:
     is-plain-obj: ^2.0.0
     trough: ^1.0.0
     vfile: ^4.0.0
-  checksum: 786b0e1847d358fef9d262eb68997ef39446682ecfccf659784b7d06952803c6ff642fc8fb9d9d738472a20b475b95294b5b03f45e70ca1e396d75d7ba9c5abc
+  checksum: 7c24461be7de4145939739ce50d18227c5fbdf9b3bc5a29dabb1ce26dd3e8bd4a1c385865f6f825f3b49230953ee8b591f23beab3bb3643e3e9dc37aa8a089d5
   languageName: node
   linkType: hard
 
@@ -13556,16 +13556,16 @@ typescript@^4.3.5:
   languageName: node
   linkType: hard
 
-"webpack@npm:5.40.0":
-  version: 5.40.0
-  resolution: "webpack@npm:5.40.0"
+"webpack@npm:5.42.0":
+  version: 5.42.0
+  resolution: "webpack@npm:5.42.0"
   dependencies:
     "@types/eslint-scope": ^3.7.0
-    "@types/estree": ^0.0.47
+    "@types/estree": ^0.0.48
     "@webassemblyjs/ast": 1.11.0
     "@webassemblyjs/wasm-edit": 1.11.0
     "@webassemblyjs/wasm-parser": 1.11.0
-    acorn: ^8.2.1
+    acorn: ^8.4.1
     browserslist: ^4.14.5
     chrome-trace-event: ^1.0.2
     enhanced-resolve: ^5.8.0
@@ -13588,7 +13588,7 @@ typescript@^4.3.5:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: 19b8e0bfb9c6f16de1baa97aa820da1bbd2032c78bb6c76dcda37844ec422d3ac82bdd6d65934c853a99fa60a9af0a8ab255cefe51f4262395aff0d6a37c7ccf
+  checksum: 3800f185257776f8d4d9fa705a6345b6ace2bbd6141d669dfb3f385d6bf69e2897b44a236fb57faf4c4902ba46ec8011e54c7133f7ffb6b244ea570961901fc2
   languageName: node
   linkType: hard
 
