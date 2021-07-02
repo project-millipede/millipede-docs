@@ -1,2 +1,3 @@
 export { MdxDocs } from './MdxDocs';
 export { h1, h2, h3, h4, h5, h6 } from './MdxElement';
+export * as Elements from './elements';
