@@ -62,11 +62,9 @@ export const SwitchDrawer: FC<DrawerProps> = ({
         </IconButton>
       </Link>
 
-      {isDrawerExpanded && (
-        <IconButton onClick={handleDrawerClose}>
-          <ChevronLeft />
-        </IconButton>
-      )}
+      <IconButton onClick={handleDrawerClose}>
+        <ChevronLeft />
+      </IconButton>
     </DrawerHeader>
   );
 
@@ -79,7 +77,7 @@ export const SwitchDrawer: FC<DrawerProps> = ({
           handleDrawerClose={handleDrawerClose}
         >
           {headerComp}
-          <Divider variant='middle' flexItem />
+          <Divider variant='middle' />
           {treeComp}
         </MobileDrawer>
       </Media>
@@ -90,7 +88,7 @@ export const SwitchDrawer: FC<DrawerProps> = ({
           handleDrawerClose={handleDrawerClose}
         >
           {headerComp}
-          <Divider variant='middle' flexItem />
+          <Divider variant='middle' />
           {treeComp}
         </DesktopDrawer>
       </Media>
