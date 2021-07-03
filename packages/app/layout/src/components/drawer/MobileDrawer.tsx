@@ -20,6 +20,7 @@ const SwipeableDrawer = styled(MuiSwipeableDrawer)(({ theme }) => ({
 
 export const MobileDrawer: FC<DrawerProps> = ({
   isDrawerExpanded,
+  handleDrawerOpen,
   handleDrawerClose,
   children
 }) => {
@@ -27,9 +28,8 @@ export const MobileDrawer: FC<DrawerProps> = ({
     <SwipeableDrawer
       variant='temporary'
       open={isDrawerExpanded}
-      onOpen={() => {}}
-      onClose={() => {}}
-      onBackdropClick={handleDrawerClose}
+      onOpen={handleDrawerOpen}
+      onClose={handleDrawerClose}
       ModalProps={{
         keepMounted: true
       }}
