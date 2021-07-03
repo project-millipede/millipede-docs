@@ -1,31 +1,27 @@
 import { PageTypes } from '@app/types';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Icon as MUIIcon } from '@material-ui/core';
 import React, { FC } from 'react';
+
+import { getIconByName } from './Icon.svc';
 
 interface CustomIconProps {
   icon: PageTypes.Icon;
 }
 
 const generateFAIcon = (iconName: IconName) => {
-  return <FontAwesomeIcon icon={iconName} />;
+  return <FontAwesomeIcon icon={iconName} style={{ fontSize: '20px' }} />;
 };
 
 const generateMUIIcon = (iconName: string) => {
-  return <MUIIcon>{iconName}</MUIIcon>;
+  return getIconByName(iconName);
 };
 
 const CustomIcon: FC<CustomIconProps> = ({ icon }) => {
-  let iconPlaceholder: JSX.Element;
-
   if (icon.type === PageTypes.IconType.FA) {
-    iconPlaceholder = generateFAIcon(icon.name as IconName);
-  } else {
-    iconPlaceholder = generateMUIIcon(icon.name);
+    return generateFAIcon(icon.name as IconName);
   }
-
-  return iconPlaceholder;
+  return generateMUIIcon(icon.name);
 };
 
 export default CustomIcon;

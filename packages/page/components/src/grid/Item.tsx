@@ -1,4 +1,4 @@
-import { getIconByName, Link } from '@app/components';
+import { CustomIcon, Link } from '@app/components';
 import { ContentTypes } from '@app/types';
 import { Avatar, IconButton, Typography } from '@material-ui/core';
 import { styled, useTheme } from '@material-ui/core/styles';
@@ -161,7 +161,7 @@ export const Item = ({
               handleSelect(link);
             }}
           >
-            {getIconByName(icon.name)}
+            <CustomIcon icon={icon} />
           </IconButton>
         </Avatar>
       ) : null}

@@ -1,4 +1,4 @@
-import { getIconByName, Link } from '@app/components';
+import { CustomIcon, Link } from '@app/components';
 import { ACTIVE_INDICATOR_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
 import { NavigationState, navigationState } from '@app/layout/src/recoil/features/pages/reducer';
 import { PageTypes } from '@app/types';
@@ -33,20 +33,22 @@ export const TransitionComponent: FC<TransitionProps> = props => {
 
 const StyledTreeItem = styled(TreeItem)<TreeItemProps>(({ theme }) => ({
   '& .MuiTreeItem-group': {
-    margin: 0
+    margin: 0,
+    backgroundColor: theme.palette.grey[200]
   },
   '& .MuiTreeItem-content': {
     padding: 0,
-    // borderRight: `2px solid transparent`,
     '&.Mui-selected': {
       borderRight: `${theme.spacing(0.25)} solid ${
         theme.palette.secondary.main
-      }`
+      }`,
+      backgroundColor: theme.palette.grey[300]
     },
     '&.Mui-expanded': {
-      borderRight: `${theme.spacing(0.25)}  solid ${
+      borderRight: `${theme.spacing(0.25)} solid ${
         theme.palette.secondary.main
-      }`
+      }`,
+      backgroundColor: theme.palette.grey[300]
     },
     '& .MuiTreeItem-iconContainer': {
       width: '24px',
@@ -160,7 +162,7 @@ export const Tree: FC<TreeProps> = (
         <StyledTreeItem
           key={`/docs/${pathname}`}
           nodeId={`/docs/${pathname}`}
-          icon={getIconByName(icon.name)}
+          icon={<CustomIcon icon={icon} />}
           label={
             <Link
               key={`/docs/${pathname}`}
