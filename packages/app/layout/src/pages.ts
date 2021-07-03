@@ -5,9 +5,9 @@ export const loadPages = (
   _currentPages: Array<PageTypes.Page> = []
 ) => {
   return [
-    ...pagesAI,
     ...pagesPET,
     ...pagesPIDP,
+    ...pagesAI,
     ...pagesSecurity,
     ...pagesPerspective,
     ...pagesGuides,
@@ -46,7 +46,7 @@ export const pagesAI: Array<PageTypes.Page> = [
       },
       {
         pathname: 'ai/discover-more',
-        icon: { ...defaultIcon, name: 'info' },
+        icon: { ...defaultIcon, name: 'read_more' },
         children: [
           {
             pathname: 'ai/discover-more/roadmap',
@@ -94,11 +94,11 @@ export const pagesSecurity: Array<PageTypes.Page> = [
 export const pagesPIDP: Array<PageTypes.Page> = [
   {
     pathname: 'pidp',
-    icon: defaultIcon,
+    icon: { ...defaultIcon, name: 'fact_check' },
     children: [
       {
         pathname: 'pidp/approach',
-        icon: { ...defaultIcon, name: 'filter_center_focus' },
+        icon: { type: PageTypes.IconType.FA, name: 'lightbulb' },
         children: [
           {
             pathname: 'pidp/approach/by-example',
@@ -108,7 +108,7 @@ export const pagesPIDP: Array<PageTypes.Page> = [
       },
       {
         pathname: 'pidp/use-case',
-        icon: { ...defaultIcon, name: 'extension' },
+        icon: { ...defaultIcon, name: 'miscellaneous_services' },
         children: [
           {
             pathname: 'pidp/use-case/recognition',
@@ -122,7 +122,7 @@ export const pagesPIDP: Array<PageTypes.Page> = [
       },
       {
         pathname: 'pidp/discover-more',
-        icon: { ...defaultIcon, name: 'info' },
+        icon: { ...defaultIcon, name: 'read_more' },
         children: [
           {
             pathname: 'pidp/discover-more/roadmap',
@@ -130,35 +130,35 @@ export const pagesPIDP: Array<PageTypes.Page> = [
           },
           {
             pathname: 'pidp/discover-more/wps',
-            icon: { ...defaultIcon, name: 'list' },
+            icon: { ...defaultIcon, name: 'filter_none' },
             children: [
               {
                 pathname: 'pidp/discover-more/wps/wp1',
-                icon: { ...defaultIcon, name: 'create' }
+                icon: { ...defaultIcon, name: 'filter_1' }
               },
               {
                 pathname: 'pidp/discover-more/wps/wp2',
-                icon: { ...defaultIcon, name: 'create' }
+                icon: { ...defaultIcon, name: 'filter_2' }
               },
               {
                 pathname: 'pidp/discover-more/wps/wp3',
-                icon: { ...defaultIcon, name: 'create' }
+                icon: { ...defaultIcon, name: 'filter_3' }
               },
               {
                 pathname: 'pidp/discover-more/wps/wp4',
-                icon: { ...defaultIcon, name: 'create' }
+                icon: { ...defaultIcon, name: 'filter_4' }
               },
               {
                 pathname: 'pidp/discover-more/wps/wp5',
-                icon: { ...defaultIcon, name: 'create' }
+                icon: { ...defaultIcon, name: 'filter_5' }
               },
               {
                 pathname: 'pidp/discover-more/wps/wp6',
-                icon: { ...defaultIcon, name: 'create' }
+                icon: { ...defaultIcon, name: 'filter_6' }
               },
               {
                 pathname: 'pidp/discover-more/wps/wp7',
-                icon: { ...defaultIcon, name: 'create' }
+                icon: { ...defaultIcon, name: 'filter_7' }
               }
             ]
           }
@@ -166,19 +166,19 @@ export const pagesPIDP: Array<PageTypes.Page> = [
       },
       {
         pathname: 'pidp/discover-more/related-projects',
-        icon: { ...defaultIcon, name: 'list' }
+        icon: { ...defaultIcon, name: 'compare' }
       },
       {
         pathname: 'pidp/discover-more/unreliable-procedures',
-        icon: { ...defaultIcon, name: 'list' },
+        icon: { ...defaultIcon, name: 'running_with_errors' },
         children: [
           {
             pathname: 'pidp/discover-more/unreliable-procedures/operator',
-            icon: { ...defaultIcon, name: 'create' }
+            icon: { ...defaultIcon, name: 'business' }
           },
           {
             pathname: 'pidp/discover-more/unreliable-procedures/regulation',
-            icon: { ...defaultIcon, name: 'create' }
+            icon: { ...defaultIcon, name: 'account_balance' }
           }
         ]
       }
@@ -189,21 +189,11 @@ export const pagesPIDP: Array<PageTypes.Page> = [
 export const pagesPET: Array<PageTypes.Page> = [
   {
     pathname: 'pet',
-    icon: defaultIcon,
+    icon: { type: PageTypes.IconType.FA, name: 'ghost' },
     children: [
       {
-        pathname: 'pet/dataflow',
-        icon: { ...defaultIcon, name: 'waves' },
-        children: [
-          {
-            pathname: 'pet/dataflow/comparison',
-            icon: { ...defaultIcon, name: 'compare_arrows' }
-          }
-        ]
-      },
-      {
         pathname: 'pet/use-case',
-        icon: { ...defaultIcon, name: 'extension' },
+        icon: { ...defaultIcon, name: 'miscellaneous_services' },
         children: [
           {
             pathname: 'pet/use-case/publish',
@@ -215,13 +205,23 @@ export const pagesPET: Array<PageTypes.Page> = [
           },
           {
             pathname: 'pet/use-case/analytics',
-            icon: { ...defaultIcon, name: 'assessment' }
+            icon: { ...defaultIcon, name: 'fingerprint' }
+          }
+        ]
+      },
+      {
+        pathname: 'pet/dataflow',
+        icon: { type: PageTypes.IconType.FA, name: 'route' },
+        children: [
+          {
+            pathname: 'pet/dataflow/comparison',
+            icon: { ...defaultIcon, name: 'compare_arrows' }
           }
         ]
       },
       {
         pathname: 'pet/discover-more',
-        icon: { ...defaultIcon, name: 'info' },
+        icon: { ...defaultIcon, name: 'read_more' },
         children: [
           {
             pathname: 'pet/discover-more/roadmap',
@@ -240,7 +240,7 @@ export const pagesPerspective: Array<PageTypes.Page> = [
     children: [
       {
         pathname: 'perspective/strategy',
-        icon: { ...defaultIcon, name: 'list' }
+        icon: { type: PageTypes.IconType.FA, name: 'chess-board' }
       },
       {
         pathname: 'perspective/cause',
@@ -248,7 +248,7 @@ export const pagesPerspective: Array<PageTypes.Page> = [
       },
       {
         pathname: 'perspective/shortsighted',
-        icon: { ...defaultIcon, name: 'trending_down' }
+        icon: { type: PageTypes.IconType.FA, name: 'low-vision' }
       },
       {
         pathname: 'perspective/competence',
@@ -269,10 +269,7 @@ export const pagesGuides: Array<PageTypes.Page> = [
     children: [
       {
         pathname: 'guides/engineering',
-        icon: {
-          ...defaultIcon,
-          name: 'code'
-        },
+        icon: { ...defaultIcon, name: 'design_services' },
         children: [
           {
             pathname: 'guides/engineering/applicationTypes',
@@ -287,7 +284,7 @@ export const pagesGuides: Array<PageTypes.Page> = [
         pathname: 'guides/research',
         icon: {
           ...defaultIcon,
-          name: 'book'
+          name: 'science'
         },
         children: [
           {
@@ -298,7 +295,7 @@ export const pagesGuides: Array<PageTypes.Page> = [
       },
       {
         pathname: 'guides/disinformation',
-        icon: { ...defaultIcon, name: 'error' },
+        icon: { type: PageTypes.IconType.FA, name: 'balance-scale-left' },
         children: [
           {
             pathname: 'guides/disinformation/objectives',
@@ -335,7 +332,7 @@ export const pagesDiscoverMore: Array<PageTypes.Page> = [
         children: [
           {
             pathname: 'discover-more/team/cv',
-            icon: { ...defaultIcon, name: 'map' }
+            icon: { ...defaultIcon, name: 'portrait' }
           }
         ]
       },
