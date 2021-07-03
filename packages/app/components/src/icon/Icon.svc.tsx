@@ -1,5 +1,5 @@
 import {
-  Assessment,
+  AccountBalance,
   Book,
   BugReport,
   Business,
@@ -7,15 +7,24 @@ import {
   CenterFocusWeak,
   CloudUpload,
   Code,
+  Compare,
   CompareArrows,
   ContactSupport,
   Create,
   Description,
-  Error,
+  DesignServices,
   Explore,
-  Extension,
-  FilterCenterFocus,
+  FactCheck,
+  Filter1,
+  Filter2,
+  Filter3,
+  Filter4,
+  Filter5,
+  Filter6,
+  Filter7,
+  FilterNone,
   FindReplace,
+  Fingerprint,
   FlashOn,
   Flip,
   FormatQuote,
@@ -23,19 +32,20 @@ import {
   GroupWork,
   Info,
   Layers,
-  List,
   Lock,
   Map,
+  MiscellaneousServices,
   ModelTraining,
   OfflineBolt,
+  Portrait,
+  ReadMore,
+  RunningWithErrors,
+  Science,
   Security,
-  Slideshow,
   Star,
   Toc,
   TouchApp,
-  TrendingDown,
   Warning,
-  Waves,
 } from '@material-ui/icons';
 import React from 'react';
 
@@ -52,9 +62,6 @@ export const getIconByName = (name: string) => {
     }
     case 'find_replace': {
       return <FindReplace />;
-    }
-    case 'slideshow': {
-      return <Slideshow />;
     }
     case 'functions': {
       return <Functions />;
@@ -74,17 +81,8 @@ export const getIconByName = (name: string) => {
     case 'model_training': {
       return <ModelTraining />;
     }
-    case 'waves': {
-      return <Waves />;
-    }
-    case 'filter_center_focus': {
-      return <FilterCenterFocus />;
-    }
     case 'touch_app': {
       return <TouchApp />;
-    }
-    case 'extension': {
-      return <Extension />;
     }
     case 'flip': {
       return <Flip />;
@@ -107,14 +105,8 @@ export const getIconByName = (name: string) => {
     case 'layers': {
       return <Layers />;
     }
-    case 'list': {
-      return <List />;
-    }
     case 'warning': {
       return <Warning />;
-    }
-    case 'trending_down': {
-      return <TrendingDown />;
     }
     case 'flash_on': {
       return <FlashOn />;
@@ -137,12 +129,6 @@ export const getIconByName = (name: string) => {
     case 'info': {
       return <Info />;
     }
-    case 'error': {
-      return <Error />;
-    }
-    case 'assessment': {
-      return <Assessment />;
-    }
     case 'contact_support': {
       return <ContactSupport />;
     }
@@ -152,8 +138,62 @@ export const getIconByName = (name: string) => {
     case 'business': {
       return <Business />;
     }
+    case 'portrait': {
+      return <Portrait />;
+    }
+    case 'fact_check': {
+      return <FactCheck />;
+    }
+    case 'compare': {
+      return <Compare />;
+    }
+    case 'running_with_errors': {
+      return <RunningWithErrors />;
+    }
+    case 'filter_none': {
+      return <FilterNone />;
+    }
+    case 'filter_1': {
+      return <Filter1 />;
+    }
+    case 'filter_2': {
+      return <Filter2 />;
+    }
+    case 'filter_3': {
+      return <Filter3 />;
+    }
+    case 'filter_4': {
+      return <Filter4 />;
+    }
+    case 'filter_5': {
+      return <Filter5 />;
+    }
+    case 'filter_6': {
+      return <Filter6 />;
+    }
+    case 'filter_7': {
+      return <Filter7 />;
+    }
+    case 'account_balance': {
+      return <AccountBalance />;
+    }
+    case 'science': {
+      return <Science />;
+    }
+    case 'fingerprint': {
+      return <Fingerprint />;
+    }
+    case 'miscellaneous_services': {
+      return <MiscellaneousServices />;
+    }
+    case 'design_services': {
+      return <DesignServices />;
+    }
+    case 'read_more': {
+      return <ReadMore />;
+    }
     default: {
-      return name;
+      return <></>;
     }
   }
 };
