@@ -8,9 +8,9 @@
     "clean": "rimraf dist"
   },
   "devDependencies": {
-    "@types/react": "^17.0.13",
-    "@types/react-dom": "^17.0.8",
-    "@types/requestidlecallback": "^0.3.3",
+    "@types/react": "^17.0.14",
+    "@types/react-dom": "^17.0.9",
+    "@types/requestidlecallback": "^0.3.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rimraf": "^3.0.2",
