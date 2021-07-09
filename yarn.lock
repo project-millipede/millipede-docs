@@ -3340,10 +3340,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/unist@npm:*, @types/unist@npm:^2.0.0, @types/unist@npm:^2.0.2, @types/unist@npm:^2.0.3":
-  version: 2.0.5
-  resolution: "@types/unist@npm:2.0.5"
-  checksum: 5d8f70e11e4464550c46a2e8175b75beaaaef60d46c9b6214b80edf99a9f27b614f9efb946681cea8a3e0233727df55561e9fea3824ba9de7fd7b876c1821c78
+"@types/unist@npm:2.0.4":
+  version: 2.0.4
+  resolution: "@types/unist@npm:2.0.4"
+  checksum: 7d7edef6b917f950578ff9a3e112164af52df8580a0885077a6e425e4f14aa6d69b1fbb6bde19695d1e2a28d2d00896a3c53bbcb3009e6e397786bb951fe63c0
   languageName: node
   linkType: hard
 
@@ -9155,7 +9155,7 @@ __metadata:
     "@types/react-pdf": ^5.0.5
     "@types/resize-observer-browser": ^0.1.6
     "@types/styled-components": ^5.1.11
-    "@types/unist": ^2.0.3
+    "@types/unist": 2.0.4
     "@types/webpack-merge": ^5.0.0
     "@typescript-eslint/eslint-plugin": ^4.28.2
     "@typescript-eslint/parser": ^4.28.2
