@@ -1,11 +1,38 @@
-import React, { useMemo } from 'react';
+import { styled } from '@material-ui/core/styles';
+import { TocEntry } from '@stefanprobst/remark-extract-toc';
+import { useRouter } from 'next/router';
+import React, { FC } from 'react';
 
-import { generateToc, TocProps } from './Toc.svc';
+import { TocLink } from './TocLink';
 
-export const TocComponent = ({ content }: TocProps) => {
-  const toc = useMemo(() => {
-    return generateToc({ content }).result;
-  }, [content]);
+interface TocComponentProps {
+  toc: Array<
+    Omit<TocEntry, 'children'> & {
+      isParent?: boolean;
+    }
+  >;
+}
 
-  return <>{toc}</>;
+const TocList = styled('ul')(() => ({
+  listStyle: 'none',
+  padding: 0,
+  margin: 0
+}));
+
+export const TocComponent: FC<TocComponentProps> = ({ toc }) => {
+  const { query, pathname } = useRouter();
+
+  return (
+    <TocList>
+      {toc.map(tocItem => {
+        return (
+          <li key={tocItem.id}>
+            <TocLink href={tocItem.id} query={query} pathname={pathname}>
+              {tocItem.value}
+            </TocLink>
+          </li>
+        );
+      })}
+    </TocList>
+  );
 };

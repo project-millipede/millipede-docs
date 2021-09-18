@@ -1,54 +1,73 @@
-import { TOC_TOP, TOC_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
-import { Container, Typography } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
+import {
+  APP_CONTENT_HEADER_HEIGHT,
+  TOC_TOP
+} from '@app/layout/src/recoil/features/layout/reducer';
+import { Typography } from '@material-ui/core';
+import { styled, Theme } from '@material-ui/core/styles';
+import { SxProps } from '@material-ui/system';
+import { TocEntry } from '@stefanprobst/remark-extract-toc';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
-import { TocComponent } from './toc';
+import { TocComponent } from './toc/TocComponent';
 
-export interface AppTableOfContentsProps {
-  content: string;
+interface AppTableOfContentsProps {
+  toc: Array<
+    Omit<TocEntry, 'children'> & {
+      isParent?: boolean;
+    }
+  >;
+  sx?: SxProps<Theme>;
 }
 
+// Use when app-frame display='grid'
+const TocNav = styled('div')(({ theme }) => {
+  return {
+    position: 'sticky',
+    top: theme.spacing(TOC_TOP),
+    alignSelf: 'start', // important, required for stickiness in display=grid
+    [theme.breakpoints.down('md')]: {
+      display: 'none'
+    }
+  };
+});
+
+// Use when app-frame display='flex'
+// const TocNav = styled('div')(({ theme }) => {
+//   return {
+//     position: 'sticky',
+//     flex: `0 0 ${theme.spacing(TOC_WIDTH)}`,
+//     top: theme.spacing(TOC_TOP),
+//     alignSelf: 'flex-start', // required for stickiness in display=flex
+//     [theme.breakpoints.down('md')]: {
+//       display: 'none'
+//     }
+//   };
+// });
+
+const TocHeaderContainer = styled('div')(({ theme }) => ({
+  height: theme.spacing(APP_CONTENT_HEADER_HEIGHT),
+  display: 'flex',
+  alignItems: 'center'
+}));
+
+const TocHeader = styled(Typography)(({ theme }) => ({
+  paddingLeft: theme.spacing(1),
+  fontSize: '1rem',
+  fontWeight: theme.typography.fontWeightMedium
+}));
+
 export const AppTableOfContents: FC<AppTableOfContentsProps> = ({
-  content
+  toc = [],
+  sx
 }) => {
   const { t } = useTranslation();
-  const theme = useTheme();
-
   return (
-    <Container
-      component='nav'
-      sx={{
-        position: 'sticky',
-        width: `${theme.spacing(TOC_WIDTH)}`,
-        height: `calc(100% - ${theme.spacing(TOC_TOP)})`,
-        top: `${theme.spacing(TOC_TOP)}`,
-        order: 2,
-        flexShrink: 0,
-        margin: theme.spacing(1),
-        overflowY: 'auto',
-        display: 'none',
-        [theme.breakpoints.up('sm')]: {
-          display: 'block'
-        },
-        '& ul': {
-          paddingLeft: 0,
-          listStyle: 'none'
-        }
-      }}
-    >
-      <Typography
-        sx={{
-          height: 56,
-          padding: theme.spacing(1),
-          fontSize: 16,
-          fontWeight: theme.typography.fontWeightMedium
-        }}
-      >
-        {t('common:toc')}
-      </Typography>
-      <TocComponent content={content} />
-    </Container>
+    <TocNav sx={sx}>
+      <TocHeaderContainer>
+        <TocHeader>{t('common:toc')}</TocHeader>
+      </TocHeaderContainer>
+      <TocComponent toc={toc} />
+    </TocNav>
   );
 };
