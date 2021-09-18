@@ -11,7 +11,6 @@ export const LanguageLabel: FC<LanguageLabelProps> = ({ label }) => {
 
   return (
     <Typography
-      component='span'
       sx={{
         margin: theme.spacing(0, 1.5, 0, 1.5),
         display: 'none',

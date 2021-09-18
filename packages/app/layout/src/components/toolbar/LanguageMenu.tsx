@@ -1,6 +1,5 @@
-import { Button, Menu, MenuItem, Tooltip } from '@material-ui/core';
+import { Button, Menu, MenuItem } from '@material-ui/core';
 import LanguageIcon from '@material-ui/icons/Language';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import React, { FC, SyntheticEvent, useState } from 'react';
 
@@ -9,8 +8,6 @@ import { LanguageLabel } from './LanguageLabel';
 
 export const LanguageMenu: FC = () => {
   const [languageMenu, setLanguageMenu] = useState<Element & EventTarget>(null);
-
-  const { t } = useTranslation();
 
   const { push, pathname, locale, query } = useRouter();
 
@@ -34,12 +31,11 @@ export const LanguageMenu: FC = () => {
   };
   return (
     <>
-      <Tooltip title={`${t('common:change-language')}`} enterDelay={300}>
-        <Button color='inherit' onClick={handleLanguageIconClick}>
-          <LanguageIcon />
-          <LanguageLabel label={locale} />
-        </Button>
-      </Tooltip>
+      <Button color='inherit' onClick={handleLanguageIconClick}>
+        <LanguageIcon />
+        <LanguageLabel label={locale} />
+      </Button>
+
       <Menu
         anchorEl={languageMenu}
         open={!!languageMenu}
