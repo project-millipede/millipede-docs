@@ -1,8 +1,8 @@
 import { PageTypes } from '@app/types';
 import isArray from 'lodash/isArray';
 
-const flattenPages = (pages: Array<PageTypes.Page>, key: string) => {
-  return pages.reduce<Array<PageTypes.FlattenedPage>>(
+const flatten = <T>(pages: Array<T>, key: string) => {
+  return pages.reduce<Array<Omit<T, 'children'> & { isParent?: boolean }>>(
     (flattenedPages, page) => {
       if (page[key]) {
         flattenedPages.push({
@@ -17,7 +17,7 @@ const flattenPages = (pages: Array<PageTypes.Page>, key: string) => {
       }
 
       if (isArray(page[key])) {
-        flattenedPages = flattenedPages.concat(flattenPages(page[key], key));
+        flattenedPages = flattenedPages.concat(flatten(page[key], key));
       }
       return flattenedPages;
     },
@@ -25,61 +25,25 @@ const flattenPages = (pages: Array<PageTypes.Page>, key: string) => {
   );
 };
 
-const findExpandedPages = (
+const getExpandedPages = (pathname: string) => {
+  if (pathname === '/') {
+    return ['/'];
+  }
+  return pathname
+    .split('/')
+    .map((_name, index, arr) => `${arr.slice(0, index + 1).join('/')}`);
+};
+
+const getActivePage = (
   flattenedPages: Array<PageTypes.FlattenedPage>,
   pathname: string
 ) => {
-  const expandedPages = flattenedPages
-    .filter(flattenedPage => {
-      return (
-        flattenedPage.isParent &&
-        pathname.includes(`/docs/${flattenedPage.pathname}`)
-      );
-    })
-    .map(expandedPage => `/docs/${expandedPage.pathname}`);
-  return expandedPages;
-};
-
-const findSelectedPage = (
-  flattenedPages: Array<PageTypes.FlattenedPage>,
-  pathname: string
-) => {
-  const selectedPage = flattenedPages
-    .filter(flattenedPage => {
-      return pathname === `/docs/${flattenedPage.pathname}`;
-    })
-    .map(selectedPage => `/docs/${selectedPage.pathname}`);
-  return selectedPage;
-};
-
-const findSelectedPageAsObject = (
-  flattenedPages: Array<PageTypes.FlattenedPage>,
-  pathname: string,
-  locale: string
-) => {
-  if (pathname.indexOf('?') > 0) {
-    pathname = pathname.substring(0, pathname.indexOf('?'));
-  }
-
-  if (pathname.indexOf('#') > 0) {
-    pathname = pathname.substring(0, pathname.indexOf('#'));
-  }
-
-  if (pathname === '/' || pathname === `/${locale}`) {
-    return {
-      pathname: '/'
-    };
-  }
-
   const [selectedPage] = flattenedPages.filter(flattenedPage => {
-    return pathname === `/docs/${flattenedPage.pathname}`;
+    return pathname === flattenedPage.pathname;
   });
-  return selectedPage ? selectedPage : null;
+  return selectedPage
+    ? selectedPage
+    : ({ pathname: '/' } as PageTypes.FlattenedPage);
 };
 
-export {
-  flattenPages,
-  findExpandedPages,
-  findSelectedPage,
-  findSelectedPageAsObject
-};
+export { flatten, getExpandedPages, getActivePage };

@@ -1,1 +1,1 @@
-export { isBrowser } from './isBrowser';
+export { isBrowser, supportWebShare } from './isBrowser';
