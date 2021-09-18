@@ -4,7 +4,7 @@ import React, { FC } from 'react';
 
 import { TitleUnstyled } from '../../../../common';
 
-const { ArcherContainer, ArcherElement, CustomBox } = Archer;
+const { ArcherContainer, ArcherElement, InteractiveBox } = Archer;
 export const GridWrapper = styled('div')(({ theme }) => ({
   display: 'grid',
   gridTemplateRows: '1fr 1fr 1fr',
@@ -46,11 +46,11 @@ export const FunctionBeahvior: FC = () => {
             }
           ]}
         >
-          <CustomBox sx={{ gridArea: 'function_a' }}>
+          <InteractiveBox sx={{ gridArea: 'function_a' }}>
             <TitleUnstyled variant={'body2'} sx={{ whiteSpace: 'pre-wrap' }}>
               {functionA}
             </TitleUnstyled>
-          </CustomBox>
+          </InteractiveBox>
         </ArcherElement>
         <ArcherElement
           id='function_b'
@@ -62,19 +62,19 @@ export const FunctionBeahvior: FC = () => {
             }
           ]}
         >
-          <CustomBox sx={{ gridArea: 'function_b' }}>
+          <InteractiveBox sx={{ gridArea: 'function_b' }}>
             <TitleUnstyled variant={'body2'} sx={{ whiteSpace: 'pre-wrap' }}>
               {functionB}
             </TitleUnstyled>
-          </CustomBox>
+          </InteractiveBox>
         </ArcherElement>
 
         <ArcherElement id='function_result'>
-          <CustomBox sx={{ gridArea: 'function_result' }}>
+          <InteractiveBox sx={{ gridArea: 'function_result' }}>
             <TitleUnstyled variant={'body2'} sx={{ whiteSpace: 'pre-wrap' }}>
               {functionResult}
             </TitleUnstyled>
-          </CustomBox>
+          </InteractiveBox>
         </ArcherElement>
       </GridWrapper>
     </ArcherContainer>

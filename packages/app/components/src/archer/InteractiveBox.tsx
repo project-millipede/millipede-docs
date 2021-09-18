@@ -1,4 +1,4 @@
-import { Link, LinkProps } from '@app/components';
+import { HiddenUnderlineLink } from '@app/components';
 import { Box, BoxProps } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 import { useRouter } from 'next/router';
@@ -8,9 +8,10 @@ import React, {
   MutableRefObject,
   ReactNode,
   useImperativeHandle,
-  useState
+  useState,
 } from 'react';
 
+import { LinkProps } from '../link';
 import { SelectHandles } from './types';
 
 export type BoxEnhancedProps = BoxProps &
@@ -24,10 +25,9 @@ export const StyledBox = styled(Box)<BoxEnhancedProps>(
     alignItems: 'center',
     justifyContent: 'center',
     border: '3px solid black',
-    textDecoration: 'none',
     padding: theme.spacing(1),
     color: theme.palette.text.primary,
-    '&:hover': {
+    ':hover': {
       cursor: 'pointer',
       backgroundColor: '#E0E0E0'
     },
@@ -38,16 +38,16 @@ export const StyledBox = styled(Box)<BoxEnhancedProps>(
   })
 );
 
-export type CustomBoxProps = BoxProps & {
+export type InteractiveBoxProps = BoxProps & {
   routeSegement?: string;
   dynamicRef?: MutableRefObject<SelectHandles>;
   children: ReactNode;
 };
 
-const CustomBox: ForwardRefRenderFunction<HTMLDivElement, CustomBoxProps> = (
-  { routeSegement, bgcolor, sx, dynamicRef, children },
-  ref
-) => {
+const InteractiveBox: ForwardRefRenderFunction<
+  HTMLDivElement,
+  InteractiveBoxProps
+> = ({ routeSegement, sx, dynamicRef, children }, ref) => {
   const [selected, setSelected] = useState(false);
 
   useImperativeHandle(
@@ -67,35 +67,21 @@ const CustomBox: ForwardRefRenderFunction<HTMLDivElement, CustomBoxProps> = (
 
   return (
     <StyledBox
-      component={routeSegement && Link}
-      selected={selected}
-      // onClick={_e => {
-      //   if (routeSegement != null) {
-      //     push(
-      //       {
-      //         pathname,
-      //         query,
-      //         hash: routeSegement
-      //       },
-      //       null,
-      //       { locale }
-      //     );
-      //   }
-      // }}
       ref={ref}
-      href={
-        {
-          pathname,
-          query,
-          hash: routeSegement
-        } as any
-      }
+      selected={selected}
       sx={sx}
-      bgcolor={bgcolor}
+      component={routeSegement && HiddenUnderlineLink}
+      href={{
+        pathname,
+        query,
+        hash: routeSegement
+      }}
+      shallow
+      prefetch={false}
     >
       {children}
     </StyledBox>
   );
 };
 
-export default forwardRef(CustomBox);
+export default forwardRef(InteractiveBox);

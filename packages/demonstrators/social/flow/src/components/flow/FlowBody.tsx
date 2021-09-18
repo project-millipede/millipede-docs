@@ -6,7 +6,7 @@ import { styled } from '@material-ui/core/styles';
 import React, { FC, memo } from 'react';
 import { useRecoilValue } from 'recoil';
 
-const { ArcherElement, CustomBox } = Archer;
+const { ArcherElement, InteractiveBox } = Archer;
 
 const Row = styled('div')({
   display: 'flex',
@@ -43,9 +43,9 @@ export const FlowBody: FC = () => {
                   relations={relations}
                   isInteractive
                 >
-                  <CustomBox>
+                  <InteractiveBox>
                     <Typography variant='subtitle1'>{label}</Typography>
-                  </CustomBox>
+                  </InteractiveBox>
                 </ArcherElement>
               );
             })}

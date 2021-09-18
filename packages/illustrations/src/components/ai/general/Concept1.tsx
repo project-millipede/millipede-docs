@@ -5,7 +5,7 @@ import React, { FC } from 'react';
 
 import { Title } from '../../common';
 
-const { ArcherContainer, ArcherElement, CustomBox } = Archer;
+const { ArcherContainer, ArcherElement, InteractiveBox } = Archer;
 
 export const GridWrapper = styled('div')(({ theme }) => ({
   display: 'grid',
@@ -16,7 +16,7 @@ export const GridWrapper = styled('div')(({ theme }) => ({
       '. preparation .'
       '. render .'
       `,
-  rowGap: theme.spacing(12)
+  rowGap: theme.spacing(6)
 }));
 
 export const Concept1: FC = () => {
@@ -35,13 +35,13 @@ export const Concept1: FC = () => {
             }
           ]}
         >
-          <CustomBox sx={{ gridArea: 'communication' }}>
+          <InteractiveBox sx={{ gridArea: 'communication' }}>
             <Title>
               {`${t('pages/ai/general/index:communication_process')} ${t(
                 'pages/ai/general/index:communication_process_abbreviation'
               )}`}
             </Title>
-          </CustomBox>
+          </InteractiveBox>
         </ArcherElement>
         <ArcherElement
           id='preparation'
@@ -53,22 +53,22 @@ export const Concept1: FC = () => {
             }
           ]}
         >
-          <CustomBox sx={{ gridArea: 'preparation' }}>
+          <InteractiveBox sx={{ gridArea: 'preparation' }}>
             <Title>
               {`${t('pages/ai/general/index:preparation_process')} ${t(
                 'pages/ai/general/index:preparation_process_abbreviation'
               )}`}
             </Title>
-          </CustomBox>
+          </InteractiveBox>
         </ArcherElement>
         <ArcherElement id='render'>
-          <CustomBox sx={{ gridArea: 'render' }}>
+          <InteractiveBox sx={{ gridArea: 'render' }}>
             <Title>
               {`${t('pages/ai/general/index:render_process')} ${t(
                 'pages/ai/general/index:render_process_abbreviation'
               )}`}
             </Title>
-          </CustomBox>
+          </InteractiveBox>
         </ArcherElement>
       </GridWrapper>
     </ArcherContainer>

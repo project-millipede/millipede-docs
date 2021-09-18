@@ -5,7 +5,7 @@ import React, { FC } from 'react';
 
 import { Title } from '../../../common';
 
-const { CustomBox, ArcherElement } = Archer;
+const { InteractiveBox, ArcherElement } = Archer;
 
 export const GridWrapper = styled('div')(({ theme }) => {
   const margin = theme.spacing(1);
@@ -47,9 +47,9 @@ export const Render: FC = () => {
           }
         ]}
       >
-        <CustomBox sx={{ gridArea: 'react_observe' }}>
+        <InteractiveBox sx={{ gridArea: 'react_observe' }}>
           <Title>{`${t('pages/ai/general/index:react_observe')}`}</Title>
-        </CustomBox>
+        </InteractiveBox>
       </ArcherElement>
 
       <ArcherElement
@@ -62,17 +62,17 @@ export const Render: FC = () => {
           }
         ]}
       >
-        <CustomBox sx={{ gridArea: 'renderX' }}>
+        <InteractiveBox sx={{ gridArea: 'renderX' }}>
           <Title>{`${t('pages/ai/general/index:render_process')} ${t(
             'pages/ai/general/index:render_process_abbreviation'
           )}`}</Title>
-        </CustomBox>
+        </InteractiveBox>
       </ArcherElement>
 
       <ArcherElement id='coordination'>
-        <CustomBox sx={{ gridArea: 'coordination' }}>
+        <InteractiveBox sx={{ gridArea: 'coordination' }}>
           <Title>{`${t('pages/ai/general/index:coordination')}`}</Title>
-        </CustomBox>
+        </InteractiveBox>
       </ArcherElement>
 
       <ArcherElement
@@ -85,13 +85,13 @@ export const Render: FC = () => {
           }
         ]}
       >
-        <CustomBox sx={{ gridArea: 'custom_render' }}>
+        <InteractiveBox sx={{ gridArea: 'custom_render' }}>
           <Title>
             {`${t('pages/ai/general/index:custom_render_process')} ${t(
               'pages/ai/general/index:custom_render_process_abbreviation'
             )}`}
           </Title>
-        </CustomBox>
+        </InteractiveBox>
       </ArcherElement>
 
       <ArcherElement
@@ -104,9 +104,9 @@ export const Render: FC = () => {
           }
         ]}
       >
-        <CustomBox sx={{ gridArea: 'observe_react' }}>
+        <InteractiveBox sx={{ gridArea: 'observe_react' }}>
           <Title>{`${t('pages/ai/general/index:observe_react')}`}</Title>
-        </CustomBox>
+        </InteractiveBox>
       </ArcherElement>
     </GridWrapper>
   );

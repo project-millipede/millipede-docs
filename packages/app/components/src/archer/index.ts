@@ -3,7 +3,7 @@ import { ArcherContainer } from './ArcherContainer';
 import { ArcherElement } from './ArcherElement';
 import ArcherSurface from './ArcherSurface';
 import * as ArcherContext from './context';
-import CustomBox from './CustomBoxForward';
+import InteractiveBox from './InteractiveBox';
 
 export * as ArcherTypes from './types';
 
@@ -11,6 +11,6 @@ export default {
   ArcherContainer,
   ArcherSurface,
   ArcherElement,
-  CustomBox,
+  InteractiveBox,
   ArcherContext
 };

@@ -6,7 +6,7 @@ import React, { FC } from 'react';
 import { Title } from '../../../common';
 import { Connect } from '../Concept2';
 
-const { CustomBox, ArcherElement } = Archer;
+const { InteractiveBox, ArcherElement } = Archer;
 
 export const GridWrapper = styled('div')(({ theme }) => {
   const margin = theme.spacing(1);
@@ -37,13 +37,13 @@ export const Instrument: FC<Connect> = ({ relations }) => {
         <Title>{t('pages/ai/general/index:project_millipede')}</Title>
       </div>
       <ArcherElement id='preparation_custom' relations={relations}>
-        <CustomBox sx={{ gridArea: 'preparation_custom' }}>
+        <InteractiveBox sx={{ gridArea: 'preparation_custom' }}>
           <Title>
             {`${t('pages/ai/general/index:preparation_process_custom')} ${t(
               'pages/ai/general/index:preparation_process_custom_abbreviation'
             )}`}
           </Title>
-        </CustomBox>
+        </InteractiveBox>
       </ArcherElement>
       <ArcherElement
         id='communication_custom'
@@ -55,13 +55,13 @@ export const Instrument: FC<Connect> = ({ relations }) => {
           }
         ]}
       >
-        <CustomBox sx={{ gridArea: 'communication_custom' }}>
+        <InteractiveBox sx={{ gridArea: 'communication_custom' }}>
           <Title>
             {`${t('pages/ai/general/index:communication_process_custom')} ${t(
               'pages/ai/general/index:communication_process_custom_abbreviation'
             )}`}
           </Title>
-        </CustomBox>
+        </InteractiveBox>
       </ArcherElement>
     </GridWrapper>
   );
