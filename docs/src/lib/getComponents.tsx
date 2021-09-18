@@ -1,4 +1,6 @@
+import { Box } from '@material-ui/core';
 import dynamic from 'next/dynamic';
+import React from 'react';
 
 const checkForComponentUse = (tagName: string, content: string) => {
   const exp = new RegExp(`<${tagName}`);
@@ -6,7 +8,7 @@ const checkForComponentUse = (tagName: string, content: string) => {
 };
 
 // Contains the list of components that can be embed in MDX files
-const components = {
+export const components = {
   Tag: dynamic(() => import('@app/components').then(module => module.Tag)),
   PDF: dynamic(() =>
     import('@app/components').then(module => module.Pdf.StepperContent)
@@ -95,4 +97,17 @@ const getComponents = (hydrationComponentsList = []) => {
   return componentsList;
 };
 
-export { getComponents, getHydrationComponentsList };
+const getAndWrapComponents = (hydrationComponentsList = []) => {
+  const componentsList = {};
+  hydrationComponentsList.forEach(componentName => {
+    const Component = components[componentName];
+    componentsList[componentName] = props => (
+      <Box>
+        <Component {...props} />
+      </Box>
+    );
+  });
+  return componentsList;
+};
+
+export { getComponents, getAndWrapComponents, getHydrationComponentsList };
