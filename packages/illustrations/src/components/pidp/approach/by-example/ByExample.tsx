@@ -11,17 +11,17 @@ const templates: Array<ContentTypes.Content> = [
   {
     step: 0,
     size: 6,
-    image: <Step1 style={{ width: '100%' }} />
+    image: <Step1 />
   },
   {
     step: 0,
     size: 6,
-    image: <Step1 style={{ width: '100%' }} />
+    image: <Step1 />
   },
   {
     step: 1,
     size: 12,
-    image: <Step2 style={{ width: '100%' }} />
+    image: <Step2 />
   }
 ];
 

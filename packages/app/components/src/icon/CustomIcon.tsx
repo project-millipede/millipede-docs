@@ -10,7 +10,7 @@ interface CustomIconProps {
 }
 
 const generateFAIcon = (iconName: IconName) => {
-  return <FontAwesomeIcon icon={iconName} style={{ fontSize: '20px' }} />;
+  return <FontAwesomeIcon icon={iconName} />;
 };
 
 const generateMUIIcon = (iconName: string) => {

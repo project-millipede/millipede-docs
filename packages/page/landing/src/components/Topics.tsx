@@ -52,12 +52,12 @@ export const Topics: FC<TopicsProps> = ({ feature, aspect }) => {
         const scenarioData = dataGrouped && dataGrouped[scenario];
         return scenarioData ? (
           <div key={`scenario-${index}`}>
-            <Typography variant='h5'>{get(scenariosRaw, scenario)}</Typography>
+            <Typography variant='h4'>{get(scenariosRaw, scenario)}</Typography>
             {categoriesKeys.map((categoryKey, index) => {
               const categoryData = scenarioData && scenarioData[categoryKey];
               return categoryData ? (
                 <div key={`category-${index}`}>
-                  <Typography variant='h6'>
+                  <Typography variant='h4'>
                     {get(categoriesRaw, categoryKey)}
                   </Typography>
                   <Grid container sx={{ margin: theme.spacing(3, 0) }}>
