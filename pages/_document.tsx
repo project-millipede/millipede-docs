@@ -1,10 +1,12 @@
 import { Components } from '@app/render-utils';
-import { CacheProvider } from '@emotion/react';
+import createEmotionServer from '@emotion/server/create-instance';
+import { AppType } from 'next/dist/shared/lib/utils';
 import NextDocument, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
 import React, { Children } from 'react';
 import { ServerStyleSheet as StyledComponentSheets } from 'styled-components';
 
-import { cache, extractCriticalToChunks } from '../docs/src/lib/emotion';
+import { createEmotionCache } from '../docs/src/lib/emotion';
+import { CustomAppProps } from '../docs/src/lib/types';
 
 const {
   Media: { mediaStyles }
@@ -24,10 +26,9 @@ class MillipedeDocument extends NextDocument {
             crossOrigin='anonymous'
           />
           <link
-            href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap'
+            href='https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700'
             rel='stylesheet'
           />
-          <link rel='shortcut icon' href='/favicon.ico' />
         </Head>
         <body>
           <Main />
@@ -38,25 +39,24 @@ class MillipedeDocument extends NextDocument {
   }
 }
 
-type InitialProps = DocumentInitialProps;
-
 MillipedeDocument.getInitialProps = async (
   ctx: DocumentContext
-): Promise<InitialProps> => {
+): Promise<DocumentInitialProps> => {
   const styledComponentSheet = new StyledComponentSheets();
 
   const originalRenderPage = ctx.renderPage;
 
+  // You can consider sharing the same emotion cache between all the SSR requests to speed up performance.
+  // However, be aware that it can have global side effects.
+  const cache = createEmotionCache();
+
+  const { extractCriticalToChunks } = createEmotionServer(cache);
+
   ctx.renderPage = () =>
     originalRenderPage({
-      enhanceApp: App => props =>
-        styledComponentSheet.collectStyles(<App {...props} />),
-      // Take precedence over the CacheProvider in our custom _app.js
-      enhanceComponent: Component => props =>
-        (
-          <CacheProvider value={cache}>
-            <Component {...props} />
-          </CacheProvider>
+      enhanceApp: (App: AppType) => (props: CustomAppProps) =>
+        styledComponentSheet.collectStyles(
+          <App emotionCache={cache} {...props} />
         )
     });
 
@@ -82,11 +82,12 @@ MillipedeDocument.getInitialProps = async (
 
   return {
     ...initialProps,
+    // Styles fragment is rendered after the app and page rendering finish.
     styles: [
       ...Children.toArray(initialProps.styles),
-      mediaQueryStyles,
+      ...emotionStyleTags,
       styledComponentSheet.getStyleElement(),
-      ...emotionStyleTags
+      mediaQueryStyles
     ]
   };
 };
