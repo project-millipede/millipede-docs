@@ -1,86 +1,17 @@
-import { RouterUtils } from '@app/utils';
-import { StyledEngineProvider } from '@material-ui/core/styles';
 import { useRouter } from 'next/router';
 import React, { FC, useEffect } from 'react';
-import { useRecoilState } from 'recoil';
 import { useAnalytics } from 'use-analytics';
 
-import { loadPages } from '../pages';
-import { navigationState } from '../recoil/features/pages/reducer';
-import { ThemeProvider } from './ThemeProvider';
+import { AppThemeProvider } from './AppThemeProvider';
 
 export const AppWrapper: FC = ({ children }) => {
   const { page } = useAnalytics();
 
-  const { asPath, locale } = useRouter();
-
-  const [navigation, setNavigation] = useRecoilState(navigationState);
-
-  const { flattenedPages } = navigation;
+  const { asPath } = useRouter();
 
   useEffect(() => {
-    const pages = loadPages(asPath);
-    const flattenedPages = RouterUtils.flattenPages(pages, 'children');
-    const activePage = RouterUtils.findSelectedPageAsObject(
-      flattenedPages,
-      asPath,
-      locale
-    );
-
-    const selectedPage = RouterUtils.findSelectedPage(
-      flattenedPages,
-      `/docs/${activePage.pathname}`
-    );
-    const expandedPages = RouterUtils.findExpandedPages(
-      flattenedPages,
-      `/docs/${activePage.pathname}`
-    );
-
-    setNavigation(state => {
-      return {
-        ...state,
-        pages,
-        flattenedPages,
-        activePage,
-        selectedPage,
-        expandedPages
-      };
-    });
     page();
-  }, []);
-
-  useEffect(() => {
-    if (asPath != null && flattenedPages != null && flattenedPages.length > 0) {
-      const activePage = RouterUtils.findSelectedPageAsObject(
-        flattenedPages,
-        asPath,
-        locale
-      );
-
-      const selectedPage = RouterUtils.findSelectedPage(
-        flattenedPages,
-        `/docs/${activePage.pathname}`
-      );
-      const expandedPages = RouterUtils.findExpandedPages(
-        flattenedPages,
-        `/docs/${activePage.pathname}`
-      );
-
-      setNavigation(state => {
-        return {
-          ...state,
-          activePage,
-          selectedPage,
-          expandedPages
-        };
-      });
-      page();
-    }
   }, [asPath]);
 
-  return (
-    <StyledEngineProvider>
-      <ThemeProvider>{children}</ThemeProvider>
-    </StyledEngineProvider>
-  );
+  return <AppThemeProvider>{children}</AppThemeProvider>;
 };
