@@ -5,22 +5,22 @@ import React, { FC } from 'react';
 
 import { Title } from '../../common';
 
-const { ArcherContainer, ArcherElement, CustomBox } = Archer;
+const { ArcherContainer, ArcherElement, InteractiveBox } = Archer;
 
-export const GridWrapper = styled('div')(({ theme }) => ({
-  display: 'grid',
-  gridTemplateRows: '1fr 1fr 1fr',
-  gridTemplateColumns: '1fr 1fr 1fr',
-  gridTemplateAreas: `
+export const GridWrapper = styled('div')(({ theme }) => {
+  return {
+    display: 'grid',
+    gridTemplateColumns: `repeat(3, 1fr)`,
+    gridTemplateRows: `repeat(3, 1fr)`,
+    gridTemplateAreas: `
     '. individual data'
     'general realistic specific'
     '. society .'
     `,
-  gridGap: theme.spacing(12),
-  [theme.breakpoints.down('sm')]: {
-    gridGap: theme.spacing(3)
-  }
-}));
+    rowGap: theme.spacing(3),
+    columnGap: theme.spacing(3)
+  };
+});
 
 export const InterdisciplinaryApproach: FC = () => {
   const { t } = useTranslation();
@@ -38,14 +38,14 @@ export const InterdisciplinaryApproach: FC = () => {
             }
           ]}
         >
-          <CustomBox sx={{ gridArea: 'individual' }}>
-            <Title>{t('pages/perspective/index:individual')}</Title>
-          </CustomBox>
+          <InteractiveBox sx={{ gridArea: 'individual' }}>
+            <Title>{t('pages/perspective/strategy/index:individual')}</Title>
+          </InteractiveBox>
         </ArcherElement>
         <ArcherElement id='data'>
-          <CustomBox sx={{ gridArea: 'data' }}>
-            <Title>{t('pages/perspective/index:dataCentric')}</Title>
-          </CustomBox>
+          <InteractiveBox sx={{ gridArea: 'data' }}>
+            <Title>{t('pages/perspective/strategy/index:dataCentric')}</Title>
+          </InteractiveBox>
         </ArcherElement>
         <ArcherElement
           id='general'
@@ -64,16 +64,19 @@ export const InterdisciplinaryApproach: FC = () => {
             }
           ]}
         >
-          <CustomBox
-            sx={{ gridArea: 'general', bgcolor: '#F44336' }}
+          <InteractiveBox
+            sx={{
+              gridArea: 'general',
+              backgroundColor: '#F44336'
+            }}
             routeSegement='general'
           >
             <Title>
-              {`${t('pages/perspective/index:general')} ${t(
-                'pages/perspective/index:problemSolving'
+              {`${t('pages/perspective/strategy/index:general')} ${t(
+                'pages/perspective/strategy/index:problemSolving'
               )}`}
             </Title>
-          </CustomBox>
+          </InteractiveBox>
         </ArcherElement>
 
         <ArcherElement
@@ -91,16 +94,19 @@ export const InterdisciplinaryApproach: FC = () => {
             }
           ]}
         >
-          <CustomBox
-            sx={{ gridArea: 'realistic', bgcolor: '#4CAF50' }}
+          <InteractiveBox
+            sx={{
+              gridArea: 'realistic',
+              backgroundColor: '#4CAF50'
+            }}
             routeSegement='realistic'
           >
             <Title>
-              {`${t('pages/perspective/index:realistic')} ${t(
-                'pages/perspective/index:problemSolving'
+              {`${t('pages/perspective/strategy/index:realistic')} ${t(
+                'pages/perspective/strategy/index:problemSolving'
               )}`}
             </Title>
-          </CustomBox>
+          </InteractiveBox>
         </ArcherElement>
 
         <ArcherElement
@@ -113,21 +119,24 @@ export const InterdisciplinaryApproach: FC = () => {
             }
           ]}
         >
-          <CustomBox
-            sx={{ gridArea: 'specific', bgcolor: '#FFEB3B' }}
+          <InteractiveBox
+            sx={{
+              gridArea: 'specific',
+              backgroundColor: '#FFEB3B'
+            }}
             routeSegement='specific'
           >
             <Title>
-              {`${t('pages/perspective/index:specific')} ${t(
-                'pages/perspective/index:problemSolving'
+              {`${t('pages/perspective/strategy/index:specific')} ${t(
+                'pages/perspective/strategy/index:problemSolving'
               )}`}
             </Title>
-          </CustomBox>
+          </InteractiveBox>
         </ArcherElement>
         <ArcherElement id='society'>
-          <CustomBox sx={{ gridArea: 'society' }}>
-            <Title>{t('pages/perspective/index:society')}</Title>
-          </CustomBox>
+          <InteractiveBox sx={{ gridArea: 'society' }}>
+            <Title>{t('pages/perspective/strategy/index:society')}</Title>
+          </InteractiveBox>
         </ArcherElement>
       </GridWrapper>
     </ArcherContainer>

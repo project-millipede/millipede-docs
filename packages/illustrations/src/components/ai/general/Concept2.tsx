@@ -7,7 +7,7 @@ import { Title } from '../../common';
 import { Instrument } from './components/Instrument';
 import { Target } from './components/Target';
 
-const { ArcherContainer, CustomBox, ArcherElement } = Archer;
+const { ArcherContainer, InteractiveBox, ArcherElement } = Archer;
 
 export const GridWrapper = styled('div')(({ theme }) => ({
   display: 'grid',
@@ -54,13 +54,13 @@ export const Concept2: FC = () => {
         <Target relations={targetConnect.relations} />
 
         <ArcherElement id='shared_render'>
-          <CustomBox sx={{ gridArea: 'render' }}>
+          <InteractiveBox sx={{ gridArea: 'render' }}>
             <Title>
               {`${t('pages/ai/general/index:shared_render_process')} ${t(
                 'pages/ai/general/index:shared_render_process_abbreviation'
               )}`}
             </Title>
-          </CustomBox>
+          </InteractiveBox>
         </ArcherElement>
         <Instrument relations={instrumentConnect.relations} />
       </GridWrapper>

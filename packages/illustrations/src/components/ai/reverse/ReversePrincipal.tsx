@@ -5,7 +5,7 @@ import React, { FC } from 'react';
 
 import { Title } from '../../common';
 
-const { ArcherContainer, ArcherElement, CustomBox } = Archer;
+const { ArcherContainer, ArcherElement, InteractiveBox } = Archer;
 
 export const GridWrapper = styled('div')(({ theme }) => {
   const margin = theme.spacing(1);
@@ -46,9 +46,9 @@ export const ReversePrincipal: FC = () => {
         </div>
 
         <ArcherElement id='function'>
-          <CustomBox sx={{ gridArea: 'function' }}>
+          <InteractiveBox sx={{ gridArea: 'function' }}>
             <Title>{t('pages/ai/reverse/index:function')}</Title>
-          </CustomBox>
+          </InteractiveBox>
         </ArcherElement>
 
         <ArcherElement
@@ -66,9 +66,9 @@ export const ReversePrincipal: FC = () => {
             }
           ]}
         >
-          <CustomBox sx={{ gridArea: 'instrument' }}>
+          <InteractiveBox sx={{ gridArea: 'instrument' }}>
             <Title>{t('pages/ai/reverse/index:instrument_function')}</Title>
-          </CustomBox>
+          </InteractiveBox>
         </ArcherElement>
 
         <div style={{ gridArea: 'head_analysis' }}>
@@ -85,9 +85,9 @@ export const ReversePrincipal: FC = () => {
             }
           ]}
         >
-          <CustomBox sx={{ gridArea: 'behavior' }}>
+          <InteractiveBox sx={{ gridArea: 'behavior' }}>
             <Title>{t('pages/ai/reverse/index:determine_behavior')}</Title>
-          </CustomBox>
+          </InteractiveBox>
         </ArcherElement>
 
         <div style={{ gridArea: 'head_exposure' }}>
@@ -104,9 +104,9 @@ export const ReversePrincipal: FC = () => {
             }
           ]}
         >
-          <CustomBox sx={{ gridArea: 'derive' }}>
+          <InteractiveBox sx={{ gridArea: 'derive' }}>
             <Title>{t('pages/ai/reverse/index:derive_attack_vector')}</Title>
-          </CustomBox>
+          </InteractiveBox>
         </ArcherElement>
 
         <ArcherElement
@@ -119,9 +119,9 @@ export const ReversePrincipal: FC = () => {
             }
           ]}
         >
-          <CustomBox sx={{ gridArea: 'apply' }}>
+          <InteractiveBox sx={{ gridArea: 'apply' }}>
             <Title>{t('pages/ai/reverse/index:apply_attack_vector')}</Title>
-          </CustomBox>
+          </InteractiveBox>
         </ArcherElement>
       </GridWrapper>
     </ArcherContainer>
