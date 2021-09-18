@@ -1,11 +1,11 @@
 import { Typography } from '@material-ui/core';
 import { Variant } from '@material-ui/core/styles/createTypography';
 import { TypographyProps } from '@material-ui/core/Typography';
-import React from 'react';
+import React, { createElement } from 'react';
 import remarkParse from 'remark-parse';
 import remarkToReact from 'remark-react';
 import remarkSlug from 'remark-slug';
-import unified from 'unified';
+import { unified } from 'unified';
 
 import attacher from '.';
 
@@ -22,9 +22,10 @@ const processor = unified()
   .use(remarkSlug)
   .use(attacher)
   .use(remarkToReact, {
+    createElement,
     remarkReactComponents: {
       a: renderHeading('h5')
     }
-  });
+  } as any);
 
 export default processor;

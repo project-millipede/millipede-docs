@@ -1,7 +1,7 @@
 import { PageTypes } from '@app/types';
 
 export const loadPages = (
-  _pathname: string,
+  _pathname: string = '',
   _currentPages: Array<PageTypes.Page> = []
 ) => {
   return [
@@ -318,17 +318,11 @@ export const pagesDiscoverMore: Array<PageTypes.Page> = [
       },
       {
         pathname: 'discover-more/support',
-        icon: {
-          ...defaultIcon,
-          name: 'contact_support'
-        }
+        icon: { ...defaultIcon, name: 'contact_support' }
       },
       {
         pathname: 'discover-more/team',
-        icon: {
-          ...defaultIcon,
-          name: 'group_work'
-        },
+        icon: { ...defaultIcon, name: 'group_work' },
         children: [
           {
             pathname: 'discover-more/team/cv',
@@ -338,10 +332,7 @@ export const pagesDiscoverMore: Array<PageTypes.Page> = [
       },
       {
         pathname: 'discover-more/organisation',
-        icon: {
-          ...defaultIcon,
-          name: 'business'
-        }
+        icon: { ...defaultIcon, name: 'business' }
       }
     ]
   }

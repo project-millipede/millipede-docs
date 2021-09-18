@@ -108,7 +108,6 @@ export const TopReveal = (props: TopRevealProps) => {
                 key={i}
                 style={{
                   width: '100%',
-                  height: fontSize * 1.5,
                   y: (fontSize * 1.5 + lineGap) * i,
                   overflow: 'hidden'
                 }}
@@ -120,7 +119,13 @@ export const TopReveal = (props: TopRevealProps) => {
                   }}
                   variants={textVariants}
                 >
-                  <Typography variant='h3' style={{ fontSize: '24px' }}>
+                  <Typography
+                    sx={{
+                      fontWeight: 400,
+                      fontSize: '1.5rem',
+                      margin: '0px'
+                    }}
+                  >
                     {item}
                   </Typography>
                 </motion.div>
