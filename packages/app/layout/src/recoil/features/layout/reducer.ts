@@ -21,9 +21,7 @@ export const LABEL_BORDER_RADIUS = LABEL_HEIGHT / 2;
 
 export const APP_CONTENT_HEADER_HEIGHT = 7;
 
-export const APP_CONTENT_SHARE_DIMENSION = 8;
-
-export const ACTIVE_INDICATOR_WIDTH = 2;
+export const NAV_ITEM_INDICATOR_WIDTH = 0.25;
 
 export interface Layout {
   isDrawerExpanded: boolean;
