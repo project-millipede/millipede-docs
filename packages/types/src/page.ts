@@ -9,8 +9,8 @@ export interface Icon {
 }
 
 export interface Page {
-  pathname?: string;
-  icon?: Icon;
+  pathname: string;
+  icon: Icon;
   children?: Array<Page>;
 }
 
@@ -34,7 +34,6 @@ export type ContentMetaData = {
 
 export type FunctionalMetaData = {
   disableToc?: boolean;
-  disableShare?: boolean;
 };
 
 export type MetaData = ContentMetaData & FunctionalMetaData;
