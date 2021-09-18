@@ -1,18 +1,32 @@
-import { Link } from '@app/components';
-import { navigationState } from '@app/layout/src/recoil/features/pages/reducer';
-import { Button, Container } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
+import { HiddenUnderlineLink } from '@app/components';
+import { NavigationState } from '@app/layout/src/recoil/features/pages/reducer';
+import { Box, Typography } from '@material-ui/core';
+import { styled } from '@material-ui/core/styles';
 import { ChevronLeft, ChevronRight } from '@material-ui/icons';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC, useMemo } from 'react';
-import { useRecoilValue } from 'recoil';
 
-export const AppContentFooter: FC = () => {
-  const theme = useTheme();
+export const Footer = styled(Box)(({ theme }) => {
+  return {
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: theme.spacing(8, 0)
+  };
+});
 
+export const TitleWithIcon = styled('div')(() => {
+  return {
+    display: 'flex',
+    alignItems: 'center'
+  };
+});
+
+interface AppContentFooterProps {
+  navigation: NavigationState;
+}
+
+export const AppContentFooter: FC<AppContentFooterProps> = ({ navigation }) => {
   const { t } = useTranslation();
-
-  const navigation = useRecoilValue(navigationState);
 
   const { flattenedPages, activePage = { pathname: '' } } = navigation;
 
@@ -27,66 +41,38 @@ export const AppContentFooter: FC = () => {
   }, [activePage.pathname]);
 
   return (
-    <Container
-      component='footer'
-      sx={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        padding: theme.spacing(8, 0)
-      }}
-    >
-      {prevPage ? (
-        <Button
-          size='medium'
-          startIcon={<ChevronLeft />}
-          sx={{
-            textTransform: 'none',
-            fontWeight: theme.typography.fontWeightRegular,
-            '& .MuiLink-root': {
-              textDecoration: 'none'
-            }
+    <Footer component='footer'>
+      {prevPage && (
+        <Typography
+          component={HiddenUnderlineLink}
+          href={{
+            pathname: '/docs/[...slug]',
+            query: { slug: prevPage.pathname.split('/') }
           }}
+          prefetch={false}
         >
-          <Link
-            href={
-              {
-                pathname: '/docs/[...slug]',
-                query: { slug: prevPage.pathname.split('/') }
-              } as any
-            }
-          >
+          <TitleWithIcon>
+            <ChevronLeft fontSize='small' />
             {t(`common:pages.${prevPage.pathname}`)}
-          </Link>
-        </Button>
-      ) : (
-        <div />
+          </TitleWithIcon>
+        </Typography>
       )}
-      {nextPage ? (
-        <Button
-          size='medium'
-          endIcon={<ChevronRight />}
-          sx={{
-            textTransform: 'none',
-            fontWeight: theme.typography.fontWeightRegular,
-            '& .MuiLink-root': {
-              textDecoration: 'none'
-            }
+
+      {nextPage && (
+        <Typography
+          component={HiddenUnderlineLink}
+          href={{
+            pathname: '/docs/[...slug]',
+            query: { slug: nextPage.pathname.split('/') }
           }}
+          prefetch={false}
         >
-          <Link
-            href={
-              {
-                pathname: '/docs/[...slug]',
-                query: { slug: nextPage.pathname.split('/') }
-              } as any
-            }
-          >
+          <TitleWithIcon>
             {t(`common:pages.${nextPage.pathname}`)}
-          </Link>
-        </Button>
-      ) : (
-        <div />
+            <ChevronRight fontSize='small' />
+          </TitleWithIcon>
+        </Typography>
       )}
-    </Container>
+    </Footer>
   );
 };
