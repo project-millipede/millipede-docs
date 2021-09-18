@@ -1,8 +1,10 @@
-import { Mdx } from '@page/layout';
+import { AppFrame } from '@app/layout';
+import { NavigationState } from '@app/layout/src/recoil/features/pages/reducer';
+import { Components, Mdx } from '@page/layout';
+import { getMDXComponent } from 'mdx-bundler/client';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { MDXRemote } from 'next-mdx-remote';
 import { mergeProps } from 'next-merge-props';
-import React, { FC } from 'react';
+import React, { Fragment, ReactElement, useMemo } from 'react';
 
 import { getComponents } from '../../docs/src/lib/getComponents';
 import { getPath } from '../../docs/src/lib/getPath';
@@ -11,39 +13,63 @@ import {
   getStaticContentProps
 } from '../../docs/src/lib/getStaticContentProps';
 import {
+  GetStaticNavigationProps,
+  getStaticNavigationProps
+} from '../../docs/src/lib/getStaticNavigationProps';
+import {
   GetStaticTranslationProps,
   getStaticTranslationProps
 } from '../../docs/src/lib/getStaticTranslationProps';
+import { NextPageWithLayout } from '../../docs/src/lib/types';
 
-type DynamicPageProps = GetStaticTranslationProps & GetStaticContentProps;
+const { AppHead } = Components;
 
-const DynamicPage: FC<DynamicPageProps> = ({
+export type DynamicPageProps = GetStaticTranslationProps &
+  GetStaticContentProps &
+  GetStaticNavigationProps;
+
+const DynamicPage: NextPageWithLayout<DynamicPageProps> = ({
   mdxSource,
   metaData,
   hydrationComponentsList,
-  rawContent
+  toc,
+  slug,
+  navigation
 }) => {
-  const { disableShare, ...restMetaData } = metaData;
+  const { disableToc, ...contentMetaData } = metaData;
 
-  const content = (
-    <MDXRemote
-      {...mdxSource}
-      components={{
-        ...getComponents(hydrationComponentsList),
-        h1: Mdx.h1({ disableShare, meta: restMetaData }),
-        h2: Mdx.h2,
-        h3: Mdx.h3,
-        h4: Mdx.h4,
-        h5: Mdx.h5,
-        h6: Mdx.h6
-      }}
-    />
+  const Component = useMemo(
+    () => getMDXComponent(mdxSource.code),
+    [mdxSource.code]
   );
 
   return (
-    <Mdx.MdxDocs meta={restMetaData} raw={rawContent}>
-      {content}
-    </Mdx.MdxDocs>
+    <Fragment>
+      <AppHead metaData={contentMetaData} />
+      <Mdx.MdxDocs
+        disableToc={disableToc}
+        toc={toc}
+        slug={slug}
+        navigation={navigation}
+        metaData={contentMetaData}
+      >
+        <Component
+          disableToc={disableToc}
+          slug={slug}
+          navigation={navigation}
+          components={{
+            h1: Mdx.h1,
+            h2: props => <Mdx.Header variant='h2' {...props} />,
+            h3: props => <Mdx.Header variant='h3' {...props} />,
+            h4: props => <Mdx.Header variant='h4' {...props} />,
+            h5: Mdx.h5,
+            h6: Mdx.h6,
+            blockquote: Mdx.blockquote,
+            ...getComponents(hydrationComponentsList)
+          }}
+        />
+      </Mdx.MdxDocs>
+    </Fragment>
   );
 };
 
@@ -54,6 +80,11 @@ export const getStaticProps: GetStaticProps = mergeProps(
         // console.log('static translation props', props);
       }
     }),
+    getStaticNavigationProps({
+      onSuccess: _props => {
+        // console.log('static navigation props', props);
+      }
+    }),
     getStaticContentProps({
       pageType: 'docs',
       onSuccess: _props => {
@@ -62,7 +93,7 @@ export const getStaticProps: GetStaticProps = mergeProps(
     })
   ],
   {
-    resolutionType: 'parallel',
+    resolutionType: 'sequential',
     debug: true
   }
 );
@@ -73,6 +104,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths,
     fallback: false
   };
+};
+
+DynamicPage.getLayout = (page: ReactElement, navigation: NavigationState) => {
+  return (
+    <AppFrame hasToc navigation={navigation}>
+      {page}
+    </AppFrame>
+  );
 };
 
 export default DynamicPage;
