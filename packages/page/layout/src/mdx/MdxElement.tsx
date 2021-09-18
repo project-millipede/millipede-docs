@@ -1,82 +1,47 @@
-import { Components as ComponentUtils } from '@app/render-utils';
-import { PageTypes } from '@app/types';
-import { Typography } from '@material-ui/core';
-import { Share } from '@page/components';
+import { Box, Typography, TypographyProps } from '@material-ui/core';
+import { blue } from '@material-ui/core/colors';
+import { styled } from '@material-ui/core/styles';
 import { Components } from '@page/layout';
-import React, { FC, ReactNode } from 'react';
+import { useRouter } from 'next/router';
+import React, { FC } from 'react';
 
-const {
-  Media: { Media }
-} = ComponentUtils;
-
-interface MDXProps {
-  id: string;
-  children: ReactNode;
+interface HeaderProps {
+  variant: TypographyProps['variant'];
+  id?: string;
 }
 
-interface MDXRenderProps {
-  disableShare?: boolean;
-  meta?: PageTypes.ContentMetaData;
-  isMobile?: boolean;
-}
+export const Header: FC<HeaderProps> = ({ variant, id, children }) => {
+  const { pathname, query } = useRouter();
 
-export const h1 = ({ disableShare, meta }: MDXRenderProps) => {
-  return ({ children }: MDXProps) => {
-    return (
-      <div style={{ display: 'flex' }}>
-        <Typography variant='h1'>{children}</Typography>
-        {!disableShare && <Share {...meta} />}
-      </div>
-    );
-  };
-};
-
-export const h2 = ({ children, id }: MDXProps) => {
   return (
-    <>
-      <Media lessThan='sm'>
-        <Typography variant='h2'>{children}</Typography>
-      </Media>
-      <Media greaterThanOrEqual='sm'>
-        <Components.Head.InteractiveHead variant='h2' id={id}>
-          {children}
-        </Components.Head.InteractiveHead>
-      </Media>
-    </>
-  );
-};
-export const h3 = ({ children, id }: MDXProps) => {
-  return (
-    <>
-      <Media lessThan='sm'>
-        <Typography variant='h3'>{children}</Typography>
-      </Media>
-      <Media greaterThanOrEqual='sm'>
-        <Components.Head.InteractiveHead variant='h3' id={id}>
-          {children}
-        </Components.Head.InteractiveHead>
-      </Media>
-    </>
-  );
-};
-export const h4 = ({ children, id }: MDXProps) => {
-  return (
-    <>
-      <Media lessThan='sm'>
-        <Typography variant='h4'>{children}</Typography>
-      </Media>
-      <Media greaterThanOrEqual='sm'>
-        <Components.Head.InteractiveHead variant='h4' id={id}>
-          {children}
-        </Components.Head.InteractiveHead>
-      </Media>
-    </>
+    <Components.Head.InteractiveHead
+      variant={variant}
+      id={id}
+      pathname={pathname}
+      query={query}
+    >
+      {children}
+    </Components.Head.InteractiveHead>
   );
 };
 
-export const h5: FC<MDXProps> = ({ children }) => (
+export const h1: FC = ({ children }) => (
+  <Typography variant='h1'>{children}</Typography>
+);
+
+export const h5: FC = ({ children }) => (
   <Typography variant='h5'>{children}</Typography>
 );
-export const h6: FC<MDXProps> = ({ children }) => (
+export const h6: FC = ({ children }) => (
   <Typography variant='h6'>{children}</Typography>
 );
+
+export const blockquote = styled(Box)(({ theme }) => ({
+  borderLeft: `${theme.spacing(0.5)} solid ${blue[500]}`,
+  backgroundColor: 'rgb(33, 150, 243, 0.2)',
+  margin: theme.spacing(3, 0),
+  '& p': {
+    margin: 0,
+    padding: theme.spacing(2)
+  }
+}));
