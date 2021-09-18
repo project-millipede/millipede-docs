@@ -17,7 +17,7 @@ export const Tag: FC<TagProps> = ({ text, id }) => {
       color='primary'
       icon={<ClassOutlined />}
       label={text}
-      sx={{ m: theme.spacing(2, 0) }}
+      sx={{ margin: theme.spacing(2, 0.5) }}
     />
   );
 };

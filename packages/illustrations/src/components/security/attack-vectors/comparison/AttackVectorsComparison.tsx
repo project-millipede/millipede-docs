@@ -1,6 +1,7 @@
 import { ContentTypes } from '@app/types';
 import { Grid, Typography } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
+import { Mdx } from '@page/layout';
 import isArray from 'lodash/isArray';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
@@ -70,11 +71,11 @@ export const AttackVectorsComparison: FC = () => {
                             </Typography>
                           ))}
                         {note && note.length > 0 && (
-                          <blockquote>
-                            {note.map(t => (
-                              <Typography variant='body1'>{t}</Typography>
-                            ))}
-                          </blockquote>
+                          <Mdx.blockquote>
+                            <Typography paragraph>
+                              {note.map(t => t)}
+                            </Typography>
+                          </Mdx.blockquote>
                         )}
                       </>
                     );
