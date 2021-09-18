@@ -1,28 +1,13 @@
-import React, { createElement, Fragment } from 'react';
+import remarkExtractToc from '@stefanprobst/remark-extract-toc';
 import remarkParse from 'remark-parse';
-import remarkToReact from 'remark-react';
 import remarkSlug from 'remark-slug';
+import remarkStringify from 'remark-stringify';
 import { unified } from 'unified';
 
-import remarkMinNodes from '../../remark/minNodes';
-import remarkToc from '../../remark/toc';
-import { TocLink } from './TocLink';
-
 export const generateProcessor = () => {
-  const processor = unified()
+  return unified()
     .use(remarkParse)
     .use(remarkSlug)
-    .use(remarkMinNodes)
-    .use(remarkToc)
-    .use(remarkToReact, {
-      createElement,
-      sanitize: true,
-      fragment: Fragment,
-      remarkReactComponents: {
-        a: props => {
-          return <TocLink {...props} />;
-        }
-      }
-    } as any);
-  return processor;
+    .use(remarkExtractToc)
+    .use(remarkStringify);
 };
