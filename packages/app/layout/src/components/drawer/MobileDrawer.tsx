@@ -1,31 +1,30 @@
 import { MAX_DRAWER_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
-import { SwipeableDrawer as MuiSwipeableDrawer } from '@material-ui/core';
+import { SwipeableDrawer } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 import React, { FC } from 'react';
 
 import { DrawerProps } from '.';
 
-const SwipeableDrawer = styled(MuiSwipeableDrawer)(({ theme }) => ({
+const StyledSwipeableDrawer = styled(SwipeableDrawer)(({ theme }) => ({
   '& .MuiDrawer-paper': {
     width: theme.spacing(MAX_DRAWER_WIDTH),
     // Important:
-    // Correct the layout shift among supported drawers switching
+    // Correct the layout shift among drawers, switching
     // from the mobile to the desktop variant and vice versa.
+    // default - without border - add to override the default
     borderRight: `1px solid #000000`
-    // The palette divider theme corresponds to the border-right
-    // style applied in the desktop drawer variant
-    // borderRight: `1px solid ${theme.palette.divider}`,
   }
 }));
 
 export const MobileDrawer: FC<DrawerProps> = ({
   isDrawerExpanded,
+  sx,
   handleDrawerOpen,
   handleDrawerClose,
   children
 }) => {
   return (
-    <SwipeableDrawer
+    <StyledSwipeableDrawer
       variant='temporary'
       open={isDrawerExpanded}
       onOpen={handleDrawerOpen}
@@ -33,8 +32,9 @@ export const MobileDrawer: FC<DrawerProps> = ({
       ModalProps={{
         keepMounted: true
       }}
+      sx={sx}
     >
       {children}
-    </SwipeableDrawer>
+    </StyledSwipeableDrawer>
   );
 };

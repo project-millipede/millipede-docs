@@ -1,4 +1,4 @@
-import MuiDrawer from '@material-ui/core/Drawer';
+import { Drawer } from '@material-ui/core';
 import { CSSObject, styled, Theme } from '@material-ui/core/styles';
 import React, { FC } from 'react';
 
@@ -21,26 +21,32 @@ const closeAnimation = (theme: Theme): CSSObject => ({
   })
 });
 
-const StyledDrawer = styled(MuiDrawer)(({ theme, open }) => ({
+export const StyledDrawer = styled(Drawer)(({ theme, open }) => ({
   width: theme.spacing(MAX_DRAWER_WIDTH),
-  overflowY: 'hidden',
   whiteSpace: 'nowrap',
   ...(open && {
     ...openAnimation(theme),
-    '& .MuiDrawer-paper': openAnimation(theme)
+    '& .MuiDrawer-paper': {
+      overflowX: 'hidden',
+      ...openAnimation(theme)
+    }
   }),
   ...(!open && {
     ...closeAnimation(theme),
-    '& .MuiDrawer-paper': closeAnimation(theme)
+    '& .MuiDrawer-paper': {
+      overflowX: 'hidden',
+      ...closeAnimation(theme)
+    }
   })
 }));
 
 export const DesktopDrawer: FC<DrawerProps> = ({
   isDrawerExpanded,
+  sx,
   children
 }) => {
   return (
-    <StyledDrawer variant='permanent' open={isDrawerExpanded}>
+    <StyledDrawer variant='permanent' open={isDrawerExpanded} sx={sx}>
       {children}
     </StyledDrawer>
   );

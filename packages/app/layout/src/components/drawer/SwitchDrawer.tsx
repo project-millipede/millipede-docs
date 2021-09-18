@@ -1,71 +1,75 @@
-import { Link } from '@app/components';
-import { ACTIVE_INDICATOR_WIDTH, TOOLBAR_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
-import { Components } from '@app/render-utils';
+import { NextLinkComposedWithRef } from '@app/components';
+import { Tree } from '@app/layout';
+import { NAV_ITEM_INDICATOR_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
+import { NavigationState } from '@app/layout/src/recoil/features/pages/reducer';
+import { Components as RenderComponents } from '@app/render-utils';
 import { Divider, IconButton } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
-import { ChevronLeft, FirstPage } from '@material-ui/icons';
+import { Close, FirstPage } from '@material-ui/icons';
 import React, { FC } from 'react';
-import { useRecoilValue } from 'recoil';
 
-import { DesktopDrawer, DrawerProps, MobileDrawer } from '.';
-import { navigationState } from '../../recoil/features/pages/reducer';
-import { Tree } from '../tree';
-
-export const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  minHeight: theme.spacing(TOOLBAR_HEIGHT),
-  // TODO:
-  // Investigate why a direct height specification causes the component to itch
-  // when tree elements are opened or closed.
-  // height: TOOLBAR_HEIGHT,
-  // Important:
-  // Correct layout shift caused by the border-right style applied to navigation
-  // indicator located in the tree component
-  marginLeft: theme.spacing(2),
-  marginRight: `calc(${theme.spacing(2)} + ${ACTIVE_INDICATOR_WIDTH}px)`
-}));
+import { DesktopDrawer, MobileDrawer } from '.';
 
 const {
   Media: { Media }
-} = Components;
+} = RenderComponents;
 
-export const SwitchDrawer: FC<DrawerProps> = ({
+interface DrawerCompProps {
+  isDrawerExpanded?: boolean;
+  navigation: NavigationState;
+  handleDrawerOpen?: () => void;
+  handleDrawerClose?: () => void;
+}
+export const DrawerHeader = styled('div')(({ theme }) => {
+  return {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2 + NAV_ITEM_INDICATOR_WIDTH),
+    // Note:
+    // The toolbar mixin is necessary for the content to be below the app bar.
+    // The minHeight override gets defined in the app theme provider
+    // mixins: {
+    //   toolbar: {
+    //     minHeight: 64;
+    //   }
+    // }
+    ...theme.mixins.toolbar
+  };
+});
+
+export const SwitchDrawer: FC<DrawerCompProps> = ({
   isDrawerExpanded,
+  navigation = {
+    pages: [],
+    expandedPages: []
+  },
   handleDrawerOpen,
   handleDrawerClose
 }) => {
-  const navigation = useRecoilValue(navigationState);
+  const { activePage, pages, expandedPages } = navigation;
 
-  const { pages, selectedPage, expandedPages } = navigation;
-
-  const treeComp = (
-    <Tree
-      pages={pages}
-      selectedPage={selectedPage}
-      expandedPages={expandedPages}
-    />
-  );
-
-  const headerComp = (
+  const header = (
     <DrawerHeader>
-      <Link
-        href={
-          {
-            pathname: '/'
-          } as any
-        }
+      <IconButton
+        onClick={isDrawerExpanded ? handleDrawerClose : handleDrawerOpen}
+        component={NextLinkComposedWithRef}
+        href={{
+          pathname: '/'
+        }}
+        prefetch={false}
       >
-        <IconButton onClick={handleDrawerClose}>
-          <FirstPage />
-        </IconButton>
-      </Link>
-
+        <FirstPage />
+      </IconButton>
       <IconButton onClick={handleDrawerClose}>
-        <ChevronLeft />
+        <Close />
       </IconButton>
     </DrawerHeader>
+  );
+
+  const tree = (
+    <Tree pages={pages} expandedPages={expandedPages} activePage={activePage} />
   );
 
   return (
@@ -75,21 +79,24 @@ export const SwitchDrawer: FC<DrawerProps> = ({
           isDrawerExpanded={isDrawerExpanded}
           handleDrawerOpen={handleDrawerOpen}
           handleDrawerClose={handleDrawerClose}
+          sx={{ gridArea: 'left' }}
         >
-          {headerComp}
+          {header}
           <Divider variant='middle' />
-          {treeComp}
+          {tree}
         </MobileDrawer>
       </Media>
-
       <Media greaterThanOrEqual='md'>
         <DesktopDrawer
           isDrawerExpanded={isDrawerExpanded}
           handleDrawerClose={handleDrawerClose}
+          sx={{
+            gridArea: 'left'
+          }}
         >
-          {headerComp}
+          {header}
           <Divider variant='middle' />
-          {treeComp}
+          {tree}
         </DesktopDrawer>
       </Media>
     </>
