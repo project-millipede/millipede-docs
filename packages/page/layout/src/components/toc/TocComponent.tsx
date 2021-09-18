@@ -1,4 +1,4 @@
-import { styled } from '@material-ui/core/styles';
+import { styled } from '@mui/material/styles';
 import { TocEntry } from '@stefanprobst/remark-extract-toc';
 import { useRouter } from 'next/router';
 import React, { FC } from 'react';

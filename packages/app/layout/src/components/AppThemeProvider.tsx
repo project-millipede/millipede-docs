@@ -1,6 +1,6 @@
-import { blue } from '@material-ui/core/colors';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { createTheme, ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
+import { blue } from '@mui/material/colors';
+import CssBaseline from '@mui/material/CssBaseline';
+import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 import React, { FC, useMemo } from 'react';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 

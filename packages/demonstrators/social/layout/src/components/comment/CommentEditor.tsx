@@ -1,7 +1,7 @@
 import { RenderUtils } from '@app/render-utils';
 import { useEffectRef } from '@huse/effect-ref';
-import { Button, Typography } from '@material-ui/core';
-import SendIcon from '@material-ui/icons/Send';
+import SendIcon from '@mui/icons-material/Send';
+import { Button, Typography } from '@mui/material';
 import { useWindupString } from '@project-millipede/windups';
 import { ContentState, Editor, EditorState } from 'draft-js';
 import elementResizeDetectorMaker from 'element-resize-detector';

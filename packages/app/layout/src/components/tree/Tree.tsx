@@ -1,6 +1,6 @@
 import { PageTypes } from '@app/types';
-import { ExpandLess, ExpandMore } from '@material-ui/icons';
-import TreeView from '@material-ui/lab/TreeView';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import TreeView from '@mui/lab/TreeView';
 import React, { FC, SyntheticEvent, useEffect, useState } from 'react';
 
 import { TreeContent } from './TreeContent';

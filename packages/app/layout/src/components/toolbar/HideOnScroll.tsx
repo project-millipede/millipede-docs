@@ -1,6 +1,6 @@
-import { Theme, useMediaQuery } from '@material-ui/core';
-import Slide from '@material-ui/core/Slide';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import { Theme, useMediaQuery } from '@mui/material';
+import Slide from '@mui/material/Slide';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
 import { FC, ReactElement } from 'react';
 
 type HideOnScrollProps = {

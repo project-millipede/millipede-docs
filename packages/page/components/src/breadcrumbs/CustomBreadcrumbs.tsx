@@ -1,7 +1,7 @@
 import { CustomIcon, HiddenUnderlineLink } from '@app/components';
 import { NavigationState } from '@app/layout/src/recoil/features/pages/reducer';
-import { Breadcrumbs as MuiBreadcrumbs, Chip, ChipProps } from '@material-ui/core';
-import { emphasize, styled } from '@material-ui/core/styles';
+import { Breadcrumbs as MuiBreadcrumbs, Chip, ChipProps } from '@mui/material';
+import { emphasize, styled } from '@mui/material/styles';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC, useMemo } from 'react';
 

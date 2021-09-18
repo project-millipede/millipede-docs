@@ -1,5 +1,5 @@
 import { StringUtil } from '@app/utils';
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 import isArray from 'lodash/isArray';
 import React from 'react';

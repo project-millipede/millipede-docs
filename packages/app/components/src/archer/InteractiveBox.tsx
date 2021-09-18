@@ -1,6 +1,6 @@
 import { HiddenUnderlineLink } from '@app/components';
-import { Box, BoxProps } from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
+import { Box, BoxProps } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/router';
 import React, {
   forwardRef,
@@ -67,7 +67,7 @@ const InteractiveBox: ForwardRefRenderFunction<
 
   return (
     <StyledBox
-      ref={ref}
+      ref={ref as any}
       selected={selected}
       sx={sx}
       component={routeSegement && HiddenUnderlineLink}

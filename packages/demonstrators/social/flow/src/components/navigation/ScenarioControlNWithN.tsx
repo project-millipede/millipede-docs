@@ -8,7 +8,7 @@ import {
   ScrollTypes,
   selectors,
 } from '@demonstrators-social/shared';
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';

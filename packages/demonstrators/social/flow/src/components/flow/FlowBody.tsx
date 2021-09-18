@@ -1,11 +1,11 @@
-/* eslint-disable import/no-named-as-default */
 import { Archer } from '@app/components';
 import { scrollSelectors } from '@demonstrators-social/shared';
-import { Typography } from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
+import { Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import React, { FC, memo } from 'react';
 import { useRecoilValue } from 'recoil';
 
+/* eslint-disable import/no-named-as-default */
 const { ArcherElement, InteractiveBox } = Archer;
 
 const Row = styled('div')({

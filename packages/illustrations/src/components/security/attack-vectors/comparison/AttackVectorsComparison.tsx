@@ -1,6 +1,6 @@
 import { ContentTypes } from '@app/types';
-import { Grid, Typography } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
+import { Grid, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { Mdx } from '@page/layout';
 import isArray from 'lodash/isArray';
 import useTranslation from 'next-translate/useTranslation';

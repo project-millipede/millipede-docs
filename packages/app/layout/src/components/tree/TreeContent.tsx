@@ -1,7 +1,7 @@
 import { CustomIcon } from '@app/components';
 import { PageTypes } from '@app/types';
-import { Collapse } from '@material-ui/core';
-import { TransitionProps } from '@material-ui/core/transitions';
+import { Collapse } from '@mui/material';
+import { TransitionProps } from '@mui/material/transitions';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC, Fragment } from 'react';
 

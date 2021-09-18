@@ -1,8 +1,8 @@
 import { HiddenUnderlineLink } from '@app/components';
 import { NavigationState } from '@app/layout/src/recoil/features/pages/reducer';
-import { Box, Typography } from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
-import { ChevronLeft, ChevronRight } from '@material-ui/icons';
+import { ChevronLeft, ChevronRight } from '@mui/icons-material';
+import { Box, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC, useMemo } from 'react';
 

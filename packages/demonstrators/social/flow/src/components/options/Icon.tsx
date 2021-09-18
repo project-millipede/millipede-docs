@@ -1,4 +1,4 @@
-import { Message, PermMedia, RecentActors, SentimentSatisfiedAlt, TextFields } from '@material-ui/icons';
+import { Message, PermMedia, RecentActors, SentimentSatisfiedAlt, TextFields } from '@mui/icons-material';
 import React from 'react';
 
 export const Icon = ({ id }) => {

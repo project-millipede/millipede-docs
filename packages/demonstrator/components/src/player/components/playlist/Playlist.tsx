@@ -1,15 +1,7 @@
-import {
-  Avatar,
-  IconButton,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemSecondaryAction,
-  ListItemText,
-} from '@material-ui/core';
-import { green } from '@material-ui/core/colors';
-import FolderIcon from '@material-ui/icons/Folder';
-import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
+import FolderIcon from '@mui/icons-material/Folder';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import { Avatar, IconButton, List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText } from '@mui/material';
+import { green } from '@mui/material/colors';
 import { FC } from 'react';
 import { useRecoilState } from 'recoil';
 

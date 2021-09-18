@@ -1,11 +1,11 @@
 import { Link } from '@app/components';
-import { Avatar, Box } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import { useTheme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import { GitHub, LinkedIn } from '@material-ui/icons';
-import AssignmentIcon from '@material-ui/icons/Assignment';
+import { GitHub, LinkedIn } from '@mui/icons-material';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import { Avatar, Box } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import { useTheme } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';

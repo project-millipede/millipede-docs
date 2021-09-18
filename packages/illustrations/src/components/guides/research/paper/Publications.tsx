@@ -1,17 +1,7 @@
 import { CollectionUtil } from '@app/utils';
-import {
-  Box,
-  Collapse,
-  IconButton,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
-import { KeyboardArrowDown, KeyboardArrowUp, Link as LinkIcon } from '@material-ui/icons';
+import { KeyboardArrowDown, KeyboardArrowUp, Link as LinkIcon } from '@mui/icons-material';
+import { Box, Collapse, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import isArray from 'lodash/isArray';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';

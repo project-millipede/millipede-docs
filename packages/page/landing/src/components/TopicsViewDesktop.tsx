@@ -1,7 +1,7 @@
 import { CustomIcon } from '@app/components';
 import { ContentTypes } from '@app/types';
 import { StringUtil } from '@app/utils';
-import { Box, Grid, IconButton } from '@material-ui/core';
+import { Box, Grid, IconButton } from '@mui/material';
 import { useRouter } from 'next/router';
 import React, { FC, useEffect } from 'react';
 import { StringParam, useQueryParams } from 'use-query-params';

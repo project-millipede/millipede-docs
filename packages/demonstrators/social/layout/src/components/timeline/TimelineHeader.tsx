@@ -1,8 +1,8 @@
 import { Tabs } from '@app/components';
 import { Components } from '@app/render-utils';
 import { scrollStates, ScrollTypes } from '@demonstrators-social/shared';
-import { Tab } from '@material-ui/core';
-import { DynamicFeed, GroupWork } from '@material-ui/icons';
+import { DynamicFeed, GroupWork } from '@mui/icons-material';
+import { Tab } from '@mui/material';
 import React, { ChangeEvent, forwardRef, ForwardRefRenderFunction, useMemo } from 'react';
 import { useRecoilState } from 'recoil';
 

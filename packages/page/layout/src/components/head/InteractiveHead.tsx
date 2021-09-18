@@ -1,6 +1,6 @@
 import { Link } from '@app/components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { TypographyProps } from '@material-ui/core';
+import { TypographyProps } from '@mui/material';
 import { ParsedUrlQuery } from 'querystring';
 import React, { FC, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';

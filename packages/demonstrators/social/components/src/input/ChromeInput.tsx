@@ -1,8 +1,8 @@
 import { INPUT_BORDER_RADIUS, INPUT_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
 import { appCompositionState } from '@demonstrator/navigation/src/recoil/features/app/reducers';
-import { Box, IconButton, InputAdornment, InputBase } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
-import { Fullscreen, FullscreenExit, InfoOutlined, ViewCarousel, ViewColumn } from '@material-ui/icons';
+import { Fullscreen, FullscreenExit, InfoOutlined, ViewCarousel, ViewColumn } from '@mui/icons-material';
+import { Box, IconButton, InputAdornment, InputBase } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import React, { FC } from 'react';
 import { FullScreenHandle } from 'react-full-screen';
 import { useRecoilState } from 'recoil';

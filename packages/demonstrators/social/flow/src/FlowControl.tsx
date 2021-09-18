@@ -1,6 +1,6 @@
 import { Archer, Stepper } from '@app/components';
 import { scrollStates } from '@demonstrators-social/shared';
-import { Checkbox, FormControlLabel, FormGroup, List, ListItem, ListSubheader, Paper, Typography } from '@material-ui/core';
+import { Checkbox, FormControlLabel, FormGroup, List, ListItem, ListSubheader, Paper, Typography } from '@mui/material';
 import { usePrevious } from 'ahooks';
 import get from 'lodash/get';
 import useTranslation from 'next-translate/useTranslation';

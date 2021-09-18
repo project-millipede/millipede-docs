@@ -1,9 +1,9 @@
 import { Link } from '@app/components';
 import { MAX_DRAWER_WIDTH, TOOLBAR_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
-import { AppBar as MuiAppBar, IconButton, Toolbar as MuiToolbar } from '@material-ui/core';
-import { AppBarProps as MuiAppBarProps } from '@material-ui/core/AppBar';
-import { CSSObject, styled, Theme } from '@material-ui/core/styles';
-import { GitHub, Menu } from '@material-ui/icons';
+import { GitHub, Menu } from '@mui/icons-material';
+import { AppBar as MuiAppBar, IconButton, Toolbar as MuiToolbar } from '@mui/material';
+import { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import { CSSObject, styled, Theme } from '@mui/material/styles';
 import React, { FC } from 'react';
 
 import { HideOnScroll } from './HideOnScroll';

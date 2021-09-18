@@ -1,5 +1,5 @@
 import { PageTypes } from '@app/types';
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import React, { FC } from 'react';
 
 interface AppContentSubHeaderProps {

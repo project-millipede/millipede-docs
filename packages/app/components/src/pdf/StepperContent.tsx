@@ -1,4 +1,4 @@
-import { Button, Grid } from '@material-ui/core';
+import { Button, Grid } from '@mui/material';
 import dynamic from 'next/dynamic';
 import React, { FC, useState } from 'react';
 import { DocumentProps, PageProps } from 'react-pdf';

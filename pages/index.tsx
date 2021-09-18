@@ -1,12 +1,8 @@
 import { AppFrame } from '@app/layout';
-import {
-  layoutState,
-  MAX_DRAWER_WIDTH,
-  MIN_DRAWER_WIDTH
-} from '@app/layout/src/recoil/features/layout/reducer';
+import { layoutState, MAX_DRAWER_WIDTH, MIN_DRAWER_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
 import { NavigationState } from '@app/layout/src/recoil/features/pages/reducer';
-import { Container, Typography } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
+import { Container, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { Components as ComponentsLanding } from '@page/landing';
 import { Components } from '@page/layout';
 import { GetStaticProps } from 'next';
@@ -15,14 +11,8 @@ import useTranslation from 'next-translate/useTranslation';
 import React, { ReactElement } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import {
-  GetStaticNavigationProps,
-  getStaticNavigationProps
-} from '../docs/src/lib/getStaticNavigationProps';
-import {
-  GetStaticTranslationProps,
-  getStaticTranslationProps
-} from '../docs/src/lib/getStaticTranslationProps';
+import { GetStaticNavigationProps, getStaticNavigationProps } from '../docs/src/lib/getStaticNavigationProps';
+import { GetStaticTranslationProps, getStaticTranslationProps } from '../docs/src/lib/getStaticTranslationProps';
 import { NextPageWithLayout } from '../docs/src/lib/types';
 
 export type StaticPageProps = GetStaticTranslationProps &

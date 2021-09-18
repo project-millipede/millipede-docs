@@ -1,6 +1,6 @@
 import { LABEL_BORDER_RADIUS } from '@app/layout/src/recoil/features/layout/reducer';
-import { Slider } from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
+import { Slider } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import React, { FC } from 'react';
 
 import { useStepDispatch, useStepState } from '../../context/StepProvider';

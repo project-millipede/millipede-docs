@@ -46,7 +46,7 @@ import {
   Toc,
   TouchApp,
   Warning,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import React from 'react';
 
 export const getIconByName = (name: string) => {

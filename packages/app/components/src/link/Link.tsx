@@ -1,12 +1,8 @@
-import MuiLink, { LinkProps as MuiLinkProps } from '@material-ui/core/Link';
+import MuiLink, { LinkProps as MuiLinkProps } from '@mui/material/Link';
 import clsx from 'clsx';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import { useRouter } from 'next/router';
-import React, {
-  AnchorHTMLAttributes,
-  forwardRef,
-  ForwardRefRenderFunction
-} from 'react';
+import React, { AnchorHTMLAttributes, forwardRef, ForwardRefRenderFunction } from 'react';
 
 export interface NextLinkComposedProps
   extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'>,

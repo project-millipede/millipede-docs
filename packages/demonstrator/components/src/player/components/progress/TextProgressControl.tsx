@@ -1,6 +1,6 @@
 import { LABEL_BORDER_RADIUS, LABEL_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
-import { Typography } from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
+import { Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import React, { FC } from 'react';
 
 import { useStepState } from '../../context/StepProvider';

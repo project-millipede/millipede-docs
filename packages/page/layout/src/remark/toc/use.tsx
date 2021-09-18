@@ -1,6 +1,6 @@
-import { Typography } from '@material-ui/core';
-import { Variant } from '@material-ui/core/styles/createTypography';
-import { TypographyProps } from '@material-ui/core/Typography';
+import { Typography } from '@mui/material';
+import { Variant } from '@mui/material/styles/createTypography';
+import { TypographyProps } from '@mui/material/Typography';
 import React, { createElement } from 'react';
 import remarkParse from 'remark-parse';
 import remarkToReact from 'remark-react';

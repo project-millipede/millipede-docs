@@ -1,6 +1,6 @@
 import { ContentTypes } from '@app/types';
-import { CardContent, Grid, Typography } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
+import { CardContent, Grid, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import React, { FC, useState } from 'react';
 
 import { Stepper, TranslationProps } from './Stepper';

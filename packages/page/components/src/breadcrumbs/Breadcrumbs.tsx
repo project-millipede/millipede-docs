@@ -1,8 +1,8 @@
 import { HiddenUnderlineLink } from '@app/components';
 import { NavigationState } from '@app/layout/src/recoil/features/pages/reducer';
-import { Breadcrumbs as MuiBreadcrumbs, Typography } from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { Breadcrumbs as MuiBreadcrumbs, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC, useMemo } from 'react';
 

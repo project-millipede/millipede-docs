@@ -3,9 +3,9 @@ import { Tree } from '@app/layout';
 import { NAV_ITEM_INDICATOR_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
 import { NavigationState } from '@app/layout/src/recoil/features/pages/reducer';
 import { Components as RenderComponents } from '@app/render-utils';
-import { Divider, IconButton } from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
-import { Close, FirstPage } from '@material-ui/icons';
+import { Close, FirstPage } from '@mui/icons-material';
+import { Divider, IconButton } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import React, { FC } from 'react';
 
 import { DesktopDrawer, MobileDrawer } from '.';

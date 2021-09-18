@@ -1,5 +1,5 @@
-import { Typography } from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
+import { Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 export const Title = styled(Typography)(({ theme }) => ({
   textAlign: 'center',
