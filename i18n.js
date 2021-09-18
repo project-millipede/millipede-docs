@@ -14,8 +14,7 @@ module.exports = {
       'pages/ai/intro/target-group/index',
       'intro'
     ],
-    '/ai': ['pages/perspective/index'],
-    '/perspective/strategy': ['pages/perspective/index'],
+    '/perspective/strategy': ['pages/perspective/strategy/index'],
     '/guides/disinformation': ['pages/guides/disinformation/index'],
     '/guides/research/paper': ['pages/guides/research/paper/index'],
     '/security/attack-vectors/comparison': [
