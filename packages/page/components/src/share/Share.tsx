@@ -1,21 +1,21 @@
-import { APP_CONTENT_SHARE_DIMENSION } from '@app/layout/src/recoil/features/layout/reducer';
+import { APP_CONTENT_HEADER_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
 import { RenderUtils } from '@app/render-utils';
 import { PageTypes } from '@app/types';
 import { StringUtil } from '@app/utils';
 import { notificationStates } from '@demonstrators-social/shared';
-import { SpeedDial, SpeedDialAction, SpeedDialIcon } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
+import { CloseReason, OpenReason, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@material-ui/core';
+import { styled } from '@material-ui/core/styles';
+import { TransitionProps } from '@material-ui/core/transitions';
 import { Close, Share as ShareIcon } from '@material-ui/icons';
 import { windowOpenPromise } from '@vangware/window-open-promise';
 import copy from 'copy-to-clipboard';
 import isArray from 'lodash/isArray';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
-import { useRouter } from 'next/router';
-import React, { FC, useCallback, useState } from 'react';
-import { isMobile } from 'react-device-detect';
+import React, { FC, SyntheticEvent, useCallback, useMemo } from 'react';
 import { useSetRecoilState } from 'recoil';
 
+import useDisclosure from './hooks/use-disclosure';
 import { Icon } from './Icon';
 import {
   Interaction,
@@ -28,17 +28,37 @@ import {
 } from './types';
 import { objectToGetParams } from './utils';
 
-export interface ShareProps {
-  meta: PageTypes.ContentMetaData;
-  url: string;
-}
+export const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
+  '&.MuiSpeedDial-root': {
+    '&.MuiSpeedDial-directionDown': {
+      position: 'relative',
+      height: theme.spacing(APP_CONTENT_HEADER_HEIGHT),
+      width: theme.spacing(APP_CONTENT_HEADER_HEIGHT)
+      // Option:
+      // When the share-component gets used next to the h1 element
+      // margin: theme.spacing(2.75, 2, 2.75)
+      // Note:
+      // When the share-component gets used next to the h1 element the h1 element style needs to set lineHeight: 'inherit'
+    },
+    '& .MuiSpeedDial-fab': {
+      minHeight: theme.spacing(APP_CONTENT_HEADER_HEIGHT)
+    }
+  }
+}));
 
-const getSharing = (
-  getShareProps: () => ShareProps,
-  baseUrl: string,
+export const NoTransition: FC<TransitionProps> = props => {
+  const { children, in: inProp } = props;
+  if (!inProp) {
+    return null;
+  }
+  return children as any;
+};
+
+const getConnectionData = (
+  meta: PageTypes.ContentMetaData,
+  url: string,
   t: Translate
 ) => {
-  const { meta } = getShareProps();
   const { title, description, hashtags } = meta;
 
   const hashtagCollection = isArray(hashtags)
@@ -73,7 +93,7 @@ const getSharing = (
       title: `${t('common:share-on')} Facebook`,
       url: 'https://www.facebook.com/sharer/sharer.php',
       params: {
-        u: baseUrl,
+        u: url,
         hashtag: firstHashtag,
         quote: title
       } as URIPathParamsFacebook
@@ -84,7 +104,7 @@ const getSharing = (
       title: `${t('common:share-on')} Twitter`,
       url: 'https://twitter.com/share',
       params: {
-        url: baseUrl,
+        url,
         text: title,
         hashtags: hashtagCollection
       } as URIPathParamsTwitter
@@ -95,7 +115,7 @@ const getSharing = (
       title: `${t('common:share-on')} LinkedIn`,
       url: 'https://linkedin.com/shareArticle',
       params: {
-        url: baseUrl,
+        url,
         title,
         summary: description,
         source: t('common:application-title'),
@@ -106,90 +126,65 @@ const getSharing = (
       id: 'whatsapp',
       type: Interaction.SHARE,
       title: `${t('common:share-on')} Whatsapp`,
-      url: isMobile
-        ? `https://api.whatsapp.com/send`
-        : `https://web.whatsapp.com/send`,
+      url: 'https://web.whatsapp.com/send',
       params: {
-        text: title ? `${title} | ${baseUrl}` : `${baseUrl}`
+        text: title ? `${title} | ${url}` : `${url}`
       } as URIPathParamsWhatsApp
     }
   ];
 };
 
 const createNewTab = async (
-  newUrl: string,
-  hideSpeedDial: (type?: Interaction) => void
+  url: string,
+  handleClose: (type?: Interaction) => void
 ) => {
   const windowOpen = windowOpenPromise(window);
 
   const newWindow = await windowOpen({
-    url: newUrl,
+    url,
     target: '_blank'
   });
   newWindow.addEventListener('beforeunload', _event => {
-    hideSpeedDial();
+    handleClose();
   });
   newWindow.focus();
 };
 
-const createObjects =
-  (baseUrl: string, hideSpeedDial: (type: Interaction) => void) =>
-  ({ id, type, title, url, params }: InteractionMenuItem) => {
-    if (type === Interaction.SHARE_LOCAL) {
-      return {
-        title,
-        icon: <Icon id={id} />,
-        action: () => {
-          copy(baseUrl);
-          hideSpeedDial(Interaction.SHARE_LOCAL);
-        }
-      };
-    }
+const setupConnection = (
+  url: string,
+  handleClose: (type: Interaction) => void,
+  { id, type, title, url: providerUrl, params }: InteractionMenuItem
+) => {
+  if (type === Interaction.SHARE_LOCAL) {
     return {
       title,
       icon: <Icon id={id} />,
       action: () => {
-        createNewTab(`${url}${objectToGetParams(params)}`, hideSpeedDial);
+        copy(url);
+        handleClose(Interaction.SHARE_LOCAL);
       }
     };
-  };
-
-const creataShareLink = ({ title, icon, action }) => (
-  <SpeedDialAction
-    key={title}
-    icon={icon}
-    tooltipTitle={title}
-    onClick={action}
-    tooltipPlacement={'left'}
-  />
-);
-
-const createButtons = (
-  hideSpeedDial: (type: Interaction) => void,
-  getShareProps: () => ShareProps,
-  t: Translate
-) => {
-  let baseUrl = '';
-
-  if (RenderUtils.isBrowser()) {
-    const url = document.URL.replace(/#.*$/, '');
-    // baseUrl = typeof share === 'string' ? `${url}/#${share}` : url;
-    baseUrl = url;
   }
-
-  const buttonsInfo = getSharing(getShareProps, baseUrl, t).map(
-    createObjects(baseUrl, hideSpeedDial)
-  );
-
-  return buttonsInfo.map(creataShareLink);
+  return {
+    title,
+    icon: <Icon id={id} />,
+    action: () => {
+      createNewTab(`${providerUrl}${objectToGetParams(params)}`, handleClose);
+    }
+  };
 };
 
-export const Share: FC<PageTypes.ContentMetaData> = props => {
+interface ShareProps {
+  metaData: PageTypes.ContentMetaData;
+}
+
+export const Share: FC<ShareProps> = ({ metaData }) => {
+  const url = RenderUtils.isBrowser() && window.location.href;
+  const supportWebShare = RenderUtils.supportWebShare();
+
   const { t } = useTranslation();
 
-  const { pathname } = useRouter();
-
-  const [speedDialOpen, setSpeedDialOpen] = useState(false);
+  const { onOpen, onClose, isOpen } = useDisclosure();
 
   const {
     notification: { snackbarState }
@@ -197,17 +192,28 @@ export const Share: FC<PageTypes.ContentMetaData> = props => {
 
   const setSnackbar = useSetRecoilState(snackbarState);
 
-  const handleSpeedDialOpen = () => {
-    setSpeedDialOpen(true);
+  const handleShareOpen = (
+    _event: SyntheticEvent<{}, Event>,
+    _reason: OpenReason
+  ) => {
+    onOpen();
   };
 
-  const handleSpeedDialClose = () => {
-    setSpeedDialOpen(false);
+  const handleShareClose = (
+    _event: SyntheticEvent<{}, Event>,
+    _reason: CloseReason
+  ) => {
+    onClose();
   };
 
-  const handleSpeedDialCloseWithFeedback = (type?: Interaction) => {
-    setSpeedDialOpen(false);
+  const handleWebShareClick = (
+    _event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    shareWithWebShare();
+  };
 
+  const handleCloseWithFeedback = (type?: Interaction) => {
+    onClose();
     if (type === Interaction.SHARE_LOCAL) {
       setSnackbar(state => {
         return {
@@ -219,34 +225,51 @@ export const Share: FC<PageTypes.ContentMetaData> = props => {
     }
   };
 
-  const getShareProps = useCallback(() => {
-    return {
-      meta: props,
-      url: pathname
-    };
-  }, [pathname, props.title]);
+  const connections = useMemo(() => {
+    const data = getConnectionData(metaData, url, t);
+    return data.map(d => {
+      return setupConnection(url, handleCloseWithFeedback, d);
+    });
+  }, [url]);
 
-  const theme = useTheme();
+  const shareWithWebShare = useCallback(async () => {
+    const { title, description } = metaData;
+
+    const shareData: ShareData = {
+      title,
+      text: description,
+      url
+    };
+    try {
+      await window.navigator.share(shareData);
+    } catch (e) {
+      console.warn(e);
+    }
+  }, [url]);
 
   return (
-    <div
-      style={{
-        width: theme.spacing(APP_CONTENT_SHARE_DIMENSION),
-        height: theme.spacing(APP_CONTENT_SHARE_DIMENSION),
-        margin: theme.spacing(0, 2),
-        zIndex: 1050
-      }}
+    <StyledSpeedDial
+      ariaLabel={t('common:share-post')}
+      icon={<SpeedDialIcon icon={<ShareIcon />} openIcon={<Close />} />}
+      onClose={!supportWebShare && handleShareClose}
+      onOpen={!supportWebShare && handleShareOpen}
+      onClick={handleWebShareClick}
+      open={isOpen}
+      direction='down'
+      TransitionComponent={NoTransition}
+      transitionDuration={0}
     >
-      <SpeedDial
-        ariaLabel={t('common:share-post')}
-        icon={<SpeedDialIcon icon={<ShareIcon />} openIcon={<Close />} />}
-        onClose={handleSpeedDialClose}
-        onOpen={handleSpeedDialOpen}
-        open={speedDialOpen}
-        direction='down'
-      >
-        {createButtons(handleSpeedDialCloseWithFeedback, getShareProps, t)}
-      </SpeedDial>
-    </div>
+      {connections.map(({ title, icon, action }) => {
+        return (
+          <SpeedDialAction
+            key={title}
+            icon={icon}
+            tooltipTitle={title}
+            onClick={action}
+            tooltipPlacement={'left'}
+          />
+        );
+      })}
+    </StyledSpeedDial>
   );
 };

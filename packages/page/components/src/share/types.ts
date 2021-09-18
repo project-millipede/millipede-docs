@@ -56,7 +56,7 @@ export enum Interaction {
 export interface InteractionMenuItem {
   id: string;
   type: Interaction;
-  title: string;
+  title?: string;
   url: string;
   params?: SocialMediaURIPathParams;
 }
