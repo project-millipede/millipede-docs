@@ -12,10 +12,14 @@ import {
 } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 import { KeyboardArrowDown, KeyboardArrowUp, Link as LinkIcon } from '@material-ui/icons';
+import isArray from 'lodash/isArray';
 import useTranslation from 'next-translate/useTranslation';
-import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import React, { FC, Fragment, useState } from 'react';
-import { isBrowser, isSafari } from 'react-device-detect';
+
+export const StyledTableCell = dynamic(() => import('./StyledTableCell'), {
+  ssr: false
+});
 
 interface ColumnDescriptor {
   id: string;
@@ -74,6 +78,10 @@ export const ExpandableRow = ({
 }) => {
   const [open, setOpen] = useState(false);
 
+  const openDocument = (url: string) => {
+    window.open(url, '_blank');
+  };
+
   return (
     <>
       <TableRow>
@@ -87,11 +95,9 @@ export const ExpandableRow = ({
           return (
             <TableCell key={column.id}>
               {column.id === 'reference' ? (
-                <Link href={value}>
-                  <IconButton color='primary'>
-                    <LinkIcon />
-                  </IconButton>
-                </Link>
+                <IconButton color='inherit' onClick={() => openDocument(value)}>
+                  <LinkIcon />
+                </IconButton>
               ) : (
                 value
               )}
@@ -175,34 +181,30 @@ export const Publications: FC = () => {
         </TableHead>
 
         <TableBody>
-          {rows.map((row, index) => {
-            const { head, body } = row;
-            return (
-              <Fragment key={`head-row-${head}-${index}`}>
-                <TableRow>
-                  <TableCell
-                    variant={'head'}
-                    style={{
-                      top: isBrowser && !isSafari ? 57 : 0
-                    }}
-                    colSpan={4}
-                  >
-                    {head}
-                  </TableCell>
-                </TableRow>
-                {body.map(row => {
-                  return (
-                    <ExpandableRow
-                      key={row.title}
-                      rowData={row}
-                      columns={columnsReduced}
-                      header={header}
-                    />
-                  );
-                })}
-              </Fragment>
-            );
-          })}
+          {isArray(rows) && rows.length > 0
+            ? rows.map((row, index) => {
+                const { head, body } = row;
+                return (
+                  <Fragment key={`head-row-${head}-${index}`}>
+                    <TableRow>
+                      <StyledTableCell variant={'head'} colSpan={4}>
+                        {head}
+                      </StyledTableCell>
+                    </TableRow>
+                    {body.map(row => {
+                      return (
+                        <ExpandableRow
+                          key={row.title}
+                          rowData={row}
+                          columns={columnsReduced}
+                          header={header}
+                        />
+                      );
+                    })}
+                  </Fragment>
+                );
+              })
+            : null}
         </TableBody>
       </StyledTable>
     </TableContainer>
