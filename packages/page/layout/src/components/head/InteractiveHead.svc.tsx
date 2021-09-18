@@ -1,4 +1,4 @@
-import { Link } from '@app/components';
+import { Typography, TypographyProps } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 
 export const Anchor = styled('span')(({ theme }) => ({
@@ -6,14 +6,17 @@ export const Anchor = styled('span')(({ theme }) => ({
   marginTop: theme.spacing(-12)
 }));
 
-export const CLASS_HEADER = 'InteractiveHeader';
-
-export const HeaderLink = styled(Link)(({ theme }) => ({
-  display: 'inline-block',
-  padding: theme.spacing(0, 1),
-  visibility: 'hidden',
-  [`.${CLASS_HEADER}:hover &`]: {
-    visibility: 'visible',
-    color: theme.palette.text.secondary
-  }
-}));
+export const StyledTypography = styled(Typography)<TypographyProps>(
+  ({ theme }) => ({
+    '& a': {
+      display: 'none',
+      padding: theme.spacing(0, 1),
+      color: theme.palette.text.primary
+    },
+    ':hover': {
+      '& a': {
+        display: 'inline-block'
+      }
+    }
+  })
+);

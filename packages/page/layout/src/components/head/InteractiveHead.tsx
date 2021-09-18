@@ -1,21 +1,27 @@
-import { SvgIcon, Typography } from '@material-ui/core';
-import LinkIcon from '@material-ui/icons/Link';
+import { Link } from '@app/components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { TypographyProps } from '@material-ui/core';
+import { ParsedUrlQuery } from 'querystring';
 import React, { FC, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useSetRecoilState } from 'recoil';
 
 import { scrollItemsReducer, scrollItemsState } from '../../recoil/features/scroll/page/reducer';
-import { Anchor, CLASS_HEADER, HeaderLink } from './InteractiveHead.svc';
+import { Anchor, StyledTypography } from './InteractiveHead.svc';
 
 interface InteractiveHeadProps {
   // id generated through slug
   id: string;
-  variant: 'h2' | 'h3' | 'h4';
+  variant: TypographyProps['variant'];
+  query: ParsedUrlQuery;
+  pathname: string;
 }
 
 export const InteractiveHead: FC<InteractiveHeadProps> = ({
   id,
   variant,
+  query,
+  pathname,
   children
 }) => {
   const setScrollItemsState = useSetRecoilState(scrollItemsState);
@@ -45,32 +51,12 @@ export const InteractiveHead: FC<InteractiveHeadProps> = ({
   }, [inView]);
 
   return (
-    <>
+    <StyledTypography variant={variant}>
       <Anchor id={id} ref={ref} />
-
-      <Typography
-        variant={variant}
-        className={CLASS_HEADER}
-        style={{
-          display: 'inline-block'
-        }}
-      >
-        <span
-          style={{
-            display: 'inline-block'
-          }}
-        >
-          {children}
-          <HeaderLink href={'#' + id}>
-            <SvgIcon
-              component={LinkIcon}
-              fontSize={
-                variant === 'h2' || variant === 'h3' ? 'medium' : 'small'
-              }
-            />
-          </HeaderLink>
-        </span>
-      </Typography>
-    </>
+      {children}
+      <Link href={{ pathname, query, hash: `#${id}` }} shallow prefetch={false}>
+        <FontAwesomeIcon icon={'hashtag'} />
+      </Link>
+    </StyledTypography>
   );
 };
