@@ -1,17 +1,26 @@
 import { PageTypes } from '@app/types';
+import { TocEntry } from '@stefanprobst/remark-extract-toc';
+import grayMatter from 'gray-matter';
 import { GetStaticPropsContext } from 'next';
 
 import { getContent } from './getContent';
 
 export interface GetStaticContentProps {
   mdxSource: {
-    compiledSource: string;
-    contentHtml: string;
-    scope: any;
+    code: string;
+    frontmatter: {
+      [key: string]: any;
+    };
+    matter: grayMatter.GrayMatterFile<any>;
   };
   hydrationComponentsList: Array<string>;
-  rawContent: string;
   metaData: PageTypes.MetaData;
+  slug: Array<string>;
+  toc: Array<
+    Omit<TocEntry, 'children'> & {
+      isParent?: boolean;
+    }
+  >;
 }
 
 interface GetStaticContentPropsOptions {

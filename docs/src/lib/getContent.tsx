@@ -1,8 +1,9 @@
+import { Components } from '@page/layout';
 import fg from 'fast-glob';
 import fs from 'fs';
 import isArray from 'lodash/isArray';
+import { bundleMDX } from 'mdx-bundler';
 import { GetStaticPropsContext } from 'next';
-import { serialize } from 'next-mdx-remote/serialize';
 import path from 'path';
 import remarkSlug from 'remark-slug';
 
@@ -10,26 +11,26 @@ import { getHydrationComponentsList } from './getComponents';
 import { getMetadata } from './getMetadata';
 import { getPageDirectory } from './pages';
 
+const {
+  Toc: { generateToc, filterToc }
+} = Components;
+
 const fsPromises = fs.promises;
 
 export const getContent = async (
-  context: GetStaticPropsContext,
+  ctx: GetStaticPropsContext,
   pageType: string
 ) => {
   const {
     params: { slug },
     locale
-  } = context;
-
-  if (!slug || !locale) {
-    throw new Error(`"slug" and "locale" are required for page props`);
-  }
+  } = ctx;
 
   const sourceDirectory = getPageDirectory(pageType);
 
-  const pathNoExt = isArray(slug) ? slug.join(path.sep) || '.' : slug;
+  const pathname = isArray(slug) ? slug.join(path.sep) : slug;
 
-  const [file] = await fg(`${pathNoExt}/${locale}.{md,mdx}`, {
+  const [file] = await fg(`${pathname}/${locale}.{md,mdx}`, {
     cwd: sourceDirectory
   });
 
@@ -39,16 +40,26 @@ export const getContent = async (
 
   const { metaData, content } = await getMetadata(fileContents);
 
+  const {
+    data: { toc }
+  } = await generateToc(content);
+
+  const filteredToc = filterToc(toc);
+
   const hydrationComponentsList = getHydrationComponentsList(content);
 
-  const mdxSource = await serialize(content, {
-    mdxOptions: { remarkPlugins: [remarkSlug] }
+  const mdxSource = await bundleMDX(content, {
+    xdmOptions: options => {
+      options.remarkPlugins = [remarkSlug];
+      return options;
+    }
   });
 
   return {
     mdxSource,
     metaData,
     hydrationComponentsList,
-    rawContent: content
+    slug,
+    toc: filteredToc || []
   };
 };
