@@ -11,11 +11,11 @@ import {
   viewportSelectors,
 } from '@demonstrators-social/shared';
 import { useMergedRef } from '@huse/merged-ref';
-import { Button, ButtonGroup, Card, ListItem } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
-import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import { Button, ButtonGroup, Card, ListItem } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { formatDistance } from 'date-fns';
 import { enGB } from 'date-fns/locale';
 import lodashGet from 'lodash/get';

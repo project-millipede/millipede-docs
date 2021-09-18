@@ -1,5 +1,5 @@
-import { Button, MobileStepper } from '@material-ui/core';
-import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
+import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
+import { Button, MobileStepper } from '@mui/material';
 import React, { FC, useCallback, useEffect, useState } from 'react';
 
 export interface TranslationProps {

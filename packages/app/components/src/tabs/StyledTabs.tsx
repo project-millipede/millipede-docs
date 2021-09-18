@@ -1,5 +1,5 @@
-import { Tabs as TabsComponent, TabsProps } from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
+import { Tabs as TabsComponent, TabsProps } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 export const StyledTabs = styled(TabsComponent)<TabsProps>(({ theme }) => ({
   '& .MuiTabs-flexContainer': {

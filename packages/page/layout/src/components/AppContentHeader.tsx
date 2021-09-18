@@ -1,7 +1,7 @@
 import { NavigationState } from '@app/layout/src/recoil/features/pages/reducer';
 import { PageTypes } from '@app/types';
-import { Box } from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
+import { Box } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { Breadcrumbs, Share } from '@page/components';
 import React, { FC } from 'react';
 

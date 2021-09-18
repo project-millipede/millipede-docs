@@ -1,6 +1,6 @@
-import { Box, Typography, TypographyProps } from '@material-ui/core';
-import { blue } from '@material-ui/core/colors';
-import { styled } from '@material-ui/core/styles';
+import { Box, Typography, TypographyProps } from '@mui/material';
+import { blue } from '@mui/material/colors';
+import { styled } from '@mui/material/styles';
 import { Components } from '@page/layout';
 import { useRouter } from 'next/router';
 import React, { FC } from 'react';

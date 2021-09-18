@@ -1,5 +1,5 @@
-import { TableCell, TableCellProps } from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
+import { TableCell, TableCellProps } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { isMobile, isSafari } from 'react-device-detect';
 
 const StyledTableCell = styled(TableCell)<TableCellProps>(() => {

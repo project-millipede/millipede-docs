@@ -1,6 +1,6 @@
-import { Chip } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
-import { ClassOutlined } from '@material-ui/icons';
+import { ClassOutlined } from '@mui/icons-material';
+import { Chip } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import React, { FC } from 'react';
 
 interface TagProps {

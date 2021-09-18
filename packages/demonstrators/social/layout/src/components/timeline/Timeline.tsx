@@ -11,9 +11,9 @@ import {
   viewportSelectors,
 } from '@demonstrators-social/shared';
 import { useMergedRef } from '@huse/merged-ref';
-import { Button, List } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
-import CreateIcon from '@material-ui/icons/Create';
+import CreateIcon from '@mui/icons-material/Create';
+import { Button, List } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import useTranslation from 'next-translate/useTranslation';
 import React, { Dispatch, FC, forwardRef, ForwardRefRenderFunction, useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';

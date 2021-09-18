@@ -1,5 +1,5 @@
-import { Theme } from '@material-ui/core/styles';
-import { SxProps } from '@material-ui/system';
+import { Theme } from '@mui/material/styles';
+import { SxProps } from '@mui/system';
 
 export { MobileDrawer } from './MobileDrawer';
 export { DesktopDrawer } from './DesktopDrawer';

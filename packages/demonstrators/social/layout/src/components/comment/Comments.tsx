@@ -1,8 +1,8 @@
 import { CollectionUtil } from '@app/utils';
 import { Types } from '@demonstrators-social/data';
-import { Avatar, CardActions, CardContent, CardHeader, IconButton, IconButtonProps, Typography } from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Avatar, CardActions, CardContent, CardHeader, IconButton, IconButtonProps, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { formatDistance } from 'date-fns';
 import { enGB } from 'date-fns/locale';
 import React, { FC, Fragment, useMemo, useState } from 'react';

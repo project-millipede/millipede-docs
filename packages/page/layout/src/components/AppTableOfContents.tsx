@@ -1,10 +1,7 @@
-import {
-  APP_CONTENT_HEADER_HEIGHT,
-  TOC_TOP
-} from '@app/layout/src/recoil/features/layout/reducer';
-import { Typography } from '@material-ui/core';
-import { styled, Theme } from '@material-ui/core/styles';
-import { SxProps } from '@material-ui/system';
+import { APP_CONTENT_HEADER_HEIGHT, TOC_TOP } from '@app/layout/src/recoil/features/layout/reducer';
+import { Typography } from '@mui/material';
+import { styled, Theme } from '@mui/material/styles';
+import { SxProps } from '@mui/system';
 import { TocEntry } from '@stefanprobst/remark-extract-toc';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';

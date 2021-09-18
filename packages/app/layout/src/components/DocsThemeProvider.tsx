@@ -1,4 +1,4 @@
-import { createTheme, ThemeProvider as MuiThemeProvider, useTheme } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider as MuiThemeProvider, useTheme } from '@mui/material/styles';
 import React, { FC, useMemo } from 'react';
 
 // Note:

@@ -1,5 +1,5 @@
-import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
-import RestoreIcon from '@material-ui/icons/Restore';
+import RestoreIcon from '@mui/icons-material/Restore';
+import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 import React, { ChangeEvent, FC, useCallback } from 'react';
 import { useRecoilValue } from 'recoil';
 

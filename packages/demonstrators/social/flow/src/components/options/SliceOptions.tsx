@@ -1,8 +1,8 @@
 import { APP_CONTENT_HEADER_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
 import { scrollStates, ScrollTypes } from '@demonstrators-social/shared';
-import { SpeedDial, SpeedDialAction, SpeedDialIcon } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
-import { Close, Share } from '@material-ui/icons';
+import { Close, Share } from '@mui/icons-material';
+import { SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC, useState } from 'react';

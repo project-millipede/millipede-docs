@@ -1,6 +1,6 @@
 import { notificationStates } from '@demonstrators-social/shared';
-import IconButton from '@material-ui/core/IconButton';
-import HelpIcon from '@material-ui/icons/Help';
+import HelpIcon from '@mui/icons-material/Help';
+import IconButton from '@mui/material/IconButton';
 import React, { FC } from 'react';
 import { useSetRecoilState } from 'recoil';
 

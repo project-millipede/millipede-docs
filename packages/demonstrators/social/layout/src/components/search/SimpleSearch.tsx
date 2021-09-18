@@ -1,7 +1,7 @@
 import { INPUT_BORDER_RADIUS, INPUT_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
-import { IconButton, InputAdornment, InputBase } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
-import Search from '@material-ui/icons/Search';
+import Search from '@mui/icons-material/Search';
+import { IconButton, InputAdornment, InputBase } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import React, { CSSProperties, FC } from 'react';
 
 interface SimpleSearchProps {

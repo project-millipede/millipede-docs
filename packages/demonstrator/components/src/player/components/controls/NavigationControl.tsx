@@ -1,7 +1,7 @@
 import { INPUT_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
-import { IconButton } from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
-import { ArrowLeft, ArrowRight, Pause, PlayArrow } from '@material-ui/icons';
+import { ArrowLeft, ArrowRight, Pause, PlayArrow } from '@mui/icons-material';
+import { IconButton } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import React, { FC } from 'react';
 
 import { useStepDispatch, useStepState } from '../../context/StepProvider';

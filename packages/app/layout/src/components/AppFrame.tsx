@@ -1,11 +1,8 @@
 import { Portal } from '@app/components';
 import { AppDrawer } from '@app/layout';
-import {
-  layoutState,
-  TOC_WIDTH
-} from '@app/layout/src/recoil/features/layout/reducer';
+import { layoutState, TOC_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
 import { NavigationState } from '@app/layout/src/recoil/features/pages/reducer';
-import { styled } from '@material-ui/core/styles';
+import { styled } from '@mui/material/styles';
 import React, { FC, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 

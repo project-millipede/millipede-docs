@@ -1,6 +1,6 @@
 import { HiddenUnderlineLink, LinkProps } from '@app/components';
-import { Typography, TypographyProps } from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
+import { Typography, TypographyProps } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { ParsedUrlQuery } from 'querystring';
 import React, { FC } from 'react';
 import { useRecoilValue } from 'recoil';

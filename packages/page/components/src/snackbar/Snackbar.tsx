@@ -1,5 +1,5 @@
 import { notificationStates } from '@demonstrators-social/shared';
-import { Alert, Snackbar as MuiSnackbar } from '@material-ui/core';
+import { Alert, Snackbar as MuiSnackbar } from '@mui/material';
 import React, { FC, SyntheticEvent, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 

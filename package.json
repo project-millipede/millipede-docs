@@ -62,9 +62,9 @@
     "@fortawesome/react-fontawesome": "^0.1.15",
     "@huse/effect-ref": "^1.1.1",
     "@huse/merged-ref": "^1.2.1",
-    "@material-ui/core": "5.0.0-beta.4",
-    "@material-ui/icons": "5.0.0-beta.4",
-    "@material-ui/lab": "5.0.0-alpha.43",
+    "@mui/icons-material": "^5.0.0",
+    "@mui/lab": "^5.0.0-alpha.47",
+    "@mui/material": "^5.0.0",
     "@page/illustrations": "workspace:packages/illustrations",
     "@page/landing": "workspace:packages/page/landing",
     "@page/layout": "workspace:packages/page/layout",
@@ -154,9 +154,6 @@
   },
   "resolutions": {
     "next": "11.1.3-canary.24",
-    "@material-ui/icons": "5.0.0-beta.4",
-    "@material-ui/core": "5.0.0-beta.4",
-    "@material-ui/lab": "5.0.0-alpha.43",
     "@types/unist": "2.0.4",
     "mdast-util-toc": "5.1.0"
   },

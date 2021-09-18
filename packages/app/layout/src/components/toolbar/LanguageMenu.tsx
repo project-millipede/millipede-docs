@@ -1,5 +1,5 @@
-import { Button, Menu, MenuItem } from '@material-ui/core';
-import LanguageIcon from '@material-ui/icons/Language';
+import LanguageIcon from '@mui/icons-material/Language';
+import { Button, Menu, MenuItem } from '@mui/material';
 import { useRouter } from 'next/router';
 import React, { FC, SyntheticEvent, useState } from 'react';
 

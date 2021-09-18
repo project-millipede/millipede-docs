@@ -1,5 +1,5 @@
-import { Drawer } from '@material-ui/core';
-import { CSSObject, styled, Theme } from '@material-ui/core/styles';
+import { Drawer } from '@mui/material';
+import { CSSObject, styled, Theme } from '@mui/material/styles';
 import React, { FC } from 'react';
 
 import { DrawerProps } from '.';

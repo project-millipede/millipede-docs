@@ -6,8 +6,8 @@
   "peerDependencies": {
     "@fortawesome/fontawesome-svg-core": "*",
     "@fortawesome/react-fontawesome": "*",
-    "@material-ui/core": "*",
-    "@material-ui/icons": "*",
+    "@mui/icons-material": "*",
+    "@mui/material": "*",
     "clsx": "*",
     "next": "*",
     "react": "*",
@@ -16,8 +16,8 @@
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/react-fontawesome": "^0.1.15",
-    "@material-ui/core": "5.0.0-beta.4",
-    "@material-ui/icons": "5.0.0-beta.4",
+    "@mui/icons-material": "^5.0.0",
+    "@mui/material": "^5.0.0",
     "@types/react": "^17.0.21",
     "@types/react-dom": "^17.0.9",
     "clsx": "^1.1.1",

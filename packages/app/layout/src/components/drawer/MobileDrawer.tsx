@@ -1,6 +1,6 @@
 import { MAX_DRAWER_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
-import { SwipeableDrawer } from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
+import { SwipeableDrawer } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import React, { FC } from 'react';
 
 import { DrawerProps } from '.';

@@ -8,9 +8,9 @@ import {
   ScrollTypes,
   selectors,
 } from '@demonstrators-social/shared';
-import { Button, ButtonGroup } from '@material-ui/core';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import SettingsBackupRestoreIcon from '@material-ui/icons/SettingsBackupRestore';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import SettingsBackupRestoreIcon from '@mui/icons-material/SettingsBackupRestore';
+import { Button, ButtonGroup } from '@mui/material';
 import get from 'lodash/get';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC, useMemo } from 'react';

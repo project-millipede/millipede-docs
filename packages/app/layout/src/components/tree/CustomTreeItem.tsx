@@ -1,7 +1,7 @@
 import { HiddenUnderlineLink } from '@app/components';
-import { Typography } from '@material-ui/core';
-import { styled, useTheme } from '@material-ui/core/styles';
-import TreeItem, { TreeItemContentProps, TreeItemProps, useTreeItem } from '@material-ui/lab/TreeItem';
+import TreeItem, { TreeItemContentProps, TreeItemProps, useTreeItem } from '@mui/lab/TreeItem';
+import { Typography } from '@mui/material';
+import { styled, useTheme } from '@mui/material/styles';
 import clsx from 'clsx';
 import React, { forwardRef, ForwardRefRenderFunction } from 'react';
 

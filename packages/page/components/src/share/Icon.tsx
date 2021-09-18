@@ -1,4 +1,4 @@
-import { AlternateEmail, Assignment, Facebook, LinkedIn, Twitter, WhatsApp } from '@material-ui/icons';
+import { AlternateEmail, Assignment, Facebook, LinkedIn, Twitter, WhatsApp } from '@mui/icons-material';
 import React from 'react';
 
 export const Icon = ({ id }) => {

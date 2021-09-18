@@ -6,8 +6,8 @@ import { playerLayoutState } from '@demonstrator/components/src/player/context/r
 import { PlayListItem, Step } from '@demonstrator/components/src/player/types';
 import { appLayoutState } from '@demonstrator/navigation/src/recoil/features/app/reducers';
 import { Components as FlowComponents } from '@demonstrators-social/flow';
-import { Button, Divider, Tab } from '@material-ui/core';
-import { DonutLarge, Subscriptions } from '@material-ui/icons';
+import { DonutLarge, Subscriptions } from '@mui/icons-material';
+import { Button, Divider, Tab } from '@mui/material';
 import React, { ChangeEvent, FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 

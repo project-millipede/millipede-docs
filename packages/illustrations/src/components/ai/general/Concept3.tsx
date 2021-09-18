@@ -1,5 +1,5 @@
 import { Archer } from '@app/components';
-import { styled } from '@material-ui/core/styles';
+import { styled } from '@mui/material/styles';
 import React, { FC } from 'react';
 
 import { Instrument } from './components/Instrument';
