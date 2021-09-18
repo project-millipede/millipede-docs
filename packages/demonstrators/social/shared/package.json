@@ -4,19 +4,19 @@
   "private": true,
   "main": "src/index.ts",
   "devDependencies": {
-    "@huse/effect-ref": "^1.1.0",
-    "@types/lodash": "^4.14.171",
-    "@types/react": "^17.0.14",
+    "@huse/effect-ref": "^1.1.1",
+    "@types/lodash": "^4.14.173",
+    "@types/react": "^17.0.21",
     "@types/react-dom": "^17.0.9",
-    "immer": "^9.0.5",
+    "immer": "^9.0.6",
     "lodash": "^4.17.21",
     "next-translate": "1.0.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "recoil": "^0.3.1",
+    "recoil": "^0.4.1",
     "reselect": "^4.0.0",
     "typesafe-actions": "^5.1.0",
-    "typescript": "^4.3.5"
+    "typescript": "^4.4.3"
   },
   "peerDependencies": {
     "@huse/effect-ref": "*",
