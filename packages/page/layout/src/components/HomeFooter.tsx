@@ -1,5 +1,11 @@
 import { Link } from '@app/components';
-import { Container, Grid, GridProps, Link as MuiLink, Typography } from '@material-ui/core';
+import {
+  Container,
+  Grid,
+  GridProps,
+  Link as MuiLink,
+  Typography
+} from '@material-ui/core';
 import { styled, useTheme } from '@material-ui/core/styles';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
@@ -67,12 +73,10 @@ export const HomeFooter = () => {
             </li>
             <li>
               <Link
-                href={
-                  {
-                    pathname: '/docs/[...slug]',
-                    query: { slug: 'discover-more/team'.split('/') }
-                  } as any
-                }
+                href={{
+                  pathname: '/docs/[...slug]',
+                  query: { slug: 'discover-more/team'.split('/') }
+                }}
                 color='inherit'
                 variant='body2'
               >
@@ -93,12 +97,10 @@ export const HomeFooter = () => {
           <ul>
             <li>
               <Link
-                href={
-                  {
-                    pathname: '/docs/[...slug]',
-                    query: { slug: 'discover-more/organisation'.split('/') }
-                  } as any
-                }
+                href={{
+                  pathname: '/docs/[...slug]',
+                  query: { slug: 'discover-more/organisation'.split('/') }
+                }}
                 color='inherit'
                 variant='body2'
               >
@@ -107,12 +109,10 @@ export const HomeFooter = () => {
             </li>
             <li>
               <Link
-                href={
-                  {
-                    pathname: '/docs/[...slug]',
-                    query: { slug: 'discover-more/support'.split('/') }
-                  } as any
-                }
+                href={{
+                  pathname: '/docs/[...slug]',
+                  query: { slug: 'discover-more/support'.split('/') }
+                }}
                 color='inherit'
                 variant='body2'
               >

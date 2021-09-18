@@ -1,3 +1,4 @@
+import { Link } from '@app/components';
 import { Avatar, Box } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
@@ -71,7 +72,8 @@ const Group: FC<GroupProps> = ({ title, members }) => {
                   <Box sx={{ display: 'flex' }}>
                     {github && (
                       <IconButton
-                        component='a'
+                        color='inherit'
+                        component={Link}
                         href={`https://github.com/${github}`}
                       >
                         <GitHub />
@@ -79,7 +81,8 @@ const Group: FC<GroupProps> = ({ title, members }) => {
                     )}
                     {linkedIn && (
                       <IconButton
-                        component='a'
+                        color='inherit'
+                        component={Link}
                         href={`https://www.linkedin.com/in/${linkedIn}`}
                       >
                         <LinkedIn />

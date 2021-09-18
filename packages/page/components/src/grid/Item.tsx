@@ -105,17 +105,16 @@ export const Item = ({
               {listing.map((item, index) => {
                 return item.link ? (
                   <li key={`listing-element-${index}`}>
-                    <Link
-                      href={
-                        {
-                          pathname: '/docs/[...slug]',
-                          query: { slug: item.link.split('/') }
-                          // hash: (item as any).hash
-                        } as any
-                      }
+                    <Typography
+                      variant='h6'
+                      component={Link}
+                      href={{
+                        pathname: '/docs/[...slug]',
+                        query: { slug: item.link.split('/') }
+                      }}
                     >
-                      <Typography variant='h6'>{item.text}</Typography>
-                    </Link>
+                      {item.text}
+                    </Typography>
                   </li>
                 ) : (
                   <li key={`listing-element-${index}`}>
@@ -166,16 +165,11 @@ export const Item = ({
         </Avatar>
       ) : null}
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <Typography
-          variant='h5'
-          sx={{ fontWeight: theme.typography.fontWeightMedium }}
-        >
-          {title}
-        </Typography>
+        <Typography variant='h5'>{title}</Typography>
         {isArray(description) ? (
           intermediateResult
         ) : (
-          <Typography variant='h6'>{description}</Typography>
+          <Typography variant='h5'>{description}</Typography>
         )}
       </div>
     </div>
