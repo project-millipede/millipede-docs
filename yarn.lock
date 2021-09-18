@@ -159,7 +159,7 @@ __metadata:
     clsx: ^1.1.1
     lodash: ^4.17.21
     next: 11.1.3-canary.24
-    next-translate: 1.0.7
+    next-translate: 1.1.0
     react: ^17.0.2
     react-dom: ^17.0.2
     styled-components: ^5.3.1
@@ -1858,7 +1858,7 @@ __metadata:
     "@types/react-dom": ^17.0.9
     immer: ^9.0.6
     lodash: ^4.17.21
-    next-translate: 1.0.7
+    next-translate: 1.1.0
     react: ^17.0.2
     react-dom: ^17.0.2
     recoil: ^0.4.1
@@ -6334,7 +6334,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.12.28, esbuild@npm:^0.12.9":
+"esbuild@npm:^0.12.28":
   version: 0.12.28
   resolution: "esbuild@npm:0.12.28"
   bin:
@@ -7066,16 +7066,6 @@ __metadata:
     locate-path: ^5.0.0
     path-exists: ^4.0.0
   checksum: 4c172680e8f8c1f78839486e14a43ef82e9decd0e74145f40707cc42e7420506d5ec92d9a11c22bd2c48fb0c384ea05dd30e10dd152fefeec6f2f75282a8b844
-  languageName: node
-  linkType: hard
-
-"find-up@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "find-up@npm:5.0.0"
-  dependencies:
-    locate-path: ^6.0.0
-    path-exists: ^4.0.0
-  checksum: 07955e357348f34660bde7920783204ff5a26ac2cafcaa28bace494027158a97b9f56faaf2d89a6106211a8174db650dd9f503f9c0d526b1202d5554a00b9095
   languageName: node
   linkType: hard
 
@@ -9354,15 +9344,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"locate-path@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "locate-path@npm:6.0.0"
-  dependencies:
-    p-locate: ^5.0.0
-  checksum: 72eb661788a0368c099a184c59d2fee760b3831c9c1c33955e8a19ae4a21b4116e53fa736dc086cdeb9fce9f7cc508f2f92d2d3aae516f133e16a2bb59a39f5a
-  languageName: node
-  linkType: hard
-
 "lodash.clonedeep@npm:^4.5.0":
   version: 4.5.0
   resolution: "lodash.clonedeep@npm:4.5.0"
@@ -10290,10 +10271,9 @@ __metadata:
     mdast-util-toc: ^6.1.0
     mdx-bundler: ^6.0.1
     next: 11.1.3-canary.24
-    next-mdx-remote: ^3.0.4
     next-merge-props: ^0.5.0
     next-remote-watch: ^1.0.0
-    next-translate: 1.0.7
+    next-translate: 1.1.0
     nextjs-sitemap-generator: ^1.3.1
     prettier: ^2.4.1
     query-string: ^7.0.1
@@ -10324,7 +10304,7 @@ __metadata:
     use-query-params: ^1.2.3
     uuid: ^8.3.2
     vfile: 5.1.0
-    victory: ^36.0.0
+    victory: ^36.0.1
     webpack-merge: 5.8.0
   languageName: unknown
   linkType: soft
@@ -10592,21 +10572,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-mdx-remote@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "next-mdx-remote@npm:3.0.4"
-  dependencies:
-    "@mdx-js/mdx": ^1.6.22
-    "@mdx-js/react": ^1.6.22
-    esbuild: ^0.12.9
-    pkg-dir: ^5.0.0
-  peerDependencies:
-    react: ">=16.x <=17.x"
-    react-dom: ">=16.x <=17.x"
-  checksum: d62be3ff915caabd09e911a0d686317b810c077f6508afe939ce2e976a49281911d7775274d4f216dcb176e949b955790e48a9387d4aaebc9a50d6d0c26a780d
-  languageName: node
-  linkType: hard
-
 "next-merge-props@npm:^0.5.0":
   version: 0.5.0
   resolution: "next-merge-props@npm:0.5.0"
@@ -10631,15 +10596,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-translate@npm:1.0.7":
-  version: 1.0.7
-  resolution: "next-translate@npm:1.0.7"
+"next-translate@npm:1.1.0":
+  version: 1.1.0
+  resolution: "next-translate@npm:1.1.0"
   peerDependencies:
     next: ">= 10.0.0"
     react: ">= 16.8.0"
-  bin:
-    next-translate: cli/builder.js
-  checksum: c57f78362c7ed14bb7b7716dbce7a42ccf925f133d4db46e866555e92db1149412491beff677bcb7ea60b3fe8b3591c6a9f3fbbd5cb23f336d264af3edcec854
+  checksum: b2719181e32fdd9a502dfec36f3e03bbbc6117181c5bd182484c8a9b90c341fd36014f2b66b627ce80268ffdb546e65390734895507214a47b0877d7f6808eef
   languageName: node
   linkType: hard
 
@@ -11093,7 +11056,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"p-limit@npm:3.1.0, p-limit@npm:^3.0.2, p-limit@npm:^3.1.0":
+"p-limit@npm:3.1.0, p-limit@npm:^3.1.0":
   version: 3.1.0
   resolution: "p-limit@npm:3.1.0"
   dependencies:
@@ -11135,15 +11098,6 @@ __metadata:
   dependencies:
     p-limit: ^2.2.0
   checksum: 513bd14a455f5da4ebfcb819ef706c54adb09097703de6aeaa5d26fe5ea16df92b48d1ac45e01e3944ce1e6aa2a66f7f8894742b8c9d6e276e16cd2049a2b870
-  languageName: node
-  linkType: hard
-
-"p-locate@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "p-locate@npm:5.0.0"
-  dependencies:
-    p-limit: ^3.0.2
-  checksum: 1623088f36cf1cbca58e9b61c4e62bf0c60a07af5ae1ca99a720837356b5b6c5ba3eb1b2127e47a06865fee59dd0453cad7cc844cda9d5a62ac1a5a51b7c86d3
   languageName: node
   linkType: hard
 
@@ -11410,15 +11364,6 @@ __metadata:
   dependencies:
     find-up: ^4.0.0
   checksum: 9863e3f35132bf99ae1636d31ff1e1e3501251d480336edb1c211133c8d58906bed80f154a1d723652df1fda91e01c7442c2eeaf9dc83157c7ae89087e43c8d6
-  languageName: node
-  linkType: hard
-
-"pkg-dir@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "pkg-dir@npm:5.0.0"
-  dependencies:
-    find-up: ^5.0.0
-  checksum: b167bb8dac7bbf22b1d5e30ec223e6b064b84b63010c9d49384619a36734caf95ed23ad23d4f9bd975e8e8082b60a83395f43a89bb192df53a7c25a38ecb57d9
   languageName: node
   linkType: hard
 
@@ -14890,7 +14835,7 @@ typescript@^4.4.3:
   languageName: node
   linkType: hard
 
-"victory@npm:^36.0.0":
+"victory@npm:^36.0.1":
   version: 36.0.1
   resolution: "victory@npm:36.0.1"
   dependencies:
