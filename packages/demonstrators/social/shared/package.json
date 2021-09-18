@@ -10,7 +10,7 @@
     "@types/react-dom": "^17.0.9",
     "immer": "^9.0.6",
     "lodash": "^4.17.21",
-    "next-translate": "1.0.7",
+    "next-translate": "1.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "recoil": "^0.4.1",
