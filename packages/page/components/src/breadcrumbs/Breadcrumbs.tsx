@@ -1,14 +1,23 @@
-import { Link } from '@app/components';
-import { Breadcrumbs as MuiBreadcrumbs, Button } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
+import { HiddenUnderlineLink } from '@app/components';
+import { NavigationState } from '@app/layout/src/recoil/features/pages/reducer';
+import { Breadcrumbs as MuiBreadcrumbs, Typography } from '@material-ui/core';
+import { styled } from '@material-ui/core/styles';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import useTranslation from 'next-translate/useTranslation';
-import { useRouter } from 'next/router';
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 
 export interface BreadCrumb {
   link: string;
 }
+
+export const StyledMuiBreadcrumbs = styled(MuiBreadcrumbs)(({ theme }) => {
+  return {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'block'
+    }
+  };
+});
 
 export const createBreadcrumbsFromSlug = (
   slug: Array<string>
@@ -17,57 +26,47 @@ export const createBreadcrumbsFromSlug = (
     link: `${arr.slice(0, index + 1).join('/')}`
   }));
 
-export const Breadcrumbs: FC = () => {
+interface BreadcrumbsProps {
+  slug: Array<string>;
+  navigation?: NavigationState;
+}
+
+export const Breadcrumbs: FC<BreadcrumbsProps> = ({ slug }) => {
   const { t } = useTranslation();
 
-  const { query } = useRouter();
-
-  const breadcrumbs = createBreadcrumbsFromSlug(query.slug as Array<string>);
-
-  const headBreadcrumbs = breadcrumbs.slice(0, breadcrumbs.length - 1);
-  const [tailBreadcrumb] = breadcrumbs.slice(-1);
-
-  const theme = useTheme();
+  const [headBreadcrumbs, [tailBreadcrumb]] = useMemo(() => {
+    const breadcrumbs = createBreadcrumbsFromSlug(slug);
+    return [
+      breadcrumbs.slice(0, breadcrumbs.length - 1),
+      breadcrumbs.slice(-1)
+    ];
+  }, [slug]);
 
   return (
-    <MuiBreadcrumbs separator={<NavigateNextIcon fontSize='small' />}>
-      {headBreadcrumbs.map((breadcrumb, index) => {
-        const label = t(`common:pages.${breadcrumb.link}`);
-        return (
-          <Button
-            key={`breadcrumb-${index}`}
-            size='medium'
-            sx={{
-              textTransform: 'none',
-              fontWeight: theme.typography.fontWeightRegular,
-              '& .MuiLink-root': {
-                textDecoration: 'none'
-              }
-            }}
-          >
-            <Link
-              href={
-                {
-                  pathname: '/docs/[...slug]',
-                  query: { slug: breadcrumb.link.split('/') }
-                } as any
-              }
+    <StyledMuiBreadcrumbs separator={<NavigateNextIcon fontSize='small' />}>
+      {headBreadcrumbs &&
+        headBreadcrumbs.length > 0 &&
+        headBreadcrumbs.map((breadcrumb, index) => {
+          const label = t(`common:pages.${breadcrumb.link}`);
+          return (
+            <Typography
+              key={`breadcrumb-${index}`}
+              component={HiddenUnderlineLink}
+              href={{
+                pathname: '/docs/[...slug]',
+                query: { slug: breadcrumb.link.split('/') }
+              }}
+              prefetch={false}
             >
               {label}
-            </Link>
-          </Button>
-        );
-      })}
-      <Button
-        key={`breadcrumb-tail`}
-        disabled
-        sx={{
-          textTransform: 'none',
-          fontWeight: theme.typography.fontWeightRegular
-        }}
-      >
-        {t(`common:pages.${tailBreadcrumb.link}`)}
-      </Button>
-    </MuiBreadcrumbs>
+            </Typography>
+          );
+        })}
+      {tailBreadcrumb && tailBreadcrumb.link && (
+        <Typography key='breadcrumb-tail'>
+          {t(`common:pages.${tailBreadcrumb.link}`)}
+        </Typography>
+      )}
+    </StyledMuiBreadcrumbs>
   );
 };
