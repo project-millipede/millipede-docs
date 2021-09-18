@@ -3,6 +3,7 @@ import {
   faBalanceScaleLeft,
   faChessBoard,
   faGhost,
+  faHashtag,
   faLightbulb,
   faLowVision,
   faRocket,
@@ -19,6 +20,7 @@ export const loadFAIcons = () => {
     faLowVision,
     faBalanceScaleLeft,
     faLightbulb,
-    faChessBoard
+    faChessBoard,
+    faHashtag
   );
 };

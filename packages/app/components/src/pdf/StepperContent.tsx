@@ -41,14 +41,14 @@ export const StepperContent: FC<StepperContentWithTranslationProps> = ({
     setMax(numPages);
   };
 
-  const downloadResume = () => {
+  const openDocument = () => {
     window.open(url, '_blank');
   };
 
   return (
     <Grid container>
       <Grid item xs={12}>
-        <Button onClick={downloadResume}>Download</Button>
+        <Button onClick={openDocument}>Download</Button>
       </Grid>
       <Grid item xs={12}>
         <SizeMe>

@@ -4,26 +4,25 @@ import NextHead from 'next/head';
 import React, { FC } from 'react';
 
 interface HeadProps {
-  meta?: PageTypes.ContentMetaData;
+  metaData?: PageTypes.ContentMetaData;
 }
 
 const defaultTitle = 'headTitle';
 const defaultDescription = 'strapline';
-export const AppHead: FC<HeadProps> = ({ meta = {} }) => {
+export const AppHead: FC<HeadProps> = ({ metaData = {} }) => {
   const {
     title = defaultTitle,
     description = defaultDescription,
     keywords,
     author,
     date
-  } = meta;
+  } = metaData;
 
   const { t } = useTranslation();
 
   return (
     <NextHead>
-      <meta charSet='UTF-8' />
-      <meta name='viewport' content='width=device-width, initial-scale=1' />
+      <meta name='viewport' content='initial-scale=1, width=device-width' />
       <meta
         name='description'
         content={
