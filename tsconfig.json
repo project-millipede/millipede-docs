@@ -20,7 +20,12 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext.Array"]
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext.Array"
+    ],
+    "incremental": true
   },
   "include": [
     "next-env.d.ts",
@@ -30,5 +35,7 @@
     "pages/**/*.ts",
     "pages/**/*.tsx"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }
