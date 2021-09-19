@@ -1,5 +1,5 @@
 yarn-upgrade:
-	yarn set version 3.0.0-rc.5
+	yarn set version berry
 	yarn plugin import workspace-tools
 	yarn plugin import version
 	yarn plugin import stage
