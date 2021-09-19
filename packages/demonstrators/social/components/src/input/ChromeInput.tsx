@@ -47,11 +47,11 @@ export const ChromeInput: FC<ChromInputProps> = ({ fullScreenHandle }) => {
             </IconButton>
             <IconButton
               size='small'
-              onClick={() => {
+              onClick={
                 fullScreenHandle.active
-                  ? fullScreenHandle.exit()
-                  : fullScreenHandle.enter();
-              }}
+                  ? fullScreenHandle.exit
+                  : fullScreenHandle.enter
+              }
             >
               {fullScreenHandle.active ? <FullscreenExit /> : <Fullscreen />}
             </IconButton>

@@ -7,10 +7,7 @@ export const getViewElement = (
   return viewElements.find(viewElement => viewElement.id === viewElementId);
 };
 
-export const getComponent = (
-  viewElement: TViewElement,
-  _update: boolean = true
-) => {
+export const getComponent = (viewElement: TViewElement, _update = true) => {
   const { key, id, component: Component } = viewElement;
 
   return Component ? (

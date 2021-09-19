@@ -1,7 +1,7 @@
 import { PageTypes } from '@app/types';
 
 export const loadPages = (
-  _pathname: string = '',
+  _pathname = '',
   _currentPages: Array<PageTypes.Page> = []
 ) => {
   return [

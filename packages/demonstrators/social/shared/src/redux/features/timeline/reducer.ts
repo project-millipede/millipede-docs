@@ -1,6 +1,6 @@
 import { CollectionUtil } from '@app/utils';
 import { Entities } from '@demonstrators-social/data';
-import produce from 'immer';
+import { produce } from 'immer';
 
 import { StoreAction } from '../actionType';
 import { ADD_COMMENT, ADD_POST, DELETE_POST, NORMALIZE_DATA } from './actionTypes';
@@ -64,10 +64,11 @@ const timelineReducer = (state = initialState, action: StoreAction) =>
       case DELETE_POST: {
         const { postId } = action.payload;
 
-        draftState.entities.posts = CollectionUtil.Object.removePropertyFromObject(
-          state.entities.posts,
-          postId
-        );
+        draftState.entities.posts =
+          CollectionUtil.Object.removePropertyFromObject(
+            state.entities.posts,
+            postId
+          );
 
         // const postIndex = state.entities.timelines[timelineId].posts.findIndex(
         //   post => post === postId
@@ -90,13 +91,12 @@ const timelineReducer = (state = initialState, action: StoreAction) =>
 
         const comment = entities.comments[result];
         draftState.entities.comments[result] = comment;
-        draftState.entities.posts[
-          postId
-        ].comments = CollectionUtil.Array.insertAtWithPreserve(
-          state.entities.posts[postId].comments,
-          result,
-          0
-        );
+        draftState.entities.posts[postId].comments =
+          CollectionUtil.Array.insertAtWithPreserve(
+            state.entities.posts[postId].comments,
+            result,
+            0
+          );
         break;
       }
       default:

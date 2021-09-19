@@ -8,9 +8,9 @@ import { BabelPluginMdxBrowser } from './babel-plugin-mdx-browser';
 type ResourceToUrl = (source: string) => string;
 
 export type BaseCompileOptions = {
-  remarkPlugins: any[];
-  rehypePlugins: any[];
-  compilers: any[];
+  remarkPlugins: Array<any>;
+  rehypePlugins: Array<any>;
+  compilers: Array<any>;
 };
 
 export type CompileOptions = BaseCompileOptions & {

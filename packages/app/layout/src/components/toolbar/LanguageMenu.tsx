@@ -1,7 +1,7 @@
 import LanguageIcon from '@mui/icons-material/Language';
 import { Button, Menu, MenuItem } from '@mui/material';
 import { useRouter } from 'next/router';
-import React, { FC, SyntheticEvent, useState } from 'react';
+import React, { FC, useState } from 'react';
 
 import { LANGUAGES_LABEL } from '../../constants';
 import { LanguageLabel } from './LanguageLabel';
@@ -23,9 +23,12 @@ export const LanguageMenu: FC = () => {
     setLanguageMenu(null);
   };
 
-  const handleLanguageIconClick = (event: SyntheticEvent) => {
+  const handleLanguageIconClick = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     setLanguageMenu(event.currentTarget);
   };
+
   const handleLanguageMenuClose = () => {
     setLanguageMenu(null);
   };
