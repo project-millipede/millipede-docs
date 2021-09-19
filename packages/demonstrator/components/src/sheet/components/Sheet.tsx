@@ -72,7 +72,9 @@ const Sheet: ForwardRefRenderFunction<SheetHandleProps, SheetProps> = (
   }, [snapPoints]);
 
   useImperativeHandle(ref, () => ({
-    reset: () => {},
+    reset: () => {
+      // do nothing.
+    },
 
     // +-----+-----+-----+-----+
     // |  a  |  -  |  -  |  >  |

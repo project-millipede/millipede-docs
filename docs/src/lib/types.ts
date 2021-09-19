@@ -2,8 +2,9 @@ import { NavigationState } from '@app/layout/src/recoil/features/pages/reducer';
 import createCache, { EmotionCache } from '@emotion/cache';
 import { NextPage } from 'next';
 import { AppPropsType, NextComponentType } from 'next/dist/shared/lib/utils';
-import { DynamicPageProps } from 'pages/docs/[...slug]';
 import { ReactNode } from 'react';
+
+import { DynamicPageProps } from '../../../pages/docs/[...slug]';
 
 export const createEmotionCache = () => {
   return createCache({ key: 'css' });

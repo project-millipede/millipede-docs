@@ -193,14 +193,14 @@ export const Share: FC<ShareProps> = ({ metaData }) => {
   const setSnackbar = useSetRecoilState(snackbarState);
 
   const handleShareOpen = (
-    _event: SyntheticEvent<{}, Event>,
+    _event: SyntheticEvent<HTMLDivElement, Event>,
     _reason: OpenReason
   ) => {
     onOpen();
   };
 
   const handleShareClose = (
-    _event: SyntheticEvent<{}, Event>,
+    _event: SyntheticEvent<HTMLDivElement, Event>,
     _reason: CloseReason
   ) => {
     onClose();

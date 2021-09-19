@@ -94,7 +94,7 @@ export const getSelectedPostIds = (
 };
 
 export const getRange = (
-  nodeWithRelations: ScrollTypes.Timeline.NodeWithRelations[],
+  nodeWithRelations: Array<ScrollTypes.Timeline.NodeWithRelations>,
   finalSize: number
 ) => {
   return nodeWithRelations.slice(

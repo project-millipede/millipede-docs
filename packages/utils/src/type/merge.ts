@@ -30,9 +30,10 @@ type MergeTwoObjects<
   T,
   U,
   // non shared keys are optional
-  T0 = Partial<GetObjDifferentKeys<T, U>> &
-    // shared keys are recursively resolved by `DeepMergeTwoTypes<...>`
-    { [K in keyof GetObjSameKeys<T, U>]: DeepMergeTwoTypes<T[K], U[K]> },
+  T0 = Partial<
+    GetObjDifferentKeys<T, U>
+  > & // shared keys are recursively resolved by `DeepMergeTwoTypes<...>`
+  { [K in keyof GetObjSameKeys<T, U>]: DeepMergeTwoTypes<T[K], U[K]> },
   T1 = { [K in keyof T0]: T0[K] }
 > = T1;
 
@@ -40,7 +41,7 @@ type MergeTwoObjects<
 export type DeepMergeTwoTypes<T, U> =
   // ----- 2 added lines ------
   // this line ⏬
-  [T, U] extends [any[], any[]]
+  [T, U] extends [Array<any>, Array<any>]
     ? // ... and this line ⏬
       Zip_DeepMergeTwoTypes<T, U>
     : // check if generic types are objects
