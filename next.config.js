@@ -35,7 +35,11 @@ const nextConfig = {
     return merge(config, webpackConfig(options));
   },
 
-  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx']
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+
+  eslint: {
+    ignoreDuringBuilds: true
+  }
 };
 
 module.exports = nextTranslate(withSvg(nextConfig));
