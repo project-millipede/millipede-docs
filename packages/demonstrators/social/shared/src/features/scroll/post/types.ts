@@ -5,6 +5,6 @@ export interface RefPostScroll {
   refObservedSubSlices: { [key: string]: EffectRef<HTMLElement> };
 }
 
-export type RefPostScrollType = {
-  [value: string]: RefPostScroll;
+export type RefPostScrollMap = {
+  [value: string]: RefPostScroll; // key corresponds to timelineId
 };
