@@ -9,7 +9,10 @@ export const useResize = (): [
 ] => {
   const resizeObserver = useRef<ResizeObserver>(null);
 
-  const [bounds, setBounds] = useState<Partial<DOMRectReadOnly>>({});
+  const [bounds, setBounds] = useState<Partial<DOMRectReadOnly>>({
+    width: 0,
+    height: 0
+  });
 
   const onResize = useCallback(
     (entries: Array<ResizeObserverEntry>, _observer: ResizeObserver) => {
@@ -37,6 +40,11 @@ export const useResize = (): [
 
   return [setRef, bounds];
 };
+
+/**
+ * Note:
+ * The element-based resize observer is not in use anymore
+ */
 
 export const useResizeWithElement = (
   options: ErdmOptions = { strategy: 'scroll' }
