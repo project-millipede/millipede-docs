@@ -32,7 +32,6 @@
     "switch:yarn:linker:dev": "yarn config set nodeLinker pnp && yarn",
     "dev": "yarn clean && yarn run next:dev",
     "start": "yarn clean && next build && next start",
-    "vercel-build": "yarn clean && next build",
     "test": "jest --colors --watch",
     "lint": "yarn eslint './docs/src/lib/**/*' './packages/**/src/**/*' './pages/**/*'",
     "format:mdx": "prettier --parser mdx --end-of-line lf --print-width 80 --prose-wrap always --single-quote true --write \"docs/src/pages/**/*.mdx\"",
