@@ -1,10 +1,7 @@
-import { CustomIcon } from '@app/components';
+import { CustomIcon, HiddenUnderlineLink } from '@app/components';
 import { ContentTypes } from '@app/types';
-import { StringUtil } from '@app/utils';
 import { Box, Grid, IconButton } from '@mui/material';
-import { useRouter } from 'next/router';
-import React, { FC, useEffect } from 'react';
-import { StringParam, useQueryParams } from 'use-query-params';
+import React, { FC } from 'react';
 
 import { TopReveal } from '../animation/framer/components/text/TopReveal';
 
@@ -13,45 +10,6 @@ interface TopicsViewDesktopProps {
 }
 
 export const TopicsViewDesktop: FC<TopicsViewDesktopProps> = ({ topics }) => {
-  const { asPath, push, pathname, locale } = useRouter();
-
-  const handleSelect = (
-    topic: ContentTypes.OverviewProps,
-    section: ContentTypes.Section
-  ) => {
-    push({
-      pathname: `/`,
-      query: {
-        feature: topic.id,
-        aspect: section.id
-      }
-      // hash: `#head-${topic.id}-${section.id}`
-    });
-  };
-
-  const [query] = useQueryParams({
-    feature: StringParam,
-    aspect: StringParam
-  });
-
-  useEffect(() => {
-    const { feature = '', aspect = '' } = query;
-
-    if (
-      !StringUtil.isEmptyString(aspect) &&
-      !StringUtil.isEmptyString(feature)
-    ) {
-      push(
-        {
-          pathname,
-          query
-        },
-        asPath,
-        { locale }
-      );
-    }
-  }, []);
-
   return (
     <Grid container>
       {topics && topics.length > 0
@@ -76,10 +34,18 @@ export const TopicsViewDesktop: FC<TopicsViewDesktopProps> = ({ topics }) => {
                         const { id: sectionId } = section;
                         return (
                           <IconButton
+                            component={HiddenUnderlineLink}
                             key={`topic-${topicId}-section-${sectionId}`}
-                            onClick={_e => {
-                              handleSelect(topic, section);
+                            href={{
+                              pathname: '/',
+                              query: {
+                                feature: topic.id,
+                                aspect: section.id
+                              },
+                              hash: `feature-${topic.id}-aspect-${section.id}`
                             }}
+                            prefetch={false}
+                            shallow
                           >
                             <CustomIcon icon={section.icon} />
                           </IconButton>

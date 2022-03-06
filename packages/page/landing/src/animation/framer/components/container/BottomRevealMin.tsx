@@ -115,8 +115,8 @@ export const BottomRevealMin: FC<BottomRevealMinProps> = props => {
           height: '56px'
           // overflow: 'hidden'
         }}
-        // initial={'before'}
-        // animate={'after'}
+        // initial='before'
+        // animate='after'
         variants={containerVariants}
       >
         <motion.div

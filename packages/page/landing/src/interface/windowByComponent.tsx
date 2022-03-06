@@ -1,33 +1,16 @@
-import { CustomIcon } from '@app/components';
+import { CustomIcon, HiddenUnderlineLink } from '@app/components';
 import { ContentTypes } from '@app/types';
 import { Box, IconButton } from '@mui/material';
-import { useRouter } from 'next/router';
 import React, { FC } from 'react';
 
 import { TopReveal } from '../animation/framer/components/text/TopReveal';
 
 interface WindowProps {
   windowStackData?: Array<ContentTypes.OverviewProps>;
-  index: number;
+  index?: number;
 }
 
 const Window: FC<WindowProps> = ({ windowStackData, index }) => {
-  const { push } = useRouter();
-
-  const handleSelect = (
-    topic: ContentTypes.OverviewProps,
-    section: ContentTypes.Section
-  ) => {
-    push({
-      pathname: `/`,
-      query: {
-        feature: topic.id,
-        aspect: section.id
-      }
-      // hash: `#head-${topic.id}-${section.id}`
-    });
-  };
-
   const topic =
     windowStackData &&
     windowStackData.length >= index &&
@@ -35,7 +18,7 @@ const Window: FC<WindowProps> = ({ windowStackData, index }) => {
 
   const { id: topicId } = topic;
 
-  return topic != null ? (
+  return (
     <Box>
       <TopReveal
         id={`topic-${topic.category}-animation`}
@@ -47,10 +30,18 @@ const Window: FC<WindowProps> = ({ windowStackData, index }) => {
             const { id: sectionId } = section;
             return (
               <IconButton
+                component={HiddenUnderlineLink}
                 key={`topic-${topicId}-section-${sectionId}`}
-                onClick={_e => {
-                  handleSelect(topic, section);
+                href={{
+                  pathname: '/',
+                  query: {
+                    feature: topic.id,
+                    aspect: section.id
+                  },
+                  hash: `feature-${topic.id}-aspect-${section.id}`
                 }}
+                prefetch={false}
+                shallow
               >
                 <CustomIcon icon={section.icon} />
               </IconButton>
@@ -58,7 +49,7 @@ const Window: FC<WindowProps> = ({ windowStackData, index }) => {
           })}
       </Box>
     </Box>
-  ) : null;
+  );
 };
 
 export default Window;
