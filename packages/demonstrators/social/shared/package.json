@@ -5,18 +5,16 @@
   "main": "src/index.ts",
   "devDependencies": {
     "@huse/effect-ref": "^1.1.1",
-    "@types/lodash": "^4.14.173",
-    "@types/react": "^17.0.22",
-    "@types/react-dom": "^17.0.9",
-    "immer": "^9.0.6",
+    "@types/lodash": "^4.14.179",
+    "@types/react": "^17.0.39",
+    "@types/react-dom": "^17.0.13",
+    "immer": "^9.0.12",
     "lodash": "^4.17.21",
-    "next-translate": "1.1.0",
+    "next-translate": "1.3.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "recoil": "^0.4.1",
-    "reselect": "^4.0.0",
-    "typesafe-actions": "^5.1.0",
-    "typescript": "^4.4.3"
+    "recoil": "^0.6.1",
+    "typescript": "^4.6.2"
   },
   "peerDependencies": {
     "@huse/effect-ref": "*",
@@ -25,12 +23,6 @@
     "next-translate": "*",
     "react": "*",
     "react-dom": "*",
-    "recoil": "*",
-    "reselect": "*",
-    "typesafe-actions": "*"
-  },
-  "dependencies": {
-    "@app/utils": "workspace:packages/utils",
-    "@demonstrators-social/data": "workspace:packages/demonstrators/social/data"
+    "recoil": "*"
   }
 }
