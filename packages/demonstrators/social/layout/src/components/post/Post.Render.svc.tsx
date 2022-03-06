@@ -4,6 +4,7 @@ import get from 'lodash/get';
 import React from 'react';
 
 export const getHeader = (
+  ref: EffectRef<HTMLElement>,
   firstName: string,
   lastName: string,
   avatar: string,
@@ -11,6 +12,7 @@ export const getHeader = (
 ) => {
   return (
     <CardHeader
+      ref={ref}
       avatar={<Avatar alt={`${firstName} ${lastName}`} src={avatar} />}
       title={`${firstName} ${lastName}`}
       subheader={date}
@@ -18,9 +20,14 @@ export const getHeader = (
   );
 };
 
-export const getMedia = (imageHref: string, imageTitle: string) => {
+export const getMedia = (
+  ref: EffectRef<HTMLElement>,
+  imageHref: string,
+  imageTitle: string
+) => {
   return (
     <CardMedia
+      ref={ref}
       image={imageHref}
       title={imageTitle}
       sx={{
@@ -31,9 +38,9 @@ export const getMedia = (imageHref: string, imageTitle: string) => {
   );
 };
 
-export const getContent = (text: string) => {
+export const getContent = (ref: EffectRef<HTMLElement>, text: string) => {
   return (
-    <CardContent>
+    <CardContent ref={ref}>
       <Typography variant='body2' color='textSecondary' component='p'>
         {text}
       </Typography>
@@ -44,12 +51,4 @@ export const getContent = (text: string) => {
 export const getRef =
   (refs: { [key: string]: EffectRef<HTMLElement> }) => (id: string) => {
     return get(refs, id);
-  };
-
-export const getObserverComp =
-  (ref: EffectRef<HTMLElement>) => (children: JSX.Element) => {
-    if (ref != null) {
-      return <div ref={ref}>{children}</div>;
-    }
-    return <>{children}</>;
   };

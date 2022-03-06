@@ -1,15 +1,7 @@
-import { useHoux } from '@app/houx';
-import {
-  RootState,
-  scrollActions,
-  scrollData,
-  scrollStates,
-  ScrollTypes,
-  selectors,
-  TimelineActions,
-  viewportReducers,
-  viewportSelectors,
-} from '@demonstrators-social/shared';
+import { features as appComponentFeatures } from '@app/components';
+import { CollectionUtil } from '@app/utils';
+import { features as navigationFeatures } from '@demonstrator/navigation';
+import { features, Scroll } from '@demonstrators-social/shared';
 import { useMergedRef } from '@huse/merged-ref';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
@@ -18,43 +10,16 @@ import { Button, ButtonGroup, Card, ListItem } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { formatDistance } from 'date-fns';
 import { enGB } from 'date-fns/locale';
-import lodashGet from 'lodash/get';
+import get from 'lodash/get';
 import useTranslation from 'next-translate/useTranslation';
-import React, { Dispatch, FC, memo, useEffect, useMemo, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { selectorFamily, SerializableParam, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilCallback, useRecoilValue, useSetRecoilState } from 'recoil';
 
-import { CommentEditor } from '../comment/CommentEditor';
-import { Comments } from '../comment/Comments';
-import { getContent, getHeader, getMedia, getObserverComp, getRef } from './Post.Render.svc';
+import Comments from '../comment/Comments';
+import { ContentEditor } from '../comment/ContentEditor';
+import { getContent, getHeader, getMedia, getRef } from './Post.Render.svc';
 import { handleCreateComment, handleDeletePost } from './Post.svc';
-
-const { selectPostById, selectTimelineOwner } = selectors.timeline;
-
-interface TimelinePostKeys {
-  timelineId: string;
-  postId: string;
-  [key: string]: SerializableParam;
-}
-
-const refPostScrollSelector = selectorFamily<
-  ScrollTypes.Post.RefPostScroll,
-  TimelinePostKeys
->({
-  key: 'ref-post-scroll-selector',
-  get:
-    ({ postId, timelineId }) =>
-    ({ get }) => {
-      const {
-        post: { refPostScrollState }
-      } = scrollStates;
-
-      const posts = get(refPostScrollState(postId));
-
-      const post = lodashGet(posts, timelineId);
-      return post;
-    }
-});
 
 export interface PostProps {
   timelineId: string;
@@ -67,43 +32,52 @@ export const Post: FC<PostProps> = ({
   otherTimelineId,
   postId
 }) => {
-  // Logs the component lifecycle.
-  // console.log('-- rendering post');
+  const {
+    scroll: {
+      timeline: {
+        states: { nodesWithRelationsWithEdgeState },
+        // actions: { addTopic, createNodesWithRelations },
+        actionsWorking: { addTopic, createNodesWithRelations },
+        constants: { actionPlan }
+      },
+      post: {
+        selector: { refPostScrollSelector }
+      }
+    },
+    timeline: {
+      states: { timelineState },
+      selector: { useCaseSelector, timelineOfOwnerSelector, postByIdSelector }
+    },
+    viewport: {
+      selector: {
+        // viewportItemSelector,
+        viewportNextItemSelector
+      }
+      // utils: { addItem, removeItem },
+    }
+  } = features;
 
-  useEffect(() => {
-    // The component is mounted only one time.
-    console.log('---- mounting post');
-    return () => {
-      // The component is never unmounted during reparenting.
-      console.log('------ unmounting post');
-    };
-  }, []);
+  const {
+    app: {
+      states: { appCompositionState }
+    }
+  } = navigationFeatures;
 
-  const theme = useTheme();
+  const {
+    archer: {
+      states: { archerTransitionComposedState }
+    }
+  } = appComponentFeatures;
 
   const { t } = useTranslation();
 
+  const theme = useTheme();
+
   const [displayEditor, setDisplayEditor] = useState(false);
 
-  const {
-    timeline: { createNodesWithRelations, addTopic }
-  } = scrollActions;
+  const { isMobile } = useRecoilValue(appCompositionState);
 
-  const {
-    timeline: { nodesWithRelationsWithEdgeState }
-  } = scrollStates;
-
-  const {
-    timeline: { publishActions }
-  } = scrollData;
-
-  const {
-    dispatch,
-    state
-  }: {
-    dispatch: Dispatch<TimelineActions>;
-    state: RootState;
-  } = useHoux();
+  const setTimeline = useSetRecoilState(timelineState);
 
   const {
     author: {
@@ -115,10 +89,10 @@ export const Post: FC<PostProps> = ({
       media: { imageTitle, imageHref }
     },
     comments
-  } = selectPostById(postId)(state);
+  } = useRecoilValue(postByIdSelector(postId));
 
   const elementRef = useRecoilValue(
-    refPostScrollSelector({ postId, timelineId })
+    refPostScrollSelector({ timelineId, postId })
   );
 
   const date = useMemo(
@@ -151,20 +125,26 @@ export const Post: FC<PostProps> = ({
     };
   }, [refObservedSubSlices]);
 
-  const headerComp = getObserverComp(refForComponent.header)(
-    getHeader(firstName, lastName, avatar, date)
+  const headerComp = getHeader(
+    refForComponent.header,
+    firstName,
+    lastName,
+    avatar,
+    date
   );
 
-  const mediaComp = getObserverComp(refForComponent.media)(
-    getMedia(imageHref, imageTitle)
-  );
+  const mediaComp = getMedia(refForComponent.media, imageHref, imageTitle);
 
-  const contentComp = getObserverComp(refForComponent.content)(
-    getContent(text)
-  );
+  const contentComp = getContent(refForComponent.content, text);
 
-  const sentimentComp = getObserverComp(refForComponent.sentiment)(
-    <ButtonGroup variant='text' color='primary' size='large' fullWidth>
+  const sentimentComp = (
+    <ButtonGroup
+      ref={refForComponent.sentiment}
+      variant='text'
+      color='primary'
+      size='large'
+      fullWidth
+    >
       <Button
         id={`timeline-${timelineId}-post-${postId}-comment-like`}
         aria-label={t('pages/pidp/use-case/recognition/index:like')}
@@ -186,68 +166,148 @@ export const Post: FC<PostProps> = ({
         variant='text'
         color='primary'
         startIcon={<DeleteOutlineIcon />}
-        onClick={() => handleDeletePost(timelineId, postId, dispatch)}
+        onClick={() => handleDeletePost(timelineId, postId, setTimeline)}
       />
     </ButtonGroup>
   );
 
-  const commentComp = getObserverComp(refForComponent.comments)(
-    <Comments comments={comments} timelineId={timelineId} postId={postId} />
+  const commentComp = (
+    <Comments
+      ref={refForComponent.comments}
+      comments={comments}
+      timelineId={timelineId}
+      postId={postId}
+    />
   );
 
-  const setNodesWithRelationsWithEdge = useSetRecoilState(
-    nodesWithRelationsWithEdgeState
-  );
+  // Scroll-restoration V1
+  // const setViewportItemState = useSetRecoilState(
+  //   viewportItemSelector(timelineId)
+  // );
 
-  const {
-    post: { addItem, removeItem }
-  } = viewportReducers;
-
-  const {
-    post: { viewportItemSelector }
-  } = viewportSelectors;
-
+  // Scroll-restoration V2 - TODO: Document necessary steps
   const setViewportItemState = useSetRecoilState(
-    viewportItemSelector(timelineId)
+    viewportNextItemSelector(timelineId)
   );
 
   const [intersectionObserverRef, inView, entry] = useInView({
     threshold: [0.1, 0.3, 0.6, 0.8],
-    delay: 500
+    delay: 2000
   });
 
+  // Scroll-restoration V1
+  // useEffect(() => {
+  //   if (entry && entry.target) {
+  //     const target = entry.target as HTMLElement;
+  //     const { id: inViewElementId, offsetTop } = target;
+  //     if (inView) {
+  //       setViewportItemState(state => {
+  //         return {
+  //           ...addItem(state, { id: inViewElementId, offsetTop }),
+  //           offsetTop: offsetTop
+  //         };
+  //       });
+  //     }
+  //     if (!inView) {
+  //       setViewportItemState(state => {
+  //         return removeItem(state, inViewElementId);
+  //       });
+  //     }
+  //   }
+  // }, [inView, isMobile]);
+
+  // Scroll-restoration V2
   useEffect(() => {
     if (entry && entry.target) {
       const target = entry.target as HTMLElement;
       const { id: inViewElementId, offsetTop } = target;
       if (inView) {
         setViewportItemState(state => {
-          return {
-            ...addItem(state, { id: inViewElementId, offsetTop }),
-            offsetTop: offsetTop
-          };
+          return { ...state, viewportItem: { id: inViewElementId, offsetTop } };
         });
       }
       if (!inView) {
-        setViewportItemState(state => removeItem(state, inViewElementId));
+        // do nothing - the recent viewport item gets updated at the inView condition
       }
     }
-  }, [inView]);
+  }, [inView, isMobile]);
 
   const combinedRef = useMergedRef([refObserved, intersectionObserverRef]);
+
+  const owner = useRecoilValue(timelineOfOwnerSelector(timelineId));
+
+  const useCase = useRecoilValue(useCaseSelector);
+
+  const { timelines } = useCase;
+
+  const [leftTimeline] = timelines;
+
+  const createComment = useRecoilCallback(
+    ({ set, reset }) =>
+      (text: string) => {
+        handleCreateComment(owner, postId, text, setTimeline, _comment => {
+          // const { id: activeCommentId } = comment;
+
+          const isLtr = leftTimeline.owner.id === owner.id;
+
+          const actions = get(actionPlan, 'publish');
+
+          const actionsWithTopic = addTopic(
+            actions,
+            'publish',
+            'pages/pidp/use-case/recognition/index:'
+          );
+
+          const flowActions = CollectionUtil.Array.withoutBorders<string>(
+            actions,
+            actions.length,
+            isLtr
+          );
+
+          const resultMinusLast = flowActions.slice(0, flowActions.length - 1);
+
+          const nodesWithRelations = createNodesWithRelations(
+            actionsWithTopic,
+            t,
+            isLtr,
+            Scroll.Timeline.LAYOUT.FULL,
+            resultMinusLast
+          )([timelineId, otherTimelineId], postId, 'comments');
+
+          reset(nodesWithRelationsWithEdgeState);
+          reset(archerTransitionComposedState);
+
+          set(nodesWithRelationsWithEdgeState, state => {
+            return {
+              ...state,
+              nodesWithRelations: {
+                [postId]: [nodesWithRelations]
+              },
+              activeId: postId,
+              finalSize: actions.length
+            };
+          });
+
+          setDisplayEditor(false);
+        });
+      },
+    [owner.id]
+  );
 
   return (
     <ListItem
       ref={combinedRef}
-      // className={classes.postListItem}
       sx={{
         padding: theme.spacing(0, 1)
       }}
       id={`timeline-${timelineId}-post-${postId}`}
     >
       <Card
-        // className={classes.card}
-        sx={{ flexGrow: 1 }}
+        sx={{
+          flexGrow: 1,
+          borderRadius: 0,
+          boxShadow: 'none'
+        }}
       >
         {headerComp}
         {mediaComp}
@@ -255,40 +315,8 @@ export const Post: FC<PostProps> = ({
         {sentimentComp}
 
         {displayEditor ? (
-          <CommentEditor
-            create={text => {
-              const owner = selectTimelineOwner(timelineId)(state);
-              handleCreateComment(owner, postId, text, dispatch, comment => {
-                const publishActionsExtended = addTopic(
-                  publishActions,
-                  'publish',
-                  'pages/pidp/use-case/recognition/index:'
-                );
-
-                const publishNodesWithRelations = createNodesWithRelations(
-                  publishActionsExtended,
-                  t,
-                  false
-                )([timelineId, otherTimelineId], postId, 'comments');
-
-                setNodesWithRelationsWithEdge(state => {
-                  return {
-                    ...state,
-                    nodesWithRelations: {
-                      ...state.nodesWithRelations,
-                      [comment.id]: {
-                        values: [publishNodesWithRelations],
-                        id: 'Comment Id',
-                        description: 'Comment Description'
-                      }
-                    },
-                    activeId: comment.id
-                  };
-                });
-
-                setDisplayEditor(false);
-              });
-            }}
+          <ContentEditor
+            create={createComment}
             timelineId={timelineId}
             isComment
           />
@@ -298,5 +326,3 @@ export const Post: FC<PostProps> = ({
     </ListItem>
   );
 };
-
-export default memo(Post);
