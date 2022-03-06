@@ -1,7 +1,4 @@
 import { createMedia } from '@artsy/fresnel';
-import { MediaProps } from '@artsy/fresnel/dist/Media';
-import clsx from 'clsx';
-import { cloneElement, ReactElement } from 'react';
 
 // Correspond to MUI breakpoints
 export const breakpoints = {
@@ -35,33 +32,3 @@ export const {
    */
   MediaContextProvider
 } = AppMedia;
-
-type BreakpointKey = keyof typeof breakpoints;
-
-interface MediaFragmentProps extends MediaProps<BreakpointKey, never> {
-  children: ReactElement<{ className?: string }>;
-}
-
-/**
- * Wrapper for fresnel's Media component that allows rendering children without
- * a wrapper div, similar to what React fragments do.  For this to work, the
- * children prop needs to:
- *  1. Be an actual component. Fragments won't work.
- *  2. Accept `className` as a prop and passes it to the root element.
- */
-export const MediaFragment = ({
-  children,
-  className,
-  ...props
-}: MediaFragmentProps) => {
-  return (
-    <Media {...props}>
-      {(mediaClassName, render) =>
-        render &&
-        cloneElement(children, {
-          className: clsx(mediaClassName, className, children.props.className)
-        })
-      }
-    </Media>
-  );
-};
