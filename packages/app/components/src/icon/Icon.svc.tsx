@@ -32,6 +32,7 @@ import {
   GroupWork,
   Info,
   Layers,
+  LocationDisabled,
   Lock,
   Map,
   MiscellaneousServices,
@@ -42,6 +43,7 @@ import {
   RunningWithErrors,
   Science,
   Security,
+  SportsScore,
   Star,
   Toc,
   TouchApp,
@@ -95,6 +97,9 @@ export const getIconByName = (name: string) => {
     }
     case 'lock': {
       return <Lock />;
+    }
+    case 'location_disabled': {
+      return <LocationDisabled />;
     }
     case 'center_focus_weak': {
       return <CenterFocusWeak />;
@@ -191,6 +196,9 @@ export const getIconByName = (name: string) => {
     }
     case 'read_more': {
       return <ReadMore />;
+    }
+    case 'sports_score': {
+      return <SportsScore />;
     }
     default: {
       return <></>;
