@@ -1,9 +1,8 @@
-import { AppFrame } from '@app/layout';
-import { layoutState, MAX_DRAWER_WIDTH, MIN_DRAWER_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
-import { NavigationState } from '@app/layout/src/recoil/features/pages/reducer';
+import { AppFrame, AppThemeProvider, features, MAX_DRAWER_WIDTH, MIN_DRAWER_WIDTH } from '@app/layout';
+import { Navigation } from '@app/types';
 import { Container, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { Components as ComponentsLanding } from '@page/landing';
+import { Components as LandingComponents } from '@page/landing';
 import { Components } from '@page/layout';
 import { GetStaticProps } from 'next';
 import { mergeProps } from 'next-merge-props';
@@ -19,14 +18,20 @@ export type StaticPageProps = GetStaticTranslationProps &
   GetStaticNavigationProps;
 
 const Index: NextPageWithLayout<StaticPageProps> = () => {
+  const {
+    layout: {
+      states: { layoutState }
+    }
+  } = features;
+
   const { isDrawerExpanded } = useRecoilValue(layoutState);
 
   const { t } = useTranslation();
   const theme = useTheme();
   return (
     <Container
+      id='app-landing'
       component='main'
-      id='main-content-landing'
       sx={{
         paddingTop: theme.spacing(12),
         textAlign: 'center',
@@ -61,34 +66,26 @@ const Index: NextPageWithLayout<StaticPageProps> = () => {
       >
         {t('common:application-subtitle')}
       </Typography>
-      <ComponentsLanding.TopicsHead />
-      <ComponentsLanding.TopicsDetail />
+      <LandingComponents.TopicsHead />
+      <LandingComponents.TopicsDetail />
       <Components.HomeFooter />
     </Container>
   );
 };
 
 export const getStaticProps: GetStaticProps = mergeProps(
-  [
-    getStaticTranslationProps({
-      onSuccess: _props => {
-        // console.log('static translation props', props);
-      }
-    }),
-    getStaticNavigationProps({
-      onSuccess: _props => {
-        // console.log('static navigation props', props);
-      }
-    })
-  ],
+  [getStaticTranslationProps(), getStaticNavigationProps({ pageType: 'docs' })],
   {
-    resolutionType: 'sequential',
-    debug: true
+    resolutionType: 'sequential'
   }
 );
 
-Index.getLayout = (page: ReactElement, navigation: NavigationState) => {
-  return <AppFrame navigation={navigation}>{page}</AppFrame>;
+Index.getLayout = (page: ReactElement, navigation: Navigation) => {
+  return (
+    <AppThemeProvider>
+      <AppFrame navigation={navigation}>{page}</AppFrame>
+    </AppThemeProvider>
+  );
 };
 
 export default Index;

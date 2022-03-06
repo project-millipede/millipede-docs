@@ -14,8 +14,24 @@ const {
 
 class MillipedeDocument extends NextDocument {
   render() {
-    const { locale, defaultLocale } = this.props.__NEXT_DATA__;
+    const { locale, defaultLocale, page } = this.props.__NEXT_DATA__;
     const lang = locale ? locale : defaultLocale;
+
+    const isBlog = page.includes('blog');
+
+    /**
+     * Used fonts and available font-weights
+     *
+     * font-family: 'Bellota', cursive; // 300;400;700
+     * font-family: 'Karla', sans-serif; // 200;300;400;500;700
+     * font-family: 'Roboto', sans-serif; // 100;300;400;500;700
+     * font-family: 'Roboto Mono', monospace; // 100;300;400;500;700
+     *
+     */
+
+    const fontHref = !isBlog
+      ? 'https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700'
+      : 'https://fonts.googleapis.com/css2?family=Bellota:wght@300;400;700&family=Karla:wght@200;300;400;500;700&family=Roboto+Mono:wght@400;500';
 
     return (
       <Html lang={lang}>
@@ -25,10 +41,8 @@ class MillipedeDocument extends NextDocument {
             href='https://fonts.gstatic.com'
             crossOrigin='anonymous'
           />
-          <link
-            href='https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700'
-            rel='stylesheet'
-          />
+
+          <link href={fontHref} rel='stylesheet' />
         </Head>
         <body>
           <Main />
@@ -46,50 +60,57 @@ MillipedeDocument.getInitialProps = async (
 
   const originalRenderPage = ctx.renderPage;
 
-  // You can consider sharing the same emotion cache between all the SSR requests to speed up performance.
-  // However, be aware that it can have global side effects.
+  /**
+   * Note:
+   * You can consider sharing the same emotion cache between all the SSR requests to speed up performance.
+   * However, be aware that it can have global side effects.
+   */
+
   const cache = createEmotionCache();
 
   const { extractCriticalToChunks } = createEmotionServer(cache);
 
-  ctx.renderPage = () =>
-    originalRenderPage({
-      enhanceApp: (App: AppType) => (props: CustomAppProps) =>
-        styledComponentSheet.collectStyles(
-          <App emotionCache={cache} {...props} />
-        )
-    });
+  try {
+    // eslint-disable-next-line no-param-reassign
+    ctx.renderPage = () =>
+      originalRenderPage({
+        enhanceApp: (App: AppType) => (props: CustomAppProps) =>
+          styledComponentSheet.collectStyles(
+            <App emotionCache={cache} {...props} />
+          )
+      });
 
-  const initialProps = await NextDocument.getInitialProps(ctx);
+    const initialProps = await NextDocument.getInitialProps(ctx);
 
-  const emotionStyles = extractCriticalToChunks(initialProps.html);
-  const emotionStyleTags = emotionStyles.styles.map(({ key, ids, css }) => (
-    <style
-      data-emotion={`${key} ${ids.join(' ')}`}
-      key={key}
-      // eslint-disable-next-line react/no-danger
-      dangerouslySetInnerHTML={{ __html: css }}
-    />
-  ));
+    const emotionStyles = extractCriticalToChunks(initialProps.html);
+    const emotionStyleTags = emotionStyles.styles.map(({ key, ids, css }) => (
+      <style
+        data-emotion={`${key} ${ids.join(' ')}`}
+        key={key}
+        dangerouslySetInnerHTML={{ __html: css }}
+      />
+    ));
 
-  const mediaQueryStyles = (
-    <style
-      key={'mediaStyles'}
-      // eslint-disable-next-line react/no-danger
-      dangerouslySetInnerHTML={{ __html: mediaStyles }}
-    />
-  );
+    const mediaQueryStyles = (
+      <style
+        key='mediaStyles'
+        dangerouslySetInnerHTML={{ __html: mediaStyles }}
+      />
+    );
 
-  return {
-    ...initialProps,
-    // Styles fragment is rendered after the app and page rendering finish.
-    styles: [
-      ...Children.toArray(initialProps.styles),
-      ...emotionStyleTags,
-      styledComponentSheet.getStyleElement(),
-      mediaQueryStyles
-    ]
-  };
+    return {
+      ...initialProps,
+      // Styles fragment is rendered after the app and page rendering finish.
+      styles: [
+        ...emotionStyleTags,
+        styledComponentSheet.getStyleElement(),
+        mediaQueryStyles,
+        ...Children.toArray(initialProps.styles)
+      ]
+    };
+  } finally {
+    styledComponentSheet.seal();
+  }
 };
 
 export default MillipedeDocument;
