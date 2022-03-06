@@ -1,27 +1,16 @@
-import { useHoux } from '@app/houx';
 import { HooksUtils } from '@app/render-utils';
-import { CollectionUtil } from '@app/utils';
-import {
-  RootState,
-  scrollSelectors,
-  scrollStates,
-  ScrollTypes,
-  selectors,
-  TimelineActions,
-  viewportSelectors,
-} from '@demonstrators-social/shared';
-import { useMergedRef } from '@huse/merged-ref';
+import { features, Scroll } from '@demonstrators-social/shared';
 import CreateIcon from '@mui/icons-material/Create';
 import { Button, List } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useTranslation from 'next-translate/useTranslation';
-import React, { Dispatch, FC, forwardRef, ForwardRefRenderFunction, useEffect, useState } from 'react';
+import React, { FC, forwardRef, ForwardRefRenderFunction, useCallback, useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-import { CommentEditor } from '../comment/CommentEditor';
+import { ContentEditor } from '../comment/ContentEditor';
 import { PostProps } from '../post/Post';
 import { handleCreatePost } from './Timeline.svc';
-import TimelineHeader from './TimelineHeader';
+import { TimelineHeader } from './TimelineHeader';
 
 interface TimelineProps {
   Comp: FC<PostProps>;
@@ -32,11 +21,29 @@ interface TimelineProps {
 
 const Timeline: ForwardRefRenderFunction<HTMLDivElement, TimelineProps> = (
   { Comp, timelineId, otherTimelineId },
-  // ref used for scroll restoration
-  ref
+  ref // used for scroll restoration
 ) => {
+  const {
+    scroll: {
+      timeline: {
+        selector: { refContainerScrollSelector },
+        states: { timelineViewState }
+      }
+    },
+    timeline: {
+      states: { timelineState },
+      selector: { timelineOfOwnerSelector, postIdsSelector }
+    },
+    viewport: {
+      selector: {
+        // viewportItemSelector,
+        viewportNextItemSelector
+      }
+    }
+  } = features;
+
   // Logs the component lifecycle.
-  // console.log('-- rendering timeline');
+  // console.log('-- rendering timeline', timelineId);
 
   useEffect(() => {
     // The component is mounted only one time.
@@ -51,71 +58,36 @@ const Timeline: ForwardRefRenderFunction<HTMLDivElement, TimelineProps> = (
 
   const theme = useTheme();
 
-  const { selectPostsOfFriends, selectPostsOfOwner, selectTimelineOwner } =
-    selectors.timeline;
-
-  const {
-    timeline: { timelineViewState, refContainerScrollFromArcherState }
-  } = scrollStates;
-
-  const {
-    post: { postIdsSelector },
-    timeline: { refContainerScrollSelector }
-  } = scrollSelectors;
-
-  const {
-    post: { viewportItemSelector }
-  } = viewportSelectors;
-
   const timelineView = useRecoilValue(timelineViewState(timelineId));
 
-  const {
-    dispatch,
-    state
-  }: {
-    dispatch: Dispatch<TimelineActions>;
-    state: RootState;
-  } = useHoux();
+  const setTimeline = useSetRecoilState(timelineState);
 
   const [displayEditor, setDisplayEditor] = useState(false);
 
-  const setPostIds = useSetRecoilState(postIdsSelector(timelineId));
-
-  const postIds =
-    timelineView.activeTab === ScrollTypes.Timeline.View.TIMELINE
-      ? selectPostsOfFriends(
-          timelineId,
-          CollectionUtil.Array.compareDescFn('content.createdAt')
-        )(state)
-      : selectPostsOfOwner(
-          timelineId,
-          CollectionUtil.Array.compareDescFn('content.createdAt')
-        )(state);
-
-  useEffect(() => {
-    setPostIds(postIds);
-  }, [postIds.length]);
+  const postIds = useRecoilValue(postIdsSelector(timelineId));
 
   const refContainerScroll = useRecoilValue(
     refContainerScrollSelector(timelineId)
   );
 
-  const refContainerScrollFromArcher = useRecoilValue(
-    refContainerScrollFromArcherState(timelineId)
-  );
+  // Scroll-restoration V1
+  // const setViewportItemState = useSetRecoilState(
+  //   viewportItemSelector(timelineId)
+  // );
+  // useEffect(() => {
+  //   setViewportItemState(_state => {
+  //     return { viewportItem: {}, offsetTop: 0 };
+  //   });
+  // }, [timelineView.activeTab]);
 
-  const combinedRef = useMergedRef([
-    refContainerScroll,
-    refContainerScrollFromArcher.refObserved
-  ]);
-
+  // Scroll-restoration V2 - TODO: Document necessary steps
   const setViewportItemState = useSetRecoilState(
-    viewportItemSelector(timelineId)
+    viewportNextItemSelector(timelineId)
   );
 
   useEffect(() => {
     setViewportItemState(_state => {
-      return { viewportItem: {}, offsetTop: 0 };
+      return { viewportItem: null };
     });
   }, [timelineView.activeTab]);
 
@@ -123,51 +95,47 @@ const Timeline: ForwardRefRenderFunction<HTMLDivElement, TimelineProps> = (
 
   const [timelineHeaderMeasureRef, timelineHeaderSize] = HooksUtils.useResize();
 
+  const owner = useRecoilValue(timelineOfOwnerSelector(timelineId));
+
+  const createPost = useCallback(
+    (text: string) => {
+      handleCreatePost(owner, text, setTimeline, () => {
+        setDisplayEditor(false);
+      });
+    },
+    [owner.id]
+  );
+
   return (
     <div
       key={`timeline-${timelineId}`}
-      ref={combinedRef}
+      ref={refContainerScroll}
       style={{
         position: 'relative',
         height: '100%',
         width: '100%'
       }}
     >
-      <TimelineHeader timelineId={timelineId} ref={timelineHeaderMeasureRef} />
+      <div ref={timelineHeaderMeasureRef}>
+        <TimelineHeader timelineId={timelineId} />
 
-      <div
-        key={`timeline-container-${timelineId}`}
-        ref={ref}
-        style={{
-          position: 'absolute',
-          top: `${timelineHeaderSize.height}px`,
-          height: `calc(100% - ${timelineHeaderSize.height}px)`,
-          bottom: '0px',
-          width: '100%',
-          overflowY: 'auto'
-        }}
-      >
-        {timelineView.activeTab === ScrollTypes.Timeline.View.POSTS &&
+        {timelineView.activeTab === Scroll.Timeline.View.POSTS &&
           displayEditor && (
-            <CommentEditor
-              create={text => {
-                const owner = selectTimelineOwner(timelineId)(state);
-                handleCreatePost(owner, text, dispatch, _post => {
-                  setDisplayEditor(false);
-                });
-              }}
+            <ContentEditor
+              create={createPost}
               isComment={false}
               timelineId={timelineId}
             />
           )}
 
-        {timelineView.activeTab === ScrollTypes.Timeline.View.POSTS &&
+        {timelineView.activeTab === Scroll.Timeline.View.POSTS &&
           !displayEditor && (
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                margin: '8px'
               }}
             >
               <Button
@@ -184,7 +152,20 @@ const Timeline: ForwardRefRenderFunction<HTMLDivElement, TimelineProps> = (
               </Button>
             </div>
           )}
+      </div>
 
+      <div
+        key={`timeline-container-${timelineId}`}
+        ref={ref}
+        style={{
+          position: 'absolute',
+          top: `${timelineHeaderSize.height}px`,
+          height: `calc(100% - ${timelineHeaderSize.height}px)`,
+          bottom: '0px',
+          width: '100%',
+          overflowY: 'auto'
+        }}
+      >
         <List
           key={`timeline-${timelineId}-tab-${timelineView.activeTab}`}
           style={{
@@ -193,18 +174,16 @@ const Timeline: ForwardRefRenderFunction<HTMLDivElement, TimelineProps> = (
             paddingBottom: theme.spacing(0)
           }}
         >
-          {postIds.length > 0
-            ? postIds.map((postId, _index) => {
-                return (
-                  <Comp
-                    timelineId={timelineId}
-                    otherTimelineId={otherTimelineId}
-                    postId={postId}
-                    key={`timeline-${timelineId}-post-${postId}`}
-                  />
-                );
-              })
-            : null}
+          {postIds.map(postId => {
+            return (
+              <Comp
+                key={`timeline-${timelineId}-post-${postId}`}
+                timelineId={timelineId}
+                otherTimelineId={otherTimelineId}
+                postId={postId}
+              />
+            );
+          })}
         </List>
       </div>
     </div>

@@ -1,15 +1,22 @@
 import { factories, Types } from '@demonstrators-social/data';
-import { actions, TimelineActions } from '@demonstrators-social/shared';
-import { Dispatch } from 'react';
+import { features, Timeline } from '@demonstrators-social/shared';
+import { SetterOrUpdater } from 'recoil';
 import { v4 as uuidv4 } from 'uuid';
 
 const { contentFactory, currentTimeStampFactory } = factories;
+
 export const handleCreatePost = async (
   owner: Types.User,
   text: string,
-  dispatch: Dispatch<TimelineActions>,
-  callback: (value: Types.Post) => void
+  set: SetterOrUpdater<Timeline>,
+  callback: (value?: Types.Post) => void
 ) => {
+  const {
+    timeline: {
+      actions: { createPost }
+    }
+  } = features;
+
   const content: Types.Content = {
     ...(await contentFactory.combine(currentTimeStampFactory).build()),
     text
@@ -22,6 +29,6 @@ export const handleCreatePost = async (
     comments: [],
     votes: []
   };
-  dispatch(actions.timeline.createPost(post));
+  createPost(set, post);
   callback(post);
 };
