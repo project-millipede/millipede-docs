@@ -1,51 +1,13 @@
+/* eslint-disable import/no-named-as-default */
 import { HooksUtils } from '@app/render-utils';
+import { features } from '@demonstrators-social/shared';
 import { useMergedRef } from '@huse/merged-ref';
-import React, { CSSProperties, forwardRef, ForwardRefRenderFunction, SVGProps, useRef, useState } from 'react';
+import React, { CSSProperties, FC, useEffect, useRef } from 'react';
+import { useRecoilCallback, useRecoilValue } from 'recoil';
 
-import { useRefState } from './context/RefProvider';
-import { useTransitionState } from './context/TransitionProvider';
-import { Point } from './Point';
+import { features as appComponentFeatures } from '..';
 import SvgArrow from './SvgArrow';
-import { AnchorPosition, ArcherContainerProps, EntityRelationType, SourceToTargetType } from './types-private';
-
-const computeCoordinatesFromAnchorPosition = (
-  anchorPosition: AnchorPosition,
-  rect: ClientRect
-) => {
-  switch (anchorPosition) {
-    case 'top':
-      return rectToPoint(rect).add(new Point(rect.width / 2, 0));
-    case 'bottom':
-      return rectToPoint(rect).add(new Point(rect.width / 2, rect.height));
-    case 'left':
-      return rectToPoint(rect).add(new Point(0, rect.height / 2));
-    case 'right':
-      return rectToPoint(rect).add(new Point(rect.width, rect.height / 2));
-    case 'middle':
-      return rectToPoint(rect).add(new Point(rect.width / 2, rect.height / 2));
-    default:
-      return new Point(0, 0);
-  }
-};
-
-const rectToPoint = (rect: ClientRect) => {
-  return new Point(rect.left, rect.top);
-};
-
-const getRectFromRef = (element: HTMLElement) => {
-  if (!element) return null;
-  return element.getBoundingClientRect();
-};
-
-const getSourceToTargets = (sourceToTargetsMap: {
-  [key: string]: Array<SourceToTargetType>;
-}): Array<SourceToTargetType> => {
-  const jaggedSourceToTargets: Array<Array<SourceToTargetType>> = Object.values(
-    sourceToTargetsMap
-  ).filter(value => value != null);
-  const flattened = [].concat(...jaggedSourceToTargets);
-  return flattened;
-};
+import { ArcherSurfaceProps, SourceToTargetType } from './types-private';
 
 const defaultSvgContainerStyle: CSSProperties = {
   position: 'absolute',
@@ -56,166 +18,118 @@ const defaultSvgContainerStyle: CSSProperties = {
   pointerEvents: 'none'
 };
 
-const getMarkerId = (
-  source: EntityRelationType,
-  target: EntityRelationType,
-  arrowMarkerUniquePrefix: string
-): string => {
-  return `${arrowMarkerUniquePrefix}${source.id}${target.id}`;
-};
+export const ArcherSurface: FC<ArcherSurfaceProps> = ({
+  arrowLength = 16,
+  arrowThickness = 8,
+  strokeColor = '#8a4444',
+  strokeWidth = 1,
+  strokeDasharray,
+  style,
+  svgElementProps,
+  className,
+  children,
+  elementStyle
+}) => {
+  const {
+    scroll: {
+      timeline: {
+        states: { nodesWithRelationsWithEdgeState }
+      }
+    }
+  } = features;
 
-export const ArcherSurface: ForwardRefRenderFunction<
-  HTMLDivElement,
-  ArcherContainerProps
-> = (
-  {
-    arrowLength = 15,
-    arrowThickness = 9,
-    strokeColor = '#f00',
-    strokeWidth = 1,
-    strokeDasharray,
-    noCurves,
-    style,
-    svgElementProps,
-    className,
-    offset,
-    children,
-    elementStyle
-  },
-  _ref
-) => {
-  const { refs } = useRefState();
-  const { sourceToTargetsMap } = useTransitionState();
+  const {
+    archer: {
+      states: { archerTransitionComposedState },
+      selector: { archerTransitionComposedSelector }
+    }
+  } = appComponentFeatures;
 
   const parentRef = useRef<HTMLDivElement>(null);
-  const [parentObserverRef] = HooksUtils.useResize();
+
+  const [parentObserverRef] = HooksUtils.useResizeDebounce({
+    debounce: 0,
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    callBack: _element => {}
+  });
 
   const combinedRef = useMergedRef([parentRef, parentObserverRef]);
 
-  const [arrowMarkerUniquePrefix] = useState(
-    () => `arrow${Math.random().toString().slice(2)}`
+  const arrowMarkerUniquePrefix = HooksUtils.useConst(
+    `arrow-${Math.random().toString().slice(2)}`
   );
 
-  const getCoordinatesFromAnchorPosition = (
-    position: AnchorPosition,
-    id: string,
-    parentCoordinates: Point
-  ): Point => {
-    if (refs != null && refs[id] != null && refs[id].ref.current != null) {
-      const rect = getRectFromRef(refs[id].ref?.current);
+  const { flattenedTransitions } = useRecoilValue(
+    archerTransitionComposedSelector
+  );
 
-      if (rect != null) {
-        const absolutePosition = computeCoordinatesFromAnchorPosition(
-          position,
-          rect
-        );
+  const handleReset = useRecoilCallback(
+    ({ reset }) =>
+      () => {
+        reset(nodesWithRelationsWithEdgeState);
+        reset(archerTransitionComposedState);
+      },
+    []
+  );
 
-        return absolutePosition.substract(parentCoordinates);
-      }
-      return new Point(0, 0);
-    }
-    return new Point(0, 0);
-  };
+  useEffect(() => {
+    return () => {
+      /**
+       * Reset implicitly created state nodes-with-relations-with-edge.
+       * Reset subsequent state transition composed state archer-transition-composed,
+       * Note:
+       * The reset of archer elements and their respective transitions gets handled
+       * in an archer-element effect (unmount - segment).
+       */
 
-  const getParentCoordinates = (): Point => {
-    const rectp = getRectFromRef(parentRef.current);
+      handleReset();
+    };
+  }, []);
 
-    if (rectp != null) {
-      return rectToPoint(rectp as ClientRect);
-    }
-    return new Point(0, 0);
-  };
-
-  const getSvgContainerStyle = (): SVGProps<SVGSVGElement> => ({
-    style: {
-      ...defaultSvgContainerStyle
-    },
-    ...svgElementProps
-  });
-
-  const computeArrows = () => {
-    const parentCoordinates = getParentCoordinates();
-    return getSourceToTargets(sourceToTargetsMap).map(
-      ({ source, target, label, style = {} }: SourceToTargetType) => {
-        // Actual arrowLength value might be 0, which can't work with a simple 'actualValue || defaultValue'
-        let arrowLengthDetermined = arrowLength;
-        if (style.arrowLength || style.arrowLength === 0) {
-          arrowLengthDetermined = style.arrowLength;
-        }
-
-        const startingAnchorOrientation = source.anchor;
-        const startingPoint = getCoordinatesFromAnchorPosition(
-          source.anchor,
-          source.id,
-          parentCoordinates
-        );
-
-        const endingAnchorOrientation = target.anchor;
-        const endingPoint = getCoordinatesFromAnchorPosition(
-          target.anchor,
-          target.id,
-          parentCoordinates
-        );
-
-        const arrowMarkerId = getMarkerId(
-          source,
-          target,
-          arrowMarkerUniquePrefix
-        );
-
-        return (
-          <SvgArrow
-            key={arrowMarkerId}
-            startingPoint={startingPoint}
-            startingAnchorOrientation={startingAnchorOrientation}
-            endingPoint={endingPoint}
-            endingAnchorOrientation={endingAnchorOrientation}
-            strokeColor={style.strokeColor || strokeColor}
-            arrowLength={arrowLengthDetermined}
-            strokeWidth={style.strokeWidth || strokeWidth}
-            strokeDasharray={style.strokeDasharray || strokeDasharray}
-            arrowLabel={label}
-            arrowMarkerId={arrowMarkerId}
-            noCurves={style.noCurves || noCurves}
-            offset={offset || 0}
-          />
-        );
-      }
+  const renderArrow = ({
+    source,
+    target,
+    label,
+    style = {}
+  }: SourceToTargetType) => {
+    return (
+      <SvgArrow
+        key={`arrow-${source.id}-${target.id}`}
+        strokeColor={style.strokeColor || strokeColor}
+        strokeWidth={style.strokeWidth || strokeWidth}
+        strokeDasharray={style.strokeDasharray || strokeDasharray}
+        arrowLabel={label}
+        arrowMarkerId={`${arrowMarkerUniquePrefix}-${source.id}-${target.id}`}
+        arrowLength={arrowLength}
+        source={source}
+        target={target}
+        ref={parentRef}
+      />
     );
   };
 
-  const generateAllArrowMarkers = () => {
-    return getSourceToTargets(sourceToTargetsMap).map(
-      ({ source, target, style = {} }: SourceToTargetType) => {
-        // Actual arrowLength value might be 0, which can't work with a simple 'actualValue || defaultValue'
-        let arrowLengthFinal = arrowLength;
-        if (style.arrowLength || style.arrowLength === 0) {
-          arrowLengthFinal = style.arrowLength;
-        }
+  const renderArrowMarker = ({
+    source,
+    target,
+    style = {}
+  }: SourceToTargetType) => {
+    const arrowPath = `M0,0 L0,${arrowThickness} L${arrowLength / 2},${
+      arrowThickness / 2
+    } z`;
 
-        const arrowThicknessFinal = style.arrowThickness || arrowThickness;
-
-        const markerId = getMarkerId(source, target, arrowMarkerUniquePrefix);
-
-        const arrowPath = `M0,0 L0,${arrowThicknessFinal} L${arrowLength},${
-          arrowThicknessFinal / 2
-        } z`;
-
-        return (
-          <marker
-            id={markerId}
-            key={markerId}
-            markerWidth={arrowLengthFinal}
-            markerHeight={arrowThicknessFinal}
-            refX='0'
-            refY={arrowThicknessFinal / 2}
-            orient='auto'
-            markerUnits='strokeWidth'
-          >
-            <path d={arrowPath} fill={style.strokeColor || strokeColor} />
-          </marker>
-        );
-      }
+    return (
+      <marker
+        id={`${arrowMarkerUniquePrefix}-${source.id}-${target.id}`}
+        key={`${arrowMarkerUniquePrefix}-${source.id}-${target.id}`}
+        markerWidth={arrowLength}
+        markerHeight={arrowThickness}
+        refX={0}
+        refY={arrowThickness / 2}
+        orient='auto'
+        markerUnits='strokeWidth'
+      >
+        <path d={arrowPath} fill={style.strokeColor || strokeColor} />
+      </marker>
     );
   };
 
@@ -236,13 +150,10 @@ export const ArcherSurface: ForwardRefRenderFunction<
       >
         {children}
       </div>
-
-      <svg {...getSvgContainerStyle()}>
-        <defs>{generateAllArrowMarkers()}</defs>
-        {computeArrows()}
+      <svg style={defaultSvgContainerStyle} {...svgElementProps}>
+        <defs>{flattenedTransitions.map(renderArrowMarker)}</defs>
+        {flattenedTransitions.map(renderArrow)}
       </svg>
     </div>
   );
 };
-
-export default forwardRef(ArcherSurface);

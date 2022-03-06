@@ -1,44 +1,43 @@
-import {
-  CSSProperties,
-  MutableRefObject,
-  ReactElement,
-  ReactNode,
-  RefCallback
-} from 'react';
+import { CSSProperties, MutableRefObject, ReactElement, ReactNode } from 'react';
 
-export interface SelectHandles {
-  select: () => void;
-  unSelect: () => void;
+import { AnchorPosition } from './types-private';
+
+export interface SyncHandle {
+  sync?: (y: number) => void;
+  select?: () => void;
+  unSelect?: () => void;
+}
+
+export interface LineStyle {
+  strokeColor?: string;
+  strokeWidth?: number;
+  strokeDasharray?: string;
 }
 
 export interface Relation {
   targetId: string;
-  targetAnchor: any;
-  sourceAnchor: any;
+  targetAnchor: AnchorPosition;
+  sourceAnchor: AnchorPosition;
+  optionalTargetAnchor?: AnchorPosition;
+  optionalSourceAnchor?: AnchorPosition;
   label?: ReactNode;
-  style?: any;
+  style?: LineStyle;
 }
-
-export type RenderFnSingleParameter = {
-  ref: MutableRefObject<HTMLDivElement> | RefCallback<HTMLDivElement>;
-};
-
-export type RenderSingleFn = ({ ref }: RenderFnSingleParameter) => JSX.Element;
 
 export type RenderFnParameter = {
   ref: MutableRefObject<HTMLElement>;
-  dynamicRef?: MutableRefObject<SelectHandles>;
+  dynamicRef?: MutableRefObject<SyncHandle>;
 };
 
 export type RenderFn = ({ ref, dynamicRef }: RenderFnParameter) => JSX.Element;
 
 export interface ArcherElementProps {
-  /**
-   * The id that will identify the Archer Element. Should only contain alphanumeric characters and standard characters that you can find in HTML ids.
-   */
-  id: string;
+  id: string; // identify the Archer Element.
   relations?: Array<Relation>;
   style?: CSSProperties;
+  className?: string;
+  label?: ReactNode;
   children?: ReactElement;
   render?: RenderFn;
+  isInteractive?: boolean;
 }
