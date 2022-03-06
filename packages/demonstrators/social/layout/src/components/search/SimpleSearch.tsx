@@ -1,4 +1,4 @@
-import { INPUT_BORDER_RADIUS, INPUT_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
+import { INPUT_BORDER_RADIUS, INPUT_HEIGHT } from '@app/layout';
 import Search from '@mui/icons-material/Search';
 import { IconButton, InputAdornment, InputBase } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
@@ -23,7 +23,7 @@ export const SimpleSearch: FC<SimpleSearchProps> = ({
         ...style
       }}
       startAdornment={
-        <InputAdornment position={'start'}>
+        <InputAdornment position='start'>
           <IconButton>
             <Search />
           </IconButton>

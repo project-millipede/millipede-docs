@@ -99,7 +99,7 @@ export const ExpandableRow = ({
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
           <Collapse in={open} timeout='auto' unmountOnExit>
-            <Box sx={{ m: 1 }}>
+            <Box sx={{ margin: 1 }}>
               <Table>
                 <TableHead>
                   <TableRow>
@@ -177,7 +177,7 @@ export const Publications: FC = () => {
                 return (
                   <Fragment key={`head-row-${head}-${index}`}>
                     <TableRow>
-                      <StyledTableCell variant={'head'} colSpan={4}>
+                      <StyledTableCell variant='head' colSpan={4}>
                         {head}
                       </StyledTableCell>
                     </TableRow>
