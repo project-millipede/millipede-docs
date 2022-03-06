@@ -10,7 +10,8 @@ export interface Icon {
 
 export interface Page {
   pathname: string;
-  icon: Icon;
+  icon?: Icon;
+  title?: string;
   children?: Array<Page>;
 }
 
@@ -22,18 +23,14 @@ export interface ReadingTime {
   text: string;
 }
 
-export type ContentMetaData = {
+export type MetaData = {
   title?: string;
   description?: string;
   keywords?: string;
   hashtags?: string;
   author?: string;
   date?: string;
+  editedAt?: string;
   timeToRead?: ReadingTime;
+  blurb?: string;
 };
-
-export type FunctionalMetaData = {
-  disableToc?: boolean;
-};
-
-export type MetaData = ContentMetaData & FunctionalMetaData;
