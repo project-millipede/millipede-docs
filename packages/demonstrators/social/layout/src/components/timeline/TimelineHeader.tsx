@@ -1,38 +1,39 @@
 import { Tabs } from '@app/components';
-import { Components } from '@app/render-utils';
-import { scrollStates, ScrollTypes } from '@demonstrators-social/shared';
+import { Components as RenderComponents } from '@app/render-utils';
+import { features, Scroll } from '@demonstrators-social/shared';
 import { DynamicFeed, GroupWork } from '@mui/icons-material';
 import { Tab } from '@mui/material';
-import React, { ChangeEvent, forwardRef, ForwardRefRenderFunction, useMemo } from 'react';
+import React, { ChangeEvent, FC, useMemo } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { SimpleSearch } from '../search';
 
 const {
   Responsive: { isMobile }
-} = Components;
+} = RenderComponents;
 
 interface TimelineHeaderProps {
-  timelineId?: string;
+  timelineId: string;
 }
 
-const TimelineHeader: ForwardRefRenderFunction<
-  HTMLDivElement,
-  TimelineHeaderProps
-> = ({ timelineId }, ref) => {
+export const TimelineHeader: FC<TimelineHeaderProps> = ({ timelineId }) => {
   const {
-    timeline: { timelineViewState }
-  } = scrollStates;
+    scroll: {
+      timeline: {
+        states: { timelineViewState }
+      }
+    }
+  } = features;
 
   const [timelineView, setTimelineView] = useRecoilState(
     timelineViewState(timelineId)
   );
 
   const handleTabChange = (_event: ChangeEvent, newValue: number) => {
-    let value: ScrollTypes.Timeline.TView = ScrollTypes.Timeline.View.TIMELINE;
+    let value: Scroll.Timeline.TView = Scroll.Timeline.View.TIMELINE;
 
-    if (newValue === 0) value = ScrollTypes.Timeline.View.TIMELINE;
-    if (newValue === 1) value = ScrollTypes.Timeline.View.POSTS;
+    if (newValue === 0) value = Scroll.Timeline.View.TIMELINE;
+    if (newValue === 1) value = Scroll.Timeline.View.POSTS;
 
     setTimelineView(state => {
       return {
@@ -43,16 +44,13 @@ const TimelineHeader: ForwardRefRenderFunction<
   };
 
   const currentValue = useMemo(() => {
-    if (timelineView.activeTab === ScrollTypes.Timeline.View.TIMELINE) return 0;
-    if (timelineView.activeTab === ScrollTypes.Timeline.View.POSTS) return 1;
+    if (timelineView.activeTab === Scroll.Timeline.View.TIMELINE) return 0;
+    if (timelineView.activeTab === Scroll.Timeline.View.POSTS) return 1;
   }, [timelineView]);
-
-  // TODO: Convert to Stack
 
   return (
     <div
       key={`header-${timelineId}`}
-      ref={ref}
       style={{
         display: 'flex',
         flexDirection: 'column'
@@ -85,7 +83,7 @@ const TimelineHeader: ForwardRefRenderFunction<
         <SimpleSearch
           style={{ margin: '8px' }}
           placeholder={
-            timelineView.activeTab === ScrollTypes.Timeline.View.TIMELINE
+            timelineView.activeTab === Scroll.Timeline.View.TIMELINE
               ? 'Search Timeline'
               : 'Search Post'
           }
@@ -94,5 +92,3 @@ const TimelineHeader: ForwardRefRenderFunction<
     </div>
   );
 };
-
-export default forwardRef(TimelineHeader);
