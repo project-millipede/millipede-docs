@@ -4138,9 +4138,9 @@ __metadata:
   linkType: hard
 
 "@vangware/types@npm:^2.3.3":
-  version: 2.3.4
-  resolution: "@vangware/types@npm:2.3.4"
-  checksum: f838374ecf411007baa70b0115248dbee5dc180ed6a0de7907ee490de1cc9a30c65f535cac8304868f4a3403e20fb670c22ae1efbf41405615ed0404855645c3
+  version: 2.3.5
+  resolution: "@vangware/types@npm:2.3.5"
+  checksum: 3eab6952f9817ff17ec2e2e795ccb317122f85db0647c5868787b34a8f52de780f8fa7fb1daac917baf812bb9b8ee25ac3de72697ca714a3be5ed26a4072e49f
   languageName: node
   linkType: hard
 
@@ -5142,9 +5142,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001283, caniuse-lite@npm:^1.0.30001312":
-  version: 1.0.30001312
-  resolution: "caniuse-lite@npm:1.0.30001312"
-  checksum: 753fb9ea1e02e999430b323a71b5acab5120f3b5fc0161b01669f54a3ef5c5296240b6ae9b79b12a3742e3aed216aa9ee3d5398a23c16d08625ccd376b79545d
+  version: 1.0.30001313
+  resolution: "caniuse-lite@npm:1.0.30001313"
+  checksum: 49f2dcd1fa493a09a5247dcf3a4da3b9df355131b1fc1fd08b67ae7683c300ed9b9eef6a5424b4ac7e5d1ff0e129d2a0b4adf2a6a5a04ab5c2c0b2c590e935be
   languageName: node
   linkType: hard
 
@@ -6479,9 +6479,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.4.71":
-  version: 1.4.75
-  resolution: "electron-to-chromium@npm:1.4.75"
-  checksum: 38ae5e197a100b9f9931a6112b0791659f736ad88ab3cd5534ed07dcc6001964a99de6757cbb708007bc59b0cd1b7cc36aeb5ea2efbfff6bd36ab53e49decb69
+  version: 1.4.76
+  resolution: "electron-to-chromium@npm:1.4.76"
+  checksum: eef4305665e095610f6e913fad1efc73473b7c383f1cfa5e1e005b19c4133006d5492013b38dbcb1e4cdb0e3cd3d0ff94c4c52630fd088464eb2ebd1e210e0eb
   languageName: node
   linkType: hard
 
@@ -9596,9 +9596,9 @@ __metadata:
   linkType: hard
 
 "lru-cache@npm:^7.4.0":
-  version: 7.4.0
-  resolution: "lru-cache@npm:7.4.0"
-  checksum: f966d8b6832ae4b6d454b96b5814a81fdd7312d393208c8ff1456981bafa7c6d5e28f8814813ec196ffac4e33a57c22c7daa24e79192f4c7f0b16acb1b9e7ed1
+  version: 7.4.1
+  resolution: "lru-cache@npm:7.4.1"
+  checksum: de6d8aa83b0a304943a1e1ec2a982d9b44ef36963c20bd01950f13dcb3eb482c57bfa15ab49b1baa15c682d6d33a10842bb7b33d8a449845009ffab6a2faec3c
   languageName: node
   linkType: hard
 
@@ -11783,7 +11783,7 @@ __metadata:
 
 "recoil@facebookexperimental/Recoil.git#nightly":
   version: 0.6.1
-  resolution: "recoil@https://github.com/facebookexperimental/Recoil.git#commit=564114083cea94ff52eff563f6de124d00176234"
+  resolution: "recoil@https://github.com/facebookexperimental/Recoil.git#commit=ea2f2b573339e67322a6f5c8b3f2f4dc693dcd7d"
   dependencies:
     hamt_plus: 1.0.2
   peerDependencies:
@@ -11793,7 +11793,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 0527808b4dd041d30d4a2c718b1eb1b0885ce07a710613b2d04845a0b2f125744833ed950acbdd4084ffebd8b989cae1975a063577ef06ce598fd6408a3cb9fa
+  checksum: 4863466a5250df5693afb2654c3d72ff92a5d3d4294c040ee4c49b05854adf8fd384ba0a142f6babdd11918393deaec0d8287df9688c8b7e57ee02d6676bb73f
   languageName: node
   linkType: hard
 
@@ -13222,14 +13222,14 @@ resolve@^2.0.0-next.3:
   linkType: hard
 
 "tsconfig-paths@npm:^3.12.0":
-  version: 3.12.0
-  resolution: "tsconfig-paths@npm:3.12.0"
+  version: 3.13.0
+  resolution: "tsconfig-paths@npm:3.13.0"
   dependencies:
     "@types/json5": ^0.0.29
     json5: ^1.0.1
     minimist: ^1.2.0
     strip-bom: ^3.0.0
-  checksum: 4999ec6cd1c7cc06750a460dbc0d39fe3595a4308cb5f1d0d0a8283009cf9c0a30d5a156508c28fe3a47760508af5263ab288fc23d71e9762779674257a95d3b
+  checksum: 64f0de3c882c016cdfe34d5261087fcf0c75048c4206ee32540e36df9f99d82d2caa5872135d3b6704324f5fd7d9032131caf316c1da83c2ac465d5dfb2aafd4
   languageName: node
   linkType: hard
 
