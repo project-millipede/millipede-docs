@@ -1,4 +1,4 @@
-import { LABEL_BORDER_RADIUS, LABEL_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
+import { LABEL_BORDER_RADIUS, LABEL_HEIGHT } from '@app/layout';
 import { Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import React, { FC } from 'react';
@@ -8,21 +8,6 @@ import { Step } from '../../types';
 import { getTimeData } from '../../utils/playertime';
 import { CountDown } from '../counter/CountDown';
 import { CountUp } from '../counter/CountUp';
-
-// export const useStyles = makeStyles((theme: Theme) => {
-//   return {
-//     item: {
-//       display: 'flex',
-//       alignItems: 'center',
-//       justifyContent: 'center'
-//     },
-//     itemEnd: {
-//       display: 'flex',
-//       alignItems: 'center',
-//       justifyContent: 'flex-end'
-//     },
-//   };
-// });
 
 const Row = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -59,8 +44,6 @@ interface TextProgressControlProps {
 export const TextProgressControl: FC<TextProgressControlProps> = ({
   steps
 }) => {
-  // const classes = useStyles();
-
   const { playing, target, maxStepsCount } = useStepState();
 
   const { stepsWithDuration, totalSeconds } = getTimeData(steps);

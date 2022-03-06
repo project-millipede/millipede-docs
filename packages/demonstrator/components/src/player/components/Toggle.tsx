@@ -4,11 +4,9 @@ import { IconButton } from '@mui/material';
 import React, { FC, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 
-import { playerLayoutState } from '../context/reducer';
+import { playerLayoutState } from '../features/layout/states';
 
-// import { NavigationControl } from './controls';
-
-export const Player: FC = () => {
+export const Toggle: FC = () => {
   const [{ isPlayerExpanded }, setPlayerLayoutState] =
     useRecoilState(playerLayoutState);
 
@@ -35,36 +33,16 @@ export const Player: FC = () => {
     </IconButton>
   );
 
-  // return (
-  //   <div
-  //     style={{
-  //       display: 'flex',
-  //       flexDirection: 'column'
-  //     }}
-  //   >
-  //     <div
-  //       style={{
-  //         display: 'flex',
-  //         alignItems: 'center',
-  //         justifyContent: 'space-between',
-  //         padding: '0 8px'
-  //       }}
-  //     >
-  //       <NavigationControl />
-  //       {expander && expander}
-  //     </div>
-  //   </div>
-  // );
   return (
     <div
       style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-end',
-        padding: '8px 8px'
+        margin: '8px 16px'
       }}
     >
-      {expander && expander}
+      {expander}
     </div>
   );
 };

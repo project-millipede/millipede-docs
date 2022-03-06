@@ -3,4 +3,4 @@ export * as Counter from './counter';
 export * as Controls from './controls';
 export { Playlist } from './playlist';
 export { Playtext } from './playtext';
-export { Player } from './Player';
+export { Toggle } from './Toggle';
