@@ -1,76 +1,107 @@
-import { useHoux } from '@app/houx';
 import { ViewElementProps } from '@demonstrator/navigation';
-import { RootState, selectors, viewportSelectors } from '@demonstrators-social/shared';
-import { State } from '@demonstrators-social/shared/src/recoil/features/viewport/post/reducer';
-import { motion } from 'framer-motion';
-import React, { FC, memo, useRef } from 'react';
-import { useRecoilCallback } from 'recoil';
+import { features } from '@demonstrators-social/shared';
+import React, { FC, memo, useLayoutEffect, useRef } from 'react';
+import { useRecoilCallback, useRecoilValue } from 'recoil';
 
 import { Post } from '../components/post';
 import { Timeline } from '../components/timeline';
 
-export const LeftViewElement: FC<ViewElementProps> = ({ layoutId, layout }) => {
+export const LeftViewElement: FC<ViewElementProps> = ({
+  parentId,
+  isMobile
+}) => {
   const {
-    state
-  }: {
-    state: RootState;
-  } = useHoux();
+    timeline: {
+      selector: { useCaseSelector }
+    },
+    viewport: {
+      selector: {
+        // viewportItemSelector,
+        viewportNextItemSelector
+      }
+    },
+    scroll: {
+      timeline: {
+        states: { timelineViewState }
+      }
+    }
+  } = features;
 
-  const useCase = (state.timeline &&
-    selectors.timeline.selectUserCaseState(state)) || {
-    id: '',
-    timelines: []
-  };
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const { timelines = [] } = useCase;
+  const useCase = useRecoilValue(useCaseSelector);
+
+  const { timelines } = useCase;
 
   const [timeline, otherTimeline] = timelines;
 
-  const {
-    post: { viewportItemSelector }
-  } = viewportSelectors;
+  const { id: timelineId } = timeline || { id: '' };
+
+  const { activeTab } = useRecoilValue(timelineViewState(timelineId));
+
+  // Scroll-restoration V1
+  // const getViewportItem = useRecoilCallback(
+  //   ({ snapshot }) =>
+  //     (timelineId: string) => {
+  //       const viewportItemValue = snapshot
+  //         .getLoadable(viewportItemSelector(timelineId))
+  //         .getValue();
+  //       return viewportItemValue;
+  //     }
+  // );
+  // useEffect(() => {
+  //   if (timeline) {
+  //     const { offsetTop } = getViewportItem(timeline.id);
+  //     scrollContainerRef.current.scroll(0, offsetTop + 1);
+  //   }
+  // }, [parentId, isMobile]);
 
   const getViewportItem = useRecoilCallback(
     ({ snapshot }) =>
       (timelineId: string) => {
         const viewportItemValue = snapshot
-          .getLoadable<State>(viewportItemSelector(timelineId))
+          .getLoadable(viewportNextItemSelector(timelineId))
           .getValue();
         return viewportItemValue;
       }
   );
 
-  const containerRef = useRef<HTMLDivElement>(null);
+  // Scroll-restoration V2 - important - this has to be layoutEffect - TODO: Document necessary steps
+  useLayoutEffect(() => {
+    if (timeline) {
+      const viewport = getViewportItem(timeline.id);
+      if (viewport.viewportItem) {
+        const { id } = viewport.viewportItem;
+        const el = document.getElementById(id);
+        if (el) {
+          // why + 1 ???
+          scrollContainerRef.current.scroll(0, el.offsetTop + 1);
+        } else {
+          scrollContainerRef.current.scroll(0, 0);
+        }
+      }
+    }
+  }, [parentId, isMobile, activeTab]);
 
   const timelineComponent = timeline && (
     <Timeline
-      key={`timeline-motion-${timeline.id}`}
       timelineId={timeline.id}
       otherTimelineId={otherTimeline.id}
-      ref={containerRef}
-      Comp={Post as any}
+      ref={scrollContainerRef}
+      Comp={Post}
     />
   );
 
   return (
-    <motion.div
-      key={layoutId}
-      layout={layout}
-      layoutId={layoutId}
+    <div
       style={{
         position: 'relative',
         width: '100%',
         height: '100%'
       }}
-      onBeforeLayoutMeasure={() => {
-        if (timeline) {
-          const { offsetTop } = getViewportItem(timeline.id);
-          containerRef.current.scroll(0, offsetTop);
-        }
-      }}
     >
       {timelineComponent}
-    </motion.div>
+    </div>
   );
 };
 

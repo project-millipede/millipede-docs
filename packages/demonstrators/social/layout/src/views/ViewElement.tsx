@@ -1,67 +1,37 @@
-import { useHoux } from '@app/houx';
 import { ViewElementProps } from '@demonstrator/navigation';
-import { FlowSurface } from '@demonstrators-social/flow';
-import { RootState, selectors } from '@demonstrators-social/shared';
-import { motion } from 'framer-motion';
-import React, { FC, memo, useState } from 'react';
+import { Components as FlowComponents } from '@demonstrators-social/flow';
+import { features } from '@demonstrators-social/shared';
+import React, { FC, memo } from 'react';
+import { useRecoilValue } from 'recoil';
 
-export const ViewElement: FC<ViewElementProps> = ({ layoutId, layout }) => {
+const { FlowSurface } = FlowComponents;
+
+export const ViewElement: FC<ViewElementProps> = () => {
   const {
-    state
-  }: {
-    state: RootState;
-  } = useHoux();
+    timeline: {
+      selector: { useCaseSelector }
+    }
+  } = features;
 
-  const useCase = (state.timeline &&
-    selectors.timeline.selectUserCaseState(state)) || {
-    id: '',
-    timelines: []
-  };
+  const useCase = useRecoilValue(useCaseSelector);
 
-  const { timelines = [] } = useCase;
+  const { timelines } = useCase;
 
   const [leftTimeline, rightTimeline] = timelines;
-  const [
-    offSet
-    // setOffSet
-  ] = useState(0);
 
   return (
-    <motion.div
-      key={layoutId}
-      layout={layout}
-      layoutId={layoutId}
+    <div
       style={{
         position: 'relative',
         width: '100%',
         height: '100%'
       }}
     >
-      {/* {leftTimeline && rightTimeline ? (
-        <FlowControlObserver
-          handleControlOffset={value => {
-            setOffSet(value);
-          }}
-        >
-          <FlowControl
-            // eslint-disable-next-line @typescript-eslint/no-empty-function
-            handleControlOffset={_value => {}}
-            style={{
-              marginTop: 'auto',
-              marginBottom: '0',
-              zIndex: 3
-            }}
-          />
-        </FlowControlObserver>
-      ) : null} */}
-      {leftTimeline && rightTimeline ? (
-        <FlowSurface
-          offSetControls={offSet}
-          leftTimelineId={leftTimeline.id}
-          rightTimelineId={rightTimeline.id}
-        />
-      ) : null}
-    </motion.div>
+      <FlowSurface
+        leftTimelineId={leftTimeline?.id}
+        rightTimelineId={rightTimeline?.id}
+      />
+    </div>
   );
 };
 

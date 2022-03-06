@@ -1,15 +1,12 @@
-import { Archer } from '@app/components';
-import { useHoux } from '@app/houx';
-import { Components } from '@app/render-utils';
+import { Components as RenderComponents } from '@app/render-utils';
 import { Player, StepProvider } from '@demonstrator/components';
-import { BottomNavigationControl, Navigation, TopNavigationControl, TViewElement } from '@demonstrator/navigation';
-import { appCompositionState, appLayoutState } from '@demonstrator/navigation/src/recoil/features/app/reducers';
+import { Components, features as navigationFeatures, TViewElement } from '@demonstrator/navigation';
 import { HeaderView } from '@demonstrators-social/components';
 import { generateData } from '@demonstrators-social/data';
-import { actions, TimelineActions } from '@demonstrators-social/shared';
-import React, { Dispatch, FC } from 'react';
+import { features } from '@demonstrators-social/shared';
+import React, { FC } from 'react';
 import { FullScreen, useFullScreenHandle } from 'react-full-screen';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { createGlobalStyle } from 'styled-components';
 import useAsyncEffect from 'use-async-effect';
 
@@ -19,57 +16,74 @@ import RightViewElement from './views/RightViewElement';
 import ViewElement from './views/ViewElement';
 
 const {
-  Responsive: { isMobile }
+  BaseViewElement,
+  BottomNavigationControl,
+  TopNavigationControl,
+  Navigation
 } = Components;
+
+const { Toggle } = Player.Components;
+
+const {
+  Responsive: { isMobile }
+} = RenderComponents;
 
 const GlobalStyle = createGlobalStyle`
   .fullscreen-enabled {
-    background: #F0F0F0;
+    background: #F0F0F0;    
   }
 `;
 
 export const TOOLBAR_HEIGHT = 64;
 
-export const getViewElements = (): Array<TViewElement> => {
-  const viewElements: Array<TViewElement> = [
-    /**
-     * Note: When more then one re-parentable gets used,
-     * pre-defining the key for each component is necessary
-     */
-
-    {
-      id: 'LeftViewElement',
-      key: 'LeftViewElement',
-      component: LeftViewElement
-    },
-    {
-      id: 'ViewElement',
-      key: 'ViewElement',
-      component: ViewElement
-    },
-    {
-      id: 'RightViewElement',
-      key: 'RightViewElement',
-      component: RightViewElement
-    }
-  ];
-  return viewElements;
-};
+/**
+ * Note: When more then one re-parentable gets used,
+ * pre-defining the key for each component is necessary.
+ */
+const viewElements: Array<TViewElement> = [
+  {
+    id: 'LeftViewElement',
+    key: 'LeftViewElement',
+    component: LeftViewElement,
+    baseComponent: BaseViewElement
+  },
+  {
+    id: 'ViewElement',
+    key: 'ViewElement',
+    component: ViewElement,
+    baseComponent: BaseViewElement
+  },
+  {
+    id: 'RightViewElement',
+    key: 'RightViewElement',
+    component: RightViewElement,
+    baseComponent: BaseViewElement
+  }
+];
 
 export const App: FC = () => {
+  const {
+    timeline: {
+      states: { timelineState },
+      actions: { normalizeData }
+    }
+  } = features;
+
+  const {
+    app: {
+      states: { appLayoutState, appCompositionState }
+    }
+  } = navigationFeatures;
+
   const handle = useFullScreenHandle();
   // const height = use100vh();
 
-  const {
-    dispatch
-  }: {
-    dispatch: Dispatch<TimelineActions>;
-  } = useHoux();
+  const setData = useSetRecoilState(timelineState);
 
   useAsyncEffect(
     async () => {
       const data = await generateData();
-      dispatch(actions.timeline.normalizeData(data));
+      normalizeData(setData, data);
     },
     () => {
       console.log('unmount');
@@ -91,7 +105,25 @@ export const App: FC = () => {
           height: `calc(100vh - ${TOOLBAR_HEIGHT}px)`,
           display: 'flex',
           flexDirection: 'column',
-          overflowX: 'hidden' // overflowX - most important flag to capture outer barrier of scroll containers, used in function findScrollContainers in useMeasure hook
+
+          /**
+           * The style property overflowX, set to the value "hidden," is most important for measuring nested scroll areas.
+           * The property specifies the outer barrier of scroll containers to capture the outer border of scroll containers;
+           * see the function findScrollContainers in the hook useScroll.
+           */
+          overflowX: 'hidden',
+
+          /**
+           * The style property position, set to the value "relative," is most important
+           * for the bottom-sheet component to work correctly.
+           *
+           * Note:
+           * The app-container component gets tracked by a resize observer.
+           * The default resize observer does not change the app-container style
+           * compared to the element-based resize observer. When used, the element-based
+           * resize observer injects the position style with the value "relative."
+           */
+          position: 'relative'
         }}
       >
         {!isMobile() && (
@@ -99,11 +131,7 @@ export const App: FC = () => {
         )}
         <TopNavigationControl style={{ margin: '8px' }} />
 
-        <Archer.ArcherContext.TransitionProvider>
-          <Archer.ArcherContext.RefProvider>
-            <Navigation defaultViewElements={getViewElements()} />
-          </Archer.ArcherContext.RefProvider>
-        </Archer.ArcherContext.TransitionProvider>
+        <Navigation defaultViewElements={viewElements} />
 
         <StepProvider>
           <StoryPlayer />
@@ -115,7 +143,7 @@ export const App: FC = () => {
               backgroundColor: '#FFFFFF'
             }}
           >
-            <Player.Components.Player />
+            <Toggle />
             {isMobileManual ? <BottomNavigationControl /> : null}
           </div>
         </StepProvider>
