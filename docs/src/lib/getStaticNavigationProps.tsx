@@ -1,28 +1,32 @@
-import { NavigationState } from '@app/layout/src/recoil/features/pages/reducer';
+import { Navigation } from '@app/types';
 import { GetStaticPropsContext } from 'next';
 
-import { getNavigation } from './getNavigation';
+import { getBlogNavigation, getNavigation } from './getNavigation';
 
 export interface GetStaticNavigationProps {
-  navigation: NavigationState;
+  navigation: Navigation;
 }
 
-interface GetStaticContentPropsOptions {
-  onSuccess: (navigation: GetStaticNavigationProps) => void;
+interface GetStaticNavigationPropsOptions {
+  pageType: string;
+  onSuccess?: (navigation: Navigation) => void;
 }
 
 export const getStaticNavigationProps =
-  ({ onSuccess }: GetStaticContentPropsOptions) =>
+  ({ pageType, onSuccess }: GetStaticNavigationPropsOptions) =>
   async (ctx: GetStaticPropsContext) => {
-    const navigation = await getNavigation(ctx);
-
-    if (navigation && onSuccess) {
-      onSuccess(navigation as any);
+    let navigation: Navigation;
+    if (pageType === 'docs') {
+      navigation = await getNavigation(ctx);
+    } else if (pageType === 'blog') {
+      navigation = await getBlogNavigation(ctx, pageType);
     }
-
+    if (navigation && onSuccess) {
+      onSuccess(navigation);
+    }
     return {
       props: {
-        ...navigation
+        navigation
       }
     };
   };

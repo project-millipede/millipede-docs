@@ -11,14 +11,10 @@ export const getMetadata = async (
   data: Buffer
 ): Promise<ContentWithMetadata> => {
   const { data: metaData, content } = matter(data);
-
-  const { disableToc } = metaData;
-
   return {
     metaData: {
       ...metaData,
-      timeToRead: readingTime(content),
-      disableToc: disableToc || false
+      timeToRead: readingTime(content)
     },
     content
   };

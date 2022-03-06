@@ -1,25 +1,25 @@
-import { NavigationState } from '@app/layout/src/recoil/features/pages/reducer';
-import createCache, { EmotionCache } from '@emotion/cache';
+import { Navigation } from '@app/types';
+import { EmotionCache } from '@emotion/cache';
 import { NextPage } from 'next';
-import { AppPropsType, NextComponentType } from 'next/dist/shared/lib/utils';
-import { ReactNode } from 'react';
+import { AppPropsType } from 'next/dist/shared/lib/utils';
+import { ComponentType, ReactElement, ReactNode } from 'react';
 
 import { DynamicPageProps } from '../../../pages/docs/[...slug]';
 
-export const createEmotionCache = () => {
-  return createCache({ key: 'css' });
+export type ComponentMap = {
+  [index: string]: { component: ComponentType; requireWrapper?: boolean };
 };
 
-export type NextPageWithLayout<P = {}> = NextPage<P> & {
-  getLayout: (page: ReactNode, navigation: NavigationState) => ReactNode;
-};
-
-type NextComponentTypeWithLayout = NextComponentType & {
-  getLayout?: (page: JSX.Element, navigation: NavigationState) => JSX.Element;
+export type NextPageWithLayout<P = Record<string, unknown>> = NextPage<P> & {
+  getLayout: (
+    page: ReactElement,
+    navigation: Navigation,
+    hasToc: boolean
+  ) => ReactNode;
 };
 
 export type CustomAppProps = Omit<AppPropsType, 'pageProps'> & {
-  Component: NextComponentTypeWithLayout;
+  Component: NextPageWithLayout;
   emotionCache: EmotionCache;
   pageProps: DynamicPageProps & { children: ReactNode };
 };
