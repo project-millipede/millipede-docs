@@ -7,7 +7,7 @@ import { Title } from '../../common';
 import { Instrument } from './components/Instrument';
 import { Target } from './components/Target';
 
-const { ArcherContainer, InteractiveBox, ArcherElement } = Archer;
+const { ArcherSurface, InteractiveBox, ArcherElement } = Archer;
 
 export const GridWrapper = styled('div')(({ theme }) => ({
   display: 'grid',
@@ -49,10 +49,9 @@ export const Concept2: FC = () => {
   const { t } = useTranslation();
 
   return (
-    <ArcherContainer noCurves strokeColor='gray'>
+    <ArcherSurface strokeColor='gray'>
       <GridWrapper>
         <Target relations={targetConnect.relations} />
-
         <ArcherElement id='shared_render'>
           <InteractiveBox sx={{ gridArea: 'render' }}>
             <Title>
@@ -64,6 +63,6 @@ export const Concept2: FC = () => {
         </ArcherElement>
         <Instrument relations={instrumentConnect.relations} />
       </GridWrapper>
-    </ArcherContainer>
+    </ArcherSurface>
   );
 };

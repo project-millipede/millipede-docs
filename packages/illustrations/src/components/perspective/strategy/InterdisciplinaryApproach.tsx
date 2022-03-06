@@ -5,7 +5,7 @@ import React, { FC } from 'react';
 
 import { Title } from '../../common';
 
-const { ArcherContainer, ArcherElement, InteractiveBox } = Archer;
+const { ArcherSurface, ArcherElement, InteractiveBox } = Archer;
 
 export const GridWrapper = styled('div')(({ theme }) => {
   return {
@@ -26,7 +26,7 @@ export const InterdisciplinaryApproach: FC = () => {
   const { t } = useTranslation();
 
   return (
-    <ArcherContainer noCurves strokeColor='gray'>
+    <ArcherSurface strokeColor='gray'>
       <GridWrapper>
         <ArcherElement
           id='individual'
@@ -54,13 +54,13 @@ export const InterdisciplinaryApproach: FC = () => {
               targetId: 'individual',
               targetAnchor: 'left',
               sourceAnchor: 'top',
-              style: { strokeDasharray: '5,5' }
+              style: { strokeDasharray: '5' }
             },
             {
               targetId: 'society',
               targetAnchor: 'left',
               sourceAnchor: 'bottom',
-              style: { strokeDasharray: '5,5' }
+              style: { strokeDasharray: '5' }
             }
           ]}
         >
@@ -139,6 +139,6 @@ export const InterdisciplinaryApproach: FC = () => {
           </InteractiveBox>
         </ArcherElement>
       </GridWrapper>
-    </ArcherContainer>
+    </ArcherSurface>
   );
 };

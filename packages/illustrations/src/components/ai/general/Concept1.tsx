@@ -5,7 +5,7 @@ import React, { FC } from 'react';
 
 import { Title } from '../../common';
 
-const { ArcherContainer, ArcherElement, InteractiveBox } = Archer;
+const { ArcherSurface, ArcherElement, InteractiveBox } = Archer;
 
 export const GridWrapper = styled('div')(({ theme }) => ({
   display: 'grid',
@@ -23,7 +23,7 @@ export const Concept1: FC = () => {
   const { t } = useTranslation();
 
   return (
-    <ArcherContainer noCurves strokeColor='gray'>
+    <ArcherSurface strokeColor='gray'>
       <GridWrapper>
         <ArcherElement
           id='communication'
@@ -71,6 +71,6 @@ export const Concept1: FC = () => {
           </InteractiveBox>
         </ArcherElement>
       </GridWrapper>
-    </ArcherContainer>
+    </ArcherSurface>
   );
 };

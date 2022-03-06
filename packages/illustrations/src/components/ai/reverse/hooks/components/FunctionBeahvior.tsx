@@ -4,7 +4,7 @@ import React, { FC } from 'react';
 
 import { TitleUnstyled } from '../../../../common';
 
-const { ArcherContainer, ArcherElement, InteractiveBox } = Archer;
+const { ArcherSurface, ArcherElement, InteractiveBox } = Archer;
 export const GridWrapper = styled('div')(({ theme }) => ({
   display: 'grid',
   gridTemplateRows: '1fr 1fr 1fr',
@@ -34,7 +34,7 @@ const functionResult = `public int a() {
 
 export const FunctionBeahvior: FC = () => {
   return (
-    <ArcherContainer noCurves strokeColor='gray'>
+    <ArcherSurface strokeColor='gray'>
       <GridWrapper>
         <ArcherElement
           id='function_a'
@@ -47,7 +47,7 @@ export const FunctionBeahvior: FC = () => {
           ]}
         >
           <InteractiveBox sx={{ gridArea: 'function_a' }}>
-            <TitleUnstyled variant={'body2'} sx={{ whiteSpace: 'pre-wrap' }}>
+            <TitleUnstyled variant='body2' sx={{ whiteSpace: 'pre-wrap' }}>
               {functionA}
             </TitleUnstyled>
           </InteractiveBox>
@@ -63,7 +63,7 @@ export const FunctionBeahvior: FC = () => {
           ]}
         >
           <InteractiveBox sx={{ gridArea: 'function_b' }}>
-            <TitleUnstyled variant={'body2'} sx={{ whiteSpace: 'pre-wrap' }}>
+            <TitleUnstyled variant='body2' sx={{ whiteSpace: 'pre-wrap' }}>
               {functionB}
             </TitleUnstyled>
           </InteractiveBox>
@@ -71,12 +71,12 @@ export const FunctionBeahvior: FC = () => {
 
         <ArcherElement id='function_result'>
           <InteractiveBox sx={{ gridArea: 'function_result' }}>
-            <TitleUnstyled variant={'body2'} sx={{ whiteSpace: 'pre-wrap' }}>
+            <TitleUnstyled variant='body2' sx={{ whiteSpace: 'pre-wrap' }}>
               {functionResult}
             </TitleUnstyled>
           </InteractiveBox>
         </ArcherElement>
       </GridWrapper>
-    </ArcherContainer>
+    </ArcherSurface>
   );
 };

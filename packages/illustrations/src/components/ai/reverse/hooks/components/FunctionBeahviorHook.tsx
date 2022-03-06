@@ -4,7 +4,7 @@ import React, { FC } from 'react';
 
 import { TitleUnstyled } from '../../../../common';
 
-const { ArcherContainer, ArcherElement, InteractiveBox } = Archer;
+const { ArcherSurface, ArcherElement, InteractiveBox } = Archer;
 
 export const GridWrapper = styled('div')(({ theme }) => ({
   display: 'grid',
@@ -40,7 +40,7 @@ const functionHookResult = `public int a() {
 
 export const FunctionBeahviorHook: FC = () => {
   return (
-    <ArcherContainer noCurves strokeColor='gray'>
+    <ArcherSurface strokeColor='gray'>
       <GridWrapper>
         <ArcherElement
           id='function_a'
@@ -53,7 +53,7 @@ export const FunctionBeahviorHook: FC = () => {
           ]}
         >
           <InteractiveBox sx={{ gridArea: 'function_a' }}>
-            <TitleUnstyled variant={'body2'} sx={{ whiteSpace: 'pre-wrap' }}>
+            <TitleUnstyled variant='body2' sx={{ whiteSpace: 'pre-wrap' }}>
               {functionA}
             </TitleUnstyled>
           </InteractiveBox>
@@ -71,7 +71,7 @@ export const FunctionBeahviorHook: FC = () => {
           <InteractiveBox
             sx={{ gridArea: 'function_b', backgroundColor: '#F44336' }}
           >
-            <TitleUnstyled variant={'body2'} sx={{ whiteSpace: 'pre-wrap' }}>
+            <TitleUnstyled variant='body2' sx={{ whiteSpace: 'pre-wrap' }}>
               {functionB}
             </TitleUnstyled>
           </InteractiveBox>
@@ -96,7 +96,7 @@ export const FunctionBeahviorHook: FC = () => {
           <InteractiveBox
             sx={{ gridArea: 'function_hook', backgroundColor: '#4CAF50' }}
           >
-            <TitleUnstyled variant={'body2'} sx={{ whiteSpace: 'pre-wrap' }}>
+            <TitleUnstyled variant='body2' sx={{ whiteSpace: 'pre-wrap' }}>
               {functionHook}
             </TitleUnstyled>
           </InteractiveBox>
@@ -104,12 +104,12 @@ export const FunctionBeahviorHook: FC = () => {
 
         <ArcherElement id='function_result'>
           <InteractiveBox sx={{ gridArea: 'function_result' }}>
-            <TitleUnstyled variant={'body2'} sx={{ whiteSpace: 'pre-wrap' }}>
+            <TitleUnstyled variant='body2' sx={{ whiteSpace: 'pre-wrap' }}>
               {functionHookResult}
             </TitleUnstyled>
           </InteractiveBox>
         </ArcherElement>
       </GridWrapper>
-    </ArcherContainer>
+    </ArcherSurface>
   );
 };
