@@ -1,8 +1,7 @@
 import isArray from 'lodash/isArray';
 import { nanoid } from 'nanoid';
 
-import { FlattenedPartialViewElement, PartialViewElement, TPosition, TView } from '../types';
-import { Position } from '../types/View';
+import { FlattenedPartialViewElement, PartialViewElement, Position, TPosition, TView } from '../types';
 
 export const generateViews = (size: number, position: TPosition) => {
   return Array.from<any, TView>({ length: size }, () => ({
@@ -28,33 +27,24 @@ export const createViews = (
   return [initialLeftViews, initialMiddleView, initialRightViews];
 };
 
+/**
+ * Note: The argument arrays viewElements and views are of same length
+ */
+
 export const createViewElements = (
   viewElements: Array<FlattenedPartialViewElement>,
   views: Array<TView>
 ) => {
-  let restViews: Array<TView> = [];
-
-  const connectedViewElements = viewElements.reduce<
-    Array<FlattenedPartialViewElement>
-  >((acc, viewElement) => {
-    if (!viewElement.isParent) {
-      const currentViewElement = acc.find(currentViewElement => {
-        const siblingViewElementIds = currentViewElement.siblings.map(
-          sibling => sibling.id
-        );
-        return siblingViewElementIds.includes(viewElement.id);
-      });
-      return [
-        ...acc,
-        { ...viewElement, parentId: currentViewElement.parentId }
-      ];
-    } else {
-      const [first, ...rest] = restViews.length > 0 ? restViews : views;
-      restViews = rest;
-      return [...acc, { ...viewElement, parentId: first.id }];
-    }
-  }, []);
-  return connectedViewElements;
+  return viewElements.map((viewElement, index) => {
+    const view = views[index];
+    return {
+      ...viewElement,
+      parentId: view.id,
+      previousParentId: view.id,
+      position: view.position,
+      previousPosition: view.position
+    };
+  });
 };
 
 export const flattenViewElements = (
@@ -64,6 +54,7 @@ export const flattenViewElements = (
   return viewElements.reduce<Array<FlattenedPartialViewElement>>(
     (acc, viewElement) => {
       if (viewElement[key]) {
+        // eslint-disable-next-line no-param-reassign
         acc = [
           ...acc,
           {
@@ -72,6 +63,7 @@ export const flattenViewElements = (
           }
         ];
       } else {
+        // eslint-disable-next-line no-param-reassign
         acc = [
           ...acc,
           {
@@ -82,6 +74,7 @@ export const flattenViewElements = (
       }
 
       if (isArray(viewElement[key])) {
+        // eslint-disable-next-line no-param-reassign
         acc = [...acc, ...flattenViewElements(viewElement[key], key)];
       }
       return acc;
