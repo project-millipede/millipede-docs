@@ -1,5 +1,4 @@
-import { NavigationState } from '@app/layout/src/recoil/features/pages/reducer';
-import { PageTypes } from '@app/types';
+import { Navigation, PageTypes } from '@app/types';
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Breadcrumbs, Share } from '@page/components';
@@ -7,8 +6,9 @@ import React, { FC } from 'react';
 
 interface AppContentHeaderProps {
   slug: Array<string>;
-  navigation: NavigationState;
+  navigation: Navigation;
   metaData: PageTypes.MetaData;
+  hasShare?: boolean;
 }
 
 export const Header = styled(Box)(() => {
@@ -23,15 +23,16 @@ export const GrowingDiv = styled('div')({
 
 export const AppContentHeader: FC<AppContentHeaderProps> = ({
   slug,
-  // navigation,
-  metaData
+  navigation,
+  metaData,
+  hasShare = true
 }) => {
   return (
     <Header component='header'>
-      <Breadcrumbs slug={slug} />
+      <Breadcrumbs slug={slug} navigation={navigation} />
       {/* <CustomBreadcrumbs slug={slug} navigation={navigation} /> */}
       <GrowingDiv />
-      <Share metaData={metaData} />
+      {hasShare && <Share metaData={metaData} />}
     </Header>
   );
 };

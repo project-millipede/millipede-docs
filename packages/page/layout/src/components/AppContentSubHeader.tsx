@@ -11,8 +11,8 @@ export const AppContentSubHeader: FC<AppContentSubHeaderProps> = ({
 }) => {
   return (
     <>
-      <Typography variant={'h4'}>{`Words: ${timeToRead.words}`}</Typography>
-      <Typography variant={'h4'}>{`Minutes: ${timeToRead.minutes}`}</Typography>
+      <Typography variant='h4'>{`Words: ${timeToRead.words}`}</Typography>
+      <Typography variant='h4'>{`Minutes: ${timeToRead.minutes}`}</Typography>
     </>
   );
 };

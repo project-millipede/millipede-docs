@@ -13,11 +13,11 @@ interface TocComponentProps {
   >;
 }
 
-const TocList = styled('ul')(() => ({
+const TocList = styled('ul')({
   listStyle: 'none',
   padding: 0,
   margin: 0
-}));
+});
 
 export const TocComponent: FC<TocComponentProps> = ({ toc }) => {
   const { query, pathname } = useRouter();
@@ -27,7 +27,7 @@ export const TocComponent: FC<TocComponentProps> = ({ toc }) => {
       {toc.map(tocItem => {
         return (
           <li key={tocItem.id}>
-            <TocLink href={tocItem.id} query={query} pathname={pathname}>
+            <TocLink pathname={pathname} query={query} href={tocItem.id}>
               {tocItem.value}
             </TocLink>
           </li>

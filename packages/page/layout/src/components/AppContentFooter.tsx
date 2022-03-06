@@ -1,5 +1,5 @@
 import { HiddenUnderlineLink } from '@app/components';
-import { NavigationState } from '@app/layout/src/recoil/features/pages/reducer';
+import { Navigation } from '@app/types';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -14,21 +14,19 @@ export const Footer = styled(Box)(({ theme }) => {
   };
 });
 
-export const TitleWithIcon = styled('div')(() => {
-  return {
-    display: 'flex',
-    alignItems: 'center'
-  };
+export const TitleWithIcon = styled('div')({
+  display: 'flex',
+  alignItems: 'center'
 });
 
 interface AppContentFooterProps {
-  navigation: NavigationState;
+  navigation: Navigation;
 }
 
 export const AppContentFooter: FC<AppContentFooterProps> = ({ navigation }) => {
   const { t } = useTranslation();
 
-  const { flattenedPages, activePage = { pathname: '' } } = navigation;
+  const { flattenedPages, activePage, pageType } = navigation;
 
   const [prevPage, nextPage] = useMemo(() => {
     const currentPageNumber = flattenedPages.findIndex(
@@ -42,36 +40,52 @@ export const AppContentFooter: FC<AppContentFooterProps> = ({ navigation }) => {
 
   return (
     <Footer component='footer'>
-      {prevPage && (
+      {prevPage ? (
         <Typography
           component={HiddenUnderlineLink}
           href={{
-            pathname: '/docs/[...slug]',
+            pathname: `/${pageType}/[...slug]`,
             query: { slug: prevPage.pathname.split('/') }
           }}
           prefetch={false}
         >
           <TitleWithIcon>
             <ChevronLeft fontSize='small' />
-            {t(`common:pages.${prevPage.pathname}`)}
+            {t(
+              `common:pages.${prevPage.pathname}`,
+              {},
+              {
+                fallback: prevPage.title
+              }
+            )}
           </TitleWithIcon>
         </Typography>
+      ) : (
+        <div />
       )}
 
-      {nextPage && (
+      {nextPage ? (
         <Typography
           component={HiddenUnderlineLink}
           href={{
-            pathname: '/docs/[...slug]',
+            pathname: `/${pageType}/[...slug]`,
             query: { slug: nextPage.pathname.split('/') }
           }}
           prefetch={false}
         >
           <TitleWithIcon>
-            {t(`common:pages.${nextPage.pathname}`)}
+            {t(
+              `common:pages.${nextPage.pathname}`,
+              {},
+              {
+                fallback: nextPage.title
+              }
+            )}
             <ChevronRight fontSize='small' />
           </TitleWithIcon>
         </Typography>
+      ) : (
+        <div />
       )}
     </Footer>
   );

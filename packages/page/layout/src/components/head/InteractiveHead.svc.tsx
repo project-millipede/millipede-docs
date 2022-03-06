@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 
 export const Anchor = styled('span')(({ theme }) => ({
   position: 'absolute',
-  marginTop: theme.spacing(-12)
+  marginTop: theme.spacing(-10)
 }));
 
 export const StyledTypography = styled(Typography)<TypographyProps>(

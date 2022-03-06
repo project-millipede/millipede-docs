@@ -1,19 +1,12 @@
-import { HiddenUnderlineLink, LinkProps } from '@app/components';
+import { HiddenUnderlineLink } from '@app/components';
 import { Typography, TypographyProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { LinkProps } from 'next/link';
 import { ParsedUrlQuery } from 'querystring';
 import React, { FC } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { scrollItemsState } from '../../recoil/features/scroll/page/reducer';
-
-const processLink = (activeState: { [key: string]: string }, href: string) => {
-  return (
-    Object.keys(activeState).filter(
-      activeState => activeState === decodeURI(href).replace('#', '')
-    ).length > 0
-  );
-};
+import { features } from '../../features';
 
 type TypographyEnhancedProps = TypographyProps &
   LinkProps & {
@@ -45,19 +38,24 @@ const TocLabel = styled(Typography, {
 });
 
 export interface TocLinkProps {
-  href: string;
-  query: ParsedUrlQuery;
   pathname: string;
+  query: ParsedUrlQuery;
+  href: string;
 }
 
 export const TocLink: FC<TocLinkProps> = ({
-  href,
-  query,
   pathname,
+  query,
+  href,
   children
 }) => {
-  const { scrollItems } = useRecoilValue(scrollItemsState);
-  const isActive = processLink(scrollItems, href);
+  const {
+    scroll: {
+      selector: { scrollIsActiveSelector }
+    }
+  } = features;
+
+  const isActive = useRecoilValue(scrollIsActiveSelector(href));
 
   return (
     <TocLabel
@@ -67,7 +65,9 @@ export const TocLink: FC<TocLinkProps> = ({
         query,
         hash: href
       }}
+      // replace // todo: check
       shallow
+      passHref
       prefetch={false}
       isActive={isActive}
     >
