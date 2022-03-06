@@ -1,5 +1,4 @@
-import { compareDesc } from 'date-fns';
-import get from 'lodash/get';
+import { compareAsc, compareDesc } from 'date-fns';
 
 type FilterFunction<T> = (item: T) => boolean;
 
@@ -79,8 +78,10 @@ export const updateAt = <T>(
   index: number
 ): Array<T> => [...source.slice(0, index), item, ...source.slice(index + 1)];
 
-export const contains = <T>(array: Array<T>) => (val: T) =>
-  array.indexOf(val) !== -1;
+export const contains =
+  <T>(array: Array<T>) =>
+  (val: T) =>
+    array.indexOf(val) !== -1;
 
 /**
  * Picks a number of items from an array at random
@@ -92,7 +93,7 @@ export const contains = <T>(array: Array<T>) => (val: T) =>
  * takeNRandom([1, 2, 3, 4, 5], 3); // [3, 5, 2]
  */
 
-export const takeNRandom = <T>(arr: Array<T>, num: number) => {
+export const takeNRandom = <T>(array: Array<T>, num: number) => {
   const indices = [];
 
   while (
@@ -100,10 +101,10 @@ export const takeNRandom = <T>(arr: Array<T>, num: number) => {
     indices.length < num &&
     // the indices array is not the same length as the array
     // this will stop the loop if the indices array becomes the same size as the array
-    indices.length !== arr.length
+    indices.length !== array.length
   ) {
     // get a random number according to the array's length
-    const random = Math.floor(Math.random() * arr.length);
+    const random = Math.floor(Math.random() * array.length);
 
     // if the array already includes the item, do not push item
     if (!indices.includes(random)) {
@@ -112,11 +113,7 @@ export const takeNRandom = <T>(arr: Array<T>, num: number) => {
   }
 
   // map each index to the item in the array at each index
-  return indices.map(index => arr[index]);
-};
-
-export const compareDescFn = (field: string) => (a: any, b: any) => {
-  return compareDesc(get(a, field), get(b, field));
+  return indices.map(index => array[index]);
 };
 
 export const reverse = <T>(array: Array<T>) => {
@@ -129,4 +126,108 @@ export const reverse = <T>(array: Array<T>) => {
 
 export const findCommonIds = (a: Array<string>, b: Array<string>) => {
   return a.some(item => b.includes(item));
+};
+
+export const isNotEmpty = <T>(array: Array<T>) => {
+  return (
+    typeof array !== 'undefined' && Array.isArray(array) && array.length > 0
+  );
+};
+
+export const sortAsc = <T>(
+  array: Array<T>,
+  accessor: (accessor: T) => number
+): Array<T> => array.sort((a, b) => accessor(a) - accessor(b));
+
+export const sortDesc = <T>(
+  array: Array<T>,
+  accessor: (accessor: T) => number
+): Array<T> => array.sort((a, b) => accessor(b) - accessor(a));
+
+export const sortDateAsc = <T>(
+  array: Array<T>,
+  accessor: (accessor: T) => Date
+): Array<T> => array.sort((a, b) => compareAsc(accessor(a), accessor(b)));
+
+export const sortDateDesc = <T>(
+  array: Array<T>,
+  accessor: (accessor: T) => Date
+): Array<T> => array.sort((a, b) => compareDesc(accessor(b), accessor(a)));
+
+export const compareAscFn =
+  <T>(accessor: (accessor: T) => Date) =>
+  (a: T, b: T) => {
+    return compareAsc(accessor(a), accessor(b));
+  };
+
+export const compareDescFn =
+  <T>(accessor: (accessor: T) => Date) =>
+  (a: T, b: T) => {
+    return compareDesc(accessor(a), accessor(b));
+  };
+
+// Use with array.filter(removeEmptyElementsFn);
+export const removeEmptyElements = <T>(element: T) => {
+  return ![null, undefined].includes(element);
+};
+
+export const removeDuplicates = (data: Array<string>) => {
+  return data.reduce(
+    (acc, value) => (acc.includes(value) ? acc : [...acc, value]),
+    []
+  );
+};
+
+export const withoutBorders = <T>(
+  array: Array<T>,
+  finalSize: number,
+  ltr: boolean
+) => {
+  // 1. Window size < final size
+
+  /**
+   * 1.1 Exclude the first element
+   *
+   * Input array | Interval | Output array
+   * -------------------------------------
+   * [A]         | ]A       | []
+   * [A B]       | ]A, B]   | [B]
+   * [A B C]     | ]A, C]   | [B C]
+   *
+   */
+
+  if (array.length < finalSize && ltr) {
+    return array.slice(1, array.length);
+  }
+
+  /**
+   * 1.2 Exclude the last element
+   *
+   * Input array | Interval | Output array
+   * -------------------------------------
+   * [A]         | A[       | []
+   * [B A]       | [B, A[   | [B]
+   * [C B A]     | [C, A[   | [C B]
+   *
+   */
+
+  if (array.length < finalSize && !ltr) {
+    return array.slice(0, array.length - 1);
+  }
+
+  // 2. Window size === final size
+
+  /**
+   * 1.3 Exclude the first and the last element when the final size is reached
+   *
+   * from 1.1 ltr=true start:  ]A, C] or [B C]
+   * from 1.2 ltr=false start: [C, A[ or [C B]
+   *
+   * ltr=true:  A B C D => ]A D[ => [B C]
+   * ltr=false: D C B A => ]D A[ => [C B]
+   *
+   */
+  if (array.length === finalSize) {
+    return array.slice(1, array.length - 1);
+  }
 };

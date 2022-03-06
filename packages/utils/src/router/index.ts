@@ -17,6 +17,7 @@ const flatten = <T>(pages: Array<T>, key: string) => {
       }
 
       if (isArray(page[key])) {
+        // eslint-disable-next-line no-param-reassign
         flattenedPages = flattenedPages.concat(flatten(page[key], key));
       }
       return flattenedPages;
