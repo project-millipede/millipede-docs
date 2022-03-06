@@ -43,7 +43,7 @@
       "icon": {
         "type": "MUI",
         "name": "lock"
-      },      
+      },
       "description": [
         {
           "subTitle": [
@@ -59,8 +59,8 @@
       "link": "pet/use-case/analytics",
       "icon": {
         "type": "MUI",
-        "name": "assessment"
-      },      
+        "name": "location_disabled"
+      },
       "description": [
         {
           "subTitle": [
