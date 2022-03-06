@@ -1,10 +1,7 @@
-import { RenderUtils } from '@app/render-utils';
-import { useEffectRef } from '@huse/effect-ref';
 import SendIcon from '@mui/icons-material/Send';
 import { Button, Typography } from '@mui/material';
 import { useWindupString } from '@project-millipede/windups';
 import { ContentState, Editor, EditorState } from 'draft-js';
-import elementResizeDetectorMaker from 'element-resize-detector';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
 
@@ -26,16 +23,13 @@ const insertText = (text: string) => {
   return EditorState.forceSelection(editorState, selectionAtEnd);
 };
 
-const resizeDetector =
-  RenderUtils.isBrowser() && elementResizeDetectorMaker({ strategy: 'scroll' });
-
-interface CommentEditorProps {
+interface ContentEditorProps {
   isComment: boolean;
   create?: (content: string) => void;
   timelineId?: string;
 }
 
-export const CommentEditor: FC<CommentEditorProps> = ({
+export const ContentEditor: FC<ContentEditorProps> = ({
   isComment = true,
   create,
   timelineId
@@ -80,32 +74,13 @@ export const CommentEditor: FC<CommentEditorProps> = ({
     editorRef.current.focus();
   }, []);
 
-  const [, setSize] = useState({
-    width: 0,
-    height: 0
-  });
-
-  const observeResize = useCallback(element => {
-    const listener = () => {
-      setSize({ width: element.offsetWidth, height: element.offsetHeight });
-    };
-    resizeDetector.listenTo(element, listener);
-
-    return () => {
-      resizeDetector.removeListener(element, listener);
-    };
-  }, []);
-
-  const ref = useEffectRef(observeResize);
-
   return (
     <div
       style={{
         display: 'flex',
         flexDirection: 'column',
-        margin: '16px'
+        margin: '8px'
       }}
-      ref={ref}
     >
       <Typography variant='h4'>
         <strong>{title}</strong>
@@ -128,7 +103,8 @@ export const CommentEditor: FC<CommentEditorProps> = ({
         style={{
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          margin: '8px'
         }}
       >
         <Button

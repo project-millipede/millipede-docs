@@ -1,2 +1,2 @@
 export { Comments } from './Comments';
-export { CommentEditor } from './CommentEditor';
+export { ContentEditor } from './ContentEditor';
