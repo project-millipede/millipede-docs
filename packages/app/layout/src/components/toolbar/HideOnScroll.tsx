@@ -1,5 +1,6 @@
-import { Theme, useMediaQuery } from '@mui/material';
+import { useMediaQuery } from '@mui/material';
 import Slide from '@mui/material/Slide';
+import { useTheme } from '@mui/material/styles';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import { FC, ReactElement } from 'react';
 
@@ -13,12 +14,12 @@ export const HideOnScroll: FC<HideOnScrollProps> = ({
   children
 }) => {
   const trigger = useScrollTrigger();
-  const matches = useMediaQuery(
-    (theme: Theme) => theme.breakpoints.down('md'),
-    {
-      noSsr: true
-    }
-  );
+
+  const outerTheme = useTheme();
+
+  const matches = useMediaQuery(outerTheme.breakpoints.down('md'), {
+    noSsr: true
+  });
 
   return (
     <>

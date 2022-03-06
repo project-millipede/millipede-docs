@@ -7,7 +7,9 @@ export { SwitchDrawer } from './SwitchDrawer';
 
 export interface DrawerProps {
   isDrawerExpanded: boolean;
-  sx: SxProps<Theme>;
   handleDrawerOpen?: () => void;
   handleDrawerClose?: () => void;
+  sx: SxProps<Theme>;
+  className?: string;
+  renderChildren?: boolean;
 }

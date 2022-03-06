@@ -8,6 +8,11 @@ const themeInitialOptions = {
   spacing: 8 // spacing unit
 };
 
+/**
+ * Used fonts:
+ * The default font is Roboto, only a sub-set of available font-weights gets used (400;500;700)
+ */
+
 export const AppThemeProvider: FC = ({ children }) => {
   const { spacing } = themeInitialOptions;
 
@@ -15,7 +20,7 @@ export const AppThemeProvider: FC = ({ children }) => {
     const nextTheme = createTheme({
       spacing,
       typography: {
-        fontFamily: 'Roboto',
+        fontFamily: "'Roboto', sans-serif",
         h1: {
           fontWeight: 700,
           fontSize: '4.5rem',
@@ -68,6 +73,15 @@ export const AppThemeProvider: FC = ({ children }) => {
     <MuiThemeProvider theme={theme}>
       <StyledThemeProvider theme={theme}>
         <CssBaseline />
+
+        {/* <GlobalStyles
+          styles={{
+            body: {
+              boxSizing: 'border-box'
+            }
+          }}
+        /> */}
+
         {children}
       </StyledThemeProvider>
     </MuiThemeProvider>

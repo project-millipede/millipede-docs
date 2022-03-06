@@ -313,6 +313,10 @@ export const pagesDiscoverMore: Array<PageTypes.Page> = [
     icon: { ...defaultIcon, name: 'info' },
     children: [
       {
+        pathname: 'discover-more/vision',
+        icon: { ...defaultIcon, name: 'sports_score' }
+      },
+      {
         pathname: 'discover-more/roadmap',
         icon: { ...defaultIcon, name: 'map' }
       },

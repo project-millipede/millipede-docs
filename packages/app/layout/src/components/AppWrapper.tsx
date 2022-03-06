@@ -1,17 +1,16 @@
-import { useRouter } from 'next/router';
-import React, { FC, useEffect } from 'react';
-import { useAnalytics } from 'use-analytics';
+import React, { FC } from 'react';
 
-import { AppThemeProvider } from './AppThemeProvider';
+import { useAnalyticsOnRouteChange } from '../hooks/use-analytics-on-route-change';
+import { useResetScrollOnRouteChange } from '../hooks/use-reset-scroll-on-route-change';
+import { useSmoothScroll } from '../hooks/use-smooth-scroll';
 
 export const AppWrapper: FC = ({ children }) => {
-  const { page } = useAnalytics();
+  // Use smooth scroll behavior application wide
+  useSmoothScroll();
 
-  const { asPath } = useRouter();
+  useResetScrollOnRouteChange();
 
-  useEffect(() => {
-    page();
-  }, [asPath]);
+  useAnalyticsOnRouteChange();
 
-  return <AppThemeProvider>{children}</AppThemeProvider>;
+  return <>{children}</>;
 };
