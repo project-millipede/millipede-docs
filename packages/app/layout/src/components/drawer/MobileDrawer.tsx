@@ -1,9 +1,9 @@
-import { MAX_DRAWER_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
 import { SwipeableDrawer } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import React, { FC } from 'react';
 
 import { DrawerProps } from '.';
+import { MAX_DRAWER_WIDTH } from '../../constants';
 
 const StyledSwipeableDrawer = styled(SwipeableDrawer)(({ theme }) => ({
   '& .MuiDrawer-paper': {
@@ -18,9 +18,9 @@ const StyledSwipeableDrawer = styled(SwipeableDrawer)(({ theme }) => ({
 
 export const MobileDrawer: FC<DrawerProps> = ({
   isDrawerExpanded,
-  sx,
   handleDrawerOpen,
   handleDrawerClose,
+  sx,
   children
 }) => {
   return (

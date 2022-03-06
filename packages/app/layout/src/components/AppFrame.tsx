@@ -1,43 +1,16 @@
 import { Portal } from '@app/components';
-import { AppDrawer } from '@app/layout';
-import { layoutState, TOC_WIDTH } from '@app/layout/src/recoil/features/layout/reducer';
-import { NavigationState } from '@app/layout/src/recoil/features/pages/reducer';
-import { styled } from '@mui/material/styles';
+import { Navigation } from '@app/types';
 import React, { FC, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 
+import { features } from '../features';
+import { SwitchDrawer } from './drawer';
+import { AppFrameGrid } from './FrameGrid';
 import { AppBar } from './toolbar';
-
-interface AppGridProps {
-  hasToc: boolean;
-}
-
-export const AppFrameGrid = styled('div', {
-  shouldForwardProp: prop => prop !== 'hasToc'
-})<AppGridProps>(({ theme, hasToc }) => {
-  return {
-    display: 'grid',
-    gridTemplateRows: 'auto',
-    gridTemplateAreas: `'left middle'`,
-    gridTemplateColumns: 'max-content auto',
-    ...(hasToc && {
-      [theme.breakpoints.up('md')]: {
-        gridTemplateAreas: `'left middle right'`,
-        gridTemplateColumns: `max-content auto ${theme.spacing(TOC_WIDTH)}`
-      }
-    })
-  };
-});
-
-export const AppFrameDiv = styled('div')(() => {
-  return {
-    display: 'flex'
-  };
-});
 
 interface AppFrameProps {
   hasToc?: boolean;
-  navigation?: NavigationState;
+  navigation?: Navigation;
 }
 
 // Note:
@@ -71,6 +44,12 @@ export const AppFrame: FC<AppFrameProps> = ({
   navigation,
   children
 }) => {
+  const {
+    layout: {
+      states: { layoutState }
+    }
+  } = features;
+
   const [{ isDrawerExpanded }, setLayout] = useRecoilState(layoutState);
 
   const handleDrawerOpen = useCallback(() => {
@@ -99,24 +78,18 @@ export const AppFrame: FC<AppFrameProps> = ({
         handleDrawerClose={handleDrawerClose}
       />
 
-      <AppFrameGrid hasToc={hasToc}>
-        <AppDrawer.SwitchDrawer
-          isDrawerExpanded={isDrawerExpanded}
-          navigation={navigation}
-          handleDrawerOpen={handleDrawerOpen}
-          handleDrawerClose={handleDrawerClose}
-        />
+      <AppFrameGrid hasToc={hasToc} hasNavigation={!!navigation}>
+        {navigation && (
+          <SwitchDrawer
+            isDrawerExpanded={isDrawerExpanded}
+            navigation={navigation}
+            handleDrawerOpen={handleDrawerOpen}
+            handleDrawerClose={handleDrawerClose}
+          />
+        )}
         {children}
       </AppFrameGrid>
-      {/* <AppFrameDiv>
-        <AppDrawer.SwitchDrawer
-          isDrawerExpanded={isDrawerExpanded}
-          navigation={navigation}
-          handleDrawerOpen={handleDrawerOpen}
-          handleDrawerClose={handleDrawerClose}
-        />
-        {children}
-      </AppFrameDiv> */}
+
       <Portal.PortalOut portalType={Portal.PortalType.Cursor} />
     </>
   );

@@ -5,7 +5,7 @@ import { styled, useTheme } from '@mui/material/styles';
 import clsx from 'clsx';
 import React, { forwardRef, ForwardRefRenderFunction } from 'react';
 
-import { NAV_ITEM_INDICATOR_WIDTH } from '../../recoil/features/layout/reducer';
+import { NAV_ITEM_INDICATOR_WIDTH } from '../../constants';
 
 const StyledTreeItem = styled(TreeItem)<TreeItemProps>(({ theme }) => ({
   '& .MuiTreeItem-group': {

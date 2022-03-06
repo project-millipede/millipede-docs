@@ -3,7 +3,7 @@ import { CSSObject, styled, Theme } from '@mui/material/styles';
 import React, { FC } from 'react';
 
 import { DrawerProps } from '.';
-import { MAX_DRAWER_WIDTH, MIN_DRAWER_WIDTH } from '../../recoil/features/layout/reducer';
+import { MAX_DRAWER_WIDTH, MIN_DRAWER_WIDTH } from '../../constants';
 
 const openAnimation = (theme: Theme): CSSObject => ({
   width: theme.spacing(MAX_DRAWER_WIDTH),

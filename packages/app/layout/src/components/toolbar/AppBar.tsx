@@ -1,11 +1,11 @@
-import { Link } from '@app/components';
-import { MAX_DRAWER_WIDTH, TOOLBAR_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
+import { HiddenUnderlineLink } from '@app/components';
 import { GitHub, Menu } from '@mui/icons-material';
 import { AppBar as MuiAppBar, IconButton, Toolbar as MuiToolbar } from '@mui/material';
 import { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import { CSSObject, styled, Theme } from '@mui/material/styles';
 import React, { FC } from 'react';
 
+import { MAX_DRAWER_WIDTH, TOOLBAR_HEIGHT } from '../../constants';
 import { HideOnScroll } from './HideOnScroll';
 import { LanguageMenu } from './LanguageMenu';
 
@@ -56,7 +56,7 @@ export const AppBar: FC<AppBarProps> = ({
   handleDrawerClose
 }) => {
   const toolBar = (
-    <MuiToolbar disableGutters>
+    <MuiToolbar disableGutters sx={{ minHeight: 64 }}>
       <IconButton
         color='inherit'
         onClick={isDrawerExpanded ? handleDrawerClose : handleDrawerOpen}
@@ -70,7 +70,7 @@ export const AppBar: FC<AppBarProps> = ({
       <LanguageMenu />
       <IconButton
         color='inherit'
-        component={Link}
+        component={HiddenUnderlineLink}
         href='https://github.com/project-millipede/millipede-docs'
       >
         <GitHub />
