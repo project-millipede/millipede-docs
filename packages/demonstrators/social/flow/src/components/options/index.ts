@@ -1,0 +1,1 @@
+export { SliceOptions } from './SliceOptions';
