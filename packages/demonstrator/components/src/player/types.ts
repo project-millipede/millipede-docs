@@ -1,4 +1,5 @@
 export interface Step {
+  id?: string;
   start: number;
   end: number;
   label?: string;
