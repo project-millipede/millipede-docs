@@ -1,40 +1,53 @@
-import { useHoux } from '@app/houx';
-import { reducers as demonstratorSharedReducers } from '@demonstrators-social/shared';
-import React, { FC, useEffect } from 'react';
-import { RecoilRoot } from 'recoil';
+import { animateCenterToLeftOrRight, animateFromLeftToCenter, animateFromRightToCenter } from '@demonstrator/navigation';
+import React, { FC } from 'react';
+import { configure } from 'react-reparenting';
 
 import { App } from './App';
 
-export const Demonstrator: FC = () => {
-  const {
-    addReducer,
-    state
-  }: // removeReducer
-  {
-    addReducer: any;
-    // removeReducer: any;
-    state;
-  } = useHoux();
+configure({
+  removeChildFromContainer(container: HTMLElement, child: HTMLElement) {
+    const { dataset } = child;
 
-  useEffect(() => {
-    if (state.timeline == null) {
-      addReducer({ ...demonstratorSharedReducers });
+    const { position, previousPosition } = dataset;
+
+    /**
+     * left -> center (animated)
+     */
+
+    if (container.style.gridArea.includes('left')) {
+      if (position === 'middle' && previousPosition === 'left') {
+        animateFromLeftToCenter({ id: child.id });
+      }
     }
-    return () => {
-      // useResetRecoilState(timelineViewState);
-      // useResetRecoilState(nodesWithRelationsWithEdgeState);
-      // useResetRecoilState(refContainerScrollFromArcherState);
-      // useResetRecoilState(refContainerScrollState);
-      // useResetRecoilState(postIdsState);
-      // useResetRecoilState(refPostScrollState);
-      // useResetRecoilState(interactionOptionsState);
-      // removeReducer('timeline');
-    };
-  }, []);
 
-  return (
-    <RecoilRoot>
-      <App />
-    </RecoilRoot>
-  );
+    /**
+     *
+     * left <- [ center (not animated)] -> right
+     *
+     */
+
+    if (container.style.gridArea.includes('middle')) {
+      if (position === 'right' && previousPosition === 'middle') {
+        animateCenterToLeftOrRight({ id: child.id }, true);
+      } else if (position === 'left' && previousPosition === 'middle') {
+        animateCenterToLeftOrRight({ id: child.id }, false);
+      }
+    }
+
+    /**
+     * center <- right (animated)
+     */
+
+    if (container.style.gridArea.includes('right')) {
+      if (position === 'middle' && previousPosition === 'right') {
+        animateFromRightToCenter({ id: child.id });
+      }
+    }
+
+    container.removeChild(child);
+  }
+});
+
+export const Demonstrator: FC = () => {
+  return <App />;
 };
