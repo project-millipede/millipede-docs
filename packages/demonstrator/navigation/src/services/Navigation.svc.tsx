@@ -7,16 +7,24 @@ export const getViewElement = (
   return viewElements.find(viewElement => viewElement.id === viewElementId);
 };
 
-export const getComponent = (viewElement: TViewElement, _update = true) => {
-  const { key, id, component: Component } = viewElement;
+export const getComponent = (viewElement: TViewElement) => {
+  const {
+    id,
+    baseComponent: BaseComponent,
+    component: Component
+  } = viewElement;
 
-  return Component ? (
-    <Component
-      key={key}
-      layoutId={id}
-      layout={'position'}
-      // layoutId={update ? id : undefined}
-      // layout={update ? 'position' : false}
+  return (
+    <BaseComponent
+      viewId={id}
+      /**
+       * 2nd render function
+       * Forward base information a view-element requires;
+       * see the comments in the base-view-element component for more details.
+       */
+      render={(parentId, isMobile) => (
+        <Component parentId={parentId} isMobile={isMobile} />
+      )}
     />
-  ) : null;
+  );
 };

@@ -6,33 +6,19 @@ export const navigateById = (
   views: Array<TView>,
   viewElements: Array<PartialViewElement>
 ) => {
-  // find the view element, currently centered
-  // has to move from its current location (center) to a left or right placeholder
-  const fromViewElement = viewElements.find(
+  const fromViewElementIndex = viewElements.findIndex(
     viewElement => viewElement.id === fromViewElementId
   );
 
-  // find the the view elements parent position in all views
-  const fromViewIndex = views.findIndex(
-    view => view.id === fromViewElement.parentId
-  );
-
-  // find the next view element, which has to be centered
-  const toViewElement = viewElements.find(
+  const toViewElementIndex = viewElements.findIndex(
     viewElement => viewElement.id === toViewElementId
   );
 
-  // find the the view elements parent position in all views
-  const toViewIndex = views.findIndex(
-    view => view.id === toViewElement.parentId
-  );
+  // directions: left = -1, right = 1
+  const direction = toViewElementIndex < fromViewElementIndex ? -1 : 1;
 
-  const distance = toViewIndex - fromViewIndex;
+  const distance = toViewElementIndex - fromViewElementIndex;
 
-  // does not use distance (Vorzeichen) to indicate direction
-  const moveToRight = toViewIndex > fromViewIndex;
-
-  // currentViewElements and nextViewElements have to be identical in size
   const nextViewElements = viewElements.reduce<Array<PartialViewElement>>(
     (acc, viewElement) => {
       const fromView = views.find(view => view.id === viewElement.parentId);
@@ -48,7 +34,9 @@ export const navigateById = (
         {
           ...viewElement,
           parentId: toView.id,
-          previousParentId: fromView.id
+          previousParentId: fromView.id,
+          position: toView.position,
+          previousPosition: fromView.position
         }
       ];
     },
@@ -57,6 +45,6 @@ export const navigateById = (
 
   return {
     nextViewElements,
-    direction: moveToRight
+    direction
   };
 };
