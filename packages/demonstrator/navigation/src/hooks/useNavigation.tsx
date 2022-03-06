@@ -2,56 +2,88 @@ import { CollectionUtil } from '@app/utils';
 import { useCallback } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
-import { reparentReducer, reparentState } from '../recoil/features/reparent/reducers';
-import { viewNavigationState } from '../recoil/features/view-navigation/reducers';
+import { features } from '../features';
 import { navigateById } from '../services/NavigationControl.svc';
+import { PartialViewElement } from '../types';
 
 export const useNavigation = (): ((
   activeViewElementId: string,
   newActiveViewElementId: string
 ) => void) => {
-  const reparent = useRecoilValue(reparentState);
+  const {
+    app: {
+      states: { appCompositionState }
+    },
+    reparent: {
+      states: { reparentState },
+      actions: { sendReparentableChild }
+    },
+    view: {
+      navigation: {
+        states: { viewNavigationState }
+      }
+    }
+  } = features;
 
-  const { sendReparentableChild } = reparentReducer;
+  const parentElements = useRecoilValue(reparentState);
 
   const [{ views, viewElements }, setViewNavigation] =
     useRecoilState(viewNavigationState);
 
+  const { isMobile: isMobileManual } = useRecoilValue(appCompositionState);
+
+  const reparent = useCallback(
+    (viewElement: PartialViewElement) => {
+      if (viewElement.parentId !== viewElement.previousParentId) {
+        /**
+         * Depending on the animation approach used
+         *
+         * Manual animation
+         * Used to communicate animation before an element gets removed within the reparenting process.
+         * The idea is to keep the current position used in the keyframe before the element gets finally removed and readded elsewhere.
+         * Use this option in pure animation strategies, where no projection or layout animation is in place.
+         *
+         * Layout animation
+         * Communication to signal an animation position has changed using the data property of an HTML element is not required.
+         * Instead of using plain HTML components as the view-based building blocks, position-aware counterparts get used.
+         *
+         */
+        const element = document.getElementById(viewElement.id);
+        element.setAttribute('data-position', viewElement.position);
+        element.setAttribute(
+          'data-previous-position',
+          viewElement.previousPosition
+        );
+
+        if (viewElement.parentId !== viewElement.previousParentId) {
+          sendReparentableChild(
+            parentElements,
+            viewElement.previousParentId,
+            viewElement.parentId,
+            0,
+            0
+          );
+        }
+      }
+    },
+    [parentElements, sendReparentableChild]
+  );
+
   const navigate = useCallback(
     (activeViewElementId: string, newActiveViewElementId: string) => {
-      const { nextViewElements, direction: moveToRight } = navigateById(
+      const { nextViewElements, direction } = navigateById(
         activeViewElementId,
         newActiveViewElementId,
         views,
         viewElements
       );
-
-      moveToRight
-        ? nextViewElements.forEach(
-            viewElement =>
-              viewElement.parentId &&
-              viewElement.previousParentId &&
-              sendReparentableChild(
-                reparent,
-                viewElement.previousParentId,
-                viewElement.parentId,
-                0,
-                0
-              )
-          )
-        : CollectionUtil.Array.reverse(nextViewElements).forEach(
-            viewElement =>
-              viewElement.parentId &&
-              viewElement.previousParentId &&
-              sendReparentableChild(
-                reparent,
-                viewElement.previousParentId,
-                viewElement.parentId,
-                0,
-                0
-              )
-          );
-
+      // directions: left = -1, right = 1
+      if (direction === 1) {
+        isMobileManual && nextViewElements.forEach(reparent);
+      } else if (direction === -1) {
+        isMobileManual &&
+          CollectionUtil.Array.reverse(nextViewElements).forEach(reparent);
+      }
       setViewNavigation(state => {
         return { ...state, viewElements: nextViewElements };
       });
@@ -59,8 +91,8 @@ export const useNavigation = (): ((
     [
       views,
       viewElements,
-      reparent.parentFiberMap,
-      navigateById,
+      isMobileManual,
+      parentElements.parentFiberMap,
       setViewNavigation
     ]
   );
