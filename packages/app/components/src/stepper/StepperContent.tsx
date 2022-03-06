@@ -17,7 +17,7 @@ export const renderTitleAndDescription = (
         item
         xs={item.size}
         key={`title-description-${index}`}
-        sx={{ p: theme.spacing(1) }}
+        sx={{ padding: theme.spacing(1) }}
       >
         <Typography variant='h6' gutterBottom>
           {item.title}

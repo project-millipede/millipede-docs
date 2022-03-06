@@ -5,6 +5,9 @@ export const StyledTabs = styled(TabsComponent)<TabsProps>(({ theme }) => ({
   '& .MuiTabs-flexContainer': {
     flexWrap: 'wrap'
   },
+  '& .MuiTabs-indicator': {
+    transition: 'none'
+  },
   '& .MuiTab-root': {
     '&.MuiTab-labelIcon': {
       minHeight: theme.spacing(6),

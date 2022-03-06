@@ -61,7 +61,7 @@ export const Stepper: FC<StepperWithTranslationProps> = ({
             size='small'
             onClick={handleBack}
             disabled={activeStep === 0}
-            id={'back'}
+            id='back'
           >
             <KeyboardArrowLeft />
             {labelBack}
@@ -74,7 +74,7 @@ export const Stepper: FC<StepperWithTranslationProps> = ({
             size='small'
             onClick={handleNext}
             disabled={activeStep === steps - 1}
-            id={'next'}
+            id='next'
           >
             {labelNext}
             <KeyboardArrowRight />
