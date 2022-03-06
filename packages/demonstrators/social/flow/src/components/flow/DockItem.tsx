@@ -1,96 +1,108 @@
 import { HooksUtils } from '@app/render-utils';
-import { scrollReducers, scrollSelectors, scrollStates } from '@demonstrators-social/shared';
+import { features } from '@demonstrators-social/shared';
 import { EffectRef } from '@huse/effect-ref';
-import React, { FC, memo, useCallback, useLayoutEffect } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import React, { FC, memo, useEffect } from 'react';
+import { useRecoilCallback, useRecoilValue } from 'recoil';
 
-import { DockItemPropsRoot } from '../../types';
-import { DockSliceObserverWithArcher } from './DockSlice';
+import DockSliceWithArcher from './DockSlice';
 
-export const DockItem: FC<DockItemPropsRoot> = ({
-  containerScroll,
+export interface DockItemProps {
+  timelineId: string;
+  postId: string;
+  containerScroll?: Partial<DOMRectReadOnly>;
+}
+
+export const DockItem: FC<DockItemProps> = ({
   timelineId,
   postId,
-  offSet
+  containerScroll
 }) => {
   const {
-    post: { refPostScrollState }
-  } = scrollStates;
-
-  const setRefPostScroll = useSetRecoilState(refPostScrollState(postId));
+    scroll: {
+      timeline: {
+        selector: { dockedSliceIdsSelector }
+      },
+      post: {
+        states: { refPostScrollState },
+        utils: { updateObservedItem, removeObservedItem }
+      }
+    }
+  } = features;
 
   const [postRef, postBounds] = HooksUtils.useScroll({
     debounce: 0,
     withCapture: false
   });
 
-  const updateObservedItem = useCallback(
-    (timelineId: string, value: EffectRef<HTMLElement>) => {
-      setRefPostScroll(state =>
-        scrollReducers.post.updateObservedItem(state, timelineId, value)
-      );
-    },
-    [scrollReducers.post.updateObservedItem]
+  const updateRefPostScroll = useRecoilCallback(
+    ({ set }) =>
+      (timelineId: string, handler: EffectRef<HTMLElement>) => {
+        set(refPostScrollState(postId), state =>
+          updateObservedItem(state, timelineId, handler)
+        );
+      },
+    []
   );
 
-  const removeObservedItem = useCallback(
-    (timelineId: string) => {
-      setRefPostScroll(state =>
-        scrollReducers.post.removeObservedItem(state, timelineId)
-      );
-    },
-    [scrollReducers.post.removeObservedItem]
+  const removeRefPostScroll = useRecoilCallback(
+    ({ set }) =>
+      (timelineId: string) => {
+        set(refPostScrollState(postId), state =>
+          removeObservedItem(state, timelineId)
+        );
+      },
+    []
   );
 
-  // 1.1 (mount, and update, deps)
-  useLayoutEffect(() => {
-    updateObservedItem(timelineId, postRef);
+  useEffect(() => {
+    updateRefPostScroll(timelineId, postRef);
+    return () => {
+      removeRefPostScroll(timelineId);
+    };
   }, [timelineId, postRef]);
 
-  // 1.2 (unmount)
-  useLayoutEffect(() => {
-    return () => {
-      removeObservedItem(timelineId);
-    };
-  }, []);
+  const dockedSliceIds = useRecoilValue(
+    dockedSliceIdsSelector({ timelineId, postId })
+  );
 
-  const {
-    timeline: { sliceIdsSelector }
-  } = scrollSelectors;
-
-  const selectedSliceIds = useRecoilValue(sliceIdsSelector(timelineId));
-
-  const sliceRectangles = selectedSliceIds.map(slice => {
+  const sliceRectangles = dockedSliceIds.map(slice => {
     const {
-      // postId: selectedPostId,
       sliceId,
       nodeWithRelations: {
         relations,
         node: { id: nodeId }
       }
-    } = slice || { nodeWithRelations: { node: {} } };
+    } = slice;
 
-    // TODO: Validate
-    // return selectedPostId === postId ? (
     return (
-      <DockSliceObserverWithArcher
+      <DockSliceWithArcher
+        key={`dock-${timelineId}-${postId}-${sliceId}`}
         timelineId={timelineId}
         postId={postId}
         sliceId={sliceId}
         postBounds={postBounds}
-        key={`dock-item-${timelineId}-${postId}-${sliceId}`}
         id={nodeId}
         relations={relations}
         isInteractive
       />
     );
-    // : null;
   });
+
+  const translate = postBounds.top - containerScroll.top;
+
+  /**
+   * To center grid-items use
+   * - left: '50%' and
+   * - transform: 'translateX(-50%)'
+   */
 
   return (
     <div
       style={{
-        top: postBounds.top - containerScroll.top - offSet,
+        left: '50%',
+        // inline calc
+        // transform: `translateY(calc(${postBounds.top}px - ${containerScroll.top}px - ${offSet}px)) translateX(-50%)`,
+        transform: `translateY(${translate}px) translateX(-50%)`,
         height: postBounds.height,
         position: 'absolute',
         width: '25px',
