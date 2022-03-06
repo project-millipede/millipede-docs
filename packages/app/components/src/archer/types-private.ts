@@ -3,15 +3,14 @@ import { CSSProperties, ReactNode, SVGProps } from 'react';
 export type AnchorPosition = 'top' | 'bottom' | 'left' | 'right' | 'middle';
 
 export interface ArrowStyle {
+  arrowLength?: number;
+  arrowThickness?: number;
   strokeColor?: string;
   strokeWidth?: number;
   strokeDasharray?: string;
-  arrowLength?: number;
-  arrowThickness?: number;
-  noCurves?: boolean;
 }
 
-export interface ArcherContainerProps {
+export interface ArcherSurfaceProps {
   /**
    * A size in px
    */
@@ -40,11 +39,6 @@ export interface ArcherContainerProps {
    */
   strokeDasharray?: string;
 
-  /**
-   * Set this to true if you want angles instead of curves
-   */
-  noCurves?: boolean;
-
   style?: CSSProperties;
 
   /**
@@ -54,23 +48,10 @@ export interface ArcherContainerProps {
 
   className?: string;
 
-  /**
-   * Optional number for space between element and start/end of stroke
-   */
-  offset?: number;
-
   elementStyle?: CSSProperties;
 
   children?: ReactNode;
 }
-
-export type RelationType = {
-  targetId: string;
-  targetAnchor: AnchorPosition;
-  sourceAnchor: AnchorPosition;
-  label?: ReactNode;
-  style?: ArrowStyle;
-};
 
 export type EntityRelationType = {
   id: string;

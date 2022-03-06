@@ -1,84 +1,58 @@
-import { HiddenUnderlineLink } from '@app/components';
 import { Box, BoxProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { LinkProps } from 'next/link';
 import { useRouter } from 'next/router';
-import React, {
-  forwardRef,
-  ForwardRefRenderFunction,
-  MutableRefObject,
-  ReactNode,
-  useImperativeHandle,
-  useState,
-} from 'react';
+import React, { forwardRef, ForwardRefRenderFunction } from 'react';
+import { UrlObject } from 'url';
 
-import { LinkProps } from '../link';
-import { SelectHandles } from './types';
+import { HiddenUnderlineLink } from '../link';
 
 export type BoxEnhancedProps = BoxProps &
-  LinkProps & {
-    selected: boolean;
-  };
+  Omit<LinkProps, 'href'> & { href?: UrlObject };
 
-export const StyledBox = styled(Box)<BoxEnhancedProps>(
-  ({ selected, theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    border: '3px solid black',
-    padding: theme.spacing(1),
-    color: theme.palette.text.primary,
-    ':hover': {
-      cursor: 'pointer',
-      backgroundColor: '#E0E0E0'
-    },
-    ...(selected && {
-      cursor: 'pointer',
-      backgroundColor: '#E0E0E0'
-    })
-  })
-);
+export const StyledBox = styled(Box)<BoxEnhancedProps>(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: theme.spacing(1),
+  border: '1px solid black',
+  [theme.breakpoints.up('md')]: {
+    border: '2px solid black'
+  },
+  color: theme.palette.text.primary,
+  ':hover': {
+    cursor: 'pointer',
+    backgroundColor: '#E0E0E0'
+  }
+}));
 
 export type InteractiveBoxProps = BoxProps & {
   routeSegement?: string;
-  dynamicRef?: MutableRefObject<SelectHandles>;
-  children: ReactNode;
 };
 
 const InteractiveBox: ForwardRefRenderFunction<
   HTMLDivElement,
   InteractiveBoxProps
-> = ({ routeSegement, sx, dynamicRef, children }, ref) => {
-  const [selected, setSelected] = useState(false);
-
-  useImperativeHandle(
-    dynamicRef,
-    () => ({
-      select: () => {
-        setSelected(true);
-      },
-      unSelect: () => {
-        setSelected(false);
-      }
-    }),
-    []
-  );
-
+> = ({ sx, routeSegement, children }, ref) => {
   const { pathname, query } = useRouter();
 
-  return (
+  return routeSegement ? (
     <StyledBox
-      ref={ref as any}
-      selected={selected}
       sx={sx}
-      component={routeSegement && HiddenUnderlineLink}
+      ref={ref}
+      component={HiddenUnderlineLink}
       href={{
         pathname,
         query,
-        hash: routeSegement
+        hash: `${routeSegement}-anchor`
       }}
       shallow
       prefetch={false}
     >
+      {children}
+    </StyledBox>
+  ) : (
+    <StyledBox sx={sx} ref={ref}>
       {children}
     </StyledBox>
   );

@@ -1,250 +1,138 @@
-/* eslint-disable no-restricted-globals */
-/* eslint-disable no-param-reassign */
-/* eslint-disable operator-assignment */
-import React, { ReactNode } from 'react';
+import { useMergedRef } from '@huse/merged-ref';
+import React, { forwardRef, ForwardRefRenderFunction, ReactNode, useImperativeHandle, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 
-import { Point } from './Point';
-import { AnchorPosition } from './types-private';
+import { features } from '../features';
+import {
+  computeArrowPointAccordingToArrowHead,
+  computeEndAnchorPosition,
+  computeLabelDimensions,
+  computePath,
+  computeStartAnchorPosition,
+  getCoordinatesFromAnchorPosition,
+  getParentCoordinates,
+} from './SvgArrow.svc';
+import { EntityRelationType } from './types-private';
 
-type Props = {
-  startingPoint: Point;
-  startingAnchorOrientation: AnchorPosition;
-  endingPoint: Point;
-  endingAnchorOrientation: AnchorPosition;
+type SvgArrowProps = {
+  source: EntityRelationType;
+  target: EntityRelationType;
   strokeColor: string;
-  arrowLength: number;
   strokeWidth: number;
   strokeDasharray?: string;
-  arrowLabel?: ReactNode;
   arrowMarkerId: string;
-  noCurves: boolean;
-  offset?: number;
+  arrowLabel: ReactNode;
+  arrowLength: number;
 };
 
-const computeArrowDirectionVector = (anchorOrientation: AnchorPosition) => {
-  switch (anchorOrientation) {
-    case 'left':
-      return { arrowX: -1, arrowY: 0 };
-    case 'right':
-      return { arrowX: 1, arrowY: 0 };
-    case 'top':
-      return { arrowX: 0, arrowY: -1 };
-    case 'bottom':
-      return { arrowX: 0, arrowY: 1 };
-    default:
-      return { arrowX: 0, arrowY: 0 };
-  }
-};
-
-export const computeEndingPointAccordingToArrowHead = (
-  xArrowHeadEnd: number,
-  yArrowHeadEnd: number,
-  arrowLength: number,
-  strokeWidth: number,
-  endingAnchorOrientation: AnchorPosition
-) => {
-  const endingVector = computeArrowDirectionVector(endingAnchorOrientation);
-
-  const { arrowX, arrowY } = endingVector;
-
-  const xEnd = xArrowHeadEnd + (arrowX * arrowLength * strokeWidth) / 2;
-  const yEnd = yArrowHeadEnd + (arrowY * arrowLength * strokeWidth) / 2;
-
-  return { xEnd, yEnd };
-};
-
-export const computeStartingAnchorPosition = (
-  xStart: number,
-  yStart: number,
-  xEnd: number,
-  yEnd: number,
-  startingAnchorOrientation: AnchorPosition
-): { xAnchor1: number; yAnchor1: number } => {
-  if (
-    startingAnchorOrientation === 'top' ||
-    startingAnchorOrientation === 'bottom'
-  ) {
-    return {
-      xAnchor1: xStart,
-      yAnchor1: yStart + (yEnd - yStart) / 2
-    };
-  }
-  if (
-    startingAnchorOrientation === 'left' ||
-    startingAnchorOrientation === 'right'
-  ) {
-    return {
-      xAnchor1: xStart + (xEnd - xStart) / 2,
-      yAnchor1: yStart
-    };
-  }
-
-  return { xAnchor1: xStart, yAnchor1: yStart };
-};
-
-export const computeEndingAnchorPosition = (
-  xStart: number,
-  yStart: number,
-  xEnd: number,
-  yEnd: number,
-  endingAnchorOrientation: AnchorPosition
-): { xAnchor2: number; yAnchor2: number } => {
-  if (
-    endingAnchorOrientation === 'top' ||
-    endingAnchorOrientation === 'bottom'
-  ) {
-    return {
-      xAnchor2: xEnd,
-      yAnchor2: yEnd - (yEnd - yStart) / 2
-    };
-  }
-  if (
-    endingAnchorOrientation === 'left' ||
-    endingAnchorOrientation === 'right'
-  ) {
-    return {
-      xAnchor2: xEnd - (xEnd - xStart) / 2,
-      yAnchor2: yEnd
-    };
-  }
-
-  return { xAnchor2: xEnd, yAnchor2: yEnd };
-};
-
-export const computeLabelDimensions = (
-  xStart: number,
-  yStart: number,
-  xEnd: number,
-  yEnd: number
-): {
-  xLabel: number;
-  yLabel: number;
-  labelWidth: number;
-  labelHeight: number;
-} => {
-  const labelWidth = Math.max(Math.abs(xEnd - xStart), 1);
-  const labelHeight = Math.max(Math.abs(yEnd - yStart), 1);
-
-  const xLabel = xEnd > xStart ? xStart : xEnd;
-  const yLabel = yEnd > yStart ? yStart : yEnd;
-
-  return {
-    xLabel,
-    yLabel,
-    labelWidth,
-    labelHeight
-  };
-};
-
-export const computePathString = ({
-  xStart,
-  yStart,
-  xAnchor1,
-  yAnchor1,
-  xAnchor2,
-  yAnchor2,
-  xEnd,
-  yEnd,
-  noCurves,
-  offset
-}: {
-  xStart: number;
-  yStart: number;
-  xAnchor1: number;
-  yAnchor1: number;
-  xAnchor2: number;
-  yAnchor2: number;
-  xEnd: number;
-  yEnd: number;
-  noCurves: boolean;
-  offset?: number;
-}): string => {
-  const curveMarker = noCurves ? '' : 'C';
-
-  if (offset && offset > 0) {
-    const angle = Math.atan2(yAnchor1 - yStart, xAnchor1 - xStart);
-
-    const xOffset = offset * Math.cos(angle);
-    const yOffset = offset * Math.sin(angle);
-
-    xStart = xStart + xOffset;
-    xEnd = xEnd - xOffset;
-
-    yStart = yStart + yOffset;
-    yEnd = yEnd - yOffset;
-  }
-
-  return (
-    `M${xStart},${yStart} ` +
-    `${curveMarker}${xAnchor1},${yAnchor1} ${xAnchor2},${yAnchor2} ` +
-    `${xEnd},${yEnd}`
-  );
-};
-
-const SvgArrow = ({
-  startingPoint,
-  startingAnchorOrientation,
-  endingPoint,
-  endingAnchorOrientation,
-  strokeColor,
-  arrowLength,
-  strokeWidth,
-  strokeDasharray,
-  arrowLabel,
-  arrowMarkerId,
-  noCurves,
-  offset
-}: Props) => {
-  const actualArrowLength = arrowLength * 2;
-
-  const xStart = startingPoint.x;
-  const yStart = startingPoint.y;
-
-  const endingPointWithArrow = computeEndingPointAccordingToArrowHead(
-    endingPoint.x,
-    endingPoint.y,
-    actualArrowLength,
+export const SvgArrow: ForwardRefRenderFunction<
+  HTMLDivElement,
+  SvgArrowProps
+> = (
+  {
+    source,
+    target,
+    strokeColor,
     strokeWidth,
-    endingAnchorOrientation
+    strokeDasharray,
+    arrowMarkerId,
+    arrowLabel,
+    arrowLength
+  },
+  ref
+) => {
+  const {
+    archer: {
+      selector: { archerRefSelector }
+    }
+  } = features;
+
+  const sourceRef = useRecoilValue(archerRefSelector(source.id));
+  const targetRef = useRecoilValue(archerRefSelector(target.id));
+
+  const combinedRef = useMergedRef([
+    sourceRef.dynamicRef,
+    targetRef.dynamicRef
+  ]);
+
+  const [renderCount, setRenderCount] = useState(0);
+
+  /**
+   * Synchronization of a dock component with an assigned bearing.
+   *
+   * Dock elements are used when playing a scenario to highlight
+   * the relevant aspects of a post.
+   *
+   * The position of a Dock element corresponds to the scroll
+   * position of the relevant post within the news feed.
+   *
+   * If a docking element is linked to another node, an arrow represents this.
+   * Instead of performing a repeated scroll handler registration of an arrow
+   * associated with a dock component with the relevant post section,
+   * a signal is sent from the dock component to recalculate the arrow coordinates.
+   */
+
+  useImperativeHandle(
+    combinedRef,
+    () => ({
+      sync: _y => {
+        // force re-render
+        setRenderCount(renderCount + 1);
+      }
+    }),
+    [combinedRef, setRenderCount, renderCount]
   );
-  const { xEnd, yEnd } = endingPointWithArrow;
 
-  const startingPosition = computeStartingAnchorPosition(
-    xStart,
-    yStart,
-    xEnd,
-    yEnd,
-    startingAnchorOrientation
+  const parentCoordinates = getParentCoordinates(ref);
+
+  const startPoint = getCoordinatesFromAnchorPosition(
+    source.anchor,
+    parentCoordinates,
+    sourceRef && sourceRef.ref
   );
-  const { xAnchor1, yAnchor1 } = startingPosition;
 
-  const endingPosition = computeEndingAnchorPosition(
-    xStart,
-    yStart,
-    xEnd,
-    yEnd,
-    endingAnchorOrientation
+  const endPoint = getCoordinatesFromAnchorPosition(
+    target.anchor,
+    parentCoordinates,
+    targetRef && targetRef.ref
   );
-  const { xAnchor2, yAnchor2 } = endingPosition;
 
-  const pathString = computePathString({
-    xStart,
-    yStart,
-    xAnchor1,
-    yAnchor1,
-    xAnchor2,
-    yAnchor2,
-    xEnd,
-    yEnd,
-    noCurves,
-    offset
-  });
+  const startPointWithArrow = computeArrowPointAccordingToArrowHead(
+    startPoint,
+    arrowLength,
+    strokeWidth,
+    source.anchor
+  );
 
-  const { xLabel, yLabel, labelWidth, labelHeight } = computeLabelDimensions(
-    xStart,
-    yStart,
-    xEnd,
-    yEnd
+  const endPointWithArrow = computeArrowPointAccordingToArrowHead(
+    endPoint,
+    arrowLength,
+    strokeWidth,
+    target.anchor
+  );
+
+  const computedStartPosition = computeStartAnchorPosition(
+    startPointWithArrow,
+    endPointWithArrow,
+    source.anchor
+  );
+
+  const computedEndPosition = computeEndAnchorPosition(
+    startPointWithArrow,
+    endPointWithArrow,
+    target.anchor
+  );
+
+  const pathString = computePath(
+    startPoint, // startPointWithArrow,
+    endPointWithArrow,
+    computedStartPosition,
+    computedEndPosition
+  );
+
+  const { position: labelPosition, size: labelSize } = computeLabelDimensions(
+    startPoint,
+    endPointWithArrow
   );
 
   return (
@@ -261,22 +149,22 @@ const SvgArrow = ({
       />
       {arrowLabel && (
         <foreignObject
-          x={xLabel}
-          y={yLabel}
-          width={labelWidth}
-          height={labelHeight}
+          x={labelPosition.x}
+          y={labelPosition.y}
+          width={labelSize.width}
+          height={labelSize.heigth}
           style={{ overflow: 'visible', pointerEvents: 'none' }}
         >
           <div
             style={{
-              position: 'absolute',
+              position: 'fixed',
               left: '50%',
               top: '50%',
               transform: 'translateX(-50%) translateY(-50%)',
               pointerEvents: 'all'
             }}
           >
-            <div>{arrowLabel}</div>
+            {arrowLabel}
           </div>
         </foreignObject>
       )}
@@ -284,4 +172,4 @@ const SvgArrow = ({
   );
 };
 
-export default SvgArrow;
+export default forwardRef(SvgArrow);
