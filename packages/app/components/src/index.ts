@@ -1,10 +1,10 @@
-export { default as CustomIcon, getIconByName, loadFAIcons } from './icon';
+export { CustomIcon, getIconByName, loadFAIcons } from './icon';
 export * from './link';
-export { Tag } from './tag';
 export * as Tabs from './tabs';
 export { default as Portal } from './portal';
 export { default as Archer, ArcherTypes } from './archer';
-export { Help } from './help';
 export { default as Stepper } from './stepper';
-export { default as Pdf } from './pdf';
-export * as Query from './query';
+export * as Pdf from './pdf';
+
+export * from './tag';
+export { features } from './features';

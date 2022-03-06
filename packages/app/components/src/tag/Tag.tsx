@@ -1,7 +1,12 @@
 import { ClassOutlined } from '@mui/icons-material';
 import { Chip } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import React, { FC } from 'react';
+
+export const Anchor = styled('span')(({ theme }) => ({
+  position: 'absolute',
+  marginTop: theme.spacing(-10)
+}));
 
 interface TagProps {
   text: string;
@@ -9,15 +14,15 @@ interface TagProps {
 }
 
 export const Tag: FC<TagProps> = ({ text, id }) => {
-  const theme = useTheme();
   return (
-    <Chip
-      id={id}
-      variant='outlined'
-      color='primary'
-      icon={<ClassOutlined />}
-      label={text}
-      sx={{ margin: theme.spacing(2, 0.5) }}
-    />
+    <div>
+      <Anchor id={id} />
+      <Chip
+        variant='outlined'
+        color='primary'
+        icon={<ClassOutlined />}
+        label={text}
+      />
+    </div>
   );
 };
