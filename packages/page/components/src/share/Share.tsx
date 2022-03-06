@@ -1,8 +1,7 @@
-import { APP_CONTENT_HEADER_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
+import { APP_CONTENT_HEADER_HEIGHT } from '@app/layout';
 import { RenderUtils } from '@app/render-utils';
 import { PageTypes } from '@app/types';
 import { StringUtil } from '@app/utils';
-import { notificationStates } from '@demonstrators-social/shared';
 import { Close, Share as ShareIcon } from '@mui/icons-material';
 import { CloseReason, OpenReason, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -15,6 +14,7 @@ import useTranslation from 'next-translate/useTranslation';
 import React, { FC, SyntheticEvent, useCallback, useMemo } from 'react';
 import { useSetRecoilState } from 'recoil';
 
+import { features } from '../features';
 import useDisclosure from './hooks/use-disclosure';
 import { Icon } from './Icon';
 import {
@@ -55,7 +55,7 @@ export const NoTransition: FC<TransitionProps> = props => {
 };
 
 const getConnectionData = (
-  meta: PageTypes.ContentMetaData,
+  meta: PageTypes.MetaData,
   url: string,
   t: Translate
 ) => {
@@ -175,10 +175,16 @@ const setupConnection = (
 };
 
 interface ShareProps {
-  metaData: PageTypes.ContentMetaData;
+  metaData: PageTypes.MetaData;
 }
 
 export const Share: FC<ShareProps> = ({ metaData }) => {
+  const {
+    notification: {
+      states: { notificationState }
+    }
+  } = features;
+
   const url = RenderUtils.isBrowser() && window.location.href;
   const supportWebShare = RenderUtils.supportWebShare();
 
@@ -186,11 +192,7 @@ export const Share: FC<ShareProps> = ({ metaData }) => {
 
   const { onOpen, onClose, isOpen } = useDisclosure();
 
-  const {
-    notification: { snackbarState }
-  } = notificationStates;
-
-  const setSnackbar = useSetRecoilState(snackbarState);
+  const setNotification = useSetRecoilState(notificationState);
 
   const handleShareOpen = (
     _event: SyntheticEvent<HTMLDivElement, Event>,
@@ -215,7 +217,7 @@ export const Share: FC<ShareProps> = ({ metaData }) => {
   const handleCloseWithFeedback = (type?: Interaction) => {
     onClose();
     if (type === Interaction.SHARE_LOCAL) {
-      setSnackbar(state => {
+      setNotification(state => {
         return {
           ...state,
           isActive: true,
@@ -266,7 +268,7 @@ export const Share: FC<ShareProps> = ({ metaData }) => {
             icon={icon}
             tooltipTitle={title}
             onClick={action}
-            tooltipPlacement={'left'}
+            tooltipPlacement='left'
           />
         );
       })}
