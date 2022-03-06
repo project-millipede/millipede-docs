@@ -7,7 +7,7 @@ import React, {
   useCallback,
   useContext,
   useEffect,
-  useState
+  useState,
 } from 'react';
 
 import { PortalType } from './Portal.constants';
@@ -58,21 +58,19 @@ export interface IProps {
   [key: string]: any;
 }
 
-export const PortalIn: FC<IProps> = props => {
+export const PortalIn: FC<IProps> = ({ portalType, children }) => {
   const { addPortalItem, removePortalItem } = useContext(PortalContext);
 
   useEffect(() => {
-    addPortalItem(props.portalType, props.children);
+    addPortalItem(portalType, children);
 
-    return () => removePortalItem(props.portalType);
-  }, [props.portalType, props.children]);
+    return () => removePortalItem(portalType);
+  }, [portalType, children]);
 
   return null;
 };
 
-export const PortalOut: FC<IProps> = props => {
-  const { portalType, ...rest } = props;
-
+export const PortalOut: FC<IProps> = ({ portalType, ...rest }) => {
   const { portalMap } = useContext(PortalContext);
 
   if (portalMap != null) {

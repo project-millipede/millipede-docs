@@ -17,11 +17,9 @@ const generateMUIIcon = (iconName: string) => {
   return getIconByName(iconName);
 };
 
-const CustomIcon: FC<CustomIconProps> = ({ icon }) => {
+export const CustomIcon: FC<CustomIconProps> = ({ icon }) => {
   if (icon.type === PageTypes.IconType.FA) {
     return generateFAIcon(icon.name as IconName);
   }
   return generateMUIIcon(icon.name);
 };
-
-export default CustomIcon;

@@ -1,5 +1,1 @@
-import { StepperContent } from './StepperContent';
-
-export default {
-  StepperContent
-};
+export { StepperContent } from './StepperContent';
