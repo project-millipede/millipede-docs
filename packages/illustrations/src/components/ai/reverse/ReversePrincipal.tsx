@@ -5,7 +5,7 @@ import React, { FC } from 'react';
 
 import { Title } from '../../common';
 
-const { ArcherContainer, ArcherElement, InteractiveBox } = Archer;
+const { ArcherSurface, ArcherElement, InteractiveBox } = Archer;
 
 export const GridWrapper = styled('div')(({ theme }) => {
   const margin = theme.spacing(1);
@@ -39,7 +39,7 @@ export const ReversePrincipal: FC = () => {
   const { t } = useTranslation();
 
   return (
-    <ArcherContainer noCurves strokeColor='gray'>
+    <ArcherSurface strokeColor='gray'>
       <GridWrapper>
         <div style={{ gridArea: 'head_access' }}>
           <Title>{t('pages/ai/reverse/index:access')}</Title>
@@ -124,6 +124,6 @@ export const ReversePrincipal: FC = () => {
           </InteractiveBox>
         </ArcherElement>
       </GridWrapper>
-    </ArcherContainer>
+    </ArcherSurface>
   );
 };

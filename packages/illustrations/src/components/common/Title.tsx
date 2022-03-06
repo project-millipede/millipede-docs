@@ -11,4 +11,4 @@ export const Title = styled(Typography)(({ theme }) => ({
   WebkitHyphens: 'auto'
 }));
 
-export const TitleUnstyled = styled(Typography)(() => ({}));
+export const TitleUnstyled = styled(Typography)({});
