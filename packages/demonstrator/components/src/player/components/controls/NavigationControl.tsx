@@ -1,4 +1,3 @@
-import { INPUT_HEIGHT } from '@app/layout/src/recoil/features/layout/reducer';
 import { ArrowLeft, ArrowRight, Pause, PlayArrow } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -10,7 +9,7 @@ const Row = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-start',
-  borderRadius: theme.spacing(INPUT_HEIGHT)
+  marginRight: theme.spacing(1)
 }));
 
 export const NavigationControl: FC = () => {
@@ -19,7 +18,7 @@ export const NavigationControl: FC = () => {
 
   return (
     <Row>
-      <IconButton onClick={() => stepDispatch({ type: 'PREV' })}>
+      <IconButton size='small' onClick={() => stepDispatch({ type: 'PREV' })}>
         <ArrowLeft />
       </IconButton>
       <IconButton
@@ -29,7 +28,7 @@ export const NavigationControl: FC = () => {
       >
         {playing ? <Pause /> : <PlayArrow />}
       </IconButton>
-      <IconButton onClick={() => stepDispatch({ type: 'NEXT' })}>
+      <IconButton size='small' onClick={() => stepDispatch({ type: 'NEXT' })}>
         <ArrowRight />
       </IconButton>
     </Row>
