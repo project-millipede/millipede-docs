@@ -1,8 +1,11 @@
-import { Link } from '@app/components';
+import { HiddenUnderlineLink as Link } from '@app/components';
 import { Container, Grid, GridProps, Link as MuiLink, Typography } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import useTranslation from 'next-translate/useTranslation';
+import getConfig from 'next/config';
 import React from 'react';
+
+const { publicRuntimeConfig } = getConfig();
 
 export const StyledGrid = styled(Grid)<GridProps>(({ theme }) => ({
   marginBottom: theme.spacing(4),
@@ -25,11 +28,16 @@ export const HomeFooter = () => {
   const theme = useTheme();
 
   return (
-    <Container component='footer' sx={{ padding: theme.spacing(8, 0) }}>
+    <Container
+      component='footer'
+      sx={{
+        padding: theme.spacing(8, 0)
+      }}
+    >
       <Grid container>
         <StyledGrid
           item
-          md={4}
+          md={3}
           sx={{
             [theme.breakpoints.down('md')]: {
               display: 'none'
@@ -44,7 +52,7 @@ export const HomeFooter = () => {
             {t('common:headTitle')}
           </Typography>
         </StyledGrid>
-        <StyledGrid item xs={6} md={4}>
+        <StyledGrid item xs={6} md={3}>
           <Typography
             sx={{
               fontWeight: theme.typography.fontWeightMedium
@@ -79,14 +87,36 @@ export const HomeFooter = () => {
             </li>
           </ul>
         </StyledGrid>
-        <StyledGrid item xs={6} md={4}>
+        <StyledGrid item xs={6} md={3}>
           <Typography
             sx={{
               fontWeight: theme.typography.fontWeightMedium
             }}
             gutterBottom
           >
-            {t('common:footerResources')}
+            {t('common:footerExplore')}
+          </Typography>
+          <ul>
+            <li>
+              {/* 
+              Note: 
+              The blog requires different fonts; they load only using the native link. 
+              Use the native link instead of the nextJS link passing the property "href" as a string. 
+              */}
+              <Link href='/blog' color='inherit' variant='body2'>
+                {t('common:blog')}
+              </Link>
+            </li>
+          </ul>
+        </StyledGrid>
+        <StyledGrid item xs={6} md={3}>
+          <Typography
+            sx={{
+              fontWeight: theme.typography.fontWeightMedium
+            }}
+            gutterBottom
+          >
+            {t('common:footerOrganisation')}
           </Typography>
           <ul>
             <li>
@@ -98,19 +128,19 @@ export const HomeFooter = () => {
                 color='inherit'
                 variant='body2'
               >
-                {t('common:pages.discover-more/organisation')}
+                {t('common:about')}
               </Link>
             </li>
             <li>
               <Link
                 href={{
                   pathname: '/docs/[...slug]',
-                  query: { slug: 'discover-more/support'.split('/') }
+                  query: { slug: 'discover-more/vision'.split('/') }
                 }}
                 color='inherit'
                 variant='body2'
               >
-                {t('common:pages.discover-more/support')}
+                {t('common:pages.discover-more/vision')}
               </Link>
             </li>
           </ul>
@@ -118,7 +148,7 @@ export const HomeFooter = () => {
       </Grid>
       <Typography color='textSecondary' variant='body2'>
         {t('common:footerRelease', {
-          versionNumber: `v${process.env.PROJECT_VERSION}`,
+          versionNumber: `v${publicRuntimeConfig.appVersion}`,
           license: t('common:license')
         })}
         {' Copyright © '}

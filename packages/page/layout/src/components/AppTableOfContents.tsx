@@ -1,4 +1,4 @@
-import { APP_CONTENT_HEADER_HEIGHT, TOC_TOP } from '@app/layout/src/recoil/features/layout/reducer';
+import { APP_CONTENT_HEADER_HEIGHT, TOC_TOP } from '@app/layout';
 import { Typography } from '@mui/material';
 import { styled, Theme } from '@mui/material/styles';
 import { SxProps } from '@mui/system';
@@ -15,6 +15,8 @@ interface AppTableOfContentsProps {
     }
   >;
   sx?: SxProps<Theme>;
+  className?: string;
+  renderChildren?: boolean;
 }
 
 // Use when app-frame display='grid'
@@ -22,25 +24,19 @@ const TocNav = styled('div')(({ theme }) => {
   return {
     position: 'sticky',
     top: theme.spacing(TOC_TOP),
-    alignSelf: 'start', // important, required for stickiness in display=grid
-    [theme.breakpoints.down('md')]: {
-      display: 'none'
-    }
+    alignSelf: 'start' // important, required for stickiness in display=grid
+
+    /**
+     * Note:
+     * Required when a-toc is not wrapped in a media component,
+     * respectively a classname gets not supplied to the toc-nav component.
+     *
+     * [theme.breakpoints.down('md')]: {
+     *    display: 'none'
+     * }
+     */
   };
 });
-
-// Use when app-frame display='flex'
-// const TocNav = styled('div')(({ theme }) => {
-//   return {
-//     position: 'sticky',
-//     flex: `0 0 ${theme.spacing(TOC_WIDTH)}`,
-//     top: theme.spacing(TOC_TOP),
-//     alignSelf: 'flex-start', // required for stickiness in display=flex
-//     [theme.breakpoints.down('md')]: {
-//       display: 'none'
-//     }
-//   };
-// });
 
 const TocHeaderContainer = styled('div')(({ theme }) => ({
   height: theme.spacing(APP_CONTENT_HEADER_HEIGHT),
@@ -56,15 +52,34 @@ const TocHeader = styled(Typography)(({ theme }) => ({
 
 export const AppTableOfContents: FC<AppTableOfContentsProps> = ({
   toc = [],
-  sx
+  sx,
+  className,
+  renderChildren
 }) => {
   const { t } = useTranslation();
+
+  const label = t(
+    'common:toc',
+    {},
+    {
+      fallback: 'Contents'
+    }
+  );
+
   return (
-    <TocNav sx={sx}>
-      <TocHeaderContainer>
-        <TocHeader>{t('common:toc')}</TocHeader>
-      </TocHeaderContainer>
-      <TocComponent toc={toc} />
+    <TocNav
+      sx={sx}
+      className={className}
+      suppressHydrationWarning={!renderChildren}
+    >
+      {renderChildren && (
+        <>
+          <TocHeaderContainer>
+            <TocHeader>{label}</TocHeader>
+          </TocHeaderContainer>
+          <TocComponent toc={toc} />
+        </>
+      )}
     </TocNav>
   );
 };

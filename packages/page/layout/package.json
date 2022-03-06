@@ -2,8 +2,5 @@
   "name": "@page/layout",
   "version": "0.2.0",
   "private": true,
-  "main": "src/index.ts",
-  "dependencies": {
-    "@page/components": "workspace:packages/page/components"
-  }
+  "main": "src/index.ts"
 }
