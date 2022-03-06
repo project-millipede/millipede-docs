@@ -1,31 +1,11 @@
 import get from 'lodash/get';
 import { MutableRefObject } from 'react';
 import { ParentFiber } from 'react-reparenting';
-import { atom } from 'recoil';
 
-import { warning } from '../../../utils/warning';
+import { warning } from '../../utils/warning';
+import { ReparentState } from './states';
 
-type ParentFiberMap = { [key: string]: MutableRefObject<ParentFiber> };
-
-export interface ReparentState {
-  parentFiberMap: ParentFiberMap;
-}
-
-export const initialState: ReparentState = {
-  parentFiberMap: {}
-};
-
-// Note:
-// The reparent atom uses the flag dangerouslyAllowMutability, to persist mutable ref-objects.
-// Under ordinary circumstances, recoil allows only read-only values to persist.
-// An option is to use a Jotai atom when recoil deprecates the support for mutability.
-export const reparentState = atom({
-  key: 'reparent',
-  default: initialState,
-  dangerouslyAllowMutability: true
-});
-
-const addItem = (
+export const addItem = (
   state: ReparentState,
   id: string,
   newItem: MutableRefObject<ParentFiber>
@@ -39,7 +19,7 @@ const addItem = (
   };
 };
 
-const removeItem = (state: ReparentState, id: string): ReparentState => {
+export const removeItem = (state: ReparentState, id: string): ReparentState => {
   const { [id]: deletedItem, ...objectWithoutDeletedProp } =
     state.parentFiberMap;
   return {
@@ -50,7 +30,7 @@ const removeItem = (state: ReparentState, id: string): ReparentState => {
   };
 };
 
-const hasItem = (state: ReparentState, id: string): boolean => {
+export const hasItem = (state: ReparentState, id: string): boolean => {
   const keys = Object.keys(state.parentFiberMap);
   if (keys.indexOf(id) === -1) {
     return false;
@@ -58,14 +38,14 @@ const hasItem = (state: ReparentState, id: string): boolean => {
   return true;
 };
 
-const sendReparentableChild = (
+export const sendReparentableChild = (
   state: ReparentState,
   fromParentId: string,
   toParentId: string,
   childSelector: string | number,
   position: string | number,
   skipUpdate?: boolean
-): number => {
+) => {
   const { parentFiberMap } = state;
 
   const { current: fromParent } = get(parentFiberMap, fromParentId);
@@ -85,11 +65,4 @@ const sendReparentableChild = (
 
   // Send the child.
   return fromParent.sendChild(toParent, childSelector, position, skipUpdate);
-};
-
-export const reparentReducer = {
-  addItem,
-  removeItem,
-  hasItem,
-  sendReparentableChild
 };

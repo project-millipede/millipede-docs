@@ -6,7 +6,7 @@ export interface AppLayout {
   bottomContainer: EffectRef<HTMLElement>;
 }
 
-export const appLayoutInitialState: AppLayout = {
+const appLayoutInitialState: AppLayout = {
   appContainer: undefined,
   bottomContainer: undefined
 };
@@ -20,7 +20,7 @@ export interface AppComposition {
   isMobile: boolean;
 }
 
-export const appCompositionInitialState: AppComposition = {
+const appCompositionInitialState: AppComposition = {
   isMobile: true
 };
 
