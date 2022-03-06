@@ -1,4 +1,4 @@
-import { viewportSelectors } from '@demonstrators-social/shared';
+import { features } from '@demonstrators-social/shared';
 import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
@@ -7,8 +7,10 @@ export const useScrollRestoration = (
   timelineId: string
 ) => {
   const {
-    post: { viewportItemSelector }
-  } = viewportSelectors;
+    viewport: {
+      selector: { viewportItemSelector }
+    }
+  } = features;
 
   const { viewportItem } = useRecoilValue(viewportItemSelector(timelineId));
 
