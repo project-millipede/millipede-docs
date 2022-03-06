@@ -7,16 +7,16 @@ import path from 'path';
 import i18nConfig from '../../../i18n';
 
 export interface GetStaticTranslationProps {
-  __lang?: string;
+  __lang: string;
   __namespaces?: Record<string, I18nDictionary>;
 }
 
 interface GetStaticTranslationPropsOptions {
-  onSuccess: (namespaces: GetStaticTranslationProps) => void;
+  onSuccess?: (translation: GetStaticTranslationProps) => void;
 }
 
 export const getStaticTranslationProps =
-  ({ onSuccess }: GetStaticTranslationPropsOptions) =>
+  ({ onSuccess }: GetStaticTranslationPropsOptions = {}) =>
   async (ctx: GetStaticPropsContext) => {
     const { params: { slug } = { slug: [] }, locale } = ctx;
 
@@ -24,19 +24,19 @@ export const getStaticTranslationProps =
       isArray(slug) ? slug.join(path.sep) : slug
     );
 
-    const namespaces = await loadNamespaces({
+    const translation = await loadNamespaces({
       ...i18nConfig,
       pathname,
       locale
     });
 
-    if (namespaces && onSuccess) {
-      onSuccess(namespaces as any);
+    if (translation && onSuccess) {
+      onSuccess(translation as any);
     }
 
     return {
       props: {
-        ...namespaces
+        ...translation
       }
     };
   };
