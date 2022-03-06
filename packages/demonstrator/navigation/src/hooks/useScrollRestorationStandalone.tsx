@@ -1,4 +1,4 @@
-import { viewportSelectors } from '@demonstrators-social/shared';
+import { features } from '@demonstrators-social/shared';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
@@ -7,11 +7,13 @@ export const useScrollRestoration = (
   timelineId: string,
   _heights: number
 ): [MutableRefObject<HTMLDivElement>, number] => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
   const {
-    post: { viewportItemSelector }
-  } = viewportSelectors;
+    viewport: {
+      selector: { viewportItemSelector }
+    }
+  } = features;
+
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const { viewportItem } = useRecoilValue(viewportItemSelector(timelineId));
 
@@ -28,7 +30,7 @@ export const useScrollRestoration = (
     }
   }, [viewportItem]);
 
-  // do scroll restoration in layout effect, when no annimation is involved
+  // do scroll restoration in layout effect, when no animation is involved
   // useLayoutEffect(() => {
   //   if (!containerRef) return;
 
