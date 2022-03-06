@@ -11,6 +11,7 @@
   "search": "Suche…",
   "next": "Weiter",
   "back": "Zurück",
+  "problem-statement": "Problem",
   "share-post": "Artikel teilen",
   "copy-link": "Link kopieren",
   "link-copied": "Link des Artikels in die Zwischenablage kopiert",
@@ -77,6 +78,7 @@
     "discover-more/team": "Team",
     "discover-more/team/cv": "Lebenslauf",
     "discover-more/support": "Support",
+    "discover-more/vision": "Vision",
     "discover-more/organisation": "Organisation",
     "perspective": "Perspektive",
     "perspective/strategy": "Strategie",
@@ -92,7 +94,11 @@
   "munich": "München",
   "germany": "Deutschland",
   "footerCommunity": "Gemeinschaft",
-  "footerResources": "Resourcen",
+  "footerExplore": "Explore",
+  "footerOrganisation": "Organisation",
+  "documentation": "Dokumentation",
+  "blog": "Blog",
+  "about": "Über uns",
   "footerRelease": "Aktuell {{versionNumber}}. Veröffentlicht unter der {{license}}.",
   "license": "MIT-Lizenz"
 }
