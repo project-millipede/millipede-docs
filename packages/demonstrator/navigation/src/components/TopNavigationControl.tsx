@@ -1,16 +1,15 @@
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import { IconButton, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import React, { CSSProperties, FC, useCallback } from 'react';
 import { useRecoilValue } from 'recoil';
 
+import { features } from '../features';
 import { useNavigation } from '../hooks/useNavigation';
-import { appCompositionState } from '../recoil/features/app/reducers';
-import {
-  activeViewIdSelector,
-  hasPreviousOrNextViewSelector,
-  nextViewIdSelector,
-  previousViewIdSelector,
-} from '../recoil/features/view-navigation/reducers';
+
+const NavigationBtnPlaceholder = styled('div')({
+  width: '34px'
+});
 
 interface TopNavigationControlProps {
   style?: CSSProperties;
@@ -19,6 +18,22 @@ interface TopNavigationControlProps {
 export const TopNavigationControl: FC<TopNavigationControlProps> = ({
   style
 }) => {
+  const {
+    view: {
+      navigation: {
+        selector: {
+          activeViewIdSelector,
+          hasPreviousOrNextViewSelector,
+          nextViewIdSelector,
+          previousViewIdSelector
+        }
+      }
+    },
+    app: {
+      states: { appCompositionState }
+    }
+  } = features;
+
   const [hasPrevious, hasNext] = useRecoilValue(hasPreviousOrNextViewSelector);
 
   const [{ id: activeViewElementId, label: activeViewElementLabel }, ...rest] =
@@ -48,53 +63,53 @@ export const TopNavigationControl: FC<TopNavigationControlProps> = ({
 
   const viewLabels = [activeViewElementLabel, ...rest.map(r => r.label)];
 
-  return isMobileManual ? (
+  return (
     <div
       style={{
-        ...style,
-        height: '48px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between'
+        ...style
       }}
     >
-      {hasPrevious ? (
-        <IconButton onClick={handleBackNavigation}>
-          <ChevronLeft />
-        </IconButton>
-      ) : (
-        <div />
-      )}
-      <Typography variant='h6'>{activeViewElementLabel}</Typography>
-      {hasNext ? (
-        <IconButton onClick={handleForwardNavigation}>
-          <ChevronRight />
-        </IconButton>
-      ) : (
-        <div />
-      )}
-    </div>
-  ) : (
-    <div
-      style={{
-        ...style,
-        display: 'grid',
-        gridTemplateColumns: `repeat(${viewLabels.length}, 1fr)`
-      }}
-    >
-      {viewLabels.map(viewLabel => (
+      {isMobileManual ? (
         <div
-          key={viewLabel}
           style={{
-            height: '48px',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'space-between',
+            marginLeft: '8px',
+            marginRight: '8px'
           }}
         >
-          <Typography variant='h6'>{viewLabel}</Typography>
+          {hasPrevious ? (
+            <IconButton onClick={handleBackNavigation} size='small'>
+              <ChevronLeft />
+            </IconButton>
+          ) : (
+            <NavigationBtnPlaceholder />
+          )}
+          <Typography variant='h6'>{activeViewElementLabel}</Typography>
+          {hasNext ? (
+            <IconButton onClick={handleForwardNavigation} size='small'>
+              <ChevronRight />
+            </IconButton>
+          ) : (
+            <NavigationBtnPlaceholder />
+          )}
         </div>
-      ))}
+      ) : (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-around'
+          }}
+        >
+          {viewLabels.map(viewLabel => (
+            <Typography key={viewLabel} variant='h6'>
+              {viewLabel}
+            </Typography>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

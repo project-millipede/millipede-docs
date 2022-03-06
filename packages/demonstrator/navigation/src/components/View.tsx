@@ -1,62 +1,58 @@
-import { isEmptyString } from '@app/utils/src/string';
-import { motion, MotionProps, SharedLayoutContext, SharedLayoutSyncMethods } from 'framer-motion';
-import React, { FC, ReactNode, useContext, useEffect, useRef } from 'react';
-import ReactReconciler from 'react-reconciler';
+import { StringUtil } from '@app/utils';
+import { FC, memo, MutableRefObject, useEffect, useRef } from 'react';
 import { useRecoilState } from 'recoil';
-import styled from 'styled-components';
 
+import { features } from '../features';
 import { useParent } from '../hooks/useParent';
-import { reparentReducer, reparentState } from '../recoil/features/reparent/reducers';
-import { TPosition } from '../types';
 import { invariant } from '../utils/invariant';
 import { warning } from '../utils/warning';
 
-type OuterViewProps = MotionProps & {
-  backgroundColor?: string;
-  gridArea: string;
-};
-
-export const OuterView = styled(motion.div)<OuterViewProps>`
-  grid-area: ${({ gridArea }) => gridArea};
-  width: 100%;
-  height: 100%;
-  background-color: ${({ backgroundColor }) => backgroundColor};
-`;
-
+import type { Fiber } from 'react-reconciler';
 interface ViewProps {
   parentId: string;
-  backgroundColor: string;
-  position?: TPosition;
-  // children: ReactElement;
-  children: ReactNode; // not ReactNode,
+  render: (
+    parentId: string,
+    parentRef: MutableRefObject<HTMLDivElement>
+  ) => JSX.Element;
 }
 
-export const View: FC<ViewProps> = ({
-  parentId,
-  position,
-  backgroundColor,
-  children
-}) => {
-  const ref = useRef<HTMLDivElement>(null);
-
-  const context = useContext<SharedLayoutSyncMethods>(
-    SharedLayoutContext as any
-  );
-
-  const parent = useParent(ref, (fiber: ReactReconciler.Fiber) => {
-    if (fiber.child != null) {
-      context.syncUpdate();
+export const View: FC<ViewProps> = ({ parentId, render }) => {
+  const {
+    reparent: {
+      states: { reparentState },
+      actions: { addItem, removeItem, hasItem }
     }
-    return fiber;
-  });
+  } = features;
+
+  const parentRef = useRef<HTMLDivElement>(null);
 
   const [reparent, setReparent] = useRecoilState(reparentState);
 
-  const { addItem, removeItem, hasItem } = reparentReducer;
+  // const parentFiber = useParent(parentRef, (fiber: Fiber, _action: string) => {
+  const parentFiber = useParent(parentRef, (fiber: Fiber) => {
+    /*
+    What is happening here?
+    
+    The function find-fiber is an intermediate function between the stages of
+    removing and re-adding an element from and respectively to a container.
+
+    The following summarizes the relationship between a fiber (parent) and its child.
+
+    - A parent-fiber has a child-fiber before the remove operation executes.
+    - The remove operation separates the child fiber from the parent fiber.
+    - After the removal, but before the add operation executes, the child fiber gets stored 
+      in a local variable within the send-child function.
+    - The decoupled child-fiber gets reassigned to a new parent-fiber.
+    */
+
+    // TODO: Write comment about re-parent config and animation switch
+
+    return fiber;
+  });
 
   useEffect(() => {
     invariant(
-      !isEmptyString(parentId),
+      !StringUtil.isEmptyString(parentId),
       'You must provide an id to the <View> component.'
     );
 
@@ -66,30 +62,14 @@ export const View: FC<ViewProps> = ({
       );
     }
 
-    setReparent(state => addItem(state, parentId, parent));
+    setReparent(state => addItem(state, parentId, parentFiber));
 
     return () => {
       setReparent(state => removeItem(state, parentId));
     };
   }, []);
 
-  return (
-    <OuterView
-      key={parentId}
-      gridArea={position}
-      backgroundColor={backgroundColor}
-      ref={ref}
-      // For layout props (layout or layoutId) framer-motion calculates transformation of origin.
-      // To overrule or compensate those measures in an outer component we set originX -Y and -Z to 0.
-      layout='position' // not necessary needed
-      layoutId={parentId}
-      // initial={{
-      //   originY: 0,
-      //   originX: 0,
-      //   originZ: 0
-      // }}
-    >
-      {children}
-    </OuterView>
-  );
+  return render(parentId, parentRef);
 };
+
+export default memo(View);

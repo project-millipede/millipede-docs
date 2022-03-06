@@ -3,11 +3,20 @@ import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 import React, { ChangeEvent, FC, useCallback } from 'react';
 import { useRecoilValue } from 'recoil';
 
+import { features } from '../features';
 import { useNavigation } from '../hooks/useNavigation';
-import { activeViewIdSelector, viewNavigationState } from '../recoil/features/view-navigation/reducers';
 import { TViewElement } from '../types';
 
 export const BottomNavigationControl: FC = () => {
+  const {
+    view: {
+      navigation: {
+        selector: { activeViewIdSelector },
+        states: { viewNavigationState }
+      }
+    }
+  } = features;
+
   const { viewElements } = useRecoilValue(viewNavigationState);
 
   const [{ id: activeViewElementId }] = useRecoilValue(activeViewIdSelector);

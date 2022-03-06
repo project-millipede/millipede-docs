@@ -1,21 +1,57 @@
-import { AnimateSharedLayout } from 'framer-motion';
-import React, { FC, useEffect, useMemo } from 'react';
+import React, { FC, useCallback, useEffect } from 'react';
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 
-import { appCompositionState } from '../recoil/features/app/reducers';
-import { partialViewElements, viewNavigationState } from '../recoil/features/view-navigation/reducers';
-import { getComponent, getViewElement } from '../services';
-import { TView, TViewElement } from '../types';
+import { features } from '../features';
+import { getComponent, getViewElement } from '../services/Navigation.svc';
+import { PartialViewElement, TView, TViewElement } from '../types';
 import { createViewElements, createViews, flattenViewElements } from './Navigation.svc';
 import { View } from './View';
+
+export const partialViewElements: Array<PartialViewElement> = [
+  {
+    id: 'LeftViewElement',
+    label: 'Author',
+    siblings: []
+  },
+  {
+    id: 'ViewElement',
+    label: 'Actions',
+    siblings: [
+      // {
+      //   id: 'DockViewElementLeft',
+      //   position: Position.left
+      // },
+      // { id: 'DockViewElementRight', position: Position.right }
+    ]
+  },
+  {
+    id: 'RightViewElement',
+    label: 'Consumer',
+    siblings: []
+  }
+];
 
 interface NavigationProps {
   defaultViewElements: Array<TViewElement>;
 }
 
 export const Navigation: FC<NavigationProps> = ({ defaultViewElements }) => {
+  const {
+    view: {
+      navigation: {
+        states: { viewNavigationState },
+        selector: { viewsToRenderSelector }
+      }
+    },
+    app: {
+      states: { appCompositionState }
+    }
+  } = features;
+
   const [{ views, viewElements }, setViewNavigationState] =
     useRecoilState(viewNavigationState);
+
+  const viewsToRender = useRecoilValue(viewsToRenderSelector);
 
   const resetViewNavigationState = useResetRecoilState(viewNavigationState);
 
@@ -49,39 +85,51 @@ export const Navigation: FC<NavigationProps> = ({ defaultViewElements }) => {
     };
   }, []);
 
-  const renderView = (view: TView) => {
-    const renderedViewElements = viewElements
-      .filter(viewElement => viewElement.parentId === view.id)
-      .map(viewElement =>
-        getComponent(
-          getViewElement(defaultViewElements, viewElement.id),
-          viewElement.update
-        )
+  const renderView = useCallback(
+    (view: TView) => {
+      // Identify if and which view element is assigned to the current view.
+      const viewElement = viewElements.find(
+        viewElement => viewElement.parentId === view.id
       );
 
-    return (
-      <View
-        key={view.id}
-        parentId={view.id} // generated through nanoid
-        position={isMobileManual ? view.position : null}
-        backgroundColor={view.backgroundColor}
-      >
-        {renderedViewElements && renderedViewElements.length > 0
-          ? renderedViewElements
-          : null}
-      </View>
-    );
-  };
+      return (
+        <View
+          key={view.id}
+          parentId={view.id} // generated through nanoid
+          /**
+           * 1st render function
+           * Assign the parent reference (used for the re-parenting approach)
+           * generated within the view component the uppermost div.
+           */
+          render={(parentId, parentRef) => {
+            return (
+              <div
+                key={parentId}
+                ref={parentRef}
+                style={{
+                  gridArea: isMobileManual && view.position
+                }}
+              >
+                {viewElement &&
+                  // Instantiate the component/base component specified in the view-element description.
+                  getComponent(
+                    // Get the view-element definition out of a list of available view-elements.
+                    getViewElement(defaultViewElements, viewElement.id)
+                  )}
+              </div>
+            );
+          }}
+        />
+      );
+    },
+    [viewElements, isMobileManual]
+  );
 
-  // number of views are equal to number of view elements
-  const viewsToRender = useMemo(() => {
-    const allViewElementParentIds = viewElements.map(
-      viewElement => viewElement.parentId
-    );
-    return views.filter(view => {
-      return allViewElementParentIds.includes(view.id);
-    });
-  }, [views, viewElements]);
+  /**
+   * The navigator supports two display modes - mobile and desktop
+   * Mobile - default: The number of views exceeds the number of view-elements (2 * N) -1
+   * Desktop: The number of views corresponds to the number of view-elements
+   */
 
   return (
     <div
@@ -96,9 +144,7 @@ export const Navigation: FC<NavigationProps> = ({ defaultViewElements }) => {
         transform: isMobileManual && 'translateX(-100%)'
       }}
     >
-      <AnimateSharedLayout type={'crossfade'}>
-        {isMobileManual ? views.map(renderView) : viewsToRender.map(renderView)}
-      </AnimateSharedLayout>
+      {isMobileManual ? views.map(renderView) : viewsToRender.map(renderView)}
     </div>
   );
 };
