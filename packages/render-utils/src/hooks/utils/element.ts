@@ -1,9 +1,9 @@
-export type HTMLOrSVGElementCustom = HTMLElement | SVGElement;
+export type HTMLOrSVGElement = HTMLElement | SVGElement;
 
 export const findScrollContainers = (
-  element: HTMLOrSVGElementCustom | null
-): Array<HTMLOrSVGElementCustom> => {
-  const result: Array<HTMLOrSVGElementCustom> = [];
+  element: HTMLOrSVGElement | null
+): Array<HTMLOrSVGElement> => {
+  const result: Array<HTMLOrSVGElement> = [];
   if (!element || element === document.body) return result;
   const { overflow, overflowX, overflowY } = window.getComputedStyle(element);
   if (
@@ -25,10 +25,10 @@ export const Overflow = {
 export type TOverflow = typeof Overflow[keyof typeof Overflow];
 
 export const findScrollContainersWithOverflow = (
-  element: HTMLOrSVGElementCustom | null,
+  element: HTMLOrSVGElement | null,
   overflow: TOverflow
-): Array<HTMLOrSVGElementCustom> => {
-  const result: Array<HTMLOrSVGElementCustom> = [];
+): Array<HTMLOrSVGElement> => {
+  const result: Array<HTMLOrSVGElement> = [];
   if (!element || element === document.body) return result;
   const {
     overflow: overflowValue,

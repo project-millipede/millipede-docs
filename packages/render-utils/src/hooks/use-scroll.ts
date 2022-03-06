@@ -2,28 +2,24 @@ import createDebounce from 'lodash/debounce';
 import { useMemo, useRef, useState } from 'react';
 
 import { useCallbackRef } from './use-callback-ref';
-import {
-  areBoundsEqual,
-  findScrollContainersWithOverflow,
-  HTMLOrSVGElementCustom,
-  Overflow,
-  TOverflow,
-} from './utils/element';
+import { areBoundsEqual, findScrollContainersWithOverflow, HTMLOrSVGElement, Overflow, TOverflow } from './utils/element';
 
 export const boundKeys: Array<keyof DOMRectReadOnly> = ['top', 'height'];
 
 export type State = {
-  element?: HTMLOrSVGElementCustom | null;
-  scrollContainers: Array<HTMLOrSVGElementCustom> | null;
+  element?: HTMLOrSVGElement | null;
+  scrollContainers: Array<HTMLOrSVGElement> | null;
   lastBounds: Partial<DOMRectReadOnly>;
+  resizeObserver: ResizeObserver | null;
 };
 
 export type Options = {
   debounce?: number;
-  callBack?: (node: HTMLElement) => void;
+  callBack?: (node: HTMLOrSVGElement) => void;
   withCapture?: boolean;
   withOverflow?: boolean;
   overflowType?: TOverflow;
+  passive?: boolean;
 };
 
 export const useScroll = ({
@@ -31,18 +27,20 @@ export const useScroll = ({
   callBack,
   withCapture = true,
   withOverflow = true,
-  overflowType = Overflow.y
-}: Options): [(node: HTMLElement) => void, Partial<DOMRectReadOnly>] => {
+  overflowType = Overflow.y,
+  passive = true
+}: Options): [(node: HTMLOrSVGElement) => void, Partial<DOMRectReadOnly>] => {
   const [bounds, setBounds] = useState<Partial<DOMRectReadOnly>>({});
 
   const state = useRef<State>({
     element: null,
     scrollContainers: null,
+    resizeObserver: null,
     lastBounds: bounds
   });
 
-  const [setRef] = useCallbackRef<HTMLElement>(
-    (node: HTMLElement) => {
+  const [setRef] = useCallbackRef<HTMLOrSVGElement>(
+    (node: HTMLOrSVGElement) => {
       const {
         current: { element }
       } = state;
@@ -50,20 +48,37 @@ export const useScroll = ({
       if (node != null && node !== element) {
         state.current.element = node;
 
+        const size = state.current.element.getBoundingClientRect();
+        state.current.lastBounds = size;
+        setBounds(() => size);
+
         state.current.scrollContainers = withOverflow
           ? findScrollContainersWithOverflow(node, overflowType)
           : [node.parentElement];
 
-        addListeners(state.current.scrollContainers, scrollChange, withCapture);
+        state.current.resizeObserver = new ResizeObserver(scrollChange);
+        state.current.resizeObserver!.observe(state.current.element);
+
+        addListeners(
+          state.current.scrollContainers,
+          scrollChange,
+          withCapture,
+          passive
+        );
 
         if (callBack != null) {
           callBack(node);
         }
       }
     },
-    (_node: HTMLElement) => {
+    (_node: HTMLOrSVGElement) => {
       removeListeners(state.current.scrollContainers, scrollChange);
       state.current.scrollContainers = null;
+
+      if (state.current.resizeObserver) {
+        state.current.resizeObserver.disconnect();
+        state.current.resizeObserver = null;
+      }
     }
   );
 
@@ -73,6 +88,13 @@ export const useScroll = ({
         current: { element, lastBounds }
       } = state;
       const size = element.getBoundingClientRect();
+      // if (!areBoundsEqual(boundKeys, lastBounds, size)) {
+      //   state.current.lastBounds = size;
+      //   setBounds(() => size);
+      // } else {
+      //   setBounds(_state => size);
+      // }
+
       if (withOverflow) {
         if (!areBoundsEqual(boundKeys, lastBounds, size)) {
           state.current.lastBounds = size;
@@ -91,22 +113,31 @@ export const useScroll = ({
 };
 
 const addListeners = (
-  scrollContainers: Array<HTMLOrSVGElementCustom> | null,
+  scrollContainers: Array<HTMLOrSVGElement> | null,
   scrollChange: EventListener,
-  withCapture: boolean
+  withCapture: boolean,
+  passive: boolean
 ) => {
   if (scrollContainers != null) {
     scrollContainers.forEach(scrollContainer => {
-      scrollContainer.addEventListener('scroll', scrollChange, {
-        capture: withCapture,
-        passive: true
-      });
+      scrollContainer.addEventListener(
+        'scroll',
+        scrollChange,
+        passive
+          ? {
+              capture: withCapture,
+              passive: true
+            }
+          : {
+              capture: withCapture
+            }
+      );
     });
   }
 };
 
 const removeListeners = (
-  scrollContainers: Array<HTMLOrSVGElementCustom> | null,
+  scrollContainers: Array<HTMLOrSVGElement> | null,
   scrollChange: EventListener
 ) => {
   if (scrollContainers != null) {
