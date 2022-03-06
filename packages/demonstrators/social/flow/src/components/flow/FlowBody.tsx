@@ -1,45 +1,82 @@
 import { Archer } from '@app/components';
-import { scrollSelectors } from '@demonstrators-social/shared';
+import { features as navigationFeatures } from '@demonstrator/navigation';
+import { features } from '@demonstrators-social/shared';
 import { Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import React, { FC, memo } from 'react';
+import React, { FC } from 'react';
 import { useRecoilValue } from 'recoil';
 
-/* eslint-disable import/no-named-as-default */
 const { ArcherElement, InteractiveBox } = Archer;
 
-const Row = styled('div')({
-  display: 'flex',
-  margin: '100px 0'
+interface FlowBodyGridProps {
+  isMobile: boolean;
+  size: number;
+}
+
+export const FlowBodyLayout = styled('div')(({ theme }) => {
+  return {
+    display: 'grid',
+    gridArea: 'dock-center',
+    placeContent: 'space-evenly',
+    columnGap: theme.spacing(3),
+    rowGap: theme.spacing(3)
+  };
+});
+
+export const FlowBodyGrid = styled('div', {
+  shouldForwardProp: prop => prop !== 'isMobile' && prop !== 'size'
+})<FlowBodyGridProps>(({ theme, isMobile, size }) => {
+  return {
+    display: 'grid',
+    placeContent: 'space-evenly',
+    ...(isMobile && {
+      [theme.breakpoints.up('md')]: {
+        gridTemplateColumns: `repeat(${size}, 1fr)`
+      }
+    }),
+    columnGap: theme.spacing(14),
+    rowGap: theme.spacing(6)
+  };
 });
 
 export const FlowBody: FC = () => {
   const {
-    timeline: { sliceIdsBodySelector }
-  } = scrollSelectors;
+    scroll: {
+      timeline: {
+        selector: { bodySliceIdsSelector }
+      }
+    }
+  } = features;
 
-  const selectedBodySlices = useRecoilValue(sliceIdsBodySelector);
+  const {
+    app: {
+      states: { appCompositionState }
+    }
+  } = navigationFeatures;
+
+  // Items represent either rows or columns, depending on the layout selected.
+  const bodyNodeWithRelations = useRecoilValue(bodySliceIdsSelector);
+
+  const { isMobile } = useRecoilValue(appCompositionState);
 
   return (
-    <>
-      {selectedBodySlices.map((nodeWithRelations, row) => {
+    <FlowBodyLayout>
+      {bodyNodeWithRelations.map((bodyNodeWithRelation, index) => {
         return (
-          <Row
-            key={`row-${row}`}
-            sx={{
-              justifyContent:
-                nodeWithRelations.length === 1 ? 'center' : 'space-between'
-            }}
+          <FlowBodyGrid
+            key={`flow-body-row-or-column-${index}`}
+            isMobile={isMobile}
+            size={bodyNodeWithRelation.length}
           >
-            {nodeWithRelations.map(value => {
+            {bodyNodeWithRelation.map(nodeWithRelation => {
               const {
                 node: { id, label },
                 relations
-              } = value;
+              } = nodeWithRelation;
               return (
                 <ArcherElement
                   id={id}
-                  key={id}
+                  key={`flow-body-row-or-column-item-${id}`}
                   relations={relations}
                   isInteractive
                 >
@@ -49,11 +86,9 @@ export const FlowBody: FC = () => {
                 </ArcherElement>
               );
             })}
-          </Row>
+          </FlowBodyGrid>
         );
       })}
-    </>
+    </FlowBodyLayout>
   );
 };
-
-export default memo(FlowBody);

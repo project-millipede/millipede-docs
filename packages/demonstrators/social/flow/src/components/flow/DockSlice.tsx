@@ -1,16 +1,14 @@
-import { HocsUtils, HooksUtils } from '@app/render-utils';
-import { scrollReducers, scrollStates } from '@demonstrators-social/shared';
+import { ArcherTypes } from '@app/components';
+import { HooksUtils } from '@app/render-utils';
+import { features } from '@demonstrators-social/shared';
 import { EffectRef } from '@huse/effect-ref';
 import get from 'lodash/get';
-import React, { FC, useCallback, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import React, { forwardRef, ForwardRefRenderFunction, MutableRefObject, useEffect } from 'react';
+import { useRecoilCallback } from 'recoil';
 
 import { withArcher } from '../../hocs/with-archer';
-import { DockSliceProps } from '../../types';
 
-const RenderFn = ({ children }) => children();
-
-export const defaultSliceBackgrundColor = {
+export const sliceBackgroundColor = {
   header: {
     color: '#03a9f4'
   }, // lightBlue
@@ -20,124 +18,83 @@ export const defaultSliceBackgrundColor = {
   comments: { color: '#ff5722' } // 'deepOrange'
 };
 
-const DockSlice: FC<DockSliceProps> = ({
-  timelineId,
-  postId,
-  sliceId,
-  postBounds,
-  forwardedRef,
-  dynamicRef
-}) => {
+export interface DockSliceProps {
+  timelineId: string;
+  postId: string;
+  sliceId: string;
+  postBounds: Partial<DOMRectReadOnly>;
+  dynamicRef: MutableRefObject<ArcherTypes.SyncHandle>;
+}
+
+const DockSlice: ForwardRefRenderFunction<HTMLDivElement, DockSliceProps> = (
+  { timelineId, postId, sliceId, postBounds, dynamicRef },
+  ref
+) => {
   const {
-    post: { updateObservedSubSliceItem, removeObservedSubSliceItem }
-  } = scrollReducers;
+    scroll: {
+      post: {
+        states: { refPostScrollState },
+        utils: { updateObservedSubSliceItem, removeObservedSubSliceItem }
+      }
+    }
+  } = features;
+
+  const [sliceRef, sliceBounds] = HooksUtils.useScroll({
+    debounce: 0,
+    withCapture: false
+  });
+
+  useEffect(() => {
+    if (dynamicRef && dynamicRef.current && dynamicRef.current.sync) {
+      dynamicRef.current.sync(sliceBounds.y);
+    }
+  }, [sliceBounds]);
+
+  const updateRefPostScroll = useRecoilCallback(
+    ({ set }) =>
+      (timelineId: string, sliceId: string, value: EffectRef<HTMLElement>) => {
+        set(refPostScrollState(postId), state =>
+          updateObservedSubSliceItem(state, timelineId, sliceId, value)
+        );
+      },
+    []
+  );
+
+  const removeRefPostScroll = useRecoilCallback(
+    ({ set }) =>
+      (timelineId: string, sliceId: string) => {
+        set(refPostScrollState(postId), state =>
+          removeObservedSubSliceItem(state, timelineId, sliceId)
+        );
+      },
+    []
+  );
+
+  useEffect(() => {
+    updateRefPostScroll(timelineId, sliceId, sliceRef);
+    return () => {
+      removeRefPostScroll(timelineId, sliceId);
+    };
+  }, [dynamicRef.current]);
+
+  const translate = sliceBounds.top - postBounds.top;
 
   return (
-    <RenderFn key={`renderFn-${timelineId}-${postId}-${sliceId}`}>
-      {() => {
-        const ref = useRef<HTMLElement>();
-
-        const [sliceRef, sliceBounds] = HooksUtils.useScroll({
-          debounce: 0,
-          withCapture: false,
-          callBack: _node => {
-            ref.current = _node;
-          }
-        });
-
-        const {
-          post: { refPostScrollState }
-        } = scrollStates;
-
-        const setRefPostScroll = useSetRecoilState(refPostScrollState(postId));
-
-        const updateItem = useCallback(
-          (
-            timelineId: string,
-            sliceId: string,
-            value: EffectRef<HTMLElement>
-          ) => {
-            setRefPostScroll(state =>
-              updateObservedSubSliceItem(state, timelineId, sliceId, value)
-            );
-          },
-          [updateObservedSubSliceItem, setRefPostScroll]
-        );
-
-        const removeItem = useCallback(
-          (timelineId: string, sliceId: string) => {
-            setRefPostScroll(state =>
-              removeObservedSubSliceItem(state, timelineId, sliceId)
-            );
-          },
-          [removeObservedSubSliceItem, setRefPostScroll]
-        );
-
-        useLayoutEffect(() => {
-          updateItem(timelineId, sliceId, sliceRef);
-          return () => {
-            removeItem(timelineId, sliceId);
-          };
-        }, []);
-
-        const [selected, setSelected] = useState(false);
-
-        useImperativeHandle(
-          dynamicRef,
-          () => ({
-            select: () => {
-              // with List / ListItem / Card
-              if (ref.current) {
-                const {
-                  current: {
-                    parentElement: { parentElement }
-                  }
-                } = ref;
-                parentElement.scrollIntoView({
-                  block: 'center',
-                  inline: 'center',
-                  behavior: 'smooth'
-                });
-              }
-              // with Div / Card
-              // if (ref.current && ref.current.parentElement) {
-              //   ref.current.parentElement.scrollIntoView({
-              //     block: 'center',
-              //     inline: 'center',
-              //     behavior: 'smooth'
-              //   });
-              // }
-              setSelected(true);
-            },
-            unSelect: () => {
-              setSelected(false);
-            }
-          }),
-          [ref.current]
-        );
-
-        return (
-          <div
-            ref={forwardedRef}
-            style={{
-              top: sliceBounds.top - postBounds.top,
-              height: sliceBounds.height,
-              width: '100%',
-              position: 'absolute',
-              background: !selected
-                ? get(defaultSliceBackgrundColor, sliceId).color
-                : '#E0E0E0'
-            }}
-          />
-        );
+    <div
+      ref={ref}
+      style={{
+        // inline calc
+        // transform: `translateY(calc(${sliceBounds.top}px - ${postBounds.top}px))`,
+        transform: `translateY(${translate}px)`,
+        height: sliceBounds.height,
+        width: '100%',
+        position: 'absolute',
+        background: get(sliceBackgroundColor, sliceId).color
       }}
-    </RenderFn>
+    />
   );
 };
 
-const DockSliceObserverWithForwardRef =
-  HocsUtils.withForwardRef<HTMLElement, DockSliceProps>(DockSlice);
+const DockSliceWithForwardRef = forwardRef(DockSlice);
 
-export const DockSliceObserverWithArcher = withArcher(
-  DockSliceObserverWithForwardRef
-);
+export default withArcher(DockSliceWithForwardRef);

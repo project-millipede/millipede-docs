@@ -1,84 +1,51 @@
 import { Archer } from '@app/components';
+import { Scroll } from '@demonstrators-social/shared';
 import React, { FC } from 'react';
 
-import { ArcherSurfaceObserver } from '../observer/ArcherSurfaceObserver';
 import { Dock } from './Dock';
-import { DockPosition } from './Dock.svc';
-import FlowBody from './FlowBody';
+import { FlowBody } from './FlowBody';
 
 const { ArcherSurface } = Archer;
 
 interface FlowSurfaceProps {
   leftTimelineId: string;
   rightTimelineId: string;
-  offSetControls: number;
 }
 
 export const FlowSurface: FC<FlowSurfaceProps> = ({
   leftTimelineId,
-  rightTimelineId,
-  offSetControls
+  rightTimelineId
 }) => {
   return (
-    <ArcherSurfaceObserver
-      timelineIds={[leftTimelineId, rightTimelineId]}
-      render={renderProps => {
-        return (
-          <ArcherSurface
-            noCurves
-            strokeColor='gray'
-            style={{
-              height: '100%',
-              overflow: 'hidden' // TODO: Evaluate if this can be leveraged for scroll observation
-            }}
-            elementStyle={{
-              display: 'flex'
-            }}
-            {...renderProps}
-          >
-            <div
-              style={{
-                width: '15%'
-              }}
-            >
-              <Dock
-                styles={{
-                  display: 'flex',
-                  justifyContent: 'flex-start'
-                }}
-                timelineId={leftTimelineId}
-                offSet={offSetControls}
-                position={DockPosition.left}
-              />
-            </div>
-            <div
-              style={{
-                width: '70%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center'
-              }}
-            >
-              <FlowBody />
-            </div>
-            <div
-              style={{
-                width: '15%'
-              }}
-            >
-              <Dock
-                styles={{
-                  display: 'flex',
-                  justifyContent: 'flex-end'
-                }}
-                timelineId={rightTimelineId}
-                offSet={offSetControls}
-                position={DockPosition.right}
-              />
-            </div>
-          </ArcherSurface>
-        );
+    <ArcherSurface
+      strokeColor='gray'
+      style={{
+        height: '100%',
+        overflow: 'hidden'
       }}
-    />
+      elementStyle={{
+        display: 'grid',
+        gridTemplateColumns: '0.2fr minmax(0,1fr) 0.2fr',
+        gridTemplateAreas: `'dock-left dock-center dock-right'`
+      }}
+    >
+      <Dock
+        styles={{
+          position: 'relative',
+          gridArea: 'dock-left'
+        }}
+        timelineId={leftTimelineId}
+        position={Scroll.Timeline.DockPosition.left}
+      />
+      <FlowBody />
+      <Dock
+        styles={{
+          position: 'relative',
+          gridArea: 'dock-right'
+        }}
+        timelineId={rightTimelineId}
+        position={Scroll.Timeline.DockPosition.right}
+      />
+    </ArcherSurface>
   );
 };
