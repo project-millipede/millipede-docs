@@ -1,55 +1,9 @@
 import { CollectionUtil } from '@app/utils';
-import { atom, selector, selectorFamily } from 'recoil';
+import { selector, selectorFamily } from 'recoil';
 
-import { NavigationState, PartialViewElement } from '../../../types';
-import { Position } from '../../../types/View';
-import { appCompositionState } from '../app/reducers';
-
-export const partialViewElements: Array<PartialViewElement> = [
-  {
-    id: 'LeftViewElement',
-    label: 'Author',
-    siblings: []
-  },
-  {
-    id: 'ViewElement',
-    label: 'Actions',
-    siblings: [
-      // {
-      //   id: 'DockViewElementLeft',
-      //   position: Position.left
-      // },
-      // { id: 'DockViewElementRight', position: Position.right }
-    ]
-  },
-  {
-    id: 'RightViewElement',
-    label: 'Consumer',
-    siblings: []
-  }
-];
-
-const initialState: NavigationState = {
-  views: [],
-  viewElements: []
-};
-
-export const viewNavigationState = atom({
-  key: 'view-navigation',
-  default: initialState
-});
-
-// export const activeViewIdSelector = selector<PartialViewElement>({
-//   key: 'active-view-id-selector',
-//   get: ({ get }) => {
-//     const { views, viewElements } = get(viewNavigationState);
-//     const activeView = views.find(view => view.position === Position.middle);
-//     const activeViewElement = viewElements.find(
-//       viewElement => viewElement.parentId === activeView.id
-//     );
-//     return (activeViewElement && activeViewElement) || { id: '', label: '' };
-//   }
-// });
+import { PartialViewElement, Position, TView } from '../../../types';
+import { appCompositionState } from '../../app/states';
+import { viewNavigationState } from './states';
 
 export const activeViewIdSelector = selector<Array<PartialViewElement>>({
   key: 'active-view-id-selector',
@@ -77,28 +31,6 @@ export const activeViewIdSelector = selector<Array<PartialViewElement>>({
       );
     }
   }
-});
-
-export const activeViewIndexSelector = selectorFamily<number, string>({
-  key: 'active-view-index-selector',
-  // id corresponds to layoutId
-  get:
-    id =>
-    ({ get }) => {
-      const { views, viewElements } = get(viewNavigationState);
-      const viewElement = viewElements.find(
-        viewElement => viewElement.id === id
-      );
-
-      if (viewElement == null) {
-        return -1;
-      }
-
-      return views.findIndex(
-        view =>
-          view.position === Position.middle && view.id === viewElement.parentId
-      );
-    }
 });
 
 export const previousViewIdSelector = selector<PartialViewElement>({
@@ -166,6 +98,32 @@ export const hasPreviousOrNextViewSelector = selector<[boolean, boolean]>({
     );
 
     return [hasPrevious, hasNext];
+  }
+});
+
+export const parentIdSelector = selectorFamily<string, string>({
+  key: 'parent-id-selector',
+  get:
+    viewId =>
+    ({ get }) => {
+      const { viewElements } = get(viewNavigationState);
+      const { parentId } = viewElements.find(
+        viewElement => viewElement.id === viewId
+      );
+      return parentId;
+    }
+});
+
+export const viewsToRenderSelector = selector<Array<TView>>({
+  key: 'views-to-render-selector',
+  get: ({ get }) => {
+    const { views, viewElements } = get(viewNavigationState);
+    const viewElementParentIds = viewElements.map(
+      viewElement => viewElement.parentId
+    );
+    return views.filter(view => {
+      return viewElementParentIds.includes(view.id);
+    });
   }
 });
 
