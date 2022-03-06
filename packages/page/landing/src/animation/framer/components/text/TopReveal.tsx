@@ -98,8 +98,8 @@ export const TopReveal = (props: TopRevealProps) => {
             width: '100%',
             height: (fontSize * 1.5 + lineGap) * items.length * 2 + 24
           }}
-          initial={'before'}
-          animate={'after'}
+          initial='before'
+          animate='after'
           variants={containerVariants}
         >
           {items.map((item, i) => {

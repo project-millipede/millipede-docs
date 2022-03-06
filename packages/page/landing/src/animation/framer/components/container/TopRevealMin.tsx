@@ -116,8 +116,8 @@ export const TopRevealMin = (props: TopRevealMinProps) => {
           height: '60px'
           // overflow: 'hidden'
         }}
-        // initial={'before'}
-        // animate={'after'}
+        // initial='before'
+        // animate='after'
         variants={containerVariants}
       >
         <motion.div
