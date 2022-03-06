@@ -1,5 +1,5 @@
 import { HiddenUnderlineLink } from '@app/components';
-import { NavigationState } from '@app/layout/src/recoil/features/pages/reducer';
+import { Navigation } from '@app/types';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Breadcrumbs as MuiBreadcrumbs, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -28,10 +28,15 @@ export const createBreadcrumbsFromSlug = (
 
 interface BreadcrumbsProps {
   slug: Array<string>;
-  navigation?: NavigationState;
+  navigation?: Navigation;
 }
 
-export const Breadcrumbs: FC<BreadcrumbsProps> = ({ slug }) => {
+export const Breadcrumbs: FC<BreadcrumbsProps> = ({ slug, navigation }) => {
+  const {
+    activePage: { title },
+    pageType
+  } = navigation;
+
   const { t } = useTranslation();
 
   const [headBreadcrumbs, [tailBreadcrumb]] = useMemo(() => {
@@ -42,20 +47,30 @@ export const Breadcrumbs: FC<BreadcrumbsProps> = ({ slug }) => {
     ];
   }, [slug]);
 
+  const tailBreadcrumbLabel =
+    pageType !== 'blog' ? t(`common:pages.${tailBreadcrumb.link}`) : title;
+
   return (
     <StyledMuiBreadcrumbs separator={<NavigateNextIcon fontSize='small' />}>
       {headBreadcrumbs &&
         headBreadcrumbs.length > 0 &&
         headBreadcrumbs.map((breadcrumb, index) => {
-          const label = t(`common:pages.${breadcrumb.link}`);
+          const link =
+            pageType !== 'blog'
+              ? {
+                  pathname: `/${pageType}/[...slug]`,
+                  query: { slug: breadcrumb.link.split('/') }
+                }
+              : { pathname: `/blog` };
+
+          const label =
+            pageType !== 'blog' ? t(`common:pages.${breadcrumb.link}`) : 'Blog';
+
           return (
             <Typography
               key={`breadcrumb-${index}`}
               component={HiddenUnderlineLink}
-              href={{
-                pathname: '/docs/[...slug]',
-                query: { slug: breadcrumb.link.split('/') }
-              }}
+              href={link}
               prefetch={false}
             >
               {label}
@@ -63,9 +78,7 @@ export const Breadcrumbs: FC<BreadcrumbsProps> = ({ slug }) => {
           );
         })}
       {tailBreadcrumb && tailBreadcrumb.link && (
-        <Typography key='breadcrumb-tail'>
-          {t(`common:pages.${tailBreadcrumb.link}`)}
-        </Typography>
+        <Typography key='breadcrumb-tail'>{tailBreadcrumbLabel}</Typography>
       )}
     </StyledMuiBreadcrumbs>
   );

@@ -1,30 +1,34 @@
-import { notificationStates } from '@demonstrators-social/shared';
 import { Alert, Snackbar as MuiSnackbar } from '@mui/material';
 import React, { FC, SyntheticEvent, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 
+import { features } from '../features';
+
 export const Snackbar: FC = () => {
   const {
-    notification: { snackbarState }
-  } = notificationStates;
+    notification: {
+      states: { notificationState }
+    }
+  } = features;
 
-  const [{ message, isActive }, setSnackbar] = useRecoilState(snackbarState);
+  const [{ message, isActive }, setNotification] =
+    useRecoilState(notificationState);
 
   const handleClose = useCallback(
     (_event: SyntheticEvent) =>
-      setSnackbar(state => {
+      setNotification(state => {
         return {
           ...state,
           isActive: false,
           message: null
         };
       }),
-    [setSnackbar]
+    [setNotification]
   );
 
   return (
     <MuiSnackbar open={isActive} onClose={handleClose} autoHideDuration={3000}>
-      <Alert onClose={handleClose} severity={'info'}>
+      <Alert onClose={handleClose} severity='info'>
         {message}
       </Alert>
     </MuiSnackbar>

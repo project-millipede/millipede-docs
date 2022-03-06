@@ -1,5 +1,5 @@
 import { CustomIcon, HiddenUnderlineLink } from '@app/components';
-import { NavigationState } from '@app/layout/src/recoil/features/pages/reducer';
+import { Navigation } from '@app/types';
 import { Breadcrumbs as MuiBreadcrumbs, Chip, ChipProps } from '@mui/material';
 import { emphasize, styled } from '@mui/material/styles';
 import useTranslation from 'next-translate/useTranslation';
@@ -18,7 +18,7 @@ export const createBreadcrumbsFromSlug = (
 
 interface BreadcrumbsProps {
   slug: Array<string>;
-  navigation: NavigationState;
+  navigation: Navigation;
 }
 
 export const StyledMuiBreadcrumbs = styled(MuiBreadcrumbs)(({ theme }) => {
