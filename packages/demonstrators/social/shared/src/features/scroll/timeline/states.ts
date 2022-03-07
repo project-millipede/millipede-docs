@@ -5,7 +5,7 @@ import { NodesWithRelationsMap, RefContainerScroll, Tab, View } from './types';
 export const timelineViewState = atomFamily<Tab, string>({
   key: 'timeline-view',
   default: {
-    activeTab: View.TIMELINE
+    activeTab: View.Timeline
   }
 });
 
