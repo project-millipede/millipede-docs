@@ -129,7 +129,7 @@ export const postIdsSelector = selectorFamily<Array<string>, string>({
       const timelineView = get(timelineViewState(timelineId));
 
       const postIds =
-        timelineView.activeTab === Scroll.Timeline.View.TIMELINE
+        timelineView.activeTab === Scroll.Timeline.View.Timeline
           ? postIdsOfFriendSelector({
               timelineId: timelineId,
               sortDirection: SortDirection.DECS

@@ -119,7 +119,7 @@ const Timeline: ForwardRefRenderFunction<HTMLDivElement, TimelineProps> = (
       <div ref={timelineHeaderMeasureRef}>
         <TimelineHeader timelineId={timelineId} />
 
-        {timelineView.activeTab === Scroll.Timeline.View.POSTS &&
+        {timelineView.activeTab === Scroll.Timeline.View.Posts &&
           displayEditor && (
             <ContentEditor
               create={createPost}
@@ -128,7 +128,7 @@ const Timeline: ForwardRefRenderFunction<HTMLDivElement, TimelineProps> = (
             />
           )}
 
-        {timelineView.activeTab === Scroll.Timeline.View.POSTS &&
+        {timelineView.activeTab === Scroll.Timeline.View.Posts &&
           !displayEditor && (
             <div
               style={{

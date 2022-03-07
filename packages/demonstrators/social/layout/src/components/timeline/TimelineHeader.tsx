@@ -3,7 +3,7 @@ import { Components as RenderComponents } from '@app/render-utils';
 import { features, Scroll } from '@demonstrators-social/shared';
 import { DynamicFeed, GroupWork } from '@mui/icons-material';
 import { Tab } from '@mui/material';
-import React, { ChangeEvent, FC, useMemo } from 'react';
+import React, { FC, SyntheticEvent, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { SimpleSearch } from '../search';
@@ -25,28 +25,21 @@ export const TimelineHeader: FC<TimelineHeaderProps> = ({ timelineId }) => {
     }
   } = features;
 
-  const [timelineView, setTimelineView] = useRecoilState(
+  const [{ activeTab }, setTimelineView] = useRecoilState(
     timelineViewState(timelineId)
   );
 
-  const handleTabChange = (_event: ChangeEvent, newValue: number) => {
-    let value: Scroll.Timeline.TView = Scroll.Timeline.View.TIMELINE;
-
-    if (newValue === 0) value = Scroll.Timeline.View.TIMELINE;
-    if (newValue === 1) value = Scroll.Timeline.View.POSTS;
-
-    setTimelineView(state => {
-      return {
-        ...state,
-        activeTab: value
-      };
-    });
-  };
-
-  const currentValue = useMemo(() => {
-    if (timelineView.activeTab === Scroll.Timeline.View.TIMELINE) return 0;
-    if (timelineView.activeTab === Scroll.Timeline.View.POSTS) return 1;
-  }, [timelineView]);
+  const handleTabChange = useCallback(
+    (_event: SyntheticEvent, newValue: Scroll.Timeline.TView) => {
+      setTimelineView(state => {
+        return {
+          ...state,
+          activeTab: newValue
+        };
+      });
+    },
+    []
+  );
 
   return (
     <div
@@ -57,7 +50,7 @@ export const TimelineHeader: FC<TimelineHeaderProps> = ({ timelineId }) => {
       }}
     >
       <Tabs.StyledTabs
-        value={currentValue}
+        value={activeTab}
         onChange={handleTabChange}
         variant='fullWidth'
         indicatorColor='primary'
@@ -67,12 +60,14 @@ export const TimelineHeader: FC<TimelineHeaderProps> = ({ timelineId }) => {
         }}
       >
         <Tab
+          value='Timeline'
           label='Timeline'
           icon={<DynamicFeed />}
           key={`timeline-${timelineId}-tab-timeline`}
           id={`timeline-${timelineId}-tab-timeline`}
         />
         <Tab
+          value='Posts'
           label='Posts'
           icon={<GroupWork />}
           key={`timeline-${timelineId}-tab-posts`}
@@ -83,7 +78,7 @@ export const TimelineHeader: FC<TimelineHeaderProps> = ({ timelineId }) => {
         <SimpleSearch
           style={{ margin: '8px' }}
           placeholder={
-            timelineView.activeTab === Scroll.Timeline.View.TIMELINE
+            activeTab === Scroll.Timeline.View.Timeline
               ? 'Search Timeline'
               : 'Search Post'
           }

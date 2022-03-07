@@ -4,8 +4,8 @@ import { EffectRef } from '@huse/effect-ref';
 import { Scroll } from '../../..';
 
 export const View = {
-  TIMELINE: 'TIMELINE',
-  POSTS: 'POSTS'
+  Timeline: 'Timeline',
+  Posts: 'Posts'
 } as const;
 
 export type TView = typeof View[keyof typeof View];
