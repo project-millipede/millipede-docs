@@ -3,25 +3,11 @@ import { motion, Variants } from 'framer-motion';
 import React, { CSSProperties, FC, useMemo } from 'react';
 import styled from 'styled-components';
 
-export const HeightVariants = {
-  Auto: 'Auto',
-  Dynamic: 'Dynamic'
-} as const;
-
-export type THeightVariants =
-  typeof HeightVariants[keyof typeof HeightVariants];
+import { HeightVariants, THeightVariants } from '../types';
 
 const Container = styled(motion.div)`
   overflow: hidden;
 `;
-
-interface AnimateHeightProps {
-  isVisible: boolean;
-  duration?: number;
-  ease?: string;
-  variantsType?: THeightVariants;
-  style?: CSSProperties;
-}
 
 export const dynamicHeightVariants: Variants = {
   open: (height: number) => {
@@ -41,6 +27,25 @@ export const autoHeightVariants: Variants = {
   collapsed: { opacity: 0, height: 0 }
 };
 
+/**
+ * Get the duration of the animation depending upon the height provided.
+ */
+export const getAutoHeightDuration = (height: number) => {
+  if (!height) {
+    return 0;
+  }
+  const constant = height / 36;
+  return Math.round((4 + 15 * constant ** 0.25 + constant / 5) * 10);
+};
+
+interface AnimateHeightProps {
+  isVisible: boolean;
+  duration?: number;
+  ease?: string;
+  variantsType?: THeightVariants;
+  style?: CSSProperties;
+}
+
 export const AnimateHeight: FC<AnimateHeightProps> = ({
   isVisible,
   duration,
@@ -58,9 +63,9 @@ export const AnimateHeight: FC<AnimateHeightProps> = ({
 
   return (
     <Container
-      initial={'collapsed'}
+      initial='collapsed'
       animate={isVisible ? 'open' : 'collapsed'}
-      exit={'collapsed'}
+      exit='collapsed'
       variants={
         (variantsType === HeightVariants.Auto && autoHeightVariants) ||
         (variantsType === HeightVariants.Dynamic && dynamicHeightVariants)
@@ -78,12 +83,3 @@ export const AnimateHeight: FC<AnimateHeightProps> = ({
     </Container>
   );
 };
-
-/**
- * Get the duration of the animation depending upon the height provided.
- */
-export function getAutoHeightDuration(height: number) {
-  if (!height) return 0;
-  const constant = height / 36;
-  return Math.round((4 + 15 * constant ** 0.25 + constant / 5) * 10);
-}
