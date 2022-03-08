@@ -35,7 +35,7 @@ export const FlowSurface: FC<FlowSurfaceProps> = ({
           gridArea: 'dock-left'
         }}
         timelineId={leftTimelineId}
-        position={Scroll.Timeline.DockPosition.left}
+        position={Scroll.Timeline.DockPosition.Left}
       />
       <FlowBody />
       <Dock
@@ -44,7 +44,7 @@ export const FlowSurface: FC<FlowSurfaceProps> = ({
           gridArea: 'dock-right'
         }}
         timelineId={rightTimelineId}
-        position={Scroll.Timeline.DockPosition.right}
+        position={Scroll.Timeline.DockPosition.Right}
       />
     </ArcherSurface>
   );
