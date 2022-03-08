@@ -1,14 +1,12 @@
 import { Tabs } from '@app/components';
 import { Components as RenderComponents, HooksUtils } from '@app/render-utils';
-import { Player, SheetNext } from '@demonstrator/components';
+import { Animation, Player, SheetNext } from '@demonstrator/components';
 import { features } from '@demonstrator/navigation';
 import { Components as FlowComponents } from '@demonstrators-social/flow';
 import { DonutLarge, Subscriptions } from '@mui/icons-material';
 import { Divider, Tab } from '@mui/material';
 import React, { FC, SyntheticEvent, useCallback, useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-
-import { AnimateHeight } from './AnimateHeight';
 
 const {
   Playtext,
@@ -21,6 +19,8 @@ const {
   Navigation: { ProgressiveStepBuilder, SliceBuilder, SliceBuilderMultiRow },
   Options: { SliceOptions }
 } = FlowComponents;
+
+const { AnimateHeight } = Animation;
 
 const {
   Responsive: { isMobile }
