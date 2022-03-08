@@ -19,6 +19,10 @@ const SheetWrapper = styled.div`
   overflow: hidden;
   pointer-events: none; // Important to access elements outside / behind the bottom sheet container
   z-index: 5;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 `;
 
 type SheetProps = {
@@ -27,16 +31,13 @@ type SheetProps = {
   initialSnapPointIndex: number;
   appContainerSize: Partial<DOMRect>;
   bottomContainerSize: Partial<DOMRect>;
-  springConfig?: AnimationOptions<number>;
+  transition?: AnimationOptions<number>;
   children: ReactNode;
-  onClose?: () => void;
 };
 
-export const inDescendingOrder = (arr: Array<number>) => {
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i + 1] > arr[i]) return false;
-  }
-  return true;
+const defaultTransition: AnimationOptions<number> = {
+  type: 'spring',
+  duration: 0.2
 };
 
 const Sheet: ForwardRefRenderFunction<SheetHandleProps, SheetProps> = (
@@ -46,10 +47,7 @@ const Sheet: ForwardRefRenderFunction<SheetHandleProps, SheetProps> = (
     initialSnapPointIndex,
     appContainerSize,
     bottomContainerSize,
-    springConfig = {
-      type: 'spring',
-      duration: 0.2
-    },
+    transition = defaultTransition,
     children
   },
   ref
@@ -109,10 +107,10 @@ const Sheet: ForwardRefRenderFunction<SheetHandleProps, SheetProps> = (
       //   sheetEl.parentElement.getBoundingClientRect().height;
 
       if (snapPoint > contentHeight) {
-        animate(fromY, 0, springConfig);
+        animate(fromY, 0, transition);
       } else {
         const toY = contentHeight - snapPoint;
-        animate(fromY, toY, springConfig);
+        animate(fromY, toY, transition);
       }
     },
 
@@ -129,7 +127,7 @@ const Sheet: ForwardRefRenderFunction<SheetHandleProps, SheetProps> = (
         sheetEl.parentElement.getBoundingClientRect().height -
         (height + offsetTop);
 
-      animate(fromY, toY, springConfig);
+      animate(fromY, toY, transition);
     }
   }));
 
@@ -142,11 +140,7 @@ const Sheet: ForwardRefRenderFunction<SheetHandleProps, SheetProps> = (
         fromY: fromY
       }}
     >
-      <SheetWrapper
-        style={{
-          width: appContainerSize.width
-        }}
-      >
+      <SheetWrapper>
         {/* Note: AnimatePresence requires us to set keys to children */}
         <AnimatePresence>
           {isOpen
