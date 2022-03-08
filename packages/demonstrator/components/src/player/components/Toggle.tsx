@@ -10,27 +10,16 @@ export const Toggle: FC = () => {
   const [{ isPlayerExpanded }, setPlayerLayoutState] =
     useRecoilState(playerLayoutState);
 
-  const toggle = useCallback(
-    () =>
+  const toggleBottomSheet = useCallback(
+    (_event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       setPlayerLayoutState(state => {
         return {
           ...state,
           isPlayerExpanded: !state.isPlayerExpanded
         };
-      }),
-    [isPlayerExpanded, setPlayerLayoutState]
-  );
-
-  const handleBottomSheet = (
-    _event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    toggle();
-  };
-
-  const expander = (
-    <IconButton size='small' onClick={handleBottomSheet}>
-      {isPlayerExpanded ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
-    </IconButton>
+      });
+    },
+    []
   );
 
   return (
@@ -42,7 +31,9 @@ export const Toggle: FC = () => {
         margin: '8px 16px'
       }}
     >
-      {expander}
+      <IconButton size='small' onClick={toggleBottomSheet}>
+        {isPlayerExpanded ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
+      </IconButton>
     </div>
   );
 };
