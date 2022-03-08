@@ -3,6 +3,14 @@
   "share": "Share",
   "delete": "Delete",
   "comment": "Comment",
+
+  "header": "Header",
+  "media": "Media",
+  "content": "Content",
+  "sentiment": "Sentiment",
+  "comments": "Comments",
+  "select-slice-categories": "Select slice categories",
+
   "comment_create": "Create comment",
   "comment_publish": "Publish comment",
   "content_create": "Create content",
@@ -15,6 +23,10 @@
   "publish-relation-upload": "4",
   "publish-node-download": "5",
   "publish-relation-download": "6",
+
+  "publish-node-next": "8",
+  "publish-relation-next": "9",
+
   "publish-node-tail": "7",
 
   "publish-node-headB": "8",
@@ -24,11 +36,6 @@
   "publish-node-downloadB": "12",
   "publish-relation-downloadB": "13",
   "publish-node-tailB": "14",
-
-  "publish-nodeId-head": "Head",
-  "publish-nodeId-upload": "Upload",
-  "publish-nodeId-download": "Download",
-  "publish-nodeId-tail": "Tail",
 
   "timeline-tab-posts": "Let's create some content on your favorite social media platform bookface.com. To do so, we navigate to the tab 'Posts.'",
   "timeline-tab-timeline": "Your friend perceives the following content in the timeline.",
