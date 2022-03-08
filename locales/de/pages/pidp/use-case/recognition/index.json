@@ -3,19 +3,31 @@
   "share": "Teilen",
   "delete": "Löschen",
   "comment": "Kommentieren",
+
+  "header": "Kopfzeile",
+  "media": "Medien",
+  "content": "Inhalt",
+  "sentiment": "Stimmungslage",
+  "comments": "Kommentare",
+  "select-slice-categories": "Slice-Kategorien auswählen",
+
   "comment_create": "Kommentar erstellen",
   "comment_publish": "Kommentar veröffentlichen",
   "content_create": "Beitrag erstellen",
   "content_publish": "Beitrag veröffentlichen",
   "content_empty": "Eine Nutzereingabe erkannt",
 
-  "publish-node-head": "1",
-  "publish-relation-head": "2",
-  "publish-node-upload": "3",
-  "publish-relation-upload": "4",
-  "publish-node-download": "5",
-  "publish-relation-download": "6",
-  "publish-node-tail": "7",
+  "publish-node-head": "Create",
+  "publish-relation-head": "Uploading",
+  "publish-node-upload": "Upload",
+  "publish-relation-upload": "Between",
+  "publish-node-download": "Download",
+  "publish-relation-download": "Downloading",
+
+  "publish-node-next": "Next",
+  "publish-relation-next": "Nexting",
+
+  "publish-node-tail": "View",
 
   "publish-node-headB": "8",
   "publish-relation-headB": "9",
@@ -24,11 +36,6 @@
   "publish-node-downloadB": "12",
   "publish-relation-downloadB": "13",
   "publish-node-tailB": "14",
-
-  "publish-nodeId-head": "Head",
-  "publish-nodeId-upload": "Upload",
-  "publish-nodeId-download": "Download",
-  "publish-nodeId-tail": "Tail",
 
   "timeline-tab-posts": "Lasst uns einige Inhalte auf eurer bevorzugten Social-Media-Plattform bookface.com erstellen. Wir navigieren dazu zur Registerkarte 'Posts'.",
   "timeline-tab-timeline": "Dein gegenüber nimmt folgenden Inhalt in der Timeline wahr",
