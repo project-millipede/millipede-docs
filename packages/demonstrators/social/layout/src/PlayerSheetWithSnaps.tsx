@@ -13,7 +13,7 @@ const {
 } = RenderComponents;
 
 const {
-  Playtext,
+  // Playtext,
   Playlist,
   Controls: { NavigationControl },
   Progress: { TextProgressControl, ProgressControl }
@@ -155,9 +155,9 @@ export const PlayerSheet: FC<PlayerSheetProps> = ({ steps, playlist }) => {
 
           {activeTab === PlayerSheetTabs.Actions && <ProgressiveStepBuilder />}
 
-          {activeTab === PlayerSheetTabs.Actions && (
+          {/* {activeTab === PlayerSheetTabs.Actions && (
             <Playtext steps={steps} ref={resizeControlRef} />
-          )}
+          )} */}
 
           {activeTab === PlayerSheetTabs.Actions && (
             <div
