@@ -1,67 +1,59 @@
-import { useHoux } from '@app/houx';
-import { StringUtil } from '@app/utils';
-import { playerLayoutState } from '@demonstrator/components/src/player/context/reducer';
-import { FlowPlayControl, getSteps } from '@demonstrators-social/flow';
-import { RootState } from '@demonstrators-social/shared';
-import React, { FC, useMemo } from 'react';
+import { Player } from '@demonstrator/components';
+import { Components } from '@demonstrators-social/flow';
+import React, { FC } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { PlayerSheet as RelativePlayerSheet } from './PlayerSheet';
-import { PlayerSheet as AbsolutePlayerSheet } from './PlayerSheetWithSnaps';
+import { LayoutVariants, PlayerSheet } from './PlayerSheet';
 
-const renderRelative = true;
+// import { PlayerSheet as PlayerSheetWithSnaps } from './PlayerSheetWithSnaps';
+
+const { FlowPlayControl } = Components;
 
 export const StoryPlayer: FC = () => {
-  const { topic } = useRecoilValue(playerLayoutState);
-
   const {
-    state
-  }: {
-    state: RootState;
-  } = useHoux();
-
-  // getSteps gets used in the form of a hook here
-  const playlist = getSteps(state) || [];
-
-  const selectedPlaylistItemSteps = useMemo(() => {
-    if (!StringUtil.isEmptyString(topic)) {
-      const [steps] = playlist
-        .filter(value => value.id === topic)
-        .map(value => value.steps);
-      return steps;
+    layout: {
+      states: { playerLayoutState },
+      selector: { storySelector }
     }
-    return [];
-  }, [topic, playlist]);
+  } = Player.features;
 
-  // return (
-  //   <>
-  //     <RelativePlayerSheet
-  //       steps={selectedPlaylistItemSteps}
-  //       playlist={playlist}
-  //     />
-  //     <FlowPlayControl steps={selectedPlaylistItemSteps} topic={topic} />
-  //   </>
-  // );
+  const { topic, playlist } = useRecoilValue(playerLayoutState);
 
-  return renderRelative ? (
+  const story = useRecoilValue(storySelector(topic));
+
+  // Modern version - with relative layout
+  return (
     <div
       style={{
         position: 'relative'
       }}
     >
-      <RelativePlayerSheet
-        steps={selectedPlaylistItemSteps}
+      <PlayerSheet
         playlist={playlist}
+        steps={story.steps}
+        layout={LayoutVariants.Relative}
       />
-      <FlowPlayControl steps={selectedPlaylistItemSteps} topic={topic} />
+      <FlowPlayControl steps={story.steps} topic={topic} />
     </div>
-  ) : (
-    <>
-      <AbsolutePlayerSheet
-        steps={selectedPlaylistItemSteps}
-        playlist={playlist}
-      />
-      <FlowPlayControl steps={selectedPlaylistItemSteps} topic={topic} />
-    </>
   );
+
+  // Modern version - with absolute layout
+  // return (
+  //   <>
+  //     <PlayerSheet
+  //       playlist={playlist}
+  //       steps={story.steps}
+  //       layout={LayoutVariants.Absolute}
+  //     />
+  //     <FlowPlayControl steps={story.steps} topic={topic} />
+  //   </>
+  // );
+
+  // Previous version, but also very interesting - with absolute layout
+  // return (
+  //   <>
+  //     <PlayerSheetWithSnaps steps={story.steps} playlist={playlist} />
+  //     <FlowPlayControl steps={story.steps} topic={topic} />
+  //   </>
+  // );
 };
