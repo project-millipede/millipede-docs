@@ -1,15 +1,9 @@
 import { HooksUtils } from '@app/render-utils';
 import { AnimationOptions, motion, useAnimation, useMotionValue, Variants } from 'framer-motion';
-import React, { FC, ReactNode, useEffect, useMemo } from 'react';
+import React, { FC, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 
-interface SheetProps {
-  isOpen: boolean;
-  bottomContainerSize: Partial<DOMRect>;
-  transition?: AnimationOptions<number>;
-  header: ReactNode;
-  content: ReactNode;
-}
+import { getAutoHeightDuration, SheetProps } from './Sheet.svc';
 
 export const BottomSheetRoot = styled.div`
   position: absolute;
@@ -42,14 +36,16 @@ export const BottomSheetHeader = styled.div`
 
 export const BottomSheetContent = styled.div``;
 
+const defaultTransition: AnimationOptions<number> = {
+  type: 'spring'
+};
+
 export const Sheet: FC<SheetProps> = ({
   isOpen,
-  bottomContainerSize,
-  transition = {
-    type: 'spring'
-  },
   header,
-  content
+  content,
+  transition = defaultTransition,
+  bottomContainerSize
 }) => {
   const [headerRef, { height: headerHeight = 0 }] = HooksUtils.useResize();
   const [contentRef, { height: contentHeight = 0 }] = HooksUtils.useResize();
@@ -108,12 +104,3 @@ export const Sheet: FC<SheetProps> = ({
     </BottomSheetRoot>
   );
 };
-
-/**
- * Get the duration of the animation depending upon the height provided.
- */
-export function getAutoHeightDuration(height: number) {
-  if (!height) return 0;
-  const constant = height / 36;
-  return Math.round((4 + 15 * constant ** 0.25 + constant / 5) * 10);
-}

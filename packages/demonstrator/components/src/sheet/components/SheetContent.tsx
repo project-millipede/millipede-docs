@@ -1,11 +1,10 @@
-import { styled } from '@mui/material/styles';
 import React, { FC } from 'react';
+import styled from 'styled-components';
 
-const Content = styled('div')(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  margin: theme.spacing(3)
-}));
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 export const SheetContent: FC = ({ children }) => {
   return <Content>{children}</Content>;
