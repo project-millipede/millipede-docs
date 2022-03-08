@@ -36,8 +36,7 @@ export const Post: FC<PostProps> = ({
     scroll: {
       timeline: {
         states: { nodesWithRelationsWithEdgeState },
-        // actions: { addTopic, createNodesWithRelations },
-        actionsWorking: { addTopic, createNodesWithRelations },
+        actions: { addTopic, createNodesWithRelations },
         constants: { actionPlan }
       },
       post: {

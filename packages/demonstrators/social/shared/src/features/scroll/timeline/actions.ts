@@ -1,7 +1,6 @@
 import isArray from 'lodash/isArray';
 import { Translate } from 'next-translate';
 
-import { Scroll } from '../../..';
 import { LAYOUT, Link, NodeWithRelationsWithEdge } from './types';
 
 export const addTopic = (
@@ -103,8 +102,7 @@ export const createNodesWithRelations =
     t: Translate,
     ltr = true,
     layout = LAYOUT.FULL,
-    resultMinusLast: Array<string>,
-    flowActions: Array<Scroll.Timeline.Link>
+    flowActionsMinusLast: Array<string> = []
   ) =>
   (
     timelineIds: Array<string> | string,
@@ -119,77 +117,63 @@ export const createNodesWithRelations =
     ): T => {
       const { id, nodeTranslationKey, relationTranslationKey } = link;
       // eslint-disable-next-line no-param-reassign
-
-      const sliceEdgeConnections = !flowActions
-        .map(flowAction => flowAction.id)
-        .includes(id)
-        ? getEdgeConnections(link, index, links.length, sliceIds)
-        : {};
-
-      const allNodeIds = acc.nodeWithRelations.map(value => value.node.id);
-      if (allNodeIds.includes(id)) {
-        return acc;
-      } else {
-        // eslint-disable-next-line no-param-reassign
-        acc = {
-          ...acc,
-          nodeWithRelations: [
-            ...acc.nodeWithRelations,
-            {
-              node: {
-                id,
-                label: t(nodeTranslationKey)
-              },
-
-              relations:
-                index !== links.length - 1
-                  ? [
-                      {
-                        targetId: links[index + 1].id,
-                        label: t(relationTranslationKey),
-
-                        /**
-                         * The source and target anchors for the east and west docking are mandatory;
-                         * anchors for the north and south docking are optional.
-                         */
-
-                        sourceAnchor: ltr ? 'right' : 'left',
-                        targetAnchor: ltr ? 'left' : 'right',
-
-                        optionalSourceAnchor: resultMinusLast.includes(id)
-                          ? ltr
-                            ? 'bottom'
-                            : 'top'
-                          : undefined,
-
-                        optionalTargetAnchor: resultMinusLast.includes(id)
-                          ? ltr
-                            ? 'top'
-                            : 'bottom'
-                          : undefined
-                      }
-                    ]
-                  : []
-            }
-          ],
-
-          edgeConnections: {
-            ...acc.edgeConnections,
-            timelineIds: {
-              ...acc.edgeConnections.timelineIds,
-              ...getEdgeConnections(link, index, links.length, timelineIds)
+      acc = {
+        ...acc,
+        nodeWithRelations: [
+          ...acc.nodeWithRelations,
+          {
+            node: {
+              id,
+              label: t(nodeTranslationKey)
             },
-            postIds: {
-              ...acc.edgeConnections.postIds,
-              ...getEdgeConnections(link, index, links.length, postIds)
-            },
-            sliceIds: {
-              ...acc.edgeConnections.sliceIds,
-              ...sliceEdgeConnections
-            }
+
+            relations:
+              index !== links.length - 1
+                ? [
+                    {
+                      targetId: links[index + 1].id,
+                      label: t(relationTranslationKey),
+
+                      /**
+                       * The source and target anchors for the east and west docking are mandatory;
+                       * anchors for the north and south docking are optional.
+                       */
+
+                      sourceAnchor: ltr ? 'right' : 'left',
+                      targetAnchor: ltr ? 'left' : 'right',
+
+                      optionalSourceAnchor: flowActionsMinusLast.includes(id)
+                        ? ltr
+                          ? 'bottom'
+                          : 'top'
+                        : undefined,
+
+                      optionalTargetAnchor: flowActionsMinusLast.includes(id)
+                        ? ltr
+                          ? 'top'
+                          : 'bottom'
+                        : undefined
+                    }
+                  ]
+                : []
           }
-        };
-      }
+        ],
+        edgeConnections: {
+          ...acc.edgeConnections,
+          timelineIds: {
+            ...acc.edgeConnections.timelineIds,
+            ...getEdgeConnections(link, index, links.length, timelineIds)
+          },
+          postIds: {
+            ...acc.edgeConnections.postIds,
+            ...getEdgeConnections(link, index, links.length, postIds)
+          },
+          sliceIds: {
+            ...acc.edgeConnections.sliceIds,
+            ...getEdgeConnections(link, index, links.length, sliceIds)
+          }
+        }
+      };
       return acc;
     };
 
@@ -206,8 +190,6 @@ export const createNodesWithRelations =
           ltr,
           layout
         });
-
-    console.log('result - createNodesWithRelations: ', result);
 
     return result;
   };
