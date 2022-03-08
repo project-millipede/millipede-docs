@@ -2,15 +2,17 @@ import { atom } from 'recoil';
 
 import { InteractionOption } from './types';
 
-export const interactionOptionsState = atom<InteractionOption>({
-  key: 'interaction-options',
-  default: {
-    activeIds: {
-      header: true,
-      media: false,
-      content: false,
-      sentiment: false,
-      comments: false
-    }
+const initialState: InteractionOption = {
+  activeIds: {
+    header: true,
+    media: false,
+    content: false,
+    sentiment: false,
+    comments: false
   }
+};
+
+export const interactionOptionsState = atom({
+  key: 'interaction-options',
+  default: initialState
 });
