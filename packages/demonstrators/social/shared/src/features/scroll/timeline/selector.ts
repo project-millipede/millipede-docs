@@ -3,7 +3,7 @@ import lodashGet from 'lodash/get';
 import { DefaultValue, selector, selectorFamily } from 'recoil';
 
 import { Scroll } from '../../..';
-import { getBodySliceIds, getDockedPostIds, getDockedSliceIds, getDockedSliceIds2 } from './selector-utils';
+import { getBodySliceIds, getDockedPostIds, getDockedSliceIds } from './selector-utils';
 import { nodesWithRelationsWithEdgeState, refContainerScrollState } from './states';
 import { NodeWithRelations, SliceMap, TDockPosition } from './types';
 
@@ -63,19 +63,6 @@ export const dockedSliceIdsSelector = selectorFamily<
     ({ get }) => {
       const state = get(nodesWithRelationsWithEdgeState);
       return getDockedSliceIds(timelineId, postId, state);
-    }
-});
-
-export const dockedSliceIdsSelector2 = selectorFamily<
-  Array<string>,
-  { timelineId: string; postId: string }
->({
-  key: 'docked-slice-ids-selector',
-  get:
-    ({ timelineId, postId }) =>
-    ({ get }) => {
-      const state = get(nodesWithRelationsWithEdgeState);
-      return getDockedSliceIds2(timelineId, postId, state);
     }
 });
 
