@@ -19,9 +19,9 @@ export interface RefContainerScroll {
 }
 
 export interface Link {
-  id?: string;
-  nodeTranslationKey?: string;
-  relationTranslationKey?: string;
+  id: string;
+  nodeTranslationKey: string;
+  relationTranslationKey: string;
 }
 
 export interface Node {
@@ -61,15 +61,13 @@ export interface NodesWithRelationsMap {
 }
 
 export const DockPosition = {
-  left: 'left',
-  right: 'right'
+  Left: 'Left',
+  Right: 'Right'
 } as const;
 
 export type TDockPosition = typeof DockPosition[keyof typeof DockPosition];
 
 export interface SliceMap {
-  postId?: string;
-
-  sliceId?: string;
+  sliceId: string;
   nodeWithRelations: Scroll.Timeline.NodeWithRelations;
 }
