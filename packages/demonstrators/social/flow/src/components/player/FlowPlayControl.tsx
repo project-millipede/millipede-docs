@@ -1,17 +1,15 @@
-import { Portal } from '@app/components';
+import { features as appComponentFeatures, Portal } from '@app/components';
 import { StringUtil } from '@app/utils';
 import { Player, useStepDispatch, useStepState } from '@demonstrator/components';
-import { Step } from '@demonstrator/components/src/player/types';
-import { activeViewIdSelector } from '@demonstrator/navigation';
-import { useNavigation } from '@demonstrator/navigation/src/hooks/useNavigation';
-import { appCompositionState } from '@demonstrator/navigation/src/recoil/features/app/reducers';
+import { features as navigationFeatures, useNavigation } from '@demonstrator/navigation';
+import { features } from '@demonstrators-social/shared';
 import isFunction from 'lodash/isFunction';
 import dynamic from 'next/dynamic';
 import React, { FC, useCallback, useEffect, useMemo } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilCallback, useRecoilValue } from 'recoil';
 
 interface FlowPlayControlProps {
-  steps: Array<Step>;
+  steps: Array<Player.Step>;
   topic: string;
 }
 
@@ -25,6 +23,31 @@ export const FlowPlayControl: FC<FlowPlayControlProps> = ({ steps, topic }) => {
 };
 
 const StepsRangeWrapper: FC<FlowPlayControlProps> = ({ steps, topic }) => {
+  const {
+    scroll: {
+      timeline: {
+        states: { nodesWithRelationsWithEdgeState }
+      }
+    }
+  } = features;
+
+  const {
+    view: {
+      navigation: {
+        selector: { activeViewIdSelector }
+      }
+    },
+    app: {
+      states: { appCompositionState }
+    }
+  } = navigationFeatures;
+
+  const {
+    archer: {
+      states: { archerTransitionComposedState }
+    }
+  } = appComponentFeatures;
+
   const [{ id: activeViewElementId }] = useRecoilValue(activeViewIdSelector);
 
   const { target, playing, maxStepsCount } = useStepState();
@@ -33,6 +56,7 @@ const StepsRangeWrapper: FC<FlowPlayControlProps> = ({ steps, topic }) => {
 
   useEffect(() => {
     if (maxStepsCount === 0 && playing) {
+      handleReset();
       stepDispatch({ type: 'INIT', maxStepsCount: steps.length });
     }
   }, [maxStepsCount, playing, topic]);
@@ -80,6 +104,22 @@ const StepsRangeWrapper: FC<FlowPlayControlProps> = ({ steps, topic }) => {
       selector();
     }
   }, [selector]);
+
+  // TODO:
+  useEffect(() => {
+    if (selector != null && !isFunction(selector)) {
+    }
+  }, [selector]);
+
+  // execute before a new playlist item gets played
+  const handleReset = useRecoilCallback(
+    ({ reset }) =>
+      () => {
+        reset(nodesWithRelationsWithEdgeState);
+        reset(archerTransitionComposedState);
+      },
+    []
+  );
 
   return (
     playing && (

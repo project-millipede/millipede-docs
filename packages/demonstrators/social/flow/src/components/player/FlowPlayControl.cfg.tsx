@@ -1,45 +1,133 @@
-import { CollectionUtil } from '@app/utils';
-import { PlayListItem } from '@demonstrator/components/src/player/types';
-import { RootState, scrollStates, selectors } from '@demonstrators-social/shared';
-import { useResetRecoilState } from 'recoil';
+// import { features as appComponentFeatures } from '@app/components';
+import { Player } from '@demonstrator/components';
+import { features } from '@demonstrators-social/shared';
+import { useRecoilValue } from 'recoil';
 
-// currently a hook with false name
+export const getPlaylist = (): Array<Player.PlayListItem> => {
+  const playList = [
+    {
+      id: 'publish_content_unprotected',
+      title: 'Veröffentlichung von Inhalten, ungeschützt',
+      description: 'Übergabe der Inhalte an den Anbieter',
+      steps: []
+    },
+    {
+      id: 'publish_comment',
+      title: 'Reaktion zu Inhalten',
+      description: 'Anbieter messen jede Interaktion des Bedieners',
+      steps: []
+    }
+  ];
+  return playList;
+};
 
-export const getSteps = (state: RootState): Array<PlayListItem> => {
-  // use selectors to get relevant data for steps
-  const useCase = (state.timeline &&
-    selectors.timeline.selectUserCaseState(state)) || {
-    id: '',
-    timelines: []
-  };
+const leftTimeline = { id: '' };
 
-  const { timelines = [] } = useCase;
+export const playListSteps = {
+  publish_content_unprotected: {
+    '1': {
+      start: 0,
+      end: 5000,
+      label: '1',
+      selector: `timeline-${leftTimeline.id}-tab-posts`,
+      description: 'pages/pidp/use-case/recognition/index:timeline-tab-posts'
+      // viewSelector: 'LeftViewElement'
+    }
+  }
+};
+
+export const getPlayListItem = (): Array<Player.Step> => {
+  // const {
+  //   scroll: {
+  //     timeline: {
+  //       states: { nodesWithRelationsWithEdgeState }
+  //     }
+  //   }
+  // } = features;
+
+  // const {
+  //   archer: {
+  //     states: { archerTransitionComposedState }
+  //   }
+  // } = appComponentFeatures;
+
+  // execute before a new playlist item gets played
+  // const handleReset = useRecoilCallback(
+  //   ({ reset }) =>
+  //     () => {
+  //       reset(nodesWithRelationsWithEdgeState);
+  //       reset(archerTransitionComposedState);
+  //     },
+  //   []
+  // );
+
+  return [
+    // programmatical reset
+    // {
+    //   start: 0,
+    //   end: 100,
+    //   label: '0',
+    //   selector: handleReset,
+    //   description: 'pages/pidp/use-case/recognition/index:timeline-tab-posts'
+    // }
+    // interactive reset
+    // {
+    //   start: 0,
+    //   end: 100,
+    //   label: '0',
+    //   selector: `psb-reset`,
+    //   description: `pages/pidp/use-case/recognition/index:progressiveStepBuilder-0`
+    // },
+  ];
+};
+
+// TODO: Rename, this is a hook
+export const getSteps = (): Array<Player.PlayListItem> => {
+  const {
+    // scroll: {
+    // timeline: {
+    //   states: { nodesWithRelationsWithEdgeState }
+    // }
+    // },
+    timeline: {
+      selector: { useCaseSelector, postIdsOfOwnerSelector, SortDirection }
+    }
+  } = features;
+
+  // const {
+  //   archer: {
+  //     states: { archerTransitionComposedState }
+  //   }
+  // } = appComponentFeatures;
+
+  const useCase = useRecoilValue(useCaseSelector);
+
+  const { timelines } = useCase;
+
   const [leftTimeline, rightTimeline] = timelines;
 
-  const leftTimelinePostIdsOwner =
-    leftTimeline &&
-    leftTimeline.id &&
-    selectors.timeline.selectPostsOfOwner(
-      leftTimeline.id,
-      CollectionUtil.Array.compareDescFn('content.createdAt')
-    )(state);
+  const { id: leftTimelineId } = leftTimeline || { id: '' };
+
+  const leftTimelinePostIdsOwner = useRecoilValue(
+    postIdsOfOwnerSelector({
+      timelineId: leftTimelineId,
+      sortDirection: SortDirection.DECS
+    })
+  );
 
   const [postId] =
     leftTimelinePostIdsOwner && leftTimelinePostIdsOwner.length > 0
       ? leftTimelinePostIdsOwner
       : [];
 
-  const {
-    timeline: { nodesWithRelationsWithEdgeState }
-  } = scrollStates;
-
-  const resetNodesWithRelationsWithEdge = useResetRecoilState(
-    nodesWithRelationsWithEdgeState
-  );
-
-  const handleReset = () => {
-    resetNodesWithRelationsWithEdge();
-  };
+  // const handleReset = useRecoilCallback(
+  //   ({ reset }) =>
+  //     () => {
+  //       reset(nodesWithRelationsWithEdgeState);
+  //       reset(archerTransitionComposedState);
+  //     },
+  //   []
+  // );
 
   const steps =
     leftTimeline && leftTimeline.id && rightTimeline && rightTimeline.id
@@ -49,25 +137,26 @@ export const getSteps = (state: RootState): Array<PlayListItem> => {
             title: 'Veröffentlichung von Inhalten, ungeschützt',
             description: 'Übergabe der Inhalte an den Anbieter',
             steps: [
-              // programmatical reset
-              {
-                start: 0,
-                end: 100,
-                label: '0',
-                selector: handleReset,
-                description:
-                  'pages/pidp/use-case/recognition/index:timeline-tab-posts'
-              },
+              // programmatical reset - out
+              // {
+              //   start: 0,
+              //   end: 100,
+              //   label: '0',
+              //   selector: handleReset,
+              //   description:
+              //     'pages/pidp/use-case/recognition/index:timeline-tab-posts'
+              // },
+
               // interactive reset
               // {
               //   start: 0,
               //   end: 100,
               //   label: '0',
-              //   selector: `progressiveStepBuilder-reset`,
+              //   selector: `psb-reset`,
               //   description: `pages/pidp/use-case/recognition/index:progressiveStepBuilder-0`
               // },
               {
-                start: 100,
+                start: 0,
                 end: 5000,
                 label: '1',
                 selector: `timeline-${leftTimeline.id}-tab-posts`,
@@ -122,7 +211,7 @@ export const getSteps = (state: RootState): Array<PlayListItem> => {
                 start: 15000,
                 end: 19000,
                 label: '4',
-                selector: `progressiveStepBuilder-${0}`,
+                selector: `psb-${0}`,
                 description:
                   'pages/pidp/use-case/recognition/index:timeline-tab-posts'
               },
@@ -137,21 +226,21 @@ export const getSteps = (state: RootState): Array<PlayListItem> => {
                 start: 20000,
                 end: 25000,
                 label: '6',
-                selector: `progressiveStepBuilder-${1}`,
+                selector: `psb-${1}`,
                 description: `pages/pidp/use-case/recognition/index:progressiveStepBuilder-1`
               },
               {
                 start: 25000,
                 end: 30000,
                 label: '7',
-                selector: `progressiveStepBuilder-${2}`,
+                selector: `psb-${2}`,
                 description: `pages/pidp/use-case/recognition/index:progressiveStepBuilder-2`
               },
               {
                 start: 30000,
                 end: 35000,
                 label: '8',
-                selector: `progressiveStepBuilder-${3}`,
+                selector: `psb-${3}`,
                 description: `pages/pidp/use-case/recognition/index:progressiveStepBuilder-3`
               },
               {
@@ -168,15 +257,15 @@ export const getSteps = (state: RootState): Array<PlayListItem> => {
             title: 'Reaktion zu Inhalten',
             description: 'Anbieter messen jede Interaktion des Bedieners',
             steps: [
-              // programmatical reset
-              {
-                start: 0,
-                end: 100,
-                label: '0',
-                selector: handleReset,
-                description:
-                  'pages/pidp/use-case/recognition/index:timeline-tab-timeline'
-              },
+              // programmatical reset - out
+              // {
+              //   start: 0,
+              //   end: 100,
+              //   label: '0',
+              //   selector: handleReset,
+              //   description:
+              //     'pages/pidp/use-case/recognition/index:timeline-tab-timeline'
+              // },
               // {
               //   start: 100,
               //   end: 2500,
@@ -196,7 +285,7 @@ export const getSteps = (state: RootState): Array<PlayListItem> => {
               // },
 
               {
-                start: 100,
+                start: 0,
                 end: 2500,
                 label: '1',
                 selector: `timeline-${leftTimeline.id}-tab-posts`,
