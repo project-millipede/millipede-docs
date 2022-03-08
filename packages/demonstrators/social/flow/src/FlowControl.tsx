@@ -1,43 +1,22 @@
-import { Archer, Stepper } from '@app/components';
-import { scrollStates } from '@demonstrators-social/shared';
-import { Checkbox, FormControlLabel, FormGroup, List, ListItem, ListSubheader, Paper, Typography } from '@mui/material';
+import { features as appComponentFeatures, Stepper } from '@app/components';
+import { features } from '@demonstrators-social/shared';
+import { List, ListItem, ListSubheader, Paper, Typography } from '@mui/material';
 import { usePrevious } from 'ahooks';
 import get from 'lodash/get';
 import useTranslation from 'next-translate/useTranslation';
-import React, { ChangeEvent, CSSProperties, FC, useEffect, useMemo, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
-import { ScenarioControlNWithN } from './components/navigation/ScenarioControlNWithN';
-import { FlowControlObserver } from './components/observer/FlowControlObserver';
-import { SliceOptions } from './components/options/SliceOptions';
-
-// const useStyles = makeStyles((theme: Theme) => ({
-//   root: {
-//     width: '100%',
-//     backgroundColor: theme.palette.background.paper,
-//     position: 'relative',
-//     overflow: 'auto'
-//   },
-//   root2: {
-//     flexGrow: 1
-//   },
-//   header: {
-//     display: 'flex',
-//     alignItems: 'center',
-//     height: 50,
-//     paddingLeft: theme.spacing(4),
-//     backgroundColor: theme.palette.background.default
-//   },
-// }));
-
-interface ScenarioNavigatorProps {}
-
-export const ScenarioNavigator: FC<ScenarioNavigatorProps> = () => {
-  const { t } = useTranslation();
-
+export const ScenarioNavigator: FC = () => {
   const {
-    timeline: { nodesWithRelationsWithEdgeState }
-  } = scrollStates;
+    scroll: {
+      timeline: {
+        states: { nodesWithRelationsWithEdgeState }
+      }
+    }
+  } = features;
+
+  const { t } = useTranslation();
 
   const [{ nodesWithRelations, activeId }, setNodesWithRelationsWithEdge] =
     useRecoilState(nodesWithRelationsWithEdgeState);
@@ -67,16 +46,22 @@ export const ScenarioNavigator: FC<ScenarioNavigatorProps> = () => {
   );
 };
 
-interface ScenarioDetailNavigatorProps {}
-
-export const ScenarioDetailNavigator: FC<ScenarioDetailNavigatorProps> = () => {
-  const { t } = useTranslation();
-
-  // const classes = useStyles();
+export const ScenarioDetailNavigator: FC = () => {
+  const {
+    scroll: {
+      timeline: {
+        states: { nodesWithRelationsWithEdgeState }
+      }
+    }
+  } = features;
 
   const {
-    timeline: { nodesWithRelationsWithEdgeState }
-  } = scrollStates;
+    archer: {
+      selector: { archerRefSelector }
+    }
+  } = appComponentFeatures;
+
+  const { t } = useTranslation();
 
   const [selectedKey, setSelectedKey] = useState({
     row: '',
@@ -95,12 +80,13 @@ export const ScenarioDetailNavigator: FC<ScenarioDetailNavigatorProps> = () => {
 
   const [currentStep, setCurrentStep] = useState(0);
 
-  const { refs } = Archer.ArcherContext.useRefState();
-
   const [id, setId] = useState('');
 
   // does not work in concurrent mode
   const previousId = usePrevious(id);
+
+  const previousRef = useRecoilValue(archerRefSelector(previousId));
+  const currentRef = useRecoilValue(archerRefSelector(id));
 
   const currentNodesWithRelations = useMemo(() => {
     const currentNodesWithRelations = get(nodesWithRelations, activeId);
@@ -124,28 +110,19 @@ export const ScenarioDetailNavigator: FC<ScenarioDetailNavigatorProps> = () => {
       return [selectedNodeWithRelationsValue, nodeWithRelations, steps];
     }, [currentNodesWithRelations, selectedKey.column]);
 
+  // TODO: Check if this is still required / unselect / select use case
   useEffect(() => {
-    if (refs != null && previousId && id) {
-      const previousRef = get(refs, previousId);
-      const currentRef = get(refs, id);
-
-      if (
-        previousRef &&
-        previousRef.dynamicRef &&
-        previousRef.dynamicRef.current
-      ) {
-        previousRef.dynamicRef.current.unSelect();
-      }
-
-      if (
-        currentRef &&
-        currentRef.dynamicRef &&
-        currentRef.dynamicRef.current
-      ) {
-        currentRef.dynamicRef.current.select();
-      }
+    if (
+      previousRef &&
+      previousRef.dynamicRef &&
+      previousRef.dynamicRef.current
+    ) {
+      previousRef.dynamicRef.current.unSelect();
     }
-  }, [refs, previousId, id]);
+    if (currentRef && currentRef.dynamicRef && currentRef.dynamicRef.current) {
+      currentRef.dynamicRef.current.select();
+    }
+  }, [currentRef, previousRef]);
 
   useEffect(() => {
     if (selectedNodeWithRelationsValue) {
@@ -179,14 +156,14 @@ export const ScenarioDetailNavigator: FC<ScenarioDetailNavigatorProps> = () => {
     <>
       <List
         dense
-        // className={classes.root}
         subheader={
           <ListSubheader component='div' id='nested-list-subheader'>
-            {`I'm sticky ${currentNodesWithRelations.id}`}
+            {/* {`I'm sticky ${currentNodesWithRelations.id}`} */}
+            {`I'm sticky`}
           </ListSubheader>
         }
       >
-        {currentNodesWithRelations.values.map((value, index) => {
+        {currentNodesWithRelations.map((value, index) => {
           return (
             <ListItem
               button
@@ -205,14 +182,8 @@ export const ScenarioDetailNavigator: FC<ScenarioDetailNavigatorProps> = () => {
         })}
       </List>
 
-      <div
-      // className={classes.root2}
-      >
-        <Paper
-          square
-          elevation={0}
-          // className={classes.header}
-        >
+      <div>
+        <Paper square elevation={0}>
           <Typography>
             {t(`pages/pidp/use-case/recognition/index:${id}`)}
           </Typography>
@@ -229,74 +200,4 @@ export const ScenarioDetailNavigator: FC<ScenarioDetailNavigatorProps> = () => {
       </div>
     </>
   ) : null;
-};
-
-interface ScenarioControlProps {
-  leftTimelineId?: string;
-  rightTimelineId?: string;
-}
-
-export const ScenarioControlOrg: FC<ScenarioControlProps> = () =>
-  // eslint-disable-next-line no-empty-pattern
-  {
-    const [state, setState] = useState({
-      ltr: false
-    });
-
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-      setState({ ...state, [event.target.name]: event.target.checked });
-    };
-
-    return (
-      <div style={{ display: 'flex' }}>
-        <SliceOptions />
-
-        <ScenarioControlNWithN ltr={state.ltr} />
-        {/* <ProgressiveStepBuilder
-          ltr={state.ltr}
-          // ltr
-        /> */}
-
-        <FormGroup row>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={state.ltr}
-                onChange={handleChange}
-                name='ltr'
-                color='primary'
-              />
-            }
-            label='LTR'
-          />
-        </FormGroup>
-      </div>
-    );
-  };
-
-interface FlowControlProps {
-  handleControlOffset?: (value: number) => void;
-  style?: CSSProperties;
-}
-
-export const FlowControl: FC<FlowControlProps> = ({
-  handleControlOffset,
-  style
-}) => {
-  return handleControlOffset ? (
-    <FlowControlObserver
-      handleControlOffset={handleControlOffset}
-      style={style}
-    >
-      <ScenarioControlOrg />
-      {/* <ScenarioNavigator />
-      <ScenarioDetailNavigator /> */}
-    </FlowControlObserver>
-  ) : (
-    <>
-      <ScenarioControlOrg />
-      {/* <ScenarioNavigator />
-      <ScenarioDetailNavigator /> */}
-    </>
-  );
 };
