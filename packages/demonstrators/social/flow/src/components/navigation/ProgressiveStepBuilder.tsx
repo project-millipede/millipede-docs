@@ -1,169 +1,187 @@
-import { useHoux } from '@app/houx';
+import { features as appComponentFeatures } from '@app/components';
 import { CollectionUtil } from '@app/utils';
-import {
-  RootState,
-  scrollActions,
-  scrollSelectors,
-  scrollStates,
-  ScrollTypes,
-  selectors,
-} from '@demonstrators-social/shared';
+import { features, Scroll } from '@demonstrators-social/shared';
+import { ArrowBack, ArrowForward } from '@mui/icons-material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import SettingsBackupRestoreIcon from '@mui/icons-material/SettingsBackupRestore';
 import { Button, ButtonGroup } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import get from 'lodash/get';
 import useTranslation from 'next-translate/useTranslation';
-import React, { FC, useMemo } from 'react';
-import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
+import React, { FC, useMemo, useState } from 'react';
+import { useRecoilCallback, useRecoilValue } from 'recoil';
 
-export const publishActions = ['head', 'upload', 'download', 'tail'];
+const NavigationBtnPlaceholder = styled('div')({
+  width: '22px',
+  height: '22px'
+});
 
-interface ProgressiveStepBuilderProps {
-  ltr: boolean;
-}
+/**
+ * The progressive step builder targets the first post.
+ * The builder uses either
+ * - the first post from the pre-generated list of posts or
+ * - a manually created post.
+ *
+ * The slice targets of a post may vary.
+ *
+ * Declarations:
+ *
+ * - Identical source and target slices.
+ * const sliceIds = 'media';
+ *
+ * - Different source and target slices.
+ * const sliceIds = ['media', 'content'];
+ */
 
-export const ProgressiveStepBuilder: FC<ProgressiveStepBuilderProps> = ({
-  ltr
-}) => {
+export const ProgressiveStepBuilder: FC = () => {
+  const {
+    scroll: {
+      timeline: {
+        states: { nodesWithRelationsWithEdgeState },
+        selector: { actionCursorLengthSelector },
+        actions: { addTopic, createNodesWithRelations },
+        constants: { actionPlan }
+      }
+    },
+    timeline: {
+      selector: { useCaseSelector, interactionDataForPostScenarioSelector }
+    }
+  } = features;
+
+  const {
+    archer: {
+      states: { archerTransitionComposedState }
+    }
+  } = appComponentFeatures;
+
+  const actions = get(actionPlan, 'publish');
+
+  const sliceIds = 'media';
+
   const { t } = useTranslation();
 
-  const {
-    timeline: { nodesWithRelationsWithEdgeState, timelineViewState }
-  } = scrollStates;
+  const [ltr, setLtr] = useState(true);
 
-  const {
-    post: { postIdsSelector }
-  } = scrollSelectors;
+  const useCase = useRecoilValue(useCaseSelector);
 
-  const [nodesWithRelationsWithEdge, setNodesWithRelationsWithEdge] =
-    useRecoilState(nodesWithRelationsWithEdgeState);
-
-  const resetNodesWithRelationsWithEdgeState = useResetRecoilState(
-    nodesWithRelationsWithEdgeState
-  );
-
-  const { nodesWithRelations, activeId } = nodesWithRelationsWithEdge;
-
-  const counter = useMemo(() => {
-    const nodeWithRelationsWithEdge = get(nodesWithRelations, activeId, {
-      values: [] as Array<ScrollTypes.Timeline.NodeWithRelationsWithEdge>
-    });
-
-    const { values } = nodeWithRelationsWithEdge;
-
-    // Todo: fix access to first element, handle multiple elements
-    const result =
-      (values && values.length > 0 && values[0].nodeWithRelations.length) || 0;
-
-    return result;
-  }, [nodesWithRelations, activeId]);
-
-  const {
-    state
-  }: {
-    state: RootState;
-  } = useHoux();
-
-  const useCase = (state.timeline &&
-    selectors.timeline.selectUserCaseState(state)) || {
-    id: '',
-    timelines: []
-  };
-
-  const { timelines = [] } = useCase;
+  const { timelines } = useCase;
 
   const [leftTimeline, rightTimeline] = timelines;
 
-  const { id: leftTimelineId } = leftTimeline || { id: '' };
-  const { id: rightTimelineId } = rightTimeline || { id: '' };
+  const actionCursor = useRecoilValue(actionCursorLengthSelector);
 
-  const postIdsLeft = useRecoilValue(postIdsSelector(leftTimelineId));
-  const postIdsRight = useRecoilValue(postIdsSelector(rightTimelineId));
+  const [activePostId] = useRecoilValue(
+    interactionDataForPostScenarioSelector(ltr)
+  );
 
-  const timelineViewLeft = useRecoilValue(timelineViewState(leftTimelineId));
-  const timelineViewRight = useRecoilValue(timelineViewState(rightTimelineId));
+  const resultMinusLast = useMemo(() => {
+    const flowActions = CollectionUtil.Array.withoutBorders<string>(
+      actions,
+      actions.length,
+      ltr
+    );
 
-  const [activePostId] =
-    selectors.timeline.selectInteractionDataForPostScenario(
-      ltr ? leftTimelineId : rightTimelineId,
-      ltr ? rightTimelineId : leftTimelineId,
-      ltr ? postIdsRight : postIdsLeft,
-      timelineViewLeft.activeTab,
-      timelineViewRight.activeTab,
-      CollectionUtil.Array.compareDescFn('content.createdAt')
-    )(state);
+    const resultMinusLast = flowActions.slice(0, flowActions.length - 1);
+    return resultMinusLast;
+  }, [actions, ltr]);
 
-  const handleCreate = (
-    _event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    if (counter <= publishActions.length) {
-      const progressiveActions = publishActions.slice(0, counter + 1);
+  const [progressiveActions, nextAction] = useMemo(() => {
+    const actionsWithTopic = addTopic(
+      actions,
+      'publish',
+      'pages/pidp/use-case/recognition/index:'
+    );
 
-      const result = [activePostId].reduce(
-        (acc, activePostId) => {
-          const nodeWithRelationsWithEdge = ['media'].map(usedSlice => {
-            const baseActionsExtended = scrollActions.timeline.addTopic(
-              progressiveActions,
-              'publish',
-              'pages/pidp/use-case/recognition/index:'
-            );
+    const progressiveActions = actionsWithTopic.slice(0, actionCursor + 1);
 
-            return scrollActions.timeline.createNodesWithRelations(
-              baseActionsExtended,
-              t,
-              ltr,
-              ScrollTypes.Timeline.LAYOUT.PROGRESSIVE
-            )(
-              ltr
-                ? [leftTimeline.id, rightTimeline.id]
-                : [rightTimeline.id, leftTimeline.id],
-              activePostId,
-              usedSlice
-            );
-          });
+    /**
+     * Array slice function with the argument set to -1 is used to create a new Array
+     * containing only the last item of the original Array; you can then use destructuring
+     * assignment to create a variable using the first item of that new Array.
+     */
+
+    const [nextAction] = progressiveActions.slice(-1);
+
+    return [progressiveActions, nextAction];
+  }, [actions, actionCursor]);
+
+  const handleCreate = useRecoilCallback(
+    ({ set }) =>
+      (_event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        const nodesWithRelations = [activePostId].reduce<{
+          [key: string]: Array<Scroll.Timeline.NodeWithRelationsWithEdge>;
+        }>((acc, postId) => {
+          const nodeWithRelationsWithEdge = createNodesWithRelations(
+            progressiveActions,
+            t,
+            ltr,
+            Scroll.Timeline.LAYOUT.PROGRESSIVE,
+            resultMinusLast
+          )(
+            ltr
+              ? [leftTimeline.id, rightTimeline.id]
+              : [rightTimeline.id, leftTimeline.id],
+            postId,
+            sliceIds
+          );
 
           return {
             ...acc,
-            [activePostId]: {
-              values: nodeWithRelationsWithEdge,
-              id: `Post Id ${activePostId}`,
-              description: `Post Description ${activePostId}`
-            }
+            [postId]: [nodeWithRelationsWithEdge]
           };
-        },
-        {} as {
-          [key: string]: {
-            values: Array<ScrollTypes.Timeline.NodeWithRelationsWithEdge>;
-            id: string;
-            description: string;
+        }, {});
+
+        set(nodesWithRelationsWithEdgeState, state => {
+          return {
+            ...state,
+            nodesWithRelations,
+            activeId: activePostId,
+            finalSize: actions.length
           };
-        }
-      );
+        });
+      },
+    [
+      leftTimeline?.id,
+      rightTimeline?.id,
+      activePostId,
+      progressiveActions,
+      resultMinusLast,
+      ltr
+    ]
+  );
 
-      setNodesWithRelationsWithEdge(state => {
-        return {
-          ...state,
-          nodesWithRelations: {
-            ...state.nodesWithRelations,
-            ...result
-          },
-          activeId: activePostId,
-          finalSize: publishActions.length
-        };
-      });
-    }
-  };
+  /**
+   * Resetting the data structure generated in the creation handler and those created subsequently
+   *
+   * Reset implicitly created state nodes-with-relations-with-edge.
+   * Reset subsequent state transition composed state archer-transition-composed,
+   * build while progressively adding new archer elements,
+   * - persisting all transition-ids from an atom-family
+   * - recomputing the respective arrow mesh.
+   * Note:
+   * The reset of archer elements and their respective transitions gets handled
+   * in an archer-element effect (unmount - segment).
+   */
 
-  const handleReset = (
+  const handleReset = useRecoilCallback(
+    ({ reset }) =>
+      (_event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        reset(nodesWithRelationsWithEdgeState);
+        reset(archerTransitionComposedState);
+      },
+    []
+  );
+
+  const handleLtr = (
     _event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    resetNodesWithRelationsWithEdgeState();
+    setLtr(state => !state);
   };
 
   return (
     <ButtonGroup variant='text' color='primary' size='large' fullWidth>
       <Button
-        id={`progressiveStepBuilder-reset`}
+        id={`psb-reset`}
         onClick={handleReset}
         variant='text'
         color='primary'
@@ -172,14 +190,24 @@ export const ProgressiveStepBuilder: FC<ProgressiveStepBuilderProps> = ({
         Reset
       </Button>
       <Button
-        id={`progressiveStepBuilder-${counter}`}
+        id={`psb-ltr`}
+        onClick={handleLtr}
+        variant='text'
+        color='primary'
+        startIcon={!ltr ? <ArrowBack /> : <NavigationBtnPlaceholder />}
+        endIcon={ltr ? <ArrowForward /> : <NavigationBtnPlaceholder />}
+      >
+        {ltr ? 'Left to Right' : 'Right to Left'}
+      </Button>
+      <Button
+        id={`psb-${actionCursor}`}
         onClick={handleCreate}
-        // disabled={counter === publishActions.length}
+        disabled={!(actionCursor <= actions.length - 1)}
         variant='text'
         color='primary'
         startIcon={<AddCircleOutlineIcon />}
       >
-        add {publishActions[counter]}
+        add {nextAction.id}
       </Button>
     </ButtonGroup>
   );
