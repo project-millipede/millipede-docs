@@ -1,22 +1,38 @@
 import { Tabs } from '@app/components';
-import { Components, HooksUtils } from '@app/render-utils';
-import { Player, SheetNext, useStepState } from '@demonstrator/components';
-import { NavigationControl } from '@demonstrator/components/src/player/components/controls';
-import { ProgressControl, TextProgressControl } from '@demonstrator/components/src/player/components/progress';
-import { playerLayoutState } from '@demonstrator/components/src/player/context/reducer';
-import { PlayListItem, Step } from '@demonstrator/components/src/player/types';
-import { appLayoutState } from '@demonstrator/navigation/src/recoil/features/app/reducers';
+import { Components as RenderComponents, HooksUtils } from '@app/render-utils';
+import { Player, SheetNext } from '@demonstrator/components';
+import { features } from '@demonstrator/navigation';
 import { Components as FlowComponents } from '@demonstrators-social/flow';
 import { DonutLarge, Subscriptions } from '@mui/icons-material';
 import { Divider, Tab } from '@mui/material';
-import React, { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
+import React, { FC, SyntheticEvent, useCallback, useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-import { AnimateHeight, HeightVariants } from './AnimateHeight';
+import { AnimateHeight } from './AnimateHeight';
+
+const {
+  Playtext,
+  Playlist,
+  Controls: { NavigationControl },
+  Progress: { TextProgressControl, ProgressControl }
+} = Player.Components;
+
+const {
+  Navigation: { ProgressiveStepBuilder, SliceBuilder, SliceBuilderMultiRow },
+  Options: { SliceOptions }
+} = FlowComponents;
 
 const {
   Responsive: { isMobile }
-} = Components;
+} = RenderComponents;
+
+export const LayoutVariants = {
+  Absolute: 'Absolute',
+  Relative: 'Relative'
+} as const;
+
+export type TLayoutVariants =
+  typeof LayoutVariants[keyof typeof LayoutVariants];
 
 export const PlayerSheetTabs = {
   Playlist: 'Playlist',
@@ -27,23 +43,30 @@ export type TPlayerSheetTabs =
   typeof PlayerSheetTabs[keyof typeof PlayerSheetTabs];
 
 interface PlayerSheetProps {
-  steps: Array<Step>;
-  playlist: Array<PlayListItem>;
+  steps: Array<Player.Step>;
+  playlist: Array<Player.PlayListItem>;
+  layout: TLayoutVariants;
 }
 
-export const PlayerSheet: FC<PlayerSheetProps> = ({ steps, playlist }) => {
-  const [appContainerMeasureRef] = HooksUtils.useResize();
-  const [bottomContainerMeasureRef] = HooksUtils.useResize();
+export const PlayerSheet: FC<PlayerSheetProps> = ({
+  playlist,
+  steps,
+  layout
+}) => {
+  const {
+    app: {
+      states: { appLayoutState }
+    }
+  } = features;
 
-  // Note:
-  // Required when integrating the component / storyplayer
-  // with absolute positioning in the app.
-  // - Use component SheetNext.SheetWithAbsolutePosition,
-  // - Provide bottomContainerSize
+  const {
+    layout: {
+      states: { playerLayoutState }
+    }
+  } = Player.features;
 
-  // const [appContainerMeasureRef] = HooksUtils.useResizeWithElement();
-  // const [bottomContainerMeasureRef, bottomContainerSize] =
-  //   HooksUtils.useResizeWithElement();
+  const [bottomContainerMeasureRef, bottomContainerSize] =
+    HooksUtils.useResize();
 
   const { isPlayerExpanded } = useRecoilValue(playerLayoutState);
 
@@ -53,54 +76,62 @@ export const PlayerSheet: FC<PlayerSheetProps> = ({ steps, playlist }) => {
     setAppLayoutState(state => {
       return {
         ...state,
-        appContainer: appContainerMeasureRef,
         bottomContainer: bottomContainerMeasureRef
       };
     });
-  }, [appContainerMeasureRef, bottomContainerMeasureRef]);
-
-  const { target } = useStepState();
-  const activeStep = steps[target];
+  }, [bottomContainerMeasureRef]);
 
   const [activeTab, setActiveTab] = useState<TPlayerSheetTabs>(
     PlayerSheetTabs.Playlist
   );
 
-  const handleTabChange = (_event: ChangeEvent, newValue: number) => {
-    let value: TPlayerSheetTabs = PlayerSheetTabs.Playlist;
-
-    if (newValue === 0) value = PlayerSheetTabs.Playlist;
-    if (newValue === 1) value = PlayerSheetTabs.Actions;
-
-    setActiveTab(value);
-  };
-
-  const currentValue = useMemo(() => {
-    if (activeTab === PlayerSheetTabs.Playlist) return 0;
-    if (activeTab === PlayerSheetTabs.Actions) return 1;
-  }, [activeTab]);
+  const handleTabChange = useCallback(
+    (_event: SyntheticEvent, newValue: TPlayerSheetTabs) => {
+      setActiveTab(newValue);
+    },
+    []
+  );
 
   const orientation = isMobile() ? 'horizontal' : 'vertical';
   const direction = isMobile() ? 'column' : 'row';
 
+  const Comp =
+    layout === LayoutVariants.Relative
+      ? SheetNext.Sheet
+      : SheetNext.SheetWithAbsolutePosition;
+
+  /**
+   * Note:
+   * The property bottomContainerSize is mandatory for the absolute positioned sheet variant;
+   * it is not required for the relative variant.
+   *
+   * Optional components:
+   * The following components are not integrated yet.
+   *
+   * <FlowControl.ScenarioNavigator />
+   * <FlowControl.ScenarioDetailNavigator />
+   */
+
   return (
-    <SheetNext.Sheet
+    <Comp
       isOpen={isPlayerExpanded}
-      // bottomContainerSize={bottomContainerSize}
+      bottomContainerSize={bottomContainerSize}
       header={
         <Tabs.StyledTabs
-          value={currentValue}
+          value={activeTab}
           onChange={handleTabChange}
           variant='fullWidth'
           indicatorColor='primary'
           textColor='primary'
         >
           <Tab
+            value='Playlist'
             label='Playlist'
             icon={<Subscriptions />}
             id={`playersheet-tabset-tab-playlist`}
           />
           <Tab
+            value='Actions'
             label='Actions'
             icon={<DonutLarge />}
             id={`playersheet-tabset-tab-actions`}
@@ -110,20 +141,18 @@ export const PlayerSheet: FC<PlayerSheetProps> = ({ steps, playlist }) => {
       content={
         <>
           <AnimateHeight isVisible={activeTab === PlayerSheetTabs.Playlist}>
-            <Player.Components.Playlist playlist={playlist} />
+            <Playlist playlist={playlist} />
           </AnimateHeight>
 
           <AnimateHeight isVisible={activeTab === PlayerSheetTabs.Actions}>
-            <FlowComponents.Navigation.ProgressiveStepBuilder ltr />
+            <ProgressiveStepBuilder />
+            <SliceBuilder />
+            <SliceBuilderMultiRow />
+            <SliceOptions />
           </AnimateHeight>
 
-          <AnimateHeight
-            isVisible={
-              activeTab === PlayerSheetTabs.Actions && activeStep != null
-            }
-            variantsType={HeightVariants.Dynamic}
-          >
-            <Player.Components.Playtext activeStep={activeStep} />
+          <AnimateHeight isVisible={activeTab === PlayerSheetTabs.Actions}>
+            <Playtext steps={steps} />
           </AnimateHeight>
 
           <AnimateHeight
@@ -141,7 +170,7 @@ export const PlayerSheet: FC<PlayerSheetProps> = ({ steps, playlist }) => {
               orientation={orientation}
               variant='middle'
               flexItem
-              sx={{ m: 1 }}
+              sx={{ margin: 1 }}
             />
             <div
               style={{

@@ -1,15 +1,27 @@
 import { Tabs } from '@app/components';
-import { HooksUtils } from '@app/render-utils';
+import { Components as RenderComponents, HooksUtils } from '@app/render-utils';
 import { CursorSvc, Player, Sheet, useStepState } from '@demonstrator/components';
-import { ProgressControl, TextProgressControl } from '@demonstrator/components/src/player/components/progress';
-import { playerLayoutState } from '@demonstrator/components/src/player/context/reducer';
-import { PlayListItem, Step } from '@demonstrator/components/src/player/types';
-import { appLayoutState } from '@demonstrator/navigation/src/recoil/features/app/reducers';
+import { features } from '@demonstrator/navigation';
 import { Components as FlowComponents } from '@demonstrators-social/flow';
 import { DonutLarge, Subscriptions } from '@mui/icons-material';
 import { Button, Divider, Tab } from '@mui/material';
-import React, { ChangeEvent, FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import React, { FC, SyntheticEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+
+const {
+  Responsive: { isMobile }
+} = RenderComponents;
+
+const {
+  Playtext,
+  Playlist,
+  Controls: { NavigationControl },
+  Progress: { TextProgressControl, ProgressControl }
+} = Player.Components;
+
+const {
+  Navigation: { ProgressiveStepBuilder }
+} = FlowComponents;
 
 export const PlayerSheetTabs = {
   Playlist: 'Playlist',
@@ -22,18 +34,30 @@ export type TPlayerSheetTabs =
 const baseSnapPoints = [800, 300, 100];
 
 interface PlayerSheetProps {
-  steps: Array<Step>;
-  playlist: Array<PlayListItem>;
+  steps: Array<Player.Step>;
+  playlist: Array<Player.PlayListItem>;
 }
+
 export const PlayerSheet: FC<PlayerSheetProps> = ({ steps, playlist }) => {
+  const {
+    app: {
+      states: { appLayoutState }
+    }
+  } = features;
+
+  const {
+    layout: {
+      states: { playerLayoutState }
+    }
+  } = Player.features;
+
   const [appContainerMeasureRef, appContainerSize] = HooksUtils.useResize();
   const [bottomContainerMeasureRef, bottomContainerSize] =
     HooksUtils.useResize();
 
   const setAppLayoutState = useSetRecoilState(appLayoutState);
 
-  const [{ isPlayerExpanded }, setPlayerLayoutState] =
-    useRecoilState(playerLayoutState);
+  const { isPlayerExpanded } = useRecoilValue(playerLayoutState);
 
   useEffect(() => {
     setAppLayoutState(state => {
@@ -46,7 +70,6 @@ export const PlayerSheet: FC<PlayerSheetProps> = ({ steps, playlist }) => {
   }, [appContainerMeasureRef, bottomContainerMeasureRef]);
 
   const { target, playing } = useStepState();
-  const activeStep = steps[target];
 
   const sheetHandleRef = useRef<Sheet.Types.SheetHandleProps>(null);
 
@@ -67,32 +90,19 @@ export const PlayerSheet: FC<PlayerSheetProps> = ({ steps, playlist }) => {
     }
   }, [target]);
 
-  const handleClose = useCallback(() => {
-    setPlayerLayoutState(state => {
-      return {
-        ...state,
-        isPlayerExpanded: false
-      };
-    });
-  }, []);
-
   const [activeTab, setActiveTab] = useState<TPlayerSheetTabs>(
     PlayerSheetTabs.Playlist
   );
 
-  const handleTabChange = (_event: ChangeEvent, newValue: number) => {
-    let value: TPlayerSheetTabs = PlayerSheetTabs.Playlist;
+  const handleTabChange = useCallback(
+    (_event: SyntheticEvent, newValue: TPlayerSheetTabs) => {
+      setActiveTab(newValue);
+    },
+    []
+  );
 
-    if (newValue === 0) value = PlayerSheetTabs.Playlist;
-    if (newValue === 1) value = PlayerSheetTabs.Actions;
-
-    setActiveTab(value);
-  };
-
-  const currentValue = useMemo(() => {
-    if (activeTab === PlayerSheetTabs.Playlist) return 0;
-    if (activeTab === PlayerSheetTabs.Actions) return 1;
-  }, [activeTab]);
+  const orientation = isMobile() ? 'horizontal' : 'vertical';
+  const direction = isMobile() ? 'column' : 'row';
 
   return (
     <Sheet.Sheet
@@ -107,7 +117,6 @@ export const PlayerSheet: FC<PlayerSheetProps> = ({ steps, playlist }) => {
       }
       appContainerSize={appContainerSize}
       bottomContainerSize={bottomContainerSize}
-      onClose={handleClose}
     >
       <Sheet.SheetContainer
         appContainerSize={appContainerSize}
@@ -120,18 +129,20 @@ export const PlayerSheet: FC<PlayerSheetProps> = ({ steps, playlist }) => {
         </Sheet.SheetHeader>
         <Sheet.SheetContent>
           <Tabs.StyledTabs
-            value={currentValue}
+            value={activeTab}
             onChange={handleTabChange}
             variant='fullWidth'
             indicatorColor='primary'
             textColor='primary'
           >
             <Tab
+              value='Playlist'
               label='Playlist'
               icon={<Subscriptions />}
               id={`playersheet-tabset-tab-playlist`}
             />
             <Tab
+              value='Actions'
               label='Actions'
               icon={<DonutLarge />}
               id={`playersheet-tabset-tab-actions`}
@@ -139,38 +150,43 @@ export const PlayerSheet: FC<PlayerSheetProps> = ({ steps, playlist }) => {
           </Tabs.StyledTabs>
 
           {activeTab === PlayerSheetTabs.Playlist && (
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <Player.Components.Playlist playlist={playlist} />
-            </div>
+            <Playlist playlist={playlist} />
           )}
 
+          {activeTab === PlayerSheetTabs.Actions && <ProgressiveStepBuilder />}
+
           {activeTab === PlayerSheetTabs.Actions && (
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <FlowComponents.Navigation.ProgressiveStepBuilder ltr />
-            </div>
+            <Playtext steps={steps} ref={resizeControlRef} />
           )}
 
           {activeTab === PlayerSheetTabs.Actions && (
             <div
               style={{
                 display: 'flex',
+                flexDirection: direction,
                 alignItems: 'center',
                 justifyContent: 'center',
                 margin: '8px'
               }}
             >
               <ProgressControl steps={steps} />
-              <Divider orientation='vertical' variant='middle' flexItem />
-              <TextProgressControl steps={steps} />
-            </div>
-          )}
-
-          {activeTab === PlayerSheetTabs.Actions && activeStep != null && (
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <Player.Components.Playtext
-                activeStep={activeStep}
-                ref={resizeControlRef}
+              <Divider
+                orientation={orientation}
+                variant='middle'
+                flexItem
+                sx={{ margin: 1 }}
               />
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  width: '100%'
+                }}
+              >
+                <NavigationControl />
+                <TextProgressControl steps={steps} />
+              </div>
             </div>
           )}
         </Sheet.SheetContent>
