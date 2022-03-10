@@ -1,5 +1,4 @@
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import React, { FC, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
@@ -32,7 +31,7 @@ export const Toggle: FC = () => {
       }}
     >
       <IconButton size='small' onClick={toggleBottomSheet}>
-        {isPlayerExpanded ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
+        {isPlayerExpanded ? <KeyboardArrowDown /> : <KeyboardArrowUp />}
       </IconButton>
     </div>
   );

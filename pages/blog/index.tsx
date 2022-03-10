@@ -41,7 +41,6 @@ const Blog: NextPageWithLayout<DynamicPageBlogProps> = ({ content }) => {
         </Typography>
         <Blurb variant='h3'>
           An interactive blog probing building blocks of futuristic privacy, by
-          {` `}
           <Typography
             variant='h3'
             sx={{
@@ -58,7 +57,7 @@ const Blog: NextPageWithLayout<DynamicPageBlogProps> = ({ content }) => {
             }}
             prefetch={false}
           >
-            Markus Gritsch
+            {` Markus Gritsch`}
           </Typography>
         </Blurb>
       </Header>

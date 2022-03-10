@@ -1,6 +1,6 @@
 import { HiddenUnderlineLink } from '@app/components';
 import { Navigation } from '@app/types';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { NavigateNext } from '@mui/icons-material';
 import { Breadcrumbs as MuiBreadcrumbs, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import useTranslation from 'next-translate/useTranslation';
@@ -51,7 +51,7 @@ export const Breadcrumbs: FC<BreadcrumbsProps> = ({ slug, navigation }) => {
     pageType !== 'blog' ? t(`common:pages.${tailBreadcrumb.link}`) : title;
 
   return (
-    <StyledMuiBreadcrumbs separator={<NavigateNextIcon fontSize='small' />}>
+    <StyledMuiBreadcrumbs separator={<NavigateNext fontSize='small' />}>
       {headBreadcrumbs &&
         headBreadcrumbs.length > 0 &&
         headBreadcrumbs.map((breadcrumb, index) => {

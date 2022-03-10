@@ -1,9 +1,18 @@
-import { HiddenUnderlineLink as Link } from '@app/components';
-import { Container, Grid, GridProps, Link as MuiLink, Typography } from '@mui/material';
+import { HiddenUnderlineLink } from '@app/components';
+import { Container, Grid, GridProps, Typography } from '@mui/material';
+import { grey } from '@mui/material/colors';
 import { styled, useTheme } from '@mui/material/styles';
 import useTranslation from 'next-translate/useTranslation';
 import getConfig from 'next/config';
 import React from 'react';
+
+export const Link = styled(HiddenUnderlineLink)({
+  fontSize: '0.875rem',
+  color: 'inherit',
+  '&:hover': {
+    color: grey[500]
+  }
+});
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -63,15 +72,9 @@ export const HomeFooter = () => {
           </Typography>
           <ul>
             <li>
-              <Typography>
-                <MuiLink
-                  href='https://github.com/project-millipede/millipede-docs'
-                  color='inherit'
-                  variant='body2'
-                >
-                  GitHub
-                </MuiLink>
-              </Typography>
+              <Link href='https://github.com/project-millipede/millipede-docs'>
+                Github
+              </Link>
             </li>
             <li>
               <Link
@@ -79,8 +82,6 @@ export const HomeFooter = () => {
                   pathname: '/docs/[...slug]',
                   query: { slug: 'discover-more/team'.split('/') }
                 }}
-                color='inherit'
-                variant='body2'
               >
                 {t('common:pages.discover-more/team')}
               </Link>
@@ -98,14 +99,7 @@ export const HomeFooter = () => {
           </Typography>
           <ul>
             <li>
-              {/* 
-              Note: 
-              The blog requires different fonts; they load only using the native link. 
-              Use the native link instead of the nextJS link passing the property "href" as a string. 
-              */}
-              <Link href='/blog' color='inherit' variant='body2'>
-                {t('common:blog')}
-              </Link>
+              <Link href='/blog'>{t('common:blog')}</Link>
             </li>
           </ul>
         </StyledGrid>
@@ -125,8 +119,6 @@ export const HomeFooter = () => {
                   pathname: '/docs/[...slug]',
                   query: { slug: 'discover-more/organisation'.split('/') }
                 }}
-                color='inherit'
-                variant='body2'
               >
                 {t('common:about')}
               </Link>
@@ -137,8 +129,6 @@ export const HomeFooter = () => {
                   pathname: '/docs/[...slug]',
                   query: { slug: 'discover-more/vision'.split('/') }
                 }}
-                color='inherit'
-                variant='body2'
               >
                 {t('common:pages.discover-more/vision')}
               </Link>
