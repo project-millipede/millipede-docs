@@ -1,6 +1,6 @@
 import { HooksUtils } from '@app/render-utils';
 import { features, Scroll } from '@demonstrators-social/shared';
-import CreateIcon from '@mui/icons-material/Create';
+import { Create } from '@mui/icons-material';
 import { Button, List } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useTranslation from 'next-translate/useTranslation';
@@ -142,7 +142,7 @@ const Timeline: ForwardRefRenderFunction<HTMLDivElement, TimelineProps> = (
                 id={`timeline-${timelineId}-content-create`}
                 variant='text'
                 color='primary'
-                startIcon={<CreateIcon />}
+                startIcon={<Create />}
                 onClick={() => setDisplayEditor(true)}
                 style={{
                   textTransform: 'none'

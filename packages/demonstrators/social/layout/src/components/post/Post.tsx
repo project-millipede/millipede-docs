@@ -3,9 +3,7 @@ import { CollectionUtil } from '@app/utils';
 import { features as navigationFeatures } from '@demonstrator/navigation';
 import { features, Scroll } from '@demonstrators-social/shared';
 import { useMergedRef } from '@huse/merged-ref';
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import { ChatBubbleOutline, DeleteOutline, ThumbUp } from '@mui/icons-material';
 import { Button, ButtonGroup, Card, ListItem } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { formatDistance } from 'date-fns';
@@ -149,14 +147,14 @@ export const Post: FC<PostProps> = ({
         aria-label={t('pages/pidp/use-case/recognition/index:like')}
         variant='text'
         color='primary'
-        startIcon={<ThumbUpIcon />}
+        startIcon={<ThumbUp />}
       />
       <Button
         id={`timeline-${timelineId}-post-${postId}-comment-create`}
         aria-label={t('pages/pidp/use-case/recognition/index:comment')}
         variant='text'
         color='primary'
-        startIcon={<ChatBubbleOutlineIcon />}
+        startIcon={<ChatBubbleOutline />}
         onClick={() => setDisplayEditor(true)}
       />
       <Button
@@ -164,7 +162,7 @@ export const Post: FC<PostProps> = ({
         aria-label={t('pages/pidp/use-case/recognition/index:delete')}
         variant='text'
         color='primary'
-        startIcon={<DeleteOutlineIcon />}
+        startIcon={<DeleteOutline />}
         onClick={() => handleDeletePost(timelineId, postId, setTimeline)}
       />
     </ButtonGroup>

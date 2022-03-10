@@ -1,9 +1,7 @@
 import { features as appComponentFeatures } from '@app/components';
 import { CollectionUtil } from '@app/utils';
 import { features, Scroll } from '@demonstrators-social/shared';
-import { ArrowBack, ArrowForward } from '@mui/icons-material';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import SettingsBackupRestoreIcon from '@mui/icons-material/SettingsBackupRestore';
+import { AddCircleOutline, ArrowBack, ArrowForward, SettingsBackupRestore } from '@mui/icons-material';
 import { Button, ButtonGroup } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import get from 'lodash/get';
@@ -185,7 +183,7 @@ export const ProgressiveStepBuilder: FC = () => {
         onClick={handleReset}
         variant='text'
         color='primary'
-        startIcon={<SettingsBackupRestoreIcon />}
+        startIcon={<SettingsBackupRestore />}
       >
         Reset
       </Button>
@@ -205,7 +203,7 @@ export const ProgressiveStepBuilder: FC = () => {
         disabled={!(actionCursor <= actions.length - 1)}
         variant='text'
         color='primary'
-        startIcon={<AddCircleOutlineIcon />}
+        startIcon={<AddCircleOutline />}
       >
         add {nextAction.id}
       </Button>

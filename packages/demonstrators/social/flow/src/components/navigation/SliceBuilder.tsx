@@ -1,9 +1,7 @@
 import { features as appComponentFeatures } from '@app/components';
 import { CollectionUtil } from '@app/utils';
 import { features, Scroll } from '@demonstrators-social/shared';
-import { ArrowBack, ArrowForward } from '@mui/icons-material';
-import ExtensionIcon from '@mui/icons-material/Extension';
-import SettingsBackupRestoreIcon from '@mui/icons-material/SettingsBackupRestore';
+import { ArrowBack, ArrowForward, Extension, SettingsBackupRestore } from '@mui/icons-material';
 import { Button, ButtonGroup } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import get from 'lodash/get';
@@ -191,7 +189,7 @@ export const SliceBuilder: FC = () => {
         onClick={handleReset}
         variant='text'
         color='primary'
-        startIcon={<SettingsBackupRestoreIcon />}
+        startIcon={<SettingsBackupRestore />}
       >
         Reset
       </Button>
@@ -210,7 +208,7 @@ export const SliceBuilder: FC = () => {
         onClick={handleCreate}
         variant='text'
         color='primary'
-        startIcon={<ExtensionIcon />}
+        startIcon={<Extension />}
       >
         SliceBuilder
       </Button>

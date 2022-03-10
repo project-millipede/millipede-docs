@@ -1,5 +1,5 @@
 import { INPUT_BORDER_RADIUS, INPUT_HEIGHT } from '@app/layout';
-import Search from '@mui/icons-material/Search';
+import { Search } from '@mui/icons-material';
 import { IconButton, InputAdornment, InputBase } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import React, { CSSProperties, FC } from 'react';

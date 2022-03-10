@@ -1,4 +1,4 @@
-import SendIcon from '@mui/icons-material/Send';
+import { Send } from '@mui/icons-material';
 import { Button, Typography } from '@mui/material';
 import { useWindupString } from '@project-millipede/windups';
 import { ContentState, Editor, EditorState } from 'draft-js';
@@ -111,7 +111,7 @@ export const ContentEditor: FC<ContentEditorProps> = ({
           id={`timeline-${timelineId}-content-post`}
           variant='text'
           color='primary'
-          startIcon={<SendIcon />}
+          startIcon={<Send />}
           onClick={handlePostComment}
           style={{
             textTransform: 'none'

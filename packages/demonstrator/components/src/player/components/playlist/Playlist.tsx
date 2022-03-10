@@ -1,5 +1,4 @@
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import TopicIcon from '@mui/icons-material/Topic';
+import { PlayCircleOutline, Topic } from '@mui/icons-material';
 import { Avatar, IconButton, List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText } from '@mui/material';
 import { green } from '@mui/material/colors';
 import React, { FC } from 'react';
@@ -51,7 +50,7 @@ export const Playlist: FC<PlaylistProps> = ({ playlist }) => {
           <ListItem key={playlistItem.id}>
             <ListItemAvatar>
               <Avatar>
-                <TopicIcon />
+                <Topic />
               </Avatar>
             </ListItemAvatar>
             <ListItemText
@@ -65,7 +64,7 @@ export const Playlist: FC<PlaylistProps> = ({ playlist }) => {
                 value={playlistItem.id}
                 onClick={handleCreate}
               >
-                <PlayCircleOutlineIcon
+                <PlayCircleOutline
                   style={{
                     color: topic === playlistItem.id && green[500]
                   }}

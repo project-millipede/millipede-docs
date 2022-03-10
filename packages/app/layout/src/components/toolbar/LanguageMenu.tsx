@@ -1,4 +1,4 @@
-import LanguageIcon from '@mui/icons-material/Language';
+import { Language } from '@mui/icons-material';
 import { Button, Menu, MenuItem } from '@mui/material';
 import { useRouter } from 'next/router';
 import React, { FC, useState } from 'react';
@@ -35,7 +35,7 @@ export const LanguageMenu: FC = () => {
   return (
     <>
       <Button color='inherit' onClick={handleLanguageIconClick}>
-        <LanguageIcon />
+        <Language />
         <LanguageLabel label={locale} />
       </Button>
 

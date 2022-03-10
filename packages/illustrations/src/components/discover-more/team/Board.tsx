@@ -1,6 +1,5 @@
-import { Link } from '@app/components';
-import { GitHub, LinkedIn } from '@mui/icons-material';
-import AssignmentIcon from '@mui/icons-material/Assignment';
+import { HiddenUnderlineLink } from '@app/components';
+import { Assignment, GitHub, LinkedIn } from '@mui/icons-material';
 import { Avatar, Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
@@ -8,7 +7,6 @@ import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
-import { useRouter } from 'next/router';
 import React, { FC } from 'react';
 
 export const getActiveCoreMembers = (t: Translate) => [
@@ -28,15 +26,6 @@ interface GroupProps {
 
 const Group: FC<GroupProps> = ({ title, members }) => {
   const theme = useTheme();
-
-  const { push } = useRouter();
-
-  const handleSelect = (link: string) => {
-    push({
-      pathname: '/docs/[...slug]',
-      query: { slug: link.split('/') }
-    });
-  };
 
   return (
     <div>
@@ -73,7 +62,7 @@ const Group: FC<GroupProps> = ({ title, members }) => {
                     {github && (
                       <IconButton
                         color='inherit'
-                        component={Link}
+                        component={HiddenUnderlineLink}
                         href={`https://github.com/${github}`}
                       >
                         <GitHub />
@@ -82,19 +71,21 @@ const Group: FC<GroupProps> = ({ title, members }) => {
                     {linkedIn && (
                       <IconButton
                         color='inherit'
-                        component={Link}
+                        component={HiddenUnderlineLink}
                         href={`https://www.linkedin.com/in/${linkedIn}`}
                       >
                         <LinkedIn />
                       </IconButton>
                     )}
                     <IconButton
-                      key={`discover-more/team/cv`}
-                      onClick={_e => {
-                        handleSelect('discover-more/team/cv');
+                      color='inherit'
+                      component={HiddenUnderlineLink}
+                      href={{
+                        pathname: '/docs/[...slug]',
+                        query: { slug: 'discover-more/team/cv'.split('/') }
                       }}
                     >
-                      <AssignmentIcon />
+                      <Assignment />
                     </IconButton>
                   </Box>
                 </Box>
