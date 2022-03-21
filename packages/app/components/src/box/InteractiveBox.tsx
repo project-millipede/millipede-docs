@@ -2,7 +2,7 @@ import { Box, BoxProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { LinkProps } from 'next/link';
 import { useRouter } from 'next/router';
-import React, { forwardRef, ForwardRefRenderFunction } from 'react';
+import { forwardRef, ForwardRefRenderFunction } from 'react';
 import { UrlObject } from 'url';
 
 import { HiddenUnderlineLink } from '../link';

@@ -1,6 +1,17 @@
 import { CSSProperties, MutableRefObject, ReactElement, ReactNode } from 'react';
 
-import { AnchorPosition } from './types-private';
+// export type AnchorPosition = 'top' | 'bottom' | 'left' | 'right' | 'middle';
+
+export const AnchorPosition = {
+  top: 'top',
+  bottom: 'bottom',
+  left: 'left',
+  right: 'right',
+  middle: 'middle'
+} as const;
+
+export type TAnchorPosition =
+  typeof AnchorPosition[keyof typeof AnchorPosition];
 
 export interface SyncHandle {
   sync?: (y: number) => void;
@@ -16,10 +27,10 @@ export interface LineStyle {
 
 export interface Relation {
   targetId: string;
-  targetAnchor: AnchorPosition;
-  sourceAnchor: AnchorPosition;
-  optionalTargetAnchor?: AnchorPosition;
-  optionalSourceAnchor?: AnchorPosition;
+  targetAnchor: TAnchorPosition;
+  sourceAnchor: TAnchorPosition;
+  optionalTargetAnchor?: TAnchorPosition;
+  optionalSourceAnchor?: TAnchorPosition;
   label?: ReactNode;
   style?: LineStyle;
 }
@@ -39,5 +50,6 @@ export interface ArcherElementProps {
   label?: ReactNode;
   children?: ReactElement;
   render?: RenderFn;
+  isMobile?: boolean;
   isInteractive?: boolean;
 }

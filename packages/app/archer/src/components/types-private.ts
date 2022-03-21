@@ -1,6 +1,6 @@
 import { CSSProperties, ReactNode, SVGProps } from 'react';
 
-export type AnchorPosition = 'top' | 'bottom' | 'left' | 'right' | 'middle';
+import { TAnchorPosition } from './types';
 
 export interface ArrowStyle {
   arrowLength?: number;
@@ -51,11 +51,13 @@ export interface ArcherSurfaceProps {
   elementStyle?: CSSProperties;
 
   children?: ReactNode;
+
+  handleResetCb?: () => void;
 }
 
 export type EntityRelationType = {
   id: string;
-  anchor: AnchorPosition;
+  anchor: TAnchorPosition;
 };
 
 export type SourceToTargetType = {

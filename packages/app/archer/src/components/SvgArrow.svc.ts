@@ -1,7 +1,7 @@
 import { MutableRefObject } from 'react';
 
 import { Point } from './Point';
-import { AnchorPosition } from './types-private';
+import { TAnchorPosition } from './types';
 
 export interface IPoint {
   x: number;
@@ -22,7 +22,7 @@ const rectToPoint = (rect: DOMRect) => {
 };
 
 const computeCoordinatesFromAnchorPosition = (
-  anchorPosition: AnchorPosition,
+  anchorPosition: TAnchorPosition,
   rect: DOMRect
 ) => {
   switch (anchorPosition) {
@@ -53,7 +53,7 @@ export const computeArrowPointAccordingToArrowHead = (
   end: IPoint,
   arrowLength: number,
   strokeWidth: number,
-  endingAnchorOrientation: AnchorPosition
+  endingAnchorOrientation: TAnchorPosition
 ) => {
   const { arrowX, arrowY } = computeArrowDirectionVector(
     endingAnchorOrientation
@@ -66,7 +66,7 @@ export const computeArrowPointAccordingToArrowHead = (
 };
 
 export const getCoordinatesFromAnchorPosition = (
-  position: AnchorPosition,
+  position: TAnchorPosition,
   parentCoordinates: Point,
   ref: MutableRefObject<HTMLElement>
 ) => {
@@ -82,7 +82,7 @@ export const getCoordinatesFromAnchorPosition = (
 };
 
 export const computeArrowDirectionVector = (
-  anchorOrientation: AnchorPosition
+  anchorOrientation: TAnchorPosition
 ): DirectionVector => {
   switch (anchorOrientation) {
     case 'left':
@@ -101,7 +101,7 @@ export const computeArrowDirectionVector = (
 export const computeStartAnchorPosition = (
   start: IPoint,
   end: IPoint,
-  startAnchorPosition: AnchorPosition
+  startAnchorPosition: TAnchorPosition
 ) => {
   if (startAnchorPosition === 'top' || startAnchorPosition === 'bottom') {
     return {
@@ -122,7 +122,7 @@ export const computeStartAnchorPosition = (
 export const computeEndAnchorPosition = (
   start: IPoint,
   end: IPoint,
-  endAnchorPosition: AnchorPosition
+  endAnchorPosition: TAnchorPosition
 ) => {
   if (endAnchorPosition === 'top' || endAnchorPosition === 'bottom') {
     return {
@@ -157,18 +157,20 @@ export const computeLabelDimensions = (
   startPoint: IPoint,
   endPointWithArrow: IPoint
 ) => {
-  const size: ISize = {
-    width: Math.max(Math.abs(endPointWithArrow.x - startPoint.x), 1),
-    heigth: Math.max(Math.abs(endPointWithArrow.y - startPoint.y), 1)
-  };
+  const xOffset = Math.abs(endPointWithArrow.x - startPoint.x) / 2;
+  const centerX =
+    endPointWithArrow.x < startPoint.x
+      ? endPointWithArrow.x + xOffset
+      : endPointWithArrow.x - xOffset;
 
-  const position: IPoint = {
-    x: endPointWithArrow.x > startPoint.x ? startPoint.x : endPointWithArrow.x,
-    y: endPointWithArrow.y > startPoint.y ? startPoint.y : endPointWithArrow.y
-  };
+  const yOffset = Math.abs(endPointWithArrow.y - startPoint.y) / 2;
+  const centerY =
+    endPointWithArrow.y < startPoint.y
+      ? endPointWithArrow.y + yOffset
+      : endPointWithArrow.y - yOffset;
 
   return {
-    size,
-    position
+    centerX,
+    centerY
   };
 };

@@ -1,8 +1,8 @@
 import { MutableRefObject } from 'react';
 import { atom, atomFamily } from 'recoil';
 
-import { SyncHandle } from '../../archer/types';
-import { SourceToTargetType } from '../../archer/types-private';
+import { SyncHandle } from '../../components/types';
+import { SourceToTargetType } from '../../components/types-private';
 
 export type ArcherRef = {
   ref: MutableRefObject<HTMLElement>;
