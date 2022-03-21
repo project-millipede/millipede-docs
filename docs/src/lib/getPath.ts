@@ -3,7 +3,7 @@ import get from 'lodash/get';
 import path from 'path';
 
 import { idToPathBlogParams, idToPathParams } from './getStaticPathsHelper';
-import { pageDirectories } from './page-config';
+import { pageDirectories } from './page-setup';
 
 export const getPageDirectory = (
   pages: { [index: string]: string },

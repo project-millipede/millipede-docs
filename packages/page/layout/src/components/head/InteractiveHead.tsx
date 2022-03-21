@@ -1,6 +1,6 @@
 import { HiddenUnderlineLink } from '@app/components';
 import { CollectionUtil } from '@app/utils';
-import { TypographyProps } from '@mui/material';
+import { Variant } from '@mui/material/styles/createTypography';
 import { useRouter } from 'next/router';
 import React, { FC, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -10,9 +10,9 @@ import { features } from '../../features';
 import { Anchor, StyledTypography } from './InteractiveHead.svc';
 
 interface InteractiveHeadProps {
-  variant: TypographyProps['variant'];
   // id generated through slug
   id: string;
+  variant: Variant;
   className?: string;
   renderChildren?: boolean;
 }

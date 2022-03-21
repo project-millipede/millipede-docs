@@ -2,11 +2,6 @@ import dynamic from 'next/dynamic';
 
 import { ComponentMap } from './types';
 
-export const pageDirectories = {
-  docs: 'docs/src/pages',
-  blog: 'blog/src/pages'
-};
-
 /**
  * Components used within the documentation pages
  */
@@ -29,10 +24,8 @@ export const docComponents: ComponentMap = {
           module => module.Demonstrator
         ),
       { ssr: false }
-    )
-    // Using requireWrapper=true causes reloading of the demonstrator content timelines
-    // every time a scroll through an interactive head or toc item gets executed.
-    // requireWrapper: true
+    ),
+    requireWrapper: true
   },
   InterdisciplinaryApproach: {
     component: dynamic(() =>

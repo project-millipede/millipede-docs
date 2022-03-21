@@ -42,7 +42,11 @@ export const getLoadableComponents = (
       return {
         ...acc,
         [key]: requireWrapper
-          ? props => <RecoilRoot>{<Component {...props} />}</RecoilRoot>
+          ? props => (
+              <RecoilRoot key={`store-${key}`}>
+                {<Component {...props} />}
+              </RecoilRoot>
+            )
           : Component
       };
     }, {});
