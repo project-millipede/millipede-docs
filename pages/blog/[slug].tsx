@@ -1,11 +1,12 @@
 import { HiddenUnderlineLink } from '@app/components';
 import { BlogFrame, BlogThemeProvider } from '@app/layout';
 import { Navigation } from '@app/types';
+import { Variant } from '@mui/material/styles/createTypography';
 import { Components, Mdx } from '@page/layout';
 import { getMDXComponent } from 'mdx-bundler/client';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { mergeProps } from 'next-merge-props';
-import React, { Fragment, ReactElement, useMemo } from 'react';
+import { Fragment, ReactElement, useMemo } from 'react';
 
 import { getBlogPath } from '../../docs/src/lib/getPath';
 import { GetStaticContentProps, getStaticContentProps } from '../../docs/src/lib/getStaticContentProps';
@@ -16,6 +17,13 @@ import { NextPageWithLayout } from '../../docs/src/lib/types';
 import { getComponents } from '../../docs/src/lib/utils/hydration';
 
 const { AppHead } = Components;
+
+export type HeaderProps = {
+  // id generated through slug
+  id: string;
+  variant: Variant;
+  children: string;
+};
 
 export type DynamicBlogPageProps = GetStaticTranslationProps &
   GetStaticContentProps &
@@ -30,10 +38,17 @@ const DynamicBlogPage: NextPageWithLayout<DynamicBlogPageProps> = ({
 
   const slugStr = !Array.isArray(slug) && slug;
 
-  const Component = useMemo(
-    () => getMDXComponent(mdxSource.code),
-    [mdxSource.code]
-  );
+  const [Component, headerComponents, components] = useMemo(() => {
+    return [
+      getMDXComponent(mdxSource.code),
+      {
+        h2: (props: HeaderProps) => <Mdx.Header variant='h2' {...props} />,
+        h3: (props: HeaderProps) => <Mdx.Header variant='h3' {...props} />,
+        h4: (props: HeaderProps) => <Mdx.Header variant='h4' {...props} />
+      },
+      getComponents(blogComponents, hydratedComponents)
+    ];
+  }, [mdxSource.code]);
 
   return (
     <Fragment>
@@ -48,13 +63,11 @@ const DynamicBlogPage: NextPageWithLayout<DynamicBlogPageProps> = ({
           components={{
             a: HiddenUnderlineLink as any,
             h1: Mdx.h1,
-            h2: Mdx.h2,
-            h3: Mdx.h3,
-            h4: Mdx.h4,
             h5: Mdx.h5,
             h6: Mdx.h6,
             blockquote: Mdx.blockquote,
-            ...getComponents(blogComponents, hydratedComponents)
+            ...headerComponents,
+            ...components
           }}
         />
       </Mdx.MdxBlog>
