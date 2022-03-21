@@ -1,10 +1,11 @@
 import { AppFrame, AppThemeProvider } from '@app/layout';
 import { Navigation } from '@app/types';
+import { Variant } from '@mui/material/styles/createTypography';
 import { Components, Mdx } from '@page/layout';
 import { getMDXComponent } from 'mdx-bundler/client';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { mergeProps } from 'next-merge-props';
-import React, { Fragment, ReactElement, useMemo } from 'react';
+import { Fragment, ReactElement, useMemo } from 'react';
 
 import { getPath } from '../../docs/src/lib/getPath';
 import { GetStaticContentProps, getStaticContentProps } from '../../docs/src/lib/getStaticContentProps';
@@ -20,6 +21,32 @@ export type DynamicPageProps = GetStaticTranslationProps &
   GetStaticContentProps &
   GetStaticNavigationProps;
 
+/**
+ * Navigation to anchors should not cause any re-render; however, changing the hash
+ * through NextJs building blocks Link and Router does cause a re-render.
+ *
+ * Re-rendering the entire app from _app and the respective page
+ * with the page's content can get quite substantial.
+ *
+ * FIXME:
+ * https://github.com/vercel/next.js/issues/34729
+ *
+ * Note:
+ * Re-rendering is reduced to the minimum in the respective MDX-components loaded.
+ * However, using the translation hook causes a re-render, not because of the hook's implementation
+ * detail (not using memo), but rather due to the global re-rendering from the app root.
+ *
+ * - no re-render for h2-h4 tags using custom components
+ * - re-render e.g., for concept tags and their respective components such as title
+ */
+
+export type HeaderProps = {
+  // id generated through slug
+  id: string;
+  variant: Variant;
+  children: string;
+};
+
 const DynamicPage: NextPageWithLayout<DynamicPageProps> = ({
   content,
   navigation
@@ -29,8 +56,16 @@ const DynamicPage: NextPageWithLayout<DynamicPageProps> = ({
 
   const slugArray = Array.isArray(slug) && slug;
 
-  const Component = useMemo(() => {
-    return getMDXComponent(mdxSource.code);
+  const [Component, headerComponents, components] = useMemo(() => {
+    return [
+      getMDXComponent(mdxSource.code),
+      {
+        h2: (props: HeaderProps) => <Mdx.Header variant='h2' {...props} />,
+        h3: (props: HeaderProps) => <Mdx.Header variant='h3' {...props} />,
+        h4: (props: HeaderProps) => <Mdx.Header variant='h4' {...props} />
+      },
+      getLoadableComponents(docComponents, hydratedComponents)
+    ];
   }, [mdxSource.code]);
 
   return (
@@ -45,13 +80,11 @@ const DynamicPage: NextPageWithLayout<DynamicPageProps> = ({
         <Component
           components={{
             h1: Mdx.h1,
-            h2: Mdx.h2,
-            h3: Mdx.h3,
-            h4: Mdx.h4,
             h5: Mdx.h5,
             h6: Mdx.h6,
             blockquote: Mdx.blockquote,
-            ...getLoadableComponents(docComponents, hydratedComponents)
+            ...headerComponents,
+            ...components
           }}
         />
       </Mdx.MdxDocs>
