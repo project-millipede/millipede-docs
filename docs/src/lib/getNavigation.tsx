@@ -9,7 +9,7 @@ import path from 'path';
 
 import { getMetadata } from './getMetadata';
 import { getPageDirectory } from './getPath';
-import { pageDirectories } from './page-config';
+import { pageDirectories } from './page-setup';
 
 /**
  * Create the navigation structure for pages such as documentation and blog.

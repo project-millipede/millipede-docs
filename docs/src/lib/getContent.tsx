@@ -9,7 +9,8 @@ import remarkSlug from 'remark-slug';
 
 import { getMetadata } from './getMetadata';
 import { getPageDirectory } from './getPath';
-import { blogComponents, docComponents, pageDirectories } from './page-config';
+import { blogComponents, docComponents } from './page-config';
+import { pageDirectories } from './page-setup';
 import { getHydratedComponents } from './utils/hydration';
 
 const {
