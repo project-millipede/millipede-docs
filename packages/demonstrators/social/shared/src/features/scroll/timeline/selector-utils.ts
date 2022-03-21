@@ -1,6 +1,7 @@
 import { CollectionUtil } from '@app/utils';
-import { Scroll } from '@demonstrators-social/shared';
 import get from 'lodash/get';
+
+import { Scroll } from '../../..';
 
 export const getDockedPostIds = (
   timelineId: string,
