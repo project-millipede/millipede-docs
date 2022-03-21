@@ -62,7 +62,6 @@ export const MdxDocs: FC<MarkdownDocsProps> = ({
           }}
         </Media>
       )}
-
       <Snackbar />
     </>
   );
