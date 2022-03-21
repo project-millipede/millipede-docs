@@ -1,11 +1,11 @@
 /* eslint-disable import/no-named-as-default */
 import { HooksUtils } from '@app/render-utils';
-import { features } from '@demonstrators-social/shared';
 import { useMergedRef } from '@huse/merged-ref';
-import React, { CSSProperties, FC, useEffect, useRef } from 'react';
+import { grey } from '@mui/material/colors';
+import { CSSProperties, FC, useEffect, useRef } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 
-import { features as appComponentFeatures } from '..';
+import { features as appComponentFeatures } from '../features';
 import SvgArrow from './SvgArrow';
 import { ArcherSurfaceProps, SourceToTargetType } from './types-private';
 
@@ -21,23 +21,16 @@ const defaultSvgContainerStyle: CSSProperties = {
 export const ArcherSurface: FC<ArcherSurfaceProps> = ({
   arrowLength = 16,
   arrowThickness = 8,
-  strokeColor = '#8a4444',
+  strokeColor = grey[500],
   strokeWidth = 1,
   strokeDasharray,
   style,
   svgElementProps,
   className,
   children,
-  elementStyle
+  elementStyle,
+  handleResetCb
 }) => {
-  const {
-    scroll: {
-      timeline: {
-        states: { nodesWithRelationsWithEdgeState }
-      }
-    }
-  } = features;
-
   const {
     archer: {
       states: { archerTransitionComposedState },
@@ -66,7 +59,6 @@ export const ArcherSurface: FC<ArcherSurfaceProps> = ({
   const handleReset = useRecoilCallback(
     ({ reset }) =>
       () => {
-        reset(nodesWithRelationsWithEdgeState);
         reset(archerTransitionComposedState);
       },
     []
@@ -75,13 +67,19 @@ export const ArcherSurface: FC<ArcherSurfaceProps> = ({
   useEffect(() => {
     return () => {
       /**
-       * Reset implicitly created state nodes-with-relations-with-edge.
-       * Reset subsequent state transition composed state archer-transition-composed,
+       * Reset internal transition composed state.
+       *
        * Note:
        * The reset of archer elements and their respective transitions gets handled
        * in an archer-element effect (unmount - segment).
+       *
+       * Note:
+       * Higher-level states associated with the component's lifecycle
+       * can be reset by providing a callback function.
        */
-
+      if (handleResetCb != undefined) {
+        handleResetCb();
+      }
       handleReset();
     };
   }, []);

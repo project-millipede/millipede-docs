@@ -1,7 +1,6 @@
 import { Components as RenderComponents } from '@app/render-utils';
-import { features as navigationFeatures } from '@demonstrator/navigation';
 import { cloneElement, FC, useEffect, useRef } from 'react';
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
+import { useResetRecoilState, useSetRecoilState } from 'recoil';
 
 import { features } from '../features';
 import { ArcherElementProps, Relation, SyncHandle } from './types';
@@ -54,6 +53,7 @@ export const ArcherElement: FC<ArcherElementProps> = ({
   relations = [],
   children,
   render,
+  isMobile = false,
   isInteractive = false
 }) => {
   const {
@@ -61,14 +61,6 @@ export const ArcherElement: FC<ArcherElementProps> = ({
       selector: { archerRefSelector, archerTransitionSelector }
     }
   } = features;
-
-  const {
-    app: {
-      states: { appCompositionState }
-    }
-  } = navigationFeatures;
-
-  const { isMobile } = useRecoilValue(appCompositionState);
 
   const isMobileResponsive = responsiveIsMobile();
 

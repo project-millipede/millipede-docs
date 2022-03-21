@@ -1,8 +1,9 @@
 import { useMergedRef } from '@huse/merged-ref';
-import React, { forwardRef, ForwardRefRenderFunction, ReactNode, useImperativeHandle, useState } from 'react';
+import { forwardRef, ForwardRefRenderFunction, ReactNode, useImperativeHandle, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { features } from '../features';
+import { EdgeText } from './EdgeText';
 import {
   computeArrowPointAccordingToArrowHead,
   computeEndAnchorPosition,
@@ -130,13 +131,13 @@ export const SvgArrow: ForwardRefRenderFunction<
     computedEndPosition
   );
 
-  const { position: labelPosition, size: labelSize } = computeLabelDimensions(
-    startPoint,
+  const { centerX, centerY } = computeLabelDimensions(
+    startPointWithArrow,
     endPointWithArrow
   );
 
   return (
-    <g>
+    <>
       <path
         d={pathString}
         style={{
@@ -145,30 +146,14 @@ export const SvgArrow: ForwardRefRenderFunction<
           strokeWidth,
           strokeDasharray
         }}
-        markerEnd={`url(${location.href.split('#')[0]}#${arrowMarkerId})`}
+        markerEnd={`url(#${arrowMarkerId})`}
       />
       {arrowLabel && (
-        <foreignObject
-          x={labelPosition.x}
-          y={labelPosition.y}
-          width={labelSize.width}
-          height={labelSize.heigth}
-          style={{ overflow: 'visible', pointerEvents: 'none' }}
-        >
-          <div
-            style={{
-              position: 'fixed',
-              left: '50%',
-              top: '50%',
-              transform: 'translateX(-50%) translateY(-50%)',
-              pointerEvents: 'all'
-            }}
-          >
-            {arrowLabel}
-          </div>
-        </foreignObject>
+        <EdgeText x={centerX} y={centerY}>
+          {arrowLabel}
+        </EdgeText>
       )}
-    </g>
+    </>
   );
 };
 

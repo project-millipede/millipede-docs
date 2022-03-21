@@ -1,6 +1,6 @@
 import { DefaultValue, selector, selectorFamily } from 'recoil';
 
-import { SourceToTargetType } from '../../archer/types-private';
+import { SourceToTargetType } from '../../components/types-private';
 import {
   ArcherRef,
   archerRefState,
@@ -73,7 +73,7 @@ export const archerTransitionSelector = selectorFamily<
         [archerId]: newArcherTransition.sourceToTargetsMap
       };
 
-      // The flat method of Array automatically removes empty array elements
+      // The flat method of Array automatically removes empty array elements - in that case tail
       const flattenedTransitions = Object.values(updatedTransitions).flat();
 
       set(archerTransitionState(archerId), newArcherTransition);
