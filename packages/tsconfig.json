@@ -5,6 +5,7 @@
     { "path": "render-utils" },
     { "path": "types" },
     { "path": "app/components" },
+    { "path": "app/archer" },
     { "path": "app/layout" },
     { "path": "illustrations" },
     { "path": "page/components" },
