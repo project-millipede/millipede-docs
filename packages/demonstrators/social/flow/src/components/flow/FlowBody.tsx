@@ -1,4 +1,5 @@
-import { Archer } from '@app/components';
+import { Archer } from '@app/archer';
+import { Box } from '@app/components';
 import { features as navigationFeatures } from '@demonstrator/navigation';
 import { features } from '@demonstrators-social/shared';
 import { Typography } from '@mui/material';
@@ -6,26 +7,27 @@ import { styled } from '@mui/material/styles';
 import React, { FC } from 'react';
 import { useRecoilValue } from 'recoil';
 
-const { ArcherElement, InteractiveBox } = Archer;
+const { InteractiveBox } = Box;
+const { ArcherElement } = Archer;
 
 interface FlowBodyGridProps {
-  isMobile: boolean;
   size: number;
+  isMobile?: boolean;
 }
-
-export const FlowBodyLayout = styled('div')(({ theme }) => {
+export const FlowBodyLayout = styled('div', {
+  shouldForwardProp: prop => prop !== 'size'
+})<FlowBodyGridProps>(({ size }) => {
   return {
     display: 'grid',
     gridArea: 'dock-center',
     placeContent: 'space-evenly',
-    columnGap: theme.spacing(3),
-    rowGap: theme.spacing(3)
+    gridTemplateRows: `repeat(${size}, 1fr)`
   };
 });
 
 export const FlowBodyGrid = styled('div', {
-  shouldForwardProp: prop => prop !== 'isMobile' && prop !== 'size'
-})<FlowBodyGridProps>(({ theme, isMobile, size }) => {
+  shouldForwardProp: prop => prop !== 'size' && prop !== 'isMobile'
+})<FlowBodyGridProps>(({ theme, size, isMobile }) => {
   return {
     display: 'grid',
     placeContent: 'space-evenly',
@@ -34,8 +36,8 @@ export const FlowBodyGrid = styled('div', {
         gridTemplateColumns: `repeat(${size}, 1fr)`
       }
     }),
-    columnGap: theme.spacing(14),
-    rowGap: theme.spacing(6)
+    columnGap: theme.spacing(20),
+    rowGap: theme.spacing(8)
   };
 });
 
@@ -60,7 +62,7 @@ export const FlowBody: FC = () => {
   const { isMobile } = useRecoilValue(appCompositionState);
 
   return (
-    <FlowBodyLayout>
+    <FlowBodyLayout size={bodyNodeWithRelations.length}>
       {bodyNodeWithRelations.map((bodyNodeWithRelation, index) => {
         return (
           <FlowBodyGrid
@@ -78,6 +80,7 @@ export const FlowBody: FC = () => {
                   id={id}
                   key={`flow-body-row-or-column-item-${id}`}
                   relations={relations}
+                  isMobile={isMobile}
                   isInteractive
                 >
                   <InteractiveBox>

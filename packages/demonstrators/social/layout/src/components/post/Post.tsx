@@ -1,4 +1,4 @@
-import { features as appComponentFeatures } from '@app/components';
+import { features as appComponentFeatures } from '@app/archer';
 import { CollectionUtil } from '@app/utils';
 import { features as navigationFeatures } from '@demonstrator/navigation';
 import { features, Scroll } from '@demonstrators-social/shared';

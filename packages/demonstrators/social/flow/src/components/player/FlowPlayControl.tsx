@@ -1,4 +1,5 @@
-import { features as appComponentFeatures, Portal } from '@app/components';
+import { features as appComponentFeatures } from '@app/archer';
+import { Portal } from '@app/components';
 import { StringUtil } from '@app/utils';
 import { Player, useStepDispatch, useStepState } from '@demonstrator/components';
 import { features as navigationFeatures, useNavigation } from '@demonstrator/navigation';

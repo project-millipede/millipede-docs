@@ -1,4 +1,4 @@
-import { Archer, ArcherTypes } from '@app/components';
+import { Archer, ArcherTypes } from '@app/archer';
 import React, { ComponentType } from 'react';
 
 import { DockItemProps } from '../components/flow/DockItem';

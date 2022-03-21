@@ -1,4 +1,5 @@
-import { Archer, ArcherTypes } from '@app/components';
+import { Archer, ArcherTypes } from '@app/archer';
+import { Box } from '@app/components';
 import { styled } from '@mui/material/styles';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
@@ -7,7 +8,9 @@ import { Title } from '../../common';
 import { Instrument } from './components/Instrument';
 import { Target } from './components/Target';
 
-const { ArcherSurface, InteractiveBox, ArcherElement } = Archer;
+const { ArcherSurface, ArcherElement } = Archer;
+
+const { InteractiveBox } = Box;
 
 export const GridWrapper = styled('div')(({ theme }) => ({
   display: 'grid',
