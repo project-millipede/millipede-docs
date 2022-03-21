@@ -1,10 +1,13 @@
-import { Archer } from '@app/components';
+import { Archer } from '@app/archer';
+import { Box } from '@app/components';
 import { styled } from '@mui/material/styles';
 import React, { FC } from 'react';
 
 import { TitleUnstyled } from '../../../../common';
 
-const { ArcherSurface, ArcherElement, InteractiveBox } = Archer;
+const { ArcherSurface, ArcherElement } = Archer;
+
+const { InteractiveBox } = Box;
 
 export const GridWrapper = styled('div')(({ theme }) => ({
   display: 'grid',

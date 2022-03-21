@@ -1,4 +1,4 @@
-import { Archer } from '@app/components';
+import { Archer } from '@app/archer';
 import { styled } from '@mui/material/styles';
 import React, { FC } from 'react';
 

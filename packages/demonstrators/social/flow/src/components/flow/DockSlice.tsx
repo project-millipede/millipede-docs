@@ -1,4 +1,4 @@
-import { ArcherTypes } from '@app/components';
+import { ArcherTypes } from '@app/archer';
 import { HooksUtils } from '@app/render-utils';
 import { features } from '@demonstrators-social/shared';
 import { EffectRef } from '@huse/effect-ref';

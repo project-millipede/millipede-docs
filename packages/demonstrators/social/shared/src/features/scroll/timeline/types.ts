@@ -1,4 +1,4 @@
-import { ArcherTypes } from '@app/components';
+import { ArcherTypes } from '@app/archer';
 import { EffectRef } from '@huse/effect-ref';
 
 import { Scroll } from '../../..';

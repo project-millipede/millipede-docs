@@ -1,4 +1,5 @@
-import { features as appComponentFeatures, Stepper } from '@app/components';
+import { features as appComponentFeatures } from '@app/archer';
+import { Stepper } from '@app/components';
 import { features } from '@demonstrators-social/shared';
 import { List, ListItem, ListSubheader, Paper, Typography } from '@mui/material';
 import { usePrevious } from 'ahooks';

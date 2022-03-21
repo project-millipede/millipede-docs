@@ -1,4 +1,4 @@
-import { features as appComponentFeatures } from '@app/components';
+import { features as appComponentFeatures } from '@app/archer';
 import { CollectionUtil } from '@app/utils';
 import { features, Scroll } from '@demonstrators-social/shared';
 import { AllInclusive, ArrowBack, ArrowForward, SettingsBackupRestore } from '@mui/icons-material';
