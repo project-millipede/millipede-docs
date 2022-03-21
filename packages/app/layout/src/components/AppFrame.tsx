@@ -1,4 +1,3 @@
-import { Portal } from '@app/components';
 import { Navigation } from '@app/types';
 import React, { FC, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
@@ -89,8 +88,6 @@ export const AppFrame: FC<AppFrameProps> = ({
         )}
         {children}
       </AppFrameGrid>
-
-      <Portal.PortalOut portalType={Portal.PortalType.Cursor} />
     </>
   );
 };

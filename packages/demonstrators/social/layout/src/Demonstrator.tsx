@@ -1,3 +1,4 @@
+import { Portal } from '@app/components';
 import { animateCenterToLeftOrRight, animateFromLeftToCenter, animateFromRightToCenter } from '@demonstrator/navigation';
 import React, { FC } from 'react';
 import { configure } from 'react-reparenting';
@@ -49,5 +50,10 @@ configure({
 });
 
 export const Demonstrator: FC = () => {
-  return <App />;
+  return (
+    <Portal.PortalProvider>
+      <App />
+      <Portal.PortalOut portalType={Portal.PortalType.Cursor} />
+    </Portal.PortalProvider>
+  );
 };

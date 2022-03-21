@@ -1,7 +1,7 @@
 import '@fortawesome/fontawesome-svg-core/styles.css';
 
 import { defaultAnalytics } from '@app/analytics';
-import { loadFAIcons, Portal } from '@app/components';
+import { loadFAIcons } from '@app/components';
 import { AppWrapper } from '@app/layout';
 import { Components as RenderComponents } from '@app/render-utils';
 import { CacheProvider } from '@emotion/react';
@@ -47,23 +47,21 @@ const MillipedeApp: NextComponentType<
 
   return (
     <AnalyticsProvider instance={defaultAnalytics}>
-      <Portal.PortalProvider>
-        <I18nProvider lang={__lang} namespaces={__namespaces}>
-          <MediaContextProvider>
-            <CacheProvider value={emotionCache}>
-              <RecoilRoot>
-                <AppWrapper>
-                  {getLayout(
-                    <Component {...pagePropsWitoutI18n} />,
-                    navigation,
-                    toc && toc.length > 0
-                  )}
-                </AppWrapper>
-              </RecoilRoot>
-            </CacheProvider>
-          </MediaContextProvider>
-        </I18nProvider>
-      </Portal.PortalProvider>
+      <I18nProvider lang={__lang} namespaces={__namespaces}>
+        <MediaContextProvider>
+          <CacheProvider value={emotionCache}>
+            <RecoilRoot>
+              <AppWrapper>
+                {getLayout(
+                  <Component {...pagePropsWitoutI18n} />,
+                  navigation,
+                  toc && toc.length > 0
+                )}
+              </AppWrapper>
+            </RecoilRoot>
+          </CacheProvider>
+        </MediaContextProvider>
+      </I18nProvider>
     </AnalyticsProvider>
   );
 };
