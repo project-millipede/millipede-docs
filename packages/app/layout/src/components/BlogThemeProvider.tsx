@@ -1,11 +1,7 @@
 import { CssBaseline, GlobalStyles } from '@mui/material';
 import { grey } from '@mui/material/colors';
-import {
-  createTheme,
-  ThemeProvider as MuiThemeProvider,
-  useTheme
-} from '@mui/material/styles';
-import React, { FC, useMemo } from 'react';
+import { createTheme, ThemeProvider as MuiThemeProvider, useTheme } from '@mui/material/styles';
+import { FC, useMemo } from 'react';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
 /**

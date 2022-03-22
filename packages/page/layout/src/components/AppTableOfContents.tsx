@@ -4,7 +4,7 @@ import { styled, Theme } from '@mui/material/styles';
 import { SxProps } from '@mui/system';
 import { TocEntry } from '@stefanprobst/remark-extract-toc';
 import useTranslation from 'next-translate/useTranslation';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { TocComponent } from './toc/TocComponent';
 

@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles';
 import { TocEntry } from '@stefanprobst/remark-extract-toc';
 import { useRouter } from 'next/router';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { TocLink } from './TocLink';
 

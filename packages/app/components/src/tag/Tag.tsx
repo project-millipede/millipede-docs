@@ -1,7 +1,7 @@
 import { ClassOutlined } from '@mui/icons-material';
 import { Chip } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 export const Anchor = styled('span')(({ theme }) => ({
   position: 'absolute',

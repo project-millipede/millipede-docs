@@ -1,5 +1,5 @@
 import { Navigation } from '@app/types';
-import React, { FC, useCallback } from 'react';
+import { FC, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { features } from '../features';

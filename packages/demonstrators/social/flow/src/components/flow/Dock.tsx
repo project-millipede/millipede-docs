@@ -1,6 +1,6 @@
 import { HooksUtils } from '@app/render-utils';
 import { features, Scroll } from '@demonstrators-social/shared';
-import React, { CSSProperties, FC, memo, useEffect } from 'react';
+import { CSSProperties, FC, memo, useEffect } from 'react';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 
 import { DockItem } from './DockItem';

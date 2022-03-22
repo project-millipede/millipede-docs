@@ -2,7 +2,7 @@ import { Archer } from '@app/archer';
 import { Box } from '@app/components';
 import { styled } from '@mui/material/styles';
 import useTranslation from 'next-translate/useTranslation';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { Title } from '../../common';
 

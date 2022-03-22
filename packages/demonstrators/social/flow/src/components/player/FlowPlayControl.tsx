@@ -6,7 +6,7 @@ import { features as navigationFeatures, useNavigation } from '@demonstrator/nav
 import { features } from '@demonstrators-social/shared';
 import isFunction from 'lodash/isFunction';
 import dynamic from 'next/dynamic';
-import React, { FC, useCallback, useEffect, useMemo } from 'react';
+import { FC, useCallback, useEffect, useMemo } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 
 interface FlowPlayControlProps {

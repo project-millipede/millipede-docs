@@ -3,7 +3,7 @@ import { Navigation } from '@app/types';
 import { Breadcrumbs as MuiBreadcrumbs, Chip, ChipProps } from '@mui/material';
 import { emphasize, styled } from '@mui/material/styles';
 import useTranslation from 'next-translate/useTranslation';
-import React, { FC, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 
 export interface BreadCrumb {
   link: string;

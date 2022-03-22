@@ -1,7 +1,7 @@
 import { blue } from '@mui/material/colors';
 import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
-import React, { FC, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
 const themeInitialOptions = {

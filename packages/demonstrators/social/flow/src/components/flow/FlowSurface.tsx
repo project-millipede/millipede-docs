@@ -1,6 +1,6 @@
 import { Archer } from '@app/archer';
 import { features, Scroll } from '@demonstrators-social/shared';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useRecoilCallback } from 'recoil';
 
 import { Dock } from './Dock';

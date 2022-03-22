@@ -1,7 +1,7 @@
 import { PageTypes } from '@app/types';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { getIconByName } from './Icon.svc';
 

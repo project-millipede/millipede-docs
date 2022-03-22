@@ -2,7 +2,7 @@ import { HooksUtils } from '@app/render-utils';
 import { Box, Button, Grid } from '@mui/material';
 import dynamic from 'next/dynamic';
 import { PDFDocumentProxy } from 'pdfjs-dist';
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { DocumentProps, PageProps } from 'react-pdf';
 
 import { Stepper, TranslationProps } from '../stepper/Stepper';

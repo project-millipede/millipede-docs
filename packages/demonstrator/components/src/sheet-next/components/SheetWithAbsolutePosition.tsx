@@ -1,6 +1,6 @@
 import { HooksUtils } from '@app/render-utils';
 import { AnimationOptions, motion, useAnimation, useMotionValue, Variants } from 'framer-motion';
-import React, { FC, useEffect, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 
 import { getAutoHeightDuration, SheetProps } from './Sheet.svc';

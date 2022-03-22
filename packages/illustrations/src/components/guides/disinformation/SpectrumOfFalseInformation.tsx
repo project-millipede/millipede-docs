@@ -1,5 +1,5 @@
 import useTranslation from 'next-translate/useTranslation';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { VictoryAxis, VictoryBar, VictoryChart, VictoryTheme } from 'victory';
 
 export const SpectrumOfFalseInformation: FC = () => {

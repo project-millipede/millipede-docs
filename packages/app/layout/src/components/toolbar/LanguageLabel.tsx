@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 interface LanguageLabelProps {
   label: string;

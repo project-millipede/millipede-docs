@@ -7,7 +7,7 @@ import { styled } from '@mui/material/styles';
 import { Snackbar } from '@page/components';
 import { Toc } from '@stefanprobst/remark-extract-toc';
 import { format } from 'date-fns';
-import React, { FC, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 
 import { AppTableOfContents } from '../components';
 import { AppContentFooter } from '../components/AppContentFooter';

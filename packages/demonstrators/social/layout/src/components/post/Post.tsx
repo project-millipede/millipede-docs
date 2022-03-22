@@ -10,7 +10,7 @@ import { formatDistance } from 'date-fns';
 import { enGB } from 'date-fns/locale';
 import get from 'lodash/get';
 import useTranslation from 'next-translate/useTranslation';
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useRecoilCallback, useRecoilValue, useSetRecoilState } from 'recoil';
 

@@ -1,5 +1,5 @@
 import { ContentTypes } from '@app/types';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import Window from '../windowByComponent';
 

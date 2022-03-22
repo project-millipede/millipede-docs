@@ -49,7 +49,6 @@ import {
   TouchApp,
   Warning,
 } from '@mui/icons-material';
-import React from 'react';
 
 export const getIconByName = (name: string) => {
   switch (name) {

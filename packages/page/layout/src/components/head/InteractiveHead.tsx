@@ -2,7 +2,7 @@ import { HiddenUnderlineLink } from '@app/components';
 import { CollectionUtil } from '@app/utils';
 import { Variant } from '@mui/material/styles/createTypography';
 import { useRouter } from 'next/router';
-import React, { FC, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useRecoilCallback } from 'recoil';
 

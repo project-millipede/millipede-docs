@@ -1,7 +1,7 @@
 import { LABEL_BORDER_RADIUS } from '@app/layout';
 import { Slider } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { useStepDispatch, useStepState } from '../../context/StepProvider';
 import { Step } from '../../types';

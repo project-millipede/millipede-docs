@@ -6,7 +6,7 @@ import { grey } from '@mui/material/colors';
 import { alpha, styled } from '@mui/material/styles';
 import { format } from 'date-fns';
 import isArray from 'lodash/isArray';
-import React, { FC, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 
 export const PostWrapper = styled('li')(({ theme }) => ({
   borderRadius: theme.spacing(1),

@@ -1,6 +1,6 @@
 import { Archer } from '@app/archer';
 import { styled } from '@mui/material/styles';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { Instrument } from './components/Instrument';
 import { Render } from './components/Render';

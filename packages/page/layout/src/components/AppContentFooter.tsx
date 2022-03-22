@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import useTranslation from 'next-translate/useTranslation';
-import React, { FC, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 
 export const Footer = styled(Box)(({ theme }) => {
   return {

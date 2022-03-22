@@ -5,7 +5,7 @@ import { features } from '@demonstrator/navigation';
 import { Components as FlowComponents } from '@demonstrators-social/flow';
 import { DonutLarge, Subscriptions } from '@mui/icons-material';
 import { Button, Divider, Tab } from '@mui/material';
-import React, { FC, SyntheticEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { FC, SyntheticEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 const {

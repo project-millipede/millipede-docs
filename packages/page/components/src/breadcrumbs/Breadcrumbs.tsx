@@ -4,7 +4,7 @@ import { NavigateNext } from '@mui/icons-material';
 import { Breadcrumbs as MuiBreadcrumbs, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import useTranslation from 'next-translate/useTranslation';
-import React, { FC, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 
 export interface BreadCrumb {
   link: string;

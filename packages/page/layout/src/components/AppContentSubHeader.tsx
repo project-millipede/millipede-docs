@@ -1,6 +1,6 @@
 import { PageTypes } from '@app/types';
 import { Typography } from '@mui/material';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 interface AppContentSubHeaderProps {
   timeToRead?: PageTypes.ReadingTime;

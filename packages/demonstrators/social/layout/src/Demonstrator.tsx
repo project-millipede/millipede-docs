@@ -1,6 +1,6 @@
 import { Portal } from '@app/components';
 import { animateCenterToLeftOrRight, animateFromLeftToCenter, animateFromRightToCenter } from '@demonstrator/navigation';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { configure } from 'react-reparenting';
 
 import { App } from './App';

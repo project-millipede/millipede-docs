@@ -1,6 +1,6 @@
 import { Player } from '@demonstrator/components';
 import { Components } from '@demonstrators-social/flow';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { LayoutVariants, PlayerSheet } from './PlayerSheet';

@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material/styles';
 import { Mdx } from '@page/layout';
 import isArray from 'lodash/isArray';
 import useTranslation from 'next-translate/useTranslation';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 export const AttackVectorsComparison: FC = () => {
   const theme = useTheme();

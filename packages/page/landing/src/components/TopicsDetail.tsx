@@ -2,7 +2,7 @@ import { Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { Topics } from './Topics';
 

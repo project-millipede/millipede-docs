@@ -2,7 +2,7 @@ import { Navigation, PageTypes } from '@app/types';
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Breadcrumbs, Share } from '@page/components';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 interface AppContentHeaderProps {
   slug: Array<string>;

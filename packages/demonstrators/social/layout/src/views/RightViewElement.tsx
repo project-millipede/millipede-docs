@@ -1,6 +1,6 @@
 import { ViewElementProps } from '@demonstrator/navigation';
 import { features } from '@demonstrators-social/shared';
-import React, { FC, memo, useLayoutEffect, useRef } from 'react';
+import { FC, memo, useLayoutEffect, useRef } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 
 import { Post } from '../components/post';

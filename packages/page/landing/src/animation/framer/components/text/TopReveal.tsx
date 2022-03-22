@@ -2,7 +2,7 @@ import { StringUtil } from '@app/utils';
 import { Typography } from '@mui/material';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 import isArray from 'lodash/isArray';
-import React from 'react';
+import { FC } from 'react';
 
 interface TopRevealProps {
   id: string;
@@ -16,7 +16,7 @@ interface TopRevealProps {
   loop?: boolean;
 }
 
-export const TopReveal = (props: TopRevealProps) => {
+export const TopReveal: FC<TopRevealProps> = props => {
   const {
     id,
     text,

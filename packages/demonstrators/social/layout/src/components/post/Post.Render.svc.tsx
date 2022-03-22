@@ -1,7 +1,6 @@
 import { EffectRef } from '@huse/effect-ref';
 import { Avatar, CardContent, CardHeader, CardMedia, Typography } from '@mui/material';
 import get from 'lodash/get';
-import React from 'react';
 
 export const getHeader = (
   ref: EffectRef<HTMLElement>,

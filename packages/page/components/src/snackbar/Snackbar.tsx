@@ -1,5 +1,5 @@
 import { Alert, Snackbar as MuiSnackbar } from '@mui/material';
-import React, { FC, SyntheticEvent, useCallback } from 'react';
+import { FC, SyntheticEvent, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { features } from '../features';
