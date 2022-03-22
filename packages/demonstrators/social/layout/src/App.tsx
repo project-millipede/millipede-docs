@@ -4,7 +4,7 @@ import { Components, features as navigationFeatures, TViewElement } from '@demon
 import { HeaderView } from '@demonstrators-social/components';
 import { generateData } from '@demonstrators-social/data';
 import { features } from '@demonstrators-social/shared';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { createGlobalStyle } from 'styled-components';

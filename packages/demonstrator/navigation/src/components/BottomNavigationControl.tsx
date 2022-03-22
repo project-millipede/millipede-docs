@@ -1,6 +1,6 @@
 import { Restore } from '@mui/icons-material';
 import { BottomNavigation, BottomNavigationAction } from '@mui/material';
-import React, { ChangeEvent, FC, useCallback } from 'react';
+import { ChangeEvent, FC, useCallback } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { features } from '../features';

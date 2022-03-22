@@ -4,7 +4,7 @@ import { Avatar, IconButton, Typography } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import isArray from 'lodash/isArray';
 import { useRouter } from 'next/router';
-import React from 'react';
+import { FC } from 'react';
 
 // const useStyles = makeStyles((theme: Theme) => ({
 //   ==> unresolved
@@ -53,12 +53,12 @@ export const Note = styled(Typography)(({ theme }) => ({
   }
 }));
 
-export const Item = ({
+export const Item: FC<ContentTypes.OverviewProps> = ({
   title,
   description,
   link,
   icon
-}: ContentTypes.OverviewProps) => {
+}) => {
   const theme = useTheme();
 
   const { push } = useRouter();

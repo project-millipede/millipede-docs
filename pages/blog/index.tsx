@@ -7,7 +7,7 @@ import { styled } from '@mui/material/styles';
 import { compareDesc } from 'date-fns';
 import { GetStaticProps } from 'next';
 import { mergeProps } from 'next-merge-props';
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 
 import { GetStaticContentProps, getStaticContentPropsBlogIndex } from '../../docs/src/lib/getStaticContentProps';
 import { GetStaticNavigationProps } from '../../docs/src/lib/getStaticNavigationProps';

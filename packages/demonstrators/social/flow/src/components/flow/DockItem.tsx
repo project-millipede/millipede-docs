@@ -1,7 +1,7 @@
 import { HooksUtils } from '@app/render-utils';
 import { features } from '@demonstrators-social/shared';
 import { EffectRef } from '@huse/effect-ref';
-import React, { FC, memo, useEffect } from 'react';
+import { FC, memo, useEffect } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 
 import DockSliceWithArcher from './DockSlice';

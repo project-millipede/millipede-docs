@@ -3,7 +3,7 @@ import { Components as RenderComponents } from '@app/render-utils';
 import { features, Scroll } from '@demonstrators-social/shared';
 import { DynamicFeed, GroupWork } from '@mui/icons-material';
 import { Tab } from '@mui/material';
-import React, { FC, SyntheticEvent, useCallback } from 'react';
+import { FC, SyntheticEvent, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { SimpleSearch } from '../search';

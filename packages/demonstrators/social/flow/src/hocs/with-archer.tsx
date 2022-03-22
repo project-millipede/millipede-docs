@@ -1,5 +1,5 @@
 import { Archer, ArcherTypes } from '@app/archer';
-import React, { ComponentType } from 'react';
+import { ComponentType } from 'react';
 
 import { DockItemProps } from '../components/flow/DockItem';
 import { DockSliceProps } from '../components/flow/DockSlice';

@@ -3,7 +3,7 @@ import { GitHub, Menu } from '@mui/icons-material';
 import { AppBar as MuiAppBar, IconButton, Toolbar as MuiToolbar } from '@mui/material';
 import { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import { CSSObject, styled, Theme } from '@mui/material/styles';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { MAX_DRAWER_WIDTH, TOOLBAR_HEIGHT } from '../../constants';
 import { HideOnScroll } from './HideOnScroll';

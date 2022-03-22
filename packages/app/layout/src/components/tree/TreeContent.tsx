@@ -3,7 +3,7 @@ import { PageTypes } from '@app/types';
 import { Collapse } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import useTranslation from 'next-translate/useTranslation';
-import React, { FC, Fragment } from 'react';
+import { FC, Fragment } from 'react';
 
 import { CustomTreeItem } from './CustomTreeItem';
 

@@ -1,7 +1,7 @@
 import { CustomIcon, HiddenUnderlineLink } from '@app/components';
 import { ContentTypes } from '@app/types';
 import { Box, Grid, IconButton } from '@mui/material';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { TopReveal } from '../animation/framer/components/text/TopReveal';
 

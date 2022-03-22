@@ -1,6 +1,6 @@
 import { SwipeableDrawer } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { DrawerProps } from '.';
 import { MAX_DRAWER_WIDTH } from '../../constants';

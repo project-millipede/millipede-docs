@@ -9,7 +9,7 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import { NextComponentType } from 'next';
 import I18nProvider from 'next-translate/I18nProvider';
 import { AppContext, AppInitialProps } from 'next/app';
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { RecoilRoot } from 'recoil';
 import { AnalyticsProvider } from 'use-analytics';
 

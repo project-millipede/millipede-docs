@@ -1,5 +1,5 @@
 import { motion, useAnimation, Variants } from 'framer-motion';
-import React, { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 
 export interface TopRevealMinProps {
   id: string;

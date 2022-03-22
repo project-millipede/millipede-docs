@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { pdfjs } from 'react-pdf';
 
 export const PDFWorker: FC = ({ children }) => {

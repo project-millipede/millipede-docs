@@ -6,7 +6,7 @@ import { Item } from '@page/components';
 import groupArray from 'group-array';
 import get from 'lodash/get';
 import useTranslation from 'next-translate/useTranslation';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { translateObject } from './TranslateService';
 

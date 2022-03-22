@@ -2,7 +2,7 @@ import { Stepper } from '@app/components';
 import { ContentTypes } from '@app/types';
 import isArray from 'lodash/isArray';
 import useTranslation from 'next-translate/useTranslation';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { FunctionBeahvior } from './components/FunctionBeahvior';
 import { FunctionBeahviorHook } from './components/FunctionBeahviorHook';

@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 export const h1: FC = ({ children }) => (
   <Typography variant='h1'>{children}</Typography>

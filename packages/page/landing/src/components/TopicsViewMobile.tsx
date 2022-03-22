@@ -1,5 +1,5 @@
 import { ContentTypes } from '@app/types';
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 
 import { useTimeout } from '../hooks';
 import { FullScreenInterface } from '../interface/FullScreenInterfaceByComponent';

@@ -2,7 +2,7 @@ import { Components as RenderComponents } from '@app/render-utils';
 import { Typography } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 import { Components } from '@page/layout';
-import React, { FC, memo } from 'react';
+import { FC, memo } from 'react';
 
 const {
   Media: { Media }

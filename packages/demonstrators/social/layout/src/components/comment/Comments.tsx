@@ -5,7 +5,7 @@ import { Avatar, CardActions, CardContent, CardHeader, IconButton, IconButtonPro
 import { styled } from '@mui/material/styles';
 import { formatDistance } from 'date-fns';
 import { enGB } from 'date-fns/locale';
-import React, { forwardRef, ForwardRefRenderFunction, Fragment, useMemo, useState } from 'react';
+import { forwardRef, ForwardRefRenderFunction, Fragment, useMemo, useState } from 'react';
 
 type StyledIconButtonProps = IconButtonProps & {
   open: boolean;

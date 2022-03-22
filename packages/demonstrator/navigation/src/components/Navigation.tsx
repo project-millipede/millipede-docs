@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect } from 'react';
+import { FC, useCallback, useEffect } from 'react';
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 
 import { features } from '../features';

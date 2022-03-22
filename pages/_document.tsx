@@ -2,7 +2,7 @@ import { Components } from '@app/render-utils';
 import createEmotionServer from '@emotion/server/create-instance';
 import { AppType } from 'next/dist/shared/lib/utils';
 import NextDocument, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
-import React, { Children } from 'react';
+import { Children } from 'react';
 import { ServerStyleSheet as StyledComponentSheets } from 'styled-components';
 
 import { createEmotionCache } from '../docs/src/lib/emotion';

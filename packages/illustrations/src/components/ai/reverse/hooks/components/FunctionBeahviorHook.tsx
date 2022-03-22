@@ -1,7 +1,7 @@
 import { Archer } from '@app/archer';
 import { Box } from '@app/components';
 import { styled } from '@mui/material/styles';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { TitleUnstyled } from '../../../../common';
 

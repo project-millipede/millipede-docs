@@ -3,7 +3,7 @@ import { HooksUtils } from '@app/render-utils';
 import { features } from '@demonstrators-social/shared';
 import { EffectRef } from '@huse/effect-ref';
 import get from 'lodash/get';
-import React, { forwardRef, ForwardRefRenderFunction, MutableRefObject, useEffect } from 'react';
+import { forwardRef, ForwardRefRenderFunction, MutableRefObject, useEffect } from 'react';
 import { useRecoilCallback } from 'recoil';
 
 import { withArcher } from '../../hocs/with-archer';

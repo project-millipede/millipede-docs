@@ -5,7 +5,7 @@ import { List, ListItem, ListSubheader, Paper, Typography } from '@mui/material'
 import { usePrevious } from 'ahooks';
 import get from 'lodash/get';
 import useTranslation from 'next-translate/useTranslation';
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 export const ScenarioNavigator: FC = () => {

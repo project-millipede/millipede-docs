@@ -4,7 +4,7 @@ import { grey } from '@mui/material/colors';
 import { styled, useTheme } from '@mui/material/styles';
 import useTranslation from 'next-translate/useTranslation';
 import getConfig from 'next/config';
-import React from 'react';
+import { FC } from 'react';
 
 export const Link = styled(HiddenUnderlineLink)({
   fontSize: '0.875rem',
@@ -31,7 +31,7 @@ export const StyledGrid = styled(Grid)<GridProps>(({ theme }) => ({
   }
 }));
 
-export const HomeFooter = () => {
+export const HomeFooter: FC = () => {
   const { t } = useTranslation();
 
   const theme = useTheme();

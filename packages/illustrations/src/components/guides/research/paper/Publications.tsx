@@ -5,7 +5,7 @@ import { styled } from '@mui/material/styles';
 import isArray from 'lodash/isArray';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
-import React, { FC, Fragment, useState } from 'react';
+import { FC, Fragment, useState } from 'react';
 
 export const StyledTableCell = dynamic(() => import('./StyledTableCell'), {
   ssr: false

@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 const LOCALES = { zh: 'zh-CN', pt: 'pt-BR', es: 'es-ES' };
 const CROWDIN_ROOT_URL = 'https://crowdin.com/project/project-millipede';

@@ -3,7 +3,7 @@ import { Navigation } from '@app/types';
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { AppFrameGrid } from './FrameGrid';
 import { HideOnScroll } from './toolbar/HideOnScroll';

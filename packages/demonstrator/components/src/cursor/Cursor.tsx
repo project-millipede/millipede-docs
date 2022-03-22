@@ -1,6 +1,6 @@
 import { usePrevious } from 'ahooks';
 import { AnimatePresence, motion, useAnimation } from 'framer-motion';
-import React, { FC, useCallback, useEffect, useMemo, useRef } from 'react';
+import { FC, useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { measure, measureOffset } from './Cursor.svc';
 import { click } from './dom-events';

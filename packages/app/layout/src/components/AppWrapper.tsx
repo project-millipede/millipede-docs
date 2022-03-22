@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { useAnalyticsOnRouteChange } from '../hooks/use-analytics-on-route-change';
 import { useResetScrollOnRouteChange } from '../hooks/use-reset-scroll-on-route-change';

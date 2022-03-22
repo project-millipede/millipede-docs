@@ -3,7 +3,7 @@ import { features } from '@demonstrator/navigation';
 import { Fullscreen, FullscreenExit, InfoOutlined, ViewCarousel, ViewColumn } from '@mui/icons-material';
 import { Box, IconButton, InputAdornment, InputBase } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { FullScreenHandle } from 'react-full-screen';
 import { useRecoilState } from 'recoil';
 

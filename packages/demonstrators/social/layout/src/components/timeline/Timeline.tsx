@@ -4,7 +4,7 @@ import { Create } from '@mui/icons-material';
 import { Button, List } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useTranslation from 'next-translate/useTranslation';
-import React, { FC, forwardRef, ForwardRefRenderFunction, useCallback, useEffect, useState } from 'react';
+import { FC, forwardRef, ForwardRefRenderFunction, useCallback, useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { ContentEditor } from '../comment/ContentEditor';

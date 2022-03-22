@@ -5,7 +5,7 @@ import { Navigation } from '@app/types';
 import { Close, Home } from '@mui/icons-material';
 import { Divider, IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { DesktopDrawer, MobileDrawer } from '.';
 import { NAV_ITEM_INDICATOR_WIDTH } from '../../constants';

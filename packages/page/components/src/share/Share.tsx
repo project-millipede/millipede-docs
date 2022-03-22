@@ -11,7 +11,7 @@ import copy from 'copy-to-clipboard';
 import isArray from 'lodash/isArray';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
-import React, { FC, SyntheticEvent, useCallback, useMemo } from 'react';
+import { FC, SyntheticEvent, useCallback, useMemo } from 'react';
 import { useSetRecoilState } from 'recoil';
 
 import { features } from '../features';

@@ -4,7 +4,7 @@ import { features as navigationFeatures } from '@demonstrator/navigation';
 import { features } from '@demonstrators-social/shared';
 import { Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useRecoilValue } from 'recoil';
 
 const { InteractiveBox } = Box;

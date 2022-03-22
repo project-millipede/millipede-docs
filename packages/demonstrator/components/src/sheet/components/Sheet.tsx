@@ -1,5 +1,5 @@
 import { animate, AnimatePresence, AnimationOptions, useMotionValue } from 'framer-motion';
-import React, {
+import {
   Children,
   cloneElement,
   forwardRef,

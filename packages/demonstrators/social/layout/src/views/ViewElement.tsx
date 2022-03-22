@@ -1,7 +1,7 @@
 import { ViewElementProps } from '@demonstrator/navigation';
 import { Components as FlowComponents } from '@demonstrators-social/flow';
 import { features } from '@demonstrators-social/shared';
-import React, { FC, memo } from 'react';
+import { FC, memo } from 'react';
 import { useRecoilValue } from 'recoil';
 
 const { FlowSurface } = FlowComponents;

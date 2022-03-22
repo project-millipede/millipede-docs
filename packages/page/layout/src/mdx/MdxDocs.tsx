@@ -5,7 +5,7 @@ import { Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Snackbar } from '@page/components';
 import { Toc } from '@stefanprobst/remark-extract-toc';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { AppTableOfContents } from '../components';
 import { AppContentFooter } from '../components/AppContentFooter';

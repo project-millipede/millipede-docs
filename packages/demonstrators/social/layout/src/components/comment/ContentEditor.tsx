@@ -3,7 +3,7 @@ import { Button, Typography } from '@mui/material';
 import { useWindupString } from '@project-millipede/windups';
 import { ContentState, Editor, EditorState } from 'draft-js';
 import useTranslation from 'next-translate/useTranslation';
-import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
+import { FC, useCallback, useEffect, useRef, useState } from 'react';
 
 const longText = 'Hi @all, my name is Markus.';
 

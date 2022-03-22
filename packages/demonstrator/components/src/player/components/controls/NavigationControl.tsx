@@ -1,7 +1,7 @@
 import { ArrowLeft, ArrowRight, Pause, PlayArrow } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { useStepDispatch, useStepState } from '../../context/StepProvider';
 

@@ -1,6 +1,6 @@
 import { HooksUtils } from '@app/render-utils';
 import { motion, Variants } from 'framer-motion';
-import React, { CSSProperties, FC, useMemo } from 'react';
+import { CSSProperties, FC, useMemo } from 'react';
 import styled from 'styled-components';
 
 import { HeightVariants, THeightVariants } from '../types';

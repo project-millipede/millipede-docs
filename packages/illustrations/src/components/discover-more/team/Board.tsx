@@ -7,7 +7,7 @@ import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 export const getActiveCoreMembers = (t: Translate) => [
   {

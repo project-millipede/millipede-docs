@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import React, { CSSProperties, FC } from 'react';
+import { CSSProperties, FC } from 'react';
 import { FullScreenHandle } from 'react-full-screen';
 
 import { ChromeInput } from '../input/ChromeInput';

@@ -7,7 +7,7 @@ import { Components } from '@page/layout';
 import { GetStaticProps } from 'next';
 import { mergeProps } from 'next-merge-props';
 import useTranslation from 'next-translate/useTranslation';
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { GetStaticNavigationProps, getStaticNavigationProps } from '../docs/src/lib/getStaticNavigationProps';

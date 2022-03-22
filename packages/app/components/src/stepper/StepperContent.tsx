@@ -1,7 +1,7 @@
 import { ContentTypes } from '@app/types';
 import { CardContent, Grid, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 
 import { Stepper, TranslationProps } from './Stepper';
 import { getStepsLength, selectContent } from './StepperContent.svc';

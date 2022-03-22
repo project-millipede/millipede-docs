@@ -1,7 +1,11 @@
 import { AlternateEmail, Assignment, Facebook, LinkedIn, Twitter, WhatsApp } from '@mui/icons-material';
-import React from 'react';
+import { FC } from 'react';
 
-export const Icon = ({ id }) => {
+interface IconProps {
+  id: string;
+}
+
+export const Icon: FC<IconProps> = ({ id }) => {
   switch (id) {
     case 'copy-link':
       return <Assignment />;

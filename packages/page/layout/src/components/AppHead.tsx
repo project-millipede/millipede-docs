@@ -2,7 +2,7 @@ import { PageTypes } from '@app/types';
 import useTranslation from 'next-translate/useTranslation';
 import NextHead from 'next/head';
 import { useRouter } from 'next/router';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 interface HeadProps {
   metaData: PageTypes.MetaData;
