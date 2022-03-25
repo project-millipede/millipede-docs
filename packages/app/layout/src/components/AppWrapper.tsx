@@ -1,6 +1,5 @@
 import { FC } from 'react';
 
-import { useAnalyticsOnRouteChange } from '../hooks/use-analytics-on-route-change';
 import { useResetScrollOnRouteChange } from '../hooks/use-reset-scroll-on-route-change';
 import { useSmoothScroll } from '../hooks/use-smooth-scroll';
 
@@ -9,8 +8,5 @@ export const AppWrapper: FC = ({ children }) => {
   useSmoothScroll();
 
   useResetScrollOnRouteChange();
-
-  useAnalyticsOnRouteChange();
-
   return <>{children}</>;
 };
