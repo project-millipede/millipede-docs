@@ -1,2 +1,9 @@
+# *
 User-agent: *
 Allow: /
+
+# Host
+Host: https://millipede.me
+
+# Sitemaps
+Sitemap: https://millipede.me/sitemap.xml
