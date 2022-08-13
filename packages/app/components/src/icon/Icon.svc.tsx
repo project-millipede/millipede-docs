@@ -7,6 +7,7 @@ import {
   CenterFocusWeak,
   CloudUpload,
   Code,
+  Commit,
   Compare,
   CompareArrows,
   ContactSupport,
@@ -28,6 +29,7 @@ import {
   FlashOn,
   Flip,
   FormatQuote,
+  FormatShapes,
   Functions,
   GroupWork,
   Info,
@@ -35,6 +37,7 @@ import {
   LocationDisabled,
   Lock,
   Map,
+  MergeType,
   MiscellaneousServices,
   ModelTraining,
   OfflineBolt,
@@ -43,11 +46,13 @@ import {
   RunningWithErrors,
   Science,
   Security,
+  SmartButton,
   SportsScore,
   Star,
   Toc,
   TouchApp,
   Warning,
+  Webhook,
 } from '@mui/icons-material';
 
 export const getIconByName = (name: string) => {
@@ -198,6 +203,21 @@ export const getIconByName = (name: string) => {
     }
     case 'sports_score': {
       return <SportsScore />;
+    }
+    case 'webhook': {
+      return <Webhook />;
+    }
+    case 'format_shapes': {
+      return <FormatShapes />;
+    }
+    case 'smart_button': {
+      return <SmartButton />;
+    }
+    case 'commit': {
+      return <Commit />;
+    }
+    case 'merge_type': {
+      return <MergeType />;
     }
     default: {
       return <></>;

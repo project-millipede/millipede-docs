@@ -1,4 +1,4 @@
-import { library } from '@fortawesome/fontawesome-svg-core';
+import { dom, library } from '@fortawesome/fontawesome-svg-core';
 import {
   faBalanceScaleLeft,
   faChessBoard,
@@ -23,4 +23,8 @@ export const loadFAIcons = () => {
     faChessBoard,
     faHashtag
   );
+
+  // Replace any existing <i> tags with <svg> and set up a MutationObserver to
+  // continue doing this as the DOM changes.
+  dom.watch();
 };
