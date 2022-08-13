@@ -1,32 +1,31 @@
-import { Components } from '@app/render-utils';
-import { ContentTypes } from '@app/types';
-import useTranslation from 'next-translate/useTranslation';
+import { Components as RenderComponents } from '@app/render-utils';
 import { FC } from 'react';
 
-import { TopicsViewDesktop } from './TopicsViewDesktop';
-import { TopicsViewMobile } from './TopicsViewMobile';
-import { translateObject } from './TranslateService';
+import { TopicsHeadDesktop } from '../interface/TopicsHeadDesktop';
+import TopicsHeadMobile from '../interface/TopicsHeadMobile';
 
 const {
-  Media: { Media }
-} = Components;
+  Media: { MediaConsumer },
+  Suspense: { SuspenseWrapper }
+} = RenderComponents;
 
 export const TopicsHead: FC = () => {
-  const { t } = useTranslation();
-
-  const topics = translateObject<ContentTypes.OverviewProps>(
-    t,
-    `pages/topics/index:topics`
-  );
-
   return (
     <>
-      <Media lessThan='md'>
-        <TopicsViewMobile topics={topics} />
-      </Media>
-      <Media greaterThanOrEqual='md'>
-        <TopicsViewDesktop topics={topics} />
-      </Media>
+      <MediaConsumer>
+        {({ media: { mobile, desktop } }) => {
+          return (
+            <>
+              <SuspenseWrapper media={mobile}>
+                <TopicsHeadMobile className={mobile.className} />
+              </SuspenseWrapper>
+              <SuspenseWrapper media={desktop}>
+                <TopicsHeadDesktop className={desktop.className} />
+              </SuspenseWrapper>
+            </>
+          );
+        }}
+      </MediaConsumer>
     </>
   );
 };
