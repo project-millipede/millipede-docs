@@ -7,6 +7,11 @@ import { ComponentMap } from './types';
  */
 
 export const docComponents: ComponentMap = {
+  Statement: {
+    component: dynamic(() =>
+      import('@app/components').then(module => module.Statement.Statement)
+    )
+  },
   Tag: {
     component: dynamic(() =>
       import('@app/components').then(module => module.Tag)
@@ -126,4 +131,9 @@ export const docComponents: ComponentMap = {
 
 export const blogComponents: ComponentMap = {
   // currently empty, first component to onload is interactive feedback-loop
+  Statement: {
+    component: dynamic(() =>
+      import('@app/components').then(module => module.Statement.Statement)
+    )
+  }
 };

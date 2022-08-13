@@ -1,9 +1,8 @@
 import { loadPages } from '@app/layout';
-import { Navigation } from '@app/types';
+import { Navigation, PageTypes } from '@app/types';
 import { RouterUtils } from '@app/utils';
 import fg from 'fast-glob';
 import { promises as fsPromises } from 'fs';
-import isArray from 'lodash/isArray';
 import { GetStaticPropsContext } from 'next';
 import path from 'path';
 
@@ -31,7 +30,7 @@ export const getNavigation = async (
 ): Promise<Navigation> => {
   const { params: { slug } = { slug: [] } } = ctx;
 
-  const pathname = isArray(slug) ? slug.join(path.sep) : slug;
+  const pathname = Array.isArray(slug) ? slug.join(path.sep) : slug;
   const pages = loadPages();
 
   const flattenedPages = RouterUtils.flatten(pages, 'children');
@@ -69,13 +68,13 @@ export const getBlogNavigation = async (
 ): Promise<Navigation> => {
   const { params: { slug } = { slug: [] } } = ctx;
 
-  const pathname = isArray(slug) ? slug.join(path.sep) : slug;
+  const pathname = Array.isArray(slug) ? slug.join(path.sep) : slug;
 
   const sourceDirectory = getPageDirectory(pageDirectories, pageType);
 
   const files = await fg(['**/*.{md,mdx}'], { cwd: sourceDirectory });
 
-  const pages = await Promise.all(
+  const pages = await Promise.all<PageTypes.Page>(
     files.map(async file => {
       const mdFile = path.join(sourceDirectory, file);
       const fileContents = await fsPromises.readFile(mdFile);
@@ -83,15 +82,33 @@ export const getBlogNavigation = async (
       const [pathname] = file.split('.');
       return {
         pathname,
-        title: metaData.title
+        title: metaData.title,
+        date: metaData.editedAt
       };
     })
   );
 
+  // Sort for the date property after promises got resolved - relevant for bottom navigation.
+  // const sortedPages = pages.sort((a, b) =>
+  //   compareAsc(new Date((a as any).date), new Date((b as any).date))
+  // );
+
+  // // Pages are flat, reading from the identical directory.
+  // const activePage = RouterUtils.getActivePage(sortedPages, pathname);
+
+  // return {
+  //   pages: sortedPages,
+  //   flattenedPages: sortedPages,
+  //   activePage,
+  //   expandedPages: [],
+  //   pageType: 'blog'
+  // };
+
+  // Pages are flat, reading from the identical directory.
   const activePage = RouterUtils.getActivePage(pages, pathname);
 
   return {
-    pages,
+    pages: pages,
     flattenedPages: pages,
     activePage,
     expandedPages: [],
