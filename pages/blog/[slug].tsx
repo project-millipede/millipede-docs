@@ -3,10 +3,12 @@ import { BlogFrame, BlogThemeProvider } from '@app/layout';
 import { Navigation } from '@app/types';
 import { Variant } from '@mui/material/styles/createTypography';
 import { Components, Mdx } from '@page/layout';
+import { Toc } from '@stefanprobst/remark-extract-toc';
+import { AnimatePresence } from 'framer-motion';
 import { getMDXComponent } from 'mdx-bundler/client';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { mergeProps } from 'next-merge-props';
-import { Fragment, ReactElement, useMemo } from 'react';
+import { ReactElement, useMemo } from 'react';
 
 import { getBlogPath } from '../../docs/src/lib/getPath';
 import { GetStaticContentProps, getStaticContentProps } from '../../docs/src/lib/getStaticContentProps';
@@ -33,7 +35,7 @@ const DynamicBlogPage: NextPageWithLayout<DynamicBlogPageProps> = ({
   content,
   navigation
 }) => {
-  const { mdxSource, metaData, hydratedComponents, toc, slug } =
+  const { mdxSource, metaData, hydratedComponents, slug } =
     !Array.isArray(content) && content;
 
   const slugStr = !Array.isArray(slug) && slug;
@@ -51,10 +53,9 @@ const DynamicBlogPage: NextPageWithLayout<DynamicBlogPageProps> = ({
   }, [mdxSource.code]);
 
   return (
-    <Fragment>
+    <>
       <AppHead metaData={metaData} />
       <Mdx.MdxBlog
-        toc={toc}
         slug={['blog', slugStr]}
         navigation={navigation}
         metaData={metaData}
@@ -71,7 +72,7 @@ const DynamicBlogPage: NextPageWithLayout<DynamicBlogPageProps> = ({
           }}
         />
       </Mdx.MdxBlog>
-    </Fragment>
+    </>
   );
 };
 
@@ -100,13 +101,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 DynamicBlogPage.getLayout = (
   page: ReactElement,
-  navigation: Navigation,
-  hasToc: boolean
+  _navigation: Navigation,
+  toc: Toc
 ) => {
   return (
     <BlogThemeProvider>
-      <BlogFrame hasToc={hasToc} navigation={navigation}>
-        {page}
+      <BlogFrame toc={toc}>
+        {/* Required for page transitions */}
+        <AnimatePresence exitBeforeEnter initial={false}>
+          {page}
+        </AnimatePresence>
       </BlogFrame>
     </BlogThemeProvider>
   );
