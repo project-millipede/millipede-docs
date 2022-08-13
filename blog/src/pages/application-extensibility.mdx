@@ -1,12 +1,80 @@
 ---
 title: 'Application Extensibility'
 blurb: 'The ability to modify existing application behavior to achieve greater privacy.'
-description: 'In this post, I will cover the basics of which applications can and can not be extended, and how to turn this dilemma around for the better.'
+description: 'In this post, I will explain the basics of extending applications, which
+types of applications generally provide this capability, and how to turn this
+dilemma for the better.'
 author: 'Markus Gritsch'
-publishedAt: '2021-12-27'
-editedAt: '2021-12-27'
+publishedAt: '2022-03-22'
+editedAt: '2022-03-22'
 ---
 
 ## Intro
 
-### Intro Sub
+<Statement type={'summary'}>
+
+The majority of applications **are not extendable** or **prevent** such
+capabilities from the ground up.
+
+</Statement>
+
+<Statement type={'remark'}>
+
+Whether a particular application is extendable depends not only on the
+underlying technology stack used to build the application, but also on the
+developer's philosophy of making software open or as a closed system.
+
+</Statement>
+
+### What does the phrase "an app is extendable" mean?
+
+Bestandteile einer Anwendung lassen sich durch anwendungsfremde Fragmente
+ergänzen oder verändern. Die Laufzeitumgebung gibt dabei jene Bereiche vor,
+welche von außen beeinflussbar sind und solche, die ausschließlich der Anwendung
+selbst vorbehalten sind.
+
+Die Laufzeitumgebung stellt eine Programmierschnittstelle bereit, welche von
+anwendungsfremden Fragmenten benutzt werden kann, um mit den autorisierten
+Bereichen einer Anwendung zu interagieren.
+
+Eine mit Fähigkeiten zur Erweiterung ausgestattete bekannte Laufzeitumgebung ist
+zweifelsfrei der Webbrowser. Zu den bekanntesten und meist genutzten
+Erweiterungen zählen sogenannte Ad-Blocker; diese führen eine Unterdrückung
+störender Werbeinhalte bei der Betrachtung einer Webseite aus.
+
+Konkret bedeutet dies, dass die Integrität der Anwendung durch Code-Fragmente
+Dritter nicht beeinflusst wird. Oftmals die Darstellungsebene beschränkt.
+
+#### Isolierte Welten
+
+## Devices and Runtime
+
+Lets start with desktop, web where extendability is available
+
+### Mobile
+
+#### Web
+
+#### Apps
+
+### Desktop
+
+#### Web
+
+#### Apps
+
+## Wrap up
+
+In this post, we looked at rendering pipeline from parsing to compositing.
+Hopefully, you are now empowered to read more about performance optimization of
+a website.
+
+In the next and last post of this series, we'll look at the compositor thread in
+more details and see what happens when user input like mouse move and click
+comes in.
+
+Did you enjoy the post? If you have any questions or suggestions for the future
+post, I'd love to hear from you in the comment section below or @kosamari on
+Twitter.
+
+Next: Input is coming to the compositor
