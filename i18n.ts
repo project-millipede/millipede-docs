@@ -1,9 +1,11 @@
-module.exports = {
+import { I18nConfig } from 'next-translate';
+
+const config: I18nConfig = {
   locales: ['en', 'de'],
   defaultLocale: 'en',
   loader: false,
   pages: {
-    '*': ['common', 'pages/topics/index'],
+    '*': ['common'],
     '/': [
       'pages/topics/index',
       'pages/pet/intro/feature/index',
@@ -30,3 +32,5 @@ module.exports = {
   loadLocaleFrom: (locale, namespace) =>
     import(`./locales/${locale}/${namespace}`).then(m => m.default)
 };
+
+export default config;
