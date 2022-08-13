@@ -1,11 +1,13 @@
 import { SwipeableDrawer } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { FC } from 'react';
+import React, { FC, useCallback } from 'react';
+import { useRecoilState } from 'recoil';
 
 import { DrawerProps } from '.';
 import { MAX_DRAWER_WIDTH } from '../../constants';
+import { features } from '../../features';
 
-const StyledSwipeableDrawer = styled(SwipeableDrawer)(({ theme }) => ({
+export const StyledSwipeableDrawer = styled(SwipeableDrawer)(({ theme }) => ({
   '& .MuiDrawer-paper': {
     width: theme.spacing(MAX_DRAWER_WIDTH),
     // Important:
@@ -16,13 +18,33 @@ const StyledSwipeableDrawer = styled(SwipeableDrawer)(({ theme }) => ({
   }
 }));
 
-export const MobileDrawer: FC<DrawerProps> = ({
-  isDrawerExpanded,
-  handleDrawerOpen,
-  handleDrawerClose,
-  sx,
-  children
-}) => {
+export const MobileDrawer: FC<DrawerProps> = ({ sx, className, children }) => {
+  const {
+    layout: {
+      states: { layoutState }
+    }
+  } = features;
+
+  const [{ isDrawerExpanded }, setLayout] = useRecoilState(layoutState);
+
+  const handleDrawerOpen = useCallback(() => {
+    setLayout(state => {
+      return {
+        ...state,
+        isDrawerExpanded: true
+      };
+    });
+  }, []);
+
+  const handleDrawerClose = useCallback(() => {
+    setLayout(state => {
+      return {
+        ...state,
+        isDrawerExpanded: false
+      };
+    });
+  }, []);
+
   return (
     <StyledSwipeableDrawer
       variant='temporary'
@@ -30,8 +52,11 @@ export const MobileDrawer: FC<DrawerProps> = ({
       onOpen={handleDrawerOpen}
       onClose={handleDrawerClose}
       ModalProps={{
-        keepMounted: true
+        keepMounted: true,
+        disableScrollLock: true,
+        disablePortal: true
       }}
+      className={className}
       sx={sx}
     >
       {children}

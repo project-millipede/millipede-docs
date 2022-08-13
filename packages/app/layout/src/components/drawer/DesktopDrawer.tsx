@@ -1,9 +1,11 @@
 import { Drawer } from '@mui/material';
 import { CSSObject, styled, Theme } from '@mui/material/styles';
 import { FC } from 'react';
+import { useRecoilValue } from 'recoil';
 
 import { DrawerProps } from '.';
 import { MAX_DRAWER_WIDTH, MIN_DRAWER_WIDTH } from '../../constants';
+import { features } from '../../features';
 
 const openAnimation = (theme: Theme): CSSObject => ({
   width: theme.spacing(MAX_DRAWER_WIDTH),
@@ -21,8 +23,7 @@ const closeAnimation = (theme: Theme): CSSObject => ({
   })
 });
 
-export const StyledDrawer = styled(Drawer)(({ theme, open }) => ({
-  width: theme.spacing(MAX_DRAWER_WIDTH),
+export const StyledDrawer = styled(Drawer)<DrawerProps>(({ theme, open }) => ({
   whiteSpace: 'nowrap',
   ...(open && {
     ...openAnimation(theme),
@@ -40,13 +41,22 @@ export const StyledDrawer = styled(Drawer)(({ theme, open }) => ({
   })
 }));
 
-export const DesktopDrawer: FC<DrawerProps> = ({
-  isDrawerExpanded,
-  sx,
-  children
-}) => {
+export const DesktopDrawer: FC<DrawerProps> = ({ sx, className, children }) => {
+  const {
+    layout: {
+      states: { layoutState }
+    }
+  } = features;
+
+  const { isDrawerExpanded } = useRecoilValue(layoutState);
+
   return (
-    <StyledDrawer variant='permanent' open={isDrawerExpanded} sx={sx}>
+    <StyledDrawer
+      variant='permanent'
+      open={isDrawerExpanded}
+      sx={sx}
+      className={className}
+    >
       {children}
     </StyledDrawer>
   );
