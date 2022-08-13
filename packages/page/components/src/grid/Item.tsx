@@ -1,177 +1,155 @@
-import { CustomIcon, Link } from '@app/components';
+import { CustomIcon, HiddenUnderlineLink, Statement } from '@app/components';
 import { ContentTypes } from '@app/types';
-import { Avatar, IconButton, Typography } from '@mui/material';
-import { styled, useTheme } from '@mui/material/styles';
-import isArray from 'lodash/isArray';
-import { useRouter } from 'next/router';
+import { IconButton, Typography } from '@mui/material';
+import { grey } from '@mui/material/colors';
+import { styled } from '@mui/material/styles';
+import Grid from '@mui/material/Unstable_Grid2';
 import { FC } from 'react';
 
-// const useStyles = makeStyles((theme: Theme) => ({
-//   ==> unresolved
-//   note: {
-//     fontWeight: theme.typography.fontWeightMedium,
-//     fontStyle: 'italic',
-//     '& blockquote': {
-//       borderLeft: '5px solid #ffe564',
-//       backgroundColor: 'rgba(255,229,100,0.2)',
-//       padding: '4px 24px',
-//       margin: '24px 0',
-//       '& p': {
-//         marginTop: '16px'
-//       }
-//     }
-//   }
-// }));
-
-// TODO: Simplify
-export const NoteDiv = styled('div')(({ theme }) => ({
-  fontWeight: theme.typography.fontWeightMedium,
-  fontStyle: 'italic',
-  '& blockquote': {
-    borderLeft: '5px solid #ffe564',
-    backgroundColor: 'rgba(255,229,100,0.2)',
-    padding: '4px 24px',
-    margin: '24px 0',
-    '& p': {
-      marginTop: '16px'
-    }
+export const TextGroup = styled(Grid)(() => ({
+  '& ol': {
+    paddingLeft: 0,
+    listStyle: 'circle'
   }
 }));
 
-// TODO: Simplify
-export const Note = styled(Typography)(({ theme }) => ({
-  fontWeight: theme.typography.fontWeightMedium,
-  fontStyle: 'italic',
-  '& blockquote': {
-    borderLeft: '5px solid #ffe564',
-    backgroundColor: 'rgba(255,229,100,0.2)',
-    padding: '4px 24px',
-    margin: '24px 0',
-    '& p': {
-      marginTop: '16px'
-    }
-  }
-}));
+export const GridWrapper = styled('div')(({ theme }) => {
+  return {
+    display: 'grid',
+    gridTemplateColumns: `min-content 1fr`,
+    gridTemplateAreas: `
+      'head_icon head_text'
+      '. content_text'
+      `,
+    gridTemplateRows: `auto 1fr`,
+    rowGap: theme.spacing(2),
+    columnGap: theme.spacing(2)
+  };
+});
 
-export const Item: FC<ContentTypes.OverviewProps> = ({
+export const Item: FC<Partial<ContentTypes.OverviewProps>> = ({
   title,
   description,
   link,
   icon
 }) => {
-  const theme = useTheme();
-
-  const { push } = useRouter();
-
-  const handleSelect = (link: string) => {
-    push({
-      pathname: '/docs/[...slug]',
-      query: { slug: link.split('/') }
-    });
-  };
-
   let intermediateResult = [];
 
-  if (isArray(description)) {
-    intermediateResult = description.map((d, index) => {
+  if (Array.isArray(description)) {
+    intermediateResult = description.map((descriptionItem, index) => {
       const {
         subTitle = [],
-        text = [],
         listing = [],
         summary = [],
         note = []
-      } = d;
+      } = descriptionItem;
 
       return (
-        <NoteDiv key={`description-${index}`}>
-          {subTitle.map((t, index) => (
-            <Typography
+        <TextGroup key={`description-${index}`}>
+          {subTitle.map((subTitleItem, index) => (
+            // <Typography key={`subTitle-${index}`} variant='subtitle1'>
+            //   {subTitleItem}
+            // </Typography>
+
+            <Statement.Statement
               key={`subTitle-${index}`}
-              variant='subtitle1'
-              sx={{
-                fontWeight: theme.typography.fontWeightRegular
-              }}
+              type={'question'}
+              external
             >
-              {t}
-            </Typography>
-          ))}
-          {text.map((t, index) => (
-            <Typography key={`text-${index}`} variant='subtitle1'>
-              {t}
-            </Typography>
+              {subTitleItem}
+            </Statement.Statement>
           ))}
           {listing.length > 0 ? (
             <ol key={`listing-${index}`}>
-              {listing.map((item, index) => {
-                return item.link ? (
+              {listing.map((listingItem, index) => {
+                return listingItem.link ? (
                   <li key={`listing-element-${index}`}>
                     <Typography
-                      variant='h6'
-                      component={Link}
+                      component={HiddenUnderlineLink}
+                      sx={{
+                        color: 'inherit',
+                        '&:hover': {
+                          color: grey[600]
+                        }
+                      }}
                       href={{
                         pathname: '/docs/[...slug]',
-                        query: { slug: item.link.split('/') }
+                        query: { slug: listingItem.link.split('/') }
                       }}
+                      prefetch={false}
                     >
-                      {item.text}
+                      {listingItem.text}
                     </Typography>
                   </li>
                 ) : (
                   <li key={`listing-element-${index}`}>
-                    <Typography variant='h6'>{item.text}</Typography>
+                    <Typography>{listingItem.text}</Typography>
                   </li>
                 );
               })}
             </ol>
           ) : null}
-          {summary.map((t, index) => (
-            <Typography
+          {summary.map((summaryItem, index) => (
+            // <Typography key={`summary-${index}`}>{summaryItem}</Typography>
+            <Statement.Statement
               key={`summary-${index}`}
-              variant='subtitle1'
-              sx={{
-                fontWeight: theme.typography.fontWeightMedium,
-                fontStyle: 'italic'
-              }}
+              type={'summary'}
+              external
             >
-              {t}
-            </Typography>
+              {summaryItem}
+            </Statement.Statement>
           ))}
-          {note.length > 0 ? (
-            <>
-              {note.map((item, index) => (
-                <Note key={`note-${index}`} variant='subtitle1'>
-                  {item}
-                </Note>
-              ))}
-            </>
-          ) : null}
-        </NoteDiv>
+          {/* {note.map((noteItem, index) => (
+            <TextGroup key={`note-${index}`}>{noteItem}</TextGroup>
+          ))} */}
+          {Array.isArray(note) &&
+            note.map((noteItem, index) => (
+              <Statement.Statement
+                key={`note-${index}`}
+                type={'remark'}
+                external
+              >
+                {noteItem}
+              </Statement.Statement>
+            ))}
+        </TextGroup>
       );
     });
   }
 
   return (
-    <div style={{ display: 'flex' }}>
+    <GridWrapper>
       {link ? (
-        <Avatar sx={{ margin: theme.spacing(0, 1) }}>
-          <IconButton
-            key={`link-${link}`}
-            onClick={_e => {
-              handleSelect(link);
-            }}
-          >
-            <CustomIcon icon={icon} />
-          </IconButton>
-        </Avatar>
+        <IconButton
+          component={HiddenUnderlineLink}
+          key={`link-${link}`}
+          sx={{
+            gridArea: 'head_icon',
+            padding: '10px',
+            width: 40,
+            height: 40
+          }}
+          href={{
+            pathname: '/docs/[...slug]',
+            query: { slug: link.split('/') }
+          }}
+          prefetch={false}
+        >
+          <CustomIcon icon={icon} />
+        </IconButton>
       ) : null}
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <Typography variant='h5'>{title}</Typography>
-        {isArray(description) ? (
+      <Typography variant='h4' style={{ gridArea: 'head_text' }}>
+        {title}
+      </Typography>
+
+      <div style={{ gridArea: 'content_text' }}>
+        {/* {isArray(description) ? (
           intermediateResult
         ) : (
-          <Typography variant='h5'>{description}</Typography>
-        )}
+          <Typography variant='h3'>{description}</Typography>
+        )} */}
+        {Array.isArray(description) && intermediateResult}
       </div>
-    </div>
+    </GridWrapper>
   );
 };

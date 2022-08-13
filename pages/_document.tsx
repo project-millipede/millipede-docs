@@ -1,4 +1,3 @@
-import { Components } from '@app/render-utils';
 import createEmotionServer from '@emotion/server/create-instance';
 import { AppType } from 'next/dist/shared/lib/utils';
 import NextDocument, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
@@ -7,10 +6,6 @@ import { ServerStyleSheet as StyledComponentSheets } from 'styled-components';
 
 import { createEmotionCache } from '../docs/src/lib/emotion';
 import { CustomAppProps } from '../docs/src/lib/types';
-
-const {
-  Media: { mediaStyles }
-} = Components;
 
 class MillipedeDocument extends NextDocument {
   render() {
@@ -43,6 +38,7 @@ class MillipedeDocument extends NextDocument {
           />
 
           <link href={fontHref} rel='stylesheet' />
+          <link rel='icon' href='/favicon.ico' />
         </Head>
         <body>
           <Main />
@@ -91,20 +87,12 @@ MillipedeDocument.getInitialProps = async (
       />
     ));
 
-    const mediaQueryStyles = (
-      <style
-        key='mediaStyles'
-        dangerouslySetInnerHTML={{ __html: mediaStyles }}
-      />
-    );
-
     return {
       ...initialProps,
       // Styles fragment is rendered after the app and page rendering finish.
       styles: [
         ...emotionStyleTags,
         styledComponentSheet.getStyleElement(),
-        mediaQueryStyles,
         ...Children.toArray(initialProps.styles)
       ]
     };

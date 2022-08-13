@@ -23,14 +23,22 @@ export interface ReadingTime {
   text: string;
 }
 
-export type MetaData = {
+export type PageMetaData = {
   title?: string;
   description?: string;
-  keywords?: string;
-  hashtags?: string;
   author?: string;
   date?: string;
+  keywords?: string;
   editedAt?: string;
   timeToRead?: ReadingTime;
+};
+
+export type BlogMetaData = {
   blurb?: string;
 };
+
+export type ShareMetaData = {
+  hashTags?: string;
+};
+
+export type MetaData = PageMetaData & BlogMetaData & ShareMetaData;

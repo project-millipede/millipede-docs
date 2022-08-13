@@ -1,15 +1,19 @@
 import { ContentTypes } from '@app/types';
+import { I18n } from '@app/utils';
 import { Typography } from '@mui/material';
-import Grid from '@mui/material/Grid';
 import { useTheme } from '@mui/material/styles';
+import Grid from '@mui/material/Unstable_Grid2';
 import { Item } from '@page/components';
 import groupArray from 'group-array';
-import get from 'lodash/get';
-import useTranslation from 'next-translate/useTranslation';
 import { FC } from 'react';
 
-import { translateObject } from './TranslateService';
+interface ScenarioMap {
+  [key: string]: { title: string; info: string };
+}
 
+interface CategoryMap {
+  [key: string]: string;
+}
 interface TopicsProps {
   feature: string;
   aspect: string;
@@ -18,29 +22,24 @@ interface TopicsProps {
 export const Topics: FC<TopicsProps> = ({ feature, aspect }) => {
   const theme = useTheme();
 
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation(`pages/${feature}/intro/${aspect}/index`);
 
-  const scenariosRaw = t(
-    `pages/${feature}/intro/${aspect}/index:scenarios`,
+  const scenarioMap = t<ScenarioMap>('scenarios', {}, { returnObjects: true });
+  const scenarioKeys = Object.keys(scenarioMap);
+
+  const categoryMap = t<CategoryMap>('categories', {}, { returnObjects: true });
+  const categoryKeys = Object.keys(categoryMap);
+
+  const data = t<Array<ContentTypes.OverviewProps>>(
+    'topics',
     {},
-    { returnObjects: true }
+    {
+      returnObjects: true,
+      fallback: []
+    }
   );
 
-  const scenarioKeys = Object.keys(scenariosRaw);
-
-  const categoriesRaw = t(
-    `pages/${feature}/intro/${aspect}/index:categories`,
-    {},
-    { returnObjects: true }
-  );
-  const categoriesKeys = Object.keys(categoriesRaw);
-
-  const data = translateObject<ContentTypes.OverviewProps>(
-    t,
-    `pages/${feature}/intro/${aspect}/index:topics`
-  );
-
-  const dataGrouped: ContentTypes.Scenario = groupArray(
+  const groupedData: ContentTypes.Scenario = groupArray(
     data,
     'scenario',
     'category'
@@ -48,23 +47,28 @@ export const Topics: FC<TopicsProps> = ({ feature, aspect }) => {
 
   return (
     <>
-      {scenarioKeys.map((scenario, index) => {
-        const scenarioData = dataGrouped && dataGrouped[scenario];
+      {scenarioKeys.map(scenarioId => {
+        const scenarioData = groupedData && groupedData[scenarioId];
         return scenarioData ? (
-          <div key={`scenario-${index}`}>
-            <Typography variant='h4'>{get(scenariosRaw, scenario)}</Typography>
-            {categoriesKeys.map((categoryKey, index) => {
-              const categoryData = scenarioData && scenarioData[categoryKey];
+          <div key={`scenario-${scenarioId}`}>
+            <Typography variant='h4'>
+              {scenarioMap?.[scenarioId]?.title}
+            </Typography>
+            <Typography variant='h5'>
+              {scenarioMap?.[scenarioId]?.info}
+            </Typography>
+            {categoryKeys.map(categoryId => {
+              const categoryData = scenarioData && scenarioData[categoryId];
               return categoryData ? (
-                <div key={`category-${index}`}>
+                <div key={`category-${categoryId}`}>
                   <Typography variant='h4'>
-                    {get(categoriesRaw, categoryKey)}
+                    {categoryMap?.[categoryId]}
                   </Typography>
                   <Grid container sx={{ margin: theme.spacing(3, 0) }}>
-                    {categoryData.map((data, index) => {
-                      const { title, description, link, icon } = data;
+                    {categoryData.map((category, index) => {
+                      const { title, description, link, icon } = category;
                       return (
-                        <Grid item key={index} xs={12} md={6}>
+                        <Grid key={index} xs={12} md={6}>
                           <Item
                             title={title}
                             description={description}
