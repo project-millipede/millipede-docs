@@ -1,15 +1,11 @@
 import { Theme } from '@mui/material/styles';
 import { SxProps } from '@mui/system';
+import { ReactNode } from 'react';
 
-export { MobileDrawer } from './MobileDrawer';
-export { DesktopDrawer } from './DesktopDrawer';
 export { SwitchDrawer } from './SwitchDrawer';
 
 export interface DrawerProps {
-  isDrawerExpanded: boolean;
-  handleDrawerOpen?: () => void;
-  handleDrawerClose?: () => void;
   sx: SxProps<Theme>;
-  className?: string;
-  renderChildren?: boolean;
+  className: string;
+  children: ReactNode;
 }

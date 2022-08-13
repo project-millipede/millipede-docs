@@ -1,12 +1,17 @@
+import { MittEmitter } from '@app/render-utils';
 import { FC } from 'react';
 
 import { useResetScrollOnRouteChange } from '../hooks/use-reset-scroll-on-route-change';
 import { useSmoothScroll } from '../hooks/use-smooth-scroll';
 
-export const AppWrapper: FC = ({ children }) => {
-  // Use smooth scroll behavior application wide
-  useSmoothScroll();
+interface AppWrapperProps {
+  events?: MittEmitter;
+}
 
-  useResetScrollOnRouteChange();
+export const AppWrapper: FC<AppWrapperProps> = ({ events, children }) => {
+  useSmoothScroll(events);
+
+  useResetScrollOnRouteChange(events);
+
   return <>{children}</>;
 };

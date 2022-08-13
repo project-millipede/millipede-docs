@@ -3,9 +3,11 @@ import { GitHub, Menu } from '@mui/icons-material';
 import { AppBar as MuiAppBar, IconButton, Toolbar as MuiToolbar } from '@mui/material';
 import { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import { CSSObject, styled, Theme } from '@mui/material/styles';
-import { FC } from 'react';
+import React, { FC, useCallback } from 'react';
+import { useRecoilState } from 'recoil';
 
 import { MAX_DRAWER_WIDTH, TOOLBAR_HEIGHT } from '../../constants';
+import { features } from '../../features';
 import { HideOnScroll } from './HideOnScroll';
 import { LanguageMenu } from './LanguageMenu';
 
@@ -50,11 +52,33 @@ export const StyledAppBar = styled(MuiAppBar, {
   };
 });
 
-export const AppBar: FC<AppBarProps> = ({
-  isDrawerExpanded,
-  handleDrawerOpen,
-  handleDrawerClose
-}) => {
+export const AppBar: FC<AppBarProps> = () => {
+  const {
+    layout: {
+      states: { layoutState }
+    }
+  } = features;
+
+  const [{ isDrawerExpanded }, setLayout] = useRecoilState(layoutState);
+
+  const handleDrawerOpen = useCallback(() => {
+    setLayout(state => {
+      return {
+        ...state,
+        isDrawerExpanded: true
+      };
+    });
+  }, []);
+
+  const handleDrawerClose = useCallback(() => {
+    setLayout(state => {
+      return {
+        ...state,
+        isDrawerExpanded: false
+      };
+    });
+  }, []);
+
   const toolBar = (
     <MuiToolbar disableGutters sx={{ minHeight: 64 }}>
       <IconButton
@@ -69,8 +93,8 @@ export const AppBar: FC<AppBarProps> = ({
       <GrowingDiv />
       <LanguageMenu />
       <IconButton
-        color='inherit'
         component={HiddenUnderlineLink}
+        color='inherit'
         href='https://github.com/project-millipede/millipede-docs'
       >
         <GitHub />
