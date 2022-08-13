@@ -1,5 +1,4 @@
 import fg from 'fast-glob';
-import get from 'lodash/get';
 import path from 'path';
 
 import { idToPathBlogParams, idToPathParams } from './getStaticPathsHelper';
@@ -9,7 +8,7 @@ export const getPageDirectory = (
   pages: { [index: string]: string },
   pageType: string
 ) => {
-  return path.resolve(process.cwd(), get(pages, pageType));
+  return path.resolve(process.cwd(), pages?.[pageType]);
 };
 
 /**

@@ -1,5 +1,4 @@
 import { CollectionUtil } from '@app/utils';
-import get from 'lodash/get';
 
 import { Scroll } from '../../..';
 
@@ -24,8 +23,8 @@ export const getDockedPostIds = (
       const [headRelationId] = allNodeIds;
       const [tailRelationId] = allNodeIds.slice(-1);
 
-      const timelineIdWithHeadDock = get(timelineIds, headRelationId);
-      const timelineIdWithTailDock = get(timelineIds, tailRelationId);
+      const timelineIdWithHeadDock = timelineIds?.[headRelationId];
+      const timelineIdWithTailDock = timelineIds?.[tailRelationId];
 
       if (ltr) {
         if (
@@ -33,7 +32,7 @@ export const getDockedPostIds = (
           allNodeIds.length >= 1
         ) {
           if (timelineId === timelineIdWithHeadDock) {
-            const postId = get(postIds, headRelationId);
+            const postId = postIds?.[headRelationId];
             return !acc.includes(postId) ? [...acc, postId] : acc;
           }
         }
@@ -42,7 +41,7 @@ export const getDockedPostIds = (
           allNodeIds.length === finalSize
         ) {
           if (timelineId === timelineIdWithTailDock) {
-            const postId = get(postIds, tailRelationId);
+            const postId = postIds?.[tailRelationId];
             return !acc.includes(postId) ? [...acc, postId] : acc;
           }
         }
@@ -53,7 +52,7 @@ export const getDockedPostIds = (
           allNodeIds.length === finalSize
         ) {
           if (timelineId === timelineIdWithHeadDock) {
-            const postId = get(postIds, headRelationId);
+            const postId = postIds?.[headRelationId];
             return !acc.includes(postId) ? [...acc, postId] : acc;
           }
         }
@@ -62,7 +61,7 @@ export const getDockedPostIds = (
           allNodeIds.length >= 1
         ) {
           if (timelineId === timelineIdWithTailDock) {
-            const postId = get(postIds, tailRelationId);
+            const postId = postIds?.[tailRelationId];
             return !acc.includes(postId) ? [...acc, postId] : acc;
           }
         }
@@ -75,7 +74,7 @@ export const getDockedPostIds = (
       //     : allNodeIds.length === finalSize
       // ) {
       //   if (timelineId === timelineIdWithHeadDock) {
-      //     const postId = get(postIds, headRelationId);
+      //     const postId = postIds?.[headRelationId];
       //     return !acc.includes(postId) ? [...acc, postId] : acc;
       //   }
       // }
@@ -85,7 +84,7 @@ export const getDockedPostIds = (
       //     : allNodeIds.length >= 1
       // ) {
       //   if (timelineId === timelineIdWithTailDock) {
-      //     const postId = get(postIds, tailRelationId);
+      //     const postId = postIds?.[tailRelationId]);
       //     return !acc.includes(postId) ? [...acc, postId] : acc;
       //   }
       // }
@@ -101,11 +100,9 @@ export const getDockedSliceIds = (
 ) => {
   const { nodesWithRelations } = nodeWithRelationsWithEdgeMap;
 
-  const activeNodesWithRelations = get(
-    nodesWithRelations,
-    postId,
-    [] as Array<Scroll.Timeline.NodeWithRelationsWithEdge>
-  );
+  const activeNodesWithRelations =
+    nodesWithRelations?.[postId] ??
+    ([] as Array<Scroll.Timeline.NodeWithRelationsWithEdge>);
 
   const intermediateResult =
     activeNodesWithRelations.map<Scroll.Timeline.SliceMap>(
@@ -120,12 +117,12 @@ export const getDockedSliceIds = (
         const [headRelationId] = allNodeIds;
         const [tailRelationId] = allNodeIds.slice(-1);
 
-        const timelineIdWithHeadDock = get(timelineIds, headRelationId);
-        const timelineIdWithTailDock = get(timelineIds, tailRelationId);
+        const timelineIdWithHeadDock = timelineIds?.[headRelationId];
+        const timelineIdWithTailDock = timelineIds?.[tailRelationId];
 
         if (timelineId === timelineIdWithHeadDock) {
           return {
-            sliceId: get(sliceIds, headRelationId),
+            sliceId: sliceIds?.[headRelationId],
             nodeWithRelations: nodeWithRelations.find(
               nodeWithRelation => nodeWithRelation.node.id === headRelationId
             )
@@ -134,7 +131,7 @@ export const getDockedSliceIds = (
 
         if (timelineId === timelineIdWithTailDock) {
           return {
-            sliceId: get(sliceIds, tailRelationId),
+            sliceId: sliceIds?.[tailRelationId],
             nodeWithRelations: nodeWithRelations.find(
               nodeWithRelation => nodeWithRelation.node.id === tailRelationId
             )
@@ -189,11 +186,9 @@ export const getDockedSliceIdsWithReduce = (
 ) => {
   const { nodesWithRelations } = nodeWithRelationsWithEdgeMap;
 
-  const activeNodesWithRelations = get(
-    nodesWithRelations,
-    postId,
-    [] as Array<Scroll.Timeline.NodeWithRelationsWithEdge>
-  );
+  const activeNodesWithRelations =
+    nodesWithRelations?.[postId] ??
+    ([] as Array<Scroll.Timeline.NodeWithRelationsWithEdge>);
 
   return activeNodesWithRelations.reduce<Array<Scroll.Timeline.SliceMap>>(
     (acc, nodeWithRelationsWithEdge) => {
@@ -207,12 +202,12 @@ export const getDockedSliceIdsWithReduce = (
       const [headRelationId] = allNodeIds;
       const [tailRelationId] = allNodeIds.slice(-1);
 
-      const timelineIdWithHeadDock = get(timelineIds, headRelationId);
-      const timelineIdWithTailDock = get(timelineIds, tailRelationId);
+      const timelineIdWithHeadDock = timelineIds?.[headRelationId];
+      const timelineIdWithTailDock = timelineIds?.[tailRelationId];
 
       if (timelineId === timelineIdWithHeadDock) {
         const allSliceIds = acc.map(value => value.sliceId);
-        const potentialSliceId = get(sliceIds, headRelationId);
+        const potentialSliceId = sliceIds?.[headRelationId];
 
         // eslint-disable-next-line no-param-reassign
         acc = !allSliceIds.includes(potentialSliceId)
@@ -238,7 +233,7 @@ export const getDockedSliceIdsWithReduce = (
          */
 
         const allSliceIds = acc.map(value => value.sliceId);
-        const potentialSliceId = get(sliceIds, tailRelationId);
+        const potentialSliceId = sliceIds?.[tailRelationId];
 
         // eslint-disable-next-line no-param-reassign
         acc = !allSliceIds.includes(potentialSliceId)

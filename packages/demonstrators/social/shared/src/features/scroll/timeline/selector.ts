@@ -1,5 +1,4 @@
 import { EffectRef } from '@huse/effect-ref';
-import lodashGet from 'lodash/get';
 import { DefaultValue, selector, selectorFamily } from 'recoil';
 
 import { Scroll } from '../../..';
@@ -81,9 +80,11 @@ export const actionCursorLengthSelector = selector<number>({
 
     const { activeId, nodesWithRelations } = state;
 
-    const activeNodesWithRelations = lodashGet(nodesWithRelations, activeId, [
-      { nodeWithRelations: [] }
-    ] as Array<Scroll.Timeline.NodeWithRelationsWithEdge>);
+    const activeNodesWithRelations =
+      nodesWithRelations?.[activeId] ??
+      ([
+        { nodeWithRelations: [] }
+      ] as Array<Scroll.Timeline.NodeWithRelationsWithEdge>);
 
     const [{ nodeWithRelations }] = activeNodesWithRelations;
     return nodeWithRelations.length;
