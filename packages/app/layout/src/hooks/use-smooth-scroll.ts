@@ -1,35 +1,36 @@
-import { useRouter } from 'next/router';
+import { MittEmitter } from '@app/render-utils';
 import { useEffect } from 'react';
 
-const setSmoothScroll = (isSmooth: boolean) => {
-  const html = document.documentElement;
-  html.style.setProperty('scroll-behavior', isSmooth ? 'smooth' : 'auto');
-};
+/**
+ * The scrolling behavior is always set to smooth, see global css.
+ * On route change, it switches to auto before it snaps back to smooth.
+ *
+ * Note:
+ * Do not use the nextJs hook "use-router" in this custom hook; constant re-renders get executed;
+ * unfortunately, there are some bugs in the implementation.
+ *
+ * Instead, the nextJs router events object from the _app component is given as an argument.
+ */
 
-export const useSmoothScroll = () => {
-  const { events } = useRouter();
+export const useSmoothScroll = (events: MittEmitter) => {
+  const setSmoothScroll = (isSmooth: boolean) => {
+    document.documentElement.style.scrollBehavior = isSmooth
+      ? 'smooth'
+      : 'auto';
+  };
 
   useEffect(() => {
-    const disableSmoothScrolling = () => setSmoothScroll(false);
-    const enableSmoothScrolling = () => setSmoothScroll(true);
+    setSmoothScroll(true);
 
-    // Enable smooth scrolling by default
-    enableSmoothScrolling();
+    const handleRouteChangeStart = () => setSmoothScroll(false);
+    const handleRouteChangeComplete = () => setSmoothScroll(true);
 
-    // Disable smooth scrolling when changing pages
-    events.on('routeChangeStart', disableSmoothScrolling);
-
-    // Re-enable smooth scrolling when the route-change completes
-    events.on('routeChangeComplete', enableSmoothScrolling);
-
-    // Enable smooth scrolling on hash change
-    events.on('hashChangeStart', enableSmoothScrolling);
+    events.on('routeChangeStart', handleRouteChangeStart);
+    events.on('routeChangeComplete', handleRouteChangeComplete);
 
     return () => {
-      // Remove event handlers when the component unmounts
-      events.off('routeChangeStart', disableSmoothScrolling);
-      events.off('routeChangeComplete', enableSmoothScrolling);
-      events.off('hashChangeStart', enableSmoothScrolling);
+      events.off('routeChangeStart', handleRouteChangeStart);
+      events.off('routeChangeComplete', handleRouteChangeComplete);
     };
-  }, [events]);
+  }, []);
 };
