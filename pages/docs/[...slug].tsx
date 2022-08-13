@@ -2,10 +2,12 @@ import { AppFrame, AppThemeProvider } from '@app/layout';
 import { Navigation } from '@app/types';
 import { Variant } from '@mui/material/styles/createTypography';
 import { Components, Mdx } from '@page/layout';
+import { Toc } from '@stefanprobst/remark-extract-toc';
+import { AnimatePresence } from 'framer-motion';
 import { getMDXComponent } from 'mdx-bundler/client';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { mergeProps } from 'next-merge-props';
-import { Fragment, ReactElement, useMemo } from 'react';
+import { ReactElement, useMemo } from 'react';
 
 import { getPath } from '../../docs/src/lib/getPath';
 import { GetStaticContentProps, getStaticContentProps } from '../../docs/src/lib/getStaticContentProps';
@@ -51,7 +53,7 @@ const DynamicPage: NextPageWithLayout<DynamicPageProps> = ({
   content,
   navigation
 }) => {
-  const { mdxSource, metaData, hydratedComponents, toc, slug } =
+  const { mdxSource, metaData, hydratedComponents, slug } =
     !Array.isArray(content) && content;
 
   const slugArray = Array.isArray(slug) && slug;
@@ -69,14 +71,10 @@ const DynamicPage: NextPageWithLayout<DynamicPageProps> = ({
   }, [mdxSource.code]);
 
   return (
-    <Fragment>
+    <>
       <AppHead metaData={metaData} />
-      <Mdx.MdxDocs
-        toc={toc}
-        slug={slugArray}
-        navigation={navigation}
-        metaData={metaData}
-      >
+
+      <Mdx.MdxDocs slug={slugArray} navigation={navigation} metaData={metaData}>
         <Component
           components={{
             h1: Mdx.h1,
@@ -88,7 +86,7 @@ const DynamicPage: NextPageWithLayout<DynamicPageProps> = ({
           }}
         />
       </Mdx.MdxDocs>
-    </Fragment>
+    </>
   );
 };
 
@@ -116,12 +114,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
 DynamicPage.getLayout = (
   page: ReactElement,
   navigation: Navigation,
-  hasToc: boolean
+  toc: Toc
 ) => {
   return (
     <AppThemeProvider>
-      <AppFrame hasToc={hasToc} navigation={navigation}>
-        {page}
+      <AppFrame navigation={navigation} toc={toc}>
+        {/* Required for page transitions */}
+        <AnimatePresence exitBeforeEnter initial={false}>
+          {page}
+        </AnimatePresence>
       </AppFrame>
     </AppThemeProvider>
   );

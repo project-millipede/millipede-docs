@@ -1,9 +1,8 @@
 import { APP_CONTENT_HEADER_HEIGHT, TOC_TOP } from '@app/layout';
+import { I18n } from '@app/utils';
 import { Typography } from '@mui/material';
-import { styled, Theme } from '@mui/material/styles';
-import { SxProps } from '@mui/system';
+import { styled } from '@mui/material/styles';
 import { TocEntry } from '@stefanprobst/remark-extract-toc';
-import useTranslation from 'next-translate/useTranslation';
 import { FC } from 'react';
 
 import { TocComponent } from './toc/TocComponent';
@@ -14,9 +13,7 @@ interface AppTableOfContentsProps {
       isParent?: boolean;
     }
   >;
-  sx?: SxProps<Theme>;
-  className?: string;
-  renderChildren?: boolean;
+  className: string;
 }
 
 // Use when app-frame display='grid'
@@ -24,7 +21,9 @@ const TocNav = styled('div')(({ theme }) => {
   return {
     position: 'sticky',
     top: theme.spacing(TOC_TOP),
-    alignSelf: 'start' // important, required for stickiness in display=grid
+    marginTop: theme.spacing(TOC_TOP),
+    alignSelf: 'start', // important, required for stickiness in display=grid
+    gridArea: 'app-right'
 
     /**
      * Note:
@@ -38,13 +37,13 @@ const TocNav = styled('div')(({ theme }) => {
   };
 });
 
-const TocHeaderContainer = styled('div')(({ theme }) => ({
+export const TocHeaderContainer = styled('div')(({ theme }) => ({
   height: theme.spacing(APP_CONTENT_HEADER_HEIGHT),
   display: 'flex',
   alignItems: 'center'
 }));
 
-const TocHeader = styled(Typography)(({ theme }) => ({
+export const TocHeader = styled(Typography)(({ theme }) => ({
   paddingLeft: theme.spacing(1),
   fontSize: '1rem',
   fontWeight: theme.typography.fontWeightMedium
@@ -52,11 +51,9 @@ const TocHeader = styled(Typography)(({ theme }) => ({
 
 export const AppTableOfContents: FC<AppTableOfContentsProps> = ({
   toc = [],
-  sx,
-  className,
-  renderChildren
+  className
 }) => {
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation();
 
   const label = t(
     'common:toc',
@@ -67,19 +64,11 @@ export const AppTableOfContents: FC<AppTableOfContentsProps> = ({
   );
 
   return (
-    <TocNav
-      sx={sx}
-      className={className}
-      suppressHydrationWarning={!renderChildren}
-    >
-      {renderChildren && (
-        <>
-          <TocHeaderContainer>
-            <TocHeader>{label}</TocHeader>
-          </TocHeaderContainer>
-          <TocComponent toc={toc} />
-        </>
-      )}
+    <TocNav className={className}>
+      <TocHeaderContainer>
+        <TocHeader>{label}</TocHeader>
+      </TocHeaderContainer>
+      <TocComponent toc={toc} />
     </TocNav>
   );
 };

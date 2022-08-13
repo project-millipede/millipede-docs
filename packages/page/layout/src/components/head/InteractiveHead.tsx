@@ -1,36 +1,24 @@
 import { HiddenUnderlineLink } from '@app/components';
 import { CollectionUtil } from '@app/utils';
-import { Variant } from '@mui/material/styles/createTypography';
-import { useRouter } from 'next/router';
-import { FC, useEffect } from 'react';
+import { FC, ReactNode, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useRecoilCallback } from 'recoil';
 
 import { features } from '../../features';
-import { Anchor, StyledTypography } from './InteractiveHead.svc';
+import { Anchor } from './InteractiveHead.svc';
 
 interface InteractiveHeadProps {
   // id generated through slug
   id: string;
-  variant: Variant;
-  className?: string;
-  renderChildren?: boolean;
+  children?: ReactNode;
 }
 
-export const InteractiveHead: FC<InteractiveHeadProps> = ({
-  variant,
-  id,
-  className,
-  renderChildren,
-  children
-}) => {
+export const InteractiveHead: FC<InteractiveHeadProps> = ({ id, children }) => {
   const {
     scroll: {
       states: { scrollState }
     }
   } = features;
-
-  const { pathname, query } = useRouter();
 
   const addScrollItem = useRecoilCallback(
     ({ set, snapshot }) =>
@@ -111,30 +99,20 @@ export const InteractiveHead: FC<InteractiveHeadProps> = ({
   }, [inView]);
 
   return (
-    <StyledTypography
-      variant={variant}
-      className={className}
-      suppressHydrationWarning={!renderChildren}
-    >
-      {renderChildren ? (
-        <>
-          <Anchor id={encodeURIComponent(id)} ref={inViewRef} />
-          {children}
-          <HiddenUnderlineLink
-            href={{
-              pathname,
-              query,
-              hash: id
-            }}
-            replace
-            shallow
-            passHref
-            prefetch={false}
-          >
-            #
-          </HiddenUnderlineLink>
-        </>
-      ) : null}
-    </StyledTypography>
+    <>
+      <Anchor id={encodeURIComponent(id)} ref={inViewRef} />
+      {children}
+      <HiddenUnderlineLink
+        href={{
+          hash: id
+        }}
+        shallow
+        prefetch={false}
+      >
+        #
+      </HiddenUnderlineLink>
+    </>
   );
 };
+
+export default InteractiveHead;
