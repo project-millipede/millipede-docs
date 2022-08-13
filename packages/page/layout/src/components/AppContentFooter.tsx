@@ -1,9 +1,9 @@
 import { HiddenUnderlineLink } from '@app/components';
 import { Navigation } from '@app/types';
+import { I18n } from '@app/utils';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import useTranslation from 'next-translate/useTranslation';
 import { FC, useMemo } from 'react';
 
 export const Footer = styled(Box)(({ theme }) => {
@@ -23,19 +23,36 @@ interface AppContentFooterProps {
   navigation: Navigation;
 }
 
+export const getLink = (pathname: string, pageType: string) => {
+  if (pathname.includes('/')) {
+    return {
+      pathname: `/${pageType}/[...slug]`,
+      query: { slug: pathname.split('/') }
+    };
+  }
+  return {
+    pathname: `/${pageType}/[slug]`,
+    query: { slug: pathname }
+  };
+};
+
 export const AppContentFooter: FC<AppContentFooterProps> = ({ navigation }) => {
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation();
 
   const { flattenedPages, activePage, pageType } = navigation;
 
-  const [prevPage, nextPage] = useMemo(() => {
+  const [prevPage, prevPageLink, nextPage, nextPageLink] = useMemo(() => {
     const currentPageNumber = flattenedPages.findIndex(
       page => page.pathname === activePage.pathname
     );
-    return [
-      flattenedPages[currentPageNumber - 1],
-      flattenedPages[currentPageNumber + 1]
-    ];
+
+    const prevPage = flattenedPages[currentPageNumber - 1];
+    const nextPage = flattenedPages[currentPageNumber + 1];
+
+    const prevPageLink = prevPage && getLink(prevPage.pathname, pageType);
+    const nextPageLink = nextPage && getLink(nextPage.pathname, pageType);
+
+    return [prevPage, prevPageLink, nextPage, nextPageLink];
   }, [activePage.pathname]);
 
   return (
@@ -43,10 +60,7 @@ export const AppContentFooter: FC<AppContentFooterProps> = ({ navigation }) => {
       {prevPage ? (
         <Typography
           component={HiddenUnderlineLink}
-          href={{
-            pathname: `/${pageType}/[...slug]`,
-            query: { slug: prevPage.pathname.split('/') }
-          }}
+          href={prevPageLink}
           prefetch={false}
         >
           <TitleWithIcon>
@@ -67,10 +81,7 @@ export const AppContentFooter: FC<AppContentFooterProps> = ({ navigation }) => {
       {nextPage ? (
         <Typography
           component={HiddenUnderlineLink}
-          href={{
-            pathname: `/${pageType}/[...slug]`,
-            query: { slug: nextPage.pathname.split('/') }
-          }}
+          href={nextPageLink}
           prefetch={false}
         >
           <TitleWithIcon>
