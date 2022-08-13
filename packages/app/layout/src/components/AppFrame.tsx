@@ -1,15 +1,21 @@
+import { SwitchDrawer } from '@app/layout';
+import { Components as RenderComponents } from '@app/render-utils';
 import { Navigation } from '@app/types';
-import { FC, useCallback } from 'react';
-import { useRecoilState } from 'recoil';
+import { Components } from '@page/layout';
+import { Toc } from '@stefanprobst/remark-extract-toc';
+import React, { FC } from 'react';
 
-import { features } from '../features';
-import { SwitchDrawer } from './drawer';
 import { AppFrameGrid } from './FrameGrid';
 import { AppBar } from './toolbar';
 
+const {
+  Media: { MediaConsumer },
+  Suspense: { SuspenseWrapper }
+} = RenderComponents;
+
 interface AppFrameProps {
-  hasToc?: boolean;
   navigation?: Navigation;
+  toc?: Toc;
 }
 
 // Note:
@@ -38,55 +44,38 @@ interface AppFrameProps {
 // + app-frame
 // - [...slug]
 
-export const AppFrame: FC<AppFrameProps> = ({
-  hasToc = false,
-  navigation,
-  children
-}) => {
-  const {
-    layout: {
-      states: { layoutState }
-    }
-  } = features;
+/**
+ * The Suspense-Wrapper of ATOC needs both subscribe to
+ * - beforeHistoryChange and
+ * - hashChangeStart
+ * because it is in layout / no unmounting on route change
+ */
 
-  const [{ isDrawerExpanded }, setLayout] = useRecoilState(layoutState);
-
-  const handleDrawerOpen = useCallback(() => {
-    setLayout(state => {
-      return {
-        ...state,
-        isDrawerExpanded: true
-      };
-    });
-  }, []);
-
-  const handleDrawerClose = useCallback(() => {
-    setLayout(state => {
-      return {
-        ...state,
-        isDrawerExpanded: false
-      };
-    });
-  }, []);
-
+export const AppFrame: FC<AppFrameProps> = ({ navigation, toc, children }) => {
   return (
     <>
-      <AppBar
-        isDrawerExpanded={isDrawerExpanded}
-        handleDrawerOpen={handleDrawerOpen}
-        handleDrawerClose={handleDrawerClose}
-      />
+      <AppBar />
 
-      <AppFrameGrid hasToc={hasToc} hasNavigation={!!navigation}>
-        {navigation && (
-          <SwitchDrawer
-            isDrawerExpanded={isDrawerExpanded}
-            navigation={navigation}
-            handleDrawerOpen={handleDrawerOpen}
-            handleDrawerClose={handleDrawerClose}
-          />
-        )}
+      <AppFrameGrid hasToc={!!toc} hasNavigation={!!navigation}>
+        {navigation && <SwitchDrawer navigation={navigation} />}
+
         {children}
+
+        {!!toc && (
+          <MediaConsumer>
+            {({ media: { desktop } }) => {
+              const { className } = desktop;
+              return (
+                <SuspenseWrapper media={desktop}>
+                  <Components.AppTableOfContents
+                    toc={toc}
+                    className={className}
+                  />
+                </SuspenseWrapper>
+              );
+            }}
+          </MediaConsumer>
+        )}
       </AppFrameGrid>
     </>
   );

@@ -2,10 +2,13 @@ import { Components as RenderComponents } from '@app/render-utils';
 import { Typography } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 import { Components } from '@page/layout';
-import { FC, memo } from 'react';
+import { FC } from 'react';
+
+import { StyledTypography } from '../components/head/InteractiveHead.svc';
 
 const {
-  Media: { Media }
+  Media: { MediaConsumer },
+  Suspense: { SuspenseWrapper }
 } = RenderComponents;
 
 export type HeaderProps = {
@@ -15,38 +18,37 @@ export type HeaderProps = {
   children: string;
 };
 
-const Header: FC<HeaderProps> = ({ variant, id, children }) => {
+export const Header: FC<HeaderProps> = ({ id, variant, children }) => {
   return (
     <>
-      <Media lessThan='md'>
-        {(className, renderChildren) => {
+      <MediaConsumer>
+        {({ media: { mobile, desktop } }) => {
           return (
-            <Typography
-              variant={variant}
-              className={className}
-              suppressHydrationWarning={!renderChildren}
-            >
-              {renderChildren && children}
-            </Typography>
+            <>
+              <SuspenseWrapper media={mobile}>
+                <Typography
+                  key={id}
+                  variant={variant}
+                  className={mobile.className}
+                >
+                  {children}
+                </Typography>
+              </SuspenseWrapper>
+              <SuspenseWrapper media={desktop}>
+                <StyledTypography
+                  key={id}
+                  variant={variant}
+                  className={desktop.className}
+                >
+                  <Components.Head.InteractiveHead id={id}>
+                    {children}
+                  </Components.Head.InteractiveHead>
+                </StyledTypography>
+              </SuspenseWrapper>
+            </>
           );
         }}
-      </Media>
-      <Media greaterThanOrEqual='md'>
-        {(className, renderChildren) => {
-          return (
-            <Components.Head.InteractiveHead
-              id={id}
-              variant={variant}
-              renderChildren={renderChildren}
-              className={className}
-            >
-              {children}
-            </Components.Head.InteractiveHead>
-          );
-        }}
-      </Media>
+      </MediaConsumer>
     </>
   );
 };
-
-export default memo(Header);

@@ -4,10 +4,10 @@ import { defaultAnalytics } from '@app/analytics';
 import { loadFAIcons } from '@app/components';
 import { Analytics, AppWrapper } from '@app/layout';
 import { Components as RenderComponents } from '@app/render-utils';
+import { I18n } from '@app/utils';
 import { CacheProvider } from '@emotion/react';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { NextComponentType } from 'next';
-import I18nProvider from 'next-translate/I18nProvider';
 import { AppContext, AppInitialProps } from 'next/app';
 import { useRouter } from 'next/router';
 import { ReactNode, useMemo } from 'react';
@@ -24,7 +24,7 @@ loadFAIcons();
 const clientSideEmotionCache = createEmotionCache();
 
 const {
-  Media: { MediaContextProvider }
+  Media: { MediaProvider }
 } = RenderComponents;
 
 const MillipedeApp: NextComponentType<
@@ -37,41 +37,49 @@ const MillipedeApp: NextComponentType<
   const { navigation, content } = pagePropsWitoutI18n;
 
   const {
+    query: { slug },
     locale,
-    query: { slug }
+    events
   } = useRouter();
 
-  /**
-   * Note:
-   * The page blog index generates content as an array.
-   * All other pages, including dynamic pages, include a toc property
-   * with either array or undefined value.
-   */
-  const { toc } = (!Array.isArray(content) && content) || { toc: undefined };
+  const slugStringified = Array.isArray(slug) ? slug.join('/') : slug;
 
+  /**
+   * This is put into the memo hook because inner page navigation relies on hash-change.
+   * Due to a limitation / known bug when a hash change occurs Next updates the router context.
+   */
   const componentWithLayout = useMemo(() => {
     const getLayout = Component.getLayout || ((page: ReactNode) => page);
-    return getLayout(
-      <Component {...pagePropsWitoutI18n} />,
-      navigation,
-      toc && toc.length > 0
+    return (
+      <AppWrapper events={events}>
+        <I18n.I18nProvider lang={__lang} namespaces={__namespaces}>
+          {getLayout(
+            <Component
+              /**
+               * Specifing a key is required for page transitions, more specifically
+               * for AnimatePresence within getLayout working correctly.
+               */
+              key={slugStringified}
+              {...pagePropsWitoutI18n}
+            />,
+            navigation,
+            content?.toc
+          )}
+        </I18n.I18nProvider>
+      </AppWrapper>
     );
-  }, [locale, slug]);
+  }, [slugStringified, locale, events]);
 
   return (
     <>
       <AnalyticsProvider instance={defaultAnalytics}>
         <Analytics />
       </AnalyticsProvider>
-      <I18nProvider lang={__lang} namespaces={__namespaces}>
-        <MediaContextProvider>
-          <CacheProvider value={emotionCache}>
-            <RecoilRoot>
-              <AppWrapper>{componentWithLayout}</AppWrapper>
-            </RecoilRoot>
-          </CacheProvider>
-        </MediaContextProvider>
-      </I18nProvider>
+      <CacheProvider value={emotionCache}>
+        <MediaProvider>
+          <RecoilRoot>{componentWithLayout}</RecoilRoot>
+        </MediaProvider>
+      </CacheProvider>
     </>
   );
 };
