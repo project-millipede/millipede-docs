@@ -1,15 +1,15 @@
+import { Statement } from '@app/components';
 import { ContentTypes } from '@app/types';
-import { Grid, Typography } from '@mui/material';
+import { I18n } from '@app/utils';
+import { Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { Mdx } from '@page/layout';
-import isArray from 'lodash/isArray';
-import useTranslation from 'next-translate/useTranslation';
+import Grid from '@mui/material/Unstable_Grid2';
 import { FC } from 'react';
 
 export const AttackVectorsComparison: FC = () => {
   const theme = useTheme();
 
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation();
 
   const rows = t<Array<Array<ContentTypes.Content>>>(
     'pages/security/attack-vectors/comparison/index:steps',
@@ -20,69 +20,97 @@ export const AttackVectorsComparison: FC = () => {
   ) || [[]];
 
   const result =
-    isArray(rows) && rows.length > 0
+    Array.isArray(rows) && rows.length > 0
       ? rows.map((row, rowIndex) => {
           return (
             <Grid container spacing={4} key={`row-${rowIndex}`}>
               {row.map((column, columnIndex) => {
                 let intermediateResult = [];
 
-                if (isArray(column.description)) {
-                  intermediateResult = column.description.map(description => {
-                    const { subTitle, text, listing, summary, note } =
-                      description;
+                if (Array.isArray(column.description)) {
+                  intermediateResult = column.description.map(
+                    (description, descriptionIndex) => {
+                      const { subTitle, text, listing, summary, note } =
+                        description;
 
-                    return (
-                      <>
-                        {subTitle &&
-                          subTitle.length > 0 &&
-                          subTitle.map(t => (
-                            <Typography
-                              variant='body1'
-                              sx={{
-                                fontWeight: theme.typography.fontWeightMedium
-                              }}
-                            >
-                              {t}
-                            </Typography>
-                          ))}
-                        {text &&
-                          text.length > 0 &&
-                          text.map(t => (
-                            <Typography variant='body1'>{t}</Typography>
-                          ))}
-                        {listing && listing.length > 0 && (
-                          <ul>
-                            {listing.map(t => (
-                              <li>
-                                <Typography variant='body1'>{t}</Typography>
-                              </li>
+                      return (
+                        <Grid
+                          container
+                          spacing={4}
+                          key={`row-${rowIndex}-description-${descriptionIndex}`}
+                        >
+                          {subTitle &&
+                            subTitle.length > 0 &&
+                            subTitle.map((subTitle, subTitleIndex) => (
+                              <Typography
+                                key={`row-${rowIndex}-description-${descriptionIndex}-subTitle-${subTitleIndex}`}
+                                variant='body1'
+                                sx={{
+                                  fontWeight: theme.typography.fontWeightMedium
+                                }}
+                              >
+                                {subTitle}
+                              </Typography>
                             ))}
-                          </ul>
-                        )}
-                        {summary &&
-                          summary.length > 0 &&
-                          summary.map(t => (
-                            <Typography
-                              variant='body1'
-                              sx={{ fontStyle: 'italic' }}
+                          {text &&
+                            text.length > 0 &&
+                            text.map((text, textIndex) => (
+                              <Typography
+                                key={`row-${rowIndex}-description-${descriptionIndex}-text-${textIndex}`}
+                                variant='body1'
+                              >
+                                {text}
+                              </Typography>
+                            ))}
+                          {listing && listing.length > 0 && (
+                            <ul>
+                              {listing.map((listing, listingIndex) => (
+                                <li
+                                  key={`row-${rowIndex}-description-${descriptionIndex}-listing-${listingIndex}`}
+                                >
+                                  <Typography variant='body1'>
+                                    {listing}
+                                  </Typography>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                          {summary &&
+                            summary.length > 0 &&
+                            summary.map((summary, summaryIndex) => (
+                              <Statement.Statement
+                                key={`row-${rowIndex}-description-${descriptionIndex}-summary-${summaryIndex}`}
+                                type={'summary'}
+                                external
+                              >
+                                <Typography variant='body1'>
+                                  {summary}
+                                </Typography>
+                              </Statement.Statement>
+                            ))}
+                          {note && note.length > 0 && (
+                            <Statement.Statement
+                              key={`row-${rowIndex}-description-${descriptionIndex}-note`}
+                              type={'remark'}
+                              external
                             >
-                              {t}
-                            </Typography>
-                          ))}
-                        {note && note.length > 0 && (
-                          <Mdx.blockquote>
-                            <Typography paragraph>
-                              {note.map(t => t)}
-                            </Typography>
-                          </Mdx.blockquote>
-                        )}
-                      </>
-                    );
-                  });
+                              {note.map((note, noteIndex) => (
+                                <Typography
+                                  variant='body1'
+                                  key={`row-${rowIndex}-description-${descriptionIndex}-note-${noteIndex}`}
+                                >
+                                  {note}
+                                </Typography>
+                              ))}
+                            </Statement.Statement>
+                          )}
+                        </Grid>
+                      );
+                    }
+                  );
                 }
                 return (
-                  <Grid item xs={12} md={4} key={`column-${columnIndex}`}>
+                  <Grid xs={12} md={4} key={`column-${columnIndex}`}>
                     <>
                       {column.title ? (
                         <Typography

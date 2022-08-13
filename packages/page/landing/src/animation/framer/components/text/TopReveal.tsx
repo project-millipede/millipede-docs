@@ -1,12 +1,10 @@
-import { StringUtil } from '@app/utils';
 import { Typography } from '@mui/material';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
-import isArray from 'lodash/isArray';
 import { FC } from 'react';
 
 interface TopRevealProps {
   id: string;
-  text: Array<string> | string;
+  text: Array<string>;
   // input parameters for height calculation
   lineGap?: number;
   fontSize?: number;
@@ -19,15 +17,13 @@ interface TopRevealProps {
 export const TopReveal: FC<TopRevealProps> = props => {
   const {
     id,
-    text,
+    text: items,
     lineGap = 0,
     fontSize = 24,
     fontColor = '#000000',
     stagger = 0.3,
     loop = true
   } = props;
-
-  const items = isArray(text) ? text : StringUtil.stringToArray(text);
 
   // Add staggering effect to the children of the container
   const containerVariants = {

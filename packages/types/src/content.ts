@@ -21,12 +21,11 @@ interface Link {
 }
 
 interface Description {
-  title?: Array<string>;
-  subTitle?: Array<string>;
-  text?: Array<string>;
-  listing?: Array<Link>;
-  summary?: Array<string>;
-  note?: Array<string>;
+  subTitle: Array<string>;
+  text?: Array<string>; // only in comparison, Description gets used on serveral places with differen context such as landing
+  listing: Array<Link>;
+  summary: Array<string>;
+  note: Array<string>;
 }
 
 interface Slice {
@@ -59,18 +58,22 @@ export interface Section {
 }
 
 export interface OverviewProps {
-  id?: string;
-  title?: Array<string> | string;
-  subTitle?: Array<string> | string;
-  description?: Array<Description>;
-  link?: string;
+  id: string;
   scenario?: string;
   category?: string;
-  icon?: Icon;
-  order?: number;
-  userFocus?: number;
-  sections?: Array<Section>;
+  title: string;
+  link: string;
+  icon: Icon;
+  description: Array<Description>;
 }
+
+export interface Topic {
+  id: string;
+  title: Array<string> | string;
+  subTitle: Array<string> | string;
+  sections: Array<Section>;
+}
+
 export interface Category {
   [category: string]: Array<OverviewProps>;
 }
