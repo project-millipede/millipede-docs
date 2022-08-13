@@ -1,5 +1,6 @@
 import { HooksUtils } from '@app/render-utils';
-import { Box, Button, Grid } from '@mui/material';
+import { Box, Button } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
 import dynamic from 'next/dynamic';
 import { PDFDocumentProxy } from 'pdfjs-dist';
 import { FC, useState } from 'react';
@@ -50,19 +51,19 @@ export const StepperContent: FC<StepperContentWithTranslationProps> = ({
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12}>
+      <Grid xs={12}>
         <Box display='flex' justifyContent='flex-end'>
           <Button onClick={openDocument}>Download</Button>
         </Box>
       </Grid>
-      <Grid item xs={12} ref={ref}>
+      <Grid xs={12} ref={ref}>
         <PDFWorker>
           <Document file={url} onLoadSuccess={onDocumentLoadSuccess}>
             <Page pageNumber={step} width={bounds.width} />
           </Document>
         </PDFWorker>
       </Grid>
-      <Grid item xs={12}>
+      <Grid xs={12}>
         <Stepper
           steps={totalPages}
           setStepCb={(currentStep: number) => {
