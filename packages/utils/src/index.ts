@@ -5,3 +5,5 @@ export * as MathUtil from './math';
 export * as StringUtil from './string';
 export * as RouterUtils from './router';
 export * as TypeUtil from './type';
+export * as GuardUtil from './guard';
+export * as I18n from './i18n';

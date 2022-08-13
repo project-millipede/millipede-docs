@@ -1,5 +1,4 @@
 import { PageTypes } from '@app/types';
-import isArray from 'lodash/isArray';
 
 const flatten = <T>(pages: Array<T>, key: string) => {
   return pages.reduce<Array<Omit<T, 'children'> & { isParent?: boolean }>>(
@@ -16,7 +15,7 @@ const flatten = <T>(pages: Array<T>, key: string) => {
         });
       }
 
-      if (isArray(page[key])) {
+      if (Array.isArray(page[key])) {
         // eslint-disable-next-line no-param-reassign
         flattenedPages = flattenedPages.concat(flatten(page[key], key));
       }
@@ -36,11 +35,11 @@ const getExpandedPages = (pathname: string) => {
 };
 
 const getActivePage = (
-  flattenedPages: Array<PageTypes.FlattenedPage>,
+  pages: Array<PageTypes.FlattenedPage>,
   pathname: string
 ) => {
-  const [selectedPage] = flattenedPages.filter(flattenedPage => {
-    return pathname === flattenedPage.pathname;
+  const [selectedPage] = pages.filter(page => {
+    return pathname === page.pathname;
   });
   return selectedPage
     ? selectedPage

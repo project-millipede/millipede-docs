@@ -1,6 +1,6 @@
 import { withoutBorders } from './array';
 
-test('should create intervall - from left to right', () => {
+test('should create interval - from left to right', () => {
   const A: Array<string> = ['A'];
   const AB: Array<string> = ['A', 'B'];
   const ABC: Array<string> = ['A', 'B', 'C'];
@@ -19,7 +19,7 @@ test('should create intervall - from left to right', () => {
   expect(resultABCD).toEqual(['B', 'C']);
 });
 
-test('should create intervall - from right to left', () => {
+test('should create interval - from right to left', () => {
   const A: Array<string> = ['A'];
   const BA: Array<string> = ['B', 'A'];
   const CBA: Array<string> = ['C', 'B', 'A'];
