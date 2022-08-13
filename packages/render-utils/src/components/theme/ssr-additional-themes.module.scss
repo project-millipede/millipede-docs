@@ -1,0 +1,27 @@
+@use 'sass:list';
+@use './theme.module' as themes;
+
+$boundary-themes-map: (
+  'xs': themes.$xs,
+  'sm': themes.$sm,
+  'md': themes.$md,
+  'lg': themes.$lg
+);
+
+@each $theme-name, $breakpoint in $boundary-themes-map {
+  $bigger-breakpoint-index: list.index(themes.$breakpoints, $breakpoint) - 1;
+  $bigger-breakpoint: list.nth(themes.$breakpoints, $bigger-breakpoint-index) *
+    1px;
+
+  .#{$theme-name}-lower {
+    @media screen and (max-width: $bigger-breakpoint - 1px) {
+      display: none;
+    }
+  }
+
+  .#{$theme-name}-upper {
+    @media screen and (min-width: $bigger-breakpoint) {
+      display: none;
+    }
+  }
+}
