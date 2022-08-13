@@ -7,5 +7,5 @@
     "jsx": "preserve",
     "skipLibCheck": true
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["types", "**/*.ts", "**/*.tsx"]
 }

@@ -8,19 +8,19 @@
     "clean": "rimraf dist"
   },
   "devDependencies": {
-    "@types/react": "^17.0.39",
-    "@types/react-dom": "^17.0.13",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "rimraf": "^3.0.2",
-    "typescript": "^4.6.2"
+    "typescript": "^4.7.4"
   },
   "dependencies": {
-    "@babel/core": "7.17.5",
-    "@babel/preset-env": "7.16.11",
-    "@babel/preset-react": "^7.16.7",
+    "@babel/core": "7.18.10",
+    "@babel/preset-env": "7.18.10",
+    "@babel/preset-react": "^7.18.6",
     "@istok/mdx": "^0.2.0",
-    "@mdx-js/mdx": "^2.0.0"
+    "@mdx-js/mdx": "^2.1.2"
   },
   "peerDependencies": {
     "react": "*",

@@ -3,23 +3,25 @@
   "version": "0.3.0",
   "private": true,
   "main": "src/index.ts",
-  "devDependencies": {
-    "@huse/effect-ref": "^1.1.1",
-    "@types/element-resize-detector": "^1.1.3",
-    "@types/lodash": "^4.14.179",
-    "@types/react": "^17.0.39",
-    "@types/react-dom": "^17.0.13",
+  "dependencies": {
     "element-resize-detector": "^1.2.4",
-    "lodash": "^4.17.21",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "typescript": "^4.6.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^4.7.4"
+  },
+  "devDependencies": {
+    "@types/element-resize-detector": "^1.1.3",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^4.7.4"
   },
   "peerDependencies": {
-    "@huse/effect-ref": "*",
     "element-resize-detector": "*",
-    "lodash": "*",
     "react": "*",
     "react-dom": "*"
+  },
+  "resolutions": {
+    "react": "link:/Users/markusgritsch/Development/Topics/Javascript/Experiments/Master/React/react/build/node_modules/react",
+    "react-dom": "link:/Users/markusgritsch/Development/Topics/Javascript/Experiments/Master/React/react/build/node_modules/react-dom"
   }
 }
