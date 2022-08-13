@@ -29,9 +29,7 @@
           ]
         },
         {
-          "note": [
-            "Das Verfahren setzt kein Umgewöhnung an neuartige digitale Workflows voraus. Bestehende oder gewohnte Workflows, etwa die Bedienung der favorisierten Social-Media Anwendung sind unterbrechungsfrei weiterzuverwenden."
-          ]
+          "note": "Das Verfahren setzt keine Umgewöhnung an neuartige digitale Workflows voraus. Bestehende oder gewohnte Workflows, etwa die Bedienung der favorisierten Social-Media Anwendung sind unterbrechungsfrei weiterzuverwenden."
         }
       ]
     },
@@ -71,7 +69,10 @@
     }
   ],
   "scenarios": {
-    "general": "Handhabung persönlicher Daten"
+    "general": {
+      "title": "Handhabung persönlicher Daten",
+      "info": "Moderne Werkzeuge zur Kollaboration scheinen im privaten und im beruflichen Umfeld nicht mehr wegzudenken. Der selbstbestimmte Umgang und der Schutz unserer Daten sowie unserer Privatsphäre empfindet unsere Gesellschaft als vorausgesetzt; in der uns all umgebenden digitalen Welt zeigen die Dinge jedoch in die komplett entgegengesetzte Richtung. Die oftmals geglaubte Gewährleistung dieser Eigenschaften verlieren wir, indem meist Werkzeuge kostenlos eingesetzt werden. In unserem sozialen Miteinander gehört es zum guten Ton, stets die modernsten und angesagtesten Werkzeuge zu verwenden, eine wichtige Routine nämlich zu hinterfragen, was den genau mit unseren Daten im Hintergrund geschieht, stumpft dabei zunehmend ab."
+    }
   },
   "categories": {
     "publish": "Sicheres und Selbstbestimmtes veröffentlichen privater Inhalte in ungeschützten Umgebungen.",

@@ -9,6 +9,7 @@
         "type": "MUI",
         "name": "cloud_upload"
       },
+      "why": "Why would you do this? We are doing it all the time. The barrier seems to vanish more and more",
       "description": [
         {
           "subTitle": [
@@ -29,9 +30,7 @@
           ]
         },
         {
-          "note": [
-            "The procedure does not require getting used to new digital workflows. Existing or familiar workflows, such as the handling of the preferred social media application, remain uninterrupted."
-          ]
+          "note": "The procedure does not require getting used to new digital workflows. Existing or familiar workflows, such as the handling of the preferred social media application, remain uninterrupted."
         }
       ]
     },
@@ -71,7 +70,10 @@
     }
   ],
   "scenarios": {
-    "general": "Handling of personal data"
+    "general": {
+      "title": "Handling of personal data",
+      "info": "Modern tools for collaboration no longer seem to be indispensable in private and professional environments. The self-determined handling and protection of our data as well as our privacy is perceived by our society as a prerequisite; however, in the digital world that surrounds us all, matters are pointing in the opposite direction. We lose the often believed guarantee of these characteristics by mostly using tools for free. In our social interaction, it is good manners to always use the latest and trendiest apps, but an important routine, specifically to question what exactly is happening with our data in the background, is becoming increasingly blunted."
+    }
   },
   "categories": {
     "publish": "Secure and self-determined publishing of private content in unprotected environments.",
