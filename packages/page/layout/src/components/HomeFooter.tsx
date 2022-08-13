@@ -1,8 +1,9 @@
 import { HiddenUnderlineLink } from '@app/components';
-import { Container, Grid, GridProps, Typography } from '@mui/material';
+import { I18n } from '@app/utils';
+import { Container, Grid2Props, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { styled, useTheme } from '@mui/material/styles';
-import useTranslation from 'next-translate/useTranslation';
+import Grid from '@mui/material/Unstable_Grid2';
 import getConfig from 'next/config';
 import { FC } from 'react';
 
@@ -10,13 +11,13 @@ export const Link = styled(HiddenUnderlineLink)({
   fontSize: '0.875rem',
   color: 'inherit',
   '&:hover': {
-    color: grey[500]
+    color: grey[600]
   }
 });
 
 const { publicRuntimeConfig } = getConfig();
 
-export const StyledGrid = styled(Grid)<GridProps>(({ theme }) => ({
+export const StyledGrid = styled(Grid)<Grid2Props>(({ theme }) => ({
   marginBottom: theme.spacing(4),
   '& ul': {
     paddingLeft: 0,
@@ -24,7 +25,6 @@ export const StyledGrid = styled(Grid)<GridProps>(({ theme }) => ({
   },
   '& li': {
     padding: theme.spacing(1, 0),
-    color: theme.palette.text.secondary,
     '& a': {
       textDecoration: 'none'
     }
@@ -32,7 +32,7 @@ export const StyledGrid = styled(Grid)<GridProps>(({ theme }) => ({
 }));
 
 export const HomeFooter: FC = () => {
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation();
 
   const theme = useTheme();
 
@@ -40,12 +40,12 @@ export const HomeFooter: FC = () => {
     <Container
       component='footer'
       sx={{
-        padding: theme.spacing(8, 0)
+        padding: theme.spacing(8, 0),
+        textAlign: 'center'
       }}
     >
       <Grid container>
         <StyledGrid
-          item
           md={3}
           sx={{
             [theme.breakpoints.down('md')]: {
@@ -61,7 +61,7 @@ export const HomeFooter: FC = () => {
             {t('common:headTitle')}
           </Typography>
         </StyledGrid>
-        <StyledGrid item xs={6} md={3}>
+        <StyledGrid xs={6} md={3}>
           <Typography
             sx={{
               fontWeight: theme.typography.fontWeightMedium
@@ -88,7 +88,7 @@ export const HomeFooter: FC = () => {
             </li>
           </ul>
         </StyledGrid>
-        <StyledGrid item xs={6} md={3}>
+        <StyledGrid xs={6} md={3}>
           <Typography
             sx={{
               fontWeight: theme.typography.fontWeightMedium
@@ -103,7 +103,7 @@ export const HomeFooter: FC = () => {
             </li>
           </ul>
         </StyledGrid>
-        <StyledGrid item xs={6} md={3}>
+        <StyledGrid xs={6} md={3}>
           <Typography
             sx={{
               fontWeight: theme.typography.fontWeightMedium

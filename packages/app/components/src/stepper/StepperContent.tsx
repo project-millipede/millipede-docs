@@ -1,6 +1,7 @@
 import { ContentTypes } from '@app/types';
-import { CardContent, Grid, Typography } from '@mui/material';
+import { CardContent, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import Grid from '@mui/material/Unstable_Grid2';
 import { FC, useState } from 'react';
 
 import { Stepper, TranslationProps } from './Stepper';
@@ -14,7 +15,6 @@ export const renderTitleAndDescription = (
   return items.map((item, index) => {
     return (
       <Grid
-        item
         xs={item.size}
         key={`title-description-${index}`}
         sx={{ padding: theme.spacing(1) }}
@@ -49,11 +49,11 @@ export const StepperContent: FC<StepperContentWithTranslationProps> = ({
   return (
     <Grid container>
       {image ? (
-        <Grid item xs={12}>
+        <Grid xs={12}>
           <CardContent>{image}</CardContent>
         </Grid>
       ) : null}
-      <Grid item xs={12}>
+      <Grid xs={12}>
         <Stepper
           steps={max + 1}
           setStepCb={(currentStep: number) => {

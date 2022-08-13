@@ -1,12 +1,12 @@
 import { HiddenUnderlineLink } from '@app/components';
+import { I18n } from '@app/utils';
 import { Assignment, GitHub, LinkedIn } from '@mui/icons-material';
 import { Avatar, Box } from '@mui/material';
-import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Unstable_Grid2';
 import { Translate } from 'next-translate';
-import useTranslation from 'next-translate/useTranslation';
 import { FC } from 'react';
 
 export const getActiveCoreMembers = (t: Translate) => [
@@ -34,7 +34,7 @@ const Group: FC<GroupProps> = ({ title, members }) => {
         {members.map(member => {
           const { name, flag, city, github, linkedIn } = member;
           return (
-            <Grid item key={name} xs={12} md={6}>
+            <Grid key={name} xs={12} md={6}>
               <Box sx={{ display: 'flex' }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                   <Avatar
@@ -61,8 +61,8 @@ const Group: FC<GroupProps> = ({ title, members }) => {
                   <Box sx={{ display: 'flex' }}>
                     {github && (
                       <IconButton
-                        color='inherit'
                         component={HiddenUnderlineLink}
+                        color='inherit'
                         href={`https://github.com/${github}`}
                       >
                         <GitHub />
@@ -70,16 +70,16 @@ const Group: FC<GroupProps> = ({ title, members }) => {
                     )}
                     {linkedIn && (
                       <IconButton
-                        color='inherit'
                         component={HiddenUnderlineLink}
+                        color='inherit'
                         href={`https://www.linkedin.com/in/${linkedIn}`}
                       >
                         <LinkedIn />
                       </IconButton>
                     )}
                     <IconButton
-                      color='inherit'
                       component={HiddenUnderlineLink}
+                      color='inherit'
                       href={{
                         pathname: '/docs/[...slug]',
                         query: { slug: 'discover-more/team/cv'.split('/') }
@@ -99,7 +99,7 @@ const Group: FC<GroupProps> = ({ title, members }) => {
 };
 
 export const Board: FC = () => {
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation();
   return (
     <>
       <Group
