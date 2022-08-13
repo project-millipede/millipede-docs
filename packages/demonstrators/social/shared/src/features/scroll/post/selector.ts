@@ -1,4 +1,3 @@
-import lodashGet from 'lodash/get';
 import { selectorFamily } from 'recoil';
 
 import { refPostScrollState } from './states';
@@ -13,7 +12,7 @@ export const refPostScrollSelector = selectorFamily<
     ({ timelineId, postId }) =>
     ({ get }) => {
       const refPostScrollMap = get(refPostScrollState(postId));
-      const refPostScroll = lodashGet(refPostScrollMap, timelineId);
+      const refPostScroll = refPostScrollMap?.[timelineId];
       return refPostScroll;
     }
 });

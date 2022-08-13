@@ -1,10 +1,9 @@
 import { features as appComponentFeatures } from '@app/archer';
 import { Stepper } from '@app/components';
+import { I18n } from '@app/utils';
 import { features } from '@demonstrators-social/shared';
 import { List, ListItem, ListSubheader, Paper, Typography } from '@mui/material';
 import { usePrevious } from 'ahooks';
-import get from 'lodash/get';
-import useTranslation from 'next-translate/useTranslation';
 import { FC, useEffect, useMemo, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
@@ -17,7 +16,7 @@ export const ScenarioNavigator: FC = () => {
     }
   } = features;
 
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation();
 
   const [{ nodesWithRelations, activeId }, setNodesWithRelationsWithEdge] =
     useRecoilState(nodesWithRelationsWithEdgeState);
@@ -62,7 +61,7 @@ export const ScenarioDetailNavigator: FC = () => {
     }
   } = appComponentFeatures;
 
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation();
 
   const [selectedKey, setSelectedKey] = useState({
     row: '',
@@ -90,7 +89,7 @@ export const ScenarioDetailNavigator: FC = () => {
   const currentRef = useRecoilValue(archerRefSelector(id));
 
   const currentNodesWithRelations = useMemo(() => {
-    const currentNodesWithRelations = get(nodesWithRelations, activeId);
+    const currentNodesWithRelations = nodesWithRelations?.[activeId];
     return currentNodesWithRelations;
   }, [nodesWithRelations, activeId]);
 

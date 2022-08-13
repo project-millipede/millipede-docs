@@ -1,11 +1,9 @@
 import { features as appComponentFeatures } from '@app/archer';
-import { CollectionUtil } from '@app/utils';
+import { CollectionUtil, I18n } from '@app/utils';
 import { features, Scroll } from '@demonstrators-social/shared';
 import { ArrowBack, ArrowForward, Extension, SettingsBackupRestore } from '@mui/icons-material';
 import { Button, ButtonGroup } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import get from 'lodash/get';
-import useTranslation from 'next-translate/useTranslation';
 import React, { FC, useState } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 
@@ -60,9 +58,9 @@ export const SliceBuilder: FC = () => {
     }
   } = appComponentFeatures;
 
-  const actions = get(actionPlan, 'base');
+  const actions = actionPlan?.['base'];
 
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation();
 
   const [ltr, setLtr] = useState(true);
 

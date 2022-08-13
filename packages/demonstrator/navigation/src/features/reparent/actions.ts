@@ -1,4 +1,3 @@
-import get from 'lodash/get';
 import { MutableRefObject } from 'react';
 import { ParentFiber } from 'react-reparenting';
 
@@ -48,8 +47,8 @@ export const sendReparentableChild = (
 ) => {
   const { parentFiberMap } = state;
 
-  const { current: fromParent } = get(parentFiberMap, fromParentId);
-  const { current: toParent } = get(parentFiberMap, toParentId);
+  const fromParent = parentFiberMap?.[fromParentId].current;
+  const toParent = parentFiberMap?.[toParentId].current;
 
   if (fromParent === undefined) {
     warning(`Cannot find a <Reparentable> with the id: ${fromParentId}.`);

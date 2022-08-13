@@ -1,5 +1,5 @@
 import { features as appComponentFeatures } from '@app/archer';
-import { CollectionUtil } from '@app/utils';
+import { CollectionUtil, I18n } from '@app/utils';
 import { features as navigationFeatures } from '@demonstrator/navigation';
 import { features, Scroll } from '@demonstrators-social/shared';
 import { useMergedRef } from '@huse/merged-ref';
@@ -8,8 +8,6 @@ import { Button, ButtonGroup, Card, ListItem } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { formatDistance } from 'date-fns';
 import { enGB } from 'date-fns/locale';
-import get from 'lodash/get';
-import useTranslation from 'next-translate/useTranslation';
 import { FC, useEffect, useMemo, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useRecoilCallback, useRecoilValue, useSetRecoilState } from 'recoil';
@@ -66,7 +64,7 @@ export const Post: FC<PostProps> = ({
     }
   } = appComponentFeatures;
 
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation();
 
   const theme = useTheme();
 
@@ -243,11 +241,9 @@ export const Post: FC<PostProps> = ({
     ({ set, reset }) =>
       (text: string) => {
         handleCreateComment(owner, postId, text, setTimeline, _comment => {
-          // const { id: activeCommentId } = comment;
-
           const isLtr = leftTimeline.owner.id === owner.id;
 
-          const actions = get(actionPlan, 'publish');
+          const actions = actionPlan?.['publish'];
 
           const actionsWithTopic = addTopic(
             actions,

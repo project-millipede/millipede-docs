@@ -2,13 +2,12 @@ import { ArcherTypes } from '@app/archer';
 import { HooksUtils } from '@app/render-utils';
 import { features } from '@demonstrators-social/shared';
 import { EffectRef } from '@huse/effect-ref';
-import get from 'lodash/get';
-import { forwardRef, ForwardRefRenderFunction, MutableRefObject, useEffect } from 'react';
+import { forwardRef, ForwardRefRenderFunction, MutableRefObject, useEffect, useMemo } from 'react';
 import { useRecoilCallback } from 'recoil';
 
 import { withArcher } from '../../hocs/with-archer';
 
-export const sliceBackgroundColor = {
+export const sliceBackgroundColorMap: { [key: string]: { color: string } } = {
   header: {
     color: '#03a9f4'
   }, // lightBlue
@@ -77,19 +76,23 @@ const DockSlice: ForwardRefRenderFunction<HTMLDivElement, DockSliceProps> = (
     };
   }, [dynamicRef.current]);
 
-  const translate = sliceBounds.top - postBounds.top;
+  // const translate = sliceBounds.top - postBounds.top;
+
+  const sliceBackgroundColor = useMemo(() => {
+    return sliceBackgroundColorMap?.[sliceId]?.color;
+  }, [sliceId]);
 
   return (
     <div
       ref={ref}
       style={{
         // inline calc
-        // transform: `translateY(calc(${sliceBounds.top}px - ${postBounds.top}px))`,
-        transform: `translateY(${translate}px)`,
+        transform: `translateY(calc(${sliceBounds.top}px - ${postBounds.top}px))`,
+        // transform: `translateY(${translate}px)`,
         height: sliceBounds.height,
         width: '100%',
         position: 'absolute',
-        background: get(sliceBackgroundColor, sliceId).color
+        background: sliceBackgroundColor
       }}
     />
   );
