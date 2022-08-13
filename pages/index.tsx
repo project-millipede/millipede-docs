@@ -1,75 +1,77 @@
-import { AppFrame, AppThemeProvider, features, MAX_DRAWER_WIDTH, MIN_DRAWER_WIDTH } from '@app/layout';
-import { Navigation } from '@app/types';
-import { Container, Typography } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { AppFrame, AppThemeProvider } from '@app/layout';
+import { Navigation, PageTypes } from '@app/types';
+import { I18n } from '@app/utils';
+import { Typography, useTheme } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { Components as LandingComponents } from '@page/landing';
-import { Components } from '@page/layout';
+import { Components, Mdx } from '@page/layout';
 import { GetStaticProps } from 'next';
 import { mergeProps } from 'next-merge-props';
-import useTranslation from 'next-translate/useTranslation';
 import { ReactElement } from 'react';
-import { useRecoilValue } from 'recoil';
 
 import { GetStaticNavigationProps, getStaticNavigationProps } from '../docs/src/lib/getStaticNavigationProps';
 import { GetStaticTranslationProps, getStaticTranslationProps } from '../docs/src/lib/getStaticTranslationProps';
 import { NextPageWithLayout } from '../docs/src/lib/types';
 
+const { AppHead } = Components;
+const { MainContainer } = Mdx;
+
+const metaDataLanding: PageTypes.MetaData = {
+  title: 'Project Millipede',
+  description: 'Probing building blocks of futuristic privacy',
+  keywords:
+    'Privacy enhancing technology, Personal Intrusion Detection and Prevention',
+  author: 'Markus Gritsch'
+};
+
+export const Header = styled('header')(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  textAlign: 'center',
+  marginBottom: theme.spacing(2)
+}));
+
 export type StaticPageProps = GetStaticTranslationProps &
   GetStaticNavigationProps;
 
 const Index: NextPageWithLayout<StaticPageProps> = () => {
-  const {
-    layout: {
-      states: { layoutState }
-    }
-  } = features;
+  const { t } = I18n.useTranslation();
 
-  const { isDrawerExpanded } = useRecoilValue(layoutState);
-
-  const { t } = useTranslation();
   const theme = useTheme();
   return (
-    <Container
-      id='app-landing'
-      component='main'
-      sx={{
-        paddingTop: theme.spacing(12),
-        textAlign: 'center',
-        color: theme.palette.primary.main,
-        width: '100%',
-        [theme.breakpoints.up('md')]: {
-          width: `calc(100% - ${
-            isDrawerExpanded
-              ? theme.spacing(MAX_DRAWER_WIDTH)
-              : theme.spacing(MIN_DRAWER_WIDTH)
-          })`
-        }
-      }}
-    >
-      <Typography
-        variant='h1'
-        gutterBottom
+    <>
+      <AppHead metaData={metaDataLanding} />
+
+      <MainContainer
+        id='app-landing'
         sx={{
-          fontWeight: theme.typography.fontWeightRegular,
-          textAlign: 'center'
+          paddingTop: theme.spacing(12),
+          color: theme.palette.primary.main
         }}
       >
-        {t('common:application-title')}
-      </Typography>
-      <Typography
-        variant='h2'
-        gutterBottom
-        sx={{
-          fontWeight: theme.typography.fontWeightLight,
-          textAlign: 'center'
-        }}
-      >
-        {t('common:application-subtitle')}
-      </Typography>
-      <LandingComponents.TopicsHead />
-      <LandingComponents.TopicsDetail />
-      <Components.HomeFooter />
-    </Container>
+        <Header>
+          <Typography
+            variant='h1'
+            sx={{
+              fontWeight: theme.typography.fontWeightRegular
+            }}
+          >
+            {t('common:application-title')}
+          </Typography>
+          <Typography
+            variant='h2'
+            sx={{
+              fontWeight: theme.typography.fontWeightLight
+            }}
+          >
+            {t('common:application-subtitle')}
+          </Typography>
+        </Header>
+        <LandingComponents.TopicsHead />
+        <LandingComponents.TopicsDetail />
+        <Components.HomeFooter />
+      </MainContainer>
+    </>
   );
 };
 
