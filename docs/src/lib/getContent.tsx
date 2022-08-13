@@ -1,7 +1,6 @@
 import { Components } from '@page/layout';
 import fg from 'fast-glob';
 import { promises as fsPromises } from 'fs';
-import isArray from 'lodash/isArray';
 import { bundleMDX } from 'mdx-bundler';
 import { GetStaticPropsContext } from 'next';
 import path from 'path';
@@ -9,6 +8,7 @@ import remarkSlug from 'remark-slug';
 
 import { getMetadata } from './getMetadata';
 import { getPageDirectory } from './getPath';
+import { GetStaticContentPropsSimple } from './getStaticContentProps';
 import { blogComponents, docComponents } from './page-config';
 import { pageDirectories } from './page-setup';
 import { getHydratedComponents } from './utils/hydration';
@@ -28,7 +28,7 @@ export const getContent = async (
 
   const sourceDirectory = getPageDirectory(pageDirectories, pageType);
 
-  const pathname = isArray(slug) ? slug.join(path.sep) : slug;
+  const pathname = Array.isArray(slug) ? slug.join(path.sep) : slug;
   const [file] = await fg(`${pathname}/${locale}.{md,mdx}`, {
     cwd: sourceDirectory
   });
@@ -47,7 +47,7 @@ export const getContent = async (
 
   const mdxSource = await bundleMDX({
     source: content,
-    xdmOptions: options => {
+    mdxOptions: options => {
       // eslint-disable-next-line no-param-reassign
       options.remarkPlugins = [remarkSlug];
       return options;
@@ -73,7 +73,7 @@ export const getBlogContent = async (
 
   const sourceDirectory = getPageDirectory(pageDirectories, pageType);
 
-  const pathname = isArray(slug) ? slug.join(path.sep) : slug;
+  const pathname = Array.isArray(slug) ? slug.join(path.sep) : slug;
   const [file] = await fg(`${pathname}.{md,mdx}`, {
     cwd: sourceDirectory
   });
@@ -92,7 +92,7 @@ export const getBlogContent = async (
 
   const mdxSource = await bundleMDX({
     source: content,
-    xdmOptions: options => {
+    mdxOptions: options => {
       // eslint-disable-next-line no-param-reassign
       options.remarkPlugins = [remarkSlug];
       return options;
@@ -113,7 +113,7 @@ export const getContentBlogIndex = async (pageType: string) => {
 
   const files = await fg(['**/*.{md,mdx}'], { cwd: sourceDirectory });
 
-  const posts = await Promise.all(
+  const posts = await Promise.all<GetStaticContentPropsSimple>(
     files.map(async file => {
       const mdFile = path.join(sourceDirectory, file);
       const fileContents = await fsPromises.readFile(mdFile);

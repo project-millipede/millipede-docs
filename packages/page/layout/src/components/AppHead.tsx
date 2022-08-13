@@ -1,5 +1,5 @@
 import { PageTypes } from '@app/types';
-import useTranslation from 'next-translate/useTranslation';
+import { I18n } from '@app/utils';
 import NextHead from 'next/head';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
@@ -26,7 +26,7 @@ export const AppHead: FC<HeadProps> = ({ metaData }) => {
 
   const largeCard = true;
 
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation();
 
   /**
    * Note:
@@ -89,18 +89,6 @@ export const AppHead: FC<HeadProps> = ({ metaData }) => {
       {/* <meta property='og:image' content={'todo.png'} /> */}
       <meta property='og:url' content={`${HOST}${asPath}`} />
       <meta property='og:ttl' content='604800' />
-      {/* working */}
-      {/* <script
-        crossOrigin='true'
-        async
-        src='https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.2/web-animations-next.min.js'
-      /> */}
-      {/* <script
-        crossOrigin='true'
-        async
-        src='https://polyfill.io/v3/polyfill.min.js?features=WebAnimations'
-      /> */}
-      {/* <script type='text/javascript' src='/static/polyfills/waapi.js'></script> */}
     </NextHead>
   );
 };

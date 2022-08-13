@@ -1,7 +1,7 @@
 import { Archer } from '@app/archer';
 import { Box } from '@app/components';
+import { I18n } from '@app/utils';
 import { styled } from '@mui/material/styles';
-import useTranslation from 'next-translate/useTranslation';
 import { FC } from 'react';
 
 import { Title } from '../../../common';
@@ -22,7 +22,7 @@ export const GridWrapper = styled('div')(({ theme }) => {
     gridTemplateAreas: `
     '. head_render head_render head_render .'
     '. . . . .'
-    '. react_observe . renderX .'
+    '. react_observe . render_process .'
     '. . coordination . .'
     '. custom_render . observe_react .'
     '. . . . .'
@@ -33,12 +33,12 @@ export const GridWrapper = styled('div')(({ theme }) => {
 });
 
 export const Render: FC = () => {
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation('pages/ai/general/index');
 
   return (
     <GridWrapper>
       <div style={{ gridArea: 'head_render' }}>
-        <Title>{t('pages/ai/general/index:dedicated_render_process')}</Title>
+        <Title>{t('dedicated_render_process')}</Title>
       </div>
       <ArcherElement
         id='react_observe'
@@ -51,7 +51,7 @@ export const Render: FC = () => {
         ]}
       >
         <InteractiveBox sx={{ gridArea: 'react_observe' }}>
-          <Title>{`${t('pages/ai/general/index:react_observe')}`}</Title>
+          <Title>{`${t('react_observe')}`}</Title>
         </InteractiveBox>
       </ArcherElement>
 
@@ -65,16 +65,16 @@ export const Render: FC = () => {
           }
         ]}
       >
-        <InteractiveBox sx={{ gridArea: 'renderX' }}>
-          <Title>{`${t('pages/ai/general/index:render_process')} ${t(
-            'pages/ai/general/index:render_process_abbreviation'
+        <InteractiveBox sx={{ gridArea: 'render_process' }}>
+          <Title>{`${t('render_process')} ${t(
+            'render_process_abbreviation'
           )}`}</Title>
         </InteractiveBox>
       </ArcherElement>
 
       <ArcherElement id='coordination'>
         <InteractiveBox sx={{ gridArea: 'coordination' }}>
-          <Title>{`${t('pages/ai/general/index:coordination')}`}</Title>
+          <Title>{`${t('coordination')}`}</Title>
         </InteractiveBox>
       </ArcherElement>
 
@@ -90,8 +90,8 @@ export const Render: FC = () => {
       >
         <InteractiveBox sx={{ gridArea: 'custom_render' }}>
           <Title>
-            {`${t('pages/ai/general/index:custom_render_process')} ${t(
-              'pages/ai/general/index:custom_render_process_abbreviation'
+            {`${t('custom_render_process')} ${t(
+              'custom_render_process_abbreviation'
             )}`}
           </Title>
         </InteractiveBox>
@@ -108,7 +108,7 @@ export const Render: FC = () => {
         ]}
       >
         <InteractiveBox sx={{ gridArea: 'observe_react' }}>
-          <Title>{`${t('pages/ai/general/index:observe_react')}`}</Title>
+          <Title>{`${t('observe_react')}`}</Title>
         </InteractiveBox>
       </ArcherElement>
     </GridWrapper>

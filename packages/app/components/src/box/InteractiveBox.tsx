@@ -1,7 +1,6 @@
 import { Box, BoxProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { LinkProps } from 'next/link';
-import { useRouter } from 'next/router';
 import { forwardRef, ForwardRefRenderFunction } from 'react';
 import { UrlObject } from 'url';
 
@@ -34,16 +33,12 @@ const InteractiveBox: ForwardRefRenderFunction<
   HTMLDivElement,
   InteractiveBoxProps
 > = ({ sx, routeSegement, children }, ref) => {
-  const { pathname, query } = useRouter();
-
   return routeSegement ? (
     <StyledBox
+      component={HiddenUnderlineLink}
       sx={sx}
       ref={ref}
-      component={HiddenUnderlineLink}
       href={{
-        pathname,
-        query,
         hash: `${routeSegement}-anchor`
       }}
       shallow

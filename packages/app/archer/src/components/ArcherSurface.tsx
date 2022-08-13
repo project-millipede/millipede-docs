@@ -42,8 +42,9 @@ export const ArcherSurface: FC<ArcherSurfaceProps> = ({
 
   const [parentObserverRef] = HooksUtils.useResizeDebounce({
     debounce: 0,
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    callBack: _element => {}
+    callBack: _element => {
+      // do nothing
+    }
   });
 
   const combinedRef = useMergedRef([parentRef, parentObserverRef]);

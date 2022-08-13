@@ -1,8 +1,3 @@
-// TODO:
-
-// Figure out if quote and title is the same - consolidate quote, title
-// Figure out if facebook accepts hashtag Array<string> - consolidate hashtag, hashtags
-
 export type SocialMediaURIPathParams =
   | URIPathParamsMail
   | URIPathParamsFacebook

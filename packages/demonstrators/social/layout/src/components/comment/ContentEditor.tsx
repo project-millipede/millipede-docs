@@ -1,9 +1,9 @@
+import { I18n } from '@app/utils';
 import { Send } from '@mui/icons-material';
 import { Button, Typography } from '@mui/material';
-import { useWindupString } from '@project-millipede/windups';
 import { ContentState, Editor, EditorState } from 'draft-js';
-import useTranslation from 'next-translate/useTranslation';
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
+import { useWindupString } from 'windups';
 
 const longText = 'Hi @all, my name is Markus.';
 
@@ -34,7 +34,7 @@ export const ContentEditor: FC<ContentEditorProps> = ({
   create,
   timelineId
 }) => {
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation();
 
   const title = t(
     `pages/pidp/use-case/recognition/index:${

@@ -1,4 +1,3 @@
-import isArray from 'lodash/isArray';
 import { nanoid } from 'nanoid';
 
 import { FlattenedPartialViewElement, PartialViewElement, Position, TPosition, TView } from '../types';
@@ -73,7 +72,7 @@ export const flattenViewElements = (
         ];
       }
 
-      if (isArray(viewElement[key])) {
+      if (Array.isArray(viewElement[key])) {
         // eslint-disable-next-line no-param-reassign
         acc = [...acc, ...flattenViewElements(viewElement[key], key)];
       }

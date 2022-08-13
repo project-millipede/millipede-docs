@@ -1,8 +1,8 @@
 import { CustomIcon, HiddenUnderlineLink } from '@app/components';
 import { Navigation } from '@app/types';
+import { I18n } from '@app/utils';
 import { Breadcrumbs as MuiBreadcrumbs, Chip, ChipProps } from '@mui/material';
 import { emphasize, styled } from '@mui/material/styles';
-import useTranslation from 'next-translate/useTranslation';
 import { FC, useMemo } from 'react';
 
 export interface BreadCrumb {
@@ -58,7 +58,7 @@ export const CustomBreadcrumbs: FC<BreadcrumbsProps> = ({
 }) => {
   const { flattenedPages } = navigation;
 
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation();
 
   const [headBreadcrumbs, [tailBreadcrumb]] = useMemo(() => {
     const breadcrumbs = createBreadcrumbsFromSlug(slug);
@@ -82,10 +82,10 @@ export const CustomBreadcrumbs: FC<BreadcrumbsProps> = ({
           const label = t(`common:pages.${breadcrumb.pathname}`);
           return (
             <StyledBreadcrumb
+              component={HiddenUnderlineLink}
               key={`breadcrumb-${index}`}
               label={label}
               icon={<CustomIcon icon={breadcrumb.icon} />}
-              component={HiddenUnderlineLink}
               href={{
                 pathname: '/docs/[...slug]',
                 query: { slug: breadcrumb.pathname.split('/') }

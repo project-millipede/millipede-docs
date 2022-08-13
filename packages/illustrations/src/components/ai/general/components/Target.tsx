@@ -1,7 +1,7 @@
 import { Archer } from '@app/archer';
 import { Box } from '@app/components';
+import { I18n } from '@app/utils';
 import { styled } from '@mui/material/styles';
-import useTranslation from 'next-translate/useTranslation';
 import { FC } from 'react';
 
 import { Title } from '../../../common';
@@ -32,12 +32,12 @@ export const GridWrapper = styled('div')(({ theme }) => {
 });
 
 export const Target: FC<Connect> = ({ relations }) => {
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation('pages/ai/general/index');
 
   return (
     <GridWrapper>
       <div style={{ gridArea: 'head_target' }}>
-        <Title>{t('pages/ai/general/index:target_application')}</Title>
+        <Title>{t('target_application')}</Title>
       </div>
       <ArcherElement
         id='communication'
@@ -51,8 +51,8 @@ export const Target: FC<Connect> = ({ relations }) => {
       >
         <InteractiveBox sx={{ gridArea: 'communication' }}>
           <Title>
-            {`${t('pages/ai/general/index:communication_process')} ${t(
-              'pages/ai/general/index:communication_process_abbreviation'
+            {`${t('communication_process')} ${t(
+              'communication_process_abbreviation'
             )}`}
           </Title>
         </InteractiveBox>
@@ -60,8 +60,8 @@ export const Target: FC<Connect> = ({ relations }) => {
       <ArcherElement id='preparation' relations={relations}>
         <InteractiveBox sx={{ gridArea: 'preparation' }}>
           <Title>
-            {`${t('pages/ai/general/index:preparation_process')} ${t(
-              'pages/ai/general/index:preparation_process_abbreviation'
+            {`${t('preparation_process')} ${t(
+              'preparation_process_abbreviation'
             )}`}
           </Title>
         </InteractiveBox>

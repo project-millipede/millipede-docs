@@ -1,9 +1,7 @@
-import { CollectionUtil } from '@app/utils';
+import { CollectionUtil, I18n } from '@app/utils';
 import { KeyboardArrowDown, KeyboardArrowUp, Link as LinkIcon } from '@mui/icons-material';
 import { Box, Collapse, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import isArray from 'lodash/isArray';
-import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import { FC, Fragment, useState } from 'react';
 
@@ -133,23 +131,11 @@ export const ExpandableRow = ({
 };
 
 export const Publications: FC = () => {
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation('pages/guides/research/paper/index');
 
-  const header = t<RowDescriptor>(
-    'pages/guides/research/paper/index:header',
-    {},
-    {
-      returnObjects: true
-    }
-  );
+  const header = t<RowDescriptor>('header', {}, { returnObjects: true });
 
-  const rows = t<Array<HeadAndBody>>(
-    'pages/guides/research/paper/index:rows',
-    {},
-    {
-      returnObjects: true
-    }
-  );
+  const rows = t<Array<HeadAndBody>>('rows', {}, { returnObjects: true });
 
   const columns = getColumns(header);
   const columnsReduced = CollectionUtil.Array.omitAtIndex(columns, 0);
@@ -171,7 +157,7 @@ export const Publications: FC = () => {
         </TableHead>
 
         <TableBody>
-          {isArray(rows) && rows.length > 0
+          {Array.isArray(rows) && rows.length > 0
             ? rows.map((row, index) => {
                 const { head, body } = row;
                 return (

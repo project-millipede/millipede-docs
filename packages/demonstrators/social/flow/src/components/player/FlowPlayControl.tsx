@@ -1,14 +1,14 @@
 import { features as appComponentFeatures } from '@app/archer';
 import { Portal } from '@app/components';
-import { StringUtil } from '@app/utils';
+import { GuardUtil, StringUtil } from '@app/utils';
 import { Player, useStepDispatch, useStepState } from '@demonstrator/components';
 import { features as navigationFeatures, useNavigation } from '@demonstrator/navigation';
 import { features } from '@demonstrators-social/shared';
-import isFunction from 'lodash/isFunction';
 import dynamic from 'next/dynamic';
 import { FC, useCallback, useEffect, useMemo } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 
+const { isFunction, isString } = GuardUtil.Primitives;
 interface FlowPlayControlProps {
   steps: Array<Player.Step>;
   topic: string;
@@ -94,21 +94,15 @@ const StepsRangeWrapper: FC<FlowPlayControlProps> = ({ steps, topic }) => {
       isMobileManual &&
       playing &&
       viewSelector != null &&
-      !StringUtil.isEmptyString(viewSelector as string)
+      !StringUtil.isEmptyString(viewSelector)
     ) {
       handleNavigation(viewSelector);
     }
   }, [viewSelector]);
 
   useEffect(() => {
-    if (selector != null && isFunction(selector)) {
+    if (!isString(selector) && isFunction(selector)) {
       selector();
-    }
-  }, [selector]);
-
-  // TODO:
-  useEffect(() => {
-    if (selector != null && !isFunction(selector)) {
     }
   }, [selector]);
 
@@ -128,7 +122,7 @@ const StepsRangeWrapper: FC<FlowPlayControlProps> = ({ steps, topic }) => {
         {playing &&
         selector != null &&
         !isFunction(selector) &&
-        !StringUtil.isEmptyString(selector as string) ? (
+        !StringUtil.isEmptyString(selector) ? (
           <Cursor selector={`#${selector}`} />
         ) : null}
       </Portal.PortalIn>

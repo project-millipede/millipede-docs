@@ -1,7 +1,7 @@
 import { Archer } from '@app/archer';
 import { Box } from '@app/components';
+import { I18n } from '@app/utils';
 import { styled } from '@mui/material/styles';
-import useTranslation from 'next-translate/useTranslation';
 import { FC } from 'react';
 
 import { Title } from '../../common';
@@ -39,18 +39,18 @@ export const GridWrapper = styled('div')(({ theme }) => {
 });
 
 export const ReversePrincipal: FC = () => {
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation('pages/ai/reverse/index');
 
   return (
     <ArcherSurface strokeColor='gray'>
       <GridWrapper>
         <div style={{ gridArea: 'head_access' }}>
-          <Title>{t('pages/ai/reverse/index:access')}</Title>
+          <Title>{t('access')}</Title>
         </div>
 
         <ArcherElement id='function'>
           <InteractiveBox sx={{ gridArea: 'function' }}>
-            <Title>{t('pages/ai/reverse/index:function')}</Title>
+            <Title>{t('function')}</Title>
           </InteractiveBox>
         </ArcherElement>
 
@@ -70,12 +70,12 @@ export const ReversePrincipal: FC = () => {
           ]}
         >
           <InteractiveBox sx={{ gridArea: 'instrument' }}>
-            <Title>{t('pages/ai/reverse/index:instrument_function')}</Title>
+            <Title>{t('instrument_function')}</Title>
           </InteractiveBox>
         </ArcherElement>
 
         <div style={{ gridArea: 'head_analysis' }}>
-          <Title>{t('pages/ai/reverse/index:analysis')}</Title>
+          <Title>{t('analysis')}</Title>
         </div>
 
         <ArcherElement
@@ -89,12 +89,12 @@ export const ReversePrincipal: FC = () => {
           ]}
         >
           <InteractiveBox sx={{ gridArea: 'behavior' }}>
-            <Title>{t('pages/ai/reverse/index:determine_behavior')}</Title>
+            <Title>{t('determine_behavior')}</Title>
           </InteractiveBox>
         </ArcherElement>
 
         <div style={{ gridArea: 'head_exposure' }}>
-          <Title>{t('pages/ai/reverse/index:exposure')}</Title>
+          <Title>{t('exposure')}</Title>
         </div>
 
         <ArcherElement
@@ -108,7 +108,7 @@ export const ReversePrincipal: FC = () => {
           ]}
         >
           <InteractiveBox sx={{ gridArea: 'derive' }}>
-            <Title>{t('pages/ai/reverse/index:derive_attack_vector')}</Title>
+            <Title>{t('derive_attack_vector')}</Title>
           </InteractiveBox>
         </ArcherElement>
 
@@ -123,7 +123,7 @@ export const ReversePrincipal: FC = () => {
           ]}
         >
           <InteractiveBox sx={{ gridArea: 'apply' }}>
-            <Title>{t('pages/ai/reverse/index:apply_attack_vector')}</Title>
+            <Title>{t('apply_attack_vector')}</Title>
           </InteractiveBox>
         </ArcherElement>
       </GridWrapper>

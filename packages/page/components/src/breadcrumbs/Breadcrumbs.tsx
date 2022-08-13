@@ -1,9 +1,9 @@
 import { HiddenUnderlineLink } from '@app/components';
 import { Navigation } from '@app/types';
+import { I18n } from '@app/utils';
 import { NavigateNext } from '@mui/icons-material';
 import { Breadcrumbs as MuiBreadcrumbs, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import useTranslation from 'next-translate/useTranslation';
 import { FC, useMemo } from 'react';
 
 export interface BreadCrumb {
@@ -37,7 +37,7 @@ export const Breadcrumbs: FC<BreadcrumbsProps> = ({ slug, navigation }) => {
     pageType
   } = navigation;
 
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation();
 
   const [headBreadcrumbs, [tailBreadcrumb]] = useMemo(() => {
     const breadcrumbs = createBreadcrumbsFromSlug(slug);
@@ -68,8 +68,8 @@ export const Breadcrumbs: FC<BreadcrumbsProps> = ({ slug, navigation }) => {
 
           return (
             <Typography
-              key={`breadcrumb-${index}`}
               component={HiddenUnderlineLink}
+              key={`breadcrumb-${index}`}
               href={link}
               prefetch={false}
             >

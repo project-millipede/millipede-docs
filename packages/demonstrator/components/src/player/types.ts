@@ -3,7 +3,7 @@ export interface Step {
   start: number;
   end: number;
   label?: string;
-  selector?: string | Function;
+  selector?: string | (() => void);
   description: string;
   viewSelector?: string;
 }

@@ -1,7 +1,6 @@
 import { Stepper } from '@app/components';
 import { ContentTypes } from '@app/types';
-import isArray from 'lodash/isArray';
-import useTranslation from 'next-translate/useTranslation';
+import { I18n } from '@app/utils';
 import { FC } from 'react';
 
 import { FunctionBeahvior } from './components/FunctionBeahvior';
@@ -21,16 +20,16 @@ const templates: Array<ContentTypes.Content> = [
 ];
 
 export const MethodHooking: FC = () => {
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation('pages/ai/index');
 
   const steps = t<Array<ContentTypes.Content>>(
-    'pages/ai/index:steps',
+    'steps',
     {},
     { returnObjects: true }
   );
 
   const stepsProcessed =
-    isArray(steps) && steps.length > 0
+    Array.isArray(steps) && steps.length > 0
       ? steps.map((step, index) => {
           return {
             ...step,

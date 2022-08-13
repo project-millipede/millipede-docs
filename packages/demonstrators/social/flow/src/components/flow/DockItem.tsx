@@ -88,7 +88,7 @@ export const DockItem: FC<DockItemProps> = ({
     );
   });
 
-  const translate = postBounds.top - containerScroll.top;
+  // const translate = postBounds.top - containerScroll.top;
 
   /**
    * To center grid-items use
@@ -101,8 +101,8 @@ export const DockItem: FC<DockItemProps> = ({
       style={{
         left: '50%',
         // inline calc
-        // transform: `translateY(calc(${postBounds.top}px - ${containerScroll.top}px - ${offSet}px)) translateX(-50%)`,
-        transform: `translateY(${translate}px) translateX(-50%)`,
+        transform: `translateY(calc(${postBounds.top}px - ${containerScroll.top}px)) translateX(-50%)`,
+        // transform: `translateY(${translate}px) translateX(-50%)`,
         height: postBounds.height,
         position: 'absolute',
         width: '25px',

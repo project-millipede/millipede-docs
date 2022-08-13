@@ -103,9 +103,9 @@ const CustomContent: ForwardRefRenderFunction<
 
       <Typography
         component={HiddenUnderlineLink}
+        key={nodeId}
         onClick={handleSelectionClick}
         className={classes.label}
-        key={nodeId}
         href={{
           pathname: '/docs/[...slug]',
           query: { slug: nodeId.split('/') }

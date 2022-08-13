@@ -1,7 +1,7 @@
 import { Archer } from '@app/archer';
 import { Box } from '@app/components';
+import { I18n } from '@app/utils';
 import { styled } from '@mui/material/styles';
-import useTranslation from 'next-translate/useTranslation';
 import { FC } from 'react';
 
 import { Title } from '../../common';
@@ -26,7 +26,7 @@ export const GridWrapper = styled('div')(({ theme }) => {
 });
 
 export const InterdisciplinaryApproach: FC = () => {
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation('pages/perspective/strategy/index');
 
   return (
     <ArcherSurface strokeColor='gray'>
@@ -42,12 +42,12 @@ export const InterdisciplinaryApproach: FC = () => {
           ]}
         >
           <InteractiveBox sx={{ gridArea: 'individual' }}>
-            <Title>{t('pages/perspective/strategy/index:individual')}</Title>
+            <Title>{t('individual')}</Title>
           </InteractiveBox>
         </ArcherElement>
         <ArcherElement id='data'>
           <InteractiveBox sx={{ gridArea: 'data' }}>
-            <Title>{t('pages/perspective/strategy/index:dataCentric')}</Title>
+            <Title>{t('dataCentric')}</Title>
           </InteractiveBox>
         </ArcherElement>
         <ArcherElement
@@ -74,11 +74,7 @@ export const InterdisciplinaryApproach: FC = () => {
             }}
             routeSegement='general'
           >
-            <Title>
-              {`${t('pages/perspective/strategy/index:general')} ${t(
-                'pages/perspective/strategy/index:problemSolving'
-              )}`}
-            </Title>
+            <Title>{`${t('general')} ${t('problemSolving')}`}</Title>
           </InteractiveBox>
         </ArcherElement>
 
@@ -104,11 +100,7 @@ export const InterdisciplinaryApproach: FC = () => {
             }}
             routeSegement='realistic'
           >
-            <Title>
-              {`${t('pages/perspective/strategy/index:realistic')} ${t(
-                'pages/perspective/strategy/index:problemSolving'
-              )}`}
-            </Title>
+            <Title>{`${t('realistic')} ${t('problemSolving')}`}</Title>
           </InteractiveBox>
         </ArcherElement>
 
@@ -129,16 +121,12 @@ export const InterdisciplinaryApproach: FC = () => {
             }}
             routeSegement='specific'
           >
-            <Title>
-              {`${t('pages/perspective/strategy/index:specific')} ${t(
-                'pages/perspective/strategy/index:problemSolving'
-              )}`}
-            </Title>
+            <Title>{`${t('specific')} ${t('problemSolving')}`}</Title>
           </InteractiveBox>
         </ArcherElement>
         <ArcherElement id='society'>
           <InteractiveBox sx={{ gridArea: 'society' }}>
-            <Title>{t('pages/perspective/strategy/index:society')}</Title>
+            <Title>{t('society')}</Title>
           </InteractiveBox>
         </ArcherElement>
       </GridWrapper>
