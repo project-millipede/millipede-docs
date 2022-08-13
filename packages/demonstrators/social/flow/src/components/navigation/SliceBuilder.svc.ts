@@ -1,6 +1,7 @@
+import { GuardUtil } from '@app/utils';
 import { Scroll } from '@demonstrators-social/shared';
-import { isString } from 'lodash';
-import isArray from 'lodash/isArray';
+
+const { isString } = GuardUtil.Primitives;
 
 export const getSliceId = (
   sliceIds:
@@ -11,14 +12,16 @@ export const getSliceId = (
 ) => {
   if (isString(sliceIds)) {
     return sliceIds;
-  } else if (isArray(sliceIds) && sliceIds.length === 2) {
+  }
+
+  if (Array.isArray(sliceIds) && sliceIds.length === 2) {
     const [firstSliceId, lastSliceId] = sliceIds;
     if (index === 0) {
       return firstSliceId;
-    } else if (index === actions.length - 1) {
-      return lastSliceId;
-    } else {
-      return `${firstSliceId}-${lastSliceId}`;
     }
+    if (index === actions.length - 1) {
+      return lastSliceId;
+    }
+    return `${firstSliceId}-${lastSliceId}`;
   }
 };

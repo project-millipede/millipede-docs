@@ -1,4 +1,3 @@
-import isArray from 'lodash/isArray';
 import { Translate } from 'next-translate';
 
 export const translateObject = <T>(t: Translate, field: string): Array<T> => {
@@ -9,7 +8,7 @@ export const translateObject = <T>(t: Translate, field: string): Array<T> => {
       returnObjects: true
     }
   );
-  if (isArray(topics)) {
+  if (Array.isArray(topics)) {
     return topics;
   }
   return [];
