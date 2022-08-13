@@ -1,6 +1,5 @@
 import { CollectionUtil, StringUtil } from '@app/utils';
 import { normalizer, postEntity, timelineEntity, Types, useCaseEntity } from '@demonstrators-social/data';
-import includes from 'lodash/includes';
 import { selector, selectorFamily } from 'recoil';
 
 import { Scroll } from '../..';
@@ -164,8 +163,8 @@ export const interactionDataForPostScenarioSelector = selectorFamily<
       const postIdsRight = get(postIdsSelector(rightTimelineId));
 
       const diff = ltr
-        ? postIdsLeft.filter(postId => includes(postIdsRight, postId))
-        : postIdsRight.filter(postId => includes(postIdsLeft, postId));
+        ? postIdsLeft.filter(postId => postIdsRight.includes(postId))
+        : postIdsRight.filter(postId => postIdsLeft.includes(postId));
 
       return diff;
     }

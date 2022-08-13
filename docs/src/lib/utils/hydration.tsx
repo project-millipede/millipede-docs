@@ -22,10 +22,11 @@ export const getComponents = (
 ) => {
   return Object.entries(components)
     .filter(([key, _value]) => componentIds.includes(key))
-    .reduce((acc, [key, value]) => {
+    .reduce((acc, [key, loadableComponent]) => {
+      const Component = loadableComponent.component;
       return {
         ...acc,
-        [key]: value
+        [key]: Component
       };
     }, {});
 };
@@ -44,7 +45,7 @@ export const getLoadableComponents = (
         [key]: requireWrapper
           ? props => (
               <RecoilRoot key={`store-${key}`}>
-                {<Component {...props} />}
+                <Component {...props} />
               </RecoilRoot>
             )
           : Component

@@ -1,7 +1,7 @@
 import { Archer } from '@app/archer';
 import { Box } from '@app/components';
+import { I18n } from '@app/utils';
 import { styled } from '@mui/material/styles';
-import useTranslation from 'next-translate/useTranslation';
 import { FC } from 'react';
 
 import { Title } from '../../common';
@@ -23,7 +23,7 @@ export const GridWrapper = styled('div')(({ theme }) => ({
 }));
 
 export const Concept1: FC = () => {
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation('pages/ai/general/index');
 
   return (
     <ArcherSurface strokeColor='gray'>
@@ -40,8 +40,8 @@ export const Concept1: FC = () => {
         >
           <InteractiveBox sx={{ gridArea: 'communication' }}>
             <Title>
-              {`${t('pages/ai/general/index:communication_process')} ${t(
-                'pages/ai/general/index:communication_process_abbreviation'
+              {`${t('communication_process')} ${t(
+                'communication_process_abbreviation'
               )}`}
             </Title>
           </InteractiveBox>
@@ -58,8 +58,8 @@ export const Concept1: FC = () => {
         >
           <InteractiveBox sx={{ gridArea: 'preparation' }}>
             <Title>
-              {`${t('pages/ai/general/index:preparation_process')} ${t(
-                'pages/ai/general/index:preparation_process_abbreviation'
+              {`${t('preparation_process')} ${t(
+                'preparation_process_abbreviation'
               )}`}
             </Title>
           </InteractiveBox>
@@ -67,9 +67,7 @@ export const Concept1: FC = () => {
         <ArcherElement id='render'>
           <InteractiveBox sx={{ gridArea: 'render' }}>
             <Title>
-              {`${t('pages/ai/general/index:render_process')} ${t(
-                'pages/ai/general/index:render_process_abbreviation'
-              )}`}
+              {`${t('render_process')} ${t('render_process_abbreviation')}`}
             </Title>
           </InteractiveBox>
         </ArcherElement>

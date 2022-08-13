@@ -1,7 +1,6 @@
 import { Stepper } from '@app/components';
 import { ContentTypes } from '@app/types';
-import isArray from 'lodash/isArray';
-import useTranslation from 'next-translate/useTranslation';
+import { I18n } from '@app/utils';
 import { FC } from 'react';
 
 import { Svg as Step1 } from './assets/Pages-Step-1.svg';
@@ -26,7 +25,7 @@ const templates: Array<ContentTypes.Content> = [
 ];
 
 export const ByExample: FC = () => {
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation();
 
   const steps = t<Array<ContentTypes.Content>>(
     'pages/pidp/approach/by-example/index:steps',
@@ -35,7 +34,7 @@ export const ByExample: FC = () => {
   );
 
   const stepsProcessed =
-    isArray(steps) && steps.length > 0
+    Array.isArray(steps) && steps.length > 0
       ? steps.map((step, index) => {
           return {
             ...step,

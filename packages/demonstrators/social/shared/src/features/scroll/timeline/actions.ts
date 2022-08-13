@@ -1,4 +1,3 @@
-import isArray from 'lodash/isArray';
 import { Translate } from 'next-translate';
 
 import { LAYOUT, Link, NodeWithRelationsWithEdge } from './types';
@@ -38,7 +37,7 @@ export const addTopicRecursive = (
     acc: Array<Link | Array<Link>>,
     item: string | Array<string>
   ) => {
-    if (isArray(item)) {
+    if (Array.isArray(item)) {
       const result = item.reduce(reduceFn, [] as Array<Link>);
       // eslint-disable-next-line no-param-reassign
       acc = [...acc, result] as Array<Link>;
@@ -60,7 +59,7 @@ const getEdgeConnections = (
   length: number, // from reduce, all items length
   ids: Array<string> | string // timeline, post, or slice
 ) => {
-  if (isArray(ids)) {
+  if (Array.isArray(ids)) {
     // Covers scenario - e.g. the progressive scenario has only a single element at the beginning of the animmation sequence
     if (length === 1) {
       const [headId] = ids;

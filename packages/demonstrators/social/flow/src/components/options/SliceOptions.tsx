@@ -1,13 +1,6 @@
+import { I18n } from '@app/utils';
 import { features } from '@demonstrators-social/shared';
-import {
-  Box,
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  FormGroup,
-  FormLabel
-} from '@mui/material';
-import useTranslation from 'next-translate/useTranslation';
+import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel } from '@mui/material';
 import React, { FC } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 
@@ -20,7 +13,7 @@ export const SliceOptions: FC = () => {
     }
   } = features;
 
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation('pages/pidp/use-case/recognition/index');
 
   const { activeIds } = useRecoilValue(interactionOptionsState);
 
@@ -49,9 +42,7 @@ export const SliceOptions: FC = () => {
       }}
     >
       <FormControl>
-        <FormLabel>
-          {t('pages/pidp/use-case/recognition/index:select-slice-categories')}
-        </FormLabel>
+        <FormLabel>{t('select-slice-categories')}</FormLabel>
         <FormGroup row>
           {Object.entries(activeIds).map(([key, value]) => {
             return (
@@ -65,7 +56,7 @@ export const SliceOptions: FC = () => {
                     onChange={handleChange}
                   />
                 }
-                label={t(`pages/pidp/use-case/recognition/index:${key}`)}
+                label={t(key)}
               />
             );
           })}

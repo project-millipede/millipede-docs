@@ -11,9 +11,6 @@ export const useNavigation = (): ((
   newActiveViewElementId: string
 ) => void) => {
   const {
-    app: {
-      states: { appCompositionState }
-    },
     reparent: {
       states: { reparentState },
       actions: { sendReparentableChild }
@@ -29,8 +26,6 @@ export const useNavigation = (): ((
 
   const [{ views, viewElements }, setViewNavigation] =
     useRecoilState(viewNavigationState);
-
-  const { isMobile: isMobileManual } = useRecoilValue(appCompositionState);
 
   const reparent = useCallback(
     (viewElement: PartialViewElement) => {
@@ -79,22 +74,15 @@ export const useNavigation = (): ((
       );
       // directions: left = -1, right = 1
       if (direction === 1) {
-        isMobileManual && nextViewElements.forEach(reparent);
+        nextViewElements.forEach(reparent);
       } else if (direction === -1) {
-        isMobileManual &&
-          CollectionUtil.Array.reverse(nextViewElements).forEach(reparent);
+        CollectionUtil.Array.reverse(nextViewElements).forEach(reparent);
       }
       setViewNavigation(state => {
         return { ...state, viewElements: nextViewElements };
       });
     },
-    [
-      views,
-      viewElements,
-      isMobileManual,
-      parentElements.parentFiberMap,
-      setViewNavigation
-    ]
+    [views, viewElements, parentElements.parentFiberMap, setViewNavigation]
   );
   return navigate;
 };

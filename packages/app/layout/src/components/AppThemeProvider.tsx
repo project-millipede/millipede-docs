@@ -28,7 +28,8 @@ export const AppThemeProvider: FC = ({ children }) => {
         },
         h2: {
           fontWeight: 500,
-          fontSize: '3rem',
+          // For header in landing - reduced from 3rem to 2.5rem
+          fontSize: '2.5rem',
           margin: '16px 0'
         },
         h3: {

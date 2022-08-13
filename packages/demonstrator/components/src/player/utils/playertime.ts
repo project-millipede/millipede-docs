@@ -1,4 +1,4 @@
-import inRange from 'lodash/inRange';
+import { inRange } from 'lodash-es';
 
 import { Step } from '../types';
 

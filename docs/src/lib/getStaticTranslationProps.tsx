@@ -1,4 +1,3 @@
-import isArray from 'lodash/isArray';
 import { GetStaticPropsContext } from 'next';
 import { I18nDictionary } from 'next-translate';
 import loadNamespaces from 'next-translate/loadNamespaces';
@@ -21,7 +20,7 @@ export const getStaticTranslationProps =
     const { params: { slug } = { slug: [] }, locale } = ctx;
 
     const pathname = path.sep.concat(
-      isArray(slug) ? slug.join(path.sep) : slug
+      Array.isArray(slug) ? slug.join(path.sep) : slug
     );
 
     const translation = await loadNamespaces({

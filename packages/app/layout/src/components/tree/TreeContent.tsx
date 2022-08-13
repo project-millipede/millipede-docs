@@ -1,8 +1,8 @@
 import { CustomIcon } from '@app/components';
 import { PageTypes } from '@app/types';
+import { I18n } from '@app/utils';
 import { Collapse } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
-import useTranslation from 'next-translate/useTranslation';
 import { FC, Fragment } from 'react';
 
 import { CustomTreeItem } from './CustomTreeItem';
@@ -17,7 +17,7 @@ export const TransitionComponent: FC<TransitionProps> = props => {
 };
 
 export const TreeContent: FC<TreeContentProps> = ({ pages }) => {
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation();
 
   const createTree = (page: PageTypes.Page) => {
     const { pathname, children, icon } = page;

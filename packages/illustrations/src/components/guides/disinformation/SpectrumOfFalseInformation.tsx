@@ -1,9 +1,9 @@
-import useTranslation from 'next-translate/useTranslation';
+import { I18n } from '@app/utils';
 import { FC } from 'react';
 import { VictoryAxis, VictoryBar, VictoryChart, VictoryTheme } from 'victory';
 
 export const SpectrumOfFalseInformation: FC = () => {
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation('pages/guides/disinformation/index');
 
   return (
     <VictoryChart theme={VictoryTheme.material}>
@@ -41,21 +41,21 @@ export const SpectrumOfFalseInformation: FC = () => {
             x: 1,
             y: 0.2,
             y0: 0.8,
-            label: t('pages/guides/disinformation/index:misinformation'),
+            label: t('misinformation'),
             color: 'green'
           },
           {
             x: -0,
             y: 0.2,
             y0: 0.8,
-            label: t('pages/guides/disinformation/index:disinformation'),
+            label: t('disinformation'),
             color: 'grey'
           },
           {
             x: -1,
             y: 0.2,
             y0: 0.8,
-            label: t('pages/guides/disinformation/index:malinformation'),
+            label: t('malinformation'),
             color: 'red'
           }
         ]}

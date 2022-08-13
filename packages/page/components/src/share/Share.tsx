@@ -1,16 +1,14 @@
 import { APP_CONTENT_HEADER_HEIGHT } from '@app/layout';
 import { RenderUtils } from '@app/render-utils';
 import { PageTypes } from '@app/types';
-import { StringUtil } from '@app/utils';
+import { GuardUtil, I18n } from '@app/utils';
 import { Close, Share as ShareIcon } from '@mui/icons-material';
 import { CloseReason, OpenReason, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { TransitionProps } from '@mui/material/transitions';
 import { windowOpenPromise } from '@vangware/window-open-promise';
 import copy from 'copy-to-clipboard';
-import isArray from 'lodash/isArray';
 import { Translate } from 'next-translate';
-import useTranslation from 'next-translate/useTranslation';
 import { FC, SyntheticEvent, useCallback, useMemo } from 'react';
 import { useSetRecoilState } from 'recoil';
 
@@ -27,6 +25,8 @@ import {
   URIPathParamsWhatsApp,
 } from './types';
 import { objectToGetParams } from './utils';
+
+const { isString } = GuardUtil.Primitives;
 
 export const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
   '&.MuiSpeedDial-root': {
@@ -59,16 +59,11 @@ const getConnectionData = (
   url: string,
   t: Translate
 ) => {
-  const { title, description, hashtags } = meta;
+  const { title, description, hashTags } = meta;
 
-  const hashtagCollection = isArray(hashtags)
-    ? hashtags
-    : StringUtil.stringToArray(hashtags);
+  const hashtagCollection = isString(hashTags) ? hashTags.split(', ') : [];
 
-  const firstHashtag = hashtagCollection
-    .filter((_hashTag, index) => index === 0)
-    .map(hashTag => `#${hashTag}`)
-    .join('');
+  const [firstHashtag] = hashtagCollection;
 
   return [
     {
@@ -94,7 +89,7 @@ const getConnectionData = (
       url: 'https://www.facebook.com/sharer/sharer.php',
       params: {
         u: url,
-        hashtag: firstHashtag,
+        hashtag: `#${firstHashtag}`,
         quote: title
       } as URIPathParamsFacebook
     },
@@ -188,7 +183,7 @@ export const Share: FC<ShareProps> = ({ metaData }) => {
   const url = RenderUtils.isBrowser() && window.location.href;
   const supportWebShare = RenderUtils.supportWebShare();
 
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation();
 
   const { onOpen, onClose, isOpen } = useDisclosure();
 

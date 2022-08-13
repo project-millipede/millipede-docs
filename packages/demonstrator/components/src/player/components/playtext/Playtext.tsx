@@ -1,5 +1,5 @@
+import { I18n } from '@app/utils';
 import { Typography } from '@mui/material';
-import useTranslation from 'next-translate/useTranslation';
 import { forwardRef, ForwardRefRenderFunction } from 'react';
 
 import { AnimateHeight } from '../../../animation/components/AnimateHeight';
@@ -14,7 +14,7 @@ export const Playtext: ForwardRefRenderFunction<
   HTMLDivElement,
   PlaytextProps
 > = ({ steps }, _ref) => {
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation();
 
   const { target } = useStepState();
   const activeStep = steps[target] || { description: '' };

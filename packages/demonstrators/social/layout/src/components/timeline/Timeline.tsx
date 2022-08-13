@@ -1,9 +1,9 @@
 import { HooksUtils } from '@app/render-utils';
+import { I18n } from '@app/utils';
 import { features, Scroll } from '@demonstrators-social/shared';
 import { Create } from '@mui/icons-material';
 import { Button, List } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import useTranslation from 'next-translate/useTranslation';
 import { FC, forwardRef, ForwardRefRenderFunction, useCallback, useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
@@ -43,7 +43,8 @@ const Timeline: ForwardRefRenderFunction<HTMLDivElement, TimelineProps> = (
   } = features;
 
   // Logs the component lifecycle.
-  // console.log('-- rendering timeline', timelineId);
+  /*
+  console.log('-- rendering timeline', timelineId);
 
   useEffect(() => {
     // The component is mounted only one time.
@@ -53,8 +54,9 @@ const Timeline: ForwardRefRenderFunction<HTMLDivElement, TimelineProps> = (
       console.log('------ unmounting timeline');
     };
   }, []);
+  */
 
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation();
 
   const theme = useTheme();
 

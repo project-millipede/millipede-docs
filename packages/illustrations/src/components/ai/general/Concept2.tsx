@@ -1,7 +1,7 @@
 import { Archer, ArcherTypes } from '@app/archer';
 import { Box } from '@app/components';
+import { I18n } from '@app/utils';
 import { styled } from '@mui/material/styles';
-import useTranslation from 'next-translate/useTranslation';
 import { FC } from 'react';
 
 import { Title } from '../../common';
@@ -49,7 +49,7 @@ const instrumentConnect: Connect = {
 };
 
 export const Concept2: FC = () => {
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation('pages/ai/general/index');
 
   return (
     <ArcherSurface strokeColor='gray'>
@@ -58,8 +58,8 @@ export const Concept2: FC = () => {
         <ArcherElement id='shared_render'>
           <InteractiveBox sx={{ gridArea: 'render' }}>
             <Title>
-              {`${t('pages/ai/general/index:shared_render_process')} ${t(
-                'pages/ai/general/index:shared_render_process_abbreviation'
+              {`${t('shared_render_process')} ${t(
+                'shared_render_process_abbreviation'
               )}`}
             </Title>
           </InteractiveBox>
