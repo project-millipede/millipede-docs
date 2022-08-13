@@ -1,6 +1,5 @@
 import { styled } from '@mui/material/styles';
 import { TocEntry } from '@stefanprobst/remark-extract-toc';
-import { useRouter } from 'next/router';
 import { FC } from 'react';
 
 import { TocLink } from './TocLink';
@@ -20,16 +19,12 @@ const TocList = styled('ul')({
 });
 
 export const TocComponent: FC<TocComponentProps> = ({ toc }) => {
-  const { query, pathname } = useRouter();
-
   return (
     <TocList>
       {toc.map(tocItem => {
         return (
           <li key={tocItem.id}>
-            <TocLink pathname={pathname} query={query} href={tocItem.id}>
-              {tocItem.value}
-            </TocLink>
+            <TocLink href={tocItem.id}>{tocItem.value}</TocLink>
           </li>
         );
       })}

@@ -2,7 +2,6 @@ import { HiddenUnderlineLink } from '@app/components';
 import { Typography, TypographyProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { LinkProps } from 'next/link';
-import { ParsedUrlQuery } from 'querystring';
 import { ElementType, FC } from 'react';
 import { useRecoilValue } from 'recoil';
 
@@ -38,17 +37,10 @@ const TocLabel = styled(Typography, {
 });
 
 export interface TocLinkProps {
-  pathname: string;
-  query: ParsedUrlQuery;
   href: string;
 }
 
-export const TocLink: FC<TocLinkProps> = ({
-  pathname,
-  query,
-  href,
-  children
-}) => {
+export const TocLink: FC<TocLinkProps> = ({ href, children }) => {
   const {
     scroll: {
       selector: { scrollIsActiveSelector }
@@ -61,13 +53,9 @@ export const TocLink: FC<TocLinkProps> = ({
     <TocLabel
       component={HiddenUnderlineLink}
       href={{
-        pathname,
-        query,
         hash: href
       }}
-      // replace // todo: check
       shallow
-      passHref
       prefetch={false}
       isActive={isActive}
     >

@@ -1,6 +1,6 @@
+import { I18n } from '@app/utils';
 import { Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
 
@@ -12,7 +12,7 @@ export const Anchor = styled('span')(({ theme }) => ({
 }));
 
 export const TopicsDetail: FC = () => {
-  const { t } = useTranslation();
+  const { t } = I18n.useTranslation();
 
   const {
     query: { feature, aspect }
@@ -31,7 +31,7 @@ export const TopicsDetail: FC = () => {
         <Anchor id={`feature-${feature}-aspect-${aspect}`} />
         {t(`intro:${feature}-${aspect}`)}
       </Typography>
-      <Topics feature={feature as string} aspect={aspect as string} />
+      <Topics feature={feature as any} aspect={aspect as any} />
     </div>
   ) : null;
 };
