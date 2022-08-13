@@ -49,9 +49,7 @@
           ]
         },
         {
-          "note": [
-            "Das Darstellungsverfahren setzt keine Umgewöhnung bestehender oder gewohnter digitaler Workflows, etwa der Bedienung der favorisierten Social-Media Anwendung voraus."
-          ]
+          "note": "Das Darstellungsverfahren setzt keine Umgewöhnung bestehender oder gewohnter digitaler Workflows, etwa der Bedienung der favorisierten Social-Media Anwendung voraus."
         }
       ]
     },
@@ -85,15 +83,16 @@
           ]
         },
         {
-          "note": [
-            "Der Vorgang der Kennzeichnung von kritischen Inhalten wird vom durchschnittlichen Nutzer ausgeführt."
-          ]
+          "note": "Der Vorgang der Kennzeichnung von kritischen Inhalten wird vom durchschnittlichen Nutzer ausgeführt."
         }
       ]
     }
   ],
   "scenarios": {
-    "general": "Konsum von Inhalten"
+    "general": {
+      "title": "Konsum von Inhalten",
+      "info": "Konsum von Inhalten"
+    }
   },
   "categories": {
     "recognition": "Unmittelbare Wahrnehmung",

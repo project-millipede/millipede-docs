@@ -49,9 +49,7 @@
           ]
         },
         {
-          "note": [
-            "The rendering process does not require any adaptation of existing or accustomed digital workflows, such as the handling of the preferred social media application."
-          ]
+          "note": "The rendering process does not require any adaptation of existing or accustomed digital workflows, such as the handling of the preferred social media application."
         }
       ]
     },
@@ -85,15 +83,16 @@
           ]
         },
         {
-          "note": [
-            "The process of tagging critical content is performed by the average user."
-          ]
+          "note": "The process of tagging critical content is performed by the average user."
         }
       ]
     }
   ],
   "scenarios": {
-    "general": "Consumption of content"
+    "general": {
+      "title": "Consumption of content",
+      "info": "Consumption of content"
+    }
   },
   "categories": {
     "recognition": "Instant recognition",

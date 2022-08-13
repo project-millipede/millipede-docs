@@ -1,5 +1,64 @@
 {
-  "topics": [],
-  "scenarios": {},
-  "categories": {}
+  "topics": [
+    {
+      "scenario": "teleport",
+      "category": "how",
+      "title": "Attach to an arbitrary application that exhibits a news-feed or messenger alike composition.",
+      "link": "pet/use-case/publish",
+      "icon": {
+        "type": "MUI",
+        "name": "webhook"
+      }
+    },
+    {
+      "scenario": "teleport",
+      "category": "how",
+      "title": "Decomposition of the application skeleton into its basic building blocks identifying repetitive components by considering their geometric alignment to each other.",
+      "link": "pet/use-case/publish",
+      "icon": {
+        "type": "MUI",
+        "name": "format_shapes"
+      }
+    },
+    {
+      "scenario": "teleport",
+      "category": "how",
+      "title": "Re-wiring the basic building blocks identified in the derived component blueprint with third-party data sources and interaction methods.",
+      "link": "pet/use-case/publish",
+      "icon": {
+        "type": "MUI",
+        "name": "smart_button"
+      }
+    },
+    {
+      "scenario": "teleport",
+      "category": "how",
+      "title": "Synthesizing of concrete display components using the libraries utilized by an application to generate its user interface.",
+      "link": "pet/use-case/publish",
+      "icon": {
+        "type": "MUI",
+        "name": "commit"
+      }
+    },
+    {
+      "scenario": "teleport",
+      "category": "how",
+      "title": "Welding of adjacent pixel regions; those that are directly generated via an application and those that are synthetically recreated afterwards via the described projection procedure.",
+      "title-1": "Complement an application UI with synthetic elements merging nearby pixel regions of chronological related data.",
+      "link": "pet/use-case/publish",
+      "icon": {
+        "type": "MUI",
+        "name": "merge_type"
+      }
+    }
+  ],
+  "scenarios": {
+    "teleport": {
+      "title": "Teleport your content to any application",
+      "info": "Content publishing without handing it to the platform operator. We are accustomed to consuming content within advanced and highly interactive display components. In fact, a continuous stream of such entries, corresponds to a list; elements of the list, i.e. the content that is so interesting to us, are always embedded in the same kind of framing. Now, imagine an application that is able to recognise the structure and composition of these elements in a foreign application and control the arrangement of repetitive elements at the user's choosing."
+    }
+  },
+  "categories": {
+    "how": "How does it work"
+  }
 }

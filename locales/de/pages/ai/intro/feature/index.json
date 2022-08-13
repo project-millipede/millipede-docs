@@ -1,5 +1,78 @@
 {
-  "topics": [],
-  "scenarios": {},
-  "categories": {}
+  "topics": [
+    {
+      "scenario": "teleport",
+      "category": "how",
+      "title": "Anhängen an eine beliebige Anwendung, die eine Newsfeed- oder Messenger-ähnliche Beschaffenheit aufweist.",
+      "link": "pet/use-case/publish",
+      "icon": {
+        "type": "MUI",
+        "name": "webhook"
+      }
+    },
+    {
+      "scenario": "teleport",
+      "category": "how",
+      "title": "Zerlegung des Anwendungsgerüsts in seine Grundbausteine, indem sich wiederholende Komponenten durch die Betrachtung der geometrischen Anordnung zueinander erkannt werden.",
+      "link": "pet/use-case/publish",
+      "icon": {
+        "type": "MUI",
+        "name": "format_shapes"
+      }
+    },
+    {
+      "scenario": "teleport",
+      "category": "how",
+      "title": "Neuverdrahtung der im abgeleiteten Komponenten-Bauplan erkannten Grundbausteine mit anwendungsfremden Datenquellen und Interaktionsverfahren.",
+      "link": "pet/use-case/publish",
+      "icon": {
+        "type": "MUI",
+        "name": "smart_button"
+      }
+    },
+    {
+      "scenario": "teleport",
+      "category": "how",
+      "title": "Synthetisieren konkreter Darstellungskomponenten unter Verwendung der von einer Anwendung eingesetzter Bibliotheken zur Erzeugung der Bedienoberfläche.",
+      "link": "pet/use-case/publish",
+      "icon": {
+        "type": "MUI",
+        "name": "commit"
+      }
+    },
+    {
+      "scenario": "teleport",
+      "category": "how",
+      "title": "Verschweißen benachbarter Pixel-Regionen; solche, die über eine Anwendung direkt erzeugt werden und solche, die im Nachhinein über den beschriebenen Abbildungsvorgang synthetisch nachgebildet werden.",
+      "link": "pet/use-case/publish",
+      "icon": {
+        "type": "MUI",
+        "name": "merge_type"
+      }
+    },
+    {
+      "scenario": "xxx",
+      "category": "feel",
+      "title": "Daten andwendungsfremder Quellen werden dem Sichtbereich des Nutzers dadurch sichtbar gemacht indem in verschiedene Darstellungsverfahren der ursprünglichen Anwendung eingegriffen wird.",
+      "link": "pet/use-case/publish",
+      "icon": {
+        "type": "MUI",
+        "name": "merge_type"
+      }
+    }
+  ],
+  "scenarios": {
+    "teleport": {
+      "title": "Teleportiere deine Inhalte in beliebige Anwendungen",
+      "info": "Veröffentlichung von Inhalten ohne deren Übergabe an den Plattformbetreiber. Wir sind es gewohnt, Inhalte innerhalb fortgeschrittener und hochgradig interaktiver Darstellungskomponenten zu konsumieren. Tatsächlich entspricht ein kontinuierlicher Strom solcher Einträge, einer Liste; Elemente der Liste, also die für uns so interessanten Inhalte, sind stets in einen gleichen Rahmen eingebunden. Stell dir nun eine Anwendung vor, die imstande ist, den Aufbau und die Zusammensetzung dieser Elemente in einer fremden Anwendung zu erkennen und die Anordnung wiederholender Elemente nach Belieben zu steuern."
+    },
+    "xxx": {
+      "title": "Erfassung der Daten",
+      "info": "Wie ändert sich das User-Experience im Gegensatz zur Nutzung der ursprünglichen Anwendung, keine Änderung."
+    }
+  },
+  "categories": {
+    "how": "Wie es funktioniert",
+    "feel": "Wie sieht der Workflow aus"
+  }
 }
