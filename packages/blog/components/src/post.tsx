@@ -5,7 +5,6 @@ import { Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { alpha, styled } from '@mui/material/styles';
 import { format } from 'date-fns';
-import isArray from 'lodash/isArray';
 import { FC, useMemo } from 'react';
 
 export const PostWrapper = styled('li')(({ theme }) => ({
@@ -32,7 +31,8 @@ export const Posts = styled('ul')(({ theme }) => ({
   padding: 0,
   listStyle: 'none',
   margin: 'auto',
-  maxWidth: '80ch',
+  // TODO - validate
+  // maxWidth: '80ch',
   marginTop: theme.spacing(6),
   marginBottom: theme.spacing(6),
   '> :not(:last-child)': {
@@ -86,7 +86,7 @@ export const Post: FC<PostProps> = ({ post }) => {
       <HiddenUnderlineLink
         href={{
           pathname: '/blog/[slug]',
-          query: { slug: !isArray(slug) ? slug.split('/') : slug }
+          query: { slug: !Array.isArray(slug) ? slug.split('/') : slug }
         }}
         prefetch={false}
       >
