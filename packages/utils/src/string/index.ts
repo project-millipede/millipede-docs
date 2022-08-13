@@ -1,1 +1,1 @@
-export { isEmptyString, stringToArray } from './string';
+export { isEmptyString } from './string';

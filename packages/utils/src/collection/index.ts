@@ -1,4 +1,2 @@
-import * as Array from './array';
-import * as Object from './object';
-
-export { Array, Object };
+export * as Array from './array';
+export * as Object from './object';
