@@ -9,7 +9,7 @@ import { TransitionProps } from '@mui/material/transitions';
 import { windowOpenPromise } from '@vangware/window-open-promise';
 import copy from 'copy-to-clipboard';
 import { Translate } from 'next-translate';
-import { FC, SyntheticEvent, useCallback, useMemo } from 'react';
+import { FC, ReactNode, SyntheticEvent, useCallback, useMemo } from 'react';
 import { useSetRecoilState } from 'recoil';
 
 import { features } from '../features';
@@ -46,8 +46,11 @@ export const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
   }
 }));
 
-export const NoTransition: FC<TransitionProps> = props => {
-  const { children, in: inProp } = props;
+export const NoTransition: FC<
+  TransitionProps & {
+    children: ReactNode;
+  }
+> = ({ children, in: inProp }) => {
   if (!inProp) {
     return null;
   }

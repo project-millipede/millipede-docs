@@ -8,7 +8,7 @@ import { AnimatePresence } from 'framer-motion';
 import { getMDXComponent } from 'mdx-bundler/client';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { mergeProps } from 'next-merge-props';
-import { ReactElement, useMemo } from 'react';
+import { ReactElement, ReactNode, useMemo } from 'react';
 
 import { getBlogPath } from '../../docs/src/lib/getPath';
 import { GetStaticContentProps, getStaticContentProps } from '../../docs/src/lib/getStaticContentProps';
@@ -24,7 +24,7 @@ export type HeaderProps = {
   // id generated through slug
   id: string;
   variant: Variant;
-  children: string;
+  children: ReactNode;
 };
 
 export type DynamicBlogPageProps = GetStaticTranslationProps &

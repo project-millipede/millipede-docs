@@ -1,13 +1,14 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { features } from '../';
 import { BaseViewElementProps } from '../types';
 
-export const BaseViewElement: FC<BaseViewElementProps> = ({
-  viewId,
-  render
-}) => {
+export const BaseViewElement: FC<
+  BaseViewElementProps & {
+    children: ReactNode;
+  }
+> = ({ viewId, render }) => {
   const {
     view: {
       navigation: {

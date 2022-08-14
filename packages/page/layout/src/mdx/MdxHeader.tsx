@@ -2,7 +2,7 @@ import { Components as RenderComponents } from '@app/render-utils';
 import { Typography } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 import { Components } from '@page/layout';
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
 import { StyledTypography } from '../components/head/InteractiveHead.svc';
 
@@ -15,10 +15,13 @@ export type HeaderProps = {
   // id generated through slug
   id: string;
   variant: Variant;
-  children: string;
 };
 
-export const Header: FC<HeaderProps> = ({ id, variant, children }) => {
+export const Header: FC<
+  HeaderProps & {
+    children: ReactNode;
+  }
+> = ({ id, variant, children }) => {
   return (
     <>
       <MediaConsumer>

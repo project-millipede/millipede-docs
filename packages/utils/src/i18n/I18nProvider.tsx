@@ -23,14 +23,13 @@ export const I18nContext = createContext<II18nContext>({
 export interface I18nProviderProps {
   lang: string;
   namespaces?: Record<string, I18nDictionary>;
-  children: ReactNode;
 }
 
-export const I18nProvider: FC<I18nProviderProps> = ({
-  lang,
-  namespaces,
-  children
-}) => {
+export const I18nProvider: FC<
+  I18nProviderProps & {
+    children: ReactNode;
+  }
+> = ({ lang, namespaces, children }) => {
   const allNamespaces = {
     ...usePreviousNamespace(namespaces, lang, null),
     ...namespaces

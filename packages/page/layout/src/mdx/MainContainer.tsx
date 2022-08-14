@@ -2,7 +2,7 @@ import { TOC_TOP } from '@app/layout';
 import { Breakpoint, Container, SxProps, Theme } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { domAnimation, LazyMotion, m, Variants } from 'framer-motion';
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
 export const StyledMainContainer = styled(Container)(({ theme }) => {
   return {
@@ -17,12 +17,11 @@ interface MainContainerProps {
   maxWidth?: false | Breakpoint;
 }
 
-export const MainContainer: FC<MainContainerProps> = ({
-  id,
-  sx,
-  maxWidth,
-  children
-}) => {
+export const MainContainer: FC<
+  MainContainerProps & {
+    children: ReactNode;
+  }
+> = ({ id, sx, maxWidth, children }) => {
   return (
     <StyledMainContainer component='div' id={id} sx={sx} maxWidth={maxWidth}>
       {children}
@@ -49,7 +48,9 @@ export const fade: Variants = {
   }
 };
 
-export const Article: FC = ({ children }) => {
+export const Article: FC<{
+  children: ReactNode;
+}> = ({ children }) => {
   return (
     <LazyMotion features={domAnimation}>
       <MotionArticle

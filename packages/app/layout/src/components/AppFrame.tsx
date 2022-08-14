@@ -3,7 +3,7 @@ import { Components as RenderComponents } from '@app/render-utils';
 import { Navigation } from '@app/types';
 import { Components } from '@page/layout';
 import { Toc } from '@stefanprobst/remark-extract-toc';
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 
 import { AppFrameGrid } from './FrameGrid';
 import { AppBar } from './toolbar';
@@ -51,7 +51,9 @@ interface AppFrameProps {
  * because it is in layout / no unmounting on route change
  */
 
-export const AppFrame: FC<AppFrameProps> = ({ navigation, toc, children }) => {
+export const AppFrame: FC<AppFrameProps & {
+  children: ReactNode;
+}> = ({ navigation, toc, children }) => {
   return (
     <>
       <AppBar />

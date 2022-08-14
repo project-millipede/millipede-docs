@@ -1,6 +1,6 @@
 import { HooksUtils } from '@app/render-utils';
 import { motion, Variants } from 'framer-motion';
-import { CSSProperties, FC, useMemo } from 'react';
+import { CSSProperties, FC, ReactNode, useMemo } from 'react';
 import styled from 'styled-components';
 
 import { HeightVariants, THeightVariants } from '../types';
@@ -46,7 +46,11 @@ interface AnimateHeightProps {
   style?: CSSProperties;
 }
 
-export const AnimateHeight: FC<AnimateHeightProps> = ({
+export const AnimateHeight: FC<
+  AnimateHeightProps & {
+    children: ReactNode;
+  }
+> = ({
   isVisible,
   duration,
   ease = 'easeOut',

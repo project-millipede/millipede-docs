@@ -1,6 +1,6 @@
 import { Drawer } from '@mui/material';
 import { CSSObject, styled, Theme } from '@mui/material/styles';
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { DrawerProps } from '.';
@@ -41,7 +41,11 @@ export const StyledDrawer = styled(Drawer)<DrawerProps>(({ theme, open }) => ({
   })
 }));
 
-export const DesktopDrawer: FC<DrawerProps> = ({ sx, className, children }) => {
+export const DesktopDrawer: FC<
+  DrawerProps & {
+    children: ReactNode;
+  }
+> = ({ sx, className, children }) => {
   const {
     layout: {
       states: { layoutState }

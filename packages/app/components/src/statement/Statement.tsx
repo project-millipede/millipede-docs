@@ -2,7 +2,7 @@ import { I18n } from '@app/utils';
 import { Typography } from '@mui/material';
 import { blue, green, grey, red, yellow } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
 interface StyleProps {
   color: string;
@@ -85,7 +85,11 @@ interface StatementProps {
   external?: boolean;
 }
 
-export const Statement: FC<StatementProps> = ({
+export const Statement: FC<
+  StatementProps & {
+    children: ReactNode;
+  }
+> = ({
   type = StatementVariant.remark,
   // external = false,
   children

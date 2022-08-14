@@ -1,5 +1,5 @@
 import { red } from '@mui/material/colors';
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, ReactNode, useEffect, useRef, useState } from 'react';
 
 const labelBgPadding = [2, 4];
 const labelBgBorderRadius = 2;
@@ -8,7 +8,11 @@ export interface EdgeTextProps {
   x: number;
   y: number;
 }
-export const EdgeText: FC<EdgeTextProps> = ({ x, y, children }) => {
+export const EdgeText: FC<
+  EdgeTextProps & {
+    children: ReactNode;
+  }
+> = ({ x, y, children }) => {
   const textRef = useRef<SVGTextElement>(null);
   const [textBoundingBox, setTextBoundingBox] = useState<Partial<DOMRect>>({
     x: 0,

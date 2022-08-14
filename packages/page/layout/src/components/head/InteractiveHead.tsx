@@ -10,10 +10,13 @@ import { Anchor } from './InteractiveHead.svc';
 interface InteractiveHeadProps {
   // id generated through slug
   id: string;
-  children?: ReactNode;
 }
 
-export const InteractiveHead: FC<InteractiveHeadProps> = ({ id, children }) => {
+export const InteractiveHead: FC<
+  InteractiveHeadProps & {
+    children: ReactNode;
+  }
+> = ({ id, children }) => {
   const {
     scroll: {
       states: { scrollState }

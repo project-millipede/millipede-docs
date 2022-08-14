@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import styled from 'styled-components';
 
 const Header = styled.div`
@@ -10,6 +10,8 @@ const Header = styled.div`
   background-color: #f1f1f1;
 `;
 
-export const SheetHeader: FC = ({ children }) => {
+export const SheetHeader: FC<{
+  children: ReactNode;
+}> = ({ children }) => {
   return <Header>{children}</Header>;
 };

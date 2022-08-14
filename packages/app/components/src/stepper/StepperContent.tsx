@@ -23,7 +23,7 @@ export const renderTitleAndDescription = (
           {item.title}
         </Typography>
         <Typography variant='body1' gutterBottom>
-          {item.description}
+          {item.description as string}
         </Typography>
       </Grid>
     );

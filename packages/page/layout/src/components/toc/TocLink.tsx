@@ -2,7 +2,7 @@ import { HiddenUnderlineLink } from '@app/components';
 import { Typography, TypographyProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { LinkProps } from 'next/link';
-import { ElementType, FC } from 'react';
+import { ElementType, FC, ReactNode } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { features } from '../../features';
@@ -40,7 +40,11 @@ export interface TocLinkProps {
   href: string;
 }
 
-export const TocLink: FC<TocLinkProps> = ({ href, children }) => {
+export const TocLink: FC<
+  TocLinkProps & {
+    children: ReactNode;
+  }
+> = ({ href, children }) => {
   const {
     scroll: {
       selector: { scrollIsActiveSelector }

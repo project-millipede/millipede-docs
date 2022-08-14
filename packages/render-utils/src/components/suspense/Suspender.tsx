@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect } from 'react';
+import { FC, ReactElement, useEffect } from 'react';
 
 import { createWakeable, Wakeable } from './suspense';
 
@@ -7,7 +7,6 @@ export const cache = new Map<string, Wakeable<unknown>>();
 export interface SuspenderProps {
   id: string;
   freeze: boolean;
-  children: ReactNode;
 }
 
 /**
@@ -30,16 +29,17 @@ export interface SuspenderProps {
  * 6. Active - true -> true - Return of the child elements
  * 7. Active - false -> false - Reuse and submission of a promise (*1)
  *
- * Important: If a suspense boundary is suspended in the current
+ * Important:
+ * If a suspense boundary is suspended in the current
  * render step and this should also apply to subsequent render steps,
  * a commitment must be made repeatedly.
  */
 
-export const Suspender: FC<SuspenderProps & { children: any }> = ({
-  id,
-  freeze,
-  children
-}) => {
+export const Suspender: FC<
+  SuspenderProps & {
+    children: ReactElement;
+  }
+> = ({ id, freeze, children }) => {
   useEffect(() => {
     return () => {
       cache.delete(id);
@@ -77,14 +77,8 @@ export const Suspender: FC<SuspenderProps & { children: any }> = ({
 
       /**
        * Note:
-       * In Next, the routing gets blocked here, throwing a promise during a navigation attempt.
-       *
        * It is required to fulfill the suspense contract by throwing a promise and making
        * the component suspend even when it was suspended before.
-       *
-       * The relevant fix is to look when the Next router is ready and see the suspense wrapper
-       * component, including the transition rerenderSuspendedIsPending, which blocks the
-       * suspense boundary from rendering immediately.
        */
 
       const weakable = cache.get(id);

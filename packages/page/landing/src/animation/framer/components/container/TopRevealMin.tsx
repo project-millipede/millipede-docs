@@ -14,10 +14,13 @@ export interface TopRevealMinProps {
   stagger?: number;
   loop?: boolean;
   toggle?: boolean;
-  children: ReactNode;
 }
 
-export const TopRevealMin = (props: TopRevealMinProps) => {
+export const TopRevealMin = (
+  props: TopRevealMinProps & {
+    children: ReactNode;
+  }
+) => {
   const {
     // lineGap,
     // fontSize,

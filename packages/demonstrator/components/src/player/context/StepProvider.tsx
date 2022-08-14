@@ -5,11 +5,9 @@ import { Action, initialState, reducer, StepState } from './reducer';
 const StepStateContext = createContext<StepState>(null);
 const StepDispatchContext = createContext<Dispatch<Action>>(null);
 
-interface StepProviderProps {
+export const StepProvider: FC<{
   children: ReactNode;
-}
-
-export const StepProvider: FC<StepProviderProps> = ({ children }) => {
+}> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (

@@ -2,7 +2,7 @@
 import { HooksUtils } from '@app/render-utils';
 import { useMergedRef } from '@huse/merged-ref';
 import { grey } from '@mui/material/colors';
-import { CSSProperties, FC, useEffect, useRef } from 'react';
+import { CSSProperties, FC, ReactNode, useEffect, useRef } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 
 import { features as appComponentFeatures } from '../features';
@@ -18,7 +18,11 @@ const defaultSvgContainerStyle: CSSProperties = {
   pointerEvents: 'none'
 };
 
-export const ArcherSurface: FC<ArcherSurfaceProps> = ({
+export const ArcherSurface: FC<
+  ArcherSurfaceProps & {
+    children: ReactNode;
+  }
+> = ({
   arrowLength = 16,
   arrowThickness = 8,
   strokeColor = grey[500],
@@ -27,9 +31,9 @@ export const ArcherSurface: FC<ArcherSurfaceProps> = ({
   style,
   svgElementProps,
   className,
-  children,
   elementStyle,
-  handleResetCb
+  handleResetCb,
+  children
 }) => {
   const {
     archer: {

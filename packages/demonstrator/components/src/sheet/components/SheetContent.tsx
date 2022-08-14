@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import styled from 'styled-components';
 
 const Content = styled.div`
@@ -6,6 +6,8 @@ const Content = styled.div`
   flex-direction: column;
 `;
 
-export const SheetContent: FC = ({ children }) => {
+export const SheetContent: FC< {
+  children: ReactNode;
+}> = ({ children }) => {
   return <Content>{children}</Content>;
 };

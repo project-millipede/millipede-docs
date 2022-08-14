@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
 import { useSheetContext } from '../context/SheetContext';
 
@@ -8,11 +8,11 @@ interface SheetContainerProps {
   bottomContainerSize: Partial<DOMRect>;
 }
 
-export const SheetContainer: FC<SheetContainerProps> = ({
-  appContainerSize,
-  bottomContainerSize,
-  children
-}) => {
+export const SheetContainer: FC<
+  SheetContainerProps & {
+    children: ReactNode;
+  }
+> = ({ appContainerSize, bottomContainerSize, children }) => {
   const {
     snapPoints,
     initialSnapPointIndex = 0,

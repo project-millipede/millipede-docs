@@ -32,7 +32,6 @@ type SheetProps = {
   appContainerSize: Partial<DOMRect>;
   bottomContainerSize: Partial<DOMRect>;
   transition?: AnimationOptions<number>;
-  children: ReactNode;
 };
 
 const defaultTransition: AnimationOptions<number> = {
@@ -40,7 +39,12 @@ const defaultTransition: AnimationOptions<number> = {
   duration: 0.2
 };
 
-const Sheet: ForwardRefRenderFunction<SheetHandleProps, SheetProps> = (
+const Sheet: ForwardRefRenderFunction<
+  SheetHandleProps,
+  SheetProps & {
+    children: ReactNode;
+  }
+> = (
   {
     isOpen,
     snapPoints,

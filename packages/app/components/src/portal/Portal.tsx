@@ -20,7 +20,9 @@ interface IPortalContext {
 
 const PortalContext = createContext<IPortalContext>(null);
 
-export const PortalProvider: FC = ({ children }) => {
+export const PortalProvider: FC<{
+  children: ReactNode;
+}> = ({ children }) => {
   const [portalMap, setPortalMap] = useState<Map<PortalType, ReactNode>>(
     new Map()
   );
