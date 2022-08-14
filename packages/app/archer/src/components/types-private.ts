@@ -50,8 +50,6 @@ export interface ArcherSurfaceProps {
 
   elementStyle?: CSSProperties;
 
-  children?: ReactNode;
-
   handleResetCb?: () => void;
 }
 

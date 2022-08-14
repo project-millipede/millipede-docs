@@ -1,5 +1,5 @@
 import { Media, RenderUtils } from '@app/render-utils';
-import React, { FC, Suspense, useEffect, useId, useState, useTransition } from 'react';
+import React, { FC, ReactElement, Suspense, useEffect, useId, useState, useTransition } from 'react';
 
 import { Suspender } from './Suspender';
 
@@ -30,34 +30,17 @@ export interface SuspenseWrapperProps {
  *
  * The only way is to trigger a commitment to the suspense boundary within a suspense boundary,
  * reference component Suspender, and its "active" property.
- *
- * Note: The suspense wrapper component should be in user-land and not be part of a library
- * because Next specific logic is involved.
  */
-export const SuspenseWrapper: FC<SuspenseWrapperProps> = ({
-  media: { active, isPending: activeIsPending },
-  children
-}) => {
+export const SuspenseWrapper: FC<
+  SuspenseWrapperProps & {
+    children: ReactElement;
+  }
+> = ({ media: { active, isPending: activeIsPending }, children }) => {
   const id = useId();
 
   const [, setRerenderSuspended] = useState(false);
   const [rerenderSuspendedIsPending, startRerenderSuspendedTransition] =
     useTransition();
-
-  /**
-   * Next specific state
-   * Either required because there is a bug within the Nextjs router component or
-   * a general requirement by the approach; see the suspender component for more information.
-   */
-  // const { isReady } = useRouter();
-
-  // useEffect(() => {
-  //   if (!active && isReady) {
-  //     startRerenderSuspendedTransition(() => {
-  //       setRerenderSuspended(value => !value);
-  //     });
-  //   }
-  // }, [active, isReady]);
 
   useEffect(() => {
     if (!active) {

@@ -1,6 +1,6 @@
 import { SwipeableDrawer } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import React, { FC, useCallback } from 'react';
+import React, { FC, ReactNode, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { DrawerProps } from '.';
@@ -18,7 +18,11 @@ export const StyledSwipeableDrawer = styled(SwipeableDrawer)(({ theme }) => ({
   }
 }));
 
-export const MobileDrawer: FC<DrawerProps> = ({ sx, className, children }) => {
+export const MobileDrawer: FC<
+  DrawerProps & {
+    children: ReactNode;
+  }
+> = ({ sx, className, children }) => {
   const {
     layout: {
       states: { layoutState }

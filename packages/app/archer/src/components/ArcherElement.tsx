@@ -1,5 +1,5 @@
 import { Components as RenderComponents } from '@app/render-utils';
-import { cloneElement, FC, useEffect, useRef } from 'react';
+import { cloneElement, FC, ReactNode, useEffect, useRef } from 'react';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 
 import { features } from '../features';
@@ -48,13 +48,17 @@ const {
   Responsive: { isMobile: responsiveIsMobile }
 } = RenderComponents;
 
-export const ArcherElement: FC<ArcherElementProps> = ({
+export const ArcherElement: FC<
+  ArcherElementProps & {
+    children: ReactNode;
+  }
+> = ({
   id,
   relations = [],
-  children,
-  render,
   isMobile = false,
-  isInteractive = false
+  isInteractive = false,
+  render,
+  children
 }) => {
   const {
     archer: {
@@ -111,12 +115,12 @@ export const ArcherElement: FC<ArcherElementProps> = ({
     return render({ ref });
   }
   if (isInteractive) {
-    return cloneElement(children, {
+    return cloneElement(children as any, {
       ref,
       dynamicRef
     });
   }
-  return cloneElement(children, {
+  return cloneElement(children as any, {
     ref
   });
 };

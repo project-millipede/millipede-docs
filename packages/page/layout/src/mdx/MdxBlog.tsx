@@ -1,7 +1,7 @@
 import { Navigation, PageTypes } from '@app/types';
 import { Snackbar } from '@page/components';
 import path from 'path';
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
 import { AppContentFooter } from '../components/AppContentFooter';
 import { AppContentHeader } from '../components/AppContentHeader';
@@ -15,12 +15,11 @@ export interface MarkdownBlogProps {
   withAnimation?: boolean;
 }
 
-export const MdxBlog: FC<MarkdownBlogProps> = ({
-  slug,
-  navigation,
-  metaData,
-  children
-}) => {
+export const MdxBlog: FC<
+  MarkdownBlogProps & {
+    children: ReactNode;
+  }
+> = ({ slug, navigation, metaData, children }) => {
   return (
     <>
       <MainContainer

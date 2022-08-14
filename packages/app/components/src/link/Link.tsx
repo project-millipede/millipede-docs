@@ -2,7 +2,7 @@ import { GuardUtil } from '@app/utils';
 import MuiLink from '@mui/material/Link';
 import { styled } from '@mui/material/styles';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
-import { forwardRef, ForwardRefRenderFunction } from 'react';
+import { forwardRef, ForwardRefRenderFunction, ReactNode } from 'react';
 
 const { isString } = GuardUtil.Primitives;
 
@@ -34,10 +34,10 @@ const NextLinkComposedWithRef = forwardRef(NextLinkComposed);
 
 export type LinkProps = NextLinkComposedProps;
 
-const InternalLink: ForwardRefRenderFunction<HTMLAnchorElement, LinkProps> = (
-  { href, ...other },
-  ref
-) => {
+const InternalLink: ForwardRefRenderFunction<
+  HTMLAnchorElement,
+  LinkProps & { children: ReactNode }
+> = ({ href, ...other }, ref) => {
   if (isString(href)) {
     return <MuiLink ref={ref} href={href} {...other} />;
   }

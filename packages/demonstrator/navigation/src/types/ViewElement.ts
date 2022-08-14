@@ -1,4 +1,4 @@
-import { ComponentType, ReactNode } from 'react';
+import { ComponentType } from 'react';
 
 import { TPosition } from './View';
 
@@ -18,7 +18,6 @@ export type FlattenedPartialViewElement = PartialViewElement & {
 
 export interface BaseViewElementProps {
   viewId: string;
-  children?: ReactNode;
   render?: (parentId: string, isMobile: boolean) => JSX.Element;
 }
 

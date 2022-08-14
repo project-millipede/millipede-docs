@@ -69,7 +69,7 @@ export const AttackVectorsComparison: FC = () => {
                                   key={`row-${rowIndex}-description-${descriptionIndex}-listing-${listingIndex}`}
                                 >
                                   <Typography variant='body1'>
-                                    {listing}
+                                    {listing as any}
                                   </Typography>
                                 </li>
                               ))}

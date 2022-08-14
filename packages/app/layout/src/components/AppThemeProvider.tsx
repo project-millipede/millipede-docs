@@ -1,7 +1,7 @@
 import { blue } from '@mui/material/colors';
 import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
-import { FC, useMemo } from 'react';
+import { FC, ReactNode, useMemo } from 'react';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
 const themeInitialOptions = {
@@ -13,7 +13,9 @@ const themeInitialOptions = {
  * The default font is Roboto, only a sub-set of available font-weights gets used (400;500;700)
  */
 
-export const AppThemeProvider: FC = ({ children }) => {
+export const AppThemeProvider: FC<{
+  children: ReactNode;
+}> = ({ children }) => {
   const { spacing } = themeInitialOptions;
 
   const theme = useMemo(() => {

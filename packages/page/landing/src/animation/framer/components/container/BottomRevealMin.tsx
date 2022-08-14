@@ -14,10 +14,13 @@ export interface BottomRevealMinProps {
   stagger?: number;
   loop?: boolean;
   toggle?: boolean;
-  children: ReactNode;
 }
 
-export const BottomRevealMin: FC<BottomRevealMinProps> = props => {
+export const BottomRevealMin: FC<
+  BottomRevealMinProps & {
+    children: ReactNode;
+  }
+> = props => {
   const {
     // lineGap,
     // fontSize,

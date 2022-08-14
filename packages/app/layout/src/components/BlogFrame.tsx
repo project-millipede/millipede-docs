@@ -5,7 +5,7 @@ import { grey } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
 import { Components } from '@page/layout';
 import { Toc } from '@stefanprobst/remark-extract-toc';
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
 import { AppFrameGrid } from './FrameGrid';
 import { HideOnScroll } from './toolbar/HideOnScroll';
@@ -27,7 +27,11 @@ interface BlogFrameProps {
   toc?: Toc;
 }
 
-export const BlogFrame: FC<BlogFrameProps> = ({ toc, children }) => {
+export const BlogFrame: FC<
+  BlogFrameProps & {
+    children: ReactNode;
+  }
+> = ({ toc, children }) => {
   return (
     <>
       <HideOnScroll>

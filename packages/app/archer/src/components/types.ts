@@ -1,4 +1,4 @@
-import { CSSProperties, MutableRefObject, ReactElement, ReactNode } from 'react';
+import { CSSProperties, MutableRefObject, ReactNode } from 'react';
 
 // export type AnchorPosition = 'top' | 'bottom' | 'left' | 'right' | 'middle';
 
@@ -48,8 +48,7 @@ export interface ArcherElementProps {
   style?: CSSProperties;
   className?: string;
   label?: ReactNode;
-  children?: ReactElement;
-  render?: RenderFn;
   isMobile?: boolean;
   isInteractive?: boolean;
+  render?: RenderFn;
 }

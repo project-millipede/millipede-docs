@@ -1,7 +1,7 @@
 import { CssBaseline, GlobalStyles } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { createTheme, ThemeProvider as MuiThemeProvider, useTheme } from '@mui/material/styles';
-import { FC, useMemo } from 'react';
+import { FC, ReactNode, useMemo } from 'react';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
 /**
@@ -16,7 +16,9 @@ import { ThemeProvider as StyledThemeProvider } from 'styled-components';
  * - Roboto Mono => Used in custom components such as statement, blurb, link; a sub-set of available font-weights gets used (400;500)
  */
 
-export const BlogThemeProvider: FC = ({ children }) => {
+export const BlogThemeProvider: FC<{
+  children: ReactNode;
+}> = ({ children }) => {
   const theme = useTheme();
 
   const blogTheme = useMemo(() => {

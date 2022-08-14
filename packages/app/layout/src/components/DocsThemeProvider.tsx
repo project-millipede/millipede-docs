@@ -1,7 +1,9 @@
 import { createTheme, ThemeProvider as MuiThemeProvider, useTheme } from '@mui/material/styles';
-import { FC, useMemo } from 'react';
+import { FC, ReactNode, useMemo } from 'react';
 
-export const DocsThemeProvider: FC = ({ children }) => {
+export const DocsThemeProvider: FC<{
+  children: ReactNode;
+}> = ({ children }) => {
   const theme = useTheme();
 
   const docsTheme = useMemo(() => {

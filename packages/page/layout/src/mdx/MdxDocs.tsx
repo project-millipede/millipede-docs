@@ -1,7 +1,7 @@
 import { DocsThemeProvider } from '@app/layout';
 import { Navigation, PageTypes } from '@app/types';
 import { Snackbar } from '@page/components';
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
 import { AppContentFooter } from '../components/AppContentFooter';
 import { AppContentHeader } from '../components/AppContentHeader';
@@ -13,7 +13,9 @@ export interface MarkdownDocsProps {
   metaData: PageTypes.MetaData;
 }
 
-export const MdxDocs: FC<MarkdownDocsProps> = ({
+export const MdxDocs: FC<MarkdownDocsProps & {
+  children: ReactNode;
+}> = ({
   slug,
   navigation,
   metaData,
