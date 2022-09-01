@@ -1,10 +1,12 @@
+/* eslint-disable import/no-unresolved */
 import { Stepper } from '@app/components';
 import { ContentTypes } from '@app/types';
 import { I18n } from '@app/utils';
 import { FC } from 'react';
 
-import { Svg as Step1 } from './assets/Pages-Step-1.svg';
-import { Svg as Step2 } from './assets/Pages-Step-2.svg';
+import Step1 from './assets/Pages-Step-1.svg?inline';
+import Step2 from './assets/Pages-Step-2.svg?inline';
+
 
 const templates: Array<ContentTypes.Content> = [
   {
