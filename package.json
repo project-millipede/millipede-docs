@@ -136,7 +136,8 @@
     "react-dom": "0.0.0-experimental-9ff738f53-20220826",
     "react-reconciler": "0.0.0-experimental-9ff738f53-20220826",
     "@fortawesome/fontawesome-svg-core": "6.1.2",
-    "@fortawesome/free-solid-svg-icons": "6.1.2"
+    "@fortawesome/free-solid-svg-icons": "6.1.2",
+    "set-value": "4.0.1"
   },
   "engines": {
     "node": "16.x"
