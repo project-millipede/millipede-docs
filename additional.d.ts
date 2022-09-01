@@ -1,1 +1,1 @@
-/// <reference types="@stefanprobst/next-svg" />
+/// <reference types="@stefanprobst/next-svg/src/svg" />
