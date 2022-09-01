@@ -1,8 +1,11 @@
-import { useMediaQuery } from '@mui/material';
+import { Components as RenderComponents } from '@app/render-utils';
 import Slide from '@mui/material/Slide';
-import { useTheme } from '@mui/material/styles';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import { FC, ReactNode } from 'react';
+
+const {
+  Responsive: { isMobile }
+} = RenderComponents;
 
 type HideOnScrollProps = {
   direction?: 'up' | 'down' | 'left' | 'right';
@@ -15,15 +18,9 @@ export const HideOnScroll: FC<
 > = ({ direction = 'down', children }) => {
   const trigger = useScrollTrigger();
 
-  const outerTheme = useTheme();
-
-  const matches = useMediaQuery(outerTheme.breakpoints.down('md'), {
-    noSsr: true
-  });
-
   return (
     <>
-      {matches ? (
+      {isMobile() ? (
         <Slide appear={false} direction={direction} in={!trigger}>
           {children as any}
         </Slide>

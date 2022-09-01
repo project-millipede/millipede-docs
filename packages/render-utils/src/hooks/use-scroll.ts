@@ -57,7 +57,7 @@ export const useScroll = ({
           : [node.parentElement];
 
         state.current.resizeObserver = new ResizeObserver(scrollChange);
-        state.current.resizeObserver!.observe(state.current.element);
+        state.current.resizeObserver.observe(state.current.element);
 
         addListeners(
           state.current.scrollContainers,

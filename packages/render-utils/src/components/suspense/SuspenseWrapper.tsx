@@ -3,8 +3,6 @@ import React, { FC, ReactElement, Suspense, useEffect, useId, useState, useTrans
 
 import { Suspender } from './Suspender';
 
-// import { Suspension } from 'resuspend';
-
 export interface SuspenseWrapperProps {
   media: Media;
 }

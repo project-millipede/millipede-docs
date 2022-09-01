@@ -11,12 +11,6 @@ import { features } from '../../features';
 import { HideOnScroll } from './HideOnScroll';
 import { LanguageMenu } from './LanguageMenu';
 
-export interface AppBarProps extends MuiAppBarProps {
-  isDrawerExpanded?: boolean;
-  handleDrawerOpen?: () => void;
-  handleDrawerClose?: () => void;
-}
-
 export const GrowingDiv = styled('div')({
   flex: '1 1 auto'
 });
@@ -37,9 +31,13 @@ export const closeAnimation = (theme: Theme): CSSObject => ({
   })
 });
 
+interface StyledAppBarProps extends MuiAppBarProps {
+  isDrawerExpanded?: boolean;
+}
+
 export const StyledAppBar = styled(MuiAppBar, {
   shouldForwardProp: prop => prop !== 'isDrawerExpanded'
-})<AppBarProps>(({ theme, isDrawerExpanded }) => {
+})<StyledAppBarProps>(({ theme, isDrawerExpanded }) => {
   return {
     position: 'fixed',
     height: theme.spacing(TOOLBAR_HEIGHT),
@@ -52,7 +50,7 @@ export const StyledAppBar = styled(MuiAppBar, {
   };
 });
 
-export const AppBar: FC<AppBarProps> = () => {
+export const AppBar: FC = () => {
   const {
     layout: {
       states: { layoutState }
