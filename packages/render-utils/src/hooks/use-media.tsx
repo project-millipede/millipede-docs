@@ -5,6 +5,7 @@ import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 
 export const useMedia = (
   query: string,
+  withTransition = false,
   onChange?: (matched: boolean) => void,
   initialState: boolean | (() => boolean) = false
 ): [boolean, boolean] => {
@@ -21,9 +22,13 @@ export const useMedia = (
       const onMediaChange = () => {
         const matched = mql.matches;
 
-        startTransition(() => {
+        if (withTransition) {
+          startTransition(() => {
+            setState(matched);
+          });
+        } else {
           setState(matched);
-        });
+        }
 
         onChange && onChange(matched);
       };

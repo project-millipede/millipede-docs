@@ -25,14 +25,16 @@ const MediaContext = createContext<{
 
 export const MediaProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [activeMobile, isPendingMobile] = HooksUtils.useMedia(
-    'only screen and (max-width : 900px)'
+    'only screen and (max-width : 900px)',
+    true
   );
   const classNameMobile = useTheme(Boundary.upper);
 
   // const classNameMobile = useTheme(Breakpoint.md, Boundary.upper);
 
   const [activeDesktop, isPendingDesktop] = HooksUtils.useMedia(
-    'only screen and (min-width : 900px)'
+    'only screen and (min-width : 900px)',
+    true
   );
 
   const classNameDesktop = useTheme(Boundary.lower);
