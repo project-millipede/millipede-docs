@@ -43,7 +43,7 @@ const Index: NextPageWithLayout<StaticPageProps> = () => {
       <AppHead metaData={metaDataLanding} />
 
       <MainContainer
-        id='app-landing'
+        id='docs-landing'
         sx={{
           paddingTop: theme.spacing(12),
           color: theme.palette.primary.main
