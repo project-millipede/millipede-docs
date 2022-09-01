@@ -13,17 +13,20 @@ export interface MarkdownDocsProps {
   metaData: PageTypes.MetaData;
 }
 
-export const MdxDocs: FC<MarkdownDocsProps & {
-  children: ReactNode;
-}> = ({
-  slug,
-  navigation,
-  metaData,
-  children
-}) => {
+export const MdxDocs: FC<
+  MarkdownDocsProps & {
+    children: ReactNode;
+  }
+> = ({ slug, navigation, metaData, children }) => {
   return (
     <>
-      <MainContainer id='app-content'>
+      <MainContainer
+        id='docs-content'
+        maxWidth={false}
+        sx={{
+          maxWidth: '80ch'
+        }}
+      >
         <AppContentHeader
           slug={slug}
           navigation={navigation}

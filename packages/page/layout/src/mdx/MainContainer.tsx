@@ -34,9 +34,9 @@ export const MainContainer: FC<
  * The m-component can be used in exactly the same way as motion, but it comes with no features preloaded.
  * These are then provided by LazyMotion.
  */
-export const MotionArticle = m.article;
+const MotionArticle = m.article;
 
-export const fade: Variants = {
+const fade: Variants = {
   initial: { opacity: 0 },
   enter: {
     opacity: 1,

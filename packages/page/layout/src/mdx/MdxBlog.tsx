@@ -1,6 +1,5 @@
 import { Navigation, PageTypes } from '@app/types';
 import { Snackbar } from '@page/components';
-import path from 'path';
 import { FC, ReactNode } from 'react';
 
 import { AppContentFooter } from '../components/AppContentFooter';
@@ -23,7 +22,7 @@ export const MdxBlog: FC<
   return (
     <>
       <MainContainer
-        id='blog-posts'
+        id='blog-content'
         maxWidth={false}
         sx={{
           maxWidth: '80ch'
@@ -37,9 +36,7 @@ export const MdxBlog: FC<
 
         <BlogHeader metaData={metaData} />
 
-        <Article key={Array.isArray(slug) ? slug.join(path.sep) : slug}>
-          {children}
-        </Article>
+        <Article>{children}</Article>
 
         <AppContentFooter navigation={navigation} />
       </MainContainer>
