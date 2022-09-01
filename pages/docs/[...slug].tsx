@@ -120,7 +120,7 @@ DynamicPage.getLayout = (
     <AppThemeProvider>
       <AppFrame navigation={navigation} toc={toc}>
         {/* Required for page transitions */}
-        <AnimatePresence exitBeforeEnter initial={false}>
+        <AnimatePresence mode='wait' initial={false}>
           {page}
         </AnimatePresence>
       </AppFrame>

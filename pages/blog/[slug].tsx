@@ -108,7 +108,7 @@ DynamicBlogPage.getLayout = (
     <BlogThemeProvider>
       <BlogFrame toc={toc}>
         {/* Required for page transitions */}
-        <AnimatePresence exitBeforeEnter initial={false}>
+        <AnimatePresence mode='wait' initial={false}>
           {page}
         </AnimatePresence>
       </BlogFrame>
