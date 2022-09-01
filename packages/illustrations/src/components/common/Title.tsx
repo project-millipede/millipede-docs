@@ -8,7 +8,8 @@ export const Title = styled(Typography)(({ theme }) => ({
   hyphens: 'auto',
   msHyphens: 'auto',
   MozHyphens: 'auto',
-  WebkitHyphens: 'auto'
+  WebkitHyphens: 'auto',
+  wordBreak: 'break-word'
 }));
 
 export const TitleUnstyled = styled(Typography)({});
