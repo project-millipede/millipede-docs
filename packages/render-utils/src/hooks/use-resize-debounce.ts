@@ -66,7 +66,7 @@ export const useResize = ({
         setBounds(() => size);
 
         state.current.resizeObserver = new ResizeObserver(resizeChange as any);
-        state.current.resizeObserver!.observe(state.current.element);
+        state.current.resizeObserver.observe(state.current.element);
 
         if (callBack != null) {
           callBack(state.current.element);
